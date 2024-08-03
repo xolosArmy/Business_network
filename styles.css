@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    background: #111;
+}
+
+header {
+    background: #222;
+    color: #eee;
+    padding: 1rem;
+    text-align: center;
+}
+
+nav a {
+    color: #eee;
+    margin: 0 1rem;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 2rem;
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+#business-list {
+    list-style: none;
+    padding: 0;
+}
+
+#business-list li {
+    background: #333;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+footer {
+    background: #222;
+    color: #eee;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
