@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XolosArmy Network</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>XolosArmy Network</h1>
+        <nav>
+            <a href="#home">Inicio</a>
+            <a href="#businesses">Negocios</a>
+            <a href="#contribute">Contribuir</a>
+            <a href="#contact">Contacto</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <img src="xoloitzcuintli-cypherpunk.jpg" alt="Xoloitzcuintli Cypherpunk">
+            <h2>Bienvenido a XolosArmy Network</h2>
+            <p>Promovemos negocios que aceptan criptomonedas. Aquí puedes encontrar una lista de negocios amigables con las criptos.</p>
+        </section>
+
+        <section id="businesses">
+            <h2>Negocios</h2>
+            <ul id="business-list">
+                <!-- Los negocios se agregarán aquí con JavaScript -->
+            </ul>
+        </section>
+
+        <section id="contribute">
+            <h2>Contribuir</h2>
+            <p>¿Conoces un negocio que acepta criptomonedas? ¡Ayúdanos a agregarlo!</p>
+            <a href="https://github.com/tu-repositorio/xolosarmy-network" target="_blank">Envíanos un pull request</a>
+        </section>
+
+        <section id="contact">
+            <h2>Contacto</h2>
+            <form id="contact-form">
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="message">Mensaje:</label>
+                <textarea id="message" name="message" required></textarea>
+                
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 XolosArmy Network</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
