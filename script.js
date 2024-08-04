@@ -1,7 +1,7 @@
 // Reemplaza 'your_emailjs_user_id', 'your_service_id', y 'your_template_id' con los valores obtenidos de EmailJS
 const emailjsUserID = 'service_28rzr6x';
 const emailjsServiceID = 'service_28rzr6x';
-const emailjsTemplateID = 'template_trao8pi';
+const emailjsTemplateID = 'template_50mtswa';
 
 document.addEventListener('DOMContentLoaded', () => {
     emailjs.init(emailjsUserID);
