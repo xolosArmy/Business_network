@@ -1,4 +1,24 @@
+// Reemplaza 'your_emailjs_user_id', 'your_service_id', y 'your_template_id' con los valores obtenidos de EmailJS
+const emailjsUserID = 'your_emailjs_user_id';
+const emailjsServiceID = 'your_service_id';
+const emailjsTemplateID = 'your_template_id';
+
 document.addEventListener('DOMContentLoaded', () => {
+    emailjs.init(emailjsUserID);
+
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        emailjs.sendForm(emailjsServiceID, emailjsTemplateID, form)
+            .then((response) => {
+                alert('Mensaje enviado exitosamente!');
+                form.reset();
+            }, (error) => {
+                alert('Error al enviar el mensaje. Intenta nuevamente.');
+            });
+    });
+
     const businessList = document.getElementById('business-list');
 
     const businesses = [
