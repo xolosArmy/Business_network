@@ -2,49 +2,96 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    color: #fff;
+    background: #111;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1200px;
 }
 
 header {
-    background-color: #333;
-    color: white;
-    padding: 1rem;
+    background: #222;
+    color: #eee;
+    padding: 1rem 0;
     text-align: center;
+    border-bottom: 3px solid #444;
 }
 
 nav a {
-    color: white;
+    color: #eee;
     margin: 0 1rem;
     text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ff6347;
 }
 
 main {
-    padding: 2rem;
+    padding: 2rem 0;
 }
 
-h1, h2 {
+section {
+    margin-bottom: 2rem;
+}
+
+#home {
     text-align: center;
 }
 
-blockquote.imgur-embed-pub.centered {
-    display: flex;
-    justify-content: center;
-}
-
-#business-list {
-    list-style-type: none;
+#businesses ul {
+    list-style: none;
     padding: 0;
 }
 
-#business-list li {
-    margin: 0.5rem 0;
+#businesses li {
+    background: #333;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+}
+
+#contact form {
+    display: flex;
+    flex-direction: column;
+}
+
+#contact label {
+    margin: 0.5rem 0 0.2rem;
+}
+
+#contact input, #contact textarea {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+#contact button {
+    padding: 0.7rem;
+    background: #ff6347;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#contact button:hover {
+    background: #ee5a3f;
 }
 
 footer {
-    background-color: #333;
-    color: white;
+    background: #222;
+    color: #eee;
     text-align: center;
-    padding: 1rem;
-    position: fixed;
+    padding: 1rem 0;
+    border-top: 3px solid #444;
+    position: relative;
     bottom: 0;
     width: 100%;
 }
