@@ -5,51 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XolosArmy Network</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 </head>
 <body>
     <header>
-        <h1>XolosArmy Network</h1>
-        <nav>
-            <a href="#home">Inicio</a>
-            <a href="#businesses">Negocios</a>
-            <a href="#contribute">Contribuir</a>
-            <a href="#contact">Contacto</a>
-        </nav>
+        <div class="container">
+            <h1>XolosArmy Network</h1>
+            <nav>
+                <a href="#home">Inicio</a>
+                <a href="#businesses">Negocios</a>
+                <a href="#contribute">Contribuir</a>
+                <a href="#contact">Contacto</a>
+            </nav>
+        </div>
     </header>
 
     <main>
         <section id="home">
-            <!-- Embedding the Imgur image -->
-            <blockquote class="imgur-embed-pub" lang="en" data-id="l8Jto2W" class="centered">
-                <a href="https://imgur.com/l8Jto2W">View post on imgur.com</a>
-            </blockquote>
-            <script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
-            
-            <h2>Bienvenido a XolosArmy Network</h2>
-            <p>Promovemos negocios que aceptan criptomonedas. Aquí puedes encontrar una lista de negocios amigables con las criptos.</p>
+            <div class="container">
+                <!-- Embedding the Imgur image -->
+                <blockquote class="imgur-embed-pub" lang="en" data-id="l8Jto2W">
+                    <a href="https://imgur.com/l8Jto2W">View post on imgur.com</a>
+                </blockquote>
+                <script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
+                <h2>Bienvenido a XolosArmy Network</h2>
+                <p>Promovemos negocios que aceptan criptomonedas. Aquí puedes encontrar una lista de negocios amigables con las criptos.</p>
+            </div>
         </section>
 
         <section id="businesses">
-            <h2>Negocios</h2>
-            <ul id="business-list">
-                <!-- Los negocios se agregarán aquí con JavaScript -->
-            </ul>
+            <div class="container">
+                <h2>Negocios</h2>
+                <ul id="business-list">
+                    <!-- Los negocios se agregarán aquí con JavaScript -->
+                </ul>
+            </div>
         </section>
 
         <section id="contribute">
-            <h2>Contribuir</h2>
-            <p>¿Conoces un negocio que acepta criptomonedas? ¡Ayúdanos a agregarlo!</p>
-            <a href="https://github.com/xolosArmy/Business_network" target="_blank">Envíanos un pull request</a>
+            <div class="container">
+                <h2>Contribuir</h2>
+                <p>¿Conoces un negocio que acepta criptomonedas? ¡Ayúdanos a agregarlo!</p>
+                <a href="https://github.com/xolosArmy/Business_network" target="_blank">Envíanos un pull request</a>
+            </div>
         </section>
 
         <section id="contact">
-            <h2>Contacto</h2>
-            <p>También puedes contactarnos a través de nuestro Telegram <a href="https://t.me/xolosramirez/4682"</a>.</p>
+            <div class="container">
+                <h2>Contacto</h2>
+                <form id="contact-form">
+                    <label for="name">Nombre:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Mensaje:</label>
+                    <textarea id="message" name="message" required></textarea>
+
+                    <button type="submit">Enviar</button>
+                </form>
+                <p>También puedes contactarnos a través de nuestro <a href="https://t.me/xolosramirez/4682" target="_blank">canal de Telegram</a>.</p>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 XolosArmy Network</p>
+        <div class="container">
+            <p>&copy; 2024 XolosArmy Network</p>
+        </div>
     </footer>
 
     <script src="script.js"></script>
