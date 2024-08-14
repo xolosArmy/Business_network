@@ -4,7 +4,7 @@ const emailjsServiceID = 'service_28rzr6x';
 const emailjsTemplateID = 'template_50mtswa';
 
 document.addEventListener('DOMContentLoaded', () => {
-    emailjs.init(emailjsUserID);
+    emailjs.init('7IEpSpkY5kKrEerjl');
 
     const form = document.getElementById('contact-form');
     form.addEventListener('submit', (event) => {
