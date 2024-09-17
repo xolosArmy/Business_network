@@ -85,6 +85,23 @@ section {
     background: #ee5a3f;
 }
 
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Relación de aspecto 16:9 (9/16 = 0.5625) */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
 footer {
     background: #222;
     color: #eee;
