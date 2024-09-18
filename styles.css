@@ -101,20 +101,6 @@ section {
     height: 100%;
 }
 
-<style>
-  #paybutton {
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    overflow: hidden;
-  }
-
-  #paybutton:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-</style>
-
 
 footer {
     background: #222;
