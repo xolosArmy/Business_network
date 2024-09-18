@@ -103,7 +103,7 @@ section {
 
 .paybutton-widget {
   display: inline-block;
-  background-color: #4CAF50; /* Green background color */
+  background-color: #f44336; /* Red background color */
   color: white; /* White text color */
   font-family: Arial, sans-serif; /* Font family */
   font-size: 16px; /* Font size */
@@ -114,15 +114,17 @@ section {
   text-decoration: none; /* Remove underline */
   cursor: pointer; /* Pointer cursor on hover */
   transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background color and scale */
+  margin: 0 auto; /* Center the button horizontally */
+  display: block; /* Ensure the button takes full width of its container */
 }
 
 .paybutton-widget:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background-color: #c62828; /* Darker red on hover */
   transform: scale(1.05); /* Slightly enlarge button on hover */
 }
 
 .paybutton-widget:active {
-  background-color: #388e3c; /* Even darker green when button is pressed */
+  background-color: #b71c1c; /* Even darker red when button is pressed */
 }
 
 .paybutton-widget::after {
