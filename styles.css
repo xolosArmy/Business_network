@@ -101,6 +101,43 @@ section {
     height: 100%;
 }
 
+.paybutton-widget {
+  display: inline-block;
+  background-color: #4CAF50; /* Green background color */
+  color: white; /* White text color */
+  font-family: Arial, sans-serif; /* Font family */
+  font-size: 16px; /* Font size */
+  padding: 12px 24px; /* Padding around text */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  text-align: center; /* Center align text */
+  text-decoration: none; /* Remove underline */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background color and scale */
+}
+
+.paybutton-widget:hover {
+  background-color: #45a049; /* Darker green on hover */
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+.paybutton-widget:active {
+  background-color: #388e3c; /* Even darker green when button is pressed */
+}
+
+.paybutton-widget::after {
+  content: attr(text); /* Show the text content */
+}
+
+.paybutton-widget[hover-text]:hover::after {
+  content: attr(hover-text); /* Change content on hover */
+}
+
+.paybutton-widget[success-text]::after {
+  content: attr(success-text); /* Show success text if present */
+}
+
+
 
 footer {
     background: #222;
