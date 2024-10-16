@@ -39,4 +39,41 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         businessList.appendChild(listItem);
     });
+
+    async function fetchMessages() {
+    const address = 'ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8';
+    const url = `https://explorer.e.cash/api/address/${address}/transactions`;
+    
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        const transactions = data.transactions;
+        const messagesList = document.getElementById('messages-list');
+
+        transactions.forEach(tx => {
+            const opReturnMessage = tx.outputs.find(output => output.script_type === 'op_return');
+
+            if (opReturnMessage && opReturnMessage.script) {
+                const message = parseOpReturn(opReturnMessage.script);
+                const messageItem = document.createElement('li');
+                messageItem.textContent = message;
+                messagesList.appendChild(messageItem);
+            }
+        });
+    } catch (error) {
+        console.error("Error fetching messages:", error);
+    }
+}
+
+// Helper function to decode the OP_Return data
+function parseOpReturn(script) {
+    // Assuming the OP_Return message is in hex, this will convert it to readable text
+    const hex = script.replace(/^6a/, ''); // OP_RETURN starts with 6a
+    const decodedMessage = hex.match(/.{1,2}/g).map(byte => String.fromCharCode(parseInt(byte, 16))).join('');
+    return decodedMessage;
+}
+
+fetchMessages();
+
 });
