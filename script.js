@@ -74,6 +74,40 @@ function parseOpReturn(script) {
     return decodedMessage;
 }
 
-fetchMessages();
+// Function to fetch messages from blockchain (using an API to get OP_Return transactions)
+async function fetchMessages() {
+    const messagesList = document.getElementById("messages-list");
+    const payButtonAddress = "ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"; // Dirección del PayButton
 
+    try {
+        // Fetching transactions from a blockchain API
+        const response = await fetch(`https://api.blockexplorer.ecash/${payButtonAddress}/op_returns`);
+        const data = await response.json();
+
+        // Limpiar lista anterior
+        messagesList.innerHTML = '';
+
+        if (data.length === 0) {
+            messagesList.innerHTML = '<li>No se han enviado mensajes aún.</li>';
+        } else {
+            // Iterar sobre las transacciones y añadir los mensajes decodificados
+            data.forEach(transaction => {
+                const script = transaction.vout[0].scriptPubKey.hex; // Assuming vout contains the script
+                const message = parseOpReturn(script);
+                
+                // Crear el elemento de la lista con el mensaje decodificado
+                const listItem = document.createElement("li");
+                listItem.textContent = message;
+                messagesList.appendChild(listItem);
+            });
+        }
+    } catch (error) {
+        console.error("Error al obtener los mensajes OP_Return:", error);
+        messagesList.innerHTML = '<li>Error al cargar los mensajes.</li>';
+    }
+}
+
+// Call the function to load the messages when the page loads
+document.addEventListener('DOMContentLoaded', (event) => {
+    fetchMessages();
 });
