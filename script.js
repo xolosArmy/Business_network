@@ -1,4 +1,3 @@
-// Reemplaza 'your_emailjs_user_id', 'your_service_id', y 'your_template_id' con los valores obtenidos de EmailJS
 const emailjsUserID = '7IEpSpkY5kKrEerjl';
 const emailjsServiceID = 'service_28rzr6x';
 const emailjsTemplateID = 'template_50mtswa';
