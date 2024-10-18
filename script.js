@@ -1,3 +1,8 @@
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM fully loaded and parsed');
+});
+
+
 const emailjsUserID = '7IEpSpkY5kKrEerjl';
 const emailjsServiceID = 'service_28rzr6x';
 const emailjsTemplateID = 'template_50mtswa';
