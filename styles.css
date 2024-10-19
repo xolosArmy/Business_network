@@ -140,6 +140,31 @@ section {
 }
 
 
+.button-link {
+    display: inline-block;
+    text-decoration: none;
+    border: 2px solid #007BFF; /* Blue border to resemble a button */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px; /* Add some padding around the image */
+    background-color: #007BFF; /* Button background color */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.button-link img {
+    display: block;
+    border-radius: 8px;
+}
+
+.button-link:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.button-link:active {
+    transform: scale(0.98); /* Shrink slightly on click */
+}
+
+
 
 footer {
     background: #222;
