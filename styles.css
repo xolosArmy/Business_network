@@ -173,17 +173,27 @@ footer {
     text-align: center;
 }
 
-/* Style for social icons */
+/* Style for social icons with a circular background and hover effect */
 .social-icons a {
-    color: #ff5733; /* XolosArmy red */
+    color: #ff5733; /* XolosArmy red for icons */
     font-size: 24px;
-    margin: 0 15px;
-    transition: transform 0.3s ease, color 0.3s ease;
+    margin: 0 10px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; /* Make icons circular */
+    background: #333; /* Dark background for the circle */
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); /* Add a subtle shadow */
 }
 
 .social-icons a:hover {
-    color: #ffffff; /* Change to white on hover */
-    transform: scale(1.2); /* Slight scale effect */
+    color: #fff; /* Change icon to white on hover */
+    background-color: #ff6347; /* Lighter red for hover effect */
+    transform: scale(1.1); /* Slightly increase size on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.6); /* Darker shadow on hover */
 }
 
 /* Additional styling for spacing and alignment */
@@ -191,7 +201,10 @@ footer {
     margin-top: 10px;
     display: flex;
     justify-content: center;
+    gap: 15px; /* Space out icons evenly */
 }
+
+
 
 footer p {
     margin: 0;
