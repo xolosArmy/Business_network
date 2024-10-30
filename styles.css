@@ -165,6 +165,41 @@ section {
 }
 
 
+/* Style the footer container */
+footer {
+    background-color: #111; /* Dark background */
+    padding: 20px 0;
+    color: white;
+    text-align: center;
+}
+
+/* Style for social icons */
+.social-icons a {
+    color: #ff5733; /* XolosArmy red */
+    font-size: 24px;
+    margin: 0 15px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #ffffff; /* Change to white on hover */
+    transform: scale(1.2); /* Slight scale effect */
+}
+
+/* Additional styling for spacing and alignment */
+.social-icons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+    color: #ccc;
+}
+
+
 
 footer {
     background: #222;
