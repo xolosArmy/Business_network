@@ -2,6 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded and parsed');
 });
 
+// Initialize Google Translate
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'es',
+        includedLanguages: 'en,fr,de,it,ja,ko,pt,ru,zh-CN'
+    }, 'google_translate_element');
+}
+
 
 const emailjsUserID = '7IEpSpkY5kKrEerjl';
 const emailjsServiceID = 'service_28rzr6x';
