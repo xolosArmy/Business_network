@@ -11,26 +11,6 @@ function googleTranslateElementInit() {
 }
 
 
-const emailjsUserID = '7IEpSpkY5kKrEerjl';
-const emailjsServiceID = 'service_28rzr6x';
-const emailjsTemplateID = 'template_50mtswa';
-
-document.addEventListener('DOMContentLoaded', () => {
-    emailjs.init('7IEpSpkY5kKrEerjl');
-
-    const form = document.getElementById('contact-form');
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        emailjs.sendForm(emailjsServiceID, emailjsTemplateID, form)
-            .then((response) => {
-                alert('Mensaje enviado exitosamente!');
-                form.reset();
-            }, (error) => {
-                alert('Error al enviar el mensaje. Intenta nuevamente.');
-            });
-    });
-
     const businessList = document.getElementById('business-list');
 
     const businesses = [
