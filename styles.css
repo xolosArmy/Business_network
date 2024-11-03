@@ -86,7 +86,7 @@ section {
 .gallery-item {
     display: flex;
     align-items: center;
-    flex-direction: row;
+    flex-direction: column;
     max-width: 300px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -102,7 +102,7 @@ section {
 }
 
 .gallery-item img {
-    width: 100%;
+    max-width: 100%;
     height: auto;
     border-radius: 8px;
     margin-bottom: 10px;
@@ -141,6 +141,7 @@ section {
 .gallery-item .paybutton-widget {
     width: auto;
     text-align: center;
+    flex-shrink: 0;
 }
 
 
