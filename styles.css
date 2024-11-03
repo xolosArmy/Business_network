@@ -56,34 +56,8 @@ section {
     border-radius: 5px;
 }
 
-#contact form {
-    display: flex;
-    flex-direction: column;
-}
 
-#contact label {
-    margin: 0.5rem 0 0.2rem;
-}
 
-#contact input, #contact textarea {
-    padding: 0.5rem;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 1rem;
-}
-
-#contact button {
-    padding: 0.7rem;
-    background: #ff6347;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#contact button:hover {
-    background: #ee5a3f;
-}
 
 .video-container {
     position: relative;
