@@ -111,23 +111,25 @@ section {
 /* Estilos específicos para el PayButton */
 .paybutton-widget {
     display: inline-block;
-    background-color: #ff5733; /* Color de fondo */
+    background-color: #333; /* Color de fondo */
     color: white; /* Color del texto */
-    padding: 10px 20px;
-    font-size: 14px;
-    border-radius: 8px;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 4px;
     text-align: center;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: none;
     text-decoration: none;
-    margin-top: 10px;
+    margin-top: 8px;
+    opacity: 0.8; 
     display: inline-block;
     flex-shrink: 0;;
 }
 
 .paybutton-widget:hover {
-    background-color: #e04a2d;
+    background-color: #444;
+    opacity: 1;
     transform: translateY(-2px);
     box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
 }
