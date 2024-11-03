@@ -112,7 +112,7 @@ section {
 .gallery-item {
     display: flex;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
     max-width: 300px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -126,7 +126,7 @@ section {
 }
 
 .gallery-item img {
-    max-width: 100%;
+    max-width: 50%;
     border-radius: 8px;
     margin-bottom: 10px;
 }
@@ -144,7 +144,8 @@ section {
     transition: background-color 0.3s ease, transform 0.3s ease;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     text-decoration: none;
-    margin-top: 8px;
+    margin-top: 8px
+    flex-shrink: 0;;
 }
 
 .paybutton-widget:hover {
@@ -160,7 +161,7 @@ section {
 
 /* Alineación para que el botón esté centrado debajo de la imagen */
 .gallery-item .paybutton-widget {
-    width: 100%;
+    width: auto;
     text-align: center;
 }
 
