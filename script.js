@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded and parsed');
-});
+
 
 // Initialize Google Translate
 function googleTranslateElementInit() {
