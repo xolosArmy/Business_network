@@ -56,34 +56,8 @@ section {
     border-radius: 5px;
 }
 
-#contact form {
-    display: flex;
-    flex-direction: column;
-}
 
-#contact label {
-    margin: 0.5rem 0 0.2rem;
-}
 
-#contact input, #contact textarea {
-    padding: 0.5rem;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 1rem;
-}
-
-#contact button {
-    padding: 0.7rem;
-    background: #ff6347;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#contact button:hover {
-    background: #ee5a3f;
-}
 
 .video-container {
     position: relative;
@@ -101,43 +75,77 @@ section {
     height: 100%;
 }
 
+/* Estilos para la galería */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.gallery-item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease
+    text-align: center;
+    margin-bottom: 20px;;
+}
+
+.gallery-item:hover {
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Estilos específicos para el PayButton */
 .paybutton-widget {
-  display: inline-block;
-  background-color: #f44336; /* Red background color */
-  color: white; /* White text color */
-  font-family: Arial, sans-serif; /* Font family */
-  font-size: 16px; /* Font size */
-  padding: 12px 24px; /* Padding around text */
-  border: none; /* No border */
-  border-radius: 5px; /* Rounded corners */
-  text-align: center; /* Center align text */
-  text-decoration: none; /* Remove underline */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background color and scale */
-  margin: 0 auto; /* Center the button horizontally */
-  display: block; /* Ensure the button takes full width of its container */
+    display: inline-block;
+    background-color: #333; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: none;
+    text-decoration: none;
+    margin-top: 8px;
+    opacity: 0.8; 
+    display: inline-block;
+    flex-shrink: 0;;
 }
 
 .paybutton-widget:hover {
-  background-color: #c62828; /* Darker red on hover */
-  transform: scale(1.05); /* Slightly enlarge button on hover */
+    background-color: #444;
+    opacity: 1;
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
 }
 
 .paybutton-widget:active {
-  background-color: #b71c1c; /* Even darker red when button is pressed */
+    transform: translateY(0);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.paybutton-widget::after {
-  content: attr(text); /* Show the text content */
+/* Alineación para que el botón esté centrado debajo de la imagen */
+.gallery-item .paybutton-widget {
+    width: auto;
+    text-align: center;
+    flex-shrink: 0;
 }
 
-.paybutton-widget[hover-text]:hover::after {
-  content: attr(hover-text); /* Change content on hover */
-}
-
-.paybutton-widget[success-text]::after {
-  content: attr(success-text); /* Show success text if present */
-}
 
 
 .button-link {

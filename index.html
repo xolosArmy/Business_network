@@ -24,7 +24,7 @@
             <nav>
                 <a href="#home">Inicio</a>
                 <a href="#businesses">Xolos Ramirez</a>
-                <a href="#contribute">Contribuir</a>
+                <a href="#gallery">Galería</a>
                 <a href="#contact">Contacto</a>
             </nav>
         </div>
@@ -68,44 +68,48 @@
             </div>
         </section>
 
-        <section id="contribute">
+        
+        <!-- Sección de galería -->
+        <section id="gallery">
             <div class="container">
-                <h2>Contribuir</h2>
-                <p>¿Eres un negocio que quiere aceptar Xolos $RMZ? ¡Ayúdanos a agregarlo!</p>
-                <a href="https://github.com/xolosArmy/Business_network" target="_blank">Envíanos un pull request</a>
+                <h2>Selecciona tu NFT y obtén tu playera xolosArmy</h2>
+                <p>Haz clic para comprar usando eCash (XEC).</p>
+
+                <div class="gallery">
+                    <!-- Primera imagen con PayButton -->
+                    <div class="gallery-item">
+                        <img src="https://i.imgur.com/HEU2kRI.png" alt="playera xolosArmy - NFT" style="width:100%; max-width:300px;">
+                        <div class="paybutton-widget" 
+                            to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8" 
+                            amount="1333333" 
+                            text="Comprar esta Imagen" 
+                            success-text="Gracias por tu compra"
+                            op-return-field="true"
+                            op-return="Xolos to the Moon, Always ! ![Imagen del NFT a enviar](https://i.imgur.com/HEU2kRI.png)">
+                        </div>
+                    </div>
+
+                    <!-- Segunda imagen con PayButton -->
+                    <div class="gallery-item">
+                        <img src="https://i.imgur.com/KC5rKlY.png" alt="playera xolosArmy - NFT" style="width:100%; max-width:300px;">
+                        <div class="paybutton-widget" 
+                            to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8" 
+                            amount="1333333" 
+                            text="Comprar esta Imagen" 
+                            success-text="Gracias por tu compra"
+                            op-return-field="true"
+                            op-return="Xolos to the Moon, Always ! ![Imagen del NFT a enviar](https://i.imgur.com/KC5rKlY.png)">
+                        </div>
+                    </div
+                </div>
             </div>
         </section>
-
-        <section id="contact">
-            <div class="container">
-                <h2>Contacto</h2>
-                <form id="contact-form">
-                    <label for="name">Nombre:</label>
-                    <input type="text" id="name" name="name" required>
-
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-
-                    <label for="message">Mensaje:</label>
-                    <textarea id="message" name="message" required></textarea>
-
-                    <button type="submit">Enviar</button>
-                </form>
 
                 <p></p>
                 
                 <script src="https://unpkg.com/@paybutton/paybutton/dist/paybutton.js"></script>
 
-<div
-  class="paybutton-widget"
-  to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
-  amount="1333333"
-  text="Añade tu Negocio a Nuestra Red"
-  hover-text="Paga con XEC"
-  success-text="Gracias, en Breve añadiremos tu Negocio"
-  goal-amount="1333333"
-  op-return-field="true"
-  op-return="Xolos to the Moon, Always !"></div>
+
 
                 
     </main>
