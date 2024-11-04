@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>xolosArmy articles</title>
+    <link>https://www.ecashchat.com/</link>
+    <description>Daily articles for the xolosArmy Network</description>
+    <language>en-us</language>
+
+    <item>
+      <title>"Running an eCash Node? Here’s How to Make It 100% Censorship-Resistant!"</title>
+      <link>https://www.ecashchat.com/?sharedArticleTxid=bdee1533d2bb3d8136b9114f68edacb3531362b758e9732e6152d6cdfbbe076a</link>
+      <description>A brief description of the post</description>
+      <pubDate>Sun, 03 Nov 2024 12:00:00 GMT</pubDate>
+    </item>
+
+    <!-- Add more items here as needed -->
+
+  </channel>
+</rss>
