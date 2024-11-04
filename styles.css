@@ -124,7 +124,7 @@ section {
     margin-top: 8px;
     opacity: 0.8; 
     display: inline-block;
-    flex-shrink: 0;;
+    flex-shrink: 0;
 }
 
 .paybutton-widget:hover {
