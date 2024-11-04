@@ -233,27 +233,38 @@ footer {
     width: 100%;
 }
 
+#rss-feed {
+    padding: 20px;
+    background-color: #111;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
 #rss-feed ul {
     list-style-type: none;
     padding: 0;
 }
 
 #rss-feed li {
-    background: #333;
-    color: #eee;
-    padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 5px;
+    margin-bottom: 15px;
 }
 
 #rss-feed a {
-    color: #ff5733; /* or any color to match your theme */
+    color: #ff5733;
     text-decoration: none;
+    font-weight: bold;
 }
 
 #rss-feed a:hover {
-    color: #ff6347;
+    text-decoration: underline;
 }
+
+#rss-feed small {
+    color: #ccc;
+}
+
+
 
 
 
