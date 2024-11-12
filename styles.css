@@ -237,6 +237,33 @@ section {
 }
 
 
+div.card {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+.card-body {
+    padding: 10px;
+}
+.card-title {
+    font-size: 1.25em;
+    margin-bottom: 10px;
+}
+.card-text {
+    margin: 5px 0;
+}
+.card-link {
+    color: #007bff;
+    text-decoration: none;
+}
+.card-link:hover {
+    text-decoration: underline;
+}
+
+
+
 
 /* Style the footer container */
 footer {
@@ -297,39 +324,4 @@ footer {
     bottom: 0;
     width: 100%;
 }
-
-#rss-feed {
-    padding: 20px;
-    background-color: #111;
-    color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-#rss-feed ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-#rss-feed li {
-    margin-bottom: 15px;
-}
-
-#rss-feed a {
-    color: #ff5733;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-#rss-feed a:hover {
-    text-decoration: underline;
-}
-
-#rss-feed small {
-    color: #ccc;
-}
-
-
-
-
 
