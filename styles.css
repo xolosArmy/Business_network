@@ -237,6 +237,16 @@ section {
 }
 
 
+
+/* Title Styling */
+h1 {
+    font-size: 2em;
+    color: #007bff; /* Bright blue to make the title stand out */
+    text-align: center; /* Center-align the title */
+    margin-bottom: 20px;
+}
+
+
 /* Card Styling */
 div.card {
     margin-bottom: 10px;
