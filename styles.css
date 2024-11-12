@@ -21,6 +21,23 @@ header {
     border-bottom: 3px solid #444;
 }
 
+.scroll-down-arrow {
+    position: fixed; /* Posiciona la flecha en un lugar fijo en la pantalla */
+    bottom: 20px; /* Ajusta la distancia desde la parte inferior de la pantalla */
+    right: 50%; /* Centra horizontalmente */
+    font-size: 2em; /* Tamaño de la flecha */
+    color: #007bff; /* Color de la flecha */
+    text-decoration: none; /* Quita el subrayado */
+    transition: transform 0.3s; /* Efecto al pasar el ratón */
+}
+
+.scroll-down-arrow:hover {
+    transform: scale(1.2); /* Agranda la flecha al pasar el ratón */
+    color: #0056b3; /* Cambia de color al pasar el ratón */
+}
+
+
+
 nav a {
     color: #eee;
     margin: 0 1rem;
