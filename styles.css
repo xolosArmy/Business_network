@@ -254,6 +254,33 @@ section {
 }
 
 
+div.card {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+.card-body {
+    padding: 10px;
+}
+.card-title {
+    font-size: 1.25em;
+    margin-bottom: 10px;
+}
+.card-text {
+    margin: 5px 0;
+}
+.card-link {
+    color: #007bff;
+    text-decoration: none;
+}
+.card-link:hover {
+    text-decoration: underline;
+}
+
+
+
 
 /* Title Styling */
 h1 {
@@ -378,10 +405,4 @@ footer {
     bottom: 0;
     width: 100%;
 }
-
-
-
-
-
-
 
