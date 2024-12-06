@@ -125,43 +125,31 @@ section {
     margin-bottom: 10px;
 }
 
-/* Estilos específicos para el PayButton */
-.paybutton-widget {
-    display: inline-block;
-    background-color: #333; /* Color de fondo */
-    color: white; /* Color del texto */
-    padding: 5px 10px;
-    font-size: 12px;
-    border-radius: 4px;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: none;
-    text-decoration: none;
-    margin-top: 8px;
-    opacity: 0.8; 
-    display: inline-block;
-    flex-shrink: 0;
+
+
+
+
+@media (max-width: 768px) {
+    h2 {
+        font-size: 24px;
+    }
+    p {
+        font-size: 16px;
+    }
+    .button-link {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
 }
 
-.paybutton-widget:hover {
-    background-color: #444;
-    opacity: 1;
-    transform: translateY(-2px);
-    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+
+.container {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    background: #ffffff;
 }
 
-.paybutton-widget:active {
-    transform: translateY(0);
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Alineación para que el botón esté centrado debajo de la imagen */
-.gallery-item .paybutton-widget {
-    width: auto;
-    text-align: center;
-    flex-shrink: 0;
-}
 
 
 
