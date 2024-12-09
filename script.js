@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // Initialize Google Translate
 function googleTranslateElementInit() {
     new google.translate.TranslateElement({
-        pageLanguage: 'es',
-        includedLanguages: 'en,fr,de,it,ja,ko,pt,ru,zh-CN'
+        pageLanguage: 'en',
+        includedLanguages: 'es,fr,de,it,ja,ko,pt,ru,zh-CN'
     }, 'google_translate_element');
 }
 
