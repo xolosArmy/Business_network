@@ -29,27 +29,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         businessList.appendChild(listItem);
     });
 
-    // Initialize memo feed with Chaingraph-ts
-    await fetchMemos();
-});
-
-// Import Chaingraph-ts
-import { ChaingraphClient, graphql } from "chaingraph-ts";
-
-// Chaingraph Client Configuration
-const chaingraphUrl = "https://gql.chaingraph.pat.mn/v1/graphql";
-const chaingraphClient = new ChaingraphClient(chaingraphUrl);
-
-// Define GraphQL Query for Memos
-const fetchMemosQuery = graphql(`
-  query FetchMemos($app: String!) {
-    memo(where: { app: { _eq: $app } }, order_by: { timestamp: desc }, limit: 10) {
-      app
-      content
-      timestamp
-    }
-  }
-`);
 
 // Fetch Memos and Update the DOM
 async function fetchMemos() {
