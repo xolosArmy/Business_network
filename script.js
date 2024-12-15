@@ -133,5 +133,50 @@ const formatHash = (str) => {
 
 memoFeed().then();
 
+import { ChaingraphClient, graphql } from "chaingraph-ts";
+
+// 1. Define Chaingraph GraphQL URL
+const chaingraphUrl = "https://gql.chaingraph.pat.mn/v1/graphql";
+const chaingraphClient = new ChaingraphClient(chaingraphUrl);
+
+// 2. Define GraphQL query to fetch Memo posts
+const fetchMemosQuery = graphql(`
+  query FetchMemos($app: String!) {
+    memo(where: { app: { _eq: $app } }, order_by: { timestamp: desc }, limit: 10) {
+      app
+      content
+      timestamp
+    }
+  }
+`);
+
+// 3. Fetch Memos Function
+async function fetchMemos() {
+  const variables = { app: "xolosarmy" }; // Replace "xolosarmy" with the app identifier used for your memos
+  try {
+    const result = await chaingraphClient.query(fetchMemosQuery, variables);
+    if (!result.data) {
+      console.error("No data returned from the query");
+      return;
+    }
+
+    // Process memo data and update the page
+    const memoData = result.data.memo;
+    const memoFeed = document.getElementById("memo-feed");
+    memoFeed.innerHTML = memoData.map(memo => `
+      <div class="memo-post">
+        <p>${memo.content}</p>
+        <small>${new Date(memo.timestamp).toLocaleString()}</small>
+      </div>
+    `).join('');
+  } catch (error) {
+    console.error("Error fetching memos:", error);
+  }
+}
+
+// 4. Initialize Fetch on Page Load
+document.addEventListener("DOMContentLoaded", fetchMemos);
+
+
 
     
