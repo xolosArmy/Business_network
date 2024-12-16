@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         }, 'google_translate_element');
     }
 
+    // Call Google Translate Initialization
+    googleTranslateElementInit();
+
     // Populate business list
     const businessList = document.getElementById('business-list');
     const businesses = [
@@ -29,40 +32,59 @@ document.addEventListener('DOMContentLoaded', async () => {
         businessList.appendChild(listItem);
     });
 
-
-// Fetch Memos and Update the DOM
-async function fetchMemos() {
-    const variables = { app: "xolosarmy" }; // Replace "xolosarmy" with your app identifier
-    try {
-        const result = await chaingraphClient.query(fetchMemosQuery, variables);
-        if (!result.data) {
-            console.error("No data returned from the query");
-            return;
+    // GraphQL Query for Fetching Memos
+    const fetchMemosQuery = `
+        query FetchMemos($app: String!) {
+            memo(where: { app: { _eq: $app } }) {
+                content
+                timestamp
+            }
         }
+    `;
 
-        // Render Memo Data
-        const memoData = result.data.memo;
-        const memoFeed = document.getElementById("memo-feed");
-        memoFeed.innerHTML = memoData.map(memo => `
-            <div class="memo-post">
-                <p>${memo.content}</p>
-                <small>${new Date(memo.timestamp).toLocaleString()}</small>
-            </div>
-        `).join('');
-    } catch (error) {
-        console.error("Error fetching memos:", error);
+    // Initialize GraphQL Client (Replace URL with your GraphQL endpoint)
+    const endpoint = 'https://your-chaingraph-endpoint.com/graphql'; // Replace with your GraphQL endpoint
+    const chaingraphClient = {
+        query: async (query, variables) => {
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ query, variables }),
+            });
+            const result = await response.json();
+            if (result.errors) {
+                throw new Error(result.errors.map(e => e.message).join(', '));
+            }
+            return result;
+        }
+    };
+
+    // Fetch Memos and Update the DOM
+    async function fetchMemos() {
+        const variables = { app: "xolosarmy" }; // Replace "xolosarmy" with your app identifier
+        try {
+            const result = await chaingraphClient.query(fetchMemosQuery, variables);
+            if (!result.data || !result.data.memo) {
+                console.error("No data returned from the query");
+                return;
+            }
+
+            // Render Memo Data
+            const memoData = result.data.memo;
+            const memoFeed = document.getElementById("memo-feed");
+            memoFeed.innerHTML = memoData.map(memo => `
+                <div class="memo-post">
+                    <p>${memo.content}</p>
+                    <small>${new Date(memo.timestamp).toLocaleString()}</small>
+                </div>
+            `).join('');
+        } catch (error) {
+            console.error("Error fetching memos:", error);
+        }
     }
-}
 
-// Utility Functions (Optional)
-const formatDate = (str) => {
-    const options = { hour: "numeric", minute: "numeric" };
-    return new Date(str).toLocaleDateString('en-us', options);
-};
-
-const newElement = (tag, classes, text) => {
-    const ele = document.createElement(tag);
-    ele.classList.add(...classes);
-    ele.textContent = text;
-    return ele;
-};
+    // Call fetchMemos
+    fetchMemos();
+});
