@@ -332,6 +332,63 @@ body {
 
 
 
+/* Estilos para la sección de Xolos Ramírez */
+.xolo-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.xolo-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.xolo-card h5 {
+    margin-top: 10px;
+    font-family: 'Cinzel', serif;
+}
+
+.xolo-card p {
+    font-family: 'Lora', serif;
+    color: #777;
+}
+
+.xolo-card a {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.xolo-card a:hover {
+    background-color: #1da851;
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+    .xolo-card {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 769px) {
+    .xolo-card {
+        flex: 1 1 300px;
+        max-width: 300px;
+    }
+}
+
+
 
 
 /* Style the footer container */
