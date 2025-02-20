@@ -333,6 +333,16 @@ body {
 
 
 /* Estilos para la sección de Xolos Ramírez */
+#XolosRamirez .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas en pantallas grandes */
+    gap: 20px;
+    justify-content: center;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Estilos para cada tarjeta de Xoloitzcuintle */
 .xolo-card {
     background: white;
     padding: 15px;
@@ -342,21 +352,25 @@ body {
     transition: transform 0.3s ease-in-out;
 }
 
+/* Ajuste de imágenes */
 .xolo-card img {
     width: 100%;
     border-radius: 10px;
 }
 
+/* Títulos */
 .xolo-card h5 {
     margin-top: 10px;
     font-family: 'Cinzel', serif;
 }
 
+/* Descripciones */
 .xolo-card p {
     font-family: 'Lora', serif;
     color: #777;
 }
 
+/* Botón de WhatsApp */
 .xolo-card a {
     display: block;
     margin-top: 10px;
@@ -372,6 +386,23 @@ body {
 .xolo-card a:hover {
     background-color: #1da851;
 }
+
+/* Diseño responsivo */
+@media (max-width: 1024px) {
+    #XolosRamirez .container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    #XolosRamirez .container {
+        grid-template-columns: repeat(1, 1fr); /* 1 columna en móviles */
+    }
+}
+
+
+
+
 
 /* Diseño responsivo */
 @media (max-width: 768px) {
