@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         businessList.appendChild(listItem);
     });
 
-  const memoFeed = async () => {
+   const memoFeed = async () => {
     const url = 'https://graph.cash/graphql';
     const query = `
             query ($address: Address!) {
