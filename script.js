@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
     memoFeed();
-});
+
 
 
  const memoFeed = async () => {
