@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-    memoFeed();
 
 
 
