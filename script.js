@@ -129,3 +129,11 @@ const formatHash = (str) => {
     return `${str.substring(0, 6)}...${str.slice(-6)}`
 }
 memoFeed().then();
+
+setTimeout(function() {
+  const popup = document.getElementById('popup-xolo');
+  if (popup) {
+    popup.style.display = 'block';
+  }
+}, 8000);
+
