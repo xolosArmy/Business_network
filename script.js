@@ -1,6 +1,17 @@
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('DOM fully loaded and parsed');
 
+    // Enable YouTube autoplay once the DOM is ready
+    function enableYouTubeAutoplay() {
+        const frames = document.querySelectorAll('iframe.youtube-autoplay');
+        frames.forEach(frame => {
+            const base = frame.dataset.src || frame.src;
+            if (!base) return;
+            const sep = base.includes('?') ? '&' : '?';
+            frame.src = `${base}${sep}autoplay=1&mute=1`;
+        });
+    }
+
     // Wait for Google Translate script to load
     function loadGoogleTranslateScript() {
         return new Promise((resolve, reject) => {
@@ -27,6 +38,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (error) {
         console.error("Failed to load Google Translate script:", error);
     }
+
+    enableYouTubeAutoplay();
 });
 
 setTimeout(function() {
