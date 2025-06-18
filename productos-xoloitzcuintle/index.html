@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tienda Xoloitzcuintle | XolosArmy Network</title>
   <meta name="description" content="Compra bálsamos y repelente naturales para el cuidado del Xoloitzcuintle. Pago con XEC (eCash) en XolosArmy Network.">
+
   <style>
     body { font-family: 'Lora', serif; margin: 0; background: #fefaf5; color: #222; }
     header { text-align: center; padding: 60px 20px; background: #232136; color: #FFD54F; }
@@ -16,9 +17,29 @@
     .card h2 { font-size: 20px; color: #113D4A; margin: 16px 0 8px; }
     .card p { font-size: 16px; color: #555; margin-bottom: 16px; }
     .paybutton { margin-top: 10px; }
+
+    .boton.whatsapp {
+      display: inline-block; background: #25D366; color: white;
+      padding: 12px 20px; border-radius: 8px; font-weight:bold;
+      margin-top:10px; text-decoration:none;
+    }
+
+    .sticky-buy {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #c20003; color: white;
+      text-align: center; padding: 12px;
+      font-size: 18px; font-weight: bold;
+      z-index: 1000;
+    }
+    @media (max-width: 768px) {
+      .sticky-buy { display: block; }
+    }
   </style>
+
   <script src="https://unpkg.com/@paybutton/paybutton/dist/paybutton.js"></script>
 </head>
+
 <body>
   <header>
     <h1>Productos Naturales Xoloitzcuintle</h1>
@@ -26,9 +47,10 @@
   </header>
 
   <section class="grid">
+
     <!-- Producto 1 -->
     <div class="card">
-      <img src="https://i.imgur.com/mMxrig5.png" alt="Bálsamo Árbol de Té">
+      <img src="https://i.imgur.com/mMxrig5.png" alt="Bálsamo Árbol de Té" />
       <h2>Bálsamo Árbol de Té</h2>
       <p>Hidratante y regenerador. 100% natural. Frasco de 100 ml.</p>
       <div class="paybutton-widget"
@@ -40,23 +62,15 @@
         theme='{"palette":{"primary":"#113D4A","secondary":"#FFD54F","tertiary":"#231f20"}}'
         op-return="Compra Balsamo Arbol de Té XolosArmy">
       </div>
-     <a id="whatsapp-buy" href="https://wa.me/521XXXXXXXXXX?text=Hola%2C+quiero+comprar+el+Bálsamo+Arbol+de+te" 
-   class="boton whatsapp" target="_blank">
-  🟢 Comprar por WhatsApp (Transferencia Bancaria)
-</a>
-<style>
-  .boton.whatsapp {
-    display: inline-block; background: #25D366; color: white;
-    padding: 12px 20px; border-radius: 8px; font-weight:bold;
-    margin-top:10px; text-decoration:none;
-  }
-</style>
-
+      <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C+quiero+comprar+el+Bálsamo+Arbol+de+té" 
+         class="boton whatsapp-buy" target="_blank">
+         🟢 Comprar por WhatsApp (Transferencia Bancaria)
+      </a>
     </div>
 
     <!-- Producto 2 -->
     <div class="card">
-      <img src="https://i.imgur.com/6SNy9zI.png" alt="Bálsamo Lavanda">
+      <img src="https://i.imgur.com/6SNy9zI.png" alt="Bálsamo Lavanda" />
       <h2>Bálsamo Lavanda</h2>
       <p>Calmante con vitamina E. Ideal para piel sensible. 100 ml.</p>
       <div class="paybutton-widget"
@@ -68,23 +82,15 @@
         theme='{"palette":{"primary":"#113D4A","secondary":"#FFD54F","tertiary":"#231f20"}}'
         op-return="Compra Balsamo Lavanda XolosArmy">
       </div>
-      <a id="whatsapp-buy" href="https://wa.me/521XXXXXXXXXX?text=Hola%2C+quiero+comprar+el+Bálsamo+Lavanda" 
-   class="boton whatsapp" target="_blank">
-  🟢 Comprar por WhatsApp (Transferencia Bancaria)
-</a>
-<style>
-  .boton.whatsapp {
-    display: inline-block; background: #25D366; color: white;
-    padding: 12px 20px; border-radius: 8px; font-weight:bold;
-    margin-top:10px; text-decoration:none;
-  }
-</style>
-
+      <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C+quiero+comprar+el+Bálsamo+Lavanda" 
+         class="boton whatsapp-buy" target="_blank">
+         🟢 Comprar por WhatsApp (Transferencia Bancaria)
+      </a>
     </div>
 
     <!-- Producto 3 -->
     <div class="card">
-      <img src="https://i.imgur.com/39QtDc9.png" alt="Bálsamo Limón">
+      <img src="https://i.imgur.com/39QtDc9.png" alt="Bálsamo Limón" />
       <h2>Bálsamo Limón</h2>
       <p>Antiséptico natural. Cuidado diario del Xolo. 100 ml.</p>
       <div class="paybutton-widget"
@@ -96,23 +102,15 @@
         theme='{"palette":{"primary":"#113D4A","secondary":"#FFD54F","tertiary":"#231f20"}}'
         op-return="Compra Balsamo Limón XolosArmy">
       </div>
-      <a id="whatsapp-buy" href="https://wa.me/521XXXXXXXXXX?text=Hola%2C+quiero+comprar+el+Bálsamo+Limón" 
-   class="boton whatsapp" target="_blank">
-  🟢 Comprar por WhatsApp (Transferencia Bancaria)
-</a>
-<style>
-  .boton.whatsapp {
-    display: inline-block; background: #25D366; color: white;
-    padding: 12px 20px; border-radius: 8px; font-weight:bold;
-    margin-top:10px; text-decoration:none;
-  }
-</style>
-
+      <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C+quiero+comprar+el+Bálsamo+Limón" 
+         class="boton whatsapp-buy" target="_blank">
+         🟢 Comprar por WhatsApp (Transferencia Bancaria)
+      </a>
     </div>
 
     <!-- Producto 4 -->
     <div class="card">
-      <img src="https://i.imgur.com/tQRuoBd.png" alt="Repelente de Limón">
+      <img src="https://i.imgur.com/tQRuoBd.png" alt="Repelente de Limón" />
       <h2>Repelente Natural</h2>
       <p>Protege contra insectos. Aroma fresco y seguro. Spray 100 ml.</p>
       <div class="paybutton-widget"
@@ -124,24 +122,30 @@
         theme='{"palette":{"primary":"#113D4A","secondary":"#FFD54F","tertiary":"#231f20"}}'
         op-return="Compra Repelente Limón XolosArmy">
       </div>
-      <a id="whatsapp-buy" href="https://wa.me/521XXXXXXXXXX?text=Hola%2C+quiero+comprar+el+Repelente+Limón" 
-   class="boton whatsapp" target="_blank">
-  🟢 Comprar por WhatsApp (Transferencia Bancaria)
-</a>
-<style>
-  .boton.whatsapp {
-    display: inline-block; background: #25D366; color: white;
-    padding: 12px 20px; border-radius: 8px; font-weight:bold;
-    margin-top:10px; text-decoration:none;
-  }
-</style>
-
+      <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C+quiero+comprar+el+Repelente+Limón" 
+         class="boton whatsapp-buy" target="_blank">
+         🟢 Comprar por WhatsApp (Transferencia Bancaria)
+      </a>
     </div>
+
   </section>
 
-<footer>
-    <p>&copy; 2025 Xolos Ramírez · Xoloitzcuintles con amor</p>
+  <!-- Botón Sticky para WhatsApp -->
+  <div id="stickyBuy" class="sticky-buy">
+    <a href="https://wa.me/521XXXXXXXXXX" target="_blank" style="color:white; text-decoration:none;">
+      🟢 Comprar por WhatsApp (Transferencia)
+    </a>
+  </div>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      const sticky = document.getElementById('stickyBuy');
+      sticky.style.display = window.scrollY > 200 ? 'block' : 'none';
+    });
+  </script>
+
+  <footer>
+    <p style="text-align:center; padding:20px;">&copy; 2025 Xolos Ramírez · Xoloitzcuintles con amor</p>
   </footer>
-  <script src="https://unpkg.com/@paybutton/paybutton/dist/paybutton.js"></script>
 </body>
 </html>
