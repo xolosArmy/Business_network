@@ -573,27 +573,7 @@ footer {
     .button-link {
 
 
-        /* Sticky Buy Button para móviles */
-.sticky-buy {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #c20003;
-  color: white;
-  text-align: center;
-  padding: 12px;
-  font-size: 18px;
-  font-weight: bold;
-  z-index: 1000;
-}
-@media (max-width: 768px) {
-  .sticky-buy {
-    display: block;
-  }
-}
-
+  
 
 footer p {
     margin: 0;
