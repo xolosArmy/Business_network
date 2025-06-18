@@ -3,82 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Productos Naturales para Xoloitzcuintle | Xolos Ramírez</title>
-  <meta name="description" content="Descubre los bálsamos y repelente naturales para el cuidado del Xoloitzcuintle, elaborados por Xolos Ramírez. Compra segura en XolosArmy Network.">
-  <link href="https://fonts.googleapis.com/css2?family=Lora&family=Cinzel&display=swap" rel="stylesheet">
+  <title>Tienda Xoloitzcuintle | XolosArmy Network</title>
+  <meta name="description" content="Compra bálsamos y repelente naturales para el cuidado del Xoloitzcuintle. Pago con XEC (eCash) en XolosArmy Network.">
   <style>
-    body { font-family: 'Lora', serif; margin: 0; background: #fffaf4; color: #222; }
-    header, footer { text-align: center; padding: 40px 20px; background: linear-gradient(135deg, #f9f0e7, #fce6d9); }
-    h1 { color: #c20003; font-family: 'Cinzel', serif; }
-    .productos { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; padding: 40px; }
-    .producto { max-width: 320px; background: #fff; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 20px; text-align: center; transition: transform 0.3s; }
-    .producto:hover { transform: translateY(-8px); }
-    .producto img { width: 100%; border-radius: 12px; }
-    .producto h2 { color: #113D4A; font-size: 20px; margin: 16px 0 8px; }
-    .producto p { font-size: 16px; margin: 0 0 12px; }
-    .boton { display: inline-block; background: #c20003; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; }
-    .boton:hover { background: #900002; }
-    .pago { text-align: center; padding: 40px 20px; }
-    .pago a.whatsapp {
-      display: inline-block;
-      background: #25D366;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-left: 20px;
-    }
-    .pago a.whatsapp:hover { background: #1ebe4f; }
+    body { font-family: 'Lora', serif; margin: 0; background: #fefaf5; color: #222; }
+    header { text-align: center; padding: 60px 20px; background: #232136; color: #FFD54F; }
+    h1 { font-size: 36px; margin-bottom: 10px; }
+    p { font-size: 18px; color: #f0e9dc; }
+    .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; padding: 40px 20px; }
+    .card { max-width: 300px; background: white; border-radius: 16px; padding: 20px; box-shadow: 0 6px 14px rgba(0,0,0,0.1); text-align: center; }
+    .card img { width: 100%; border-radius: 12px; }
+    .card h2 { font-size: 20px; color: #113D4A; margin: 16px 0 8px; }
+    .card p { font-size: 16px; color: #555; margin-bottom: 16px; }
+    .paybutton { margin-top: 10px; }
   </style>
+  <script src="https://unpkg.com/@paybutton/paybutton/dist/paybutton.js"></script>
 </head>
 <body>
   <header>
-    <h1>Productos Naturales para tu Xoloitzcuintle</h1>
-    <p>Creados por Xolos Ramírez. Compra directa desde XolosArmy Network.</p>
+    <h1>Productos Naturales Xoloitzcuintle</h1>
+    <p>Bálsamos y repelentes hechos para cuidar la piel y energía de tu xolo.</p>
   </header>
 
-  <section class="productos">
-    <div class="producto">
+  <section class="grid">
+    <!-- Producto 1 -->
+    <div class="card">
       <img src="https://i.imgur.com/ejemplo1.jpg" alt="Bálsamo Árbol de Té">
-      <h2>Bálsamo de Árbol de Té</h2>
-      <p>Regenera y calma la piel del Xoloitzcuintle. 100% natural.</p>
-      <a class="boton" href="https://wa.me/message/435RTKGJLTX2J1">Comprar en XolosArmy</a>
+      <h2>Bálsamo Árbol de Té</h2>
+      <p>Hidratante y regenerador. 100% natural. Frasco de 100 ml.</p>
+      <div class="paybutton-widget"
+        to="ecash:qz234examplexectokenaddress1"
+        amount=1333333
+        text="Comprar con XEC"
+        hover-text="Enviar XEC"
+        success-text="Gracias por tu compra"
+        theme='{"palette":{"primary":"#113D4A","secondary":"#FFD54F","tertiary":"#231f20"}}'
+        op-return="Compra Balsamo Arbol de Té XolosArmy">
+      </div>
     </div>
-    <div class="producto">
+
+    <!-- Producto 2 -->
+    <div class="card">
       <img src="https://i.imgur.com/ejemplo2.jpg" alt="Bálsamo Lavanda">
-      <h2>Bálsamo de Lavanda</h2>
-      <p>Relajante, hidratante y con vitamina E. Aroma suave.</p>
-      <a class="boton" href="https://wa.me/message/435RTKGJLTX2J1">Comprar en XolosArmy</a>
+      <h2>Bálsamo Lavanda</h2>
+      <p>Calmante con vitamina E. Ideal para piel sensible. 100 ml.</p>
+      <div class="paybutton-widget"
+        to="ecash:qz234examplexectokenaddress2"
+        amount=1333333
+        text="Comprar con XEC"
+        hover-text="Enviar XEC"
+        success-text="Gracias por tu compra"
+        theme='{"palette":{"primary":"#113D4A","secondary":"#FFD54F","tertiary":"#231f20"}}'
+        op-return="Compra Balsamo Lavanda XolosArmy">
+      </div>
     </div>
-    <div class="producto">
+
+    <!-- Producto 3 -->
+    <div class="card">
       <img src="https://i.imgur.com/ejemplo3.jpg" alt="Bálsamo Limón">
-      <h2>Bálsamo de Limón</h2>
-      <p>Antibacterial, fresco y protector para la piel sensible.</p>
-      <a class="boton" href="https://wa.me/message/435RTKGJLTX2J1">Comprar en XolosArmy</a>
+      <h2>Bálsamo Limón</h2>
+      <p>Antiséptico natural. Cuidado diario del Xolo. 100 ml.</p>
+      <div class="paybutton-widget"
+        to="ecash:qz234examplexectokenaddress3"
+        amount=1333333
+        text="Comprar con XEC"
+        hover-text="Enviar XEC"
+        success-text="Gracias por tu compra"
+        theme='{"palette":{"primary":"#113D4A","secondary":"#FFD54F","tertiary":"#231f20"}}'
+        op-return="Compra Balsamo Limón XolosArmy">
+      </div>
     </div>
-    <div class="producto">
+
+    <!-- Producto 4 -->
+    <div class="card">
       <img src="https://i.imgur.com/ejemplo4.jpg" alt="Repelente de Limón">
       <h2>Repelente Natural</h2>
-      <p>A base de limón. Protege contra pulgas, mosquitos y más.</p>
-      <a class="boton" href="https://wa.me/message/435RTKGJLTX2J1">Comprar en XolosArmy</a>
+      <p>Protege contra insectos. Aroma fresco y seguro. Spray 100 ml.</p>
+      <div class="paybutton-widget"
+        to="ecash:qz234examplexectokenaddress4"
+        amount=1333333
+        text="Comprar con XEC"
+        hover-text="Enviar XEC"
+        success-text="Gracias por tu compra"
+        theme='{"palette":{"primary":"#113D4A","secondary":"#FFD54F","tertiary":"#231f20"}}'
+        op-return="Compra Repelente Limón XolosArmy">
+      </div>
     </div>
   </section>
 
-  <section class="pago">
-    <div class="paybutton"
-      to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
-      text="Comprar "
-      hover-text="Enviar pago con Crypto"
-      success-text="Gracias"
-      goal-amount="1008000">
-    </div>
-    <a class="whatsapp" href="https://wa.me/message/435RTKGJLTX2J1" target="_blank">Transferencia por WhatsApp</a>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Xolos Ramírez · Xoloitzcuintles con amor</p>
-  </footer>
-  <script src="https://unpkg.com/@paybutton/paybutton/dist/paybutton.js"></script>
 </body>
 </html>
