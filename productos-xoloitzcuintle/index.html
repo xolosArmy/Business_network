@@ -35,6 +35,38 @@
     @media (max-width: 768px) {
       .sticky-buy { display: block; }
     }
+
+    /* Estilos para la sección de reseñas */
+    .reviews-section {
+      background: #fff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .reviews-section h2 {
+      color: #113D4A;
+      margin-bottom: 20px;
+    }
+    .reviews-section form {
+      max-width: 500px;
+      margin: auto;
+    }
+    .reviews-section input,
+    .reviews-section textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    .reviews-section button {
+      background: #113D4A;
+      color: #FFD54F;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
   </style>
 
   <script src="https://unpkg.com/@paybutton/paybutton/dist/paybutton.js"></script>
@@ -128,6 +160,17 @@
       </a>
     </div>
 
+  </section>
+
+  <!-- Sección de reseñas de clientes -->
+  <section id="reseñas" class="reviews-section">
+    <h2>Comparte tu reseña</h2>
+    <p>¿Ya probaste nuestros productos? ¡Cuéntanos tu experiencia!</p>
+    <form action="https://formspree.io/f/your-form-id" method="POST">
+      <input type="text" name="nombre" placeholder="Tu nombre" required />
+      <textarea name="mensaje" placeholder="Tu reseña" required></textarea>
+      <button type="submit">Enviar reseña</button>
+    </form>
   </section>
 
   <!-- Botón Sticky para WhatsApp -->
