@@ -594,3 +594,16 @@ footer {
     width: 100%;
 }
 
+/* Gallery for Xolos Ramírez */
+#xolos-ramirez-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+#xolos-ramirez-gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
