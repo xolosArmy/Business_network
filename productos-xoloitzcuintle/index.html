@@ -1,206 +1,75 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>xolosArmy Naturals – Cuidado Ancestral para piel de Guerrero</title>
-  <meta name="description" content="xolosArmy Naturals: bálsamos, repelentes y shampoos naturales diseñados para el Xoloitzcuintle.">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tienda Xoloitzcuintle | XolosArmy Network</title>
+  <meta name="description" content="Compra bálsamos y repelente naturales para el cuidado del Xoloitzcuintle. Pago con XEC (eCash) en XolosArmy Network.">
+
   <style>
-    :root {
-      --negro: #000;
-      --rojo-oscuro: #8B0000;
-      --fondo-claro: #F5F5F5;
+    body { font-family: 'Lora', serif; margin: 0; background: #fefaf5; color: #222; }
+    header { text-align: center; padding: 60px 20px; background: #232136; color: #FFD54F; }
+    h1 { font-size: 36px; margin-bottom: 10px; }
+    p { font-size: 18px; color: #f0e9dc; }
+    .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; padding: 40px 20px; }
+    .card { max-width: 300px; background: white; border-radius: 16px; padding: 20px; box-shadow: 0 6px 14px rgba(0,0,0,0.1); text-align: center; }
+    .card img { width: 100%; border-radius: 12px; }
+    .card h2 { font-size: 20px; color: #113D4A; margin: 16px 0 8px; }
+    .card p { font-size: 16px; color: #555; margin-bottom: 16px; }
+    .paybutton { margin-top: 10px; }
+
+    .boton.whatsapp {
+      display: inline-block; background: #25D366; color: white;
+      padding: 12px 20px; border-radius: 8px; font-weight:bold;
+      margin-top:10px; text-decoration:none;
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: var(--fondo-claro);
-      color: var(--negro);
-      line-height: 1.6;
+
+    .sticky-buy {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #c20003; color: white;
+      text-align: center; padding: 12px;
+      font-size: 18px; font-weight: bold;
+      z-index: 1000;
     }
-    header {
-      background: var(--negro);
-      color: var(--fondo-claro);
-      padding: 1rem 2rem;
+    @media (max-width: 768px) {
+      .sticky-buy { display: block; }
+    }
+
+    /* Estilos para la sección de reseñas */
+    .reviews-section {
+      background: #fff;
+      padding: 40px 20px;
       text-align: center;
     }
-    header h1 {
-      margin: 0;
-      font-size: 1.5rem;
+    .reviews-section h2 {
+      color: #113D4A;
+      margin-bottom: 20px;
     }
-    .hero {
-      position: relative;
-      text-align: center;
-      color: var(--fondo-claro);
+    .reviews-section form {
+      max-width: 500px;
+      margin: auto;
     }
-    .hero picture,
-    .hero img {
+    .reviews-section input,
+    .reviews-section textarea {
       width: 100%;
-      height: 60vh;
-      object-fit: cover;
-    }
-    .hero-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      padding: 0 1rem;
-    }
-    .hero-content h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-    .hero-content p {
-      font-size: 1.2rem;
-      margin-bottom: 1.5rem;
-    }
-    .btn {
-      background: var(--rojo-oscuro);
-      color: var(--fondo-claro);
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-block;
-    }
-    .productos {
-      padding: 3rem 1rem;
-      text-align: center;
-    }
-    .productos h2 {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-    }
-    .grid {
-      display: grid;
-      gap: 1.5rem;
-    }
-    @media (min-width: 768px) {
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    @media (min-width: 1024px) {
-      .grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-    .card {
-      background: white;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
       border-radius: 8px;
-      padding: 1.5rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    .card h3 {
-      margin-top: 0;
-      font-size: 1.25rem;
+    .reviews-section button {
+      background: #113D4A;
+      color: #FFD54F;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
     }
-    .card p {
-      font-size: 1rem;
-      margin-bottom: 1rem;
-    }
-    .benefits {
-      background: var(--negro);
-      color: var(--fondo-claro);
-      padding: 2rem 1rem;
-    }
-    .benefits ul {
-      list-style: none;
-      padding: 0;
-      margin: 0 auto;
-      max-width: 800px;
-    }
-    .benefits li {
-      font-size: 1.1rem;
-      margin-bottom: 0.75rem;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: var(--negro);
-      color: var(--fondo-claro);
-    }
-    .product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-/* Permite 1–4 columnas según ancho, sin media queries extra */ 
-    html {
-  font-size: clamp(14px, 1.2vw, 18px);
-}
-body {
-  font-family: var(--font-base);
-  line-height: 1.6;
-  color: var(--color-text);
-}
-/* Ajusta el tamaño de fuente entre 14px y 18px según ancho de viewport */ 
-
-    .card {
-  background: #fff;
-  border-radius: var(--radius-base);
-  box-shadow: var(--shadow-light);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.product-img-wrapper {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-}
-
-.product-img-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.card .btn,
-.card .paybutton-widget,
-.card a.whatsapp-buy {
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.card .btn:hover,
-.card a.whatsapp-buy:hover {
-  background-color: var(--color-text);
-  color: var(--color-bg);
-}
-
-    .card h3 {
-  font-size: 1.25rem;
-  margin: 1rem 0 0.5rem;
-}
-
-.card p, .card ul {
-  font-size: 1rem;
-  color: #444;
-}
-
-a.whatsapp-buy {
-  font-size: 0.95rem;
-}
-
-
   </style>
-</head>
+
+  </head>
 <body>
   <header>
     <h1>xolosArmy Naturals</h1>
@@ -218,11 +87,19 @@ a.whatsapp-buy {
       </div>
     </section>
 
-     <section class="grid">
+  <script src="https://unpkg.com/@paybutton/paybutton/dist/paybutton.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>Productos Naturales Xoloitzcuintle</h1>
+    <p>Bálsamos y repelentes hechos para cuidar la piel y energía de tu xolo.</p>
+  </header>
+
+  <section class="grid">
 
     <!-- Producto 1 -->
     <div class="card">
-  <div class="product-img-wrapper">
       <img src="https://i.imgur.com/mMxrig5.png" alt="Bálsamo Árbol de Té" />
       <h2>Bálsamo Árbol de Té</h2>
       <p>Hidratante y regenerador. 100% natural. Frasco de 100 ml.</p>
@@ -242,8 +119,7 @@ a.whatsapp-buy {
     </div>
 
     <!-- Producto 2 -->
-      <div class="card">
-  <div class="product-img-wrapper">
+    <div class="card">
       <img src="https://i.imgur.com/6SNy9zI.png" alt="Bálsamo Lavanda" />
       <h2>Bálsamo Lavanda</h2>
       <p>Calmante con vitamina E. Ideal para piel sensible. 100 ml.</p>
@@ -264,7 +140,6 @@ a.whatsapp-buy {
 
     <!-- Producto 3 -->
     <div class="card">
-      <div class="product-img-wrapper">
       <img src="https://i.imgur.com/39QtDc9.png" alt="Bálsamo Limón" />
       <h2>Bálsamo Limón</h2>
       <p>Antiséptico natural. Cuidado diario del Xolo. 100 ml.</p>
@@ -285,7 +160,6 @@ a.whatsapp-buy {
 
     <!-- Producto 4 -->
     <div class="card">
-      <div class="product-img-wrapper">
       <img src="https://i.imgur.com/tQRuoBd.png" alt="Repelente de Limón" />
       <h2>Repelente Natural</h2>
       <p>Protege contra insectos. Aroma fresco y seguro. Spray 100 ml.</p>
@@ -306,7 +180,6 @@ a.whatsapp-buy {
 
     <!-- Producto 5 -->
     <div class="card">
-      <div class="product-img-wrapper">
        <img src="https://i.imgur.com/YI99sTb.png" alt="Jabón Neutro y Exfoliante Suave">
       <h3>Jabón Neutro y Exfoliante Suave</h3>
   <p>KIT DOS BARRAS de Jabón natural con pH neutro y exfoliación delicada. Ideal para la piel sensible del Xoloitzcuintle.</p>
@@ -333,7 +206,6 @@ a.whatsapp-buy {
     
     <!-- Producto 6 -->
     <div class="card">
-      <div class="product-img-wrapper">
        <img src="https://i.imgur.com/DNzNO7W.png" alt="Paquete Bienestar Integral Xoloitzcuintlee">
       <h3>Paquete Bienestar Integral Xoloitzcuintle</h3>
   <p>Cuidado completo de la piel y protección natural: incluye bálsamos de Árbol de Té, Limón y Lavanda, repelente con esencia de limón y dos jabones neutros exfoliantes.</p>
@@ -359,16 +231,6 @@ a.whatsapp-buy {
     </div>
 
   </section>
-
-      <section class="benefits" aria-label="Beneficios">
-      <ul>
-        <li>🌿 Ingredientes 100 % naturales</li>
-        <li>🐾 Especial para piel sin pelo</li>
-        <li>✅ Dermatológicamente testeado</li>
-        <li>🚚 Envío express eco-friendly</li>
-      </ul>
-    </section>
-  </main>
 
   <!-- Sección de reseñas de clientes -->
   <section id="reseñas" class="reviews-section">
@@ -396,9 +258,22 @@ a.whatsapp-buy {
   </script>
 
 
+
+
+  <footer style="background:#232136; color:white; text-align:center; padding:30px 20px;">
+  <p style="margin: 0 0 10px;">&copy; 2025 Xolos Ramírez · Xoloitzcuintles con amor</p>
+
+  <div style="margin-bottom:15px;">
+    <a href="https://xolosarmy.xyz" style="background:#FFD54F; color:#232136; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:bold;">
+      ← Volver a la página principal
+    </a>
+  </div>
+
   
-  <footer>
-    &copy; 2025 xolosArmy Naturals
-  </footer>
+  </div>
+</footer>
+
+<!-- FontAwesome para íconos -->
+<script src="https://kit.fontawesome.com/your_kit_id.js" crossorigin="anonymous"></script>
 </body>
 </html>
