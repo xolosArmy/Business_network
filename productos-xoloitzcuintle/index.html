@@ -133,6 +133,16 @@
   margin: 0 auto;
 }
 /* Permite 1–4 columnas según ancho, sin media queries extra */ 
+    html {
+  font-size: clamp(14px, 1.2vw, 18px);
+}
+body {
+  font-family: var(--font-base);
+  line-height: 1.6;
+  color: var(--color-text);
+}
+/* Ajusta el tamaño de fuente entre 14px y 18px según ancho de viewport */ 
+
 
   </style>
 </head>
