@@ -124,6 +124,16 @@
       background: var(--negro);
       color: var(--fondo-claro);
     }
+    .product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+/* Permite 1–4 columnas según ancho, sin media queries extra */ 
+
   </style>
 </head>
 <body>
