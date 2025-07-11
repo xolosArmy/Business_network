@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tienda Xoloitzcuintle | XolosArmy Network</title>
+  <meta name="description" content="Compra bálsamos y repelente naturales para el cuidado del Xoloitzcuintle. Pago con XEC (eCash) en XolosArmy Network.">
+
+  <style>
+    body { font-family: 'Lora', serif; margin: 0; background: #fefaf5; color: #222; }
+    header { text-align: center; padding: 60px 20px; background: #232136; color: #FFD54F; }
+    h1 { font-size: 36px; margin-bottom: 10px; }
+    p { font-size: 18px; color: #f0e9dc; }
+    .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; padding: 40px 20px; }
+    .card { max-width: 300px; background: white; border-radius: 16px; padding: 20px; box-shadow: 0 6px 14px rgba(0,0,0,0.1); text-align: center; }
+    .card img { width: 100%; border-radius: 12px; }
+    .card h2 { font-size: 20px; color: #113D4A; margin: 16px 0 8px; }
+    .card p { font-size: 16px; color: #555; margin-bottom: 16px; }
+    .paybutton { margin-top: 10px; }
+
+    .boton.whatsapp {
+      display: inline-block; background: #25D366; color: white;
+      padding: 12px 20px; border-radius: 8px; font-weight:bold;
+      margin-top:10px; text-decoration:none;
+    }
+
+    .sticky-buy {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #c20003; color: white;
+      text-align: center; padding: 12px;
+      font-size: 18px; font-weight: bold;
+      z-index: 1000;
+    }
+    @media (max-width: 768px) {
+      .sticky-buy { display: block; }
+    }
+
+    /* Estilos para la sección de reseñas */
+    .reviews-section {
+      background: #fff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .reviews-section h2 {
+      color: #113D4A;
+      margin-bottom: 20px;
+    }
+    .reviews-section form {
+      max-width: 500px;
+      margin: auto;
+    }
+    .reviews-section input,
+    .reviews-section textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    .reviews-section button {
+      background: #113D4A;
+      color: #FFD54F;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+
+  <script src="https://unpkg.com/@paybutton/paybutton/dist/paybutton.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>Productos Naturales Xoloitzcuintle</h1>
+    <p>Bálsamos y repelentes hechos para cuidar la piel y energía de tu xolo.</p>
+  </header>
+
+  <section class="grid">
+
+    <!-- Producto 1 -->
+    <div class="card">
+      <img src="https://i.imgur.com/mMxrig5.png" alt="Bálsamo Árbol de Té" />
+      <h2>Bálsamo Árbol de Té</h2>
+      <p>Hidratante y regenerador. 100% natural. Frasco de 100 ml.</p>
+      <div class="paybutton-widget"
+        to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
+        amount=1333333
+        text="Comprar con XEC"
+        hover-text="Enviar XEC"
+        success-text="Gracias por tu compra"
+        theme='{"palette":{"primary":"#113D4A","secondary":"#FFD54F","tertiary":"#231f20"}}'
+        op-return="Compra Balsamo Arbol de Té XolosArmy">
+      </div>
+      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Bálsamo+Arbol+de+té" 
+         class="boton whatsapp-buy" target="_blank">
+         🟢 Comprar por WhatsApp (Transferencia Bancaria)
+      </a>
+    </div>
+
+    <!-- Producto 2 -->
+    <div class="card">
+      <img src="https://i.imgur.com/6SNy9zI.png" alt="Bálsamo Lavanda" />
+      <h2>Bálsamo Lavanda</h2>
+      <p>Calmante con vitamina E. Ideal para piel sensible. 100 ml.</p>
+      <div class="paybutton-widget"
+        to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
+        amount=1333333
+        text="Comprar con XEC"
+        hover-text="Enviar XEC"
+        success-text="Gracias por tu compra"
+        theme='{"palette":{"primary":"#113D4A","secondary":"#FFD54F","tertiary":"#231f20"}}'
+        op-return="Compra Balsamo Lavanda XolosArmy">
+      </div>
+      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Bálsamo+Lavanda" 
+         class="boton whatsapp-buy" target="_blank">
+         🟢 Comprar por WhatsApp (Transferencia Bancaria)
+      </a>
+    </div>
+
+    <!-- Producto 3 -->
+    <div class="card">
+      <img src="https://i.imgur.com/39QtDc9.png" alt="Bálsamo Limón" />
+      <h2>Bálsamo Limón</h2>
+      <p>Antiséptico natural. Cuidado diario del Xolo. 100 ml.</p>
+      <div class="paybutton-widget"
+        to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
+        amount=1333333
+        text="Comprar con XEC"
+        hover-text="Enviar XEC"
+        success-text="Gracias por tu compra"
+        theme='{"palette":{"primary":"#113D4A","secondary":"#FFD54F","tertiary":"#231f20"}}'
+        op-return="Compra Balsamo Limón XolosArmy">
+      </div>
+      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Bálsamo+Limón" 
+         class="boton whatsapp-buy" target="_blank">
+         🟢 Comprar por WhatsApp (Transferencia Bancaria)
+      </a>
+    </div>
+
+    <!-- Producto 4 -->
+    <div class="card">
+      <img src="https://i.imgur.com/tQRuoBd.png" alt="Repelente de Limón" />
+      <h2>Repelente Natural</h2>
+      <p>Protege contra insectos. Aroma fresco y seguro. Spray 100 ml.</p>
+      <div class="paybutton-widget"
+        to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
+        amount=1333333
+        text="Comprar con XEC"
+        hover-text="Enviar XEC"
+        success-text="Gracias por tu compra"
+        theme='{"palette":{"primary":"#113D4A","secondary":"#FFD54F","tertiary":"#231f20"}}'
+        op-return="Compra Repelente Limón XolosArmy">
+      </div>
+      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Repelente+Limón" 
+         class="boton whatsapp-buy" target="_blank">
+         🟢 Comprar por WhatsApp (Transferencia Bancaria)
+      </a>
+    </div>
+
+    <!-- Producto 5 -->
+    <div class="card">
+       <img src="https://i.imgur.com/YI99sTb.png" alt="Jabón Neutro y Exfoliante Suave">
+      <h3>Jabón Neutro y Exfoliante Suave</h3>
+  <p>KIT DOS BARRAS de Jabón natural con pH neutro y exfoliación delicada. Ideal para la piel sensible del Xoloitzcuintle.</p>
+  <ul>
+    <li>Glicerina vegetal</li>
+    <li>Aceite de caléndula</li>
+    <li>Avena coloidal</li>
+  </ul>
+      <div class="paybutton-widget"
+        to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
+        amount=1333333
+        text="Comprar con XEC"
+        hover-text="Enviar XEC"
+        success-text="Gracias por tu compra"
+        theme='{"palette":{"primary":"#113D4A","secondary":"#FFD54F","tertiary":"#231f20"}}'
+        op-return="Jabón Neutro y Exfoliante Suave xolosArmy">
+      </div>
+      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+jabon+exfoliante" 
+         class="boton whatsapp-buy" target="_blank">
+         🟢 Comprar por WhatsApp (Transferencia Bancaria)
+      </a>
+    </div>
+
+    
+    <!-- Producto 6 -->
+    <div class="card">
+       <img src="https://i.imgur.com/DNzNO7W.png" alt="Paquete Bienestar Integral Xoloitzcuintlee">
+      <h3>Paquete Bienestar Integral Xoloitzcuintle</h3>
+  <p>Cuidado completo de la piel y protección natural: incluye bálsamos de Árbol de Té, Limón y Lavanda, repelente con esencia de limón y dos jabones neutros exfoliantes.</p>
+  <ul>
+    <li>Bálsamos calmantes y nutritivos: Árbol de Té, Limón y Lavanda.</li>
+    <li>Repelente natural con esencia de limón: protege de insectos sin químicos agresivos.</li>
+    <li>Jabones exfoliantes neutros: limpian suavemente mientras cuidan la piel.</li>
+
+  </ul>
+      <div class="paybutton-widget"
+        to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
+        amount=5666666
+        text="Comprar con XEC"
+        hover-text="Enviar XEC"
+        success-text="Gracias por tu compra"
+        theme='{"palette":{"primary":"#113D4A","secondary":"#FFD54F","tertiary":"#231f20"}}'
+        op-return="Paquete Bienestar Integral Xoloitzcuintle">
+      </div>
+      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Paquete+Bienestar+Integral+Xoloitzcuintle" 
+         class="boton whatsapp-buy" target="_blank">
+         🟢 Comprar por WhatsApp (Transferencia Bancaria)
+      </a>
+    </div>
+
+  </section>
+
+  <!-- Sección de reseñas de clientes -->
+  <section id="reseñas" class="reviews-section">
+    <h2>Comparte tu reseña</h2>
+    <p>¿Ya probaste nuestros productos? ¡Cuéntanos tu experiencia!</p>
+    <form action="https://formspree.io/f/your-form-id" method="POST">
+      <input type="text" name="nombre" placeholder="Tu nombre" required />
+      <textarea name="mensaje" placeholder="Tu reseña" required></textarea>
+      <button type="submit">Enviar reseña</button>
+    </form>
+  </section>
+
+  <!-- Botón Sticky para WhatsApp -->
+  <div id="stickyBuy" class="sticky-buy">
+    <a href="https://wa.me/message/435RTKGJLTX2J1" target="_blank" style="color:white; text-decoration:none;">
+      🟢 Comprar por WhatsApp (Transferencia)
+    </a>
+  </div>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      const sticky = document.getElementById('stickyBuy');
+      sticky.style.display = window.scrollY > 200 ? 'block' : 'none';
+    });
+  </script>
+
+
+
+
+  <footer style="background:#232136; color:white; text-align:center; padding:30px 20px;">
+  <p style="margin: 0 0 10px;">&copy; 2025 Xolos Ramírez · Xoloitzcuintles con amor</p>
+
+  <div style="margin-bottom:15px;">
+    <a href="https://xolosarmy.xyz" style="background:#FFD54F; color:#232136; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:bold;">
+      ← Volver a la página principal
+    </a>
+  </div>
+
+  
+  </div>
+</footer>
+
+<!-- FontAwesome para íconos -->
+<script src="https://kit.fontawesome.com/your_kit_id.js" crossorigin="anonymous"></script>
+</body>
+</html>
