@@ -167,6 +167,22 @@ body {
   object-position: center;
 }
 
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.card .btn,
+.card .paybutton-widget,
+.card a.whatsapp-buy {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.card .btn:hover,
+.card a.whatsapp-buy:hover {
+  background-color: var(--color-text);
+  color: var(--color-bg);
+}
 
 
   </style>
