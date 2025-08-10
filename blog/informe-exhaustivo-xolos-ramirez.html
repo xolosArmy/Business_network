@@ -51,6 +51,16 @@
       .panel{border:1px solid #ccc}
       a{color:#0033aa;text-decoration:underline}
     }
+    /* botón volver a principal */
+.btn-row{display:flex; gap:10px; margin:10px 0 24px}
+.btn{
+  display:inline-flex; align-items:center; gap:.5rem;
+  background:var(--accent); color:#0b0b0c; font-weight:700;
+  padding:.6rem 1rem; border-radius:12px; border:1px solid var(--border);
+  text-decoration:none;
+}
+.btn:hover{filter:brightness(1.08); text-decoration:none}
+
   </style>
 </head>
 <body>
@@ -58,6 +68,10 @@
     <header>
       <h1 class="anchored" id="top"><span class="hash">#</span>Informe exhaustivo: Investigación sobre Xolos Ramírez, Criadero Xoloitzcuintle</h1>
       <div class="meta">Documento investigativo en formato HTML · preparado para publicación</div>
+      <nav class="btn-row">
+  <a class="btn" href="/" rel="home" aria-label="Volver a la página principal">← Volver a la página principal</a>
+</nav>
+
     </header>
 
     <!-- Tabla de contenidos -->
