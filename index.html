@@ -335,7 +335,7 @@
   <div class="container">
     <p>&copy; 2024 XolosArmy Network</p>
 
-    <!-- ID del eToken (compacto) -->
+    <!-- ID del eToken (compacto) con botón de copiar -->
     <div class="etoken-id">
       <strong>Xolos $RMZ eToken ID:</strong>
       <a href="https://explorer.e.cash/tx/9e0a9d4720782cf661beaea6c5513f1972e0f3b1541ba4c83f4c87ef65f843dc" 
@@ -343,6 +343,7 @@
          title="9e0a9d4720782cf661beaea6c5513f1972e0f3b1541ba4c83f4c87ef65f843dc">
         9e0a9d47…65f843dc
       </a>
+      <button id="copy-etoken" title="Copiar ID completo">📋</button>
     </div>
 
     <!-- Iconos sociales -->
@@ -364,23 +365,18 @@
 </footer>
 
 <style>
-/* ----- Footer base ----- */
 footer {
   background-color: #111;
   color: #fff;
   padding: 24px 0;
   text-align: center;
 }
-
-/* Arregla el "card" blanco en el footer */
 footer .container {
   background: transparent !important;
   box-shadow: none !important;
   border-radius: 0 !important;
   padding: 0 16px;
 }
-
-/* eToken compacto y legible */
 footer .etoken-id {
   margin: 8px 0 4px;
   font-size: 14px;
@@ -391,7 +387,7 @@ footer .etoken-id {
   align-items: center;
 }
 footer .etoken-id strong {
-  color: #FFD54F; /* contraste en fondo oscuro */
+  color: #FFD54F;
 }
 footer .etoken-id a {
   color: #24BCD5;
@@ -401,8 +397,18 @@ footer .etoken-id a:hover {
   text-decoration: underline;
   color: #90f0ff;
 }
-
-/* Iconos sociales */
+footer .etoken-id button {
+  background: #FFD54F;
+  color: #111;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 2px 6px;
+  font-size: 14px;
+}
+footer .etoken-id button:hover {
+  background: #e6c200;
+}
 footer .social-icons {
   margin-top: 10px;
   display: flex;
@@ -416,12 +422,21 @@ footer .social-icons a {
 footer .social-icons a:hover {
   color: #FFD54F;
 }
-
-/* Responsive: si el ancho es muy pequeño, reduce tipografía */
 @media (max-width: 420px) {
   footer .etoken-id { font-size: 13px; }
 }
 </style>
+
+<script>
+document.getElementById('copy-etoken').addEventListener('click', function() {
+  const etokenID = "9e0a9d4720782cf661beaea6c5513f1972e0f3b1541ba4c83f4c87ef65f843dc";
+  navigator.clipboard.writeText(etokenID).then(() => {
+    alert("ID copiado al portapapeles");
+  }).catch(err => {
+    console.error("Error al copiar el ID: ", err);
+  });
+});
+</script>
 
 
   <!-- Bootstrap CSS -->
