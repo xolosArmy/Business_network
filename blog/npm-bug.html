@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Supply-Chain Attacks on NPM: Is eCash at Risk?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="What the recent NPM supply-chain attack means for eCash/Cashtab, how the team mitigates risk, and a practical checklist for builders." />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Supply-Chain Attacks on NPM: Is eCash at Risk?" />
+  <meta property="og:description" content="Why Cashtab and eCash are safe, plus a security checklist for builders." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="/images/xolo-guardian-hero.jpg" />
+  <meta property="og:url" content="https://xolosarmy.xyz/blog/npm-bug.html" />
+
+  <style>
+    :root{
+      --bg:#0c1117;
+      --panel:#0f1722;
+      --ink:#e6edf3;
+      --muted:#9fb0c3;
+      --acc:#27e0c9;
+      --accent-2:#7bf1b7;
+      --border:rgba(255,255,255,.07);
+      --code:#0b1320;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,"Noto Sans",sans-serif;line-height:1.6}
+    a{color:var(--accent-2);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:980px;margin:auto;padding:24px}
+    header.hero{
+      border:1px solid var(--border);
+      border-radius:18px;
+      overflow:hidden;
+      background:linear-gradient(180deg,rgba(39,224,201,.1),transparent 60%);
+    }
+    .hero img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+    .eyebrow{letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;font-size:.82rem;margin:16px 0 6px}
+    h1{font-size:clamp(1.8rem,3vw,2.6rem);line-height:1.2;margin:.2em 0 .4em}
+    .lede{font-size:1.05rem;color:#cfe3f5;max-width:70ch}
+    .grid{display:grid;gap:24px;margin:28px 0}
+    @media(min-width:900px){.grid.cols-2{grid-template-columns:1.2fr .8fr}}
+    section.panel{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:20px 18px;
+    }
+    h2{font-size:1.35rem;margin:.2em 0 .6em}
+    h3{font-size:1.05rem;margin:1.2em 0 .4em}
+    .callout{
+      border-left:4px solid var(--acc);
+      padding:12px 14px;
+      background:rgba(39,224,201,.06);
+      border-radius:8px;
+      color:#daf6f1
+    }
+    ul,ol{padding-left:20px;margin:10px 0}
+    code,kbd,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,"Liberation Mono","Courier New",monospace}
+    pre{
+      background:var(--code);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:14px;
+      overflow:auto
+    }
+    .meta{color:var(--muted);font-size:.9rem;margin-top:8px}
+    .tweet{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:linear-gradient(180deg,#0b1623,#0b1420);
+      padding:14px 16px;
+      display:flex;gap:12px;align-items:flex-start
+    }
+    .tweet .dot{width:36px;height:36px;border-radius:999px;background:linear-gradient(135deg,var(--acc),var(--accent-2))}
+    .cta{
+      display:flex;flex-wrap:wrap;gap:12px;margin:22px 0 6px
+    }
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      border:1px solid var(--border);
+      padding:10px 14px;border-radius:12px;
+      background:#0d1622;
+      color:#dff;
+      font-weight:600
+    }
+    .btn.primary{background:linear-gradient(135deg,var(--acc),#1fbac4);color:#061216}
+    footer{margin:28px 0 8px;color:var(--muted);font-size:.9rem}
+    .img-note{color:var(--muted);font-size:.85rem;margin-top:8px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <img src="/images/xolo-guardian-hero.jpg" alt="Xoloitzcuintli guarding a digital fortress with code and circuit motifs" />
+    </header>
+
+    <p class="eyebrow">Security • eCash • Builders</p>
+    <h1>Supply-Chain Attacks on NPM: Is eCash at Risk?</h1>
+    <p class="lede">
+      A recent large-scale supply-chain incident on NPM triggered questions across the crypto developer community.
+      Here’s what it means for <strong>eCash</strong> and <strong>Cashtab</strong>—and a practical checklist to help you secure your own projects.
+    </p>
+
+    <div class="grid cols-2">
+      <section class="panel">
+        <h2>The Short Answer</h2>
+        <div class="callout">
+          <strong>No direct risk to eCash/Cashtab.</strong> Cashtab rarely changes dependencies,
+          none of the malicious versions were installed, and XEC was not targeted. Critical crypto
+          functions live in internal monorepo packages rather than third-party libraries.
+        </div>
+
+        <h2>Why Cashtab Is Resilient</h2>
+        <ul>
+          <li><strong>Conservative dependency policy:</strong> dependency updates are infrequent and reviewed.</li>
+          <li><strong>Defense-in-depth:</strong> changes are isolated, tested, and easy to revert if needed.</li>
+          <li><strong>Internal crypto stack:</strong> core functions rely on in-house packages such as
+            <code>ecash-lib</code>, <code>chronik-client</code>, <code>ecash-agora</code>,
+            <code>ecash-wallet</code>, and <code>ecashaddrjs</code>.
+          </li>
+        </ul>
+
+        <h2>What Is a Supply-Chain Attack?</h2>
+        <p>
+          Instead of attacking your code directly, adversaries compromise <em>dependencies</em> (or their maintainers)
+          and publish tainted versions. Automatic updates or careless installs can then pull malicious code into otherwise
+          trusted apps.
+        </p>
+
+        <h2>Secure-Build Checklist (Copy & Run)</h2>
+        <h3>Audit & Pin</h3>
+        <pre><code># see known vulnerabilities
+npm audit
+
+# ensure reproducible installs
+npm ci
+
+# view what is actually installed
+npm ls
+        </code></pre>
+
+        <h3>Policy</h3>
+        <ul>
+          <li>Always commit and use <code>package-lock.json</code> / <code>yarn.lock</code>.</li>
+          <li>Run CI with <code>npm ci --ignore-scripts</code> unless scripts are required.</li>
+          <li>Gate dependency bumps behind PR review and changelog inspection.</li>
+        </ul>
+
+        <h3>Monitoring</h3>
+        <ul>
+          <li>Enable security alerts (e.g., Dependabot, Snyk) on all repos.</li>
+          <li>Subscribe to advisories of critical dependencies.</li>
+          <li>Periodically rebuild from scratch to detect drift.</li>
+        </ul>
+      </section>
+
+      <aside class="panel">
+        <h2>XolosArmy Take</h2>
+        <p>
+          The most robust defense isn’t a single tool—it’s a design choice.
+          By minimizing third-party code in critical paths and treating dependency updates as a security event,
+          the eCash ecosystem limits exposure to supply-chain threats.
+        </p>
+
+        <div class="tweet" aria-label="Shareable blurb">
+          <div class="dot" aria-hidden="true"></div>
+          <div>
+            <strong style="display:block">TL;DR (share this)</strong>
+            Cashtab/eCash are unaffected by the recent NPM supply-chain incident. Conservative deps + internal crypto libs = strong resilience. Read more: <em>this page</em>.
+          </div>
+        </div>
+
+        <div class="cta">
+          <a class="btn primary" href="https://xolosarmy.xyz/blog">
+            Read more on XolosArmy
+          </a>
+          <a class="btn" href="/images/xolo-guardian-story.jpg" download>
+            Download Story Image (9:16)
+          </a>
+        </div>
+
+        <p class="img-note">Hero art: “Xolo, Digital Guardian”. Replace <code>/images/xolo-guardian-hero.jpg</code> and <code>/images/xolo-guardian-story.jpg</code> with your final assets.</p>
+        <p class="meta">Published by XolosArmy Network • Updated today</p>
+      </aside>
+    </div>
+
+    <section class="panel">
+      <h2>Developer Notes</h2>
+      <p>
+        If you maintain extensions, forks, or integrations with Cashtab, prefer the internal packages listed above for
+        crypto-critical operations. When external libraries are unavoidable, pin versions, verify checksums, and avoid
+        introducing new transitive dependencies casually.
+      </p>
+      <h3>Safe Install Example</h3>
+      <pre><code># fresh, reproducible install in CI
+rm -rf node_modules
+npm ci --ignore-scripts
+
+# run minimal audit (fail CI on highs)
+npm audit --audit-level=high
+      </code></pre>
+    </section>
+
+    <footer>
+      © XolosArmy Network. You may republish excerpts with credit and a link back to this page.
+    </footer>
+  </div>
+</body>
+</html>
+
