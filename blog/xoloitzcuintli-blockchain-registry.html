@@ -33,7 +33,8 @@
       --accent:#a78bfa;      /* violet-400 */
       --ok:#22c55e;          /* green-500 */
       --warn:#f59e0b;        /* amber-500 */
-      --code-bg:#0a0f1d;
+      --code-bg:#0f172a;
+      --code-ink: #e5e7eb; 
       --code-border:#1f2a44;
       --border:#1f2937;      /* gray-800 */
       --shadow: 0 10px 30px rgba(0,0,0,.35);
@@ -153,6 +154,7 @@
       overflow:auto;
       margin:14px 0;
       position: relative;
+      color: var(--code-ink);     
     }
     code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace; font-size:.91rem}
     .copy{
@@ -173,7 +175,7 @@
       body{background:#fff; color:#111}
       header.hero, .panel{box-shadow:none}
       a{color:#111; text-decoration:underline}
-      .copy{display:none}
+      .copy{ color: var(--code-ink);
     }
   </style>
 </head>
