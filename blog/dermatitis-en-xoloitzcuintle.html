@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Xoloitzcuintli Dermatitis · Bilingual Article</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#0f172a;
+      --ink:#e5e7eb;
+      --muted:#94a3b8;
+      --brand:#22d3ee;
+      --accent:#a78bfa;
+      --border:#1f2937;
+    }
+    body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:system-ui,Segoe UI,Roboto,Inter,Arial,sans-serif;line-height:1.65}
+    .container{max-width:1000px;margin:0 auto;padding:28px 20px}
+    header{text-align:center;margin-bottom:20px}
+    h1{font-size:clamp(1.6rem,4vw,2.5rem)}
+    .tabs{display:flex;justify-content:center;margin-bottom:20px}
+    .tab{padding:10px 20px;border:1px solid var(--border);cursor:pointer;background:var(--panel);color:var(--muted);margin:0 5px;border-radius:8px 8px 0 0}
+    .tab.active{background:var(--brand);color:#06202a;font-weight:600}
+    .content{display:none;background:var(--panel);padding:20px;border:1px solid var(--border);border-radius:0 0 12px 12px;box-shadow:0 8px 25px rgba(0,0,0,.35)}
+    .content.active{display:block}
+    h2{margin:1em 0 .5em}
+    h3{color:#cbd5e1}
+    ul{margin-left:1.2em}
+    .video{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%}
+    .video iframe{position:absolute;top:0;left:0;width:100%;height:100%}
+    footer{text-align:center;margin-top:40px;font-size:.9rem;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Xoloitzcuintli Dermatitis</h1>
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('en')">English</div>
+        <div class="tab" onclick="switchTab('es')">Español</div>
+      </div>
+    </header>
+
+    <!-- English Content -->
+    <div id="en" class="content active">
+      <h2>Why Xolos are prone to dermatitis</h2>
+      <p>The hairless phenotype of the Xoloitzcuintli comes with a fragile skin barrier, making them more sensitive to dryness, sun, humidity, and allergens.</p>
+      <ul>
+        <li><b>Genetic:</b> FOXI3 mutation → thin skin, comedones, folliculitis.</li>
+        <li><b>Environmental:</b> sunburn, humid climate infections, insect bites.</li>
+        <li><b>Immunologic:</b> atopic dermatitis, flea allergy, food/contact allergies.</li>
+      </ul>
+
+      <h2>How XolosArmy Naturals helps</h2>
+      <ul>
+        <li><b>Balms (Tea Tree / Lavender / Lemon):</b> antimicrobial, soothing, or purifying depending on the formula.</li>
+        <li><b>Neutral Soap with Oat & Calendula:</b> cleans without stripping, relieves itch.</li>
+        <li><b>Natural Repellent:</b> protects against fleas, ticks, and mosquitoes.</li>
+      </ul>
+
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/D4MILmbxERQ?si=0Kzc96qQvPoUDXTG" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <!-- Spanish Content -->
+    <div id="es" class="content">
+      <h2>¿Por qué el Xolo es propenso a la dermatitis?</h2>
+      <p>El fenotipo sin pelo del Xoloitzcuintle implica una barrera cutánea frágil, lo que lo hace más sensible a la resequedad, el sol, la humedad y los alérgenos.</p>
+      <ul>
+        <li><b>Genética:</b> mutación FOXI3 → piel delgada, comedones, foliculitis.</li>
+        <li><b>Ambiental:</b> quemaduras solares, infecciones en clima húmedo, picaduras de insectos.</li>
+        <li><b>Inmunológico:</b> dermatitis atópica, alergia a pulgas, alergias alimentarias/de contacto.</li>
+      </ul>
+
+      <h2>Cómo ayudan los productos XolosArmy Naturals</h2>
+      <ul>
+        <li><b>Bálsamos (Árbol de Té / Lavanda / Limón):</b> antimicrobiano, calmante o purificante según la fórmula.</li>
+        <li><b>Jabón neutro con avena y caléndula:</b> limpia sin resecar, alivia la comezón.</li>
+        <li><b>Repelente natural:</b> protege contra pulgas, garrapatas y mosquitos.</li>
+      </ul>
+
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/D4MILmbxERQ?si=0Kzc96qQvPoUDXTG" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <footer>© Xolos Ramírez · XolosArmy Naturals</footer>
+  </div>
+
+  <script>
+    function switchTab(lang){
+      document.querySelectorAll('.tab').forEach(tab=>tab.classList.remove('active'));
+      document.querySelectorAll('.content').forEach(c=>c.classList.remove('active'));
+      document.querySelector(`.tab[onclick="switchTab('${lang}')"]`).classList.add('active');
+      document.getElementById(lang).classList.add('active');
+    }
+  </script>
+</body>
+</html>
