@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tutorial: Pagar con Bitcoin Cash (BCH) o eCash (XEC) desde un exchange — XolosArmy Network</title>
+  <style>
+    :root{
+      --bg:#0b0d10; --card:#12161b; --muted:#8fa3b0; --text:#e7f0f4; --brand:#00E6A8; --warn:#ffd166; --danger:#ff4d4d;
+      --radius:18px; --radius-sm:12px; --shadow:0 10px 30px rgba(0,0,0,.35);
+      --mono: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0; padding:0; background:linear-gradient(180deg,#0b0d10 0%,#0f1419 100%); color:var(--text); font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;}
+    .wrap{max-width:980px; margin:32px auto 80px; padding:0 20px}
+    header{display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:24px}
+    .logo{display:flex; align-items:center; gap:12px}
+    .logo .mark{width:44px; height:44px; border-radius:12px; background:radial-gradient(circle at 30% 30%,rgba(0,230,168,.25),transparent 60%), #0f1419; border:1px solid #1b222a; display:grid; place-items:center}
+    .logo .mark:before{content:"🐾"; font-size:22px}
+    h1{font-size: clamp(1.6rem, 1.2rem + 1.8vw, 2.4rem); margin:0}
+    .subtitle{color:var(--muted); margin-top:6px}
+
+    .card{background:var(--card); border:1px solid #1b222a; border-radius:var(--radius); box-shadow:var(--shadow)}
+    .hero{padding:28px}
+    .hero p{margin:8px 0 0; color:var(--muted)}
+
+    .grid{display:grid; grid-template-columns:1fr; gap:18px}
+    @media(min-width:880px){.grid{grid-template-columns:1fr 1fr}}
+
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px; border:1px solid #21303a; background:rgba(0,230,168,.07); color:var(--brand); font-weight:600; font-size:.9rem}
+
+    .steps{padding:20px}
+    .step{padding:16px; border:1px dashed #22303a; border-radius:var(--radius-sm); background:#0f1419}
+    .step h3{margin:0 0 8px; font-size:1.05rem}
+    .step p{margin:0 0 8px; color:var(--muted)}
+
+    .warn{display:flex; gap:12px; padding:14px 16px; border-radius:var(--radius-sm); border:1px solid rgba(255,209,102,.35); background:linear-gradient(180deg, rgba(255,209,102,.08), rgba(255,209,102,.03)); color:#ffe7a3}
+    .danger{display:flex; gap:12px; padding:14px 16px; border-radius:var(--radius-sm); border:1px solid rgba(255,77,77,.35); background:linear-gradient(180deg, rgba(255,77,77,.08), rgba(255,77,77,.03)); color:#ffb3b3}
+
+    code,kbd,.addr{font-family:var(--mono);}
+    .kbd{display:inline-block; padding:2px 6px; border-radius:6px; border:1px solid #2a3440; background:#0f1419; color:var(--text); font-size:.9rem}
+
+    .panel{padding:18px}
+    .panel h2{margin:0 0 8px}
+
+    .addr-card{display:grid; gap:10px; padding:16px; border-radius:var(--radius-sm); border:1px solid #1b222a; background:#0e1318}
+    .addr-row{display:flex; gap:10px; align-items:center}
+    .addr{word-break:break-all; background:#0b0f13; padding:10px 12px; border-radius:10px; border:1px solid #1b222a; color:#bde6d7}
+
+    .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid #1b222a; background:#0f1419; color:var(--text); text-decoration:none; cursor:pointer; font-weight:700}
+    .btn.primary{background:var(--brand); color:#00140e; border-color:#00d19a}
+    .btn.ghost{background:transparent}
+    .btn:active{transform:translateY(1px)}
+    .btn small{opacity:.7; font-weight:600}
+
+    details{border:1px solid #1b222a; background:#0f1419; border-radius:12px; padding:14px 16px}
+    summary{cursor:pointer; font-weight:700}
+
+    .two-col{display:grid; grid-template-columns:1fr; gap:16px}
+    @media(min-width:860px){.two-col{grid-template-columns:1fr 1fr}}
+
+    .foot{margin-top:22px; color:var(--muted); font-size:.95rem}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">
+        <div class="mark"></div>
+        <div>
+          <h1>Tutorial: pagar con <span style="color:var(--brand)">Bitcoin Cash (BCH)</span> o <span style="color:var(--brand)">eCash (XEC)</span> desde un exchange</h1>
+          <div class="subtitle">Guía paso a paso para enviar tu pago a la cartera oficial de XolosArmy Network</div>
+        </div>
+      </div>
+      <a class="pill" href="https://xolosarmy.xyz" target="_blank" rel="noopener">xolosarmy.xyz</a>
+    </header>
+
+    <section class="card hero">
+      <p>En esta guía aprenderás a retirar <strong>BCH</strong> o <strong>XEC</strong> desde tu exchange y enviarlos a la <strong>dirección oficial</strong> de XolosArmy Network. Las redes de BCH y XEC son rápidas y de bajo costo, ideales para pagos.</p>
+      <div style="height:10px"></div>
+      <div class="warn">⚠️ <div> <strong>Siempre copia y pega</strong> la dirección; no la escribas a mano. Verifica que la moneda y la red coincidan con la dirección de destino.</div></div>
+    </section>
+
+    <section class="grid">
+      <div class="card panel">
+        <h2>Direcciones oficiales</h2>
+        <p class="subtitle">Elige la moneda que usarás y copia su dirección oficial.</p>
+        <div class="two-col">
+          <div class="addr-card">
+            <strong>Bitcoin Cash (BCH)</strong>
+            <div class="addr-row">
+              <div class="addr" id="addr-bch">bitcoincash:qxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</div>
+            </div>
+            <div class="addr-row" style="gap:12px">
+              <button class="btn primary" data-copy="#addr-bch">Copiar dirección BCH</button>
+              <a class="btn ghost" href="https://www.blockchair.com/bitcoin-cash" target="_blank" rel="noopener">Abrir explorador BCH</a>
+            </div>
+          </div>
+          <div class="addr-card">
+            <strong>eCash (XEC)</strong>
+            <div class="addr-row">
+              <div class="addr" id="addr-xec">ecash:qxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</div>
+            </div>
+            <div class="addr-row" style="gap:12px">
+              <button class="btn primary" data-copy="#addr-xec">Copiar dirección XEC</button>
+              <a class="btn ghost" href="https://explorer.e.cash/" target="_blank" rel="noopener">Abrir explorador XEC</a>
+            </div>
+          </div>
+        </div>
+        <p class="foot">📝 Reemplaza las direcciones anteriores por las <em>oficiales</em> de tu página de pago cuando publiques esta guía.</p>
+      </div>
+
+      <div class="card panel">
+        <h2>Checklist previo</h2>
+        <ul>
+          <li>Tienes cuenta en un exchange (Binance, KuCoin, etc.).</li>
+          <li>Fondos disponibles en <strong>BCH</strong> o <strong>XEC</strong>.</li>
+          <li>Confirmaste la <strong>dirección correcta</strong> según la moneda.</li>
+          <li>Sabes el <strong>monto</strong> que vas a enviar.</li>
+        </ul>
+        <div class="danger">🚫 <div>No envíes BTC, ETH u otras monedas a estas direcciones. No reembolsable si te equivocas de red/moneda.</div></div>
+      </div>
+    </section>
+
+    <section class="card steps" style="margin-top:18px">
+      <h2>Paso a paso desde el exchange</h2>
+      <div class="step">
+        <h3>1) Ve a <em>Retiros / Withdraw</em> en tu exchange</h3>
+        <p>Inicia sesión y abre la sección de retiros. Selecciona la criptomoneda: <strong>BCH</strong> o <strong>XEC</strong>.</p>
+      </div>
+      <div class="step">
+        <h3>2) Pega la dirección de XolosArmy Network</h3>
+        <p>Copia la dirección correspondiente arriba y pégala en el campo <em>Dirección de retiro</em>. Verifica visualmente los primeros y últimos caracteres.</p>
+      </div>
+      <div class="step">
+        <h3>3) Elige la <u>red correcta</u></h3>
+        <ul>
+          <li>Para <strong>BCH</strong>: red <strong>BCH</strong> (Bitcoin Cash).</li>
+          <li>Para <strong>XEC</strong>: red <strong>eCash/XEC mainnet</strong>.</li>
+        </ul>
+        <p class="subtitle">Nunca elijas redes ajenas como BTC, BSC, ETH, etc.</p>
+      </div>
+      <div class="step">
+        <h3>4) Ingresa el monto y revisa la comisión</h3>
+        <p>El exchange mostrará la tarifa de retiro. Asegúrate de enviar el <strong>monto neto</strong> acordado si aplica.</p>
+      </div>
+      <div class="step">
+        <h3>5) Confirma el retiro</h3>
+        <p>Aprueba la 2FA (correo, SMS o app). El retiro quedará <em>pendiente</em> hasta que la red lo procese.</p>
+      </div>
+      <div class="step">
+        <h3>6) Espera confirmación en la red</h3>
+        <p>En BCH/XEC suele tardar de <strong>1 a 3 minutos</strong>. Guarda el <strong>TxID</strong> para referencia.</p>
+      </div>
+      <div class="step">
+        <h3>7) Verifica y notifica</h3>
+        <p>Abre el explorador y pega el TxID para ver el estado. Si tu pago requiere notificación, envía el TxID al soporte.</p>
+      </div>
+    </section>
+
+    <section class="card panel" style="margin-top:18px">
+      <h2>Cómo revisar tu transacción</h2>
+      <details>
+        <summary>Ver en explorador de Bitcoin Cash (BCH)</summary>
+        <p>Copia tu <strong>TxID</strong> del exchange y pégalo en un explorador como <a href="https://www.blockchair.com/bitcoin-cash" target="_blank" rel="noopener">Blockchair — BCH</a>. Verás estado, confirmaciones y monto.</p>
+      </details>
+      <div style="height:10px"></div>
+      <details>
+        <summary>Ver en explorador de eCash (XEC)</summary>
+        <p>Usa <a href="https://explorer.e.cash/" target="_blank" rel="noopener">explorer.e.cash</a>, pega el <strong>TxID</strong> y verifica confirmaciones.</p>
+      </details>
+      <p class="foot">Si tienes dudas, comparte tu TxID con soporte de XolosArmy para asistencia.</p>
+    </section>
+
+    <section class="card panel" style="margin-top:18px">
+      <h2>FAQs rápidas</h2>
+      <details>
+        <summary>¿Qué pasa si envío a la red equivocada?</summary>
+        <p>Los envíos en red/moneda incorrecta pueden ser <strong>irrecuperables</strong>. Contacta al soporte del exchange de inmediato, pero no siempre hay solución.</p>
+      </details>
+      <div style="height:10px"></div>
+      <details>
+        <summary>¿Puedo pagar desde una wallet en lugar del exchange?</summary>
+        <p>Sí. Elige tu wallet (por ejemplo, Cashtab para XEC o una wallet BCH), pega la dirección y envía. El proceso es similar.</p>
+      </details>
+      <div style="height:10px"></div>
+      <details>
+        <summary>¿Cómo compro BCH/XEC si no tengo?</summary>
+        <p>Regístrate en un exchange que ofrezca BCH/XEC, deposita moneda local y compra. Después, retira a la dirección de XolosArmy.</p>
+      </details>
+    </section>
+
+    <footer class="foot" style="text-align:center; margin-top:28px">
+      Hecho con ❤️ por XolosArmy Network · Esta guía es informativa y no constituye asesoría financiera. Verifica siempre direcciones y redes antes de enviar.
+    </footer>
+  </div>
+
+  <script>
+    document.querySelectorAll('[data-copy]').forEach(btn=>{
+      btn.addEventListener('click', async ()=>{
+        const el = document.querySelector(btn.getAttribute('data-copy'));
+        try{
+          await navigator.clipboard.writeText(el.textContent.trim());
+          const prev = btn.innerHTML; btn.innerHTML = '✔ Copiado';
+          setTimeout(()=>btn.innerHTML = prev, 1600);
+        }catch(e){
+          alert('No se pudo copiar. Selecciona y copia manualmente.');
+        }
+      })
+    })
+  </script>
+</body>
+</html>
