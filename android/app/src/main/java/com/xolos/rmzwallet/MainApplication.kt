@@ -1,4 +1,4 @@
-package com.rmzwallet
+package com.xolos.rmzwallet
 
 import android.app.Application
 import com.facebook.react.PackageList
