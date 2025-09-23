@@ -1,4 +1,4 @@
-package com.rmzwallet
+package com.xolos.rmzwallet
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
