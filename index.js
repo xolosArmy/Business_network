@@ -1,21 +1,20 @@
-import 'react-native-get-random-values';
+// Polyfills necesarios para React Native (ejecución en móvil)
+import { encode, decode } from 'base-64';
+if (!global.btoa) global.btoa = encode;
+if (!global.atob) global.atob = decode;
+
 import 'react-native-url-polyfill/auto';
 import 'text-encoding-polyfill';
-import { TextEncoder, TextDecoder } from 'text-encoding-polyfill';
-if (!global.TextEncoder) global.TextEncoder = TextEncoder;
-if (!global.TextDecoder) global.TextDecoder = TextDecoder;
+import 'react-native-get-random-values';
 
-import { install } from 'react-native-quick-crypto';
-install();
-if (!global.crypto) global.crypto = require('react-native-quick-crypto');
+import { install as installQuickCrypto } from 'react-native-quick-crypto';
+installQuickCrypto();
 
 import { Buffer } from 'buffer';
-import { decode as atob, encode as btoa } from 'base-64';
 if (!global.Buffer) global.Buffer = Buffer;
-if (!global.atob) global.atob = atob;
-if (!global.btoa) global.btoa = btoa;
 
 import { AppRegistry } from 'react-native';
 import App from './src/App';
 import { name as appName } from './app.json';
+
 AppRegistry.registerComponent(appName, () => App);
