@@ -1,5 +1,16 @@
 pluginManagement {
-  includeBuild("../node_modules/@react-native/gradle-plugin")
+  // Detect plugin location dynamically (classic vs scoped)
+  def rnPluginDir = file("../node_modules/react-native-gradle-plugin")
+  def rnPluginScopedDir = file("../node_modules/@react-native/gradle-plugin")
+
+  if (rnPluginDir.exists()) {
+    includeBuild("../node_modules/react-native-gradle-plugin")
+  } else if (rnPluginScopedDir.exists()) {
+    includeBuild("../node_modules/@react-native/gradle-plugin")
+  } else {
+    throw new GradleException("❌ React Native gradle plugin not found in node_modules.")
+  }
+
   repositories {
     gradlePluginPortal()
     mavenCentral()
@@ -8,12 +19,11 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
+  // Avoid conflict: prefer settings repositories
   repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
   repositories {
     mavenCentral()
     google()
-    maven { url("$rootDir/../node_modules/react-native/android") }
-    maven { url("$rootDir/../node_modules/jsc-android/dist") }
   }
 }
 
