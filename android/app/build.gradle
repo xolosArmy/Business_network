@@ -11,12 +11,12 @@ react {
 
 android {
   namespace "com.rmzwallet"
-  compileSdkVersion rootProject.ext.compileSdkVersion
+  compileSdkVersion 34
 
   defaultConfig {
     applicationId "com.rmzwallet"
-    minSdkVersion rootProject.ext.minSdkVersion
-    targetSdkVersion rootProject.ext.targetSdkVersion
+    minSdkVersion 21
+    targetSdkVersion 34
     versionCode 1
     versionName "1.0"
   }
