@@ -9,6 +9,9 @@ import {
   Alert,
   Modal,
   Pressable,
+  TextInput,
+  Platform,
+  ToastAndroid,
 } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -16,6 +19,7 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import QRCode from 'react-native-qrcode-svg';
 
 import { createWallet, getBalance /* , signTx */ } from './core/wallet';
+import { sendRawTx } from './core/enviar';
 // import { broadcastTx } from './ble/mesh';
 
 // ✅ Formateador local que NO divide ni cambia unidades
@@ -29,6 +33,19 @@ export default function App() {
   const [address, setAddress] = useState('');
   const [balance, setBalance] = useState(0);
   const [showQR, setShowQR] = useState(false);
+  const [showSend, setShowSend] = useState(false);
+  const [destino, setDestino] = useState('');
+  const [monto, setMonto] = useState('');
+  const [sending, setSending] = useState(false);
+
+  const showToast = (message, title = 'Info') => {
+    if (!message) return;
+    if (Platform.OS === 'android') {
+      ToastAndroid.show(message, ToastAndroid.LONG);
+    } else {
+      Alert.alert(title, message);
+    }
+  };
 
   // Restaurar cartera si existe
   useEffect(() => {
@@ -84,18 +101,40 @@ export default function App() {
     Alert.alert('Mnemónica', wallet.mnemonic);
   };
 
-  const handleSend = async () => {
+  const resetSendForm = () => {
+    setDestino('');
+    setMonto('');
+  };
+
+  const confirmSend = async () => {
+    if (!destino?.trim()) {
+      Alert.alert('Enviar', 'Ingresa una dirección destino');
+      return;
+    }
+
+    const parsedAmount = parseFloat(monto);
+    if (Number.isNaN(parsedAmount) || parsedAmount <= 0) {
+      Alert.alert('Enviar', 'Ingresa un monto válido en XEC');
+      return;
+    }
+
     try {
-      if (!wallet) return;
-      // TODO: dirección de destino y construcción de TX real
-      // const to = 'ecash:qq....';
-      // const amountSats = 100 * 100; // 100 XEC -> 100*100 sats
-      // const { hex } = await signTx(wallet, to, amountSats);
-      // await broadcastTx(hex);
-      Alert.alert('Demo', 'Envío vía BLE por implementar');
+      setSending(true);
+      const trimmedDestino = destino.trim();
+      const resp = await sendRawTx(trimmedDestino, parseFloat(monto));
+      if (resp?.success) {
+        showToast(`TX enviada: ${resp.txid}`, 'Éxito');
+        setShowSend(false);
+        resetSendForm();
+        await handleRefresh();
+      } else {
+        showToast(resp?.error || 'No se pudo enviar la transacción', 'Error');
+      }
     } catch (e) {
       console.error('send error:', e);
-      Alert.alert('Error', String(e?.message || e));
+      showToast(String(e?.message || e), 'Error');
+    } finally {
+      setSending(false);
     }
   };
 
@@ -162,7 +201,7 @@ export default function App() {
           <Button title="ACTUALIZAR SALDO" onPress={handleRefresh} />
         </View>
 
-        <Button title="ENVIAR TX (BLE DEMO)" onPress={handleSend} />
+        <Button title="ENVIAR TX (BLE DEMO)" onPress={() => setShowSend(true)} />
       </ScrollView>
 
       {/* Modal QR */}
@@ -196,6 +235,116 @@ export default function App() {
             <Pressable onPress={() => setShowQR(false)} style={{ marginTop: 16 }}>
               <Text style={{ color: '#1976d2' }}>Cerrar</Text>
             </Pressable>
+          </View>
+        </Pressable>
+      </Modal>
+
+      {/* Modal Envío */}
+      <Modal
+        visible={showSend}
+        transparent
+        animationType="slide"
+        onRequestClose={() => {
+          if (!sending) {
+            setShowSend(false);
+            resetSendForm();
+          }
+        }}
+      >
+        <Pressable
+          onPress={() => {
+            if (!sending) {
+              setShowSend(false);
+              resetSendForm();
+            }
+          }}
+          style={{
+            flex: 1,
+            backgroundColor: 'rgba(0,0,0,0.6)',
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingHorizontal: 20,
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: 'white',
+              padding: 24,
+              borderRadius: 12,
+              width: '100%',
+              maxWidth: 420,
+            }}
+          >
+            <Text style={{ fontWeight: '600', fontSize: 18, marginBottom: 16 }}>
+              Enviar XEC
+            </Text>
+
+            <Text style={{ marginBottom: 6, color: '#37474f' }}>Dirección destino</Text>
+            <TextInput
+              value={destino}
+              onChangeText={setDestino}
+              placeholder="ecash:..."
+              placeholderTextColor="#90a4ae"
+              autoCapitalize="none"
+              autoCorrect={false}
+              style={{
+                borderWidth: 1,
+                borderColor: '#b0bec5',
+                borderRadius: 8,
+                paddingHorizontal: 12,
+                paddingVertical: 10,
+                marginBottom: 12,
+                color: '#000',
+              }}
+            />
+
+            <Text style={{ marginBottom: 6, color: '#37474f' }}>Monto (XEC)</Text>
+            <TextInput
+              value={monto}
+              onChangeText={setMonto}
+              placeholder="0.00"
+              placeholderTextColor="#90a4ae"
+              keyboardType="decimal-pad"
+              style={{
+                borderWidth: 1,
+                borderColor: '#b0bec5',
+                borderRadius: 8,
+                paddingHorizontal: 12,
+                paddingVertical: 10,
+                marginBottom: 20,
+                color: '#000',
+              }}
+            />
+
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', gap: 12 }}>
+              <Pressable
+                onPress={() => {
+                  if (sending) return;
+                  setShowSend(false);
+                  resetSendForm();
+                }}
+                style={{
+                  paddingHorizontal: 16,
+                  paddingVertical: 10,
+                  borderRadius: 8,
+                  backgroundColor: '#eceff1',
+                }}
+              >
+                <Text style={{ color: '#37474f' }}>Cancelar</Text>
+              </Pressable>
+
+              <Pressable
+                onPress={sending ? undefined : confirmSend}
+                style={{
+                  paddingHorizontal: 16,
+                  paddingVertical: 10,
+                  borderRadius: 8,
+                  backgroundColor: sending ? '#90a4ae' : '#1976d2',
+                }}
+              >
+                <Text style={{ color: 'white' }}>{sending ? 'Enviando…' : 'Enviar'}</Text>
+              </Pressable>
+            </View>
           </View>
         </Pressable>
       </Modal>
