@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tienda Xoloitzcuintle | XolosArmy Network</title>
   <meta name="description" content="Compra bálsamos y repelente naturales para el cuidado del Xoloitzcuintle. Pago con XEC (eCash) en XolosArmy Network.">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 
   <style>
     body { font-family: 'Lora', serif; margin: 0; background: #fefaf5; color: #222; }
@@ -111,15 +118,177 @@
   margin-bottom: 20px;
 }
 
-.hero-content .btn {
-  background: #FFD54F;
-  color: #232136;
-  padding: 12px 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-}
+    .hero-content .btn {
+      background: #FFD54F;
+      color: #232136;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
+    .payment-helper {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .payment-helper-button {
+      background: #113D4A;
+      color: #FFD54F;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .payment-helper-button:hover,
+    .payment-helper-button:focus {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(17, 61, 74, 0.25);
+      outline: none;
+    }
+
+    .xec-modal {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(17, 61, 74, 0.75);
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+      z-index: 2000;
+    }
+
+    .xec-modal.is-visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .xec-modal__dialog {
+      background: #ffffff;
+      border-radius: 20px;
+      max-width: 520px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 18px 40px rgba(17, 61, 74, 0.35);
+      color: #113D4A;
+      position: relative;
+    }
+
+    .xec-modal__title {
+      margin-top: 0;
+      margin-bottom: 16px;
+      color: #113D4A;
+      font-size: 1.4rem;
+    }
+
+    .xec-modal__list {
+      padding-left: 20px;
+      margin: 0 0 20px;
+      line-height: 1.6;
+      color: #34515b;
+    }
+
+    .xec-modal__warning {
+      background: rgba(255, 213, 79, 0.2);
+      border-left: 4px solid #FFD54F;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 600;
+      color: #113D4A;
+      margin-bottom: 20px;
+    }
+
+    .xec-modal__address {
+      background: rgba(17, 61, 74, 0.08);
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-family: 'Courier New', Courier, monospace;
+      word-break: break-all;
+      margin-bottom: 20px;
+      color: #113D4A;
+    }
+
+    .xec-modal__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .xec-modal__button {
+      flex: 1 1 160px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      padding: 12px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .xec-modal__button--primary {
+      background: #113D4A;
+      color: #FFD54F;
+    }
+
+    .xec-modal__button--secondary {
+      background: #FFD54F;
+      color: #113D4A;
+    }
+
+    .xec-modal__button:hover,
+    .xec-modal__button:focus {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(17, 61, 74, 0.2);
+      outline: none;
+    }
+
+    .xec-modal__close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: transparent;
+      border: none;
+      color: #113D4A;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .xec-modal__feedback {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: #0a7859;
+      min-height: 1.2em;
+    }
+
+    @media (max-width: 600px) {
+      .xec-modal__dialog {
+        padding: 20px 18px;
+      }
+
+      .xec-modal__actions {
+        flex-direction: column;
+      }
+
+      .xec-modal__button {
+        width: 100%;
+      }
+    }
+  
   </style>
 
   </head>
@@ -142,7 +311,6 @@
 
 
   <script src="https://unpkg.com/@paybutton/paybutton/dist/paybutton.js"></script>
-</head>
 
 
     <!-- Sección de video de presentación (YouTube) -->
@@ -160,6 +328,13 @@
 
 
 
+
+  <section class="payment-helper" aria-label="Guía de pago con eCash">
+    <button id="openXecModal" class="payment-helper-button" type="button">
+      <i class="fa-solid fa-wallet" aria-hidden="true"></i>
+      ¿Cómo pagar con eCash (XEC)?
+    </button>
+  </section>
 
   <section id="productos" class="grid">
 
@@ -331,6 +506,7 @@
 
 
 
+  </main>
   <footer style="background:#232136; color:white; text-align:center; padding:30px 20px;">
   <p style="margin: 0 0 10px;">&copy; 2025 Xolos Ramírez · Xoloitzcuintles con amor</p>
 
@@ -340,12 +516,41 @@
     </a>
   </div>
 
-  
-  </div>
 </footer>
 
-<!-- FontAwesome para íconos -->
-<script src="https://kit.fontawesome.com/your_kit_id.js" crossorigin="anonymous"></script>
+  <div id="xecModal" class="xec-modal" aria-hidden="true">
+    <div class="xec-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="xecModalTitle">
+      <button class="xec-modal__close" id="closeXecModal" type="button" aria-label="Cerrar guía de pago">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+      <h2 class="xec-modal__title" id="xecModalTitle">¿Cómo pagar con eCash (XEC)?</h2>
+      <ol class="xec-modal__list">
+        <li>Obtén eCash (XEC) en tu billetera o exchange.</li>
+        <li>Inicia el envío de XEC seleccionando la red eCash.</li>
+        <li>Copia la dirección de pago XolosArmy (botón disponible).</li>
+        <li>Ingresa el monto exacto y confirma la transacción.</li>
+        <li>Espera 1-3 minutos para la confirmación.</li>
+      </ol>
+      <div class="xec-modal__warning">⚠️ Verifica siempre la dirección y la red antes de enviar.</div>
+      <div class="xec-modal__address" id="xecPaymentAddress">ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8</div>
+      <div class="xec-modal__actions">
+        <button id="copyXecAddress" class="xec-modal__button xec-modal__button--primary" type="button">
+          <i class="fa-solid fa-copy" aria-hidden="true"></i>
+          Copiar dirección
+        </button>
+        <a
+          class="xec-modal__button xec-modal__button--secondary"
+          href="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i class="fa-solid fa-wallet" aria-hidden="true"></i>
+          Abrir en billetera
+        </a>
+      </div>
+      <div class="xec-modal__feedback" id="xecCopyFeedback" aria-live="polite"></div>
+    </div>
+  </div>
 
     <script>
 document.addEventListener('click', function(e){
@@ -358,6 +563,69 @@ document.addEventListener('click', function(e){
   }
 });
 </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('xecModal');
+      const openBtn = document.getElementById('openXecModal');
+      const closeBtn = document.getElementById('closeXecModal');
+      const copyBtn = document.getElementById('copyXecAddress');
+      const feedback = document.getElementById('xecCopyFeedback');
+      const xecAddress = 'ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8';
+      let lastFocusedElement = null;
+
+      const openModal = () => {
+        lastFocusedElement = document.activeElement;
+        modal.classList.add('is-visible');
+        modal.setAttribute('aria-hidden', 'false');
+        closeBtn.focus();
+      };
+
+      const closeModal = () => {
+        modal.classList.remove('is-visible');
+        modal.setAttribute('aria-hidden', 'true');
+        feedback.textContent = '';
+        if (lastFocusedElement) {
+          lastFocusedElement.focus();
+        }
+      };
+
+      openBtn?.addEventListener('click', openModal);
+      closeBtn?.addEventListener('click', closeModal);
+
+      modal?.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && modal.classList.contains('is-visible')) {
+          closeModal();
+        }
+      });
+
+      copyBtn?.addEventListener('click', async () => {
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(xecAddress);
+          } else {
+            const tempInput = document.createElement('input');
+            tempInput.value = xecAddress;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+          }
+          feedback.textContent = 'Dirección copiada en el portapapeles.';
+          feedback.style.color = '#0a7859';
+        } catch (error) {
+          feedback.textContent = 'No se pudo copiar. Copia manualmente la dirección.';
+          feedback.style.color = '#c20003';
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
