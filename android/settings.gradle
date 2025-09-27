@@ -12,6 +12,8 @@ dependencyResolutionManagement {
   repositories {
     mavenCentral()
     google()
+    maven { url("$rootDir/../node_modules/react-native/android") }
+    maven { url("$rootDir/../node_modules/jsc-android/dist") }
   }
 }
 

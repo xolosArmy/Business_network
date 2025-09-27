@@ -4,19 +4,19 @@ plugins {
   id("com.facebook.react")
 }
 
-// Deja que el plugin de RN haga el autolink correctamente
 react {
   autolinkLibrariesWithApp()
 }
 
 android {
   namespace "com.rmzwallet"
-  compileSdkVersion 34
+  compileSdkVersion rootProject.ext.compileSdkVersion
+  buildToolsVersion rootProject.ext.buildToolsVersion
 
   defaultConfig {
     applicationId "com.rmzwallet"
-    minSdkVersion 21
-    targetSdkVersion 34
+    minSdkVersion rootProject.ext.minSdkVersion
+    targetSdkVersion rootProject.ext.targetSdkVersion
     versionCode 1
     versionName "1.0"
   }
@@ -30,8 +30,6 @@ android {
 }
 
 dependencies {
-  // El plugin de Kotlin ya añade stdlib, pero si quieres dejarlo explícito:
   implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.ext.kotlinVersion}")
   implementation("androidx.core:core-ktx:1.9.0")
-  // IMPORTANTE: NADA de 'implementation project(":capacitor-android")' ni similares
 }
