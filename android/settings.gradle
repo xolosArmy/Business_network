@@ -1,23 +1,2 @@
-pluginManagement {
-  repositories {
-    gradlePluginPortal()
-    google()
-    mavenCentral()
-  }
-}
-
-dependencyResolutionManagement {
-  repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
-  repositories {
-    google()
-    mavenCentral()
-  }
-}
-
 rootProject.name = "RMZWallet"
-
-// Solo tu app RN; sin módulos de Capacitor
 include(":app")
-
-// Usa el plugin de RN desde node_modules (no necesita versión ni token)
-includeBuild("../node_modules/react-native-gradle-plugin")
