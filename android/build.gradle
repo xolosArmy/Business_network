@@ -4,7 +4,7 @@ buildscript {
     compileSdkVersion = 34
     targetSdkVersion  = 34
     minSdkVersion     = 23
-    kotlinVersion     = "1.9.22"
+    kotlinVersion     = '1.9.0'
   }
 
   repositories {
@@ -14,8 +14,8 @@ buildscript {
 
   dependencies {
     // AGP compatible con Gradle 8.1.1
-    classpath("com.android.tools.build:gradle:8.0.2")
-    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+    classpath("com.android.tools.build:gradle:8.1.1")
+    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0")
     // NO agregar el plugin de RN aquí cuando usamos includeBuild() en settings.gradle
   }
 }
@@ -26,3 +26,5 @@ allprojects {
     mavenCentral()
   }
 }
+apply plugin: 'com.android.application'
+apply plugin: 'org.jetbrains.kotlin.android'
