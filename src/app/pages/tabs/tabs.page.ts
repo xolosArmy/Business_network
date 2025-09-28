@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
       <ion-router-outlet></ion-router-outlet>
 
       <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="home" [routerLink]="['/tabs/home']">
+          <ion-label>Home</ion-label>
+        </ion-tab-button>
+
         <ion-tab-button tab="wallet" [routerLink]="['/tabs/wallet']">
           <ion-label>Wallet</ion-label>
         </ion-tab-button>

@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Gestión de Cartera</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Genera una nueva cartera para comenzar a recibir eCash.</p>
+      <ion-button
+        expand="block"
+        color="primary"
+        (click)="onCreateWallet()"
+        [disabled]="isCreatingWallet"
+      >
+        {{ isCreatingWallet ? 'Creando…' : 'Crear Cartera' }}
+      </ion-button>
+      <ion-text color="danger" *ngIf="errorMessage && !hasWallet">
+        <p class="error-text">{{ errorMessage }}</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="hasWallet">
+    <ion-card-header>
+      <ion-card-title>Información de la Cartera</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-label class="label-title">Dirección</ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label class="address-label">{{ wallet?.address }}</ion-label>
+      </ion-item>
+
+      <ion-item lines="none" class="balance-row">
+        <ion-label class="label-title">Saldo</ion-label>
+        <ion-button
+          slot="end"
+          size="small"
+          fill="outline"
+          (click)="refreshBalance()"
+          [disabled]="isRefreshingBalance"
+        >
+          {{ isRefreshingBalance ? 'Actualizando…' : 'Actualizar Saldo' }}
+        </ion-button>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>{{ formattedBalance }}</ion-label>
+      </ion-item>
+
+      <ion-button expand="block" color="secondary" (click)="openSendModal()">
+        Enviar
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-text color="danger" *ngIf="errorMessage && hasWallet">
+    <p class="error-text">{{ errorMessage }}</p>
+  </ion-text>
+
+  <ion-modal [isOpen]="isSendModalOpen" (didDismiss)="closeSendModal()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Enviar XEC</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeSendModal()" [disabled]="isSending">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="ion-padding">
+        <form [formGroup]="sendForm" (ngSubmit)="onSubmitSend()">
+          <ion-item>
+            <ion-label position="stacked">Dirección destino</ion-label>
+            <ion-input formControlName="destination" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Monto (XEC)</ion-label>
+            <ion-input
+              type="number"
+              min="0.000001"
+              step="0.000001"
+              formControlName="amount"
+              required
+            ></ion-input>
+          </ion-item>
+
+          <ion-text color="danger" *ngIf="sendErrorMessage">
+            <p class="error-text">{{ sendErrorMessage }}</p>
+          </ion-text>
+
+          <ion-button
+            expand="block"
+            type="submit"
+            [disabled]="sendForm.invalid || isSending"
+          >
+            {{ isSending ? 'Enviando…' : 'Enviar' }}
+          </ion-button>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
