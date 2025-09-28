@@ -27,12 +27,17 @@ DerivedData
 build/
 .idea
 .gradle
+/android/.gradle/
+/android/app/build/
 local.properties
 *.iml
 *.hprof
 .cxx/
 *.keystore
 !debug.keystore
+*.apk
+*.dex
+*.class
 
 # node.js
 #
