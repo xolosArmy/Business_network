@@ -1,0 +1,14 @@
+apply plugin: 'com.android.application'
+
+android {
+    namespace "com.rmz.wallet"
+    compileSdkVersion 34
+
+    defaultConfig {
+        applicationId "com.rmz.wallet"
+        minSdkVersion 21
+        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0"
+    }
+}
