@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.rmzwallet',
+  appId: 'com.rmz.wallet',
   appName: 'RMZ Wallet',
   webDir: 'www',
   bundledWebRuntime: false
