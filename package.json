@@ -3,12 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "start": "ionic serve",
     "build": "ionic build",
     "android": "ionic capacitor run android",
-    "ios": "ionic capacitor run ios",
-    "lint": "eslint .",
-    "start": "ionic serve",
-    "test": "jest"
+    "sync": "npx cap sync"
   },
   "dependencies": {
     "@angular/animations": "^17.3.12",
