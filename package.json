@@ -41,6 +41,7 @@
     "@babel/core": "^7.20.0",
     "@babel/preset-env": "^7.20.0",
     "@babel/runtime": "^7.20.0",
+    "@capacitor/cli": "^7.4.3",
     "@react-native/babel-preset": "0.75.5",
     "@react-native/eslint-config": "0.75.5",
     "@react-native/gradle-plugin": "0.75.5",
