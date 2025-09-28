@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Preferences } from '@capacitor/preferences';
 import {
   Address,
   HdNode,
@@ -36,21 +37,17 @@ export class CarteraService {
     return this.persistWallet(wallet);
   }
 
-  getWalletInfo(): WalletInfo | null {
+  async getWalletInfo(): Promise<WalletInfo | null> {
     if (this.cachedWallet) {
       return this.cachedWallet;
     }
 
-    if (!this.hasLocalStorage()) {
-      return null;
-    }
-
     try {
-      const stored = globalThis.localStorage?.getItem(STORAGE_KEY);
-      if (!stored) {
+      const { value } = await Preferences.get({ key: STORAGE_KEY });
+      if (!value) {
         return null;
       }
-      const parsed = JSON.parse(stored) as Partial<WalletInfo>;
+      const parsed = JSON.parse(value) as Partial<WalletInfo>;
       if (
         typeof parsed?.mnemonic === 'string' &&
         typeof parsed?.address === 'string' &&
@@ -111,14 +108,12 @@ export class CarteraService {
       .join(' ');
   }
 
-  private persistWallet(wallet: WalletInfo): WalletInfo {
+  private async persistWallet(wallet: WalletInfo): Promise<WalletInfo> {
     this.cachedWallet = wallet;
-    if (this.hasLocalStorage()) {
-      try {
-        globalThis.localStorage?.setItem(STORAGE_KEY, JSON.stringify(wallet));
-      } catch (error) {
-        console.warn('No se pudo almacenar la cartera localmente', error);
-      }
+    try {
+      await Preferences.set({ key: STORAGE_KEY, value: JSON.stringify(wallet) });
+    } catch (error) {
+      console.warn('No se pudo almacenar la cartera localmente', error);
     }
     return wallet;
   }
@@ -139,9 +134,5 @@ export class CarteraService {
     }
 
     throw new Error('Entorno sin soporte para generación de números aleatorios criptográficos.');
-  }
-
-  private hasLocalStorage(): boolean {
-    return typeof globalThis !== 'undefined' && !!globalThis.localStorage;
   }
 }
