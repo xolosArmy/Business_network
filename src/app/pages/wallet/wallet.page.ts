@@ -153,7 +153,7 @@ export class WalletPage implements OnInit, OnDestroy {
   }
 
   async loadWalletInfo(): Promise<void> {
-    this.wallet = this.carteraService.getWalletInfo();
+    this.wallet = await this.carteraService.getWalletInfo();
     if (this.wallet?.address) {
       await this.refreshBalance(this.wallet.address);
       this.updateQrImage(this.wallet.address);
