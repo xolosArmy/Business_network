@@ -1,9 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "defaultProject": "rmzwallet",
+  "defaultProject": "app",
   "projects": {
-    "rmzwallet": {
+    "app": {
       "projectType": "application",
       "root": "",
       "sourceRoot": "src",
@@ -61,19 +61,22 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "rmzwallet:build:development"
+            "browserTarget": "app:build:development"
           },
           "configurations": {
             "production": {
-              "browserTarget": "rmzwallet:build:production"
+              "browserTarget": "app:build:production"
             },
             "development": {
-              "browserTarget": "rmzwallet:build:development"
+              "browserTarget": "app:build:development"
             }
           },
           "defaultConfiguration": "development"
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

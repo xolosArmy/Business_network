@@ -16,6 +16,7 @@ export interface WalletInfo {
   privateKey: string;
 }
 
+const WORDS = ENGLISH_WORDLIST;
 const WORDLIST = { words: ENGLISH_WORDLIST, separator: ' ' } as const;
 const DERIVATION_PATH = "m/44'/899'/0'/0/0";
 const STORAGE_KEY = 'rmz_wallet';
@@ -94,7 +95,7 @@ export class CarteraService {
 
   private validateMnemonic(mnemonic: string): void {
     try {
-      mnemonicToEntropy(mnemonic, WORDLIST);
+      mnemonicToEntropy(mnemonic, WORDS);
     } catch (error) {
       throw new Error('La frase mnemónica proporcionada no es válida.');
     }

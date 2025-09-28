@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkapp=self.webpackChunkapp||[]).push([[792],{429:()=>{typeof window<"u"&&console.log("RMZ Wallet production build placeholder loaded.")}},e=>{e(e.s=429)}]);
