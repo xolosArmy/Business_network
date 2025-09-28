@@ -32,7 +32,7 @@ const DUST_SATS = 546n;
 
 @Injectable({ providedIn: 'root' })
 export class EnviarService {
-  private chronikClient = new ChronikClient(CHRONIK_URL);
+  private chronikClient = new ChronikClient([CHRONIK_URL]);
 
   async sendTransaction(fromWallet: WalletSource, toAddress: string, amount: number): Promise<string> {
     try {

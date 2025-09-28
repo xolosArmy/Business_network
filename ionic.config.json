@@ -1,0 +1,7 @@
+{
+  "name": "RMZWallet",
+  "type": "angular",
+  "integrations": {
+    "capacitor": {}
+  }
+}

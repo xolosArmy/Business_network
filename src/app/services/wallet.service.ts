@@ -23,6 +23,8 @@ const CHRONIK_REST_URL = `${CHRONIK_BASE_URL}/xec`;
 const DERIVATION_PATH = "m/44'/899'/0'/0/0";
 const SATS_PER_XEC = 100n;
 const FIXED_FEE_SATS = 1000n;
+const MNEMONIC_WORDS = ENGLISH_WORDLIST;
+const MNEMONIC_WORDLIST = { words: ENGLISH_WORDLIST, separator: ' ' } as const;
 
 interface ChronikApiOutPoint {
   txid: string;
@@ -71,7 +73,8 @@ interface BuiltTransaction {
 }
 
 class Wallet {
-  private static readonly WORDLIST = { words: ENGLISH_WORDLIST, separator: ' ' } as const;
+  private static readonly WORDLIST = MNEMONIC_WORDLIST;
+  private static readonly WORDS = MNEMONIC_WORDS;
 
   private readonly spendScript: Script;
 
@@ -253,7 +256,7 @@ class Wallet {
 
 @Injectable({ providedIn: 'root' })
 export class WalletService {
-  private readonly chronik = new ChronikClient(CHRONIK_BASE_URL);
+  private readonly chronik = new ChronikClient([CHRONIK_BASE_URL]);
   private cachedWallet: Wallet | null = null;
 
   async createWallet(): Promise<WalletSnapshot> {
