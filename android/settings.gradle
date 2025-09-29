@@ -1,4 +1,4 @@
-rootProject.name = "RMZWallet"
+rootProject.name = 'RMZWallet'
 
 include ':app'
 
