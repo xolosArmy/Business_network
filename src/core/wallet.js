@@ -1,11 +1,10 @@
 // src/core/wallet.js
-// RMZ Wallet core - React Native (sin WASM)
+// RMZ Wallet core (sin WASM)
 // - BIP39 ES + BIP32 (@scure/*)
 // - secp256k1 + Hash160 (@noble/*)
 // - CashAddr eCash P2PKH (encode/decode sin dependencias)
 // - Balance vía Chronik (cliente oficial + REST fallback, con diagnóstico)
 
-import { Alert } from 'react-native';
 import { generateMnemonic, mnemonicToSeedSync, validateMnemonic } from '@scure/bip39';
 import { wordlist as WORDS_ES } from '@scure/bip39/wordlists/spanish';
 import { HDKey } from '@scure/bip32';
@@ -17,7 +16,17 @@ import { ChronikClient } from 'chronik-client';
 // ------- Config -------
 export const DERIVE_PATH = "m/44'/899'/0'/0/0"; // XEC BIP44
 export const CHRONIK_MIRROR = 'https://chronik.e.cash'; // mirror estable
-const SHOW_ALERTS = true; // ponlo en false si no quieres Alert al consultar saldo
+const SHOW_ALERTS = true; // ponlo en false si no quieres avisos al consultar saldo
+
+const showAlert = (title, message) => {
+  if (!SHOW_ALERTS) return;
+  const text = [title, message].filter(Boolean).join(': ');
+  if (typeof window !== 'undefined' && typeof window.alert === 'function') {
+    window.alert(text);
+  } else {
+    console.log(`[ALERT] ${text}`);
+  }
+};
 
 // ------- Utils hex/bin -------
 const toHex = (buf) => Array.from(buf, b => b.toString(16).padStart(2, '0')).join('');
@@ -210,7 +219,7 @@ export async function getBalance(addressOrWallet) {
   try {
     const sats = await tryClient(address);
     const xec = Number(sats) / 100;
-    if (SHOW_ALERTS) Alert.alert('Balance (client)', `${xec.toFixed(2)} XEC`);
+    showAlert('Balance (client)', `${xec.toFixed(2)} XEC`);
     return xec;
   } catch (e) {
     console.log('[balance] client exhausted:', e?.message || e);
@@ -219,13 +228,13 @@ export async function getBalance(addressOrWallet) {
   try {
     const sats = await tryRest(address);
     const xec = Number(sats) / 100;
-    if (SHOW_ALERTS) Alert.alert('Balance (REST)', `${xec.toFixed(2)} XEC`);
+    showAlert('Balance (REST)', `${xec.toFixed(2)} XEC`);
     return xec;
   } catch (e) {
     console.log('[balance] rest exhausted:', e?.message || e);
   }
 
-  if (SHOW_ALERTS) Alert.alert('Balance', 'No se pudo obtener UTXOs');
+  showAlert('Balance', 'No se pudo obtener UTXOs');
   return 0;
 }
 
