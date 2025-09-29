@@ -1,0 +1,3 @@
+[FAVICON PLACEHOLDER]
+
+Puedes generar el ícono con Angular/Ionic usando `ionic resources` o subir un favicon `.ico` manualmente en producción.
