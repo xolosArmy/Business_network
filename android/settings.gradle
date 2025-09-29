@@ -1,20 +1,23 @@
-rootProject.name = 'RMZWallet'
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
 
+rootProject.name = "RMZWallet"
 include ':app'
 
-def capacitorAndroidDir = new File('../node_modules/@capacitor/android/capacitor')
-if (capacitorAndroidDir.exists()) {
-    include ':capacitor-android'
-    project(':capacitor-android').projectDir = capacitorAndroidDir
-}
+include ':capacitor-android'
+project(':capacitor-android').projectDir = new File('../node_modules/@capacitor/android')
 
-def capacitorPluginsDir = new File('capacitor-cordova-android-plugins')
-if (capacitorPluginsDir.exists()) {
-    include ':capacitor-cordova-android-plugins'
-    project(':capacitor-cordova-android-plugins').projectDir = capacitorPluginsDir
-}
-
-def capacitorSettings = new File('capacitor.settings.gradle')
-if (capacitorSettings.exists()) {
-    apply from: capacitorSettings
-}
+include ':capacitor-cordova-android-plugins'
+project(':capacitor-cordova-android-plugins').projectDir = new File('./capacitor-cordova-android-plugins')
