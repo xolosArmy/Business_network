@@ -57,13 +57,23 @@
       display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid #2a2a2a;background:#151515;color:#eaeaea;font-weight:600
     }
     .btn:hover{border-color:#3a3a3a}
-    @media (prefers-color-scheme: light){
-      :root{--bg:#fafafa;--paper:#ffffff;--text:#0c0c0c;--muted:#555;--link:#0b61ff}
-      article{box-shadow:0 12px 30px rgba(0,0,0,.08)}
-      .pull{background:#fff}
-      .callout{background:#fff}
-      header.hero{background:#000}
-    }
+    .pull{
+  border-left:4px solid var(--accent);
+  padding:6px 16px;
+  margin:22px 0;
+  color:var(--text);
+  background:transparent;   /* sin fondo, limpio */
+  font-style:italic;
+  font-weight:500;
+}
+
+@media (prefers-color-scheme: light){
+  .pull{
+    color:#222;             /* texto oscuro en modo claro */
+    background:transparent; /* mantiene fondo limpio */
+  }
+}
+
   </style>
 </head>
 <body>
