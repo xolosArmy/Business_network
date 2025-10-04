@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Toast } from '@capacitor/toast';
 
 import { CarteraService, WalletInfo } from '../../services/cartera.service';
 import { SaldoService } from '../../services/saldo.service';
 import { EnviarService } from '../../services/enviar.service';
+import { OfflineStorageService } from '../../services/offline-storage.service';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   wallet: WalletInfo | null = null;
   balance: number | null = null;
   isLoadingWallet = false;
@@ -21,23 +22,33 @@ export class HomePage implements OnInit {
   isSending = false;
   errorMessage = '';
   sendErrorMessage = '';
+  isOnline = typeof navigator === 'undefined' ? true : navigator.onLine;
 
   readonly sendForm: FormGroup;
+  private removeConnectionListeners: (() => void) | null = null;
 
   constructor(
     private readonly carteraService: CarteraService,
     private readonly saldoService: SaldoService,
     private readonly enviarService: EnviarService,
+    private readonly offlineStorage: OfflineStorageService,
+    private readonly ngZone: NgZone,
     formBuilder: FormBuilder,
   ) {
     this.sendForm = formBuilder.group({
       destination: ['', Validators.required],
       amount: [null, [Validators.required, Validators.min(0.000001)]],
     });
+
+    this.registerConnectionListeners();
   }
 
   async ngOnInit(): Promise<void> {
     await this.loadWallet();
+  }
+
+  ngOnDestroy(): void {
+    this.removeConnectionListeners?.();
   }
 
   get hasWallet(): boolean {
@@ -62,6 +73,7 @@ export class HomePage implements OnInit {
         await this.refreshBalance();
       } else {
         this.balance = null;
+        await this.loadCachedBalance();
       }
     } catch (error) {
       this.errorMessage = this.resolveErrorMessage(error);
@@ -87,6 +99,7 @@ export class HomePage implements OnInit {
 
   async refreshBalance(): Promise<void> {
     if (!this.wallet?.mnemonic) {
+      await this.loadCachedBalance();
       return;
     }
 
@@ -94,9 +107,27 @@ export class HomePage implements OnInit {
     this.errorMessage = '';
 
     try {
+      const online = typeof navigator === 'undefined' ? true : navigator.onLine;
+
+      if (!online) {
+        const cachedBalance = await this.offlineStorage.getCachedBalance();
+        if (cachedBalance === null) {
+          throw new Error('Sin conexión y sin saldo almacenado localmente.');
+        }
+        this.balance = cachedBalance;
+        return;
+      }
+
       this.balance = await this.saldoService.getBalance(this.wallet);
+      await this.offlineStorage.setCachedBalance(this.balance);
     } catch (error) {
-      this.errorMessage = this.resolveErrorMessage(error);
+      const cachedBalance = await this.offlineStorage.getCachedBalance();
+      if (cachedBalance !== null) {
+        this.balance = cachedBalance;
+        this.errorMessage = `${this.resolveErrorMessage(error)}. Mostrando saldo almacenado.`;
+      } else {
+        this.errorMessage = this.resolveErrorMessage(error);
+      }
     } finally {
       this.isRefreshingBalance = false;
     }
@@ -145,7 +176,11 @@ export class HomePage implements OnInit {
         destination,
         amount,
       );
-      await Toast.show({ text: `Transacción enviada: ${txid}` });
+      const isPending = txid.startsWith('pending-offline-');
+      const toastMessage = isPending
+        ? 'Transacción guardada para envío cuando regreses a internet.'
+        : `Transacción enviada: ${txid}`;
+      await Toast.show({ text: toastMessage });
       this.closeSendModal();
       await this.refreshBalance();
     } catch (error) {
@@ -153,6 +188,39 @@ export class HomePage implements OnInit {
     } finally {
       this.isSending = false;
     }
+  }
+
+  private async loadCachedBalance(): Promise<void> {
+    const cachedBalance = await this.offlineStorage.getCachedBalance();
+    if (cachedBalance !== null) {
+      this.balance = cachedBalance;
+    }
+  }
+
+  private registerConnectionListeners(): void {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const onlineHandler = () =>
+      this.ngZone.run(() => {
+        this.isOnline = true;
+        void this.refreshBalance();
+      });
+
+    const offlineHandler = () =>
+      this.ngZone.run(() => {
+        this.isOnline = false;
+        void this.loadCachedBalance();
+      });
+
+    window.addEventListener('online', onlineHandler);
+    window.addEventListener('offline', offlineHandler);
+
+    this.removeConnectionListeners = () => {
+      window.removeEventListener('online', onlineHandler);
+      window.removeEventListener('offline', offlineHandler);
+    };
   }
 
   private resolveErrorMessage(error: unknown): string {

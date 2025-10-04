@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { PwaService } from './services/pwa.service';
+import { EnviarService } from './services/enviar.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +10,11 @@ import { Component } from '@angular/core';
     </ion-app>
   `,
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  constructor(private pwa: PwaService, private enviarService: EnviarService) {}
+
+  ngOnInit() {
+    setTimeout(() => this.pwa.showInstallPrompt(), 5000);
+    void this.enviarService.processPendingTransactions();
+  }
+}

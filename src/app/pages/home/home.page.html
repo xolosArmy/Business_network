@@ -5,6 +5,12 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  <ion-card color="warning" *ngIf="!isOnline">
+    <ion-card-content>
+      Estás sin conexión. Se muestra la información disponible en caché.
+    </ion-card-content>
+  </ion-card>
+
   <ion-card>
     <ion-card-header>
       <ion-card-title>Gestión de Cartera</ion-card-title>
