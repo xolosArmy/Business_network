@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>Historial</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="syncNow()" [disabled]="loading">
+        <ion-icon name="sync-outline"></ion-icon>
+      </ion-button>
+      <ion-button color="danger" (click)="clear()">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let tx of txs">
+      <ion-label>
+        <h2>{{ tx.txid | slice:0:12 }}...</h2>
+        <p>{{ tx.amount }} XEC</p>
+        <p>{{ tx.time * 1000 | date:'medium' }}</p>
+      </ion-label>
+      <ion-badge color="{{ tx.confirmed ? 'success' : 'warning' }}">
+        {{ tx.confirmed ? 'Confirmada' : 'Pendiente' }}
+      </ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <ion-text *ngIf="!txs.length" color="medium">
+    <p>No hay transacciones registradas.</p>
+  </ion-text>
+</ion-content>
