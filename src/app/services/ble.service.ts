@@ -18,6 +18,11 @@ interface BleTransferPayload {
   [key: string]: unknown;
 }
 
+interface ScanOptions {
+  autoConnect?: boolean;
+  onDeviceDiscovered?: (device: BleDevice) => void;
+}
+
 @Injectable({ providedIn: 'root' })
 export class BleService {
   private readonly SERVICE_UUID = 'b27a1e88-cc7f-46b2-8cb9-9b91ef4f0e11';
@@ -28,6 +33,7 @@ export class BleService {
   private scanning = false;
   private connectedDevice: BleDevice | null = null;
   private notificationsActive = false;
+  private discoveredDevices = new Map<string, BleDevice>();
 
   constructor(
     private readonly wallet: WalletService,
@@ -70,19 +76,32 @@ export class BleService {
     await Toast.show({ text: 'Wallet lista para anuncios BLE locales.' });
   }
 
-  async scanAndConnect(): Promise<void> {
+  async scanAndConnect(options: ScanOptions = {}): Promise<void> {
+    const { autoConnect = true, onDeviceDiscovered } = options;
+
     await this.init();
 
-    if (this.connectedDevice) {
+    if (this.connectedDevice && autoConnect) {
       await Toast.show({ text: 'Ya existe un dispositivo BLE conectado.' });
       return;
     }
 
     if (this.scanning) {
+      if (!autoConnect && onDeviceDiscovered) {
+        this.zone.run(() => {
+          for (const device of this.discoveredDevices.values()) {
+            onDeviceDiscovered(device);
+          }
+        });
+      }
       return;
     }
 
     this.scanning = true;
+
+    if (!autoConnect) {
+      this.discoveredDevices.clear();
+    }
 
     try {
       await Toast.show({ text: 'Buscando wallets BLE cercanas…' });
@@ -107,7 +126,13 @@ export class BleService {
           }
 
           this.zone.run(() => {
-            this.handleDeviceDiscovered(device).catch((error) => {
+            const stored = this.storeDiscoveredDevice(device);
+            if (!autoConnect) {
+              onDeviceDiscovered?.(stored);
+              return;
+            }
+
+            this.handleDeviceDiscovered(stored).catch((error) => {
               console.error('[BLE] Error al conectar con dispositivo.', error);
             });
           });
@@ -120,16 +145,41 @@ export class BleService {
     }
   }
 
+  async connect(deviceId: string): Promise<BleDevice> {
+    await this.init();
+
+    if (this.connectedDevice?.deviceId === deviceId) {
+      return this.connectedDevice;
+    }
+
+    if (this.connectedDevice && this.connectedDevice.deviceId !== deviceId) {
+      await this.stop();
+    }
+
+    const device = this.discoveredDevices.get(deviceId) ?? ({
+      deviceId,
+      name: deviceId,
+    } as BleDevice);
+
+    return this.connectToDevice(device);
+  }
+
   private async handleDeviceDiscovered(device: BleDevice): Promise<void> {
     if (!this.scanning || this.connectedDevice) {
       return;
     }
 
+    await this.connectToDevice(device);
+  }
+
+  private async connectToDevice(device: BleDevice): Promise<BleDevice> {
     await this.stopScanning();
 
+    const stored = this.storeDiscoveredDevice(device);
+
     try {
-      await Toast.show({ text: `Conectando con ${device.name ?? device.deviceId}` });
-      await BleClient.connect(device.deviceId, async () => {
+      await Toast.show({ text: `Conectando con ${stored.name ?? stored.deviceId}` });
+      await BleClient.connect(stored.deviceId, async () => {
         this.zone.run(async () => {
           this.connectedDevice = null;
           this.notificationsActive = false;
@@ -137,8 +187,9 @@ export class BleService {
         });
       });
 
-      this.connectedDevice = device;
-      await Toast.show({ text: `Conectado a ${device.name ?? device.deviceId}` });
+      this.connectedDevice = stored;
+      await Toast.show({ text: `Conectado a ${stored.name ?? stored.deviceId}` });
+      return stored;
     } catch (error) {
       await Toast.show({ text: 'No fue posible establecer la conexión BLE.' });
       throw error;
@@ -233,5 +284,16 @@ export class BleService {
     this.scanning = false;
 
     await BleClient.stopLEScan().catch(() => undefined);
+  }
+
+  private storeDiscoveredDevice(device: BleDevice): BleDevice {
+    const current = this.discoveredDevices.get(device.deviceId);
+    const merged = {
+      ...(current ?? {}),
+      ...device,
+    } as BleDevice;
+
+    this.discoveredDevices.set(device.deviceId, merged);
+    return merged;
   }
 }

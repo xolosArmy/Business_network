@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>Dispositivos Cercanos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="scan()">
+        <ion-icon name="bluetooth-outline"></ion-icon>
+        Escanear
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let device of devices" (click)="connect(device)">
+      <ion-icon slot="start" name="phone-portrait-outline"></ion-icon>
+      <ion-label>
+        <h2>{{ device.name || 'Sin nombre' }}</h2>
+        <p>{{ device.deviceId }}</p>
+      </ion-label>
+      <ion-badge color="success" *ngIf="device.connected">Conectado</ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <ion-card *ngIf="connectedDevice">
+    <ion-card-header>
+      <ion-card-title>Enviar XEC a {{ connectedDevice.name }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-input type="number" placeholder="Cantidad" [(ngModel)]="amount"></ion-input>
+      </ion-item>
+      <ion-button expand="block" color="primary" (click)="send()">Enviar</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
