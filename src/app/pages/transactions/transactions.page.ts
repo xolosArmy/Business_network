@@ -1,11 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { trigger, transition, style, animate } from '@angular/animations';
 import { TxStorageService, StoredTx } from '../../services/tx-storage.service';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-transactions',
   templateUrl: './transactions.page.html',
-  styleUrls: ['./transactions.page.scss']
+  styleUrls: ['./transactions.page.scss'],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('400ms ease-out', style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class TransactionsPage implements OnInit, OnDestroy {
   txs: StoredTx[] = [];
