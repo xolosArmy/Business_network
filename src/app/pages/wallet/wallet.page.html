@@ -73,6 +73,25 @@
 
   <ion-card>
     <ion-card-header>
+      <ion-card-title>Enviar por BLE</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Dirección destino</ion-label>
+        <ion-input [(ngModel)]="toAddr" placeholder="ecash:..."></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Monto (XEC)</ion-label>
+        <ion-input type="number" [(ngModel)]="amount"></ion-input>
+      </ion-item>
+      <ion-button expand="block" color="primary" (click)="sendTxBLE()">
+        Enviar TX BLE
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
       <ion-card-title>Enviar</ion-card-title>
     </ion-card-header>
     <ion-card-content>
