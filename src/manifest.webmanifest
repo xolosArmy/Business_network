@@ -1,0 +1,8 @@
+{
+  "name": "RMZ Wallet",
+  "short_name": "RMZWallet",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#12181f",
+  "theme_color": "#12181f"
+}
