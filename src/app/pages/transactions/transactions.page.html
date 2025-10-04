@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar color="dark">
-    <ion-title>Historial de Transacciones</ion-title>
+    <ion-title>Transacciones BLE</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="dark">
-  <ion-list>
-    <ion-item *ngFor="let tx of txs">
+  <ion-list *ngIf="txs.length > 0; else noTx">
+    <ion-item *ngFor="let tx of txs" lines="full">
       <ion-label>
         <h2>
           {{ tx.type === 'sent' ? '📤 Enviada' : '📥 Recibida' }}
@@ -21,9 +21,15 @@
     </ion-item>
   </ion-list>
 
-  <ion-footer>
-    <ion-toolbar color="medium">
-      <ion-button expand="full" color="danger" (click)="store.clear()">Limpiar historial</ion-button>
-    </ion-toolbar>
-  </ion-footer>
+  <ng-template #noTx>
+    <ion-text color="medium">
+      <p style="text-align:center; margin-top: 20px;">Sin transacciones registradas</p>
+    </ion-text>
+  </ng-template>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" color="danger" (click)="clearAll()">Limpiar historial</ion-button>
+  </ion-toolbar>
+</ion-footer>
