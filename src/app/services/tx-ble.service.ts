@@ -90,8 +90,6 @@ export class TxBLEService {
         return;
       }
 
-      console.log('📥 TX recibida por BLE:', txData);
-
       const id = Date.now().toString();
       this.store.save({
         id,
@@ -103,6 +101,8 @@ export class TxBLEService {
         timestamp: new Date().toISOString(),
         raw: txData.raw,
       });
+
+      console.log('📥 TX recibida por BLE:', txData);
 
       if (navigator.onLine) {
         const response = await fetch('https://chronik.e.cash/xec-mainnet/tx', {
