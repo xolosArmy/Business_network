@@ -5,6 +5,8 @@ import { Wallet } from 'ecash-wallet';
 import { generateMnemonic, validateMnemonic } from '@scure/bip39';
 import { wordlist as ENGLISH_WORDLIST } from '@scure/bip39/wordlists/english';
 
+import { OfflineStorageService } from './offline-storage.service';
+
 export interface WalletInfo {
   mnemonic: string;
   address: string;
@@ -20,6 +22,8 @@ const CHRONIK_URL = 'https://chronik.e.cash';
 export class CarteraService {
   private cachedWallet: WalletInfo | null = null;
   private readonly chronikClient = new ChronikClient([CHRONIK_URL]);
+
+  constructor(private readonly offlineStorage: OfflineStorageService) {}
 
   async createWallet(): Promise<WalletInfo> {
     const mnemonic = this.generateMnemonic();
@@ -40,6 +44,16 @@ export class CarteraService {
     }
 
     try {
+      const offlineWallet = await this.offlineStorage.getWallet();
+      if (offlineWallet) {
+        this.cachedWallet = offlineWallet;
+        return this.cachedWallet;
+      }
+    } catch (error) {
+      console.warn('No se pudo recuperar la cartera de IndexedDB', error);
+    }
+
+    try {
       const { value } = await Preferences.get({ key: STORAGE_KEY });
       if (!value) {
         return null;
@@ -52,6 +66,7 @@ export class CarteraService {
         typeof parsed?.privateKey === 'string'
       ) {
         this.cachedWallet = parsed as WalletInfo;
+        await this.offlineStorage.setWallet(this.cachedWallet);
         return this.cachedWallet;
       }
     } catch (error) {
@@ -105,6 +120,13 @@ export class CarteraService {
     } catch (error) {
       console.warn('No se pudo almacenar la cartera localmente', error);
     }
+
+    try {
+      await this.offlineStorage.setWallet(wallet);
+    } catch (error) {
+      console.warn('No se pudo almacenar la cartera en IndexedDB', error);
+    }
+
     return wallet;
   }
 
