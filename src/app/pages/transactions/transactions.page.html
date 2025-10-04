@@ -13,20 +13,67 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-list>
-    <ion-item *ngFor="let tx of txs">
-      <ion-label>
-        <h2>{{ tx.txid | slice:0:12 }}...</h2>
-        <p>{{ tx.amount }} XEC</p>
-        <p>{{ tx.time * 1000 | date:'medium' }}</p>
-      </ion-label>
-      <ion-badge color="{{ tx.confirmed ? 'success' : 'warning' }}">
-        {{ tx.confirmed ? 'Confirmada' : 'Pendiente' }}
-      </ion-badge>
-    </ion-item>
-  </ion-list>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Transacciones BLE</ion-card-title>
+      <ion-card-subtitle>Historial local</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list *ngIf="bleTxs.length; else noBleTxs">
+        <ion-item *ngFor="let tx of bleTxs">
+          <ion-icon [name]="txTypeIcon(tx.type)" slot="start" [color]="tx.type === 'sent' ? 'primary' : 'success'"></ion-icon>
+          <ion-label>
+            <h2>{{ txTypeLabel(tx.type) }} • {{ tx.amount | number:'1.2-2' }} XEC</h2>
+            <p>De: {{ tx.from }}</p>
+            <p>Para: {{ tx.to }}</p>
+            <p>{{ tx.timestamp | date:'medium' }}</p>
+          </ion-label>
+          <ion-badge [color]="statusColor(tx.status)">{{ statusLabel(tx.status) }}</ion-badge>
+        </ion-item>
+      </ion-list>
 
-  <ion-text *ngIf="!txs.length" color="medium">
-    <p>No hay transacciones registradas.</p>
-  </ion-text>
+      <ng-template #noBleTxs>
+        <ion-text color="medium">
+          <p>No hay transacciones BLE registradas.</p>
+        </ion-text>
+      </ng-template>
+
+      <ion-button
+        *ngIf="bleTxs.length"
+        expand="block"
+        fill="outline"
+        color="medium"
+        (click)="clearBleHistory()"
+      >
+        Limpiar historial BLE
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Historial en cadena</ion-card-title>
+      <ion-card-subtitle>Sincronizado con Chronik</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list *ngIf="txs.length; else noTxs">
+        <ion-item *ngFor="let tx of txs">
+          <ion-label>
+            <h2>{{ tx.txid | slice:0:12 }}...</h2>
+            <p>{{ tx.amount }} XEC</p>
+            <p>{{ tx.time * 1000 | date:'medium' }}</p>
+          </ion-label>
+          <ion-badge color="{{ tx.confirmed ? 'success' : 'warning' }}">
+            {{ tx.confirmed ? 'Confirmada' : 'Pendiente' }}
+          </ion-badge>
+        </ion-item>
+      </ion-list>
+
+      <ng-template #noTxs>
+        <ion-text color="medium">
+          <p>No hay transacciones registradas.</p>
+        </ion-text>
+      </ng-template>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
