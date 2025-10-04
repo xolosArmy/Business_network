@@ -37,6 +37,8 @@ export class TransactionsPage implements OnInit, OnDestroy {
       case 'pending': return 'warning';
       case 'signed': return 'medium';
       case 'broadcasted': return 'success';
+      case 'confirmed': return 'success';
+      case 'failed': return 'danger';
       default: return 'dark';
     }
   }
