@@ -24,5 +24,21 @@ export class AppComponent implements OnInit {
         console.log('🔔 Permiso notificaciones:', result);
       });
     }
+
+    window.addEventListener('online', async () => {
+      const pending = localStorage.getItem('pendingTx');
+      if (pending) {
+        const data = JSON.parse(pending);
+        const res = await fetch('https://chronik.e.cash/xec-mainnet/tx', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ hex: data.raw }),
+        });
+        if (res.ok) {
+          console.log('✅ TX enviada tras reconexión');
+          localStorage.removeItem('pendingTx');
+        }
+      }
+    });
   }
 }
