@@ -11,10 +11,10 @@ La app usa ecash-wallet y Chronik API para crear carteras, consultar saldos y en
 
 ### Desarrollo con Web Bluetooth
 
-Para probar las funciones BLE en navegadores Chromium es necesario ejecutar la app en un contexto HTTPS. Puedes usar:
+Para probar las funciones BLE y la PWA en navegadores Chromium es necesario ejecutar la app en un contexto HTTPS. Puedes usar:
 
 ```
-ionic serve --ssl --host=localhost --port=8100
+ionic serve --ssl --external
 ```
 
-Esto habilita un certificado autofirmado suficiente para desarrollo local.
+Esto habilita un certificado autofirmado y expone el servidor HTTPS en la red local, suficiente para desarrollo y pruebas con dispositivos externos.
