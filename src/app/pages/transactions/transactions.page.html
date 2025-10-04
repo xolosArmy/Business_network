@@ -6,7 +6,7 @@
 
 <ion-content color="dark">
   <ion-list *ngIf="txs.length > 0; else noTx">
-    <ion-item *ngFor="let tx of txs" lines="full">
+    <ion-item *ngFor="let tx of txs" lines="full" [@fadeIn]>
       <ion-label>
         <h2>
           {{ tx.type === 'sent' ? '📤 Enviada' : '📥 Recibida' }}
