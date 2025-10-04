@@ -92,21 +92,17 @@ export class TxBLEService {
 
       console.log('📥 TX recibida por BLE:', txData);
 
-      const txId: string = txData.id ?? this.generateId();
-      const timestamp = new Date().toISOString();
-
-      const storedTx: StoredTx = {
-        id: txId,
+      const id = Date.now().toString();
+      this.store.save({
+        id,
         type: 'received',
-        from: txData.from ?? 'desconocido',
-        to: txData.to ?? 'desconocido',
-        amount: txData.amount ?? 0,
-        status: 'signed',
-        timestamp,
+        from: txData.from,
+        to: txData.to,
+        amount: txData.amount,
+        status: navigator.onLine ? 'broadcasted' : 'pending',
+        timestamp: new Date().toISOString(),
         raw: txData.raw,
-      };
-
-      this.store.save(storedTx);
+      });
 
       if (navigator.onLine) {
         const response = await fetch('https://chronik.e.cash/xec-mainnet/tx', {
@@ -118,7 +114,7 @@ export class TxBLEService {
         const result = await response.json();
         console.log('✅ TX transmitida a red:', result);
         this.ble.notify('TX retransmitida a la red eCash');
-        this.store.updateStatus(txId, 'broadcasted');
+        this.store.updateStatus(id, 'broadcasted');
       } else {
         console.warn('🌐 Sin conexión — TX almacenada localmente');
         this.ble.notify('TX recibida y pendiente de retransmitir');
