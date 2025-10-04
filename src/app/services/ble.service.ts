@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { forwardRef, Inject, Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   BleClient,
@@ -12,6 +12,7 @@ import { Toast } from '@capacitor/toast';
 
 import { WalletService } from './wallet.service';
 import { TransactionsService } from './transactions.service';
+import { TxBLEService } from './tx-ble.service';
 
 interface BleTransferPayload {
   amount?: number;
@@ -41,6 +42,7 @@ export class BLEService {
   private scanning = false;
   public connectedDevice: BleDevice | null = null;
   private notificationsActive = false;
+  private rxNotificationHandler: ((event: Event) => void) | null = null;
   private discoveredDevices = new Map<string, BleDevice>();
   private readonly chronikUrl = 'https://chronik.e.cash/xec-mainnet';
 
@@ -49,6 +51,8 @@ export class BLEService {
     private readonly zone: NgZone,
     private readonly http: HttpClient,
     private readonly txs: TransactionsService,
+    @Inject(forwardRef(() => TxBLEService))
+    private readonly txBle: TxBLEService,
   ) {}
 
   private async ensureInitialized(): Promise<void> {
@@ -127,7 +131,8 @@ export class BLEService {
       this.device = device;
       this.server = server;
       this.txCharacteristic = txCharacteristic;
-      this.rxCharacteristic = null;
+      this.rxCharacteristic = txCharacteristic;
+      this.listenForIncoming();
 
       console.info(`[BLE] Dispositivo BLE conectado: ${device.name ?? 'Sin nombre'}`);
       await this.notify(`Dispositivo BLE conectado: ${device.name ?? 'Sin nombre'}`);
@@ -157,12 +162,58 @@ export class BLEService {
     }
   }
 
+  listenForIncoming(): void {
+    if (!this.rxCharacteristic) {
+      return;
+    }
+
+    if (this.rxNotificationHandler) {
+      this.rxCharacteristic.removeEventListener(
+        'characteristicvaluechanged',
+        this.rxNotificationHandler,
+      );
+      this.rxNotificationHandler = null;
+    }
+
+    this.rxNotificationHandler = (event: Event) => {
+      const characteristic = event.target as BluetoothRemoteGATTCharacteristic | null;
+      const dataView = characteristic?.value ?? null;
+      if (!dataView) {
+        return;
+      }
+
+      const bytes = new Uint8Array(dataView.buffer, dataView.byteOffset, dataView.byteLength);
+      const value = new TextDecoder().decode(bytes);
+      console.log('📩 Mensaje BLE recibido:', value);
+      void this.txBle.receiveAndBroadcast(value);
+    };
+
+    void this.rxCharacteristic
+      .startNotifications()
+      .then(() => {
+        this.rxCharacteristic?.addEventListener(
+          'characteristicvaluechanged',
+          this.rxNotificationHandler!,
+        );
+      })
+      .catch((error) => {
+        console.error('[BLE] No fue posible iniciar notificaciones RX.', error);
+      });
+  }
+
   private onDisconnected(): void {
     console.warn('[BLE] Dispositivo BLE desconectado.');
     void this.notify('Dispositivo BLE desconectado');
     this.device = null;
     this.server = null;
     this.txCharacteristic = null;
+    if (this.rxCharacteristic && this.rxNotificationHandler) {
+      this.rxCharacteristic.removeEventListener(
+        'characteristicvaluechanged',
+        this.rxNotificationHandler,
+      );
+    }
+    this.rxNotificationHandler = null;
     this.rxCharacteristic = null;
   }
 
