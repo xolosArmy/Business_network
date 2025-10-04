@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PwaService } from './services/pwa.service';
 import { EnviarService } from './services/enviar.service';
 import { SyncService } from './services/sync.service';
+import { ChronikService } from './services/chronik.service';
+import { TxStorageService } from './services/tx-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +14,26 @@ export class AppComponent implements OnInit {
     private pwa: PwaService,
     private enviarService: EnviarService,
     private sync: SyncService,
+    private chronik: ChronikService,
+    private store: TxStorageService,
   ) {}
 
-  ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.sync.listenForNetwork();
     setTimeout(() => this.pwa.showInstallPrompt(), 5000);
     void this.enviarService.processPendingTransactions();
+
+    const txs = this.store.getAll();
+    if (txs.length > 0) {
+      console.log('🔄 Sincronizando TX con Chronik...');
+      await this.chronik.syncAll();
+    }
+
+    const walletData = localStorage.getItem('rmz_wallet');
+    if (walletData) {
+      const { address } = JSON.parse(walletData);
+      await this.chronik.subscribeToAddress(address);
+    }
 
     if ('Notification' in window) {
       Notification.requestPermission().then((result) => {
