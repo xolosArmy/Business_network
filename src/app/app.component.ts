@@ -5,11 +5,7 @@ import { SyncService } from './services/sync.service';
 
 @Component({
   selector: 'app-root',
-  template: `
-    <ion-app>
-      <ion-router-outlet></ion-router-outlet>
-    </ion-app>
-  `,
+  templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
   constructor(
