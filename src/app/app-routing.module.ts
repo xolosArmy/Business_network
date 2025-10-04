@@ -8,6 +8,11 @@ const routes: Routes = [
       import('./pages/tabs/tabs.module').then((m) => m.TabsPageModule),
   },
   {
+    path: 'ble-devices',
+    loadChildren: () =>
+      import('./pages/ble-devices/ble-devices.module').then((m) => m.BleDevicesPageModule),
+  },
+  {
     path: '',
     redirectTo: 'tabs',
     pathMatch: 'full',
