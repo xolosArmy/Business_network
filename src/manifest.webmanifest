@@ -4,5 +4,12 @@
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#12181f",
-  "theme_color": "#12181f"
+  "theme_color": "#12181f",
+  "permissions": ["bluetooth", "notifications"],
+  "bluetooth": {
+    "optionalServices": [
+      "battery_service",
+      "0000ffe0-0000-1000-8000-00805f9b34fb"
+    ]
+  }
 }

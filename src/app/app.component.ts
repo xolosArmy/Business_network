@@ -18,5 +18,15 @@ export class AppComponent implements OnInit {
     this.sync.listenForNetwork();
     setTimeout(() => this.pwa.showInstallPrompt(), 5000);
     void this.enviarService.processPendingTransactions();
+
+    if (typeof window !== 'undefined' && 'Notification' in window) {
+      Notification.requestPermission()
+        .then((result) => {
+          console.info(`Permiso notificaciones: ${result}`);
+        })
+        .catch((error) => {
+          console.error('Permiso notificaciones: error', error);
+        });
+    }
   }
 }
