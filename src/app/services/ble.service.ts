@@ -11,6 +11,7 @@ import { Capacitor } from '@capacitor/core';
 import { Toast } from '@capacitor/toast';
 
 import { WalletService } from './wallet.service';
+import { TransactionsService } from './transactions.service';
 
 interface BleTransferPayload {
   amount?: number;
@@ -41,6 +42,7 @@ export class BleService {
     private readonly wallet: WalletService,
     private readonly zone: NgZone,
     private readonly http: HttpClient,
+    private readonly txs: TransactionsService,
   ) {}
 
   private async ensureInitialized(): Promise<void> {
@@ -231,6 +233,8 @@ export class BleService {
 
     const txHex = await this.wallet.signTx(toAddress, amount);
 
+    let sent = false;
+
     try {
       if (!this.connectedDevice) {
         throw new Error('BLE no disponible');
@@ -244,16 +248,28 @@ export class BleService {
         new DataView(payload.buffer),
       );
       await Toast.show({ text: '🔵 Transacción enviada vía BLE' });
+      sent = true;
     } catch (error) {
       try {
         await this.http
           .post(`${this.chronikUrl}/broadcast-tx`, { rawTx: txHex })
           .toPromise();
         await Toast.show({ text: '🌐 Transacción enviada vía Internet' });
+        sent = true;
       } catch (err) {
         await Toast.show({ text: '❌ Error enviando transacción' });
         console.error(err);
       }
+    }
+
+    if (sent) {
+      await this.txs.save({
+        txid: txHex.slice(0, 24),
+        amount,
+        to: toAddress,
+        time: Date.now() / 1000,
+        confirmed: false,
+      });
     }
   }
 

@@ -9,7 +9,13 @@ export class WalletService {
   private client: Wallet | null = null;
   private walletInfo: WalletInfo | null = null;
 
-  constructor(private readonly carteraService: CarteraService) {}
+  constructor(private readonly carteraService: CarteraService) {
+    void this.ensureWalletInfo().catch(() => undefined);
+  }
+
+  get address(): string | null {
+    return this.walletInfo?.address ?? null;
+  }
 
   private async ensureClient(): Promise<Wallet> {
     const wallet = await this.ensureWalletInfo();
