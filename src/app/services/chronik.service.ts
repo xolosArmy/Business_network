@@ -73,6 +73,10 @@ export class ChronikService {
     }
   }
 
+  startAutoSync(intervalMs = 60000): void {
+    setInterval(() => this.syncAll(), intervalMs);
+  }
+
   private ensureWsClient(): ChronikWsClient {
     if (!this.wsClient) {
       this.prepareWsReady();
