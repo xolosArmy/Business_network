@@ -1,4 +1,22 @@
 module.exports = {
   root: true,
-  extends: '@react-native',
+  ignorePatterns: ['projects/**/*'],
+  overrides: [
+    {
+      files: ['*.ts'],
+      parserOptions: {
+        project: ['tsconfig.json'],
+        createDefaultProgram: true,
+      },
+      extends: [
+        'plugin:@angular-eslint/recommended',
+        'plugin:@angular-eslint/template/process-inline-templates',
+      ],
+    },
+    {
+      files: ['*.html'],
+      extends: ['plugin:@angular-eslint/template/recommended'],
+      rules: {},
+    },
+  ],
 };
