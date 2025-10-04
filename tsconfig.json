@@ -17,7 +17,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
-    "types": [],
+    "types": ["web-bluetooth"],
     "lib": ["es2022", "dom"]
   },
   "angularCompilerOptions": {

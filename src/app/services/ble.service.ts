@@ -26,7 +26,13 @@ interface ScanOptions {
 }
 
 @Injectable({ providedIn: 'root' })
-export class BleService {
+export class BLEService {
+  private device: BluetoothDevice | null = null;
+  private server: BluetoothRemoteGATTServer | null = null;
+  private txCharacteristic: BluetoothRemoteGATTCharacteristic | null = null;
+  private rxCharacteristic: BluetoothRemoteGATTCharacteristic | null = null;
+  private readonly onDisconnectedHandler: EventListener = this.onDisconnected.bind(this);
+
   private readonly SERVICE_UUID = 'b27a1e88-cc7f-46b2-8cb9-9b91ef4f0e11';
   private readonly CHARACTERISTIC_UUID = '6a57bcd7-1e2e-4b8d-97b5-47f2c6de9f17';
 
@@ -82,6 +88,113 @@ export class BleService {
   }
 
   async scanAndConnect(options: ScanOptions = {}): Promise<void> {
+    if (options.onDeviceDiscovered || options.autoConnect === false) {
+      await this.legacyScanAndConnect(options);
+      return;
+    }
+
+    if (typeof navigator === 'undefined' || !navigator.bluetooth) {
+      console.warn('[BLE] Web Bluetooth no disponible. Usando flujo legacy si está soportado.');
+      await this.legacyScanAndConnect(options);
+      return;
+    }
+
+    try {
+      if (this.server?.connected) {
+        this.server.disconnect();
+      }
+
+      if (this.device) {
+        this.device.removeEventListener('gattserverdisconnected', this.onDisconnectedHandler);
+      }
+
+      const device = await navigator.bluetooth.requestDevice({
+        acceptAllDevices: true,
+        optionalServices: ['battery_service', '0000ffe0-0000-1000-8000-00805f9b34fb'],
+      });
+
+      device.addEventListener('gattserverdisconnected', this.onDisconnectedHandler);
+
+      const gatt = device.gatt;
+      if (!gatt) {
+        throw new Error('El dispositivo no expone GATT.');
+      }
+
+      const server = await gatt.connect();
+      const service = await server.getPrimaryService('0000ffe0-0000-1000-8000-00805f9b34fb');
+      const txCharacteristic = await service.getCharacteristic('0000ffe1-0000-1000-8000-00805f9b34fb');
+
+      this.device = device;
+      this.server = server;
+      this.txCharacteristic = txCharacteristic;
+      this.rxCharacteristic = null;
+
+      console.info(`[BLE] Dispositivo BLE conectado: ${device.name ?? 'Sin nombre'}`);
+      await this.notify(`Dispositivo BLE conectado: ${device.name ?? 'Sin nombre'}`);
+    } catch (error) {
+      console.error('[BLE] Error al conectar BLE.', error);
+      await this.notify('Error al conectar BLE');
+      await this.legacyScanAndConnect(options).catch(() => undefined);
+    }
+  }
+
+  async sendMessage(message: string): Promise<void> {
+    if (!this.txCharacteristic) {
+      console.warn('[BLE] No hay característica TX disponible para enviar mensajes.');
+      await this.notify('No hay dispositivo BLE conectado');
+      return;
+    }
+
+    try {
+      const encoder = new TextEncoder();
+      const value = encoder.encode(message);
+      await this.txCharacteristic.writeValue(value);
+      console.info(`[BLE] Mensaje BLE enviado: ${message}`);
+      await this.notify('Mensaje BLE enviado');
+    } catch (error) {
+      console.error('[BLE] No fue posible enviar el mensaje BLE.', error);
+      await this.notify('Error al enviar mensaje BLE');
+    }
+  }
+
+  private onDisconnected(): void {
+    console.warn('[BLE] Dispositivo BLE desconectado.');
+    void this.notify('Dispositivo BLE desconectado');
+    this.device = null;
+    this.server = null;
+    this.txCharacteristic = null;
+    this.rxCharacteristic = null;
+  }
+
+  private async notify(message: string): Promise<void> {
+    if (typeof window === 'undefined' || !('Notification' in window)) {
+      console.info(`[BLE] ${message}`);
+      return;
+    }
+
+    if (Notification.permission === 'default') {
+      try {
+        await Notification.requestPermission();
+      } catch (error) {
+        console.warn('[BLE] No se pudo solicitar permiso de notificaciones.', error);
+      }
+    }
+
+    if (Notification.permission === 'granted') {
+      try {
+        new Notification('RMZ Wallet', {
+          body: message,
+          icon: 'assets/icons/icon-192x192.png',
+        });
+      } catch (error) {
+        console.warn('[BLE] No se pudo mostrar la notificación.', error);
+      }
+    } else {
+      console.info(`[BLE] ${message}`);
+    }
+  }
+
+  private async legacyScanAndConnect(options: ScanOptions = {}): Promise<void> {
     const { autoConnect = true, onDeviceDiscovered } = options;
 
     await this.init();
@@ -356,3 +469,5 @@ export class BleService {
     return arr;
   }
 }
+
+export { BLEService as BleService };
