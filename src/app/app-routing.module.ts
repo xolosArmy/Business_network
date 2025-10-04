@@ -15,6 +15,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'transactions',
+    loadChildren: () =>
+      import('./pages/transactions/transactions.module').then(
+        (m) => m.TransactionsPageModule
+      ),
+  },
+  {
     path: '',
     redirectTo: 'tabs',
     pathMatch: 'full',
