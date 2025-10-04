@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
     if (txs.length > 0) {
       console.log('🔄 Sincronizando TX con Chronik...');
       await this.chronik.syncAll();
+      this.chronik.startAutoSync();
     }
 
     const walletData = localStorage.getItem('rmz_wallet');
