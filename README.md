@@ -7,4 +7,4 @@ App de eCash (XEC) desarrollada en Ionic + Angular + Capacitor.
 - `npm run android`: compilar y correr en Android
 - `npm run sync`: sincronizar cambios con Android nativo
 
-La app usa ecash-lib y Chronik API para crear carteras, consultar saldos y enviar transacciones en la red eCash.
+La app usa ecash-wallet y Chronik API para crear carteras, consultar saldos y enviar transacciones en la red eCash.

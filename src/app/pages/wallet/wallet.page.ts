@@ -154,15 +154,17 @@ export class WalletPage implements OnInit, OnDestroy {
 
   async loadWalletInfo(): Promise<void> {
     this.wallet = await this.carteraService.getWalletInfo();
-    if (this.wallet?.address) {
-      await this.refreshBalance(this.wallet.address);
-      this.updateQrImage(this.wallet.address);
+    if (this.wallet) {
+      await this.refreshBalance(this.wallet);
+      if (this.wallet.address) {
+        this.updateQrImage(this.wallet.address);
+      }
     }
   }
 
-  async refreshBalance(address: string): Promise<void> {
+  async refreshBalance(wallet: WalletInfo): Promise<void> {
     try {
-      const balance = await this.saldoService.getBalance(address);
+      const balance = await this.saldoService.getBalance(wallet);
       this.balanceLabel = this.saldoService.formatBalance(balance);
     } catch (error) {
       this.balanceLabel = '0.00';
@@ -211,8 +213,8 @@ export class WalletPage implements OnInit, OnDestroy {
       );
       this.successMessage = `Transacción enviada. TXID: ${txid}`;
       this.sendForm.reset();
-      if (this.wallet.address) {
-        await this.refreshBalance(this.wallet.address);
+      if (this.wallet) {
+        await this.refreshBalance(this.wallet);
       }
     } catch (error) {
       this.errorMessage = error instanceof Error ? error.message : String(error);

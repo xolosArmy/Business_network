@@ -86,7 +86,7 @@ export class HomePage implements OnInit {
   }
 
   async refreshBalance(): Promise<void> {
-    if (!this.wallet?.address) {
+    if (!this.wallet?.mnemonic) {
       return;
     }
 
@@ -94,7 +94,7 @@ export class HomePage implements OnInit {
     this.errorMessage = '';
 
     try {
-      this.balance = await this.saldoService.getBalance(this.wallet.address);
+      this.balance = await this.saldoService.getBalance(this.wallet);
     } catch (error) {
       this.errorMessage = this.resolveErrorMessage(error);
     } finally {
