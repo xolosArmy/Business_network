@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Network } from '@capacitor/network';
 import { Wallet } from 'ecash-wallet';
 import type { WalletInfo } from './cartera.service';
 import {
   OfflineStorageService,
   StoredTransaction,
 } from './offline-storage.service';
+import { StorageService } from './storage.service';
 
 type WalletSource =
   | Pick<WalletInfo, 'mnemonic' | 'address' | 'privateKey'>
@@ -14,7 +16,15 @@ type WalletSource =
 export class EnviarService {
   private isProcessingPending = false;
 
-  constructor(private readonly offlineStorage: OfflineStorageService) {
+  constructor(
+    private readonly offlineStorage: OfflineStorageService,
+    private readonly storage: StorageService,
+  ) {
+    if (typeof window !== 'undefined') {
+      void this.storage
+        .initDB()
+        .catch((error) => console.error('IndexedDB init failed', error));
+    }
     if (typeof window !== 'undefined') {
       window.addEventListener('online', () => {
         void this.processPendingTransactions();
@@ -41,11 +51,19 @@ export class EnviarService {
       }
 
       const timestamp = new Date().toISOString();
-      const isOnline = typeof navigator === 'undefined' ? true : navigator.onLine;
+      const { connected } = await this.getNetworkStatus();
 
-      if (!isOnline) {
+      if (!connected) {
+        const tx = {
+          toAddress: destination,
+          amount,
+          txid: Date.now().toString(),
+          pending: true,
+        };
+        this.storage.saveTx(tx);
         await this.queueTransaction(destination, amount, timestamp);
-        return `pending-offline-${Date.now()}`;
+        console.log('Transacción guardada localmente (offline).');
+        return `pending-offline-${tx.txid}`;
       }
 
       const wallet = new Wallet(privateKey);
@@ -77,6 +95,19 @@ export class EnviarService {
       });
       throw new Error(`No se pudo enviar la transacción: ${message}`);
     }
+  }
+
+  private async getNetworkStatus(): Promise<{ connected: boolean }> {
+    try {
+      if (typeof Network?.getStatus === 'function') {
+        return await Network.getStatus();
+      }
+    } catch (error) {
+      console.warn('No se pudo obtener el estado de la red con Capacitor Network.', error);
+    }
+
+    const isConnected = typeof navigator === 'undefined' ? true : navigator.onLine;
+    return { connected: isConnected };
   }
 
   async processPendingTransactions(): Promise<void> {
