@@ -12,7 +12,7 @@ export class TxBLEService {
 
   constructor(
     private readonly ble: BLEService,
-    private readonly txStorage: TxStorageService,
+    private readonly store: TxStorageService,
   ) {}
 
   private generateId(): string {
@@ -35,23 +35,10 @@ export class TxBLEService {
       return;
     }
 
-    let txId: string | null = null;
-
     try {
-      txId = this.generateId();
+      const txId = this.generateId();
       const fromAddress = this.wallet.address();
       const timestamp = new Date().toISOString();
-      const storedTx: StoredTx = {
-        id: txId,
-        type: 'sent',
-        from: fromAddress,
-        to,
-        amount: amountXec,
-        status: 'pending',
-        timestamp,
-      };
-
-      this.txStorage.save(storedTx);
 
       const sats = Math.floor(amountXec * 100);
       const tx = await this.wallet.createTx({
@@ -62,7 +49,18 @@ export class TxBLEService {
       const rawHex = tx.hex;
       console.log('🧾 TX firmada:', rawHex);
 
-      this.txStorage.update(txId, { status: 'signed', raw: rawHex });
+      const storedTx: StoredTx = {
+        id: txId,
+        type: 'sent',
+        from: fromAddress,
+        to,
+        amount: amountXec,
+        status: 'signed',
+        timestamp,
+        raw: rawHex,
+      };
+
+      this.store.save(storedTx);
 
       await this.ble.sendMessage(
         JSON.stringify({
@@ -77,12 +75,11 @@ export class TxBLEService {
 
       this.ble.notify('Transacción enviada por BLE');
       console.log('📡 TX BLE enviada:', { to, amountXec });
+
+      this.store.updateStatus(txId, 'broadcasted');
     } catch (error) {
       console.error('❌ Error al crear/enviar TX:', error);
       this.ble.notify('Error al enviar TX por BLE');
-      if (txId) {
-        this.txStorage.updateStatus(txId, 'pending');
-      }
     }
   }
 
@@ -109,7 +106,7 @@ export class TxBLEService {
         raw: txData.raw,
       };
 
-      this.txStorage.save(storedTx);
+      this.store.save(storedTx);
 
       if (navigator.onLine) {
         const response = await fetch('https://chronik.e.cash/xec-mainnet/tx', {
@@ -121,7 +118,7 @@ export class TxBLEService {
         const result = await response.json();
         console.log('✅ TX transmitida a red:', result);
         this.ble.notify('TX retransmitida a la red eCash');
-        this.txStorage.updateStatus(txId, 'broadcasted');
+        this.store.updateStatus(txId, 'broadcasted');
       } else {
         console.warn('🌐 Sin conexión — TX almacenada localmente');
         this.ble.notify('TX recibida y pendiente de retransmitir');
