@@ -36,9 +36,13 @@ export class TransactionsPage implements OnInit, OnDestroy {
     switch (status) {
       case 'pending': return 'warning';
       case 'signed': return 'medium';
+      case 'queued': return 'tertiary';
+      case 'broadcasting': return 'medium';
       case 'broadcasted': return 'success';
+      case 'confirming': return 'warning';
       case 'confirmed': return 'success';
       case 'failed': return 'danger';
+      case 'cancelled': return 'medium';
       default: return 'dark';
     }
   }

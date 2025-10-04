@@ -1,16 +1,45 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+export type StoredTxStatus =
+  | 'queued'
+  | 'pending'
+  | 'signed'
+  | 'broadcasting'
+  | 'broadcasted'
+  | 'confirming'
+  | 'confirmed'
+  | 'failed'
+  | 'cancelled';
+
+export interface StoredTxHistoryEntry {
+  status: StoredTxStatus;
+  timestamp: string;
+  reason?: string;
+}
+
 export interface StoredTx {
   id: string;
   type: 'sent' | 'received';
   from: string;
   to: string;
   amount: number;
-  status: 'pending' | 'signed' | 'broadcasted' | 'confirmed' | 'failed';
+  status: StoredTxStatus;
   timestamp: string;
   raw?: string;
   txid?: string;
+  context?: 'ble' | 'manual' | 'offline' | 'imported';
+  confirmations?: number;
+  statusReason?: string;
+  errorMessage?: string;
+  lastUpdated?: string;
+  history?: StoredTxHistoryEntry[];
+}
+
+export interface StatusUpdateOptions {
+  statusReason?: string;
+  confirmations?: number;
+  errorMessage?: string;
 }
 
 @Injectable({
@@ -33,7 +62,8 @@ export class TxStorageService {
 
   save(tx: StoredTx) {
     const txs = this.getAll();
-    txs.unshift(tx);
+    const normalized = this.prepareForStorage(tx);
+    txs.unshift(normalized);
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(txs));
     this.emitChange();
   }
@@ -42,7 +72,7 @@ export class TxStorageService {
     const txs = this.getAll();
     const idx = txs.findIndex(t => t.id === id);
     if (idx !== -1) {
-      txs[idx] = { ...txs[idx], ...changes };
+      txs[idx] = this.applyChanges(txs[idx], changes);
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(txs));
       this.emitChange();
     }
@@ -52,22 +82,92 @@ export class TxStorageService {
     const txs = this.getAll();
     const idx = txs.findIndex(t => t.txid === txid);
     if (idx !== -1) {
-      txs[idx] = { ...txs[idx], ...changes };
+      txs[idx] = this.applyChanges(txs[idx], changes);
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(txs));
       this.emitChange();
     }
   }
 
-  updateStatus(id: string, newStatus: StoredTx['status']) {
-    this.update(id, { status: newStatus });
+  updateStatus(id: string, newStatus: StoredTxStatus, options: StatusUpdateOptions = {}) {
+    this.update(id, this.buildStatusPayload(newStatus, options));
   }
 
-  updateStatusByTxid(txid: string, newStatus: StoredTx['status']) {
-    this.updateByTxid(txid, { status: newStatus });
+  updateStatusByTxid(txid: string, newStatus: StoredTxStatus, options: StatusUpdateOptions = {}) {
+    this.updateByTxid(txid, this.buildStatusPayload(newStatus, options));
   }
 
   clear() {
     localStorage.removeItem(this.STORAGE_KEY);
     this.emitChange();
+  }
+
+  private prepareForStorage(tx: StoredTx): StoredTx {
+    const now = new Date().toISOString();
+    const hasHistory = Array.isArray(tx.history) && tx.history.length > 0;
+    const history = hasHistory
+      ? tx.history
+      : [
+          {
+            status: tx.status,
+            timestamp: now,
+            reason: tx.statusReason,
+          },
+        ];
+
+    return {
+      ...tx,
+      history,
+      lastUpdated: tx.lastUpdated ?? now,
+    };
+  }
+
+  private applyChanges(current: StoredTx, changes: Partial<StoredTx>): StoredTx {
+    const baseHistory = changes.history ?? current.history ?? [];
+    const now = new Date().toISOString();
+    let history = baseHistory;
+    let lastUpdated = changes.lastUpdated ?? current.lastUpdated ?? current.timestamp;
+
+    if (changes.status && changes.status !== current.status) {
+      history = [
+        ...baseHistory,
+        {
+          status: changes.status,
+          timestamp: now,
+          reason: changes.statusReason ?? changes.errorMessage ?? current.statusReason,
+        },
+      ];
+      lastUpdated = now;
+    } else if (
+      'statusReason' in changes ||
+      'confirmations' in changes ||
+      'errorMessage' in changes
+    ) {
+      lastUpdated = now;
+    }
+
+    return {
+      ...current,
+      ...changes,
+      history,
+      lastUpdated,
+    };
+  }
+
+  private buildStatusPayload(status: StoredTxStatus, options: StatusUpdateOptions): Partial<StoredTx> {
+    const payload: Partial<StoredTx> = { status };
+
+    if (options.statusReason !== undefined) {
+      payload.statusReason = options.statusReason;
+    }
+
+    if (options.confirmations !== undefined) {
+      payload.confirmations = options.confirmations;
+    }
+
+    if (options.errorMessage !== undefined) {
+      payload.errorMessage = options.errorMessage;
+    }
+
+    return payload;
   }
 }

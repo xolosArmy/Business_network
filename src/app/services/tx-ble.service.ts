@@ -66,6 +66,7 @@ export class TxBLEService {
         timestamp,
         raw: rawHex,
         txid: txid ?? undefined,
+        context: 'ble',
       };
 
       this.store.save(storedTx);
@@ -113,6 +114,7 @@ export class TxBLEService {
         timestamp: new Date().toISOString(),
         raw: txData.raw,
         txid: computedTxid ?? undefined,
+        context: 'ble',
       });
 
       console.log('📥 TX recibida por BLE:', txData);
