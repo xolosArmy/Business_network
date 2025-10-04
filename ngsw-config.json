@@ -21,20 +21,22 @@
       "resources": {
         "files": [
           "/assets/**",
-          "/manifest.webmanifest"
+          "/*.(png|jpg|jpeg|svg|webp)"
         ]
       }
     }
   ],
   "dataGroups": [
     {
-      "name": "chronik-api",
-      "urls": ["https://chronik.e.cash/**"],
+      "name": "api-calls",
+      "urls": [
+        "https://chronik.e.cash/**"
+      ],
       "cacheConfig": {
-        "strategy": "freshness",
-        "maxSize": 50,
-        "maxAge": "1d",
-        "timeout": "10s"
+        "maxSize": 20,
+        "maxAge": "6h",
+        "timeout": "5s",
+        "strategy": "performance"
       }
     }
   ]
