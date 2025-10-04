@@ -1,45 +1,29 @@
 <ion-header>
   <ion-toolbar color="dark">
-    <ion-title>Historial</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="load()" fill="clear">
-        <ion-icon name="refresh-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+    <ion-title>Historial de Transacciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-refresher slot="fixed" (ionRefresh)="load(); $event.target.complete()">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
+<ion-content color="dark">
+  <ion-list>
+    <ion-item *ngFor="let tx of txs">
+      <ion-label>
+        <h2>
+          {{ tx.type === 'sent' ? '📤 Enviada' : '📥 Recibida' }}
+          — {{ tx.amount }} XEC
+        </h2>
+        <p>De: {{ tx.from | slice:0:12 }}... → A: {{ tx.to | slice:0:12 }}...</p>
+        <p>{{ tx.timestamp | date:'short' }}</p>
+      </ion-label>
+      <ion-badge slot="end" [color]="getColor(tx.status)">
+        {{ tx.status }}
+      </ion-badge>
+    </ion-item>
+  </ion-list>
 
-  <ion-card *ngIf="txs.length; else empty">
-    <ion-list>
-      <ion-item lines="full" *ngFor="let tx of txs">
-        <ion-icon
-          slot="start"
-          [name]="tx.type === 'sent' ? 'arrow-up-circle-outline' : 'arrow-down-circle-outline'"
-          [color]="tx.type === 'sent' ? 'danger' : 'success'"
-        ></ion-icon>
-        <ion-label>
-          <h2>{{ tx.amount | number:'1.2-6' }} XEC</h2>
-          <p>{{ tx.type === 'sent' ? 'Enviada' : 'Recibida' }} • {{ tx.timestamp | date:'medium' }}</p>
-          <p>De: {{ tx.from }}</p>
-          <p>Para: {{ tx.to }}</p>
-        </ion-label>
-        <ion-badge [color]="getColor(tx.status)">{{ tx.status | titlecase }}</ion-badge>
-      </ion-item>
-    </ion-list>
-  </ion-card>
-
-  <ng-template #empty>
-    <ion-card>
-      <ion-card-content class="empty">
-        <ion-icon name="hourglass-outline"></ion-icon>
-        <h2>No hay transacciones registradas</h2>
-        <p>El historial se actualizará cuando envíes o recibas transacciones desde el dispositivo.</p>
-      </ion-card-content>
-    </ion-card>
-  </ng-template>
+  <ion-footer>
+    <ion-toolbar color="medium">
+      <ion-button expand="full" color="danger" (click)="store.clear()">Limpiar historial</ion-button>
+    </ion-toolbar>
+  </ion-footer>
 </ion-content>
