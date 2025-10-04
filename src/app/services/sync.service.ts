@@ -3,6 +3,7 @@ import { Network } from '@capacitor/network';
 import { Toast } from '@capacitor/toast';
 import { StorageService } from './storage.service';
 import { WalletService } from './wallet.service';
+import { ChronikService } from './chronik.service';
 
 @Injectable({ providedIn: 'root' })
 export class SyncService {
@@ -10,15 +11,18 @@ export class SyncService {
 
   constructor(
     private storage: StorageService,
-    private wallet: WalletService
+    private wallet: WalletService,
+    private chronik: ChronikService,
   ) {
     this.listenForNetwork();
+    void this.chronik.syncAll();
   }
 
   listenForNetwork() {
     Network.addListener('networkStatusChange', (status) => {
       if (status.connected && !this.syncing) {
         this.syncPendingTxs();
+        void this.chronik.syncAll();
       }
     });
   }
@@ -44,6 +48,7 @@ export class SyncService {
     }
 
     this.syncing = false;
+    void this.chronik.syncAll();
   }
 
   private async showToast(message: string) {

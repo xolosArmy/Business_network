@@ -1,0 +1,131 @@
+import { Injectable } from '@angular/core';
+import { ChronikClient } from 'chronik-client';
+
+import { TxStorageService } from './tx-storage.service';
+
+type ChronikWsClient = ReturnType<ChronikClient['ws']>;
+
+type ChronikWsMessage = {
+  type?: string;
+  txid?: string;
+  tx?: { txid?: string };
+};
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ChronikService {
+  private readonly chronik = new ChronikClient('https://chronik.e.cash/xec-mainnet');
+  private readonly subscribedAddresses = new Set<string>();
+  private wsClient?: ChronikWsClient;
+  private wsReady!: Promise<void>;
+  private resolveWsReady?: () => void;
+
+  constructor(private readonly store: TxStorageService) {
+    this.ensureWsClient();
+  }
+
+  async checkTxStatus(txid: string | undefined | null): Promise<void> {
+    if (!txid) {
+      return;
+    }
+
+    try {
+      const res = await this.chronik.tx(txid);
+      if (res && res.block) {
+        console.log('✅ TX confirmada:', txid);
+        this.store.updateStatusByTxid(txid, 'confirmed');
+      } else {
+        console.log('⏳ TX aún no confirmada:', txid);
+        this.store.updateStatusByTxid(txid, 'broadcasted');
+      }
+    } catch (err: any) {
+      if (err?.response?.status === 404) {
+        console.log('🚫 TX aún no propagada:', txid);
+      } else {
+        console.error('Error verificando TX:', err);
+      }
+    }
+  }
+
+  async subscribeToAddress(address: string | undefined | null): Promise<void> {
+    if (!address || this.subscribedAddresses.has(address)) {
+      return;
+    }
+
+    this.subscribedAddresses.add(address);
+
+    try {
+      await this.ensureWsClient();
+      await this.wsReady;
+      await this.wsClient?.subscribeToAddress(address);
+    } catch (err) {
+      console.error('❌ Error Chronik WS:', err);
+    }
+  }
+
+  async syncAll(): Promise<void> {
+    const txs = this.store.getAll();
+    for (const tx of txs) {
+      if (tx.txid && tx.status !== 'confirmed') {
+        await this.checkTxStatus(tx.txid);
+      }
+    }
+  }
+
+  private ensureWsClient(): ChronikWsClient {
+    if (!this.wsClient) {
+      this.prepareWsReady();
+      this.wsClient = this.chronik.ws({
+        onMessage: msg => this.handleWsMessage(msg),
+        onReconnect: e => {
+          console.warn('🔁 Reconexion Chronik', e);
+          this.prepareWsReady();
+        },
+      });
+
+      this.wsClient.onConnect(async () => {
+        console.log('🛰️ Conectado a Chronik WS');
+        this.resolveWsReady?.();
+        this.resolveWsReady = undefined;
+
+        for (const address of this.subscribedAddresses) {
+          try {
+            await this.wsClient?.subscribeToAddress(address);
+          } catch (err) {
+            console.error('❌ Error suscribiendo dirección Chronik:', err);
+          }
+        }
+      });
+    }
+
+    return this.wsClient;
+  }
+
+  private prepareWsReady(): void {
+    this.wsReady = new Promise(resolve => {
+      this.resolveWsReady = resolve;
+    });
+  }
+
+  private handleWsMessage(msg: ChronikWsMessage): void {
+    if (!msg?.type) {
+      return;
+    }
+
+    const txid = msg.txid || msg.tx?.txid;
+    if (!txid) {
+      return;
+    }
+
+    console.log('📦 TX actualizada vía WS:', txid, msg.type);
+
+    if (msg.type === 'AddedToMempool') {
+      this.store.updateStatusByTxid(txid, 'broadcasted');
+    }
+
+    if (msg.type === 'Confirmed') {
+      this.store.updateStatusByTxid(txid, 'confirmed');
+    }
+  }
+}

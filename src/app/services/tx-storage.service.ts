@@ -7,9 +7,10 @@ export interface StoredTx {
   from: string;
   to: string;
   amount: number;
-  status: 'pending' | 'signed' | 'broadcasted';
+  status: 'pending' | 'signed' | 'broadcasted' | 'confirmed' | 'failed';
   timestamp: string;
   raw?: string;
+  txid?: string;
 }
 
 @Injectable({
@@ -37,14 +38,32 @@ export class TxStorageService {
     this.emitChange();
   }
 
-  updateStatus(id: string, newStatus: StoredTx['status']) {
+  update(id: string, changes: Partial<StoredTx>) {
     const txs = this.getAll();
     const idx = txs.findIndex(t => t.id === id);
     if (idx !== -1) {
-      txs[idx].status = newStatus;
+      txs[idx] = { ...txs[idx], ...changes };
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(txs));
       this.emitChange();
     }
+  }
+
+  updateByTxid(txid: string, changes: Partial<StoredTx>) {
+    const txs = this.getAll();
+    const idx = txs.findIndex(t => t.txid === txid);
+    if (idx !== -1) {
+      txs[idx] = { ...txs[idx], ...changes };
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(txs));
+      this.emitChange();
+    }
+  }
+
+  updateStatus(id: string, newStatus: StoredTx['status']) {
+    this.update(id, { status: newStatus });
+  }
+
+  updateStatusByTxid(txid: string, newStatus: StoredTx['status']) {
+    this.updateByTxid(txid, { status: newStatus });
   }
 
   clear() {
