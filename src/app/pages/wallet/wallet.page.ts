@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BLEService } from '../../services/ble.service';
+import { TxBLEService } from '../../services/tx-ble.service';
 
 @Component({
   selector: 'app-wallet',
@@ -7,14 +7,12 @@ import { BLEService } from '../../services/ble.service';
   styleUrls: ['./wallet.page.scss']
 })
 export class WalletPage {
-  constructor(private ble: BLEService) {}
+  toAddr = '';
+  amount = '';
 
-  connectBLE() {
-    this.ble.scanAndConnect();
-  }
+  constructor(private txBle: TxBLEService) {}
 
-  sendBLE() {
-    const msg = 'TX ' + new Date().toISOString();
-    this.ble.sendMessage(msg);
+  async sendTxBLE() {
+    await this.txBle.createAndSendTx(this.toAddr, parseFloat(this.amount));
   }
 }
