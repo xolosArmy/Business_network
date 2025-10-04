@@ -4,7 +4,7 @@
   "author": "XolosArmy Network",
   "private": true,
   "scripts": {
-    "start": "ionic serve",
+    "start": "ionic serve --ssl --external",
     "build": "ionic build",
     "lint": "eslint . --ext .ts,.html",
     "test": "ng test",
