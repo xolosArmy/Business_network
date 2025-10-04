@@ -96,14 +96,8 @@ import { BleService } from '../../services/ble.service';
               {{ sending ? 'Enviando…' : 'Enviar' }}
             </ion-button>
 
-            <ion-button
-              expand="block"
-              type="button"
-              color="tertiary"
-              (click)="sendBle()"
-              [disabled]="sendForm.invalid || sending"
-            >
-              Enviar vía BLE
+            <ion-button expand="block" color="success" (click)="sendHybrid()">
+              Enviar (BLE / Internet)
             </ion-button>
           </form>
 
@@ -271,7 +265,7 @@ export class WalletPage implements OnInit, OnDestroy {
     }
   }
 
-  async sendBle(): Promise<void> {
+  async sendHybrid(): Promise<void> {
     if (this.sendForm.invalid) {
       this.errorMessage = 'Complete los campos requeridos.';
       return;
@@ -291,8 +285,8 @@ export class WalletPage implements OnInit, OnDestroy {
         throw new Error('Monto inválido.');
       }
 
-      await this.ble.sendTx(String(toAddress).trim(), numericAmount);
-      this.successMessage = 'Transacción enviada vía BLE.';
+      await this.ble.sendTxWithFallback(numericAmount, String(toAddress).trim());
+      this.successMessage = 'Transacción enviada (BLE / Internet).';
       this.sendForm.reset();
     } catch (error) {
       this.errorMessage = error instanceof Error ? error.message : String(error);
