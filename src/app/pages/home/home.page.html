@@ -102,6 +102,13 @@
             <p class="error-text">{{ sendErrorMessage }}</p>
           </ion-text>
 
+          <ion-text color="medium" *ngIf="ble.connectedDevice">
+            <ion-icon name="bluetooth-outline"></ion-icon> Envío por BLE activo
+          </ion-text>
+          <ion-text color="warning" *ngIf="!ble.connectedDevice">
+            <ion-icon name="cloud-outline"></ion-icon> Envío por Internet (fallback)
+          </ion-text>
+
           <ion-button
             expand="block"
             type="submit"
