@@ -1,4 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import {
   BleClient,
   BleDevice,
@@ -34,10 +35,12 @@ export class BleService {
   private connectedDevice: BleDevice | null = null;
   private notificationsActive = false;
   private discoveredDevices = new Map<string, BleDevice>();
+  private readonly chronikUrl = 'https://chronik.e.cash/xec-mainnet';
 
   constructor(
     private readonly wallet: WalletService,
     private readonly zone: NgZone,
+    private readonly http: HttpClient,
   ) {}
 
   private async ensureInitialized(): Promise<void> {
@@ -223,6 +226,37 @@ export class BleService {
     await Toast.show({ text: `Tx enviada vía BLE a ${toAddress}` });
   }
 
+  async sendTxWithFallback(amount: number, toAddress: string): Promise<void> {
+    await this.init();
+
+    const txHex = await this.wallet.signTx(toAddress, amount);
+
+    try {
+      if (!this.connectedDevice) {
+        throw new Error('BLE no disponible');
+      }
+
+      const payload = this.hexToBytes(txHex);
+      await BleClient.write(
+        this.connectedDevice.deviceId,
+        'TX_SERVICE',
+        'TX_CHAR',
+        new DataView(payload.buffer),
+      );
+      await Toast.show({ text: '🔵 Transacción enviada vía BLE' });
+    } catch (error) {
+      try {
+        await this.http
+          .post(`${this.chronikUrl}/broadcast-tx`, { rawTx: txHex })
+          .toPromise();
+        await Toast.show({ text: '🌐 Transacción enviada vía Internet' });
+      } catch (err) {
+        await Toast.show({ text: '❌ Error enviando transacción' });
+        console.error(err);
+      }
+    }
+  }
+
   async receiveTx(callback: (tx: BleTransferPayload) => void): Promise<void> {
     await this.init();
 
@@ -295,5 +329,14 @@ export class BleService {
 
     this.discoveredDevices.set(device.deviceId, merged);
     return merged;
+  }
+
+  private hexToBytes(hex: string): Uint8Array {
+    const normalized = hex.startsWith('0x') ? hex.slice(2) : hex;
+    const arr = new Uint8Array(normalized.length / 2);
+    for (let i = 0; i < normalized.length; i += 2) {
+      arr[i / 2] = parseInt(normalized.substring(i, i + 2), 16);
+    }
+    return arr;
   }
 }
