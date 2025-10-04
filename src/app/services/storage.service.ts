@@ -29,6 +29,19 @@ export class StorageService {
     txStore.put(tx);
   }
 
+  markAsSent(txid: string) {
+    const txStore = this.db.transaction('transactions', 'readwrite').objectStore('transactions');
+    const getReq = txStore.get(txid);
+    getReq.onsuccess = () => {
+      const tx = getReq.result;
+      if (tx) {
+        tx.pending = false;
+        tx.sentAt = Date.now();
+        txStore.put(tx);
+      }
+    };
+  }
+
   async getAllTxs(): Promise<any[]> {
     return new Promise((resolve) => {
       const txStore = this.db.transaction('transactions', 'readonly').objectStore('transactions');
