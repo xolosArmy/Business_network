@@ -32,7 +32,7 @@ export class BleService {
   private initialized = false;
   private advertisingName: string | null = null;
   private scanning = false;
-  private connectedDevice: BleDevice | null = null;
+  public connectedDevice: BleDevice | null = null;
   private notificationsActive = false;
   private discoveredDevices = new Map<string, BleDevice>();
   private readonly chronikUrl = 'https://chronik.e.cash/xec-mainnet';

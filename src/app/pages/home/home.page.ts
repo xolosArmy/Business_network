@@ -5,6 +5,7 @@ import { Toast } from '@capacitor/toast';
 import { CarteraService, WalletInfo } from '../../services/cartera.service';
 import { SaldoService } from '../../services/saldo.service';
 import { EnviarService } from '../../services/enviar.service';
+import { BleService } from '../../services/ble.service';
 import { OfflineStorageService } from '../../services/offline-storage.service';
 
 @Component({
@@ -33,6 +34,7 @@ export class HomePage implements OnInit, OnDestroy {
     private readonly enviarService: EnviarService,
     private readonly offlineStorage: OfflineStorageService,
     private readonly ngZone: NgZone,
+    public readonly ble: BleService,
     formBuilder: FormBuilder,
   ) {
     this.sendForm = formBuilder.group({
