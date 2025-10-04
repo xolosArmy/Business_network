@@ -8,7 +8,9 @@ const config: CapacitorConfig = {
   plugins: {
     BluetoothLe: {
       displayStrings: {
-        scanning: 'Escaneando dispositivos BLE...',
+        scanning: 'Escaneando dispositivos cercanos...',
+        connecting: 'Conectando con dispositivo...',
+        connected: 'Dispositivo conectado',
         scanAgain: 'Escanear otra vez',
         cancel: 'Cancelar',
       },
