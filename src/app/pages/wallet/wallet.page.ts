@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { CarteraService, WalletInfo } from '../../services/cartera.service';
 import { SaldoService } from '../../services/saldo.service';
 import { EnviarService } from '../../services/enviar.service';
+import { BleService } from '../../services/ble.service';
 
 @Component({
   selector: 'app-wallet',
@@ -50,6 +51,19 @@ import { EnviarService } from '../../services/enviar.service';
               <p>No se pudo generar el código QR.</p>
             </ng-template>
           </div>
+
+          <ion-button
+            expand="block"
+            color="secondary"
+            (click)="advertiseWallet()"
+            [disabled]="!wallet?.address"
+          >
+            Anunciar Wallet
+          </ion-button>
+
+          <ion-button expand="block" (click)="scanForPeers()">
+            Buscar Peers
+          </ion-button>
         </ion-card-content>
       </ion-card>
 
@@ -80,6 +94,16 @@ import { EnviarService } from '../../services/enviar.service';
               [disabled]="sendForm.invalid || sending"
             >
               {{ sending ? 'Enviando…' : 'Enviar' }}
+            </ion-button>
+
+            <ion-button
+              expand="block"
+              type="button"
+              color="tertiary"
+              (click)="sendBle()"
+              [disabled]="sendForm.invalid || sending"
+            >
+              Enviar vía BLE
             </ion-button>
           </form>
 
@@ -131,6 +155,7 @@ export class WalletPage implements OnInit, OnDestroy {
     private readonly carteraService: CarteraService,
     private readonly saldoService: SaldoService,
     private readonly enviarService: EnviarService,
+    private readonly ble: BleService,
     private readonly formBuilder: FormBuilder,
   ) {
     this.sendForm = this.formBuilder.group({
@@ -216,6 +241,59 @@ export class WalletPage implements OnInit, OnDestroy {
       if (this.wallet) {
         await this.refreshBalance(this.wallet);
       }
+    } catch (error) {
+      this.errorMessage = error instanceof Error ? error.message : String(error);
+    } finally {
+      this.sending = false;
+    }
+  }
+
+  async advertiseWallet(): Promise<void> {
+    if (!this.wallet?.address) {
+      this.errorMessage = 'No hay una dirección disponible para anunciar.';
+      return;
+    }
+
+    try {
+      await this.ble.advertise(this.wallet.address);
+      this.successMessage = 'Wallet anunciada vía BLE.';
+    } catch (error) {
+      this.errorMessage = error instanceof Error ? error.message : String(error);
+    }
+  }
+
+  async scanForPeers(): Promise<void> {
+    try {
+      await this.ble.scanAndConnect();
+      this.successMessage = 'Escaneando dispositivos BLE cercanos…';
+    } catch (error) {
+      this.errorMessage = error instanceof Error ? error.message : String(error);
+    }
+  }
+
+  async sendBle(): Promise<void> {
+    if (this.sendForm.invalid) {
+      this.errorMessage = 'Complete los campos requeridos.';
+      return;
+    }
+
+    this.errorMessage = '';
+    this.successMessage = '';
+    this.sending = true;
+
+    const { toAddress, amount } = this.sendForm.value;
+
+    try {
+      const parsedAmount = typeof amount === 'string' ? Number(amount) : amount;
+      const numericAmount = Number(parsedAmount);
+
+      if (!Number.isFinite(numericAmount) || numericAmount <= 0) {
+        throw new Error('Monto inválido.');
+      }
+
+      await this.ble.sendTx(String(toAddress).trim(), numericAmount);
+      this.successMessage = 'Transacción enviada vía BLE.';
+      this.sendForm.reset();
     } catch (error) {
       this.errorMessage = error instanceof Error ? error.message : String(error);
     } finally {
