@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
-import {
-  Address,
-  HdNode,
-  entropyToMnemonic,
-  mnemonicToEntropy,
-  mnemonicToSeed,
-} from 'ecash-lib';
+import { ChronikClient } from 'chronik-client';
+import { Wallet } from 'ecash-wallet';
+import { generateMnemonic, validateMnemonic } from '@scure/bip39';
 import { wordlist as ENGLISH_WORDLIST } from '@scure/bip39/wordlists/english';
 
 export interface WalletInfo {
@@ -17,13 +13,13 @@ export interface WalletInfo {
 }
 
 const WORDS = ENGLISH_WORDLIST;
-const WORDLIST = { words: ENGLISH_WORDLIST, separator: ' ' } as const;
-const DERIVATION_PATH = "m/44'/899'/0'/0/0";
 const STORAGE_KEY = 'rmz_wallet';
+const CHRONIK_URL = 'https://chronik.e.cash';
 
 @Injectable({ providedIn: 'root' })
 export class CarteraService {
   private cachedWallet: WalletInfo | null = null;
+  private readonly chronikClient = new ChronikClient([CHRONIK_URL]);
 
   async createWallet(): Promise<WalletInfo> {
     const mnemonic = this.generateMnemonic();
@@ -65,25 +61,16 @@ export class CarteraService {
     return null;
   }
 
-  private generateMnemonic(): string {
-    const entropy = this.getRandomBytes(16);
-    return entropyToMnemonic(entropy, WORDLIST);
-  }
-
   private async buildWalletFromMnemonic(mnemonic: string): Promise<WalletInfo> {
-    const seed = await mnemonicToSeed(mnemonic);
-    const master = HdNode.fromSeed(seed);
-    const accountNode = master.derivePath(DERIVATION_PATH);
+    const wallet = Wallet.fromMnemonic(mnemonic, this.chronikClient);
 
-    const privateKey = accountNode.seckey();
-    const publicKey = accountNode.pubkey();
-    const pubKeyHash = accountNode.pkh();
+    const address = wallet.address;
+    const publicKey = wallet.pk;
+    const privateKey = wallet.sk;
 
-    if (!privateKey) {
-      throw new Error('No se pudo derivar la clave privada.');
+    if (!address || !publicKey || !privateKey) {
+      throw new Error('No se pudo derivar la información de la cartera.');
     }
-
-    const address = Address.p2pkh(pubKeyHash).address;
 
     return {
       mnemonic,
@@ -94,9 +81,7 @@ export class CarteraService {
   }
 
   private validateMnemonic(mnemonic: string): void {
-    try {
-      mnemonicToEntropy(mnemonic, WORDS);
-    } catch (error) {
+    if (!validateMnemonic(mnemonic, WORDS)) {
       throw new Error('La frase mnemónica proporcionada no es válida.');
     }
   }
@@ -107,6 +92,10 @@ export class CarteraService {
       .split(/\s+/u)
       .map((word) => word.toLowerCase())
       .join(' ');
+  }
+
+  private generateMnemonic(): string {
+    return generateMnemonic(WORDS, 128);
   }
 
   private async persistWallet(wallet: WalletInfo): Promise<WalletInfo> {
@@ -125,15 +114,4 @@ export class CarteraService {
       .join('');
   }
 
-  private getRandomBytes(length: number): Uint8Array {
-    if (length <= 0) {
-      throw new Error('El tamaño de la entropía debe ser mayor que cero.');
-    }
-
-    if (typeof globalThis !== 'undefined' && globalThis.crypto?.getRandomValues) {
-      return globalThis.crypto.getRandomValues(new Uint8Array(length));
-    }
-
-    throw new Error('Entorno sin soporte para generación de números aleatorios criptográficos.');
-  }
 }

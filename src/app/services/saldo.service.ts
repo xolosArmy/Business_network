@@ -1,33 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Address } from 'ecash-lib';
-import { ChronikClient, type ScriptUtxo } from 'chronik-client';
+import { ChronikClient } from 'chronik-client';
+import { Wallet } from 'ecash-wallet';
+import type { WalletInfo } from './cartera.service';
+
+type WalletSource = Pick<WalletInfo, 'mnemonic' | 'address'> | { mnemonic: string; address?: string };
 
 const DEFAULT_CHRONIK_URL = 'https://chronik.e.cash';
 const SATS_PER_XEC = 100n;
 
 @Injectable({ providedIn: 'root' })
 export class SaldoService {
-  private chronik?: ChronikClient;
+  private readonly chronik = new ChronikClient([DEFAULT_CHRONIK_URL]);
 
-  constructor() {}
-
-  async getBalance(address: string): Promise<number> {
-    const normalized = address?.trim();
-    if (!normalized) {
-      throw new Error('La dirección es obligatoria.');
+  async getBalance(walletSource: WalletSource): Promise<number> {
+    const mnemonic = walletSource?.mnemonic?.trim();
+    if (!mnemonic) {
+      throw new Error('La frase mnemónica es obligatoria para consultar el saldo.');
     }
 
-    const parsedAddress = this.parseAddress(normalized);
-    const chronik = this.getChronikClient();
+    const wallet = Wallet.fromMnemonic(mnemonic, this.chronik);
+    await wallet.sync();
 
-    const response = await chronik.address(parsedAddress).utxos();
-    const utxos = Array.isArray(response?.utxos) ? response.utxos : [];
-
-    const spendable = utxos.filter((utxo) => !utxo.token);
-    const totalSats = spendable.reduce<bigint>(
-      (total, utxo) => total + this.extractSatoshis(utxo),
-      0n,
-    );
+    const spendable = wallet.spendableSatsOnlyUtxos();
+    const totalSats = spendable.reduce<bigint>((total, utxo) => {
+      const value = utxo.sats;
+      return total + (typeof value === 'bigint' ? value : BigInt(value));
+    }, 0n);
 
     return Number(totalSats) / Number(SATS_PER_XEC);
   }
@@ -43,24 +41,4 @@ export class SaldoService {
     }).format(balance);
   }
 
-  private parseAddress(address: string): string {
-    try {
-      const parsed = Address.parse(address).cash();
-      return parsed.toString();
-    } catch (error) {
-      throw new Error('Dirección eCash inválida.');
-    }
-  }
-
-  private extractSatoshis(utxo: ScriptUtxo): bigint {
-    const { sats } = utxo as ScriptUtxo & { sats: bigint | number | string };
-    return typeof sats === 'bigint' ? sats : BigInt(sats);
-  }
-
-  private getChronikClient(): ChronikClient {
-    if (!this.chronik) {
-      this.chronik = new ChronikClient([DEFAULT_CHRONIK_URL]);
-    }
-    return this.chronik;
-  }
 }
