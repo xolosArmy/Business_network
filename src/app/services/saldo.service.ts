@@ -1,33 +1,32 @@
 import { Injectable } from '@angular/core';
-import { ChronikClient } from 'chronik-client';
 import { Wallet } from 'ecash-wallet';
 import type { WalletInfo } from './cartera.service';
 
-type WalletSource = Pick<WalletInfo, 'mnemonic' | 'address'> | { mnemonic: string; address?: string };
-
-const DEFAULT_CHRONIK_URL = 'https://chronik.e.cash';
-const SATS_PER_XEC = 100n;
+type WalletSource =
+  | Pick<WalletInfo, 'mnemonic' | 'address' | 'privateKey'>
+  | { mnemonic: string; privateKey: string; address?: string };
 
 @Injectable({ providedIn: 'root' })
 export class SaldoService {
-  private readonly chronik = new ChronikClient([DEFAULT_CHRONIK_URL]);
-
   async getBalance(walletSource: WalletSource): Promise<number> {
     const mnemonic = walletSource?.mnemonic?.trim();
     if (!mnemonic) {
       throw new Error('La frase mnemónica es obligatoria para consultar el saldo.');
     }
 
-    const wallet = Wallet.fromMnemonic(mnemonic, this.chronik);
-    await wallet.sync();
+    const privateKey = walletSource?.privateKey?.trim();
+    if (!privateKey) {
+      throw new Error('La llave privada es obligatoria para consultar el saldo.');
+    }
 
-    const spendable = wallet.spendableSatsOnlyUtxos();
-    const totalSats = spendable.reduce<bigint>((total, utxo) => {
-      const value = utxo.sats;
-      return total + (typeof value === 'bigint' ? value : BigInt(value));
-    }, 0n);
+    const wallet = new Wallet(privateKey);
+    const balance = await wallet.getBalance();
 
-    return Number(totalSats) / Number(SATS_PER_XEC);
+    if (!Number.isFinite(balance)) {
+      throw new Error('No se pudo obtener el saldo de la cartera.');
+    }
+
+    return balance;
   }
 
   formatBalance(balance: number): string {
