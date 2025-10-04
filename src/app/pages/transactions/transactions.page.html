@@ -17,6 +17,7 @@
       </ion-label>
       <ion-badge slot="end" [color]="getColor(tx.status)">
         {{ tx.status }}
+        <ion-icon *ngIf="tx.status === 'confirmed'" name="checkmark-circle-outline"></ion-icon>
       </ion-badge>
     </ion-item>
   </ion-list>
