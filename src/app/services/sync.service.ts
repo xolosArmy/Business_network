@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Network } from '@capacitor/network';
+import { Toast } from '@capacitor/toast';
 import { StorageService } from './storage.service';
 import { WalletService } from './wallet.service';
 
@@ -35,6 +36,7 @@ export class SyncService {
         if (result && result.txid) {
           this.storage.markAsSent(tx.txid);
           console.log(`Tx ${tx.txid} enviada correctamente.`);
+          await this.showToast(`Tx ${tx.txid} enviada tras reconexión`);
         }
       } catch (e) {
         console.warn(`Error reenviando tx ${tx.txid}:`, e);
@@ -42,5 +44,9 @@ export class SyncService {
     }
 
     this.syncing = false;
+  }
+
+  private async showToast(message: string) {
+    await Toast.show({ text: message, duration: 'short' });
   }
 }
