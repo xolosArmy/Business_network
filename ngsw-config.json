@@ -1,17 +1,11 @@
 {
-  "$schema": "./node_modules/@angular/service-worker/config/schema.json",
   "index": "/index.html",
   "assetGroups": [
     {
       "name": "app",
       "installMode": "prefetch",
       "resources": {
-        "files": [
-          "/favicon.ico",
-          "/index.html",
-          "/*.css",
-          "/*.js"
-        ]
+        "files": ["/favicon.ico", "/index.html", "/*.css", "/*.js"]
       }
     },
     {
@@ -19,24 +13,7 @@
       "installMode": "lazy",
       "updateMode": "prefetch",
       "resources": {
-        "files": [
-          "/assets/**",
-          "/*.(png|jpg|jpeg|svg|webp)"
-        ]
-      }
-    }
-  ],
-  "dataGroups": [
-    {
-      "name": "api-calls",
-      "urls": [
-        "https://chronik.e.cash/**"
-      ],
-      "cacheConfig": {
-        "maxSize": 20,
-        "maxAge": "6h",
-        "timeout": "5s",
-        "strategy": "performance"
+        "files": ["/assets/**", "/*.(png|jpg|svg)"]
       }
     }
   ]

@@ -1,15 +1,13 @@
 {
   "name": "RMZ Wallet",
   "short_name": "RMZWallet",
-  "start_url": "./index.html",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
   "display": "standalone",
-  "background_color": "#12181f",
-  "theme_color": "#12181f",
-  "permissions": [
-    "bluetooth",
-    "notifications"
-  ],
-  "bluetooth": {
-    "optionalServices": ["battery_service", "0000ffe0-0000-1000-8000-00805f9b34fb"]
-  }
+  "scope": "./",
+  "start_url": "./",
+  "icons": [
+    { "src": "assets/icons/icon-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icons/icon-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ]
 }
