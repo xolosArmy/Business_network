@@ -4,6 +4,7 @@ import { EnviarService } from './services/enviar.service';
 import { SyncService } from './services/sync.service';
 import { ChronikService } from './services/chronik.service';
 import { TxStorageService } from './services/tx-storage.service';
+import { NotificationService } from './services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ export class AppComponent implements OnInit {
     private sync: SyncService,
     private chronik: ChronikService,
     private store: TxStorageService,
+    private notify: NotificationService,
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -36,10 +38,9 @@ export class AppComponent implements OnInit {
       await this.chronik.subscribeToAddress(address);
     }
 
-    if ('Notification' in window) {
-      Notification.requestPermission().then((result) => {
-        console.log('🔔 Permiso notificaciones:', result);
-      });
+    const permission = await this.notify.requestPermission();
+    if (permission !== 'unsupported') {
+      console.log('🔔 Permiso notificaciones:', permission);
     }
 
     window.addEventListener('online', async () => {
