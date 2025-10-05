@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Network } from '@capacitor/network';
 import { Wallet } from 'ecash-wallet';
+import { ChronikClient } from 'chronik-client';
 import type { WalletInfo } from './cartera.service';
 import {
   OfflineStorageService,
   StoredTransaction,
 } from './offline-storage.service';
 import { StorageService } from './storage.service';
+
+const chronik = new ChronikClient('https://chronik.e.cash/xec-mainnet');
+const SATS_PER_XEC = 100;
 
 type WalletSource =
   | Pick<WalletInfo, 'mnemonic' | 'address' | 'privateKey'>
@@ -66,23 +70,21 @@ export class EnviarService {
         return `pending-offline-${tx.txid}`;
       }
 
-      const wallet = new Wallet(privateKey);
+      const wallet = this.createWallet(privateKey);
+      await wallet.sync();
 
-      const txid = await wallet.send(destination, amount);
-      if (!txid) {
-        throw new Error('No se recibió el identificador de la transacción.');
-      }
+      const txid = await this.sendWithWallet(wallet, destination, amount);
 
       await this.offlineStorage.addTransaction({
         description: `Envío a ${destination}`,
         amount: -amount,
         date: timestamp,
         status: 'confirmed',
-        txid: String(txid),
+        txid,
         destination,
       });
 
-      return String(txid);
+      return txid;
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       await this.offlineStorage.addTransaction({
@@ -132,7 +134,8 @@ export class EnviarService {
         return;
       }
 
-      const walletInstance = new Wallet(wallet.privateKey);
+      const walletInstance = this.createWallet(wallet.privateKey);
+      await walletInstance.sync();
 
       for (const transaction of pendingTransactions) {
         await this.processPendingTransaction(walletInstance, transaction);
@@ -167,14 +170,15 @@ export class EnviarService {
     }
 
     try {
-      const txid = await wallet.send(transaction.payload.destination, transaction.payload.amount);
-      if (!txid) {
-        throw new Error('El identificador de la transacción está vacío.');
-      }
+      const txid = await this.sendWithWallet(
+        wallet,
+        transaction.payload.destination,
+        transaction.payload.amount,
+      );
 
       await this.offlineStorage.updateTransaction(transaction.id, {
         status: 'confirmed',
-        txid: String(txid),
+        txid,
         date: new Date().toISOString(),
         payload: undefined,
         errorMessage: undefined,
@@ -186,5 +190,65 @@ export class EnviarService {
         errorMessage: message,
       });
     }
+  }
+
+  private createWallet(privateKeyHex: string): Wallet {
+    return Wallet.fromSk(this.hexToBytes(privateKeyHex), chronik);
+  }
+
+  private hexToBytes(hex: string): Uint8Array {
+    const normalized = hex.trim().replace(/^0x/i, '');
+    if (!normalized || normalized.length % 2 !== 0) {
+      throw new Error('La llave privada tiene un formato inválido.');
+    }
+
+    const bytes = new Uint8Array(normalized.length / 2);
+    for (let index = 0; index < bytes.length; index++) {
+      const byte = Number.parseInt(normalized.slice(index * 2, index * 2 + 2), 16);
+      if (Number.isNaN(byte)) {
+        throw new Error('La llave privada tiene un formato inválido.');
+      }
+      bytes[index] = byte;
+    }
+
+    return bytes;
+  }
+
+  private xecToSats(amount: number): bigint {
+    if (!Number.isFinite(amount)) {
+      throw new Error('El monto proporcionado no es válido.');
+    }
+
+    const sats = Math.round(amount * SATS_PER_XEC);
+    return BigInt(sats);
+  }
+
+  private async sendWithWallet(wallet: Wallet, destination: string, amountXec: number): Promise<string> {
+    const satsAmount = this.xecToSats(amountXec);
+
+    if (satsAmount <= 0n) {
+      throw new Error('El monto convertido a satoshis debe ser mayor que cero.');
+    }
+
+    const action = wallet.action({
+      outputs: [
+        {
+          address: destination,
+          sats: satsAmount,
+        },
+      ],
+    });
+
+    const builtAction = action.build();
+    const result = await builtAction.broadcast();
+
+    if (!result.success || !Array.isArray(result.broadcasted) || result.broadcasted.length === 0) {
+      const details = Array.isArray(result.errors) && result.errors.length
+        ? result.errors.join('; ')
+        : 'No se pudo transmitir la transacción.';
+      throw new Error(details);
+    }
+
+    return result.broadcasted[0];
   }
 }
