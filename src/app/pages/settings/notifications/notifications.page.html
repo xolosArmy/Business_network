@@ -1,20 +1,37 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/settings"></ion-back-button>
-    </ion-buttons>
+  <ion-toolbar color="primary">
     <ion-title>Notificaciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-list inset="true">
-    <ion-item *ngFor="let option of notificationOptions" lines="inset">
-      <ion-label>
-        <h2>{{ option.title }}</h2>
-        <p>{{ option.description }}</p>
-      </ion-label>
-      <ion-toggle slot="end" color="primary"></ion-toggle>
+  <ion-list>
+    <ion-item>
+      <ion-label>Alertas BLE</ion-label>
+      <ion-toggle [(ngModel)]="settings.ble" (ionChange)="save()"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Alertas de red</ion-label>
+      <ion-toggle [(ngModel)]="settings.network" (ionChange)="save()"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Sonido</ion-label>
+      <ion-toggle [(ngModel)]="settings.sound" (ionChange)="save()"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Notificaciones visuales</ion-label>
+      <ion-toggle [(ngModel)]="settings.visual" (ionChange)="save()"></ion-toggle>
     </ion-item>
   </ion-list>
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-button expand="block" color="success" (click)="testNotification()">
+        Probar Notificación
+      </ion-button>
+    </ion-toolbar>
+  </ion-footer>
 </ion-content>
