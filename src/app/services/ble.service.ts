@@ -217,7 +217,7 @@ export class BLEService {
     this.rxCharacteristic = null;
   }
 
-  private async notify(message: string): Promise<void> {
+  public async notify(message: string): Promise<void> {
     if (typeof window === 'undefined' || !('Notification' in window)) {
       console.info(`[BLE] ${message}`);
       return;

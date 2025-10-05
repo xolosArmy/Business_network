@@ -9,7 +9,7 @@ import {
 } from './offline-storage.service';
 import { StorageService } from './storage.service';
 
-const chronik = new ChronikClient('https://chronik.e.cash/xec-mainnet');
+const chronik = new ChronikClient('https://chronik.e.cash');
 const SATS_PER_XEC = 100;
 
 type WalletSource =
@@ -70,7 +70,7 @@ export class EnviarService {
         return `pending-offline-${tx.txid}`;
       }
 
-      const wallet = this.createWallet(privateKey);
+      const wallet = await this.createWallet(privateKey);
       await wallet.sync();
 
       const txid = await this.sendWithWallet(wallet, destination, amount);
@@ -134,7 +134,7 @@ export class EnviarService {
         return;
       }
 
-      const walletInstance = this.createWallet(wallet.privateKey);
+      const walletInstance = await this.createWallet(wallet.privateKey);
       await walletInstance.sync();
 
       for (const transaction of pendingTransactions) {
@@ -192,26 +192,25 @@ export class EnviarService {
     }
   }
 
-  private createWallet(privateKeyHex: string): Wallet {
-    return Wallet.fromSk(this.hexToBytes(privateKeyHex), chronik);
+  private async createWallet(privateKeyHex: string): Promise<Wallet> {
+    const normalizedKey = this.normalizePrivateKey(privateKeyHex);
+    return Wallet.fromPrivateKey(normalizedKey, chronik);
   }
 
-  private hexToBytes(hex: string): Uint8Array {
+  private normalizePrivateKey(hex: string): string {
     const normalized = hex.trim().replace(/^0x/i, '');
     if (!normalized || normalized.length % 2 !== 0) {
       throw new Error('La llave privada tiene un formato inválido.');
     }
 
-    const bytes = new Uint8Array(normalized.length / 2);
-    for (let index = 0; index < bytes.length; index++) {
-      const byte = Number.parseInt(normalized.slice(index * 2, index * 2 + 2), 16);
+    for (let index = 0; index < normalized.length; index += 2) {
+      const byte = Number.parseInt(normalized.slice(index, index + 2), 16);
       if (Number.isNaN(byte)) {
         throw new Error('La llave privada tiene un formato inválido.');
       }
-      bytes[index] = byte;
     }
 
-    return bytes;
+    return normalized;
   }
 
   private xecToSats(amount: number): bigint {

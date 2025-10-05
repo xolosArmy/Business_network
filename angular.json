@@ -23,6 +23,8 @@
               "src/global.scss",
               "src/manifest.webmanifest"
             ],
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json",
             "styles": [],
             "scripts": []
           },

@@ -9,7 +9,7 @@ import { CarteraService } from './cartera.service';
 export class WalletService {
   private client: Wallet | null = null;
   private walletInfo: WalletInfo | null = null;
-  private readonly chronik = new ChronikClient('https://chronik.e.cash/xec-mainnet');
+  private readonly chronik = new ChronikClient('https://chronik.e.cash');
 
   constructor(private readonly carteraService: CarteraService) {
     void this.ensureWalletInfo().catch(() => undefined);
@@ -23,7 +23,10 @@ export class WalletService {
     const wallet = await this.ensureWalletInfo();
 
     if (!this.client) {
-      const client = Wallet.fromSk(this.hexToBytes(wallet.privateKey), this.chronik);
+      const client = await Wallet.fromPrivateKey(
+        this.normalizePrivateKey(wallet.privateKey),
+        this.chronik,
+      );
       await client.sync();
       this.client = client;
     }
@@ -63,21 +66,19 @@ export class WalletService {
     this.walletInfo = null;
   }
 
-  private hexToBytes(hex: string): Uint8Array {
+  private normalizePrivateKey(hex: string): string {
     const normalized = hex.trim().replace(/^0x/i, '');
     if (!normalized || normalized.length % 2 !== 0) {
       throw new Error('La llave privada tiene un formato inválido.');
     }
 
-    const bytes = new Uint8Array(normalized.length / 2);
-    for (let index = 0; index < bytes.length; index++) {
-      const byte = Number.parseInt(normalized.slice(index * 2, index * 2 + 2), 16);
+    for (let index = 0; index < normalized.length; index += 2) {
+      const byte = Number.parseInt(normalized.slice(index, index + 2), 16);
       if (Number.isNaN(byte)) {
         throw new Error('La llave privada tiene un formato inválido.');
       }
-      bytes[index] = byte;
     }
 
-    return bytes;
+    return normalized;
   }
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ChronikClient } from 'chronik-client';
 import { Wallet } from 'ecash-wallet';
 
 import { BLEService } from './ble.service';
@@ -6,6 +7,8 @@ import { ChronikService } from './chronik.service';
 import { NotificationService } from './notification.service';
 import { NotificationSettingsService } from './notification-settings.service';
 import { StoredTx, TxStorageService } from './tx-storage.service';
+
+const chronik = new ChronikClient('https://chronik.e.cash');
 
 @Injectable({
   providedIn: 'root',
@@ -31,8 +34,8 @@ export class TxBLEService {
   }
 
   async initWallet(mnemonic: string): Promise<void> {
-    this.wallet = await Wallet.fromMnemonic(mnemonic);
-    const address = this.wallet.address();
+    this.wallet = await Wallet.fromMnemonic(mnemonic, chronik);
+    const address = this.wallet.address;
     console.log('✅ Cartera inicializada:', address);
     void this.chronik.subscribeToAddress(address);
     void this.chronik.syncAll();
@@ -46,7 +49,7 @@ export class TxBLEService {
 
     try {
       const txId = this.generateId();
-      const fromAddress = this.wallet.address();
+      const fromAddress = this.wallet.address;
       const timestamp = new Date().toISOString();
 
       const sats = Math.floor(amountXec * 100);
