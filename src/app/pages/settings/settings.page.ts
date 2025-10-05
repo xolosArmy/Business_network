@@ -10,9 +10,17 @@ import { Component } from '@angular/core';
     </ion-header>
 
     <ion-content class="ion-padding">
-      <p>
-        Aquí podrás personalizar la aplicación. Por ahora este es un texto placeholder
-        mientras definimos las opciones de configuración.
+      <ion-list inset="true">
+        <ion-item routerLink="notifications" detail>
+          <ion-label>
+            <h2>Notificaciones</h2>
+            <p>Personaliza cómo y cuándo recibir avisos de la aplicación.</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <p class="ion-text-center ion-margin-top ion-text-wrap">
+        Muy pronto encontrarás más opciones para adaptar RMZ Wallet a tus necesidades.
       </p>
     </ion-content>
   `,
