@@ -1,4 +1,10 @@
 import { Injectable } from '@angular/core';
+import { NotificationSettingsService } from './notification-settings.service';
+
+interface NotificationPreferences {
+  sound: boolean;
+  visual: boolean;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -6,10 +12,25 @@ import { Injectable } from '@angular/core';
 export class NotificationService {
   private audioCtx?: AudioContext;
 
-  constructor() {
+  constructor(private settingsService: NotificationSettingsService) {
     // Evitar errores en SSR y solo inicializar en el navegador
     if (typeof window !== 'undefined' && 'AudioContext' in window) {
       this.audioCtx = new (window.AudioContext as any)();
+    }
+  }
+
+  private getPreferences(): NotificationPreferences {
+    try {
+      const settings = this.settingsService.getSettings() ?? {};
+      return {
+        sound: settings.sound ?? true,
+        visual: settings.visual ?? true
+      };
+    } catch (err) {
+      return {
+        sound: true,
+        visual: true
+      };
     }
   }
 
@@ -18,6 +39,11 @@ export class NotificationService {
    * Usa Web Audio API (Oscillator + Gain).
    */
   play(durationMs: number = 140, frequency: number = 880, volume: number = 0.06) {
+    const { sound } = this.getPreferences();
+    if (!sound) {
+      return;
+    }
+
     try {
       if (!this.audioCtx) {
         return;
@@ -78,6 +104,11 @@ export class NotificationService {
    * Puedes pasar opciones extra compatibles con NotificationOptions.
    */
   async show(title: string, body: string, options: NotificationOptions = {}) {
+    const { visual } = this.getPreferences();
+    if (!visual) {
+      return;
+    }
+
     try {
       if (typeof window !== 'undefined' && 'Notification' in window) {
         if (Notification.permission === 'granted') {
