@@ -27,8 +27,20 @@ const routes: Routes = [
       },
       {
         path: 'settings',
-        loadChildren: () =>
-          import('../settings/settings.module').then((m) => m.SettingsPageModule),
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../settings/settings.module').then((m) => m.SettingsPageModule),
+          },
+          {
+            path: 'notifications',
+            loadChildren: () =>
+              import('../settings/notifications/notifications.module').then(
+                (m) => m.NotificationsPageModule,
+              ),
+          },
+        ],
       },
       {
         path: '',
