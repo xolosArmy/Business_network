@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ChronikClient } from 'chronik-client';
 
 import { TxStorageService } from './tx-storage.service';
+import { NotificationService } from './notification.service';
 
 type ChronikWsClient = ReturnType<ChronikClient['ws']>;
 
@@ -21,7 +22,10 @@ export class ChronikService {
   private wsReady!: Promise<void>;
   private resolveWsReady?: () => void;
 
-  constructor(private readonly store: TxStorageService) {
+  constructor(
+    private readonly store: TxStorageService,
+    private readonly notify: NotificationService,
+  ) {
     this.ensureWsClient();
   }
 
@@ -125,10 +129,12 @@ export class ChronikService {
     console.log('📦 TX actualizada vía WS:', txid, msg.type);
 
     if (msg.type === 'AddedToMempool') {
+      this.notify.show('💸 Nueva TX detectada', 'Se ha recibido una transacción pendiente');
       this.store.updateStatusByTxid(txid, 'broadcasted');
     }
 
     if (msg.type === 'Confirmed') {
+      this.notify.show('✅ Transacción confirmada', 'Una transacción ha sido incluida en bloque');
       this.store.updateStatusByTxid(txid, 'confirmed');
     }
   }
