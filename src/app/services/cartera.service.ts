@@ -16,12 +16,12 @@ export interface WalletInfo {
 
 const WORDS = ENGLISH_WORDLIST;
 const STORAGE_KEY = 'rmz_wallet';
-const CHRONIK_URL = 'https://chronik.e.cash';
+const CHRONIK_URL = 'https://chronik.e.cash/xec-mainnet';
 
 @Injectable({ providedIn: 'root' })
 export class CarteraService {
   private cachedWallet: WalletInfo | null = null;
-  private readonly chronikClient = new ChronikClient([CHRONIK_URL]);
+  private readonly chronikClient = new ChronikClient(CHRONIK_URL);
 
   constructor(private readonly offlineStorage: OfflineStorageService) {}
 
