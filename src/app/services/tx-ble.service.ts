@@ -4,6 +4,7 @@ import { Wallet } from 'ecash-wallet';
 import { BLEService } from './ble.service';
 import { ChronikService } from './chronik.service';
 import { NotificationService } from './notification.service';
+import { NotificationSettingsService } from './notification-settings.service';
 import { StoredTx, TxStorageService } from './tx-storage.service';
 
 @Injectable({
@@ -17,6 +18,7 @@ export class TxBLEService {
     private readonly store: TxStorageService,
     private readonly chronik: ChronikService,
     private readonly notify: NotificationService,
+    private readonly settingsService: NotificationSettingsService,
   ) {}
 
   private generateId(): string {
@@ -100,7 +102,8 @@ export class TxBLEService {
   async receiveAndBroadcast(data: unknown): Promise<void> {
     try {
       const txData = JSON.parse(String(data));
-      if (txData.type !== 'tx') {
+      const settings = this.settingsService.getSettings();
+      if (txData.type !== 'tx' || !settings.ble) {
         return;
       }
 

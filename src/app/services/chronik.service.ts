@@ -3,6 +3,7 @@ import { ChronikClient } from 'chronik-client';
 
 import { TxStorageService } from './tx-storage.service';
 import { NotificationService } from './notification.service';
+import { NotificationSettingsService } from './notification-settings.service';
 
 type ChronikWsClient = ReturnType<ChronikClient['ws']>;
 
@@ -25,6 +26,7 @@ export class ChronikService {
   constructor(
     private readonly store: TxStorageService,
     private readonly notify: NotificationService,
+    private readonly settingsService: NotificationSettingsService,
   ) {
     this.ensureWsClient();
   }
@@ -128,12 +130,14 @@ export class ChronikService {
 
     console.log('📦 TX actualizada vía WS:', txid, msg.type);
 
-    if (msg.type === 'AddedToMempool') {
+    const settings = this.settingsService.getSettings();
+
+    if (msg.type === 'AddedToMempool' && settings.network) {
       this.notify.show('💸 Nueva TX detectada', 'Se ha recibido una transacción pendiente');
       this.store.updateStatusByTxid(txid, 'broadcasted');
     }
 
-    if (msg.type === 'Confirmed') {
+    if (msg.type === 'Confirmed' && settings.network) {
       this.notify.show('✅ Transacción confirmada', 'Una transacción ha sido incluida en bloque');
       this.store.updateStatusByTxid(txid, 'confirmed');
     }
