@@ -3,6 +3,7 @@ import { Wallet } from 'ecash-wallet';
 
 import { BLEService } from './ble.service';
 import { ChronikService } from './chronik.service';
+import { NotificationService } from './notification.service';
 import { StoredTx, TxStorageService } from './tx-storage.service';
 
 @Injectable({
@@ -15,6 +16,7 @@ export class TxBLEService {
     private readonly ble: BLEService,
     private readonly store: TxStorageService,
     private readonly chronik: ChronikService,
+    private readonly notify: NotificationService,
   ) {}
 
   private generateId(): string {
@@ -116,6 +118,11 @@ export class TxBLEService {
         txid: computedTxid ?? undefined,
         context: 'ble',
       });
+
+      this.notify.show(
+        '📡 TX recibida por BLE',
+        `${txData.amount} XEC de ${String(txData.from).slice(0, 8)}...`,
+      );
 
       console.log('📥 TX recibida por BLE:', txData);
 
