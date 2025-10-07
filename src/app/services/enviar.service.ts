@@ -8,6 +8,7 @@ import {
   StoredTransaction,
 } from './offline-storage.service';
 import { StorageService } from './storage.service';
+import { WalletService } from './wallet.service';
 
 const chronik = new ChronikClient('https://chronik.e.cash/xec-mainnet');
 const SATS_PER_XEC = 100;
@@ -23,6 +24,7 @@ export class EnviarService {
   constructor(
     private readonly offlineStorage: OfflineStorageService,
     private readonly storage: StorageService,
+    private readonly walletService: WalletService,
   ) {
     if (typeof window !== 'undefined') {
       void this.storage
@@ -33,6 +35,21 @@ export class EnviarService {
       window.addEventListener('online', () => {
         void this.processPendingTransactions();
       });
+    }
+  }
+
+  async enviarTx(toAddress: string, amount: number): Promise<{
+    success: boolean;
+    txid?: string;
+    error?: string;
+  }> {
+    try {
+      const txid = await this.walletService.createAndBroadcastTx(toAddress, amount);
+      return { success: true, txid };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      console.error('Error enviando transacción:', error);
+      return { success: false, error: message };
     }
   }
 
