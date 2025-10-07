@@ -9,7 +9,7 @@ import {
 } from './offline-storage.service';
 import { StorageService } from './storage.service';
 
-const chronik = new ChronikClient('https://chronik.e.cash');
+const chronik = new ChronikClient('https://chronik.e.cash/xec-mainnet');
 const SATS_PER_XEC = 100;
 
 type WalletSource =
@@ -188,7 +188,7 @@ export class EnviarService {
 
   private async createWallet(mnemonic: string): Promise<Wallet> {
     const normalizedMnemonic = this.normalizeMnemonic(mnemonic);
-    return await Wallet.fromMnemonic(normalizedMnemonic, chronik);
+    return Wallet.fromMnemonic(normalizedMnemonic, chronik);
   }
 
   private normalizeMnemonic(mnemonic: string): string {
@@ -199,28 +199,32 @@ export class EnviarService {
       .join(' ');
   }
 
-  private xecToSats(amount: number): bigint {
+  private xecToSats(amount: number): number {
     if (!Number.isFinite(amount)) {
       throw new Error('El monto proporcionado no es válido.');
     }
 
-    const sats = Math.round(amount * SATS_PER_XEC);
-    return BigInt(sats);
+    return Math.round(amount * SATS_PER_XEC);
   }
 
   private async sendWithWallet(wallet: Wallet, destination: string, amountXec: number): Promise<string> {
     const satsAmount = this.xecToSats(amountXec);
 
-    if (satsAmount <= 0n) {
+    if (satsAmount <= 0) {
       throw new Error('El monto convertido a satoshis debe ser mayor que cero.');
     }
 
     const tx = await wallet.createTx({
       to: destination,
-      amount: Number(satsAmount),
+      amount: satsAmount,
     });
 
     const broadcastResult = await wallet.broadcastTx(tx);
+
+    if (typeof broadcastResult === 'string' && broadcastResult) {
+      return broadcastResult;
+    }
+
     const txid = this.extractTxid(broadcastResult);
 
     if (!txid) {
