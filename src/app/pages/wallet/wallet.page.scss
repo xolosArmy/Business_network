@@ -2,6 +2,10 @@
   display: block;
 }
 
+ion-card {
+  padding: 1rem;
+}
+
 ion-card + ion-card {
   margin-top: 1rem;
 }
