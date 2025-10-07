@@ -1,4 +1,4 @@
-import { forwardRef, Inject, Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   BleClient,
@@ -51,7 +51,6 @@ export class BLEService {
     private readonly zone: NgZone,
     private readonly http: HttpClient,
     private readonly txs: TransactionsService,
-    @Inject(forwardRef(() => TxBLEService))
     private readonly txBle: TxBLEService,
   ) {}
 
