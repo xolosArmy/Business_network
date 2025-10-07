@@ -45,28 +45,20 @@ export class StatusBarComponent implements OnInit, OnDestroy {
     return this.isOnline ? 'wifi' : 'cloud-offline';
   }
 
-  get internetStatusClass(): string {
-    return this.isOnline ? 'status-item--ok' : 'status-item--error';
-  }
-
-  get internetStatusText(): string {
-    return this.isOnline ? 'Conectado' : 'Sin conexión';
-  }
-
   get bleIcon(): string {
     return this.bleService.connectedDevice ? 'bluetooth' : 'bluetooth-outline';
   }
 
-  get bleStatusClass(): string {
-    return this.bleService.connectedDevice ? 'status-item--ok' : 'status-item--warning';
+  get bleConnected(): boolean {
+    return !!this.bleService.connectedDevice;
   }
 
-  get bleStatusText(): string {
-    if (this.bleService.connectedDevice) {
-      const name = this.bleService.connectedDevice.name ?? this.bleService.connectedDevice.localName;
-      return name && name.trim().length > 0 ? name : 'Conectado';
+  get bleDevice(): string | null {
+    if (!this.bleService.connectedDevice) {
+      return null;
     }
 
-    return 'Desconectado';
+    const name = this.bleService.connectedDevice.name ?? this.bleService.connectedDevice.localName;
+    return name && name.trim().length > 0 ? name : null;
   }
 }
