@@ -3,19 +3,28 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: var(--ion-color-step-100, #1f1f1f);
-  padding: calc(env(safe-area-inset-top, 0px) + 0.25rem) 1rem 0.25rem;
+}
+
+ion-toolbar.status-bar {
+  --background: var(--ion-color-step-100, #1f1f1f);
+  --color: var(--ion-color-light, #f4f5f8);
+  --padding-top: calc(env(safe-area-inset-top, 0px) + 0.35rem);
+  --padding-bottom: 0.35rem;
+  --padding-start: 1rem;
+  --padding-end: 1rem;
   box-shadow: 0 1px 0 rgba(var(--ion-color-step-400-rgb, 56, 56, 56), 0.35);
 }
 
-.status-bar {
+.status-container {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
 }
 
-.status-item {
+.network,
+.ble {
   flex: 1 1 0;
   display: flex;
   align-items: center;
@@ -23,73 +32,46 @@
   padding: 0.45rem 0.9rem;
   border-radius: 999px;
   background: rgba(var(--ion-color-light-rgb, 244, 244, 244), 0.04);
-  color: var(--ion-color-light, #f4f5f8);
+  color: rgba(var(--ion-color-light-rgb, 244, 244, 244), 0.78);
   min-width: 0;
   transition: background 150ms ease, color 150ms ease;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
-.status-item ion-icon {
+.network ion-icon,
+.ble ion-icon {
   font-size: 1.1rem;
 }
 
-.status-item--ok {
+.network.online {
   color: var(--ion-color-success, #2fdf75);
 }
 
-.status-item--ok ion-icon {
+.network.offline {
+  color: var(--ion-color-danger, #eb445a);
+}
+
+.ble.connected {
   color: var(--ion-color-success, #2fdf75);
 }
 
-.status-item--warning {
-  color: var(--ion-color-warning, #ffc409);
-}
-
-.status-item--warning ion-icon {
-  color: var(--ion-color-warning, #ffc409);
-}
-
-.status-item--error {
-  color: var(--ion-color-danger, #eb445a);
-}
-
-.status-item--error ion-icon {
-  color: var(--ion-color-danger, #eb445a);
-}
-
-.status-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
-  overflow: hidden;
-}
-
-.status-label {
-  font-size: 0.65rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(var(--ion-color-light-rgb, 244, 244, 244), 0.6);
-}
-
-.status-value {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: currentColor;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.ble.disconnected {
+  color: var(--ion-color-medium, #92949c);
 }
 
 @media (max-width: 480px) {
-  :host {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
+  ion-toolbar.status-bar {
+    --padding-start: 0.75rem;
+    --padding-end: 0.75rem;
   }
 
-  .status-bar {
+  .status-container {
     gap: 0.5rem;
   }
 
-  .status-item {
+  .network,
+  .ble {
     padding: 0.4rem 0.7rem;
   }
 }
