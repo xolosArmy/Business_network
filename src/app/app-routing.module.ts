@@ -10,9 +10,7 @@ const routes: Routes = [
   {
     path: 'ble-devices',
     loadChildren: () =>
-      import('./pages/ble-devices/ble-devices.module').then(
-        (m) => m.BleDevicesPageModule
-      ),
+      import('./pages/ble-devices/ble-devices.module').then((m) => m.BleDevicesPageModule),
   },
   {
     path: 'transactions',
