@@ -8,9 +8,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
+import { StatusBarComponent } from './components/status-bar/status-bar.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, StatusBarComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
