@@ -5,6 +5,8 @@ import { Wallet } from 'ecash-wallet';
 import type { WalletInfo } from './cartera.service';
 import { CarteraService } from './cartera.service';
 
+const SATS_PER_XEC = 100;
+
 @Injectable({ providedIn: 'root' })
 export class WalletService {
   private client: Wallet | null = null;
@@ -16,6 +18,13 @@ export class WalletService {
   }
 
   get address(): string | null {
+    if (this.client) {
+      const candidate = this.getWalletAddress(this.client);
+      if (candidate) {
+        return candidate;
+      }
+    }
+
     return this.walletInfo?.address ?? null;
   }
 
@@ -23,12 +32,16 @@ export class WalletService {
     const wallet = await this.ensureWalletInfo();
 
     if (!this.client) {
-      const client = await Wallet.fromPrivateKey(
-        this.normalizePrivateKey(wallet.privateKey),
+      const client = await Wallet.fromMnemonic(
+        this.normalizeMnemonic(wallet.mnemonic),
         this.chronik,
       );
-      await client.sync();
       this.client = client;
+
+      const derivedAddress = this.getWalletAddress(client);
+      if (derivedAddress && (!wallet.address || wallet.address !== derivedAddress)) {
+        this.walletInfo = { ...wallet, address: derivedAddress };
+      }
     }
 
     return this.client;
@@ -40,8 +53,8 @@ export class WalletService {
       if (!info) {
         throw new Error('No se encontró una cartera configurada.');
       }
-      if (!info.privateKey) {
-        throw new Error('La cartera no contiene una llave privada válida.');
+      if (!info.mnemonic) {
+        throw new Error('La cartera no contiene una frase mnemónica válida.');
       }
       this.walletInfo = info;
     }
@@ -50,15 +63,26 @@ export class WalletService {
   }
 
   async enviar(toAddress: string, amount: number): Promise<{ txid: string }> {
-    const client = await this.ensureClient();
-    const tx = await client.send(toAddress, amount);
+    if (!Number.isFinite(amount) || amount <= 0) {
+      throw new Error('El monto a enviar debe ser mayor que cero.');
+    }
 
-    const txid = typeof tx === 'string' ? tx : tx?.txid;
+    const client = await this.ensureClient();
+    const satsAmount = this.xecToSats(amount);
+
+    const tx = await client.createTx({
+      to: toAddress,
+      amount: satsAmount,
+    });
+
+    const broadcastResult = await client.broadcastTx(tx);
+    const txid = this.extractTxid(broadcastResult);
+
     if (!txid) {
       throw new Error('La transacción no devolvió un identificador.');
     }
 
-    return { txid: String(txid) };
+    return { txid };
   }
 
   clearCache(): void {
@@ -66,19 +90,47 @@ export class WalletService {
     this.walletInfo = null;
   }
 
-  private normalizePrivateKey(hex: string): string {
-    const normalized = hex.trim().replace(/^0x/i, '');
-    if (!normalized || normalized.length % 2 !== 0) {
-      throw new Error('La llave privada tiene un formato inválido.');
+  private normalizeMnemonic(mnemonic: string): string {
+    return mnemonic
+      .trim()
+      .split(/\s+/u)
+      .map((word) => word.toLowerCase())
+      .join(' ');
+  }
+
+  private xecToSats(amount: number): number {
+    return Math.round(amount * SATS_PER_XEC);
+  }
+
+  private extractTxid(result: unknown): string | null {
+    if (typeof result === 'string') {
+      return result;
     }
 
-    for (let index = 0; index < normalized.length; index += 2) {
-      const byte = Number.parseInt(normalized.slice(index, index + 2), 16);
-      if (Number.isNaN(byte)) {
-        throw new Error('La llave privada tiene un formato inválido.');
+    if (result && typeof result === 'object') {
+      const record = result as Record<string, unknown>;
+      const possibleKeys = ['txid', 'txId', 'id'];
+      for (const key of possibleKeys) {
+        const value = record[key];
+        if (typeof value === 'string' && value) {
+          return value;
+        }
       }
     }
 
-    return normalized;
+    return null;
+  }
+
+  private getWalletAddress(wallet: Wallet): string | null {
+    const getAddress = (wallet as { getAddress?: () => string }).getAddress;
+    if (typeof getAddress === 'function') {
+      const address = getAddress.call(wallet);
+      if (address) {
+        return address;
+      }
+    }
+
+    const legacyAddress = (wallet as { address?: string }).address;
+    return typeof legacyAddress === 'string' ? legacyAddress : null;
   }
 }

@@ -3,9 +3,11 @@ import { ChronikClient } from 'chronik-client';
 import { Wallet } from 'ecash-wallet';
 import type { WalletInfo } from './cartera.service';
 
+const SATS_PER_XEC = 100;
+
 type WalletSource =
-  | Pick<WalletInfo, 'mnemonic' | 'address' | 'privateKey'>
-  | { mnemonic: string; privateKey: string; address?: string };
+  | Pick<WalletInfo, 'mnemonic' | 'address'>
+  | { mnemonic: string; address?: string };
 
 @Injectable({ providedIn: 'root' })
 export class SaldoService {
@@ -17,14 +19,20 @@ export class SaldoService {
       throw new Error('La frase mnemónica es obligatoria para consultar el saldo.');
     }
 
-    const privateKey = walletSource?.privateKey?.trim();
-    if (!privateKey) {
-      throw new Error('La llave privada es obligatoria para consultar el saldo.');
+    const wallet = await this.createWallet(mnemonic);
+    const address = this.resolveAddress(wallet, walletSource.address);
+
+    if (!address) {
+      throw new Error('No se pudo determinar la dirección de la cartera.');
     }
 
-    const wallet = await Wallet.fromPrivateKey(this.normalizePrivateKey(privateKey), this.chronik);
-    await wallet.sync();
-    const balance = await wallet.getBalance();
+    const utxosResponse = await this.chronik.address(address).utxos();
+    const balanceSats = utxosResponse.utxos.reduce<bigint>(
+      (total, utxo) => total + this.parseSats(utxo.sats),
+      0n,
+    );
+
+    const balance = Number(balanceSats) / SATS_PER_XEC;
 
     if (!Number.isFinite(balance)) {
       throw new Error('No se pudo obtener el saldo de la cartera.');
@@ -44,20 +52,54 @@ export class SaldoService {
     }).format(balance);
   }
 
-  private normalizePrivateKey(hex: string): string {
-    const normalized = hex.trim().replace(/^0x/i, '');
-    if (!normalized || normalized.length % 2 !== 0) {
-      throw new Error('La llave privada tiene un formato inválido.');
-    }
+  private async createWallet(mnemonic: string): Promise<Wallet> {
+    const normalizedMnemonic = this.normalizeMnemonic(mnemonic);
+    return await Wallet.fromMnemonic(normalizedMnemonic, this.chronik);
+  }
 
-    for (let index = 0; index < normalized.length; index += 2) {
-      const byte = Number.parseInt(normalized.slice(index, index + 2), 16);
-      if (Number.isNaN(byte)) {
-        throw new Error('La llave privada tiene un formato inválido.');
+  private normalizeMnemonic(mnemonic: string): string {
+    return mnemonic
+      .trim()
+      .split(/\s+/u)
+      .map((word) => word.toLowerCase())
+      .join(' ');
+  }
+
+  private resolveAddress(wallet: Wallet, fallback?: string): string | null {
+    const getAddress = (wallet as { getAddress?: () => string }).getAddress;
+    if (typeof getAddress === 'function') {
+      const derived = getAddress.call(wallet);
+      if (derived) {
+        return derived;
       }
     }
 
-    return normalized;
+    if (typeof fallback === 'string' && fallback.trim()) {
+      return fallback.trim();
+    }
+
+    const legacyAddress = (wallet as { address?: string }).address;
+    return typeof legacyAddress === 'string' ? legacyAddress : null;
+  }
+
+  private parseSats(value: unknown): bigint {
+    if (typeof value === 'bigint') {
+      return value;
+    }
+
+    if (typeof value === 'number' && Number.isFinite(value)) {
+      return BigInt(Math.round(value));
+    }
+
+    if (typeof value === 'string' && value.trim()) {
+      try {
+        return BigInt(value.trim());
+      } catch {
+        return 0n;
+      }
+    }
+
+    return 0n;
   }
 
 }
