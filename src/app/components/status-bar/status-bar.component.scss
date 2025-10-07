@@ -5,73 +5,49 @@
   z-index: 1000;
 }
 
-ion-toolbar.status-bar {
-  --background: var(--ion-color-step-100, #1f1f1f);
-  --color: var(--ion-color-light, #f4f5f8);
-  --padding-top: calc(env(safe-area-inset-top, 0px) + 0.35rem);
-  --padding-bottom: 0.35rem;
-  --padding-start: 1rem;
-  --padding-end: 1rem;
-  box-shadow: 0 1px 0 rgba(var(--ion-color-step-400-rgb, 56, 56, 56), 0.35);
-}
-
-.status-container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-}
-
-.network,
-.ble {
-  flex: 1 1 0;
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.45rem 0.9rem;
-  border-radius: 999px;
-  background: rgba(var(--ion-color-light-rgb, 244, 244, 244), 0.04);
-  color: rgba(var(--ion-color-light-rgb, 244, 244, 244), 0.78);
-  min-width: 0;
-  transition: background 150ms ease, color 150ms ease;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-}
-
-.network ion-icon,
-.ble ion-icon {
-  font-size: 1.1rem;
-}
-
-.network.online {
-  color: var(--ion-color-success, #2fdf75);
-}
-
-.network.offline {
-  color: var(--ion-color-danger, #eb445a);
-}
-
-.ble.connected {
-  color: var(--ion-color-success, #2fdf75);
-}
-
-.ble.disconnected {
-  color: var(--ion-color-medium, #92949c);
-}
-
-@media (max-width: 480px) {
-  ion-toolbar.status-bar {
-    --padding-start: 0.75rem;
-    --padding-end: 0.75rem;
+.status-bar {
+  ion-toolbar {
+    --background: var(--ion-color-step-100, #1f1f1f);
+    --color: var(--ion-color-light, #f4f5f8);
+    --padding-top: calc(env(safe-area-inset-top, 0px) + 0.35rem);
+    --padding-bottom: 0.35rem;
+    --padding-start: 1rem;
+    --padding-end: 1rem;
+    box-shadow: 0 1px 0 rgba(var(--ion-color-step-400-rgb, 56, 56, 56), 0.35);
+    min-height: 40px;
+    display: flex;
+    align-items: center;
   }
 
   .status-container {
-    gap: 0.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    font-size: 0.9rem;
   }
 
   .network,
   .ble {
-    padding: 0.4rem 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .online {
+    color: #4cd964;
+  }
+
+  .offline {
+    color: #ff3b30;
+  }
+
+  .connected {
+    color: #4cd964;
+  }
+
+  .disconnected {
+    color: #ffcc00;
   }
 }

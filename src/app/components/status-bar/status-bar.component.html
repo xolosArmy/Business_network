@@ -1,18 +1,20 @@
-<ion-toolbar color="dark" class="status-bar" mode="md">
-  <div class="status-container">
-    <div class="network" [class.online]="isOnline" [class.offline]="!isOnline" aria-live="polite">
-      <ion-icon [name]="internetIcon" aria-hidden="true"></ion-icon>
-      <span>{{ isOnline ? 'Online' : 'Offline' }}</span>
-    </div>
+<div class="status-bar">
+  <ion-toolbar color="dark" mode="md">
+    <div class="status-container">
+      <div class="network" [class.online]="isOnline" [class.offline]="!isOnline" aria-live="polite">
+        <ion-icon [name]="internetIcon" aria-hidden="true"></ion-icon>
+        <span>{{ isOnline ? 'Online' : 'Offline' }}</span>
+      </div>
 
-    <div
-      class="ble"
-      [class.connected]="bleConnected"
-      [class.disconnected]="!bleConnected"
-      aria-live="polite"
-    >
-      <ion-icon [name]="bleIcon" aria-hidden="true"></ion-icon>
-      <span>{{ bleConnected ? bleDevice ?? 'BLE conectado' : 'BLE desconectado' }}</span>
+      <div
+        class="ble"
+        [class.connected]="bleConnected"
+        [class.disconnected]="!bleConnected"
+        aria-live="polite"
+      >
+        <ion-icon [name]="bleIcon" aria-hidden="true"></ion-icon>
+        <span>{{ bleConnected ? bleDevice ?? 'BLE conectado' : 'BLE desconectado' }}</span>
+      </div>
     </div>
-  </div>
-</ion-toolbar>
+  </ion-toolbar>
+</div>
