@@ -13,8 +13,8 @@ const chronik = new ChronikClient('https://chronik.e.cash');
 const SATS_PER_XEC = 100;
 
 type WalletSource =
-  | Pick<WalletInfo, 'mnemonic' | 'address' | 'privateKey'>
-  | { mnemonic: string; privateKey: string; address?: string };
+  | Pick<WalletInfo, 'mnemonic' | 'address'>
+  | { mnemonic: string; address?: string };
 
 @Injectable({ providedIn: 'root' })
 export class EnviarService {
@@ -42,10 +42,6 @@ export class EnviarService {
       if (!mnemonic) {
         throw new Error('La cartera de origen debe incluir la frase mnemónica.');
       }
-      const privateKey = fromWallet?.privateKey?.trim();
-      if (!privateKey) {
-        throw new Error('La cartera de origen debe incluir la llave privada.');
-      }
       const destination = toAddress?.trim();
       if (!destination) {
         throw new Error('La dirección de destino es obligatoria.');
@@ -70,8 +66,7 @@ export class EnviarService {
         return `pending-offline-${tx.txid}`;
       }
 
-      const wallet = await this.createWallet(privateKey);
-      await wallet.sync();
+      const wallet = await this.createWallet(mnemonic);
 
       const txid = await this.sendWithWallet(wallet, destination, amount);
 
@@ -125,7 +120,7 @@ export class EnviarService {
       }
 
       const wallet = await this.offlineStorage.getWallet();
-      if (!wallet?.privateKey) {
+      if (!wallet?.mnemonic) {
         return;
       }
 
@@ -134,8 +129,7 @@ export class EnviarService {
         return;
       }
 
-      const walletInstance = await this.createWallet(wallet.privateKey);
-      await walletInstance.sync();
+      const walletInstance = await this.createWallet(wallet.mnemonic);
 
       for (const transaction of pendingTransactions) {
         await this.processPendingTransaction(walletInstance, transaction);
@@ -192,25 +186,17 @@ export class EnviarService {
     }
   }
 
-  private async createWallet(privateKeyHex: string): Promise<Wallet> {
-    const normalizedKey = this.normalizePrivateKey(privateKeyHex);
-    return Wallet.fromPrivateKey(normalizedKey, chronik);
+  private async createWallet(mnemonic: string): Promise<Wallet> {
+    const normalizedMnemonic = this.normalizeMnemonic(mnemonic);
+    return await Wallet.fromMnemonic(normalizedMnemonic, chronik);
   }
 
-  private normalizePrivateKey(hex: string): string {
-    const normalized = hex.trim().replace(/^0x/i, '');
-    if (!normalized || normalized.length % 2 !== 0) {
-      throw new Error('La llave privada tiene un formato inválido.');
-    }
-
-    for (let index = 0; index < normalized.length; index += 2) {
-      const byte = Number.parseInt(normalized.slice(index, index + 2), 16);
-      if (Number.isNaN(byte)) {
-        throw new Error('La llave privada tiene un formato inválido.');
-      }
-    }
-
-    return normalized;
+  private normalizeMnemonic(mnemonic: string): string {
+    return mnemonic
+      .trim()
+      .split(/\s+/u)
+      .map((word) => word.toLowerCase())
+      .join(' ');
   }
 
   private xecToSats(amount: number): bigint {
@@ -229,25 +215,37 @@ export class EnviarService {
       throw new Error('El monto convertido a satoshis debe ser mayor que cero.');
     }
 
-    const action = wallet.action({
-      outputs: [
-        {
-          address: destination,
-          sats: satsAmount,
-        },
-      ],
+    const tx = await wallet.createTx({
+      to: destination,
+      amount: Number(satsAmount),
     });
 
-    const builtAction = action.build();
-    const result = await builtAction.broadcast();
+    const broadcastResult = await wallet.broadcastTx(tx);
+    const txid = this.extractTxid(broadcastResult);
 
-    if (!result.success || !Array.isArray(result.broadcasted) || result.broadcasted.length === 0) {
-      const details = Array.isArray(result.errors) && result.errors.length
-        ? result.errors.join('; ')
-        : 'No se pudo transmitir la transacción.';
-      throw new Error(details);
+    if (!txid) {
+      throw new Error('No se pudo obtener el identificador de la transacción.');
     }
 
-    return result.broadcasted[0];
+    return txid;
+  }
+
+  private extractTxid(result: unknown): string | null {
+    if (typeof result === 'string') {
+      return result;
+    }
+
+    if (result && typeof result === 'object') {
+      const record = result as Record<string, unknown>;
+      const possibleKeys = ['txid', 'txId', 'id'];
+      for (const key of possibleKeys) {
+        const value = record[key];
+        if (typeof value === 'string' && value) {
+          return value;
+        }
+      }
+    }
+
+    return null;
   }
 }

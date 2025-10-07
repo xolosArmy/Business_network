@@ -9,6 +9,7 @@ import { NotificationSettingsService } from './notification-settings.service';
 import { StoredTx, TxStorageService } from './tx-storage.service';
 
 const chronik = new ChronikClient('https://chronik.e.cash');
+const SATS_PER_XEC = 100;
 
 @Injectable({
   providedIn: 'root',
@@ -34,10 +35,14 @@ export class TxBLEService {
   }
 
   async initWallet(mnemonic: string): Promise<void> {
-    this.wallet = await Wallet.fromMnemonic(mnemonic, chronik);
-    const address = this.wallet.address;
-    console.log('✅ Cartera inicializada:', address);
-    void this.chronik.subscribeToAddress(address);
+    this.wallet = await Wallet.fromMnemonic(this.normalizeMnemonic(mnemonic), chronik);
+    const address = this.getWalletAddress(this.wallet);
+    if (address) {
+      console.log('✅ Cartera inicializada:', address);
+      void this.chronik.subscribeToAddress(address);
+    } else {
+      console.warn('✅ Cartera inicializada sin dirección derivada');
+    }
     void this.chronik.syncAll();
   }
 
@@ -49,16 +54,19 @@ export class TxBLEService {
 
     try {
       const txId = this.generateId();
-      const fromAddress = this.wallet.address;
+      const fromAddress = this.getWalletAddress(this.wallet);
+      if (!fromAddress) {
+        throw new Error('No se pudo obtener la dirección de origen de la cartera.');
+      }
       const timestamp = new Date().toISOString();
 
-      const sats = Math.floor(amountXec * 100);
+      const sats = this.xecToSats(amountXec);
       const tx = await this.wallet.createTx({
         to,
         amount: sats,
       });
 
-      const rawHex = tx.hex;
+      const rawHex = this.extractRawHex(tx);
       console.log('🧾 TX firmada:', rawHex);
 
       const txid = await this.computeTxid(rawHex);
@@ -166,6 +174,58 @@ export class TxBLEService {
     } catch (err) {
       console.error('Error procesando TX BLE:', err);
     }
+  }
+
+  private normalizeMnemonic(mnemonic: string): string {
+    return mnemonic
+      .trim()
+      .split(/\s+/u)
+      .map((word) => word.toLowerCase())
+      .join(' ');
+  }
+
+  private getWalletAddress(wallet: Wallet | null): string | null {
+    if (!wallet) {
+      return null;
+    }
+
+    const getAddress = (wallet as { getAddress?: () => string }).getAddress;
+    if (typeof getAddress === 'function') {
+      const address = getAddress.call(wallet);
+      if (address) {
+        return address;
+      }
+    }
+
+    const legacyAddress = (wallet as { address?: string }).address;
+    return typeof legacyAddress === 'string' ? legacyAddress : null;
+  }
+
+  private xecToSats(amountXec: number): number {
+    if (!Number.isFinite(amountXec) || amountXec <= 0) {
+      throw new Error('El monto a enviar debe ser mayor que cero.');
+    }
+
+    return Math.round(amountXec * SATS_PER_XEC);
+  }
+
+  private extractRawHex(tx: unknown): string {
+    if (typeof tx === 'string' && tx.trim()) {
+      return tx.trim();
+    }
+
+    if (tx && typeof tx === 'object') {
+      const record = tx as Record<string, unknown>;
+      const keys = ['hex', 'rawHex', 'raw', 'serialized', 'tx'];
+      for (const key of keys) {
+        const value = record[key];
+        if (typeof value === 'string' && value.trim()) {
+          return value.trim();
+        }
+      }
+    }
+
+    throw new Error('No se pudo obtener el contenido hexadecimal de la transacción.');
   }
 
   private async computeTxid(rawHex: string): Promise<string | null> {
