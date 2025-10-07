@@ -1,36 +1,90 @@
 <ion-header>
   <ion-toolbar color="dark">
-    <ion-title>Dispositivos Cercanos</ion-title>
+    <ion-title>Dispositivos BLE</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="scan()">
-        <ion-icon name="bluetooth-outline"></ion-icon>
-        Escanear
+      <ion-button fill="outline" color="primary" (click)="startScan()" [disabled]="scanning || !isSupported">
+        <ion-icon slot="start" name="scan-circle-outline"></ion-icon>
+        {{ scanning ? 'Escaneando' : 'Escanear' }}
+        <ion-spinner *ngIf="scanning" slot="end" name="lines-small"></ion-spinner>
+      </ion-button>
+      <ion-button fill="clear" color="medium" (click)="stopScan()" *ngIf="scanning">
+        <ion-icon slot="start" name="stop-circle-outline"></ion-icon>
+        Detener
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let device of devices" (click)="connect(device)">
-      <ion-icon slot="start" name="phone-portrait-outline"></ion-icon>
+  <section class="status" *ngIf="!isSupported">
+    <ion-icon name="alert-circle-outline"></ion-icon>
+    <p>El navegador o dispositivo no soporta Bluetooth Low Energy.</p>
+  </section>
+
+  <ion-card class="connection-card">
+    <ion-card-header>
+      <ion-card-title>Estado de conexión</ion-card-title>
+      <ion-card-subtitle>{{ connectionStatus }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ng-container *ngIf="connectedDevice; else noDevice">
+        <div class="device-info">
+          <ion-icon name="bluetooth-outline"></ion-icon>
+          <div>
+            <h3>{{ connectedDevice?.name || 'Sin nombre' }}</h3>
+            <small>ID: {{ connectedDevice?.deviceId }}</small>
+          </div>
+        </div>
+        <ion-button expand="block" color="danger" (click)="disconnect()">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
+          Desconectar
+        </ion-button>
+      </ng-container>
+      <ng-template #noDevice>
+        <p class="empty">No hay dispositivos conectados actualmente.</p>
+      </ng-template>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list inset="true">
+    <ion-list-header lines="none">
+      <ion-label>Dispositivos disponibles</ion-label>
+      <ion-note slot="end" *ngIf="devices.length">{{ devices.length }} encontrados</ion-note>
+    </ion-list-header>
+
+    <ion-item *ngFor="let device of devices" lines="inset" detail="false">
+      <ion-icon slot="start" name="hardware-chip-outline"></ion-icon>
       <ion-label>
         <h2>{{ device.name || 'Sin nombre' }}</h2>
         <p>{{ device.deviceId }}</p>
       </ion-label>
-      <ion-badge color="success" *ngIf="device.connected">Conectado</ion-badge>
+
+      <ion-chip color="tertiary" *ngIf="device.rssi !== undefined" slot="end">
+        <ion-icon name="bar-chart-outline"></ion-icon>
+        <ion-label>{{ device.rssi }} dBm</ion-label>
+      </ion-chip>
+
+      <ion-badge color="success" *ngIf="device.connected" slot="end">Conectado</ion-badge>
+
+      <ion-button
+        slot="end"
+        size="small"
+        [color]="device.connected ? 'danger' : 'primary'"
+        (click)="device.connected ? disconnect() : connect(device)"
+      >
+        <ion-icon slot="start" [name]="device.connected ? 'link-off-outline' : 'link-outline'"></ion-icon>
+        {{ device.connected ? 'Desconectar' : 'Conectar' }}
+      </ion-button>
     </ion-item>
   </ion-list>
 
-  <ion-card *ngIf="connectedDevice">
-    <ion-card-header>
-      <ion-card-title>Enviar XEC a {{ connectedDevice.name }}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-        <ion-input type="number" placeholder="Cantidad" [(ngModel)]="amount"></ion-input>
-      </ion-item>
-      <ion-button expand="block" color="primary" (click)="send()">Enviar</ion-button>
-    </ion-card-content>
-  </ion-card>
+  <div class="empty" *ngIf="!devices.length && scanning">
+    <ion-spinner name="dots"></ion-spinner>
+    <p>Buscando dispositivos cercanos...</p>
+  </div>
+
+  <div class="empty" *ngIf="!devices.length && !scanning && isSupported">
+    <ion-icon name="bluetooth-outline"></ion-icon>
+    <p>Inicia un escaneo para encontrar dispositivos BLE cercanos.</p>
+  </div>
 </ion-content>
