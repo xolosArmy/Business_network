@@ -16,5 +16,17 @@
         "files": ["/assets/**", "/*.(png|jpg|svg)"]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "chronik-api",
+      "urls": ["https://chronik.e.cash/**"],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 50,
+        "maxAge": "1h",
+        "timeout": "10s"
+      }
+    }
   ]
 }

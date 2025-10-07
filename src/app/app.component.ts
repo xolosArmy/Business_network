@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
+    this.pwa.init();
     this.sync.listenForNetwork();
     setTimeout(() => this.pwa.showInstallPrompt(), 5000);
     void this.enviarService.processPendingTransactions();
