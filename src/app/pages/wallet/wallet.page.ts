@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import QRCode from 'qrcode';
 
 import { BleService } from '../../services/ble.service';
-import { CarteraService } from '../../services/cartera.service';
 import { EnviarService } from '../../services/enviar.service';
-import { SaldoService } from '../../services/saldo.service';
-import { TxBLEService } from '../../services/tx-ble.service';
-
-type WalletInfo = Awaited<ReturnType<CarteraService['getWalletInfo']>>;
+import { WalletService } from '../../services/wallet.service';
 
 @Component({
   selector: 'app-wallet',
@@ -15,34 +12,55 @@ type WalletInfo = Awaited<ReturnType<CarteraService['getWalletInfo']>>;
   styleUrls: ['./wallet.page.scss'],
 })
 export class WalletPage implements OnInit {
-  wallet: any = null;
-  balanceLabel = '--';
+  address = '';
+  balanceLabel = '0 XEC';
   showQr = false;
   qrImageSrc: string | null = null;
   sending = false;
+  isLoading = false;
   errorMessage = '';
   successMessage = '';
   sendForm: FormGroup;
-
-  toAddr = '';
-  amount = '';
+  bleAvailable = false;
 
   constructor(
-    private readonly carteraService: CarteraService,
-    private readonly saldoService: SaldoService,
+    private readonly walletService: WalletService,
     private readonly enviarService: EnviarService,
-    private readonly ble: BleService,
-    private readonly txBle: TxBLEService,
+    private readonly bleService: BleService,
     formBuilder: FormBuilder,
   ) {
     this.sendForm = formBuilder.group({
-      toAddress: ['', Validators.required],
+      toAddr: ['', [Validators.required]],
       amount: [null, [Validators.required, Validators.min(0.000001)]],
     });
+    this.bleAvailable = !!this.bleService;
   }
 
   async ngOnInit(): Promise<void> {
-    await this.loadWallet();
+    await this.initWallet();
+  }
+
+  async initWallet(): Promise<void> {
+    this.isLoading = true;
+    this.errorMessage = '';
+    this.successMessage = '';
+    try {
+      const mnemonic = localStorage.getItem('rmz_mnemonic');
+      if (!mnemonic) {
+        this.errorMessage = 'No hay semilla guardada.';
+        return;
+      }
+
+      await this.walletService.loadFromMnemonic(mnemonic);
+      this.address = await this.walletService.getAddress();
+      await this.refreshBalance();
+      await this.generateQr();
+    } catch (error) {
+      console.error('Error al inicializar la cartera.', error);
+      this.errorMessage = 'Error al inicializar la cartera.';
+    } finally {
+      this.isLoading = false;
+    }
   }
 
   async toggleQr(): Promise<void> {
@@ -53,106 +71,7 @@ export class WalletPage implements OnInit {
       return;
     }
 
-    const address = (this.wallet as WalletInfo | null)?.address;
-    if (typeof address !== 'string' || !address.trim()) {
-      this.qrImageSrc = null;
-      return;
-    }
-
-    this.qrImageSrc = this.buildQrUrl(address);
-  }
-
-  async advertiseWallet(): Promise<void> {
-    this.errorMessage = '';
-    this.successMessage = '';
-
-    const address = (this.wallet as WalletInfo | null)?.address;
-    if (typeof address !== 'string' || !address.trim()) {
-      this.errorMessage = 'No hay una dirección de cartera disponible.';
-      return;
-    }
-
-    try {
-      await this.ble.advertise(address);
-      this.successMessage = 'Wallet lista para anunciar por BLE.';
-    } catch (error) {
-      this.errorMessage = this.resolveError(error);
-    }
-  }
-
-  async scanForPeers(): Promise<void> {
-    this.errorMessage = '';
-    this.successMessage = '';
-
-    try {
-      await this.ble.scanAndConnect();
-      this.successMessage = 'Escaneo BLE iniciado.';
-    } catch (error) {
-      this.errorMessage = this.resolveError(error);
-    }
-  }
-
-  async connectBLE(): Promise<void> {
-    this.errorMessage = '';
-    this.successMessage = '';
-
-    try {
-      await this.ble.scanAndConnect();
-      this.successMessage = 'Intentando conectar con dispositivos BLE cercanos.';
-    } catch (error) {
-      this.errorMessage = this.resolveError(error);
-    }
-  }
-
-  async sendTxBLE(destination?: string, amountValue?: number): Promise<void> {
-    this.errorMessage = '';
-    this.successMessage = '';
-
-    const to = (destination ?? this.toAddr).trim();
-    const parsedAmount = amountValue ?? Number(this.amount);
-
-    if (!to) {
-      this.errorMessage = 'La dirección de destino es obligatoria.';
-      return;
-    }
-
-    if (!Number.isFinite(parsedAmount) || parsedAmount <= 0) {
-      this.errorMessage = 'El monto debe ser mayor que cero.';
-      return;
-    }
-
-    try {
-      await this.txBle.createAndSendTx(to, parsedAmount);
-      this.successMessage = 'Transacción enviada por BLE.';
-    } catch (error) {
-      this.errorMessage = this.resolveError(error);
-    }
-  }
-
-  async sendHybrid(): Promise<void> {
-    if (this.sendForm.invalid) {
-      this.sendForm.markAllAsTouched();
-      return;
-    }
-
-    const destination = String(this.sendForm.value.toAddress ?? '').trim();
-    const amount = Number(this.sendForm.value.amount);
-
-    if (!destination) {
-      this.errorMessage = 'La dirección de destino es obligatoria.';
-      return;
-    }
-
-    if (!Number.isFinite(amount) || amount <= 0) {
-      this.errorMessage = 'El monto debe ser mayor que cero.';
-      return;
-    }
-
-    await this.sendTxBLE(destination, amount);
-    const sent = await this.sendViaNetwork(destination, amount);
-    if (sent) {
-      this.sendForm.reset();
-    }
+    await this.generateQr();
   }
 
   async onSubmit(): Promise<void> {
@@ -161,89 +80,71 @@ export class WalletPage implements OnInit {
       return;
     }
 
-    const destination = String(this.sendForm.value.toAddress ?? '').trim();
-    const amount = Number(this.sendForm.value.amount);
+    const destination = String(this.sendForm.value.toAddr ?? '').trim();
+    const amountXec = Number(this.sendForm.value.amount);
 
     if (!destination) {
       this.errorMessage = 'La dirección de destino es obligatoria.';
       return;
     }
 
-    if (!Number.isFinite(amount) || amount <= 0) {
+    if (!Number.isFinite(amountXec) || amountXec <= 0) {
       this.errorMessage = 'El monto debe ser mayor que cero.';
       return;
     }
 
-    const sent = await this.sendViaNetwork(destination, amount);
-    if (sent) {
-      this.sendForm.reset();
-    }
-  }
+    const amountInSats = Math.round(amountXec * 100);
 
-  private async loadWallet(): Promise<void> {
     try {
-      const wallet = await this.carteraService.getWalletInfo();
-      this.wallet = wallet;
+      this.sending = true;
+      this.errorMessage = '';
+      this.successMessage = '';
 
-      if (wallet?.address && wallet?.mnemonic) {
-        await this.updateBalanceLabel(wallet);
+      const result = await this.enviarService.enviarTx(destination, amountInSats);
+      if (result.success) {
+        this.successMessage = `Transacción enviada ✅ TXID: ${result.txid}`;
+        await this.refreshBalance();
+        this.sendForm.reset();
       } else {
-        this.balanceLabel = 'Sin cartera configurada';
+        this.errorMessage = result.error ?? 'No se pudo enviar la transacción.';
       }
     } catch (error) {
-      this.errorMessage = this.resolveError(error);
+      console.error('Error al enviar transacción.', error);
+      this.errorMessage = 'Error al enviar transacción.';
+    } finally {
+      this.sending = false;
     }
   }
 
-  private async updateBalanceLabel(wallet: NonNullable<WalletInfo>): Promise<void> {
+  get bleConnected(): boolean {
+    return Boolean(this.bleService?.connectedDevice);
+  }
+
+  get bleDeviceName(): string {
+    return this.bleService?.connectedDevice?.name ?? 'Sin dispositivo';
+  }
+
+  private async refreshBalance(): Promise<void> {
     try {
-      const balance = await this.saldoService.getBalance(wallet);
-      this.balanceLabel = `${this.saldoService.formatBalance(balance)} XEC`;
+      const balance = await this.walletService.getBalance();
+      this.balanceLabel = `${balance.toFixed(2)} XEC`;
     } catch (error) {
-      console.error('No se pudo actualizar el saldo de la cartera.', error);
+      console.error('No se pudo obtener el saldo.', error);
       this.balanceLabel = 'Saldo no disponible';
     }
   }
 
-  private buildQrUrl(address: string): string {
-    const encoded = encodeURIComponent(address.trim());
-    return `https://quickchart.io/qr?text=${encoded}&size=256&margin=1`;
-  }
-
-  private async sendViaNetwork(destination: string, amount: number): Promise<boolean> {
-    const wallet = this.wallet as WalletInfo | null;
-    if (!wallet?.mnemonic) {
-      this.errorMessage = 'Debes configurar una cartera antes de enviar fondos.';
-      return false;
+  private async generateQr(): Promise<void> {
+    if (!this.address) {
+      this.qrImageSrc = null;
+      return;
     }
-
-    this.sending = true;
-    this.errorMessage = '';
-    this.successMessage = '';
-    let succeeded = false;
 
     try {
-      const txid = await this.enviarService.sendTransaction(wallet, destination, amount);
-      const isPending = txid.startsWith('pending-offline-');
-      this.successMessage = isPending
-        ? 'Transacción guardada para enviar cuando haya conexión.'
-        : `Transacción enviada correctamente: ${txid}`;
-      succeeded = true;
-      await this.updateBalanceLabel(wallet);
+      this.qrImageSrc = await QRCode.toDataURL(this.address);
     } catch (error) {
-      this.errorMessage = this.resolveError(error);
-    } finally {
-      this.sending = false;
+      console.error('No se pudo generar el código QR.', error);
+      this.qrImageSrc = null;
     }
-
-    return succeeded;
-  }
-
-  private resolveError(error: unknown): string {
-    if (error instanceof Error && error.message) {
-      return error.message;
-    }
-
-    return 'Ocurrió un error inesperado.';
   }
 }
