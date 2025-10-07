@@ -24,6 +24,6 @@ import { environment } from '../environments/environment';
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  exports: [IonicModule, FormsModule],
+  exports: [IonicModule, FormsModule, ReactiveFormsModule],
 })
 export class AppModule {}
