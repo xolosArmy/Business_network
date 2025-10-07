@@ -5,28 +5,40 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-card *ngIf="wallet">
+  <ion-text color="danger" *ngIf="errorMessage">
+    <p class="ion-text-center">{{ errorMessage }}</p>
+  </ion-text>
+  <ion-text color="success" *ngIf="successMessage">
+    <p class="ion-text-center">{{ successMessage }}</p>
+  </ion-text>
+
+  <ion-card>
     <ion-card-header>
       <ion-card-title>Información de la cartera</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p class="wallet-label">Dirección pública</p>
       <ion-item lines="none">
-        <ion-label class="address-label">{{ wallet?.address }}</ion-label>
+        <ion-label>
+          <h2>Dirección pública</h2>
+          <p>{{ address || 'No disponible' }}</p>
+        </ion-label>
       </ion-item>
 
-      <p class="wallet-label">Balance disponible</p>
       <ion-item lines="none">
-        <ion-label>{{ balanceLabel }}</ion-label>
+        <ion-label>
+          <h2>Balance disponible</h2>
+          <p>{{ balanceLabel }}</p>
+        </ion-label>
+        <ion-spinner slot="end" *ngIf="isLoading"></ion-spinner>
       </ion-item>
 
       <ion-button
         expand="block"
         color="primary"
         (click)="toggleQr()"
-        [disabled]="!wallet?.address"
+        [disabled]="!address"
       >
-        {{ showQr ? 'Ocultar' : 'Recibir' }}
+        {{ showQr ? 'Ocultar código QR' : 'Mostrar código QR' }}
       </ion-button>
 
       <div *ngIf="showQr" class="qr-wrapper">
@@ -40,76 +52,45 @@
           <p>No se pudo generar el código QR.</p>
         </ng-template>
       </div>
-
-      <ion-button
-        expand="block"
-        color="secondary"
-        (click)="advertiseWallet()"
-        [disabled]="!wallet?.address"
-      >
-        Anunciar Wallet
-      </ion-button>
-
-      <ion-button expand="block" (click)="scanForPeers()">
-        Buscar Peers
-      </ion-button>
-
-      <ion-button expand="block" color="light" routerLink="/transactions">
-        Ver historial de transacciones
-      </ion-button>
-
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+  <ion-card *ngIf="bleAvailable">
     <ion-card-header>
-      <ion-card-title>Conexión Bluetooth</ion-card-title>
+      <ion-card-title>Estado de conexión BLE</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-button expand="block" color="success" (click)="connectBLE()">
-        Conectar dispositivo BLE
-      </ion-button>
-      <ion-button expand="block" color="primary" (click)="sendTxBLE()">
-        Enviar mensaje BLE
-      </ion-button>
+      <ion-item lines="none">
+        <ion-icon
+          slot="start"
+          [color]="bleConnected ? 'success' : 'medium'"
+          [name]="bleConnected ? 'bluetooth' : 'cloud-offline'"
+        ></ion-icon>
+        <ion-label>
+          <h2>{{ bleConnected ? 'Dispositivo conectado' : 'Sin conexión BLE' }}</h2>
+          <p *ngIf="bleConnected">{{ bleDeviceName }}</p>
+          <p *ngIf="!bleConnected">Las transacciones usarán la red disponible.</p>
+        </ion-label>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Enviar por BLE</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-        <ion-label position="stacked">Dirección destino</ion-label>
-        <ion-input [(ngModel)]="toAddr" placeholder="ecash:..."></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Monto (XEC)</ion-label>
-        <ion-input type="number" [(ngModel)]="amount"></ion-input>
-      </ion-item>
-      <ion-button expand="block" color="primary" (click)="sendTxBLE()">
-        Enviar TX BLE
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Enviar</ion-card-title>
+      <ion-card-title>Enviar XEC</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <form [formGroup]="sendForm" (ngSubmit)="onSubmit()">
         <ion-item>
           <ion-label position="floating">Dirección destino</ion-label>
-          <ion-input formControlName="toAddress" required></ion-input>
+          <ion-input formControlName="toAddr" required></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Cantidad (XEC)</ion-label>
           <ion-input
             type="number"
-            min="0"
-            step="0.01"
+            min="0.000001"
+            step="0.000001"
             formControlName="amount"
             required
           ></ion-input>
@@ -120,21 +101,9 @@
           type="submit"
           [disabled]="sendForm.invalid || sending"
         >
-          {{ sending ? 'Enviando…' : 'Enviar' }}
-        </ion-button>
-
-        <ion-button expand="block" color="success" (click)="sendHybrid()">
-          Enviar (BLE / Internet)
+          {{ sending ? 'Enviando…' : 'Enviar transacción' }}
         </ion-button>
       </form>
-
-      <ion-item *ngIf="errorMessage" lines="none">
-        <ion-label color="danger">{{ errorMessage }}</ion-label>
-      </ion-item>
-
-      <ion-item *ngIf="successMessage" lines="none">
-        <ion-label color="success">{{ successMessage }}</ion-label>
-      </ion-item>
     </ion-card-content>
   </ion-card>
 </ion-content>
