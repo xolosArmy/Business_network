@@ -1,0 +1,17 @@
+<div class="status-bar">
+  <div class="status-item" [ngClass]="internetStatusClass" aria-live="polite">
+    <ion-icon [name]="internetIcon" aria-hidden="true"></ion-icon>
+    <div class="status-text">
+      <span class="status-label">Internet</span>
+      <span class="status-value">{{ internetStatusText }}</span>
+    </div>
+  </div>
+
+  <div class="status-item" [ngClass]="bleStatusClass" aria-live="polite">
+    <ion-icon [name]="bleIcon" aria-hidden="true"></ion-icon>
+    <div class="status-text">
+      <span class="status-label">BLE</span>
+      <span class="status-value">{{ bleStatusText }}</span>
+    </div>
+  </div>
+</div>
