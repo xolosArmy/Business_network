@@ -1,9 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "defaultProject": "app",
+  "defaultProject": "rmzwallet",
   "projects": {
-    "app": {
+    "rmzwallet": {
       "projectType": "application",
       "root": "",
       "sourceRoot": "src",
@@ -12,15 +12,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "www",
+            "outputPath": "dist/rmzwallet",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": ["src/polyfills.ts"],
+            "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.json",
             "assets": [
-              "src/favicon.txt",
+              "src/favicon.ico",
               "src/assets",
-              "src/global.scss",
               "src/manifest.webmanifest"
             ],
             "serviceWorker": true,
@@ -76,14 +75,14 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "app:build:development"
+            "browserTarget": "rmzwallet:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "app:build:production"
+              "browserTarget": "rmzwallet:build:production"
             },
             "development": {
-              "browserTarget": "app:build:development"
+              "browserTarget": "rmzwallet:build:development"
             }
           },
           "defaultConfiguration": "development"
