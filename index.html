@@ -7,18 +7,17 @@
   <title>XolosArmy Network | Cultura Xoloitzcuintle + NFTs en Blockchain</title>
 
   <meta name="description" content="Únete a XolosArmy Network, la comunidad descentralizada que conecta el legado del Xoloitzcuintle con el mundo NFT y la blockchain.">
-  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://xolosarmy.xyz/">
-  <meta property="og:title" content="XolosArmy Network: Cultura, NFT y Blockchain">
-  <meta property="og:description" content="Explora el legado místico del Xoloitzcuintle y accede a contenido exclusivo en la red XolosArmy.">
-  <meta property="og:image" content="https://i.imgur.com/zCxucVs.png">
-  <!-- Twitter -->
+  <meta property="og:title" content="XolosArmy Network — Guardians of the Digital Xoloitzcuintli">
+  <meta property="og:description" content="Join XolosArmy Network: culture, blockchain, and art united through the Xoloitzcuintli.">
+  <meta property="og:image" content="https://xolosarmy.xyz/assets/xolo-hero.jpg">
+  <meta property="og:url" content="https://xolosarmy.xyz">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://xolosarmy.xyz/">
-  <meta name="twitter:title" content="XolosArmy Network: Cultura, NFT y Blockchain">
-  <meta name="twitter:description" content="Únete a la comunidad global que fusiona el arte ancestral del Xoloitzcuintle con el futuro en la blockchain.">
-  <meta name="twitter:image" content="https://i.imgur.com/zCxucVs.png">
+  <meta name="twitter:url" content="https://xolosarmy.xyz">
+  <meta name="twitter:title" content="XolosArmy Network — Guardians of the Digital Xoloitzcuintli">
+  <meta name="twitter:description" content="Join XolosArmy Network: culture, blockchain, and art united through the Xoloitzcuintli.">
+  <meta name="twitter:image" content="https://xolosarmy.xyz/assets/xolo-hero.jpg">
+  <meta name="theme-color" content="#000000">
   <!-- Palabras clave -->
   <meta name="keywords" content="Xoloitzcuintle, NFT, blockchain, cultura mexicana, Xolos Ramírez, XolosArmy, arte digital, eCash, comunidad descentralizada">
   <!-- Estilos y scripts -->
@@ -35,6 +34,7 @@
 </head>
 
 <body>
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Alternar modo de color">🌙</button>
   <header>
     <div class="container">
       <h1>XolosArmy Network State</h1>
@@ -195,19 +195,34 @@
         </p>
         <div class="gallery" id="xolos-ramirez-gallery">
           <a href="https://www.xolosramirez.com" target="_blank" class="gallery-item">
-            <img src="https://i.imgur.com/T3GzoTX.jpeg" alt="Xolos Ramírez 1">
+            <picture>
+              <source type="image/webp" srcset="https://i.imgur.com/T3GzoTX.webp">
+              <img loading="lazy" src="https://i.imgur.com/T3GzoTX.jpeg" alt="Xolos Ramírez 1">
+            </picture>
           </a>
           <a href="https://www.xolosramirez.com" target="_blank" class="gallery-item">
-            <img src="https://i.imgur.com/nYsecpz.png" alt="Xolos Ramírez 2">
+            <picture>
+              <source type="image/webp" srcset="https://i.imgur.com/nYsecpz.webp">
+              <img loading="lazy" src="https://i.imgur.com/nYsecpz.png" alt="Xolos Ramírez 2">
+            </picture>
           </a>
           <a href="https://www.xolosramirez.com" target="_blank" class="gallery-item">
-            <img src="https://i.imgur.com/ZZ7YYNt.jpeg" alt="Xolos Ramírez 3">
+            <picture>
+              <source type="image/webp" srcset="https://i.imgur.com/ZZ7YYNt.webp">
+              <img loading="lazy" src="https://i.imgur.com/ZZ7YYNt.jpeg" alt="Xolos Ramírez 3">
+            </picture>
           </a>
           <a href="https://www.xolosramirez.com" target="_blank" class="gallery-item">
-            <img src="https://i.imgur.com/SgXx5Ox.jpeg" alt="Xolos Ramírez 4">
+            <picture>
+              <source type="image/webp" srcset="https://i.imgur.com/SgXx5Ox.webp">
+              <img loading="lazy" src="https://i.imgur.com/SgXx5Ox.jpeg" alt="Xolos Ramírez 4">
+            </picture>
           </a>
           <a href="https://www.xolosramirez.com" target="_blank" class="gallery-item">
-            <img src="https://i.imgur.com/pKVHzSk.jpeg" alt="Xolos Ramírez 5">
+            <picture>
+              <source type="image/webp" srcset="https://i.imgur.com/pKVHzSk.webp">
+              <img loading="lazy" src="https://i.imgur.com/pKVHzSk.jpeg" alt="Xolos Ramírez 5">
+            </picture>
           </a>
         </div>
       </div>
@@ -235,6 +250,32 @@
       </div>
     </section>
   </main>
+
+  <!-- Sección: Roadmap RMZWallet -->
+  <section class="roadmap" style="background:#0A0A0A; color:#FFD54F; padding:40px 20px; text-align:center;">
+    <h2>🔒 RMZWallet Roadmap</h2>
+    <div style="max-width:800px; margin:auto; text-align:left;">
+      <ul style="list-style:none; padding:0; font-size:1.1rem; line-height:1.8;">
+        <li>✅ PWA foundation (Offline-ready wallet core)</li>
+        <li>🔄 BLE mesh prototype (device-to-device sync)</li>
+        <li>🧩 IndexedDB storage (local UTXO management)</li>
+        <li>🚀 Public Launch — Q4 2025</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Sección: Team & Vision -->
+  <section class="team-vision" style="background:#111; color:#FFF; padding:40px 20px; text-align:center;">
+    <h2>🌎 Team & Vision</h2>
+    <p style="max-width:700px; margin:auto; font-size:1.1rem;">
+      XolosArmy Network is a collective led by <strong>Fernando Ramírez</strong>, merging ancient culture and open-source technology.
+      Our goal is to make the Xoloitzcuintli a symbol of digital freedom and cultural preservation.
+    </p>
+    <div style="margin-top:20px;">
+      <a href="https://t.me/xolosramirez" target="_blank" style="margin:5px; background:#FFD54F; color:#111; padding:10px 20px; border-radius:8px; text-decoration:none;">Join Telegram</a>
+      <a href="https://xolosramirez.club" target="_blank" style="margin:5px; background:#FFD54F; color:#111; padding:10px 20px; border-radius:8px; text-decoration:none;">Mastodon</a>
+    </div>
+  </section>
 
   <footer>
   <div class="container">
@@ -270,6 +311,128 @@
 </footer>
 
 <style>
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  background-color: #ffffff;
+  color: #111;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+  background-color: #000000;
+  color: #FFD54F;
+}
+
+body.dark-mode section:not(#hero),
+body.dark-mode header,
+body.dark-mode main,
+body.dark-mode footer {
+  background-color: #000000 !important;
+  color: #FFD54F !important;
+}
+
+body.dark-mode a {
+  color: #FFD54F;
+}
+
+body.dark-mode .team-vision {
+  background: #000000 !important;
+  color: #FFD54F !important;
+}
+
+body.dark-mode .roadmap {
+  background: #000000 !important;
+  color: #FFD54F !important;
+}
+
+body.dark-mode nav a,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode p,
+body.dark-mode li {
+  color: #FFD54F !important;
+}
+
+body.dark-mode .button-link,
+body.dark-mode a.button-link,
+body.dark-mode .team-vision a,
+body.dark-mode .roadmap a {
+  background-color: #FFD54F !important;
+  color: #111 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  body:not(.light-mode) {
+    background-color: #000000;
+    color: #FFD54F;
+  }
+
+  body:not(.light-mode) section:not(#hero),
+  body:not(.light-mode) header,
+  body:not(.light-mode) main,
+  body:not(.light-mode) footer {
+    background-color: #000000 !important;
+    color: #FFD54F !important;
+  }
+
+  body:not(.light-mode) nav a,
+  body:not(.light-mode) h1,
+  body:not(.light-mode) h2,
+  body:not(.light-mode) h3,
+  body:not(.light-mode) h4,
+  body:not(.light-mode) h5,
+  body:not(.light-mode) h6,
+  body:not(.light-mode) p,
+  body:not(.light-mode) li {
+    color: #FFD54F !important;
+  }
+
+  body:not(.light-mode) .button-link,
+  body:not(.light-mode) a.button-link,
+  body:not(.light-mode) .team-vision a,
+  body:not(.light-mode) .roadmap a {
+    background-color: #FFD54F !important;
+    color: #111 !important;
+  }
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  background: rgba(17, 17, 17, 0.8);
+  color: #FFD54F;
+  border: 2px solid #FFD54F;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10000;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05);
+  background: rgba(255, 213, 79, 0.15);
+}
+
+body.dark-mode .theme-toggle {
+  background: rgba(255, 213, 79, 0.1);
+  color: #FFD54F;
+  border-color: #FFD54F;
+}
+
 footer {
   background-color: #111;
   color: #fff;
@@ -333,6 +496,59 @@ footer .social-icons a:hover {
 </style>
 
 <script>
+(function() {
+  const body = document.body;
+  const themeToggle = document.getElementById('theme-toggle');
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const storedTheme = localStorage.getItem('preferred-theme');
+
+  if (!themeToggle) {
+    return;
+  }
+
+  function applyTheme(theme) {
+    if (theme === 'dark') {
+      body.classList.add('dark-mode');
+      body.classList.remove('light-mode');
+      themeToggle.textContent = '🌞';
+      themeToggle.setAttribute('aria-label', 'Cambiar a modo claro');
+    } else {
+      body.classList.remove('dark-mode');
+      body.classList.add('light-mode');
+      themeToggle.textContent = '🌙';
+      themeToggle.setAttribute('aria-label', 'Cambiar a modo oscuro');
+    }
+  }
+
+  if (storedTheme === 'dark' || storedTheme === 'light') {
+    applyTheme(storedTheme);
+  } else if (prefersDarkScheme.matches) {
+    applyTheme('dark');
+  }
+
+  prefersDarkScheme.addEventListener('change', (event) => {
+    if (!localStorage.getItem('preferred-theme')) {
+      applyTheme(event.matches ? 'dark' : 'light');
+    }
+  });
+
+  themeToggle.addEventListener('click', () => {
+    const isDark = body.classList.contains('dark-mode');
+    const newTheme = isDark ? 'light' : 'dark';
+    localStorage.setItem('preferred-theme', newTheme);
+    applyTheme(newTheme);
+  });
+
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'preferred-theme') {
+      const newTheme = event.newValue;
+      if (newTheme === 'dark' || newTheme === 'light') {
+        applyTheme(newTheme);
+      }
+    }
+  });
+})();
+
 document.getElementById('copy-etoken').addEventListener('click', function() {
   const etokenID = "9e0a9d4720782cf661beaea6c5513f1972e0f3b1541ba4c83f4c87ef65f843dc";
   navigator.clipboard.writeText(etokenID).then(() => {
