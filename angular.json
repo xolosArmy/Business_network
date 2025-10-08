@@ -67,7 +67,9 @@
               "sourceMap": true,
               "vendorChunk": true,
               "extractLicenses": false,
-              "buildOptimizer": false
+              "buildOptimizer": false,
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             }
           },
           "defaultConfiguration": "production"
