@@ -23,6 +23,228 @@
   <!-- Estilos y scripts -->
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --xolo-gold: #f9d777;
+      --xolo-ember: #ff7e3f;
+      --xolo-ink: #060606;
+      --xolo-slate: #161111;
+    }
+
+    #hero.cinematic-hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 140px 20px 120px;
+      color: #fdf6e8;
+      text-align: center;
+      background: var(--xolo-ink);
+      isolation: isolate;
+    }
+
+    #hero .hero-visuals,
+    #hero .animated-bg,
+    #hero .light-lines,
+    #hero .particle-field {
+      position: absolute;
+      inset: 0;
+    }
+
+    #hero .hero-visuals {
+      z-index: -3;
+    }
+
+    #hero .animated-bg {
+      background: linear-gradient(-45deg, #000000, #111111, #1a0f0a, #302010);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
+      filter: brightness(1.1);
+    }
+
+    #hero .light-lines {
+      z-index: -2;
+    }
+
+    #hero .light-lines::before,
+    #hero .light-lines::after {
+      content: "";
+      position: absolute;
+      inset: -50% -20%;
+      background: repeating-linear-gradient(
+          120deg,
+          rgba(249, 215, 119, 0.12) 0px,
+          rgba(249, 215, 119, 0.12) 2px,
+          transparent 2px,
+          transparent 26px
+        );
+      mix-blend-mode: screen;
+      opacity: 0.55;
+      animation: linesMove 18s linear infinite;
+    }
+
+    #hero .light-lines::after {
+      transform: rotate(8deg);
+      opacity: 0.35;
+      animation-duration: 28s;
+    }
+
+    #hero .particle-field {
+      z-index: -1;
+      mix-blend-mode: screen;
+    }
+
+    #hero .particle-field::before,
+    #hero .particle-field::after {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background-image: radial-gradient(rgba(249, 215, 119, 0.4) 0.6px, transparent 1px);
+      background-size: 120px 120px;
+      opacity: 0.6;
+      animation: particleDrift 40s linear infinite;
+    }
+
+    #hero .particle-field::after {
+      background-size: 80px 80px;
+      opacity: 0.35;
+      animation-duration: 55s;
+      animation-direction: reverse;
+    }
+
+    #hero .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 60px 40px;
+      background: rgba(10, 7, 6, 0.55);
+      border: 1px solid rgba(249, 215, 119, 0.35);
+      border-radius: 28px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(16px);
+    }
+
+    #hero .hero-content h1 {
+      font-family: "Cinzel", serif;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      color: var(--xolo-gold);
+      text-shadow: 0 0 20px rgba(249, 215, 119, 0.4);
+    }
+
+    #hero .glow-subtitle {
+      font-family: "Lora", serif;
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      color: rgba(255, 240, 220, 0.88);
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    #hero .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    #hero .hero-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: 999px;
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: #0a0605;
+      text-decoration: none;
+      background: linear-gradient(135deg, var(--xolo-gold), #ffd28a 45%, var(--xolo-ember));
+      box-shadow: 0 20px 40px rgba(249, 215, 119, 0.25);
+      border: 1px solid rgba(249, 215, 119, 0.45);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
+    }
+
+    #hero .hero-button:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 26px 55px rgba(249, 215, 119, 0.35);
+      filter: brightness(1.07);
+    }
+
+    #hero .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      letter-spacing: 0.22em;
+      color: rgba(249, 215, 119, 0.9);
+      text-transform: uppercase;
+      border: 1px solid rgba(249, 215, 119, 0.35);
+      margin-bottom: 22px;
+      backdrop-filter: blur(6px);
+      background: rgba(12, 8, 8, 0.55);
+    }
+
+    #hero .hero-badge i {
+      color: var(--xolo-gold);
+      text-shadow: 0 0 12px rgba(249, 215, 119, 0.6);
+    }
+
+    @keyframes gradientMove {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @keyframes linesMove {
+      from {
+        transform: translate3d(-5%, 0, 0);
+      }
+      to {
+        transform: translate3d(5%, 0, 0);
+      }
+    }
+
+    @keyframes particleDrift {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(-6%, -8%, 0) scale(1.05);
+      }
+      100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+
+    @media (max-width: 768px) {
+      #hero.cinematic-hero {
+        padding: 120px 18px 100px;
+      }
+
+      #hero .hero-content {
+        padding: 44px 26px;
+      }
+
+      #hero .hero-actions {
+        flex-direction: column;
+        gap: 18px;
+      }
+    }
+  </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-YTZMJ41WMY"></script>
   <script>
@@ -51,31 +273,25 @@
     </div>
   </header>
 
-  <section id="hero" style="position: relative; background: url('https://i.imgur.com/EDdQG0W.png') center/cover no-repeat; padding: 120px 20px; text-align: center; color: white;">
-    <div class="container" style="max-width: 900px; margin: auto; background: rgba(0, 0, 0, 0.65); padding: 40px; border-radius: 20px;">
-      <h1 style="font-family: 'Cinzel', serif; font-size: 44px; margin-bottom: 16px; letter-spacing:1px; color: #FFD54F; text-shadow: 2px 2px 8px #210f28;">
-        WEB3 CULTURE OF<br>THE XOLOITZCUINTLI
-      </h1>
-      <p style="font-family: 'Lora', serif; font-size: 22px; margin-bottom: 38px; color:#eee;">
-        NFTs únicos y el token comunitario $RMZ.<br>
-        Vive el arte, la historia y el futuro del Xoloitzcuintli en la blockchain.
+  <section id="hero" class="cinematic-hero">
+    <div class="hero-visuals">
+      <div class="animated-bg"></div>
+      <div class="light-lines"></div>
+      <div class="particle-field"></div>
+    </div>
+    <div class="hero-content">
+      <span class="hero-badge"><i class="fas fa-paw"></i> Energía ancestral del Xoloitzcuintle</span>
+      <h1>Web3 Culture of the Xoloitzcuintli</h1>
+      <p class="glow-subtitle">
+        NFTs rituales y el token comunitario $RMZ. <br>
+        Siente la vibración dorada de la manada XolosArmy: arte, historia y futuro unidos en la blockchain.
       </p>
-      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 24px;">
-        <a href="https://cashtab.com/?utm_source=hero_btn_nft#/token/8fd3f14abd2b176a1d4bd5136542cd2a7ba3df0e11947dd19326c9d1cd81ae09"
-           target="_blank"
-           class="button-link"
-           style="background: #113D4A; color: #FFD54F; font-family: 'Montserrat', sans-serif; font-size: 20px; padding: 17px 38px; border-radius: 15px; text-decoration: none; font-weight: 600; box-shadow: 0px 4px 14px rgba(16,16,30,0.3); border: 2px solid #24BCD5; transition: background 0.3s, transform 0.3s;"
-           onmouseover="this.style.background='#232136'; this.style.transform='scale(1.07)';"
-           onmouseout="this.style.background='#113D4A'; this.style.transform='scale(1)';">
-          🔥 MINT NFT CIGARS
+      <div class="hero-actions">
+        <a href="https://cashtab.com/?utm_source=hero_btn_nft#/token/8fd3f14abd2b176a1d4bd5136542cd2a7ba3df0e11947dd19326c9d1cd81ae09" target="_blank" class="hero-button">
+          🔥 Mint NFT Cigars
         </a>
-        <a href="https://cashtab.com/?utm_source=hero_btn_rmz#/token/9e0a9d4720782cf661beaea6c5513f1972e0f3b1541ba4c83f4c87ef65f843dc"
-           target="_blank"
-           class="button-link"
-           style="background: #113D4A; color: #FFD54F; font-family: 'Montserrat', sans-serif; font-size: 20px; padding: 17px 38px; border-radius: 15px; text-decoration: none; font-weight: 600; box-shadow: 0px 4px 14px rgba(16,16,30,0.3); border: 2px solid #24BCD5; transition: background 0.3s, transform 0.3s;"
-           onmouseover="this.style.background='#232136'; this.style.transform='scale(1.07)';"
-           onmouseout="this.style.background='#113D4A'; this.style.transform='scale(1)';">
-          💰 OBTÉN $RMZ AHORA
+        <a href="https://cashtab.com/?utm_source=hero_btn_rmz#/token/9e0a9d4720782cf661beaea6c5513f1972e0f3b1541ba4c83f4c87ef65f843dc" target="_blank" class="hero-button">
+          💰 Obtén $RMZ Ahora
         </a>
       </div>
     </div>
