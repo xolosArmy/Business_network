@@ -31,6 +31,16 @@
       --xolo-slate: #161111;
     }
 
+    #particles {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1000;
+      mix-blend-mode: screen;
+    }
+
     #hero.cinematic-hero {
       position: relative;
       overflow: hidden;
@@ -256,6 +266,7 @@
 </head>
 
 <body>
+  <canvas id="particles" aria-hidden="true"></canvas>
   <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Alternar modo de color">🌙</button>
   <header>
     <div class="container">
@@ -773,6 +784,55 @@ document.getElementById('copy-etoken').addEventListener('click', function() {
     console.error("Error al copiar el ID: ", err);
   });
 });
+</script>
+
+<script>
+  (function () {
+    const canvas = document.getElementById('particles');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const particles = Array.from({ length: 60 }, () => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      r: Math.random() * 2 + 1,
+      dx: Math.random() * 0.5 - 0.25,
+      dy: Math.random() * 0.5 - 0.25,
+    }));
+
+    function drawParticles(width, height) {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = 'rgba(255, 215, 0, 0.6)';
+      particles.forEach((particle) => {
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        particle.x += particle.dx;
+        particle.y += particle.dy;
+
+        if (particle.x < 0 || particle.x > width) {
+          particle.dx *= -1;
+        }
+        if (particle.y < 0 || particle.y > height) {
+          particle.dy *= -1;
+        }
+      });
+    }
+
+    function animate() {
+      const dpr = window.devicePixelRatio || 1;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      drawParticles(width, height);
+      window.requestAnimationFrame(animate);
+    }
+
+    animate();
+  })();
 </script>
 
 
