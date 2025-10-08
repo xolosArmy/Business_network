@@ -10,6 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
 import { StatusBarComponent } from './components/status-bar/status-bar.component';
 
+const serviceWorkerEnabled =
+  environment.production && typeof navigator !== 'undefined' && 'serviceWorker' in navigator;
+
 @NgModule({
   declarations: [AppComponent, StatusBarComponent],
   imports: [
@@ -19,7 +22,7 @@ import { StatusBarComponent } from './components/status-bar/status-bar.component
     FormsModule,
     ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
+      enabled: serviceWorkerEnabled,
       registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
