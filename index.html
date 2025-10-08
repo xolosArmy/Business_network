@@ -44,14 +44,16 @@
     #hero.cinematic-hero {
       position: relative;
       overflow: hidden;
-      min-height: 90vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 140px 20px 120px;
+      padding: 120px 20px;
       color: #fdf6e8;
       text-align: center;
-      background: var(--xolo-ink);
+      background: radial-gradient(circle at 20% 20%, rgba(249, 215, 119, 0.12), transparent 55%),
+        radial-gradient(circle at 80% 0%, rgba(255, 174, 94, 0.16), transparent 50%),
+        linear-gradient(145deg, #040404 10%, #120c08 45%, #24140f 100%);
       isolation: isolate;
     }
 
@@ -127,32 +129,40 @@
     #hero .hero-content {
       position: relative;
       z-index: 1;
-      max-width: 880px;
+      max-width: 860px;
       margin: 0 auto;
-      padding: 60px 40px;
-      background: rgba(10, 7, 6, 0.55);
-      border: 1px solid rgba(249, 215, 119, 0.35);
-      border-radius: 28px;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.65);
-      backdrop-filter: blur(16px);
+      padding: 70px 48px;
+      background: rgba(10, 7, 6, 0.58);
+      border: 1px solid rgba(249, 215, 119, 0.28);
+      border-radius: 32px;
+      box-shadow: 0 40px 90px rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(18px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 22px;
     }
 
     #hero .hero-content h1 {
       font-family: "Cinzel", serif;
-      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-size: clamp(2.75rem, 6vw, 4.8rem);
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      margin-bottom: 18px;
-      color: var(--xolo-gold);
-      text-shadow: 0 0 20px rgba(249, 215, 119, 0.4);
+      margin: 0;
+      background: linear-gradient(120deg, rgba(255, 215, 130, 0.95), #f9d777 45%, #f9a83a 80%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
     }
 
     #hero .glow-subtitle {
       font-family: "Lora", serif;
-      font-size: clamp(1.1rem, 2vw, 1.5rem);
-      color: rgba(255, 240, 220, 0.88);
-      margin-bottom: 36px;
+      font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+      color: rgba(255, 240, 220, 0.9);
       line-height: 1.7;
+      max-width: 620px;
     }
 
     #hero .hero-actions {
@@ -292,9 +302,9 @@
     </div>
     <div class="hero-content">
       <span class="hero-badge"><i class="fas fa-paw"></i> Energía ancestral del Xoloitzcuintle</span>
-      <h1>Web3 Culture of the Xoloitzcuintli</h1>
+      <h1>XolosArmy Network</h1>
       <p class="glow-subtitle">
-        NFTs rituales y el token comunitario $RMZ. <br>
+        Guardians of Culture, Blockchain, and Spirit. <br>
         Siente la vibración dorada de la manada XolosArmy: arte, historia y futuro unidos en la blockchain.
       </p>
       <div class="hero-actions">
