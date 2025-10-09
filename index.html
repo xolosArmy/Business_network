@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +21,11 @@
   <!-- Palabras clave -->
   <meta name="keywords" content="Xoloitzcuintle, NFT, blockchain, cultura mexicana, Xolos Ramírez, XolosArmy, arte digital, eCash, comunidad descentralizada">
   <!-- Estilos y scripts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -29,6 +34,155 @@
       --xolo-ember: #ff7e3f;
       --xolo-ink: #060606;
       --xolo-slate: #161111;
+      --bg-neutral-950: #0a0a0a;
+      --text-gray-200: #e5e7eb;
+      --accent-amber-400: #fbbf24;
+      --heading-font: "Playfair Display", serif;
+      --body-font: "Inter", sans-serif;
+    }
+
+    .scroll-smooth {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--body-font);
+      background-color: var(--bg-neutral-950);
+      color: var(--text-gray-200);
+      margin: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: var(--heading-font);
+      color: var(--text-gray-200);
+    }
+
+    a {
+      color: var(--accent-amber-400);
+    }
+
+    .text-accent {
+      color: var(--accent-amber-400);
+    }
+
+    .surface-panel {
+      background: rgba(28, 25, 23, 0.6);
+      border: 1px solid rgba(251, 191, 36, 0.18);
+      border-radius: 24px;
+      padding: 2.5rem;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(14px);
+    }
+
+    .section-heading {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: rgba(229, 231, 235, 0.78);
+      line-height: 1.8;
+    }
+
+    .max-w-6xl {
+      max-width: 72rem;
+    }
+
+    .mx-auto {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .grid {
+      display: grid;
+    }
+
+    .gap-12 {
+      gap: 3rem;
+    }
+
+    .md\:grid-cols-2 {
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 768px) {
+      .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .transition-all {
+      transition-property: all;
+    }
+
+    .duration-500 {
+      transition-duration: 500ms;
+    }
+
+    .ease-in-out {
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .section-shell {
+      padding: clamp(3rem, 6vw, 5.5rem) 1.5rem;
+    }
+
+    .section-shell .section-eyebrow {
+      font-size: 0.95rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(251, 191, 36, 0.78);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-shell ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .section-shell li {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      color: rgba(229, 231, 235, 0.86);
+      margin-bottom: 1rem;
+    }
+
+    .section-shell li span {
+      color: var(--accent-amber-400);
+    }
+
+    .section-shell strong {
+      color: var(--accent-amber-400);
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.75rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(251, 191, 36, 0.6);
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.92), rgba(217, 119, 6, 0.88));
+      color: #111111;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 18px 45px rgba(251, 191, 36, 0.25);
+    }
+
+    .cta-button:hover {
+      box-shadow: 0 22px 55px rgba(251, 191, 36, 0.4);
+      transform: translateY(-3px);
     }
 
     #particles {
@@ -145,7 +299,7 @@
     }
 
     #hero .hero-content h1 {
-      font-family: "Cinzel", serif;
+      font-family: var(--heading-font);
       font-size: clamp(2.75rem, 6vw, 4.8rem);
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -158,9 +312,9 @@
     }
 
     #hero .glow-subtitle {
-      font-family: "Lora", serif;
+      font-family: var(--body-font);
       font-size: clamp(1.15rem, 2.4vw, 1.6rem);
-      color: rgba(255, 240, 220, 0.9);
+      color: rgba(229, 231, 235, 0.92);
       line-height: 1.7;
       max-width: 620px;
     }
@@ -178,13 +332,13 @@
       gap: 10px;
       padding: 16px 36px;
       border-radius: 999px;
-      font-family: "Montserrat", sans-serif;
+      font-family: var(--body-font);
       font-size: 1.05rem;
       font-weight: 600;
       letter-spacing: 0.04em;
       color: #0a0605;
       text-decoration: none;
-      background: linear-gradient(135deg, var(--xolo-gold), #ffd28a 45%, var(--xolo-ember));
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.98), rgba(217, 119, 6, 0.96));
       box-shadow: 0 20px 40px rgba(249, 215, 119, 0.25);
       border: 1px solid rgba(249, 215, 119, 0.45);
       transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
@@ -277,7 +431,7 @@
 
 <body>
   <canvas id="particles" aria-hidden="true"></canvas>
-  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Alternar modo de color">🌙</button>
+  <button id="theme-toggle" class="theme-toggle transition-all duration-500 ease-in-out" type="button" aria-label="Alternar modo de color">🌙</button>
   <header>
     <div class="container">
       <h1>XolosArmy Network State</h1>
@@ -308,12 +462,12 @@
         Siente la vibración dorada de la manada XolosArmy: arte, historia y futuro unidos en la blockchain.
       </p>
       <div class="hero-actions">
-        <a href="https://cashtab.com/?utm_source=hero_btn_nft#/token/8fd3f14abd2b176a1d4bd5136542cd2a7ba3df0e11947dd19326c9d1cd81ae09" target="_blank" class="hero-button">
-          🔥 Mint NFT Cigars
-        </a>
-        <a href="https://cashtab.com/?utm_source=hero_btn_rmz#/token/9e0a9d4720782cf661beaea6c5513f1972e0f3b1541ba4c83f4c87ef65f843dc" target="_blank" class="hero-button">
-          💰 Obtén $RMZ Ahora
-        </a>
+          <a href="https://cashtab.com/?utm_source=hero_btn_nft#/token/8fd3f14abd2b176a1d4bd5136542cd2a7ba3df0e11947dd19326c9d1cd81ae09" target="_blank" class="hero-button transition-all duration-500 ease-in-out">
+            🔥 Mint NFT Cigars
+          </a>
+          <a href="https://cashtab.com/?utm_source=hero_btn_rmz#/token/9e0a9d4720782cf661beaea6c5513f1972e0f3b1541ba4c83f4c87ef65f843dc" target="_blank" class="hero-button transition-all duration-500 ease-in-out">
+            💰 Obtén $RMZ Ahora
+          </a>
       </div>
     </div>
   </section>
@@ -321,21 +475,43 @@
   <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10"></div>
 
   <!-- Nueva sección: Próximo Lanzamiento de RMZWallet -->
-  <section class="coming-soon" style="background: #113D4A; color: #FFD54F; padding: 30px 20px; text-align: center;">
-    <h2>🚀 Coming Soon: RMZWallet</h2>
-    <p>RMZWallet es una cartera digital para eCash desarrollada por XolosArmy, con soporte offline y conexión Bluetooth (BLE).</p>
-    <a href="mailto:xolosarmynetwork@gmail.com?subject=RMZWallet%20Early%20Access&body=I%20would%20like%20to%20join%20the%20RMZWallet%20early%20access%20list.%20Please%20keep%20me%20updated%21"
-       style="background: #FFD54F; color: #113D4A; padding: 12px 24px; border-radius: 8px; font-weight: bold; text-decoration: none;">
-      ¡Mantenerme informado!
-    </a>
+  <section id="rmzwallet" class="section-shell">
+    <div class="max-w-6xl mx-auto surface-panel">
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+          <span class="section-eyebrow">🚀 Coming Soon</span>
+          <h2 class="section-heading">RMZWallet</h2>
+          <p class="section-subtitle">
+            RMZWallet es la cartera diseñada por XolosArmy para transaccionar eCash incluso sin conexión.
+            Con soporte offline y conectividad Bluetooth (BLE), la manada podrá sincronizar valor y cultura desde cualquier lugar.
+          </p>
+          <p class="section-subtitle">
+            Regístrate para obtener acceso anticipado y ayudar a definir las funciones que impulsarán la economía del Xoloitzcuintle digital.
+          </p>
+        </div>
+        <div>
+          <ul>
+            <li><span>✅</span> Modo PWA para operar sin instalar apps nativas.</li>
+            <li><span>🔄</span> Sincronización entre dispositivos mediante malla BLE cifrada.</li>
+            <li><span>🛡️</span> Custodia local de claves y UTXOs con almacenamiento seguro.</li>
+          </ul>
+          <a
+            href="mailto:xolosarmynetwork@gmail.com?subject=RMZWallet%20Early%20Access&body=I%20would%20like%20to%20join%20the%20RMZWallet%20early%20access%20list.%20Please%20keep%20me%20updated%21"
+            class="cta-button transition-all duration-500 ease-in-out"
+          >
+            ¡Mantenerme informado!
+          </a>
+        </div>
+      </div>
+    </div>
   </section>
 
   <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10"></div>
 
-  <section class="shop-promo" style="background:#113D4A; color:#FFD54F; padding:30px 20px; text-align:center;">
-  <h2>🌿 Nuevo: XolosArmy Essentials</h2>
-  <p>Visita nuestra tienda de productos naturales para Xoloitzcuintles</p>
-  <a href="/productos-xoloitzcuintle/" style="background:#FFD54F; color:#113D4A; padding:12px 24px; border-radius:8px; font-weight:bold; text-decoration:none;">Ir a la tienda</a>
+  <section class="shop-promo" style="background:rgba(28, 25, 23, 0.85); color:var(--text-gray-200); padding:30px 20px; text-align:center;">
+  <h2 style="font-family: var(--heading-font);">🌿 Nuevo: XolosArmy Essentials</h2>
+  <p style="font-family: var(--body-font);">Visita nuestra tienda de productos naturales para Xoloitzcuintles</p>
+  <a href="/productos-xoloitzcuintle/" class="cta-button transition-all duration-500 ease-in-out">Ir a la tienda</a>
 </section>
 
   <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10"></div>
@@ -344,32 +520,19 @@
   <main>
     
 
-        <section id="xolos-rmz" style="padding: 50px 20px; background-color: #f9f9f9;">
-          <div class="container" style="text-align: center; max-width: 800px; margin: auto;">
-            <h2 style="font-family: 'Cinzel', serif; color: #333; margin-bottom: 20px;">Xolos $RMZ: El Token del Xoloitzcuintle en la Blockchain</h2>
-            <p style="font-family: 'Lora', serif; font-size: 18px; color: #555; margin-bottom: 30px; line-height: 1.6;">
+          <section id="xolos-rmz" style="padding: 50px 20px;">
+            <div class="container" style="text-align: center; max-width: 800px; margin: auto;">
+              <h2 style="font-family: var(--heading-font); color: var(--text-gray-200); margin-bottom: 20px;">Xolos $RMZ: El Token del Xoloitzcuintle en la Blockchain</h2>
+              <p style="font-family: var(--body-font); font-size: 18px; color: rgba(229, 231, 235, 0.82); margin-bottom: 30px; line-height: 1.6;">
               Xolos $RMZ es el corazón digital de XolosArmy Network: un token descentralizado que honra al Xoloitzcuintle y abre las puertas a una comunidad global.
             </p>
             <p>
               Con Xolos $RMZ accedes a contenido exclusivo, NFTs legendarios, y participación en una red viva que fusiona cultura ancestral, tecnología y comunidad.
             </p>
-            <a href="https://cashtab.com/#/token/9e0a9d4720782cf661beaea6c5513f1972e0f3b1541ba4c83f4c87ef65f843dc" target="_blank" class="button-link"
-               style="
-                   display: inline-block;
-                   background: linear-gradient(45deg, #ff5733, #ff9966);
-                   color: white;
-                   font-family: 'Montserrat', sans-serif;
-                   font-size: 18px;
-                   padding: 15px 40px;
-                   text-decoration: none;
-                   border-radius: 50px;
-                   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-                   transition: transform 0.3s, box-shadow 0.3s;
-               "
-               onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0px 6px 8px rgba(0,0,0,0.2)';"
-               onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';">
-              Obtén Xolos $RMZ Ahora
-            </a>
+              <a href="https://cashtab.com/#/token/9e0a9d4720782cf661beaea6c5513f1972e0f3b1541ba4c83f4c87ef65f843dc" target="_blank"
+                 class="cta-button transition-all duration-500 ease-in-out">
+                Obtén Xolos $RMZ Ahora
+              </a>
           </div>
         </section>
 
@@ -387,28 +550,14 @@
     <!-- Dedicated Section for Xoloitzcuintli RMZ Gospel -->
     <section id="xoloitzcuintli-gospel">
       <div class="container" style="text-align: center; padding: 50px 20px;">
-        <h2 style="font-family: 'Cinzel', serif; color: #333; margin-bottom: 20px;">El Evangelio RMZ del Xoloitzcuintle: Guardianes Eternos</h2>
-        <p style="font-family: 'Lora', serif; font-size: 18px; color: #555; margin-bottom: 30px;">
+        <h2 style="font-family: var(--heading-font); color: var(--text-gray-200); margin-bottom: 20px;">El Evangelio RMZ del Xoloitzcuintle: Guardianes Eternos</h2>
+        <p style="font-family: var(--body-font); font-size: 18px; color: rgba(229, 231, 235, 0.82); margin-bottom: 30px;">
           Sumérgete en el Evangelio del Xoloitzcuintli RMZ, un manifiesto cultural que celebra al Xoloitzcuintle como guardián ancestral de los mundos visibles e invisibles.
         </p>
         <p>
           Este documento único fusiona espiritualidad, historia y tecnología en un canto a la raza más antigua de América, ahora inmortalizada en la blockchain a través del token Xolos $RMZ.
         </p>
-        <a href="assets/RMZGospel.pdf" target="_blank" class="button-link"
-           style="
-               display: inline-block;
-               background: linear-gradient(45deg, #ff5733, #ff9966);
-               color: white;
-               font-family: 'Montserrat', sans-serif;
-               font-size: 16px;
-               padding: 15px 30px;
-               text-decoration: none;
-               border-radius: 50px;
-               box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-               transition: transform 0.3s, box-shadow 0.3s;
-           "
-           onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0px 6px 8px rgba(0,0,0,0.2)';"
-           onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';">
+        <a href="assets/RMZGospel.pdf" target="_blank" class="cta-button transition-all duration-500 ease-in-out">
           Lee el PDF del Evangelio RMZ
         </a>
       </div>
@@ -417,18 +566,18 @@
     <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10"></div>
 
     <!-- Dedicated Section for RMZ Whitepaper -->
-    <section id="whitepaper" style="padding: 50px 20px; text-align: center; background-color: #f9f9f9;">
+    <section id="whitepaper" style="padding: 50px 20px; text-align: center;">
       <div class="container">
-        <h2 style="font-family: 'Cinzel', serif; margin-bottom: 20px;">Whitepaper Oficial de Xolos $RMZ: Token de Cultura y Comunidad</h2>
-        <p style="font-family: 'Lora', serif; font-size: 18px; margin-bottom: 30px; color: #555;">
+        <h2 style="font-family: var(--heading-font); margin-bottom: 20px; color: var(--text-gray-200);">Whitepaper Oficial de Xolos $RMZ: Token de Cultura y Comunidad</h2>
+        <p style="font-family: var(--body-font); font-size: 18px; margin-bottom: 30px; color: rgba(229, 231, 235, 0.82);">
           El token <strong>Xolos $RMZ</strong> es más que una criptomoneda: es un manifiesto digital que une blockchain, arte ancestral y comunidad global.
         </p>
-        <p style="font-family: 'Lora', serif; font-size: 18px; margin-bottom: 30px; color: #555;">
+        <p style="font-family: var(--body-font); font-size: 18px; margin-bottom: 30px; color: rgba(229, 231, 235, 0.82);">
           Explora nuestro Whitepaper oficial y conoce la visión detrás del proyecto, su utilidad real, la filosofía que lo sustenta, y cómo puedes formar parte de esta revolución descentralizada inspirada en el Xoloitzcuintle.
         </p>
         <iframe src="assets/XolosRMZ_Whitepaper.pdf" width="100%" height="600px" style="border: none;"></iframe>
-        <p style="font-family: 'Lora', serif; font-size: 16px; margin-top: 20px; color: #777;">
-          También puedes <a href="assets/XolosRMZ_Whitepaper.pdf" target="_blank" style="color: #ff5733; text-decoration: none;">descargar el Whitepaper</a> para leerlo más tarde.
+        <p style="font-family: var(--body-font); font-size: 16px; margin-top: 20px; color: rgba(229, 231, 235, 0.7);">
+          También puedes <a href="assets/XolosRMZ_Whitepaper.pdf" target="_blank" style="color: var(--accent-amber-400); text-decoration: none;">descargar el Whitepaper</a> para leerlo más tarde.
         </p>
       </div>
     </section>
@@ -436,13 +585,13 @@
     <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10"></div>
 
     <!-- Xolos Ramírez Section -->
-    <section id="xolos-ramirez" style="background-color:#f9f9f9; padding:50px 20px;">
+    <section id="xolos-ramirez" style="padding:50px 20px;">
       <div class="container" style="max-width:900px; margin:auto; text-align:center;">
-        <h2 style="font-family:'Cinzel',serif; font-size:32px; color:#113D4A; margin-bottom:20px;">
+        <h2 style="font-family:var(--heading-font); font-size:32px; color:var(--text-gray-200); margin-bottom:20px;">
           Conoce a Xolos Ramírez
         </h2>
-        <p style="font-family:'Lora',serif; color:#555; margin-bottom:30px;">
-          Visita <a href="https://www.xolosramirez.com" target="_blank" style="color:#ff5733; text-decoration:none;">xolosramirez.com</a> y descubre más.
+        <p style="font-family:var(--body-font); color:rgba(229, 231, 235, 0.82); margin-bottom:30px;">
+          Visita <a href="https://www.xolosramirez.com" target="_blank" style="color:var(--accent-amber-400); text-decoration:none;">xolosramirez.com</a> y descubre más.
         </p>
         <div class="gallery" id="xolos-ramirez-gallery">
           <a href="https://www.xolosramirez.com" target="_blank" class="gallery-item">
@@ -507,32 +656,60 @@
   <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10"></div>
 
   <!-- Sección: Roadmap RMZWallet -->
-  <section class="roadmap" style="background:#0A0A0A; color:#FFD54F; padding:40px 20px; text-align:center;">
-    <h2>🔒 RMZWallet Roadmap</h2>
-    <div style="max-width:800px; margin:auto; text-align:left;">
-      <ul style="list-style:none; padding:0; font-size:1.1rem; line-height:1.8;">
-        <li>✅ PWA foundation (Offline-ready wallet core)</li>
-        <li>🔄 BLE mesh prototype (device-to-device sync)</li>
-        <li>🧩 IndexedDB storage (local UTXO management)</li>
-        <li>🚀 Public Launch — Q4 2025</li>
-      </ul>
+  <section id="rmzwallet-roadmap" class="section-shell">
+    <div class="max-w-6xl mx-auto surface-panel">
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+          <span class="section-eyebrow">🔒 Roadmap</span>
+          <h2 class="section-heading">RMZWallet Roadmap</h2>
+          <p class="section-subtitle">
+            Nuestra hoja de ruta prioriza resiliencia fuera de línea, sincronización segura y un lanzamiento comunitario sólido.
+            Cada hito desbloquea herramientas para que los guardianes del Xoloitzcuintle gestionen valor en cualquier territorio.
+          </p>
+        </div>
+        <div>
+          <ul>
+            <li><span>✅</span> Fundamentos PWA con modo sin conexión y carga instantánea.</li>
+            <li><span>🔄</span> Prototipo de malla BLE para sincronización entre dispositivos.</li>
+            <li><span>🧩</span> Gestión local de UTXOs mediante IndexedDB cifrado.</li>
+            <li><span>🚀</span> Lanzamiento público con gobernanza comunitaria — Q4 2025.</li>
+          </ul>
+          <p class="section-subtitle">
+            ¿Quieres aportar ideas al roadmap? Escríbenos y suma tu voz a la evolución del RMZWallet.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
   <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10"></div>
 
-  <!-- Sección: Team & Vision -->
-  <section class="team-vision" style="background:#111; color:#FFF; padding:40px 20px; text-align:center;">
-    <h2>🌎 Team & Vision</h2>
-    <p style="max-width:700px; margin:auto; font-size:1.1rem;">
-      XolosArmy Network is a collective led by <strong>Fernando Ramírez</strong>, merging ancient culture and open-source technology.
-      Our goal is to make the Xoloitzcuintli a symbol of digital freedom and cultural preservation.
-    </p>
-    <div style="margin-top:20px;">
-      <a href="https://t.me/xolosramirez" target="_blank" style="margin:5px; background:#FFD54F; color:#111; padding:10px 20px; border-radius:8px; text-decoration:none;">Join Telegram</a>
-      <a href="https://xolosramirez.club" target="_blank" style="margin:5px; background:#FFD54F; color:#111; padding:10px 20px; border-radius:8px; text-decoration:none;">Mastodon</a>
-    </div>
-  </section>
+    <!-- Sección: Team & Vision -->
+    <section id="team" class="section-shell">
+      <div class="max-w-6xl mx-auto surface-panel">
+        <div class="grid md:grid-cols-2 gap-12">
+          <div>
+            <span class="section-eyebrow">🌎 Team & Vision</span>
+            <h2 class="section-heading">Guardianes detrás de XolosArmy</h2>
+            <p class="section-subtitle">
+              XolosArmy Network es liderado por <strong>Fernando Ramírez</strong>, desarrollador y custodio de la herencia Xoloitzcuintle.
+              Combinamos código abierto, blockchain y narrativas ancestrales para preservar la cultura con herramientas descentralizadas.
+            </p>
+          </div>
+          <div>
+            <ul>
+              <li><span>🤝</span> Comunidad abierta que colabora en proyectos culturales y Web3.</li>
+              <li><span>📡</span> Investigación constante en conectividad alternativa y economía circular.</li>
+              <li><span>🔥</span> Experiencias NFT que honran el linaje del Xoloitzcuintle.</li>
+            </ul>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+              <a href="https://t.me/xolosramirez" target="_blank" class="cta-button transition-all duration-500 ease-in-out">Join Telegram</a>
+              <a href="https://xolosramirez.club" target="_blank" class="cta-button transition-all duration-500 ease-in-out">Mastodon</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
   <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10"></div>
 
@@ -548,7 +725,7 @@
          title="9e0a9d4720782cf661beaea6c5513f1972e0f3b1541ba4c83f4c87ef65f843dc">
         9e0a9d47…65f843dc
       </a>
-      <button id="copy-etoken" title="Copiar ID completo">📋</button>
+      <button id="copy-etoken" class="transition-all duration-500 ease-in-out" title="Copiar ID completo">📋</button>
     </div>
 
     <!-- Iconos sociales -->
@@ -571,95 +748,42 @@
 
 <style>
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
 }
 
 body {
-  background-color: #ffffff;
-  color: #111;
+  background-color: var(--bg-neutral-950);
+  color: var(--text-gray-200);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body.dark-mode {
-  background-color: #000000;
-  color: #FFD54F;
+  background-color: var(--bg-neutral-950);
+  color: var(--text-gray-200);
 }
 
-body.dark-mode section:not(#hero),
-body.dark-mode header,
-body.dark-mode main,
-body.dark-mode footer {
-  background-color: #000000 !important;
-  color: #FFD54F !important;
+body.light-mode {
+  background-color: #fdf9f2;
+  color: #1f2937;
+}
+
+body.light-mode a {
+  color: #b45309;
 }
 
 body.dark-mode a {
-  color: #FFD54F;
+  color: var(--accent-amber-400);
 }
 
-body.dark-mode .team-vision {
-  background: #000000 !important;
-  color: #FFD54F !important;
+body.light-mode .surface-panel {
+  background: rgba(255, 255, 255, 0.82);
+  color: #1f2937;
+  border-color: rgba(217, 119, 6, 0.35);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.15);
 }
 
-body.dark-mode .roadmap {
-  background: #000000 !important;
-  color: #FFD54F !important;
-}
-
-body.dark-mode nav a,
-body.dark-mode h1,
-body.dark-mode h2,
-body.dark-mode h3,
-body.dark-mode h4,
-body.dark-mode h5,
-body.dark-mode h6,
-body.dark-mode p,
-body.dark-mode li {
-  color: #FFD54F !important;
-}
-
-body.dark-mode .button-link,
-body.dark-mode a.button-link,
-body.dark-mode .team-vision a,
-body.dark-mode .roadmap a {
-  background-color: #FFD54F !important;
-  color: #111 !important;
-}
-
-@media (prefers-color-scheme: dark) {
-  body:not(.light-mode) {
-    background-color: #000000;
-    color: #FFD54F;
-  }
-
-  body:not(.light-mode) section:not(#hero),
-  body:not(.light-mode) header,
-  body:not(.light-mode) main,
-  body:not(.light-mode) footer {
-    background-color: #000000 !important;
-    color: #FFD54F !important;
-  }
-
-  body:not(.light-mode) nav a,
-  body:not(.light-mode) h1,
-  body:not(.light-mode) h2,
-  body:not(.light-mode) h3,
-  body:not(.light-mode) h4,
-  body:not(.light-mode) h5,
-  body:not(.light-mode) h6,
-  body:not(.light-mode) p,
-  body:not(.light-mode) li {
-    color: #FFD54F !important;
-  }
-
-  body:not(.light-mode) .button-link,
-  body:not(.light-mode) a.button-link,
-  body:not(.light-mode) .team-vision a,
-  body:not(.light-mode) .roadmap a {
-    background-color: #FFD54F !important;
-    color: #111 !important;
-  }
+body.light-mode .section-subtitle {
+  color: rgba(55, 65, 81, 0.75);
 }
 
 .theme-toggle {
@@ -667,8 +791,8 @@ body.dark-mode .roadmap a {
   top: 16px;
   right: 16px;
   background: rgba(17, 17, 17, 0.8);
-  color: #FFD54F;
-  border: 2px solid #FFD54F;
+  color: var(--accent-amber-400);
+  border: 2px solid rgba(251, 191, 36, 0.65);
   border-radius: 50%;
   width: 48px;
   height: 48px;
@@ -678,32 +802,34 @@ body.dark-mode .roadmap a {
   font-size: 20px;
   cursor: pointer;
   z-index: 10000;
-  transition: transform 0.3s ease, background 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
 }
 
 .theme-toggle:hover {
   transform: scale(1.05);
-  background: rgba(255, 213, 79, 0.15);
+  background: rgba(251, 191, 36, 0.12);
 }
 
-body.dark-mode .theme-toggle {
-  background: rgba(255, 213, 79, 0.1);
-  color: #FFD54F;
-  border-color: #FFD54F;
+body.light-mode .theme-toggle {
+  background: rgba(255, 255, 255, 0.85);
+  color: #b45309;
+  border-color: rgba(217, 119, 6, 0.6);
 }
 
 footer {
-  background-color: #111;
-  color: #fff;
+  background-color: rgba(17, 17, 17, 0.88);
+  color: var(--text-gray-200);
   padding: 24px 0;
   text-align: center;
 }
+
 footer .container {
   background: transparent !important;
   box-shadow: none !important;
   border-radius: 0 !important;
   padding: 0 16px;
 }
+
 footer .etoken-id {
   margin: 8px 0 4px;
   font-size: 14px;
@@ -713,19 +839,22 @@ footer .etoken-id {
   justify-content: center;
   align-items: center;
 }
+
 footer .etoken-id strong {
-  color: #FFD54F;
+  color: var(--accent-amber-400);
 }
+
 footer .etoken-id a {
-  color: #24BCD5;
+  color: var(--accent-amber-400);
   text-decoration: none;
 }
+
 footer .etoken-id a:hover {
   text-decoration: underline;
-  color: #90f0ff;
 }
+
 footer .etoken-id button {
-  background: #FFD54F;
+  background: var(--accent-amber-400);
   color: #111;
   border: none;
   border-radius: 4px;
@@ -733,22 +862,27 @@ footer .etoken-id button {
   padding: 2px 6px;
   font-size: 14px;
 }
+
 footer .etoken-id button:hover {
-  background: #e6c200;
+  background: #f59e0b;
 }
+
 footer .social-icons {
   margin-top: 10px;
   display: flex;
   gap: 16px;
   justify-content: center;
 }
+
 footer .social-icons a {
-  color: #fff;
+  color: var(--text-gray-200);
   font-size: 20px;
 }
+
 footer .social-icons a:hover {
-  color: #FFD54F;
+  color: var(--accent-amber-400);
 }
+
 @media (max-width: 420px) {
   footer .etoken-id { font-size: 13px; }
 }
@@ -877,14 +1011,15 @@ document.getElementById('copy-etoken').addEventListener('click', function() {
   <elevenlabs-convai agent-id="ao2s5Z7zdZPW9gthoihX"></elevenlabs-convai>
   <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script> -->
 
-  <div id="popup-xolo" style="display:none; position: fixed; bottom: 30px; right: 30px; background-color: #111; border: 2px solid #ff5733; border-radius: 12px; padding: 20px; z-index: 9999; width: 300px; color: white; box-shadow: 0 0 15px rgba(0,0,0,0.6); font-family: 'Lora', serif;">
-    <button onclick="document.getElementById('popup-xolo').style.display='none'" 
+  <div id="popup-xolo" style="display:none; position: fixed; bottom: 30px; right: 30px; background-color: #111; border: 2px solid #ff5733; border-radius: 12px; padding: 20px; z-index: 9999; width: 300px; color: white; box-shadow: 0 0 15px rgba(0,0,0,0.6); font-family: var(--body-font);">
+    <button onclick="document.getElementById('popup-xolo').style.display='none'"
+            class="transition-all duration-500 ease-in-out"
             style="position: absolute; top: 5px; right: 8px; background: transparent; border: none; color: #ff5733; font-size: 20px; cursor: pointer;">×</button>
     <h3 style="margin-top: 0;">🌀 El Xolo te ha encontrado</h3>
     <p style="font-size: 16px; margin-bottom: 20px;">
       Explora el Evangelio RMZ y descubre tu lugar en esta historia ancestral.
     </p>
-    <a href="#xoloitzcuintli-gospel" class="button-link" style="background-color: #ff5733; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; display: inline-block; font-size: 14px;">Leer ahora</a>
+    <a href="#xoloitzcuintli-gospel" class="cta-button transition-all duration-500 ease-in-out" style="padding: 10px 20px; font-size: 14px;">Leer ahora</a>
   </div>
 
 

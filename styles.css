@@ -1,10 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    color: #fff;
-    background: #111;
+    color: #e5e7eb;
+    background: #0a0a0a;
     line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    color: #e5e7eb;
+}
+
+a {
+    color: #fbbf24;
 }
 
 .container {
@@ -105,10 +116,12 @@ section {
 }
 
 #businesses li {
-    background: #333;
+    background: rgba(17, 17, 17, 0.85);
     padding: 1rem;
     margin-bottom: 0.5rem;
-    border-radius: 5px;
+    border-radius: 12px;
+    border: 1px solid rgba(251, 191, 36, 0.18);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -143,17 +156,18 @@ section {
     align-items: center;
     flex-direction: column;
     max-width: 300px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.16);
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0px 18px 40px rgba(0, 0, 0, 0.35);
+    background: rgba(17, 17, 17, 0.85);
     transition: box-shadow 0.3s ease;
     text-align: center;
     margin-bottom: 20px;
 }
 
 .gallery-item:hover {
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 24px 55px rgba(251, 191, 36, 0.28);
 }
 
 .gallery-item img {
@@ -182,81 +196,82 @@ section {
 
 
 .container {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    padding: 20px;
-    background: #ffffff;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    border-radius: 16px;
+    padding: 24px;
+    background: rgba(17, 17, 17, 0.85);
+    border: 1px solid rgba(251, 191, 36, 0.18);
 }
 
 
 
 
 .button-link {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     text-decoration: none;
-    border: 2px solid #007BFF; /* Blue border to resemble a button */
-    border-radius: 8px; /* Rounded corners */
-    padding: 10px; /* Add some padding around the image */
-    background-color: #007BFF; /* Button background color */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effects */
-}
-
-.button-link img {
-    display: block;
-    border-radius: 8px;
+    border-radius: 9999px;
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #fbbf24, #d97706);
+    color: #111;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 18px 40px rgba(251, 191, 36, 0.25);
 }
 
 .button-link:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    transform: scale(1.05); /* Slight zoom on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 24px 55px rgba(251, 191, 36, 0.35);
 }
 
 .button-link:active {
-    transform: scale(0.98); /* Shrink slightly on click */
+    transform: translateY(-1px);
 }
 
 
 /* General Section Styling */
 .vision-section {
-    background-color: #f9f9f9;
+    background-color: rgba(17, 17, 17, 0.75);
     padding: 40px 0;
     text-align: center;
 }
 
 .vision-section h2 {
     font-size: 2em;
-    color: #333;
+    color: #f4f4f5;
     margin-bottom: 20px;
 }
 
 .vision-section p {
     font-size: 1.1em;
-    color: #666;
+    color: rgba(229, 231, 235, 0.76);
     max-width: 700px;
     margin: 0 auto 30px;
 }
 
 /* Card Styling */
 .card {
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    border-radius: 8px;
+    background-color: rgba(17, 17, 17, 0.85);
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.35);
+    padding: 24px;
+    border-radius: 16px;
     max-width: 600px;
     margin: 0 auto;
+    border: 1px solid rgba(251, 191, 36, 0.15);
 }
 
 /* Summary Section */
 .summary h3 {
     font-size: 1.5em;
-    color: #333;
+    color: #f4f4f5;
     margin-top: 20px;
 }
 
 .summary ul {
     list-style-type: disc;
     padding-left: 20px;
-    color: #666;
+    color: rgba(229, 231, 235, 0.76);
 }
 
 .summary li {
@@ -282,10 +297,11 @@ section {
 
 div.card {
     margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    background-color: #f9f9f9;
+    border: 1px solid rgba(251, 191, 36, 0.2);
+    border-radius: 12px;
+    padding: 18px;
+    background-color: rgba(17, 17, 17, 0.85);
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.35);
 }
 .card-body {
     padding: 10px;
@@ -320,12 +336,12 @@ h1 {
 /* Card Styling */
 div.card {
     margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    background-color: #ffffff; /* Set a light background for contrast */
-    color: #333; /* Dark text color for readability */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    border: 1px solid rgba(251, 191, 36, 0.18);
+    border-radius: 14px;
+    padding: 18px;
+    background-color: rgba(17, 17, 17, 0.85);
+    color: #e5e7eb;
+    box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.35);
 }
 
 /* Card Body Styling */
@@ -337,13 +353,13 @@ div.card {
 .card-title {
     font-size: 1.25em;
     margin-bottom: 10px;
-    color: #000; /* Darker title color */
+    color: #f4f4f5;
 }
 
 /* Text Styling */
 .card-text {
     margin: 5px 0;
-    color: #555; /* Dark grey text for readability */
+    color: rgba(229, 231, 235, 0.78);
 }
 
 /* Link Styling */
@@ -502,10 +518,10 @@ footer {
 }
 
 .social-icons a:hover {
-    color: #fff; /* Change icon to white on hover */
-    background-color: #ff6347; /* Lighter red for hover effect */
-    transform: scale(1.1); /* Slightly increase size on hover */
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.6); /* Darker shadow on hover */
+    background-color: #fbbf24;
+    color: #111;
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(251, 191, 36, 0.35);
 }
 
 /* Additional styling for spacing and alignment */
@@ -537,25 +553,24 @@ footer {
     align-items: center;
     flex-direction: column;
     max-width: 300px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease
-    transition: box-shadow 0.3s ease;
+    border: 1px solid rgba(251, 191, 36, 0.16);
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0px 18px 40px rgba(0, 0, 0, 0.35);
     text-align: center;
-    margin-bottom: 20px;;
     margin-bottom: 20px;
+    background: rgba(17, 17, 17, 0.85);
+    transition: box-shadow 0.3s ease;
 }
 
 .gallery-item:hover {
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 24px 55px rgba(251, 191, 36, 0.28);
 }
 
 .gallery-item img {
     max-width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 10px;
     margin-bottom: 10px;
 }
 
