@@ -4,9 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Across the Obsidian River — Xoloitzcuintle as Soul Guide</title>
+
+  <!-- SEO / Sharing -->
   <meta name="description" content="From Mictlán to modern altars: the Xolo as psychopomp and cultural icon.">
+  <link rel="canonical" href="https://xolosarmy.xyz/blog/obsidian-river.html">
+  <meta property="og:title" content="Across the Obsidian River — Xoloitzcuintle as Soul Guide">
+  <meta property="og:description" content="From Mictlán to modern altars: the Xolo as psychopomp and cultural icon.">
+  <meta property="og:type" content="article">
   <meta property="og:image" content="https://i.imgur.com/nGyN5Pl.jpeg">
   <meta name="twitter:card" content="summary_large_image">
+
   <style>
     :root {
       --bg: #0d0d0d;
@@ -178,48 +185,49 @@
     }
   </style>
 </head>
-<body>
+<body id="top">
 
 <header>
   <h1>Across the Obsidian River</h1>
   <p class="subtitle">The Xoloitzcuintle as Soul Guide — and the Living Origins of Día de Muertos</p>
   <div class="hero">
-    <img src="https://i.imgur.com/nGyN5Pl.jpeg" alt="Xoloitzcuintle leading soul through the underworld">
+    <img src="https://i.imgur.com/nGyN5Pl.jpeg" alt="Xoloitzcuintle leading a soul through the underworld">
   </div>
-  <a class="cta-button" href="https://www.xolosramirez.com" target="_blank">Visit Xolos Ramírez</a>
-  <a class="cta-button" href="https://xolosarmy.xyz/blog/xoloitzcuintli-day-of-the-death.html">Read: Day of the Death</a>
+  <a class="cta-button" href="https://www.xolosramirez.com" target="_blank" rel="noopener noreferrer">Visit Xolos Ramírez</a>
+  <a class="cta-button" href="https://xolosarmy.xyz/blog/xoloitzcuintli-day-of-the-death.html" target="_blank" rel="noopener noreferrer">Read: Day of the Death</a>
 </header>
 
-  <!-- ===== XolosArmy · Embedded Video ===== -->
+<!-- ===== XolosArmy · Embedded Video ===== -->
 <section id="video" class="reveal" style="max-width: 860px; margin: 28px auto;">
-  <h2 style="margin-top: 0; font-size: 1.4rem; border-left: 5px solid #f59e0b; padding-left: 12px;">
+  <h2 style="margin-top: 0; font-size: 1.6rem; border-left: 5px solid #f59e0b; padding-left: 12px;">
     Feature Video
   </h2>
 
-  <!-- Contenedor responsivo 16:9 -->
+  <!-- Responsive 16:9 container -->
   <div style="position: relative; width: 100%; padding-top: 56.25%; border-radius: 12px; overflow: hidden; background:#111;">
     <iframe
       src="https://www.youtube.com/embed/FhtVXpiUi4c?si=ctAvk64KzhYM8iSD"
-      title="Xoloitzcuintle · Día de Muertos"
+      title="Feature Video — Xoloitzcuintle · Día de Muertos"
       style="position:absolute; inset:0; width:100%; height:100%; border:0;"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       referrerpolicy="strict-origin-when-cross-origin"
       allowfullscreen
+      loading="lazy"
     ></iframe>
   </div>
 
-  <!-- Enlace alternativo -->
+  <!-- Fallback link -->
   <p style="color:#9ca3af; font-size:0.95rem; margin-top:10px;">
     If the embed doesn’t load, watch it on YouTube:
-    <a href="https://www.youtube.com/embed/FhtVXpiUi4c?si=ctAvk64KzhYM8iSD" target="_blank" style="color:#22d3ee;">
+    <a href="https://www.youtube.com/embed/FhtVXpiUi4c?si=ctAvk64KzhYM8iSD" target="_blank" rel="noopener noreferrer" style="color:#22d3ee;">
       https://youtu.be/FhtVXpiUi4c
     </a>
   </p>
 </section>
 
-
 <div class="toc">
   <strong>In This Article:</strong>
+  <a href="#video">Feature Video</a>
   <a href="#summary">Executive Summary</a>
   <a href="#death">1. Death as Transformation</a>
   <a href="#trials">2. The Nine Trials</a>
@@ -293,10 +301,11 @@
   </section>
 </main>
 
-<a href="#top" class="back-to-top" id="backToTop">↑ Top</a>
+<a href="#top" class="back-to-top" id="backToTop" aria-label="Back to top">↑ Top</a>
 
 <footer>
-  © 2025 XolosArmy Network · More at <a href="https://www.xolosramirez.com" style="color:var(--brand);">XolosRamirez.com</a>
+  © 2025 XolosArmy Network · More at
+  <a href="https://www.xolosramirez.com" style="color:var(--brand);" target="_blank" rel="noopener noreferrer">XolosRamirez.com</a>
 </footer>
 
 <script>
@@ -305,9 +314,7 @@
   window.addEventListener('scroll', () => {
     for (let el of reveals) {
       const top = el.getBoundingClientRect().top;
-      if (top < window.innerHeight - 100) {
-        el.classList.add('visible');
-      }
+      if (top < window.innerHeight - 100) el.classList.add('visible');
     }
   });
 
