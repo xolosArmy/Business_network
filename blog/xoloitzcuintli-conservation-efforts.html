@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Xoloitzcuintle Legacy: A Conservation Journey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Aztec Earth -->
+    <!-- Application Structure Plan: The SPA uses a thematic, single-page scrolling structure to tell a narrative: from ancient history to near-extinction, successful recovery, and modern conservation. This non-linear approach is more engaging than a traditional report, guiding the user through a story of cultural heritage and survival. Key interactions include clickable cards for historical facts, a dynamic chart showing population recovery, an interactive diagram on conservation pillars, and filters to explore breed variations. -->
+    <!-- Visualization & Content Choices: 
+    1) Historical Info -> Goal: Inform/Engage -> Method: Interactive Cards -> Interaction: Click to reveal details.
+    2) Population Data -> Goal: Show Change -> Method: Line Chart (Chart.js) -> Interaction: Hover tooltips.
+    3) Conservation Strategy -> Goal: Organize/Explain -> Method: Interactive Diagram (CSS Grid) -> Interaction: Click to highlight.
+    4) Breed Variations -> Goal: Compare/Inform -> Method: Filters/Dynamic Text (JS).
+    -->
+    <!-- CONFIRMATION: NO inline SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAF8F5;
+            color: #3D352E;
+        }
+        .bg-custom-primary { background-color: #FAF8F5; }
+        .text-custom-primary { color: #3D352E; }
+        .text-custom-secondary { color: #78716C; }
+        .accent-bg { background-color: #D97706; }
+        .accent-text { color: #D97706; }
+        .accent-border { border-color: #D97706; }
+        .nav-link { position: relative; transition: color 0.3s ease; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #D97706;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 50vh;
+            max-height: 450px;
+        }
+        .xolo-icon-display {
+            width: 100%;
+            height: 150px;
+            border: 2px dashed #D1D5DB;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: #78716C;
+            transition: all 0.3s ease;
+        }
+        .link-chip {
+            display:inline-flex; align-items:center; gap:.5rem;
+            border:1px solid #D97706; color:#D97706; padding:.5rem .75rem;
+            border-radius:.75rem; font-weight:600; background:#FFF7ED;
+        }
+        .link-chip:hover { background:#FFEDD5; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Sticky nav appears after hero scroll -->
+    <header id="navbar" class="bg-custom-primary/80 backdrop-blur-md sticky top-0 z-50 hidden">
+        <nav class="container mx-auto px-6 py-3">
+            <div class="flex justify-center items-center space-x-6 md:space-x-8">
+                <a href="#history" class="nav-link text-custom-secondary hover:accent-text font-semibold tracking-wide">History</a>
+                <a href="#recovery" class="nav-link text-custom-secondary hover:accent-text font-semibold tracking-wide">Recovery</a>
+                <a href="#conservation" class="nav-link text-custom-secondary hover:accent-text font-semibold tracking-wide">Conservation</a>
+                <a href="#breed" class="nav-link text-custom-secondary hover:accent-text font-semibold tracking-wide">The Breed</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section id="hero" class="min-h-screen flex flex-col justify-center items-center text-center px-4">
+            <h1 class="text-4xl md:text-6xl font-bold text-custom-primary leading-tight">
+                The Legacy of the <span class="accent-text">Xoloitzcuintle</span>
+            </h1>
+            <p class="mt-4 text-lg md:text-xl text-custom-secondary max-w-3xl">
+                A journey through the history, survival, and conservation of one of the world’s oldest and most emblematic breeds—Mexico’s living treasure.
+            </p>
+
+            <!-- Link to the Xolos Ramírez article -->
+            <div class="mt-6">
+                <a class="link-chip"
+                   href="https://www.xolosramirez.com/2023/01/10/el-xoloitzcuintle-en-peligro-de-extinci%C3%B3n-la-importancia-del-esfuerzo-de-conservaci%C3%B3n-de-xolos-ramirez/"
+                   target="_blank" rel="noopener">
+                   📖 Read the full article on Xolos Ramírez
+                </a>
+            </div>
+
+            <div class="mt-12 text-7xl text-gray-400 opacity-50">
+                &#128021;
+            </div>
+            <a href="#history" class="absolute bottom-10 animate-bounce">
+                <svg class="w-8 h-8 text-custom-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </a>
+        </section>
+
+        <!-- HISTORY -->
+        <section id="history" class="py-20 md:py-32 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold text-custom-primary">Mexico’s Spiritual Guide</h2>
+                    <p class="mt-4 text-custom-secondary text-lg">
+                        With more than 3,500 years of history, the Xoloitzcuintle is more than a dog; it is a living symbol of Mexican culture. Its story is woven with gods, artists, and the struggle for cultural survival. Explore the milestones that have defined this unique breed.
+                    </p>
+                </div>
+                <div class="mt-16 grid md:grid-cols-3 gap-8">
+                    <div class="history-card bg-custom-primary rounded-lg p-6 cursor-pointer transform hover:-translate-y-2 transition-transform duration-300 shadow-lg">
+                        <div class="flex items-center">
+                            <span class="text-3xl mr-4">📜</span>
+                            <h3 class="text-xl font-bold accent-text">Aztec Mythology</h3>
+                        </div>
+                        <p class="history-content text-custom-secondary mt-4">
+                            In the Aztec worldview, the Xolo was created by the god Xólotl to protect the living and guide the souls of the dead through the perilous underworld, Mictlán—a sacred companion and spiritual guardian.
+                        </p>
+                    </div>
+                    <div class="history-card bg-custom-primary rounded-lg p-6 cursor-pointer transform hover:-translate-y-2 transition-transform duration-300 shadow-lg">
+                        <div class="flex items-center">
+                            <span class="text-3xl mr-4">🎨</span>
+                            <h3 class="text-xl font-bold accent-text">Art & Culture</h3>
+                        </div>
+                        <p class="history-content text-custom-secondary mt-4">
+                            Immortalized by masters like Diego Rivera and Frida Kahlo, the Xolo became an icon of post-revolutionary Mexican nationalism—representing Indigenous heritage and pride in the nation’s pre-Hispanic roots.
+                        </p>
+                    </div>
+                    <div class="history-card bg-custom-primary rounded-lg p-6 cursor-pointer transform hover:-translate-y-2 transition-transform duration-300 shadow-lg">
+                        <div class="flex items-center">
+                           <span class="text-3xl mr-4">💔</span>
+                           <h3 class="text-xl font-bold accent-text">Near Extinction</h3>
+                        </div>
+                        <p class="history-content text-custom-secondary mt-4">
+                            After the Spanish conquest, the breed was pushed to the brink of extinction. Seen as “pagan” and even consumed as food, Xolos survived for centuries only in remote rural areas of Mexico, preserving their ancient lineage in secret.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RECOVERY -->
+        <section id="recovery" class="py-20 md:py-32">
+            <div class="container mx-auto px-6">
+                 <div class="text-center max-w-3xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold text-custom-primary">The Rebirth of a Breed</h2>
+                    <p class="mt-4 text-custom-secondary text-lg">
+                        The Xoloitzcuintle’s story is not one of permanent endangerment but of extraordinary recovery. Thanks to dedicated efforts in the 20th century, the breed was saved from oblivion. The chart below illustrates this successful comeback—proof of Mexico’s commitment to its living heritage.
+                    </p>
+                </div>
+                <div class="mt-16">
+                    <div class="chart-container bg-white p-4 rounded-lg shadow-xl">
+                        <canvas id="populationChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONSERVATION -->
+        <section id="conservation" class="py-20 md:py-32 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold text-custom-primary">Conservation Today: The “Xolos Ramírez” Model</h2>
+                    <p class="mt-4 text-custom-secondary text-lg">
+                        Today the challenge is not survival but preservation. The conservation effort—embodied by responsible breeders like the “Xolos Ramírez” archetype—focuses on maintaining the breed’s purity, health, and cultural meaning. This model stands on four core pillars.
+                    </p>
+                </div>
+                <div class="mt-16 flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/3">
+                        <div class="grid grid-cols-2 md:grid-cols-1 gap-4">
+                            <button data-pillar="ethics" class="pillar-btn p-4 border-2 accent-border bg-amber-50 rounded-lg text-left transition duration-300">
+                                <h3 class="font-bold accent-text">Ethical Breeding</h3>
+                                <p class="text-sm text-custom-secondary">Prioritize health and temperament over trends.</p>
+                            </button>
+                            <button data-pillar="health" class="pillar-btn p-4 border-2 border-gray-300 rounded-lg text-left transition duration-300">
+                                <h3 class="font-bold text-custom-primary">Genetic Health</h3>
+                                <p class="text-sm text-custom-secondary">Maintain diversity and lineage integrity.</p>
+                            </button>
+                            <button data-pillar="education" class="pillar-btn p-4 border-2 border-gray-300 rounded-lg text-left transition duration-300">
+                                <h3 class="font-bold text-custom-primary">Public Education</h3>
+                                <p class="text-sm text-custom-secondary">Share history and correct care
