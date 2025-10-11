@@ -22,13 +22,13 @@ export class TransactionsPage implements OnInit, OnDestroy {
 
   constructor(private store: TxStorageService) {}
 
-  ngOnInit() {
-    this.sub = this.store.tx$.subscribe(data => {
+  ngOnInit(): void {
+    this.sub = this.store.tx$.subscribe((data: StoredTx[]) => {
       this.txs = data;
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.sub?.unsubscribe();
   }
 
@@ -42,7 +42,7 @@ export class TransactionsPage implements OnInit, OnDestroy {
     }
   }
 
-  clearAll() {
+  clearAll(): void {
     this.store.clear();
   }
 }
