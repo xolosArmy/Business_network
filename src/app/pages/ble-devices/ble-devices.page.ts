@@ -22,34 +22,40 @@ export class BleDevicesPage implements OnInit, OnDestroy {
   connectionStatus = 'Desconectado';
   isSupported = true;
 
-  private listeners: PluginListenerHandle[] = [];
+  private scanListener?: PluginListenerHandle;
   private scanTimeout?: ReturnType<typeof setTimeout>;
 
   constructor(private readonly zone: NgZone) {}
 
   async ngOnInit(): Promise<void> {
-    await this.registerListeners();
     await this.checkPermissions();
     await this.restoreLastDevice();
   }
 
   ngOnDestroy(): void {
     void this.stopScan();
-    for (const listener of this.listeners) {
-      void listener.remove();
-    }
-    this.listeners = [];
+    void this.scanListener?.remove();
+    this.scanListener = undefined;
   }
 
   async checkPermissions(): Promise<void> {
-    if (!BluetoothLe?.requestLEScanPermissions) {
+    if (!BluetoothLe?.requestLEScan || !BluetoothLe?.addListener) {
       this.isSupported = false;
       console.warn('BLE plugin no disponible en esta plataforma.');
       return;
     }
 
     try {
-      await BluetoothLe.requestLEScanPermissions();
+      const permissionListener = await BluetoothLe.addListener(
+        'onScanResult',
+        () => {},
+      );
+      try {
+        await BluetoothLe.requestLEScan({});
+      } finally {
+        await BluetoothLe.stopLEScan();
+        await permissionListener.remove();
+      }
     } catch (error) {
       console.error('Error obteniendo permisos BLE:', error);
       await Toast.show({ text: 'No fue posible obtener permisos BLE.' });
@@ -85,32 +91,38 @@ export class BleDevicesPage implements OnInit, OnDestroy {
       : [];
 
     try {
-      await BluetoothLe.requestLEScan({}, (result) => {
-        if (!result?.device) {
-          return;
-        }
-
-        this.zone.run(() => {
-          const mapped: BLEDevice = {
-            deviceId: result.device.deviceId,
-            name: result.device.name || 'Sin nombre',
-            rssi: result.rssi ?? undefined,
-          };
-
-          const existingIndex = this.devices.findIndex(
-            (d) => d.deviceId === mapped.deviceId,
-          );
-
-          if (existingIndex >= 0) {
-            this.devices[existingIndex] = {
-              ...this.devices[existingIndex],
-              ...mapped,
-            };
-          } else {
-            this.devices = [...this.devices, mapped];
+      await this.scanListener?.remove();
+      this.scanListener = await BluetoothLe.addListener(
+        'onScanResult',
+        (result) => {
+          if (!result?.device) {
+            return;
           }
-        });
-      });
+
+          this.zone.run(() => {
+            const mapped: BLEDevice = {
+              deviceId: result.device.deviceId,
+              name: result.device.name || 'Sin nombre',
+              rssi: result.rssi ?? undefined,
+            };
+
+            const existingIndex = this.devices.findIndex(
+              (d) => d.deviceId === mapped.deviceId,
+            );
+
+            if (existingIndex >= 0) {
+              this.devices[existingIndex] = {
+                ...this.devices[existingIndex],
+                ...mapped,
+              };
+            } else {
+              this.devices = [...this.devices, mapped];
+            }
+          });
+        },
+      );
+
+      await BluetoothLe.requestLEScan({});
 
       this.scanTimeout = setTimeout(() => {
         void this.stopScan();
@@ -119,6 +131,8 @@ export class BleDevicesPage implements OnInit, OnDestroy {
       await Toast.show({ text: 'Escaneando dispositivos BLE...' });
     } catch (error) {
       console.error('Error al escanear BLE:', error);
+      await this.scanListener?.remove();
+      this.scanListener = undefined;
       this.zone.run(() => {
         this.scanning = false;
       });
@@ -141,6 +155,9 @@ export class BleDevicesPage implements OnInit, OnDestroy {
     } catch (error) {
       console.warn('El escaneo BLE ya se encontraba detenido.', error);
     }
+
+    await this.scanListener?.remove();
+    this.scanListener = undefined;
 
     this.zone.run(() => {
       this.scanning = false;
@@ -220,61 +237,4 @@ export class BleDevicesPage implements OnInit, OnDestroy {
     }
   }
 
-  private async registerListeners(): Promise<void> {
-    if (!BluetoothLe?.addListener) {
-      return;
-    }
-
-    try {
-      const connectedListener = await BluetoothLe.addListener(
-        'onConnected',
-        (event: { deviceId: string; name?: string }) => {
-          this.zone.run(() => {
-            const device =
-              this.devices.find((item) => item.deviceId === event.deviceId) ??
-              ({
-                deviceId: event.deviceId,
-                name: event.name || 'Sin nombre',
-              } as BLEDevice);
-            let updated = this.devices.map((item) =>
-              item.deviceId === event.deviceId
-                ? { ...item, connected: true }
-                : { ...item, connected: false },
-            );
-
-            if (!updated.some((item) => item.deviceId === event.deviceId)) {
-              updated = [...updated, { ...device, connected: true }];
-            }
-
-            this.devices = updated;
-            this.connectedDevice = { ...device, connected: true };
-            this.connectionStatus = 'Conectado';
-            localStorage.setItem('rmz_ble_device', JSON.stringify(this.connectedDevice));
-          });
-        },
-      );
-      this.listeners.push(connectedListener);
-
-      const disconnectedListener = await BluetoothLe.addListener(
-        'onDisconnected',
-        (event: { deviceId: string }) => {
-          this.zone.run(() => {
-            if (this.connectedDevice?.deviceId === event.deviceId) {
-              this.connectedDevice = null;
-              this.connectionStatus = 'Desconectado';
-              localStorage.removeItem('rmz_ble_device');
-            }
-            this.devices = this.devices.map((item) =>
-              item.deviceId === event.deviceId
-                ? { ...item, connected: false }
-                : item,
-            );
-          });
-        },
-      );
-      this.listeners.push(disconnectedListener);
-    } catch (error) {
-      console.warn('No fue posible registrar los listeners BLE.', error);
-    }
-  }
 }
