@@ -30,7 +30,7 @@ export class PwaService {
 
     this.updates.versionUpdates
       .pipe(filter((event): event is VersionReadyEvent => event.type === 'VERSION_READY'))
-      .subscribe(event => {
+      .subscribe((event: VersionReadyEvent) => {
         console.log('🔁 Actualización de PWA disponible', event);
         void this.promptForUpdate();
       });
