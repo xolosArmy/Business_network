@@ -32,8 +32,8 @@ export class WalletService {
 
   async createAndBroadcastTx(toAddress: string, amount: number) {
     if (!this.wallet) throw new Error('Wallet not initialized');
-    const tx = await this.wallet.createTx({ to: toAddress, amount });
-    const txid = await this.wallet.broadcastTx(tx);
+    const tx = await this.wallet.createTransaction({ to: toAddress, amount });
+    const txid = await this.wallet.broadcastTransaction(tx);
     return txid;
   }
 }

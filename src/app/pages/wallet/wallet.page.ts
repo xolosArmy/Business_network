@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Wallet } from 'ecash-wallet';
 import QRCode from 'qrcode';
 
 import { BleService } from '../../services/ble.service';
@@ -13,9 +14,12 @@ import { WalletService } from '../../services/wallet.service';
 })
 export class WalletPage implements OnInit {
   address = '';
+  wallet: Wallet | null = null;
   balanceLabel = '0 XEC';
   showQr = false;
   qrImageSrc: string | null = null;
+  toAddr = '';
+  amount: number | null = null;
   sending = false;
   isLoading = false;
   errorMessage = '';
@@ -51,7 +55,7 @@ export class WalletPage implements OnInit {
         return;
       }
 
-      await this.walletService.loadFromMnemonic(mnemonic);
+      this.wallet = await this.walletService.loadFromMnemonic(mnemonic);
       this.address = await this.walletService.getAddress();
       await this.refreshBalance();
       await this.generateQr();
@@ -83,6 +87,9 @@ export class WalletPage implements OnInit {
     const destination = String(this.sendForm.value.toAddr ?? '').trim();
     const amountXec = Number(this.sendForm.value.amount);
 
+    this.toAddr = destination;
+    this.amount = Number.isFinite(amountXec) ? amountXec : null;
+
     if (!destination) {
       this.errorMessage = 'La dirección de destino es obligatoria.';
       return;
@@ -105,6 +112,8 @@ export class WalletPage implements OnInit {
         this.successMessage = `Transacción enviada ✅ TXID: ${result.txid}`;
         await this.refreshBalance();
         this.sendForm.reset();
+        this.toAddr = '';
+        this.amount = null;
       } else {
         this.errorMessage = result.error ?? 'No se pudo enviar la transacción.';
       }
