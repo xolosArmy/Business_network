@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ChronikClient, Wallet } from 'ecash-wallet';
+import { Wallet } from 'ecash-wallet';
+import { ChronikClient, type ScriptUtxo } from 'chronik-client';
 import type { WalletInfo } from './cartera.service';
 
 const SATS_PER_XEC = 100;
@@ -10,7 +11,7 @@ type WalletSource =
 
 @Injectable({ providedIn: 'root' })
 export class SaldoService {
-  private readonly chronik = new ChronikClient('https://chronik.be.cash/xec');
+  private readonly chronik = new ChronikClient(['https://chronik.be.cash/xec']);
 
   async getBalance(walletSource: WalletSource): Promise<number> {
     const mnemonic = walletSource?.mnemonic?.trim();
@@ -26,7 +27,8 @@ export class SaldoService {
     }
 
     const utxosResponse = await this.chronik.address(address).utxos();
-    const balanceSats = utxosResponse.utxos.reduce<bigint>(
+    const utxos = utxosResponse.utxos as ScriptUtxo[];
+    const balanceSats = utxos.reduce<bigint>(
       (total, utxo) => total + this.parseSats(utxo.sats),
       0n,
     );

@@ -17,7 +17,7 @@ type ChronikWsMessage = {
   providedIn: 'root',
 })
 export class ChronikService {
-  private readonly chronik = new ChronikClient('https://chronik.e.cash/xec-mainnet');
+  private readonly chronik = new ChronikClient(['https://chronik.e.cash/xec-mainnet']);
   private readonly subscribedAddresses = new Set<string>();
   private wsClient?: ChronikWsClient;
   private wsReady!: Promise<void>;
@@ -64,7 +64,7 @@ export class ChronikService {
     try {
       await this.ensureWsClient();
       await this.wsReady;
-      await this.wsClient?.subscribeScript('p2pkh', address);
+      await this.wsClient?.subscribeToScript('p2pkh', address);
     } catch (err) {
       console.error('❌ Error Chronik WS:', err);
     }
@@ -94,19 +94,21 @@ export class ChronikService {
         },
       });
 
-      this.wsClient.onConnect(async _event => {
-        console.log('🛰️ Conectado a Chronik WS');
-        this.resolveWsReady?.();
-        this.resolveWsReady = undefined;
+      this.wsClient.onConnect = () => {
+        void (async () => {
+          console.log('🛰️ Conectado a Chronik WS');
+          this.resolveWsReady?.();
+          this.resolveWsReady = undefined;
 
-        for (const address of this.subscribedAddresses) {
-          try {
-            await this.wsClient?.subscribeScript('p2pkh', address);
-          } catch (err) {
-            console.error('❌ Error suscribiendo dirección Chronik:', err);
+          for (const address of this.subscribedAddresses) {
+            try {
+              await this.wsClient?.subscribeToScript('p2pkh', address);
+            } catch (err) {
+              console.error('❌ Error suscribiendo dirección Chronik:', err);
+            }
           }
-        }
-      });
+        })();
+      };
     }
 
     return this.wsClient;

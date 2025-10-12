@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
-import { ChronikClient, Wallet } from 'ecash-wallet';
+import { Wallet } from 'ecash-wallet';
+import { ChronikClient } from 'chronik-client';
 import { generateMnemonic, validateMnemonic } from '@scure/bip39';
-import { wordlist as ENGLISH_WORDLIST } from '@scure/bip39/wordlists/english';
+import { wordlist as ENGLISH_WORDLIST } from '@scure/bip39/wordlists/english.js';
 
 import { OfflineStorageService } from './offline-storage.service';
 
@@ -20,7 +21,7 @@ const CHRONIK_URL = 'https://chronik.be.cash/xec';
 @Injectable({ providedIn: 'root' })
 export class CarteraService {
   private cachedWallet: WalletInfo | null = null;
-  private readonly chronikClient = new ChronikClient(CHRONIK_URL);
+  private readonly chronikClient = new ChronikClient([CHRONIK_URL]);
 
   constructor(private readonly offlineStorage: OfflineStorageService) {}
 

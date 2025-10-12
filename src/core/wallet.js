@@ -6,7 +6,7 @@
 // - Balance vía Chronik (cliente oficial + REST fallback, con diagnóstico)
 
 import { generateMnemonic, mnemonicToSeedSync, validateMnemonic } from '@scure/bip39';
-import { wordlist as WORDS_ES } from '@scure/bip39/wordlists/spanish';
+import { wordlist as WORDS_ES } from '@scure/bip39/wordlists/spanish.js';
 import { HDKey } from '@scure/bip32';
 import * as secp from '@noble/secp256k1';
 import { sha256 } from '@noble/hashes/sha256';
