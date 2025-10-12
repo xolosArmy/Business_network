@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Wallet } from 'ecash-wallet';
-import { ChronikClient } from 'chronik-client';
+import { ChronikClient, type ScriptUtxo } from 'chronik-client';
 
 @Injectable({
   providedIn: 'root'
@@ -8,32 +8,72 @@ import { ChronikClient } from 'chronik-client';
 export class WalletService {
   private chronik: ChronikClient;
   private wallet: Wallet | null = null;
+  private static readonly SATS_PER_XEC = 100;
 
   constructor() {
     this.chronik = new ChronikClient('https://chronik.e.cash/xec-mainnet');
   }
 
-  async loadFromMnemonic(mnemonic: string) {
+  async loadFromMnemonic(mnemonic: string): Promise<Wallet> {
     this.wallet = await Wallet.fromMnemonic(mnemonic, this.chronik);
     return this.wallet;
   }
 
   async getAddress(): Promise<string> {
-    if (!this.wallet) throw new Error('Wallet not initialized');
-    return this.wallet.getAddress();
+    return this.getInitializedWallet().address;
   }
 
   async getBalance(): Promise<number> {
-    if (!this.wallet) throw new Error('Wallet not initialized');
-    const utxos = await this.wallet.getUtxos();
-    const balance = utxos.reduce((sum, utxo) => sum + utxo.value, 0);
-    return balance / 100; // convertir satoshis a XEC
+    const wallet = this.getInitializedWallet();
+    const utxos = await wallet.getAllUtxos();
+    const totalSats = utxos.reduce<bigint>((sum, utxo) => {
+      if (typeof utxo.sats === 'bigint') {
+        return sum + utxo.sats;
+      }
+      const legacyValue = (utxo as ScriptUtxo & { value?: number }).value;
+      return sum + BigInt(Math.round(legacyValue ?? 0));
+    }, 0n);
+
+    return Number(totalSats) / WalletService.SATS_PER_XEC;
   }
 
-  async createAndBroadcastTx(toAddress: string, amount: number) {
-    if (!this.wallet) throw new Error('Wallet not initialized');
-    const tx = await this.wallet.createTransaction({ to: toAddress, amount });
-    const txid = await this.wallet.broadcastTransaction(tx);
+  async createAndBroadcastTx(toAddress: string, amount: number): Promise<string> {
+    const wallet = this.getInitializedWallet();
+    const rawTx = await wallet.createTx({ to: toAddress, amount });
+    const broadcastResult = await wallet.broadcastTx(rawTx);
+    const txid = this.extractTxId(broadcastResult);
+
+    if (!txid) {
+      throw new Error('Unable to determine transaction ID from broadcast result');
+    }
+
     return txid;
+  }
+
+  private getInitializedWallet(): Wallet {
+    if (!this.wallet) {
+      throw new Error('Wallet not initialized');
+    }
+
+    return this.wallet;
+  }
+
+  private extractTxId(result: unknown): string | null {
+    if (typeof result === 'string' && result) {
+      return result;
+    }
+
+    if (result && typeof result === 'object') {
+      const record = result as Record<string, unknown>;
+      const possibleKeys = ['txid', 'txId', 'id'];
+      for (const key of possibleKeys) {
+        const value = record[key];
+        if (typeof value === 'string' && value) {
+          return value;
+        }
+      }
+    }
+
+    return null;
   }
 }
