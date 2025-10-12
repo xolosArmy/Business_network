@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Wallet } from 'ecash-wallet';
-import { ChronikClient, type ScriptUtxo } from 'chronik-client';
+import { Wallet, ChronikClient, type ScriptUtxo } from 'ecash-wallet';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,7 @@ export class WalletService {
   private static readonly SATS_PER_XEC = 100;
 
   constructor() {
-    this.chronik = new ChronikClient('https://chronik.e.cash/xec-mainnet');
+    this.chronik = new ChronikClient('https://chronik.be.cash/xec');
   }
 
   async loadFromMnemonic(mnemonic: string): Promise<Wallet> {

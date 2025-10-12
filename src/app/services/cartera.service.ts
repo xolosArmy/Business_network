@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
-import { ChronikClient } from 'chronik-client';
-import { Wallet } from 'ecash-wallet';
+import { ChronikClient, Wallet } from 'ecash-wallet';
 import { generateMnemonic, validateMnemonic } from '@scure/bip39';
 import { wordlist as ENGLISH_WORDLIST } from '@scure/bip39/wordlists/english';
 
@@ -16,7 +15,7 @@ export interface WalletInfo {
 
 const WORDS = ENGLISH_WORDLIST;
 const STORAGE_KEY = 'rmz_wallet';
-const CHRONIK_URL = 'https://chronik.e.cash/xec-mainnet';
+const CHRONIK_URL = 'https://chronik.be.cash/xec';
 
 @Injectable({ providedIn: 'root' })
 export class CarteraService {
