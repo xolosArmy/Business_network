@@ -58,7 +58,10 @@ export class StatusBarComponent implements OnInit, OnDestroy {
       return null;
     }
 
-    const name = this.bleService.connectedDevice.name ?? this.bleService.connectedDevice.localName;
+    const name =
+      this.bleService.connectedDevice?.name ||
+      this.bleService.connectedDevice?.deviceName ||
+      'Unknown';
     return name && name.trim().length > 0 ? name : null;
   }
 }

@@ -7,7 +7,7 @@ import { BleService } from '../../services/ble.service';
 class MockBleService {
   connectedDevice: {
     name?: string | null;
-    localName?: string | null;
+    deviceName?: string | null;
   } | null = null;
 }
 
@@ -72,7 +72,7 @@ describe('StatusBarComponent', () => {
   it('should return null when BLE device has no name information', () => {
     bleService.connectedDevice = {
       name: ' ',
-      localName: '',
+      deviceName: '',
     };
 
     expect(component.bleDevice).toBeNull();
