@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Wallet } from 'ecash-wallet';
-import QRCode from 'qrcode';
+import * as QRCode from 'qrcode';
 
 import { BleService } from '../../services/ble.service';
 import { EnviarService } from '../../services/enviar.service';
