@@ -64,7 +64,7 @@ export class ChronikService {
     try {
       await this.ensureWsClient();
       await this.wsReady;
-      await this.wsClient?.subscribeToAddress(address);
+      await this.wsClient?.subscribeScript('p2pkh', address);
     } catch (err) {
       console.error('❌ Error Chronik WS:', err);
     }
@@ -94,14 +94,14 @@ export class ChronikService {
         },
       });
 
-      this.wsClient.onConnect(async () => {
+      this.wsClient.onConnect(async _event => {
         console.log('🛰️ Conectado a Chronik WS');
         this.resolveWsReady?.();
         this.resolveWsReady = undefined;
 
         for (const address of this.subscribedAddresses) {
           try {
-            await this.wsClient?.subscribeToAddress(address);
+            await this.wsClient?.subscribeScript('p2pkh', address);
           } catch (err) {
             console.error('❌ Error suscribiendo dirección Chronik:', err);
           }
