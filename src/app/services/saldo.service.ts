@@ -27,7 +27,7 @@ export class SaldoService {
 
     const utxosResponse = await this.chronik.address(address).utxos();
     const balanceSats = utxosResponse.utxos.reduce<bigint>(
-      (total, utxo) => total + this.parseSats(utxo.sats),
+      (total: bigint, utxo: { sats: unknown }) => total + this.parseSats(utxo.sats),
       0n,
     );
 
@@ -60,7 +60,7 @@ export class SaldoService {
     return mnemonic
       .trim()
       .split(/\s+/u)
-      .map((word) => word.toLowerCase())
+      .map((word: string) => word.toLowerCase())
       .join(' ');
   }
 

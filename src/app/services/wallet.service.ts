@@ -25,7 +25,7 @@ export class WalletService {
   async getBalance(): Promise<number> {
     const wallet = this.getInitializedWallet();
     const utxos = await wallet.getAllUtxos();
-    const totalSats = utxos.reduce<bigint>((sum, utxo) => {
+    const totalSats = utxos.reduce<bigint>((sum: bigint, utxo: ScriptUtxo) => {
       if (typeof utxo.sats === 'bigint') {
         return sum + utxo.sats;
       }
