@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Wallet } from 'ecash-wallet';
-import { ChronikClient, type ScriptUtxo } from 'chronik-client';
+import { ChronikClient, type ScriptUtxos } from 'chronik-client';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class WalletService {
   private static readonly SATS_PER_XEC = 100;
 
   constructor() {
-    this.chronik = new ChronikClient(['https://chronik.be.cash/xec']);
+    this.chronik = new ChronikClient('https://chronik.be.cash/xec');
   }
 
   async loadFromMnemonic(mnemonic: string): Promise<Wallet> {
@@ -26,11 +26,11 @@ export class WalletService {
   async getBalance(): Promise<number> {
     const wallet = this.getInitializedWallet();
     const utxos = await wallet.getAllUtxos();
-    const totalSats = utxos.reduce<bigint>((sum: bigint, utxo: ScriptUtxo) => {
+    const totalSats = utxos.reduce<bigint>((sum: bigint, utxo: ScriptUtxos) => {
       if (typeof utxo.sats === 'bigint') {
         return sum + utxo.sats;
       }
-      const legacyValue = (utxo as ScriptUtxo & { value?: number }).value;
+      const legacyValue = (utxo as ScriptUtxos & { value?: number }).value;
       return sum + BigInt(Math.round(legacyValue ?? 0));
     }, 0n);
 
