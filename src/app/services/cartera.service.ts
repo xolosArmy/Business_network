@@ -21,7 +21,7 @@ const CHRONIK_URL = 'https://chronik.be.cash/xec';
 @Injectable({ providedIn: 'root' })
 export class CarteraService {
   private cachedWallet: WalletInfo | null = null;
-  private readonly chronikClient = new ChronikClient([CHRONIK_URL]);
+  private readonly chronikClient = new ChronikClient(CHRONIK_URL);
 
   constructor(private readonly offlineStorage: OfflineStorageService) {}
 
