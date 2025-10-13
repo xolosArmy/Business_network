@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Wallet, ChronikClient, type ScriptUtxo } from 'ecash-wallet';
+import { Wallet } from 'ecash-wallet';
+import { ChronikClient, type ScriptUtxo } from 'chronik-client';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class WalletService {
   private static readonly SATS_PER_XEC = 100;
 
   constructor() {
-    this.chronik = new ChronikClient('https://chronik.be.cash/xec');
+    this.chronik = new ChronikClient(['https://chronik.be.cash/xec']);
   }
 
   async loadFromMnemonic(mnemonic: string): Promise<Wallet> {
@@ -37,6 +38,28 @@ export class WalletService {
   }
 
   async createAndBroadcastTx(toAddress: string, amount: number): Promise<string> {
+    const { txid } = await this.broadcastTransaction(toAddress, amount);
+    return txid;
+  }
+
+  async enviar(toAddress: string, amount: number): Promise<{
+    txid: string;
+    rawTx: string;
+    result: unknown;
+  }> {
+    return this.broadcastTransaction(toAddress, amount);
+  }
+
+  async signTx(toAddress: string, amount: number): Promise<string> {
+    const wallet = this.getInitializedWallet();
+    return wallet.createTx({ to: toAddress, amount });
+  }
+
+  private async broadcastTransaction(toAddress: string, amount: number): Promise<{
+    txid: string;
+    rawTx: string;
+    result: unknown;
+  }> {
     const wallet = this.getInitializedWallet();
     const rawTx = await wallet.createTx({ to: toAddress, amount });
     const broadcastResult = await wallet.broadcastTx(rawTx);
@@ -46,7 +69,7 @@ export class WalletService {
       throw new Error('Unable to determine transaction ID from broadcast result');
     }
 
-    return txid;
+    return { txid, rawTx, result: broadcastResult };
   }
 
   private getInitializedWallet(): Wallet {

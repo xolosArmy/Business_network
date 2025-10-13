@@ -18,6 +18,10 @@
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "types": ["web-bluetooth"],
+    "typeRoots": ["node_modules/@types", "src/types"],
+    "paths": {
+      "ecash-wallet": ["src/shims/ecash-wallet"]
+    },
     "lib": ["es2022", "dom"]
   },
   "angularCompilerOptions": {

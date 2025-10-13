@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ChronikClient, Wallet } from 'ecash-wallet';
+import { Wallet } from 'ecash-wallet';
+import { ChronikClient } from 'chronik-client';
 
 import { BLEService } from './ble.service';
 import { ChronikService } from './chronik.service';
@@ -7,7 +8,7 @@ import { NotificationService } from './notification.service';
 import { NotificationSettingsService } from './notification-settings.service';
 import { StoredTx, TxStorageService } from './tx-storage.service';
 
-const chronik = new ChronikClient('https://chronik.be.cash/xec');
+const chronik = new ChronikClient(['https://chronik.be.cash/xec']);
 const SATS_PER_XEC = 100;
 
 @Injectable({

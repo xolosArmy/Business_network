@@ -1,4 +1,5 @@
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import type { BleDevice } from '@capacitor-community/bluetooth-le';
 
 import { BleService } from '../../services/ble.service';
 
@@ -54,13 +55,15 @@ export class StatusBarComponent implements OnInit, OnDestroy {
   }
 
   get bleDevice(): string | null {
-    if (!this.bleService.connectedDevice) {
+    const device = this.bleService.connectedDevice;
+    if (!device) {
       return null;
     }
 
+    const extendedDevice = device as BleDevice & { deviceName?: string };
     const name =
-      this.bleService.connectedDevice?.name ||
-      this.bleService.connectedDevice?.deviceName ||
+      extendedDevice?.name ||
+      (typeof extendedDevice?.deviceName === 'string' ? extendedDevice.deviceName : undefined) ||
       'Unknown';
     return name && name.trim().length > 0 ? name : null;
   }
