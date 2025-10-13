@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Xoloitzcuintle: Size Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Terracotta Earth -->
+    <!-- Application Structure Plan: The SPA is designed as a single-page, top-to-bottom narrative flow to guide a potential owner from general discovery to specific decision-making. It starts with a captivating hero section to introduce the breed's mystique. It then moves to an interactive 'core' section where users can toggle between the three sizes (Standard, Intermediate, Toy) using tabs. This focused, interactive approach prevents information overload by dynamically updating text, key stats, and a comparative Chart.js visualization for each size's needs (exercise, space, etc.). The journey concludes with a scannable summary table for final comparison and a concluding note. -->
+    <!-- Visualization & Content Choices: 
+        1) Report Info: Three distinct Xoloitzcuintle sizes with specific needs.
+           Goal: Let users compare sizes interactively.
+           Presentation: Tabbed interface.
+           Interaction: Clicking a size tab dynamically displays its data (text, stats, chart).
+        2) Report Info: Relative needs for exercise, space, and skin care for each size.
+           Goal: Visual comparison of need intensity.
+           Viz: Horizontal Bar Chart (Chart.js Canvas).
+        3) Report Info: Summary of key characteristics for all sizes.
+           Goal: Quick, at-a-glance reference.
+           Viz: HTML Table styled with Tailwind CSS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #FEFBF6;
+            color: #4A4A4A;
+        }
+        .bg-terracotta { background-color: #E07A5F; }
+        .text-terracotta { color: #E07A5F; }
+        .border-terracotta { border-color: #E07A5F; }
+        .bg-sand { background-color: #F4F1DE; }
+        .text-earth { color: #3D405B; }
+        .bg-earth { background-color: #3D405B; }
+        .tab-active {
+            border-bottom: 3px solid #E07A5F;
+            color: #E07A5F;
+            font-weight: 600;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 250px;
+            max-height: 300px;
+        }
+        @media (min-width: 768px) {
+            .chart-container { height: 300px; }
+        }
+        .animate-fade-in { animation: fadeIn 300ms ease-in-out; }
+        @keyframes fadeIn { from {opacity: 0; transform: translateY(4px);} to {opacity: 1; transform: translateY(0);} }
+    </style>
+</head>
+<body class="antialiased">
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-earth mb-2">Xoloitzcuintle: A Mexican Treasure</h1>
+            <p class="text-lg text-gray-600">Find the size that fits your lifestyle</p>
+            <p class="mt-4">
+                <a class="inline-flex items-center gap-2 text-terracotta underline underline-offset-4" href="https://www.xolosramirez.com/2024/11/24/c%C3%B3mo-elegir-el-xoloitzcuintle-ideal-para-tu-familia-miniatura-intermedia-o-est%C3%A1ndar/" target="_blank" rel="noopener">Read the companion article on Xolos Ramírez →</a>
+            </p>
+        </header>
+
+        <section class="mb-12 bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+            <p class="text-base leading-relaxed text-center text-gray-700">
+                The Xoloitzcuintle, or "Xolo," is more than a dog; it's an emblem of Mexican culture with over 3,500 years of history. Revered by the Mexica (Aztecs) as a spiritual guide, this ancient and loyal breed comes in three sizes. Each size shares the same noble, calm temperament but has unique needs and advantages that suit different homes and families. This interactive guide helps you explore each size’s traits to find your ideal companion.
+            </p>
+        </section>
+
+        <section class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+            <div class="border-b border-gray-200 mb-6">
+                <nav class="flex justify-center -mb-px space-x-4 md:space-x-8" aria-label="Tabs">
+                    <button id="tab-estandar" class="tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg text-gray-500 hover:text-terracotta focus:outline-none">Standard</button>
+                    <button id="tab-intermedio" class="tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg text-gray-500 hover:text-terracotta focus:outline-none">Intermediate</button>
+                    <button id="tab-toy" class="tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg text-gray-500 hover:text-terracotta focus:outline-none">Toy</button>
+                </nav>
+            </div>
+
+            <div id="content-container"><!-- Dynamic content per size --></div>
+            
+            <div class="mt-8">
+                 <div class="chart-container">
+                    <canvas id="needsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="mt-12">
+            <h2 class="text-3xl font-bold text-center text-earth mb-6">Quick Comparison Table</h2>
+            <div class="overflow-x-auto bg-white rounded-2xl shadow-lg p-4">
+                <table class="w-full text-left table-auto">
+                    <thead>
+                        <tr class="bg-sand text-earth">
+                            <th class="px-4 py-3 font-semibold">Feature</th>
+                            <th class="px-4 py-3 font-semibold text-center">Toy</th>
+                            <th class="px-4 py-3 font-semibold text-center">Intermediate</th>
+                            <th class="px-4 py-3 font-semibold text-center">Standard</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b">
+                            <td class="px-4 py-3 font-medium">Height (cm)</td>
+                            <td class="px-4 py-3 text-center">25 – 35</td>
+                            <td class="px-4 py-3 text-center">36 – 45</td>
+                            <td class="px-4 py-3 text-center">46 – 60</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="px-4 py-3 font-medium">Exercise Level</td>
+                            <td class="px-4 py-3 text-center">Low</td>
+                            <td class="px-4 py-3 text-center">Medium</td>
+                            <td class="px-4 py-3 text-center">High</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="px-4 py-3 font-medium">Space Needed</td>
+                            <td class="px-4 py-3 text-center">Apartment</td>
+                            <td class="px-4 py-3 text-center">Apartment / House</td>
+                            <td class="px-4 py-3 text-center">House with yard</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-medium">Ideal For…</td>
+                            <td class="px-4 py-3 text-center">Seniors, urban living, first-time owners.</td>
+                            <td class="px-4 py-3 text-center">Families, moderately active people.</td>
+                            <td class="px-4 py-3 text-center">Active families, runners, homes with space.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="text-center py-6 mt-8 bg-sand">
+        <p class="text-gray-600">Interactive design for responsible ownership. | <a class="text-terracotta underline underline-offset-4" href="https://www.xolosramirez.com/2024/11/24/c%C3%B3mo-elegir-el-xoloitzcuintle-ideal-para-tu-familia-miniatura-intermedia-o-est%C3%A1ndar/" target="_blank" rel="noopener">Xolos Ramírez article</a></p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const xoloData = {
+                estandar: {
+                    title: "Standard Xoloitzcuintle",
+                    image: 'https://placehold.co/600x400/E07A5F/FEFBF6?text=Standard+Xolo',
+                    stats: [
+                        { label: 'Height', value: '46 – 60 cm' },
+                        { label: 'Weight', value: '14 – 25 kg' }
+                    ],
+                    needs: "The Standard Xolo is athletic and requires the most exercise. Daily long walks, opportunities to run in a safe area, and mental stimulation help keep balance. Feed a high-quality, portion-controlled diet to support energy needs. Because the skin is more exposed, regular moisturizing and sun protection are important.",
+                    lifestyle: "Ideal for active families and people who enjoy running or hiking and have a securely fenced yard. Its imposing size and alert nature make it an excellent watchdog, yet it remains calm and devoted at home. Owners must be committed to exercise needs.",
+                    chartData: [8, 7, 5]
+                },
+                intermedio: {
+                    title: "Intermediate Xoloitzcuintle",
+                    image: 'https://placehold.co/600x400/81B29A/FEFBF6?text=Intermediate+Xolo',
+                    stats: [
+                        { label: 'Height', value: '36 – 45 cm' },
+                        { label: 'Weight', value: '7 – 14 kg' }
+                    ],
+                    needs: "The Intermediate size is incredibly versatile. Exercise needs are moderate: quality daily walks plus a few play sessions are enough. Diet is adaptable and skin care is manageable due to size.",
+                    lifestyle: "Arguably the most adaptable size. Great for a broad range of homes—from roomy apartments to houses with gardens. Good with families with children (with supervision) and people with a moderately active lifestyle. A perfect balance between the Standard’s energy and the Toy’s portability.",
+                    chartData: [6, 5, 5]
+                },
+                toy: {
+                    title: "Toy Xoloitzcuintle",
+                    image: 'https://placehold.co/600x400/F2CC8F/3D405B?text=Toy+Xolo',
+                    stats: [
+                        { label: 'Height', value: '25 – 35 cm' },
+                        { label: 'Weight', value: '4 – 7 kg' }
+                    ],
+                    needs: "The Toy Xolo has the lowest exercise requirements. Two short walks a day and indoor play are typically sufficient. Eats less and is easier to handle due to size, but is more sensitive to cold and needs protection. Skin care remains important, just on a smaller surface.",
+                    lifestyle: "A perfect companion for city and apartment life. Ideal for seniors, single individuals, or calmer families. A devoted companion that enjoys staying close to its people. Small size requires careful handling to avoid injury, especially around very young children.",
+                    chartData: [3, 3, 5]
+                }
+            };
+
+            const contentContainer = document.getElementById('content-container');
+            const tabs = document.querySelectorAll('.tab');
+            const chartCanvas = document.getElementById('needsChart').getContext('2d');
+            let needsChart;
+
+            function createOrUpdateChart(size) {
+                const data = xoloData[size].chartData;
+                const chartConfig = {
+                    type: 'bar',
+                    data: {
+                        labels: ['Exercise Level', 'Space Needed', 'Skin Care'],
+                        datasets: [{
+                            label: 'Need Level',
+                            data: data,
+                            backgroundColor: ['#E07A5F', '#81B29A', '#F2CC8F'],
+                            borderColor: '#FEFBF6',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                max: 10,
+                                grid: { color: '#F4F1DE' }
+                            },
+                            y: { grid: { display: false } }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { enabled: false }
+                        }
+                    }
+                };
+                
+                if (needsChart) {
+                    needsChart.data.datasets[0].data = data;
+                    needsChart.update();
+                } else {
+                    needsChart = new Chart(chartCanvas, chartConfig);
+                }
+            }
+
+            function showSizeInfo(size) {
+                const data = xoloData[size];
+                contentContainer.innerHTML = `
+                    <div class="flex flex-col md:flex-row gap-8 items-center animate-fade-in">
+                        <div class="w-full md:w-1/2 flex-shrink-0">
+                            <img src="${data.image}" alt="${data.title}" class="rounded-lg shadow-md w-full h-auto object-cover">
+                        </div>
+                        <div class="w-full md:w-1/2">
+                            <h2 class="text-3xl font-bold text-earth mb-4">${data.title}</h2>
+                            <div class="flex space-x-6 mb-4">
+                                ${data.stats.map(stat => `
+                                    <div class="text-center">
+                                        <p class="text-sm text-gray-500">${stat.label}</p>
+                                        <p class="text-xl font-semibold text-terracotta">${stat.value}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <h3 class="font-semibold text-lg text-earth mt-6 mb-2">Specific Needs</h3>
+                            <p class="text-gray-700 leading-relaxed">${data.needs}</p>
+                            <h3 class="font-semibold text-lg text-earth mt-6 mb-2">Ideal Lifestyle</h3>
+                            <p class="text-gray-700 leading-relaxed">${data.lifestyle}</p>
+                        </div>
+                    </div>
+                `;
+
+                tabs.forEach(tab => {
+                    tab.classList.remove('tab-active');
+                    if (tab.id === `tab-${size}`) tab.classList.add('tab-active');
+                });
+
+                createOrUpdateChart(size);
+            }
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const size = tab.id.replace('tab-', '');
+                    showSizeInfo(size);
+                });
+            });
+
+            showSizeInfo('estandar');
+        });
+    </script>
+</body>
+</html>
