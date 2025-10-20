@@ -25,16 +25,15 @@ export class WalletService {
 
   async getBalance(): Promise<number> {
     const wallet = this.getInitializedWallet();
-    const utxos = await wallet.getAllUtxos();
-    const totalSats = utxos.reduce<bigint>((sum: bigint, utxo: ScriptUtxos) => {
-      if (typeof utxo.sats === 'bigint') {
-        return sum + utxo.sats;
-      }
-      const legacyValue = (utxo as ScriptUtxos & { value?: number }).value;
-      return sum + BigInt(Math.round(legacyValue ?? 0));
-    }, 0n);
+    const address = wallet.address;
+    const resp: ScriptUtxos = await this.chronik.address(address).utxos();
+    const list = resp?.utxos ?? [];
+    const totalSats = list.reduce((sum: number, u: any) => {
+      const sats = typeof u.sats === 'bigint' ? Number(u.sats) : Number(u.sats ?? 0);
+      return sum + (Number.isFinite(sats) ? sats : 0);
+    }, 0);
 
-    return Number(totalSats) / WalletService.SATS_PER_XEC;
+    return totalSats / WalletService.SATS_PER_XEC;
   }
 
   async createAndBroadcastTx(toAddress: string, amount: number): Promise<string> {
