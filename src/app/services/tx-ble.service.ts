@@ -8,7 +8,7 @@ import { NotificationService } from './notification.service';
 import { NotificationSettingsService } from './notification-settings.service';
 import { StoredTx, TxStorageService } from './tx-storage.service';
 
-const chronik = new ChronikClient('https://chronik.be.cash/xec');
+const chronik: ChronikClient = new ChronikClient('https://chronik.be.cash/xec');
 const SATS_PER_XEC = 100;
 
 @Injectable({
