@@ -120,8 +120,9 @@ export class HomePage implements OnInit, OnDestroy {
         return;
       }
 
-      const address = this.wallet?.address ?? '';
-      this.balance = address ? await this.saldoService.getBalance(address) : 0;
+      this.balance = this.wallet?.address
+        ? await this.saldoService.getBalance(this.wallet.address)
+        : 0;
       await this.offlineStorage.setCachedBalance(this.balance ?? 0);
     } catch (error) {
       const cachedBalance = await this.offlineStorage.getCachedBalance();
