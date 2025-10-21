@@ -29,7 +29,7 @@
     "@capacitor/toast": "^7.0.0",
     "@ionic/angular": "^8.0.0",
     "@scure/bip39": "^2.0.1",
-    "chronik-client": "^3.4.0",
+    "chronik-client": "0.6.0",
     "ecash-wallet": "^1.5.0",
     "qrcode": "^1.5.4",
     "rxjs": "~7.8.0",
