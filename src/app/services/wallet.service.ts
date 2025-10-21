@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Wallet } from 'ecash-wallet';
-import { ChronikClient, type ScriptUtxos } from 'chronik-client';
+import type { ChronikClient } from 'chronik-client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WalletService {
-  private chronik: ChronikClient;
+  private chronik!: ChronikClient;
+  private chronikInit: Promise<ChronikClient> | null = null;
   private wallet: Wallet | null = null;
   private static readonly SATS_PER_XEC = 100;
 
   constructor() {
-    this.chronik = new ChronikClient('https://chronik.be.cash/xec');
+    this.chronikInit = this.initChronik();
   }
 
   async loadFromMnemonic(mnemonic: string): Promise<Wallet> {
-    this.wallet = await Wallet.fromMnemonic(mnemonic, this.chronik);
+    const chronik = await this.getChronik();
+    this.wallet = await Wallet.fromMnemonic(mnemonic, chronik as any);
     return this.wallet;
   }
 
@@ -26,14 +28,15 @@ export class WalletService {
   async getBalance(): Promise<number> {
     const wallet = this.getInitializedWallet();
     const address = wallet.address;
-    const resp: ScriptUtxos = await this.chronik.address(address).utxos();
-    const list = resp?.utxos ?? [];
-    const totalSats = list.reduce((sum: number, u: any) => {
-      const sats = typeof u.sats === 'bigint' ? Number(u.sats) : Number(u.sats ?? 0);
-      return sum + (Number.isFinite(sats) ? sats : 0);
+    const chronik = await this.getChronik();
+    const resp = await chronik.address(address).utxos();
+    const balanceSats = resp.utxos.reduce((sum: number, utxo: any) => {
+      const n = typeof utxo.sats === 'bigint' ? Number(utxo.sats) : Number(utxo.sats);
+      return sum + (isNaN(n) ? 0 : n);
     }, 0);
+    const balanceXec = balanceSats / WalletService.SATS_PER_XEC;
 
-    return totalSats / WalletService.SATS_PER_XEC;
+    return balanceXec;
   }
 
   async createAndBroadcastTx(toAddress: string, amount: number): Promise<string> {
@@ -96,5 +99,24 @@ export class WalletService {
     }
 
     return null;
+  }
+
+  private async getChronik(): Promise<ChronikClient> {
+    if (this.chronik) {
+      return this.chronik;
+    }
+
+    if (!this.chronikInit) {
+      this.chronikInit = this.initChronik();
+    }
+
+    this.chronik = await this.chronikInit;
+    return this.chronik;
+  }
+
+  private async initChronik(): Promise<ChronikClient> {
+    const { ChronikClient } = await import('chronik-client');
+    this.chronik = new ChronikClient('https://chronik.be.cash/xec');
+    return this.chronik;
   }
 }
