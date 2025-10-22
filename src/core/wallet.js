@@ -168,40 +168,34 @@ const sumUtxosSats = (utxos = []) => {
 };
 
 async function tryClient(address) {
-  for (const base of [`${CHRONIK_MIRROR}/xec-mainnet`, CHRONIK_MIRROR]) {
-    try {
-      console.log('[balance] client ->', base);
-      const cli = new ChronikClient(base);
-      const { utxos } = await cli.address(address).utxos();
-      const sats = sumUtxosSats(utxos);
-      console.log('[balance] client OK', { base, utxos: utxos?.length ?? 0, sats: String(sats) });
-      return sats;
-    } catch (e) {
-      console.log('[balance] client FAIL', base, e?.message || e);
-    }
+  const base = CHRONIK_MIRROR;
+  try {
+    console.log('[balance] client ->', base);
+    const cli = new ChronikClient([base]);
+    const { utxos } = await cli.address(address).utxos();
+    const sats = sumUtxosSats(utxos);
+    console.log('[balance] client OK', { base, utxos: utxos?.length ?? 0, sats: String(sats) });
+    return sats;
+  } catch (e) {
+    console.log('[balance] client FAIL', base, e?.message || e);
   }
   throw new Error('client-failed');
 }
 
 async function tryRest(address) {
   const addr = encodeURIComponent(address);
-  const routes = [
-    `${CHRONIK_MIRROR}/address/${addr}/utxos`,
-    `${CHRONIK_MIRROR}/xec-mainnet/address/${addr}/utxos`,
-  ];
-  for (const url of routes) {
-    try {
-      console.log('[balance] REST ->', url);
-      const r = await fetch(url);
-      if (!r.ok) throw new Error(`HTTP ${r.status}`);
-      const data = await r.json();
-      const list = Array.isArray(data) ? data : (data?.utxos ?? []);
-      const sats = sumUtxosSats(list);
-      console.log('[balance] REST OK', { url, utxos: list?.length ?? 0, sats: String(sats) });
-      return sats;
-    } catch (e) {
-      console.log('[balance] REST FAIL', url, e?.message || e);
-    }
+  const url = `${CHRONIK_MIRROR}/address/${addr}/utxos`;
+  try {
+    console.log('[balance] REST ->', url);
+    const r = await fetch(url);
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const data = await r.json();
+    const list = Array.isArray(data) ? data : (data?.utxos ?? []);
+    const sats = sumUtxosSats(list);
+    console.log('[balance] REST OK', { url, utxos: list?.length ?? 0, sats: String(sats) });
+    return sats;
+  } catch (e) {
+    console.log('[balance] REST FAIL', url, e?.message || e);
   }
   throw new Error('rest-failed');
 }

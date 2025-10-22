@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
       const pending = localStorage.getItem('pendingTx');
       if (pending) {
         const data = JSON.parse(pending);
-        const res = await fetch('https://chronik.e.cash/xec-mainnet/tx', {
+        const res = await fetch('https://chronik.e.cash/tx', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ hex: data.raw }),

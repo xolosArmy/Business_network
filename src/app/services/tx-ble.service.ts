@@ -8,7 +8,7 @@ import { NotificationService } from './notification.service';
 import { NotificationSettingsService } from './notification-settings.service';
 import { StoredTx, TxStorageService } from './tx-storage.service';
 
-const chronik: ChronikClient = new ChronikClient('https://chronik.e.cash/xec');
+const chronik: ChronikClient = new ChronikClient(['https://chronik.e.cash']);
 const SATS_PER_XEC = 100;
 
 @Injectable({
@@ -141,7 +141,7 @@ export class TxBLEService {
       console.log('📥 TX recibida por BLE:', txData);
 
       if (navigator.onLine) {
-        const response = await fetch('https://chronik.e.cash/xec-mainnet/tx', {
+        const response = await fetch('https://chronik.e.cash/tx', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ hex: txData.raw }),

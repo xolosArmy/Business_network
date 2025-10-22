@@ -10,7 +10,7 @@ import {
 import { StorageService } from './storage.service';
 import { WalletService } from './wallet.service';
 
-const chronik: ChronikClient = new ChronikClient('https://chronik.e.cash/xec-mainnet');
+const chronik: ChronikClient = new ChronikClient(['https://chronik.e.cash']);
 const SATS_PER_XEC = 100;
 
 type WalletSource =
