@@ -6,6 +6,7 @@ import { generateMnemonic, validateMnemonic } from '@scure/bip39';
 import { wordlist as ENGLISH_WORDLIST } from '@scure/bip39/wordlists/english.js';
 
 import { OfflineStorageService } from './offline-storage.service';
+import { CHRONIK_URL } from './chronik.constants';
 
 export interface WalletInfo {
   mnemonic: string;
@@ -16,8 +17,6 @@ export interface WalletInfo {
 
 const WORDS = ENGLISH_WORDLIST;
 const STORAGE_KEY = 'rmz_wallet';
-const CHRONIK_URL = 'https://chronik.e.cash';
-
 @Injectable({ providedIn: 'root' })
 export class CarteraService {
   private cachedWallet: WalletInfo | null = null;

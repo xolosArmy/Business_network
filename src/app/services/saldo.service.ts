@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ChronikClient } from 'chronik-client';
 
+import { CHRONIK_URL } from './chronik.constants';
+
 @Injectable({ providedIn: 'root' })
 export class SaldoService {
-  private readonly chronik = new ChronikClient(['https://chronik.e.cash']);
+  private readonly chronik = new ChronikClient([CHRONIK_URL]);
 
   async getBalance(address: string): Promise<number> {
     const { utxos = [] } = await this.chronik.address(address).utxos();

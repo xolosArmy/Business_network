@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { ChronikClient } from 'chronik-client';
 import { Wallet } from 'ecash-wallet';
 
+import { CHRONIK_URL } from './chronik.constants';
+
 @Injectable({ providedIn: 'root' })
 export class WalletService {
   private wallet?: Wallet;
-  private chronik = new ChronikClient(['https://chronik.e.cash']);
+  private chronik = new ChronikClient([CHRONIK_URL]);
 
   async loadFromMnemonic(mnemonic: string): Promise<Wallet> {
     this.wallet = await Wallet.fromMnemonic(mnemonic);
