@@ -20,9 +20,7 @@ const STORAGE_KEY = 'rmz_wallet';
 @Injectable({ providedIn: 'root' })
 export class CarteraService {
   private cachedWallet: WalletInfo | null = null;
-  private readonly chronikClient: ChronikClient = new ChronikClient([
-    CHRONIK_URL,
-  ]);
+  private readonly chronikClient: ChronikClient = new ChronikClient([CHRONIK_URL]);
 
   constructor(private readonly offlineStorage: OfflineStorageService) {}
 
