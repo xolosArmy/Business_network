@@ -56,8 +56,9 @@ export class WalletPage implements OnInit {
       }
 
       this.wallet = await this.walletService.loadFromMnemonic(mnemonic);
-      this.address = await this.walletService.getAddress();
-      await this.refreshBalance();
+      const addr = this.walletService.getAddress();
+      this.address = addr;
+      await this.refreshBalance(addr);
       await this.generateQr();
     } catch (error) {
       console.error('Error al inicializar la cartera.', error);
@@ -133,9 +134,10 @@ export class WalletPage implements OnInit {
     return this.bleService?.connectedDevice?.name ?? 'Sin dispositivo';
   }
 
-  private async refreshBalance(): Promise<void> {
+  private async refreshBalance(address?: string): Promise<void> {
     try {
-      const balance = await this.walletService.getBalance();
+      const addr = address ?? this.walletService.getAddress();
+      const balance = await this.walletService.getBalance(addr);
       this.balanceLabel = `${balance.toFixed(2)} XEC`;
     } catch (error) {
       console.error('No se pudo obtener el saldo.', error);
