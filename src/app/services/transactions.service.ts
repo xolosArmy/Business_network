@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class TransactionsService {
   private key = 'rmz_transactions';
-  private chronikUrl = 'https://chronik.e.cash/xec-mainnet';
+  private chronikUrl = 'https://chronik.e.cash';
 
   constructor(private http: HttpClient) {}
 

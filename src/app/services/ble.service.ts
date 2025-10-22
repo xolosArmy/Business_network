@@ -44,7 +44,7 @@ export class BLEService {
   private notificationsActive = false;
   private rxNotificationHandler: ((event: Event) => void) | null = null;
   private discoveredDevices = new Map<string, BleDevice>();
-  private readonly chronikUrl = 'https://chronik.e.cash/xec-mainnet';
+  private readonly chronikUrl = 'https://chronik.e.cash';
 
   constructor(
     private readonly walletService: WalletService,
