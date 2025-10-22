@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ChronikClient } from 'chronik-client';
+import { addressToHash160 } from '../utils/address';
 
 import { TxStorageService } from './tx-storage.service';
 import { NotificationService } from './notification.service';
@@ -64,7 +65,8 @@ export class ChronikService {
     try {
       await this.ensureWsClient();
       await this.wsReady;
-      await this.wsClient?.subscribeToAddress(address);
+      const h160 = addressToHash160(address);
+      await this.wsClient?.subscribeToScript('p2pkh', h160);
     } catch (err) {
       console.error('❌ Error Chronik WS:', err);
     }
@@ -102,7 +104,8 @@ export class ChronikService {
 
           for (const address of this.subscribedAddresses) {
             try {
-              await this.wsClient?.subscribeToAddress(address);
+              const h160 = addressToHash160(address);
+              await this.wsClient?.subscribeToScript('p2pkh', h160);
             } catch (err) {
               console.error('❌ Error suscribiendo dirección Chronik:', err);
             }
