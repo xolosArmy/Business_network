@@ -25,7 +25,12 @@
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json",
             "styles": [],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "qrcode",
+              "chronik-client",
+              "ecash-lib"
+            ]
           },
           "configurations": {
             "production": {
