@@ -47,7 +47,7 @@ export class BLEService {
   private readonly chronikUrl = 'https://chronik.e.cash/xec-mainnet';
 
   constructor(
-    private readonly wallet: WalletService,
+    private readonly walletService: WalletService,
     private readonly zone: NgZone,
     private readonly http: HttpClient,
     private readonly txs: TransactionsService,
@@ -371,9 +371,9 @@ export class BLEService {
       throw new Error('No hay un dispositivo BLE conectado.');
     }
 
-    const tx = await this.wallet.enviar(toAddress, amount);
+    const txid = await this.walletService.createAndBroadcastTx(toAddress, amount);
     const payload: BleTransferPayload = {
-      ...tx,
+      txid,
       amount,
       toAddress,
       advertisedName: this.advertisingName ?? undefined,
@@ -394,7 +394,7 @@ export class BLEService {
   async sendTxWithFallback(amount: number, toAddress: string): Promise<void> {
     await this.init();
 
-    const txHex = await this.wallet.signTx(toAddress, amount);
+    const txHex = await this.walletService.signTx(toAddress, amount);
 
     let sent = false;
 
