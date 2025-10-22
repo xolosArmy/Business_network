@@ -116,7 +116,7 @@ export class WalletService {
 
   private async initChronik(): Promise<ChronikClient> {
     const { ChronikClient } = await import('chronik-client');
-    this.chronik = new ChronikClient('https://chronik.be.cash/xec');
+    this.chronik = new ChronikClient('https://chronik.e.cash/xec');
     return this.chronik;
   }
 }

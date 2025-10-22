@@ -16,7 +16,7 @@ export interface WalletInfo {
 
 const WORDS = ENGLISH_WORDLIST;
 const STORAGE_KEY = 'rmz_wallet';
-const CHRONIK_URL = 'https://chronik.be.cash/xec';
+const CHRONIK_URL = 'https://chronik.e.cash/xec';
 
 @Injectable({ providedIn: 'root' })
 export class CarteraService {
