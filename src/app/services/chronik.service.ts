@@ -66,7 +66,7 @@ export class ChronikService {
       await this.ensureWsClient();
       await this.wsReady;
       const h160 = addressToHash160(address);
-      await this.wsClient?.subscribeToScript('p2pkh', h160);
+      await this.subscribeToChronikScript('p2pkh', h160);
     } catch (err) {
       console.error('❌ Error Chronik WS:', err);
     }
@@ -105,7 +105,7 @@ export class ChronikService {
           for (const address of this.subscribedAddresses) {
             try {
               const h160 = addressToHash160(address);
-              await this.wsClient?.subscribeToScript('p2pkh', h160);
+              await this.subscribeToChronikScript('p2pkh', h160);
             } catch (err) {
               console.error('❌ Error suscribiendo dirección Chronik:', err);
             }
@@ -115,6 +115,29 @@ export class ChronikService {
     }
 
     return this.wsClient;
+  }
+
+  private async subscribeToChronikScript(scriptType: string, script: string): Promise<void> {
+    if (!this.wsClient) {
+      return;
+    }
+
+    const client = this.wsClient as unknown as {
+      subscribe?: (type: string, id: string) => Promise<void>;
+      subscribeToScript?: (type: string, id: string) => Promise<void>;
+    };
+
+    if (client.subscribe) {
+      await client.subscribe(scriptType, script);
+      return;
+    }
+
+    if (client.subscribeToScript) {
+      await client.subscribeToScript(scriptType, script);
+      return;
+    }
+
+    console.error('❌ Chronik WS client no soporta métodos de suscripción conocidos');
   }
 
   private prepareWsReady(): void {
