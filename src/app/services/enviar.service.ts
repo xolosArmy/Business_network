@@ -9,8 +9,9 @@ import {
 } from './offline-storage.service';
 import { StorageService } from './storage.service';
 import { WalletService } from './wallet.service';
+import { CHRONIK_URL } from './chronik.constants';
 
-const chronik: ChronikClient = new ChronikClient(['https://chronik.e.cash']);
+const chronik: ChronikClient = new ChronikClient([CHRONIK_URL]);
 const SATS_PER_XEC = 100;
 
 type WalletSource =
