@@ -1,5 +1,7 @@
 import { Wallet } from 'ecash-wallet';
-import { payment, toHex } from 'ecash-lib';
+import { payment } from 'ecash-lib';
+
+import { toHex } from './address';
 
 interface CreateTxParams {
   to: string;
