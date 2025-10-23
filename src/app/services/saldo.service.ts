@@ -3,7 +3,7 @@ import { ChronikClient } from 'chronik-client';
 
 @Injectable({ providedIn: 'root' })
 export class SaldoService {
-  private readonly chronik = new ChronikClient(['https://chronik.e.cash']);
+  private readonly chronik = new ChronikClient('https://chronik.e.cash');
 
   async getBalance(address: string): Promise<number> {
     const { utxos = [] } = await this.chronik.address(address).utxos();
