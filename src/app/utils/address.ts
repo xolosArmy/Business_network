@@ -1,9 +1,13 @@
 import { decodeCashAddress } from 'ecashaddrjs';
-import { bytesToHex } from '@noble/hashes/utils';
+export function toHex(bytes: Uint8Array): string {
+  return Array.from(bytes)
+    .map((x) => x.toString(16).padStart(2, '0'))
+    .join('');
+}
 
 export function hashToHex(hash: string | Uint8Array): string {
   if (typeof hash === 'string') return hash;
-  return bytesToHex(hash);
+  return toHex(hash);
 }
 
 /** Convierte dirección ecash:qq... a hash160 (hex) para Chronik 0.7.x (P2PKH) */
