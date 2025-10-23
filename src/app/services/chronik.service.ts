@@ -19,7 +19,7 @@ type ChronikWsMessage = {
   providedIn: 'root',
 })
 export class ChronikService {
-  private readonly chronik = new ChronikClient(['https://chronik.e.cash']);
+  private readonly chronik = new ChronikClient('https://chronik.e.cash');
   private readonly subscribedAddresses = new Set<string>();
   private wsClient?: ChronikWsClient;
   private wsReady!: Promise<void>;
