@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { Wallet } from 'ecash-wallet';
 import { ChronikClient } from 'chronik-client';
 
+import { CHRONIK_URL } from './chronik.constants';
+
 @Injectable({ providedIn: 'root' })
 export class WalletService {
   private wallet?: Wallet;
-  private chronik = new ChronikClient('https://chronik.e.cash');
+  private readonly chronikClient: ChronikClient = new ChronikClient(CHRONIK_URL);
 
   async loadFromMnemonic(mnemonic: string): Promise<Wallet> {
-    this.wallet = await Wallet.fromMnemonic(mnemonic, this.chronik);
+    this.wallet = await Wallet.fromMnemonic(mnemonic, this.chronikClient);
     return this.wallet;
   }
 
@@ -35,7 +37,8 @@ export class WalletService {
       throw new Error('Wallet no inicializada y no se proporcionó dirección');
     }
 
-    const { utxos } = await this.chronik.address(address).utxos();
+    const chronikAddress = this.chronikClient.address(address);
+    const { utxos } = await chronikAddress.utxos();
     return utxos.reduce((sum: number, utxo: any) => {
       const sats = typeof utxo.sats === 'bigint' ? Number(utxo.sats) : Number(utxo.sats ?? 0);
       return sum + (Number.isFinite(sats) ? sats : 0);
