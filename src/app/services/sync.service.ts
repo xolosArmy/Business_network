@@ -11,7 +11,7 @@ export class SyncService {
 
   constructor(
     private storage: StorageService,
-    private wallet: WalletService,
+    private walletService: WalletService,
     private chronik: ChronikService,
   ) {
     this.listenForNetwork();
@@ -36,7 +36,7 @@ export class SyncService {
 
     for (const tx of pendings) {
       try {
-        const result = await this.wallet.enviar(tx.toAddress, tx.amount);
+        const result = await this.walletService.enviar(tx.toAddress, tx.amount);
         if (result && result.txid) {
           this.storage.markAsSent(tx.txid);
           console.log(`Tx ${tx.txid} enviada correctamente.`);
