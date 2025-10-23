@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ChronikClient } from 'chronik-client';
 import { Wallet } from 'ecash-wallet';
+import { ChronikClient } from 'chronik-client';
 
 @Injectable({ providedIn: 'root' })
 export class WalletService {
@@ -8,8 +8,15 @@ export class WalletService {
   private chronik = new ChronikClient(['https://chronik.e.cash']);
 
   async loadFromMnemonic(mnemonic: string): Promise<Wallet> {
-    this.wallet = await Wallet.fromMnemonic(mnemonic);
+    this.wallet = await Wallet.fromMnemonic(mnemonic, this.chronik);
     return this.wallet;
+  }
+
+  async enviar(toAddress: string, amountSats: number): Promise<string> {
+    // TODO: Implementar con la API actual de ecash-wallet.
+    // Por ahora, deja un placeholder que no rompa la compilación.
+    console.warn('[WalletService.enviar] Implementación pendiente', { toAddress, amountSats });
+    return Promise.resolve('pending-impl');
   }
 
   getAddress(): string {
