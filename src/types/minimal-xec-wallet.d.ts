@@ -32,6 +32,7 @@ declare module 'minimal-xec-wallet/lib/adapters/router' {
     constructor(localConfig?: AdapterRouterOptions);
     getUtxos(address: string | string[]): Promise<AdapterRouterUtxoResponse | AdapterRouterUtxoResponse[]>;
     getBalance(address: string | string[]): Promise<unknown>;
+    sendTx(hex: string): Promise<string | { txid?: string }>;
   }
 }
 
@@ -55,5 +56,19 @@ declare module 'minimal-xec-wallet/lib/hybrid-token-manager' {
     getTokenBalance(tokenId: string, utxos: unknown[]): Promise<HybridTokenBalance>;
     listTokensFromAddress(address: string): Promise<HybridTokenBalance[]>;
     listTokensFromUtxos(utxos: unknown[]): Promise<HybridTokenBalance[]>;
+    sendTokens(
+      tokenId: string,
+      outputs: Array<{ address: string; amount?: number; value?: number }>,
+      walletInfo: {
+        mnemonic: string;
+        xecAddress: string;
+        hdPath?: string;
+        fee?: number;
+        privateKey: string;
+        publicKey?: string;
+      },
+      utxos: unknown[],
+      satsPerByte?: number,
+    ): Promise<string>;
   }
 }
