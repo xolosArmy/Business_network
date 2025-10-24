@@ -32,6 +32,14 @@
         <ion-spinner slot="end" *ngIf="isLoading"></ion-spinner>
       </ion-item>
 
+      <ion-item lines="none">
+        <ion-label>
+          <h2>Xolos RMZ (RMZ)</h2>
+          <p>{{ formattedRmzBalance }}</p>
+          <p class="token-id">ID: {{ rmzTokenId }}</p>
+        </ion-label>
+      </ion-item>
+
       <ion-button
         expand="block"
         color="primary"
@@ -102,6 +110,46 @@
           [disabled]="sendForm.invalid || sending"
         >
           {{ sending ? 'Enviando…' : 'Enviar transacción' }}
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Enviar Xolos RMZ</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-note>Token ID: {{ rmzTokenId }}</ion-note>
+      </ion-item>
+
+      <form [formGroup]="sendTokenForm" (ngSubmit)="onSubmitToken()">
+        <ion-item>
+          <ion-label position="floating">Dirección destino</ion-label>
+          <ion-input formControlName="tokenDestination" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Cantidad (RMZ)</ion-label>
+          <ion-input
+            type="number"
+            min="1"
+            step="1"
+            formControlName="tokenAmount"
+            required
+          ></ion-input>
+        </ion-item>
+
+        <ion-text color="danger" *ngIf="tokenErrorMessage">
+          <p class="ion-text-center">{{ tokenErrorMessage }}</p>
+        </ion-text>
+
+        <ion-button
+          expand="block"
+          type="submit"
+          [disabled]="sendTokenForm.invalid || sendingToken"
+        >
+          {{ sendingToken ? 'Enviando…' : 'Enviar eToken' }}
         </ion-button>
       </form>
     </ion-card-content>
