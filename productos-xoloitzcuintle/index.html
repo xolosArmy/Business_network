@@ -234,9 +234,15 @@
       width: auto;
       height: auto;
       transform: translate(-50%, -50%);
-      object-fit: cover;
       filter: saturate(1.2) contrast(1.05);
       z-index: 0;
+    }
+
+    .hero-video img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .hero-content {
@@ -724,10 +730,10 @@
   </header>
   <main id="mainContent" role="main">
    <section class="hero" aria-labelledby="heroTitle heroTagline">
-  <video class="hero-video" autoplay loop muted playsinline aria-hidden="true" tabindex="-1">
-    <source src="https://cdn.pixabay.com/download/video/2023/05/27/164850-834516594_large.mp4?filename=aztec-pyramid-at-dusk-164850.mp4" type="video/mp4" />
-    Tu navegador no soporta video HTML5.
-  </video>
+  <picture class="hero-video" aria-hidden="true">
+    <source srcset="https://images.unsplash.com/photo-1526318896980-cf78c088247c?auto=format&fit=crop&w=1600&q=80" type="image/jpeg" />
+    <img src="https://images.unsplash.com/photo-1526318896980-cf78c088247c?auto=format&fit=crop&w=1600&q=80" alt="" loading="lazy" decoding="async" />
+  </picture>
   <div class="hero-content">
     <h1 id="heroTitle">xolosArmy Naturals</h1>
     <p id="heroTagline">Cuidado Ancestral para piel de Guerrero</p>
