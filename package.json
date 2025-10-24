@@ -30,7 +30,9 @@
     "@ionic/angular": "^8.0.0",
     "@scure/bip39": "^2.0.1",
     "chronik-client": "0.6.0",
+    "ecash-lib": "^4.4.0",
     "ecash-wallet": "^1.5.0",
+    "minimal-xec-wallet": "^2.0.2",
     "qrcode": "^1.5.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.5.0",
@@ -48,6 +50,7 @@
     "@types/node": "^20.11.0",
     "@types/qrcode": "^1.5.5",
     "@types/web-bluetooth": "^0.0.21",
+    "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8.57.1",
     "typescript": "~5.3.0"
   },
