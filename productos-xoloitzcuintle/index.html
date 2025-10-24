@@ -289,35 +289,25 @@
       transform: translateY(-2px);
       box-shadow: 0 12px 26px rgba(249, 221, 108, 0.3);
     }
+.parallax-section{
+  height: clamp(260px, 45vh, 340px);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 700'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23140a0a'/><stop offset='1' stop-color='%230b1010'/></linearGradient><linearGradient id='gold' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23f0c753'/><stop offset='1' stop-color='%23f9dd6c'/></linearGradient><linearGradient id='teal' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%230d7f72'/><stop offset='1' stop-color='%230b5d53'/></linearGradient></defs><rect width='1600' height='700' fill='url(%23g)'/><g opacity='0.08' fill='%23f9dd6c'><circle cx='200' cy='140' r='6'/><circle cx='420' cy='90' r='4'/><circle cx='1180' cy='110' r='5'/><circle cx='1480' cy='160' r='3'/><circle cx='300' cy='520' r='5'/><circle cx='980' cy='560' r='4'/></g><!-- hojas --> <g fill='none' stroke='%23f9dd6c' stroke-width='3' opacity='0.35'><path d='M220 380 q40 -60 120 -20 q-60 50 -120 20 z'/><path d='M420 420 q30 -40 90 -10 q-50 40 -90 10 z'/><path d='M1230 420 q35 -55 110 -15 q-55 45 -110 15 z'/></g><!-- mortero (izquierda) --> <g transform='translate(130,430)'><path d='M0 0 q140 60 280 0 v20 q-140 70 -280 0 z' fill='url(%23teal)' opacity='0.85'/><ellipse cx='140' cy='0' rx='140' ry='28' fill='%23161d1d' stroke='%23f0c753' stroke-width='2' opacity='0.6'/><rect x='210' y='-80' width='26' height='80' rx='8' fill='%23f0c753' opacity='0.7' transform='rotate(-18 223 -40)'/></g><!-- frascos (centro) --> <g transform='translate(720,360)'><rect x='-60' y='-80' width='50' height='160' rx='10' fill='url(%23teal)'/><rect x='-52' y='-100' width='34' height='22' rx='6' fill='%23f9dd6c'/><rect x='20' y='-60' width='70' height='140' rx='16' fill='%23d0a85a'/><rect x='34' y='-80' width='42' height='24' rx='6' fill='%23f9dd6c'/><rect x='-50' y='-10' width='30' height='40' rx='6' fill='%23f9dd6c' opacity='0.35'/><rect x='40' y='10' width='40' height='36' rx='6' fill='%23fffdfa' opacity='0.2'/></g><!-- flechas del proceso --> <g stroke='%23f0c753' stroke-width='3' fill='none' opacity='0.55'><path d='M420 420 C520 380 600 380 690 380'/><path d='M820 380 C940 380 1020 390 1110 430'/><polygon points='685,372 700,380 685,388' fill='%23f0c753'/><polygon points='1100,420 1116,430 1098,438' fill='%23f0c753'/></g><!-- xolo (derecha, silueta estilizada) --> <g transform='translate(1160,220)' fill='%23161d1d' stroke='%23f0c753' stroke-width='3' opacity='0.9'><path d='M60 280 L140 260 L188 180 L230 160 L260 168 L242 210 L260 250 L310 260 L330 300 L300 310 L280 290 L250 288 L190 320 L180 350 L150 360 L138 330 L120 320 L90 320 L70 340 L40 338 L52 310 L44 292 L50 276 Z'/><circle cx='238' cy='168' r='6' fill='%23f9dd6c'/></g><!-- título centrado --> <text x='800' y='360' text-anchor='middle' font-family='Cinzel Decorative, serif' font-size='48' fill='url(%23gold)'>Fórmula artesanal · del huerto al bálsamo</text></svg>");
+  background-size: cover;
+  background-position: center 40%;
+  background-attachment: fixed;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-strong);
+  font-size: clamp(1.1rem, 3.5vw, 1.6rem);
+  letter-spacing: 2px;
+  text-shadow: 0 6px 18px rgba(0,0,0,.75);
+  overflow: hidden;
+}
+.parallax-section::after{ content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.45); }
+.parallax-section span{ position: relative; z-index: 1; }
 
-    .parallax-section {
-      height: clamp(260px, 45vh, 340px);
-      background-image: url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1400&q=80');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-text-strong);
-      font-size: clamp(1.3rem, 4vw, 2rem);
-      letter-spacing: 2px;
-      text-shadow: 0 6px 18px rgba(0, 0, 0, 0.75);
-      overflow: hidden;
-    }
-
-    .parallax-section::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.55);
-    }
-
-    .parallax-section span {
-      position: relative;
-      z-index: 1;
-    }
 
     .audio-section {
       padding-block: clamp(40px, 8vw, 64px);
