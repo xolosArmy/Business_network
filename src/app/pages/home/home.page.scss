@@ -14,3 +14,26 @@
 .balance-row {
   align-items: center;
 }
+
+.token-balance {
+  margin: 0;
+  font-weight: 600;
+}
+
+.token-id {
+  margin: 0.25rem 0 0;
+  font-size: 0.75rem;
+  color: var(--ion-color-medium, #6b7280);
+  word-break: break-all;
+}
+
+.token-section-title {
+  display: block;
+  font-weight: 600;
+}
+
+.token-section-title h2 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--ion-color-dark, #1f2937);
+}

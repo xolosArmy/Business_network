@@ -59,6 +59,14 @@
         <ion-label>{{ formattedBalance }}</ion-label>
       </ion-item>
 
+      <ion-item lines="none">
+        <ion-label>
+          <h3>Xolos RMZ (RMZ)</h3>
+          <p class="token-balance">{{ formattedRmzBalance }}</p>
+          <p class="token-id">ID: {{ rmzTokenId }}</p>
+        </ion-label>
+      </ion-item>
+
       <ion-button expand="block" color="secondary" (click)="openSendModal()">
         Enviar
       </ion-button>
@@ -109,14 +117,51 @@
             <ion-icon name="cloud-outline"></ion-icon> Envío por Internet (fallback)
           </ion-text>
 
-          <ion-button
-            expand="block"
-            type="submit"
-            [disabled]="sendForm.invalid || isSending"
-          >
-            {{ isSending ? 'Enviando…' : 'Enviar' }}
-          </ion-button>
-        </form>
+        <ion-button
+          expand="block"
+          type="submit"
+          [disabled]="sendForm.invalid || isSending"
+        >
+          {{ isSending ? 'Enviando…' : 'Enviar' }}
+        </ion-button>
+      </form>
+
+      <ion-text class="ion-margin-top token-section-title">
+        <h2>Enviar Xolos RMZ</h2>
+      </ion-text>
+      <ion-item lines="none">
+        <ion-note>Token ID: {{ rmzTokenId }}</ion-note>
+      </ion-item>
+
+      <form [formGroup]="rmzSendForm" (ngSubmit)="onSubmitSendToken()">
+        <ion-item>
+          <ion-label position="stacked">Dirección destino</ion-label>
+          <ion-input formControlName="tokenDestination" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Cantidad (RMZ)</ion-label>
+          <ion-input
+            type="number"
+            min="1"
+            step="1"
+            formControlName="tokenAmount"
+            required
+          ></ion-input>
+        </ion-item>
+
+        <ion-text color="danger" *ngIf="rmzSendErrorMessage">
+          <p class="error-text">{{ rmzSendErrorMessage }}</p>
+        </ion-text>
+
+        <ion-button
+          expand="block"
+          type="submit"
+          [disabled]="rmzSendForm.invalid || isSendingToken"
+        >
+          {{ isSendingToken ? 'Enviando…' : 'Enviar eToken' }}
+        </ion-button>
+      </form>
       </ion-content>
     </ng-template>
   </ion-modal>

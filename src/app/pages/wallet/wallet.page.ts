@@ -6,6 +6,9 @@ import * as QRCode from 'qrcode';
 import { BleService } from '../../services/ble.service';
 import { EnviarService } from '../../services/enviar.service';
 import { WalletService } from '../../services/wallet.service';
+import { CarteraService } from '../../services/cartera.service';
+import { TokenBalanceService } from '../../services/token-balance.service';
+import { RMZ_TOKEN_ID } from '../../services/chronik.constants';
 
 @Component({
   selector: 'app-wallet',
@@ -21,21 +24,32 @@ export class WalletPage implements OnInit {
   toAddr = '';
   amount: number | null = null;
   sending = false;
+  sendingToken = false;
   isLoading = false;
   errorMessage = '';
   successMessage = '';
   sendForm: FormGroup;
+  sendTokenForm: FormGroup;
   bleAvailable = false;
+  tokenErrorMessage = '';
+  rmzTokenBalance: bigint | null = null;
+  readonly rmzTokenId = RMZ_TOKEN_ID;
 
   constructor(
     private readonly walletService: WalletService,
     private readonly enviarService: EnviarService,
+    private readonly carteraService: CarteraService,
+    private readonly tokenBalanceService: TokenBalanceService,
     private readonly bleService: BleService,
     formBuilder: FormBuilder,
   ) {
     this.sendForm = formBuilder.group({
       toAddr: ['', [Validators.required]],
       amount: [null, [Validators.required, Validators.min(0.000001)]],
+    });
+    this.sendTokenForm = formBuilder.group({
+      tokenDestination: ['', [Validators.required]],
+      tokenAmount: [null, [Validators.required, Validators.min(1)]]
     });
     this.bleAvailable = !!this.bleService;
   }
@@ -52,6 +66,7 @@ export class WalletPage implements OnInit {
       const mnemonic = localStorage.getItem('rmz_mnemonic');
       if (!mnemonic) {
         this.errorMessage = 'No hay semilla guardada.';
+        this.rmzTokenBalance = null;
         return;
       }
 
@@ -107,6 +122,7 @@ export class WalletPage implements OnInit {
       this.sending = true;
       this.errorMessage = '';
       this.successMessage = '';
+      this.tokenErrorMessage = '';
 
       const result = await this.enviarService.enviarTx(destination, amountInSats);
       if (result.success) {
@@ -120,9 +136,45 @@ export class WalletPage implements OnInit {
       }
     } catch (error) {
       console.error('Error al enviar transacción.', error);
-      this.errorMessage = 'Error al enviar transacción.';
+      this.errorMessage = this.resolveErrorMessage(error);
     } finally {
       this.sending = false;
+    }
+  }
+
+  async onSubmitToken(): Promise<void> {
+    if (this.sendTokenForm.invalid) {
+      this.sendTokenForm.markAllAsTouched();
+      return;
+    }
+
+    const destination = String(this.sendTokenForm.value.tokenDestination ?? '').trim();
+    const amount = Number(this.sendTokenForm.value.tokenAmount);
+
+    if (!destination) {
+      this.tokenErrorMessage = 'La dirección de destino es obligatoria.';
+      return;
+    }
+
+    if (!Number.isInteger(amount) || amount <= 0) {
+      this.tokenErrorMessage = 'El monto del eToken debe ser un número entero mayor que cero.';
+      return;
+    }
+
+    try {
+      this.sendingToken = true;
+      this.errorMessage = '';
+      this.tokenErrorMessage = '';
+      this.successMessage = '';
+
+      const result = await this.carteraService.sendRMZToken(destination, amount);
+      this.successMessage = `eToken enviado ✅ TXID: ${result.txid}`;
+      this.sendTokenForm.reset({ tokenDestination: '', tokenAmount: null });
+      await this.refreshBalance();
+    } catch (error) {
+      this.tokenErrorMessage = this.resolveErrorMessage(error);
+    } finally {
+      this.sendingToken = false;
     }
   }
 
@@ -134,14 +186,39 @@ export class WalletPage implements OnInit {
     return this.bleService?.connectedDevice?.name ?? 'Sin dispositivo';
   }
 
+  get formattedRmzBalance(): string {
+    if (this.rmzTokenBalance === null) {
+      return '-- RMZ';
+    }
+
+    return `${this.rmzTokenBalance.toString()} RMZ`;
+  }
+
   private async refreshBalance(address?: string): Promise<void> {
     try {
       const addr = address ?? this.walletService.getAddress();
-      const balance = await this.walletService.getBalance(addr);
+      if (!addr) {
+        this.balanceLabel = '0 XEC';
+        this.rmzTokenBalance = null;
+        return;
+      }
+
+      const [balance, rmzBalance] = await Promise.all([
+        this.walletService.getBalance(addr),
+        this.tokenBalanceService
+          .getRMZBalance(addr)
+          .catch((error) => {
+            console.warn('No se pudo obtener el saldo del token RMZ.', error);
+            return null;
+          }),
+      ]);
+
       this.balanceLabel = `${balance.toFixed(2)} XEC`;
+      this.rmzTokenBalance = rmzBalance;
     } catch (error) {
       console.error('No se pudo obtener el saldo.', error);
       this.balanceLabel = 'Saldo no disponible';
+      this.rmzTokenBalance = null;
     }
   }
 
@@ -157,5 +234,17 @@ export class WalletPage implements OnInit {
       console.error('No se pudo generar el código QR.', error);
       this.qrImageSrc = null;
     }
+  }
+
+  private resolveErrorMessage(error: unknown): string {
+    if (error instanceof Error && error.message) {
+      return error.message;
+    }
+
+    if (typeof error === 'string' && error) {
+      return error;
+    }
+
+    return 'Se produjo un error inesperado.';
   }
 }

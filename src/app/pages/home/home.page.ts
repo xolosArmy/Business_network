@@ -7,6 +7,8 @@ import { SaldoService } from '../../services/saldo.service';
 import { EnviarService } from '../../services/enviar.service';
 import { BleService } from '../../services/ble.service';
 import { OfflineStorageService } from '../../services/offline-storage.service';
+import { TokenBalanceService } from '../../services/token-balance.service';
+import { RMZ_TOKEN_ID } from '../../services/chronik.constants';
 
 @Component({
   selector: 'app-home-page',
@@ -21,11 +23,18 @@ export class HomePage implements OnInit, OnDestroy {
   isRefreshingBalance = false;
   isSendModalOpen = false;
   isSending = false;
+  isSendingToken = false;
   errorMessage = '';
   sendErrorMessage = '';
+  rmzSendErrorMessage = '';
   isOnline = typeof navigator === 'undefined' ? true : navigator.onLine;
 
   readonly sendForm: FormGroup;
+  readonly rmzSendForm: FormGroup;
+  readonly rmzTokenId = RMZ_TOKEN_ID;
+
+  rmzTokenBalance: bigint | null = null;
+
   private removeConnectionListeners: (() => void) | null = null;
 
   constructor(
@@ -33,6 +42,7 @@ export class HomePage implements OnInit, OnDestroy {
     private readonly saldoService: SaldoService,
     private readonly enviarService: EnviarService,
     private readonly offlineStorage: OfflineStorageService,
+    private readonly tokenBalanceService: TokenBalanceService,
     private readonly ngZone: NgZone,
     public readonly ble: BleService,
     formBuilder: FormBuilder,
@@ -40,6 +50,11 @@ export class HomePage implements OnInit, OnDestroy {
     this.sendForm = formBuilder.group({
       destination: ['', Validators.required],
       amount: [null, [Validators.required, Validators.min(0.000001)]],
+    });
+
+    this.rmzSendForm = formBuilder.group({
+      tokenDestination: ['', Validators.required],
+      tokenAmount: [null, [Validators.required, Validators.min(1)]],
     });
 
     this.registerConnectionListeners();
@@ -65,6 +80,14 @@ export class HomePage implements OnInit, OnDestroy {
     return `${this.saldoService.formatBalance(this.balance)} XEC`;
   }
 
+  get formattedRmzBalance(): string {
+    if (this.rmzTokenBalance === null) {
+      return '-- RMZ';
+    }
+
+    return `${this.rmzTokenBalance.toString()} RMZ`;
+  }
+
   async loadWallet(): Promise<void> {
     this.isLoadingWallet = true;
     this.errorMessage = '';
@@ -75,6 +98,7 @@ export class HomePage implements OnInit, OnDestroy {
         await this.refreshBalance();
       } else {
         this.balance = null;
+        this.rmzTokenBalance = null;
         await this.loadCachedBalance();
       }
     } catch (error) {
@@ -102,6 +126,7 @@ export class HomePage implements OnInit, OnDestroy {
   async refreshBalance(): Promise<void> {
     if (!this.wallet?.mnemonic) {
       await this.loadCachedBalance();
+      this.rmzTokenBalance = null;
       return;
     }
 
@@ -117,6 +142,7 @@ export class HomePage implements OnInit, OnDestroy {
           throw new Error('Sin conexión y sin saldo almacenado localmente.');
         }
         this.balance = cachedBalance;
+        this.rmzTokenBalance = null;
         return;
       }
 
@@ -124,10 +150,17 @@ export class HomePage implements OnInit, OnDestroy {
       if (!address) {
         this.balance = 0;
         await this.offlineStorage.setCachedBalance(0);
+        this.rmzTokenBalance = null;
         return;
       }
 
-      this.balance = await this.saldoService.getBalance(address);
+      const [xecBalance, rmzBalance] = await Promise.all([
+        this.saldoService.getBalance(address),
+        this.fetchRmzTokenBalance(address),
+      ]);
+
+      this.balance = xecBalance;
+      this.rmzTokenBalance = rmzBalance;
       await this.offlineStorage.setCachedBalance(this.balance ?? 0);
     } catch (error) {
       const cachedBalance = await this.offlineStorage.getCachedBalance();
@@ -137,6 +170,7 @@ export class HomePage implements OnInit, OnDestroy {
       } else {
         this.errorMessage = this.resolveErrorMessage(error);
       }
+      this.rmzTokenBalance = null;
     } finally {
       this.isRefreshingBalance = false;
     }
@@ -145,11 +179,14 @@ export class HomePage implements OnInit, OnDestroy {
   openSendModal(): void {
     this.sendForm.reset({ destination: '', amount: null });
     this.sendErrorMessage = '';
+    this.rmzSendForm.reset({ tokenDestination: '', tokenAmount: null });
+    this.rmzSendErrorMessage = '';
     this.isSendModalOpen = true;
   }
 
   closeSendModal(): void {
     this.isSendModalOpen = false;
+    this.isSendingToken = false;
   }
 
   async onSubmitSend(): Promise<void> {
@@ -196,6 +233,54 @@ export class HomePage implements OnInit, OnDestroy {
       this.sendErrorMessage = this.resolveErrorMessage(error);
     } finally {
       this.isSending = false;
+    }
+  }
+
+  async onSubmitSendToken(): Promise<void> {
+    if (!this.wallet?.mnemonic) {
+      this.rmzSendErrorMessage = 'Debes crear una cartera antes de enviar eTokens.';
+      return;
+    }
+
+    if (this.rmzSendForm.invalid) {
+      this.rmzSendForm.markAllAsTouched();
+      return;
+    }
+
+    const destination = String(this.rmzSendForm.value.tokenDestination ?? '').trim();
+    const amount = Number(this.rmzSendForm.value.tokenAmount);
+
+    if (!destination) {
+      this.rmzSendErrorMessage = 'La dirección de destino es obligatoria.';
+      return;
+    }
+
+    if (!Number.isInteger(amount) || amount <= 0) {
+      this.rmzSendErrorMessage = 'El monto del eToken debe ser un número entero mayor que cero.';
+      return;
+    }
+
+    this.isSendingToken = true;
+    this.rmzSendErrorMessage = '';
+
+    try {
+      const result = await this.carteraService.sendRMZToken(destination, amount);
+      await Toast.show({ text: `eToken enviado: ${result.txid}` });
+      this.rmzSendForm.reset({ tokenDestination: '', tokenAmount: null });
+      await this.refreshBalance();
+    } catch (error) {
+      this.rmzSendErrorMessage = this.resolveErrorMessage(error);
+    } finally {
+      this.isSendingToken = false;
+    }
+  }
+
+  private async fetchRmzTokenBalance(address: string): Promise<bigint | null> {
+    try {
+      return await this.tokenBalanceService.getRMZBalance(address);
+    } catch (error) {
+      console.warn('No se pudo obtener el saldo del token RMZ.', error);
+      return null;
     }
   }
 
