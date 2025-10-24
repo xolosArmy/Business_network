@@ -18,6 +18,13 @@
     href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Lora:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    integrity="sha512-1evP8mSOA1NEfUB8gq1nH2wPFNdpWfyC1FcArWSJKnxTS1V+3HQlA0RduCMsZ/HXXdK5vCq9zHEcWZP4LYXY3Q=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 
     <style>
     :root {
@@ -242,8 +249,7 @@
       box-shadow: var(--shadow-elevated);
       max-width: 560px;
       opacity: 0;
-      transform: translateY(20px);
-      animation: heroReveal 1.4s ease 0.3s forwards;
+      transform: translateY(28px);
     }
 
     .hero-content h1 {
@@ -280,7 +286,7 @@
 
     .parallax-section {
       height: clamp(260px, 45vh, 340px);
-      background-image: url('https://images.unsplash.com/photo-1526481280695-3c46973e09a2?auto=format&fit=crop&w=1400&q=80');
+      background-image: url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1400&q=80');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -353,6 +359,57 @@
       border-radius: 18px;
     }
 
+    .immersive-gallery,
+    .ritual-video {
+      padding-block: clamp(40px, 8vw, 72px);
+      background: var(--color-surface);
+      border-block: 1px solid rgba(13, 127, 114, 0.2);
+    }
+
+    .immersive-gallery .section-heading,
+    .ritual-video .section-heading {
+      margin-bottom: clamp(24px, 6vw, 40px);
+    }
+
+    .immersive-gallery__frame,
+    .ritual-video__frame {
+      position: relative;
+      width: min(100%, 960px);
+      margin: 0 auto;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-elevated);
+    }
+
+    .immersive-gallery__frame::before,
+    .ritual-video__frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(240, 199, 83, 0.32);
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .immersive-gallery__frame iframe {
+      width: 100%;
+      height: clamp(320px, 56vw, 540px);
+      border: 0;
+      display: block;
+    }
+
+    .ritual-video__frame video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .ritual-video__frame video::-webkit-media-controls-panel {
+      background: rgba(16, 21, 21, 0.8);
+    }
+
     .product-3d {
       position: relative;
       width: 100%;
@@ -382,13 +439,6 @@
     .animate-on-scroll.in-view {
       opacity: 1;
       transform: translateY(0);
-    }
-
-    @keyframes heroReveal {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     .payment-helper {
@@ -675,7 +725,7 @@
   <main id="mainContent" role="main">
    <section class="hero" aria-labelledby="heroTitle heroTagline">
   <video class="hero-video" autoplay loop muted playsinline aria-hidden="true" tabindex="-1">
-    <source src="https://cdn.pixabay.com/download/video/2020/09/19/50576-459235985_large.mp4?filename=teotihuacan-pyramid-50576.mp4" type="video/mp4" />
+    <source src="https://cdn.pixabay.com/download/video/2023/05/27/164850-834516594_large.mp4?filename=aztec-pyramid-at-dusk-164850.mp4" type="video/mp4" />
     Tu navegador no soporta video HTML5.
   </video>
   <div class="hero-content">
@@ -688,26 +738,68 @@
   </div>
 </section>
 
-<section class="parallax-section" aria-hidden="true">
+<section class="parallax-section" aria-hidden="true" data-aos="zoom-in" data-aos-duration="1200">
   <span>Guardianes del Mictlán</span>
 </section>
 
-<section class="audio-section" aria-labelledby="audioTitle">
+<section class="audio-section" aria-labelledby="audioTitle" data-aos="fade-up">
   <h2 id="audioTitle">Activa la atmósfera ritual</h2>
   <p id="audioDescription">Reproduce el ambiente sonoro de selva, tambores y cantos para acompañar tu recorrido por los remedios sagrados.</p>
   <audio controls loop muted autoplay aria-label="Ambiente sonoro prehispánico" aria-describedby="audioDescription">
-    <source src="https://cdn.pixabay.com/download/audio/2023/03/24/audio_e7ce4a751f.mp3?filename=aztec-ritual-143189.mp3" type="audio/mpeg" />
+    <source src="https://cdn.pixabay.com/download/audio/2023/02/13/audio_867234b0fe.mp3?filename=tribal-zen-139323.mp3" type="audio/mpeg" />
     Tu navegador no soporta el elemento de audio.
   </audio>
 </section>
 
 
+<section class="immersive-gallery" aria-labelledby="immersiveGalleryTitle" data-aos="fade-up">
+  <div class="section-heading">
+    <h2 id="immersiveGalleryTitle">Recorrido 3D por el santuario Xoloitzcuintle</h2>
+    <p>Explora un altar digital inspirado en la cosmovisión mexica y descubre cómo concebimos cada fórmula botánica.</p>
+  </div>
+  <div class="immersive-gallery__frame">
+    <iframe
+      src="https://sketchfab.com/models/a31dedf6209f4fb1ac9d4a569db03f65/embed?autostart=1&ui_theme=dark"
+      title="Escultura Xoloitzcuintle en 3D"
+      allow="autoplay; fullscreen; xr-spatial-tracking"
+      allowfullscreen
+      loading="lazy"
+    ></iframe>
+  </div>
+</section>
+
+<section class="ritual-video" aria-labelledby="ritualVideoTitle" data-aos="fade-up">
+  <div class="section-heading">
+    <h2 id="ritualVideoTitle">Ritual de aplicación guiada</h2>
+    <p>Observa paso a paso cómo aplicar los bálsamos y esencias para potenciar su protección sin irritar la piel.</p>
+  </div>
+  <div class="ritual-video__frame">
+    <video id="ritualVideo" controls preload="metadata" poster="https://images.unsplash.com/photo-1601758125946-6ec2e5c5c4e6?auto=format&fit=crop&w=1200&q=80">
+      <source src="https://cdn.pixabay.com/download/video/2022/06/09/118037-723460988_large.mp4?filename=dog-care-118037.mp4" type="video/mp4" />
+      Tu navegador no soporta video HTML5.
+    </video>
+  </div>
+</section>
+
+
   <script src="https://unpkg.com/@paybutton/paybutton/dist/paybutton.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    integrity="sha512-TrVn8xZI92s/6wDfVgsGtsasJGCynfm5F7DG25oxu48JoimPn2tIkv2pwBTvo1V1OEwq8ClDXsA+5qnvOy4PWA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"
+    integrity="sha512-A7AYk1QcnD3G1X45L2qkV6NKc+3YFzmc5Q42Q1p1tnJx1j6h5swSNa93w35b4nJ0HNnPGx1d+WQL6im1C6H0Pg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
 
 
     <!-- Sección de video de presentación (YouTube) -->
-<section class="video-section" aria-labelledby="videoSectionTitle">
+<section class="video-section" aria-labelledby="videoSectionTitle" data-aos="fade-up">
   <div class="section-heading">
     <h2 id="videoSectionTitle">Descubre nuestra filosofía ancestral</h2>
     <p>Sumérgete en la narrativa Xoloitzcuintle con este video que presenta nuestra propuesta holística de bienestar.</p>
@@ -725,7 +817,7 @@
 
 
 
-  <section class="payment-helper" role="region" aria-labelledby="paymentHelperTitle">
+  <section class="payment-helper" role="region" aria-labelledby="paymentHelperTitle" data-aos="fade-up">
     <h2 id="paymentHelperTitle" class="visually-hidden">Guía de pago con eCash</h2>
     <button id="openXecModal" class="payment-helper-button" type="button" data-open-xec-modal aria-controls="xecModal" aria-haspopup="dialog" aria-expanded="false">
       <i class="fa-solid fa-wallet" aria-hidden="true"></i>
@@ -733,7 +825,7 @@
     </button>
   </section>
 
-  <section id="productos" class="products-section" aria-labelledby="productosTitle">
+  <section id="productos" class="products-section" aria-labelledby="productosTitle" data-aos="fade-up">
     <div class="section-heading">
       <h2 id="productosTitle">Remedios botánicos para Xoloitzcuintles guardianes</h2>
       <p>Cada fórmula artesanal está pensada para proteger la piel sensible del Xoloitzcuintle con ingredientes naturales de alto rendimiento.</p>
@@ -907,7 +999,7 @@
   </section>
 
   <!-- Sección de reseñas de clientes -->
-  <section id="reseñas" class="reviews-section" role="region" aria-labelledby="reviewsTitle">
+  <section id="reseñas" class="reviews-section" role="region" aria-labelledby="reviewsTitle" data-aos="fade-up">
     <h2 id="reviewsTitle">Comparte tu reseña</h2>
     <p id="reviewsDescription">¿Ya probaste nuestros productos? ¡Cuéntanos tu experiencia y ayuda a otras familias Xoloitzcuintle!</p>
     <form action="https://formspree.io/f/your-form-id" method="POST" aria-describedby="reviewsDescription">
@@ -1005,6 +1097,32 @@ document.addEventListener('click', function(e){
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      if (window.AOS) {
+        AOS.init({
+          once: true,
+          offset: 160,
+          duration: 900,
+          easing: 'ease-out-quart',
+        });
+      }
+
+      if (window.gsap) {
+        gsap.set('.hero-content', { autoAlpha: 0, y: 48 });
+        const heroTimeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
+        heroTimeline
+          .to('.hero-content', { duration: 1.4, autoAlpha: 1, y: 0 })
+          .from(
+            '.hero .btn',
+            {
+              duration: 0.8,
+              scale: 0.92,
+              autoAlpha: 0,
+              ease: 'elastic.out(1, 0.6)',
+            },
+            '-=0.6'
+          );
+      }
+
       const modal = document.getElementById('xecModal');
       const openButtons = document.querySelectorAll('[data-open-xec-modal]');
       const closeBtn = document.getElementById('closeXecModal');
@@ -1124,6 +1242,7 @@ document.addEventListener('click', function(e){
 
       // Parallax del video hero
       const heroVideo = document.querySelector('.hero-video');
+      const ritualVideo = document.getElementById('ritualVideo');
       let scrollTarget = 0;
       let currentOffset = 0;
 
@@ -1144,6 +1263,24 @@ document.addEventListener('click', function(e){
       );
 
       updateParallax();
+
+      if (ritualVideo) {
+        const ritualObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                ritualVideo.play().catch(() => {
+                  /* El navegador puede impedir la reproducción automática */
+                });
+              } else {
+                ritualVideo.pause();
+              }
+            });
+          },
+          { threshold: 0.4 }
+        );
+        ritualObserver.observe(ritualVideo);
+      }
 
       // Escaparates 3D interactivos
       const initProductShowcases = () => {
@@ -1395,6 +1532,12 @@ document.addEventListener('click', function(e){
       };
 
       initProductShowcases();
+
+      if (window.AOS) {
+        setTimeout(() => {
+          AOS.refreshHard();
+        }, 600);
+      }
     });
   </script>
 
