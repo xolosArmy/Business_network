@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
-import { Wallet } from 'ecash-wallet';
-import { ChronikClient } from 'chronik-client';
-import { generateMnemonic, validateMnemonic } from '@scure/bip39';
-import { wordlist as ENGLISH_WORDLIST } from '@scure/bip39/wordlists/english.js';
+import KeyDerivation from 'minimal-xec-wallet/lib/key-derivation';
 
 import { OfflineStorageService } from './offline-storage.service';
-import { CHRONIK_URL } from './chronik.constants';
+import { RMZ_TOKEN_ID } from './chronik.constants';
+import { TokenBalance, TokenManagerService } from './token-manager.service';
 
 export interface WalletInfo {
   mnemonic: string;
@@ -15,14 +13,17 @@ export interface WalletInfo {
   privateKey: string;
 }
 
-const WORDS = ENGLISH_WORDLIST;
+const DEFAULT_DERIVATION_PATH = "m/44'/899'/0'/0/0";
 const STORAGE_KEY = 'rmz_wallet';
 @Injectable({ providedIn: 'root' })
 export class CarteraService {
   private cachedWallet: WalletInfo | null = null;
-  private readonly chronikClient: ChronikClient = new ChronikClient([CHRONIK_URL]);
+  private readonly keyDerivation = new KeyDerivation();
 
-  constructor(private readonly offlineStorage: OfflineStorageService) {}
+  constructor(
+    private readonly offlineStorage: OfflineStorageService,
+    private readonly tokenManager: TokenManagerService,
+  ) {}
 
   async createWallet(): Promise<WalletInfo> {
     const mnemonic = this.generateMnemonic();
@@ -75,27 +76,22 @@ export class CarteraService {
     return null;
   }
 
-  private async buildWalletFromMnemonic(mnemonic: string): Promise<WalletInfo> {
-    const wallet = Wallet.fromMnemonic(mnemonic, this.chronikClient);
-
-    const address = wallet.address;
-    const publicKey = wallet.pk;
-    const privateKey = wallet.sk;
-
-    if (!address || !publicKey || !privateKey) {
-      throw new Error('No se pudo derivar la información de la cartera.');
+  async getRmzTokenBalance(): Promise<TokenBalance | null> {
+    const wallet = await this.getWalletInfo();
+    if (!wallet?.address) {
+      return null;
     }
 
-    return {
-      mnemonic,
-      address,
-      publicKey: this.bytesToHex(publicKey),
-      privateKey: this.bytesToHex(privateKey),
-    };
+    try {
+      return await this.tokenManager.getTokenBalance(RMZ_TOKEN_ID, wallet.address);
+    } catch (error) {
+      console.warn('No se pudo obtener el balance del token RMZ', error);
+      return null;
+    }
   }
 
   private validateMnemonic(mnemonic: string): void {
-    if (!validateMnemonic(mnemonic, WORDS)) {
+    if (!this.keyDerivation.validateMnemonic(mnemonic)) {
       throw new Error('La frase mnemónica proporcionada no es válida.');
     }
   }
@@ -109,7 +105,7 @@ export class CarteraService {
   }
 
   private generateMnemonic(): string {
-    return generateMnemonic(WORDS, 128);
+    return this.keyDerivation.generateMnemonic(128);
   }
 
   private async persistWallet(wallet: WalletInfo): Promise<WalletInfo> {
@@ -129,10 +125,21 @@ export class CarteraService {
     return wallet;
   }
 
-  private bytesToHex(bytes: Uint8Array): string {
-    return Array.from(bytes)
-      .map((byte) => byte.toString(16).padStart(2, '0'))
-      .join('');
-  }
+  private async buildWalletFromMnemonic(mnemonic: string): Promise<WalletInfo> {
+    const { address, publicKey, privateKey } = this.keyDerivation.deriveFromMnemonic(
+      mnemonic,
+      DEFAULT_DERIVATION_PATH,
+    );
 
+    if (!address || !publicKey || !privateKey) {
+      throw new Error('No se pudo derivar la información de la cartera.');
+    }
+
+    return {
+      mnemonic,
+      address,
+      publicKey,
+      privateKey,
+    };
+  }
 }
