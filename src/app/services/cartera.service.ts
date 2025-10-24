@@ -4,7 +4,11 @@ import KeyDerivation from 'minimal-xec-wallet/lib/key-derivation';
 
 import { OfflineStorageService } from './offline-storage.service';
 import { RMZ_TOKEN_ID } from './chronik.constants';
-import { TokenBalance, TokenManagerService } from './token-manager.service';
+import {
+  SendRmzTokenResult,
+  TokenBalance,
+  TokenManagerService,
+} from './token-manager.service';
 
 export interface WalletInfo {
   mnemonic: string;
@@ -88,6 +92,26 @@ export class CarteraService {
       console.warn('No se pudo obtener el balance del token RMZ', error);
       return null;
     }
+  }
+
+  async sendRMZToken(
+    destination: string,
+    amount: number,
+    feeRate?: number,
+  ): Promise<SendRmzTokenResult> {
+    const wallet = await this.getWalletInfo();
+    if (!wallet) {
+      throw new Error('No se encontró una cartera inicializada.');
+    }
+
+    return this.tokenManager.sendRMZToken(destination, amount, {
+      mnemonic: wallet.mnemonic,
+      address: wallet.address,
+      publicKey: wallet.publicKey,
+      privateKey: wallet.privateKey,
+      hdPath: DEFAULT_DERIVATION_PATH,
+      feeRate,
+    });
   }
 
   private validateMnemonic(mnemonic: string): void {
