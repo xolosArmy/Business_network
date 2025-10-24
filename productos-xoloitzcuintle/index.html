@@ -15,89 +15,198 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Lora:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
 
-  <style>
-    body { font-family: 'Lora', serif; margin: 0; background: #0A0A0A; color: #f5f5f5; }
+    <style>
+    :root {
+      color-scheme: dark;
+      --color-background: #050606;
+      --color-surface: #101414;
+      --color-card: #161d1d;
+      --color-border: #0f5f58;
+      --color-primary: #0d7f72;
+      --color-primary-strong: #0b5d53;
+      --color-highlight: #f0c753;
+      --color-highlight-strong: #f9dd6c;
+      --color-danger: #9e1d1d;
+      --color-text: #f7f2e9;
+      --color-text-muted: #e4d6bd;
+      --color-text-strong: #fffdfa;
+      --shadow-elevated: 0 16px 32px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Lora', serif;
+      background: var(--color-background);
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
     h1,
     h2,
     h3,
     h4,
     h5,
-    h6 { font-family: 'Cinzel Decorative', cursive; }
-    header { text-align: center; padding: 60px 20px; background: #990000; color: #FFD700; }
-    h1 { font-size: 36px; margin-bottom: 10px; }
-    p { font-size: 18px; color: #e5d7c2; }
-    .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; padding: 40px 20px; }
-    .card { max-width: 300px; background: #111; border-radius: 16px; padding: 20px; box-shadow: 0 6px 14px rgba(0,0,0,0.35); text-align: center; border: 1px solid #008080; }
-    .card img { width: 100%; border-radius: 12px; border: 2px solid #FFD700; }
-    .card h2 { font-size: 20px; color: #FFD700; margin: 16px 0 8px; }
-    .card p { font-size: 16px; color: #d4d4d4; margin-bottom: 16px; }
-    .paybutton { margin-top: 10px; }
-
-    .boton.whatsapp {
-      display: inline-block; background: #008080; color: #FFD700;
-      padding: 12px 20px; border-radius: 8px; font-weight:bold;
-      margin-top:10px; text-decoration:none; border: 2px solid #FFD700;
+    h6 {
+      font-family: 'Cinzel Decorative', cursive;
+      color: var(--color-highlight-strong);
+      letter-spacing: 0.04em;
     }
 
-    .sticky-buy {
-      display: none;
-      position: fixed; bottom: 0; left: 0; right: 0;
-      background: #990000; color: #FFD700;
-      text-align: center; padding: 12px;
-      font-size: 18px; font-weight: bold;
-      z-index: 1000;
-    }
-    @media (max-width: 768px) {
-      .sticky-buy { display: block; }
+    p {
+      color: var(--color-text-muted);
+      font-size: 1.1rem;
     }
 
-    /* Estilos para la sección de reseñas */
-    .reviews-section {
-      background: #111;
-      padding: 40px 20px;
+    a {
+      color: var(--color-highlight-strong);
+    }
+
+    a,
+    button {
+      font-family: inherit;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    .paybutton-widget:focus-visible {
+      outline: 3px solid var(--color-highlight);
+      outline-offset: 3px;
+    }
+
+    header {
       text-align: center;
+      padding: 64px 20px;
+      background: linear-gradient(135deg, rgba(26, 8, 8, 0.95), rgba(74, 12, 12, 0.92));
+      color: var(--color-text-strong);
+      border-bottom: 2px solid var(--color-highlight);
     }
-    .reviews-section h2 {
-      color: #FFD700;
-      margin-bottom: 20px;
+
+    header h1 {
+      font-size: clamp(2.4rem, 5vw, 3.2rem);
+      margin-bottom: 12px;
+      color: var(--color-text-strong);
+      text-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
     }
-    .reviews-section form {
-      max-width: 500px;
-      margin: auto;
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(48px, 10vw, 96px);
     }
-    .reviews-section input,
-    .reviews-section textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 10px;
-      border: 1px solid #008080;
-      border-radius: 8px;
+
+    section {
+      padding-inline: clamp(16px, 5vw, 60px);
     }
-    .reviews-section button {
-      background: #008080;
-      color: #FFD700;
-      border: 2px solid #FFD700;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
+
+    .products-section {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(32px, 6vw, 48px);
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .section-heading p {
+      margin-top: 12px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: clamp(24px, 5vw, 40px);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      padding: clamp(20px, 4vw, 28px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card h2 {
+      font-size: 1.4rem;
+      color: var(--color-highlight-strong);
+      margin: 0;
+    }
+
+    .card p {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+    }
+
+    .card strong {
+      color: var(--color-text-strong);
+    }
+
+    .paybutton-widget {
+      border-radius: 12px;
+      overflow: hidden;
+      min-height: 48px;
+    }
+
+    .whatsapp-buy {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--color-primary);
+      color: var(--color-text-strong);
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .whatsapp-buy:hover,
+    .whatsapp-buy:focus-visible {
+      transform: translateY(-2px);
+      background: var(--color-primary-strong);
+      box-shadow: 0 10px 22px rgba(13, 127, 114, 0.35);
     }
 
     .hero {
       position: relative;
       width: 100%;
-      height: 75vh;
-      min-height: 420px;
+      min-height: clamp(420px, 70vh, 720px);
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      background: radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.25), transparent 55%);
+      background: radial-gradient(circle at 20% 20%, rgba(240, 199, 83, 0.25), transparent 60%);
       perspective: 1000px;
     }
 
@@ -105,7 +214,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.75) 75%);
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.8) 75%);
       z-index: 0;
     }
 
@@ -126,41 +235,51 @@
     .hero-content {
       position: relative;
       z-index: 2;
-      color: #fff;
-      background: rgba(10, 10, 10, 0.6);
-      padding: 24px 32px;
-      border-radius: 16px;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
-      max-width: 520px;
+      background: rgba(9, 17, 17, 0.72);
+      padding: clamp(24px, 6vw, 36px) clamp(24px, 8vw, 48px);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-elevated);
+      max-width: 560px;
       opacity: 0;
       transform: translateY(20px);
       animation: heroReveal 1.4s ease 0.3s forwards;
     }
 
     .hero-content h1 {
-      font-size: 2.6rem;
-      margin-bottom: 10px;
-      letter-spacing: 1px;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      margin-bottom: 12px;
+      color: var(--color-text-strong);
     }
 
     .hero-content p {
-      font-size: 1.25rem;
-      margin-bottom: 20px;
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      margin-bottom: 24px;
     }
 
     .hero-content .btn {
-      background: #FFD700;
-      color: #008080;
-      padding: 12px 20px;
-      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: var(--color-highlight-strong);
+      color: #201c09;
+      padding: 14px 26px;
+      border-radius: 999px;
       text-decoration: none;
-      font-weight: bold;
-      border: 2px solid #008080;
+      font-weight: 700;
+      border: 2px solid transparent;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .hero-content .btn:hover,
+    .hero-content .btn:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(249, 221, 108, 0.3);
     }
 
     .parallax-section {
-      height: 320px;
+      height: clamp(260px, 45vh, 340px);
       background-image: url('https://images.unsplash.com/photo-1526481280695-3c46973e09a2?auto=format&fit=crop&w=1400&q=80');
       background-size: cover;
       background-position: center;
@@ -169,8 +288,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #FFD700;
-      font-size: 1.8rem;
+      color: var(--color-text-strong);
+      font-size: clamp(1.3rem, 4vw, 2rem);
       letter-spacing: 2px;
       text-shadow: 0 6px 18px rgba(0, 0, 0, 0.75);
       overflow: hidden;
@@ -189,42 +308,63 @@
     }
 
     .audio-section {
-      padding: 40px 20px;
+      padding-block: clamp(40px, 8vw, 64px);
       text-align: center;
-      background: #111;
-      border-top: 1px solid rgba(255, 215, 0, 0.35);
-      border-bottom: 1px solid rgba(0, 128, 128, 0.35);
+      background: var(--color-surface);
+      border-block: 1px solid rgba(240, 199, 83, 0.2);
     }
 
     .audio-section h2 {
-      color: #FFD700;
+      color: var(--color-highlight-strong);
       margin-bottom: 12px;
     }
 
     .audio-section p {
       max-width: 640px;
-      margin: 0 auto 20px auto;
-      color: #e5d7c2;
+      margin: 0 auto 24px auto;
     }
 
     .audio-section audio {
       width: min(100%, 420px);
-      border-radius: 12px;
+      border-radius: 16px;
       box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .video-section {
+      text-align: center;
+      padding-block: clamp(40px, 8vw, 72px);
+    }
+
+    .video-section__frame {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 18px;
+      box-shadow: var(--shadow-elevated);
+    }
+
+    .video-section__frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 18px;
     }
 
     .product-3d {
       position: relative;
       width: 100%;
       height: 260px;
-      border-radius: 14px;
-      background: radial-gradient(circle at 30% 20%, rgba(255, 215, 0, 0.18), transparent 65%),
-                  radial-gradient(circle at 70% 80%, rgba(0, 128, 128, 0.18), transparent 55%);
+      border-radius: 18px;
+      background: radial-gradient(circle at 30% 20%, rgba(240, 199, 83, 0.18), transparent 65%),
+                  radial-gradient(circle at 70% 80%, rgba(13, 127, 114, 0.18), transparent 55%);
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
     .product-3d canvas {
@@ -254,184 +394,297 @@
     .payment-helper {
       display: flex;
       justify-content: center;
-      padding: 20px;
+      padding: 0 20px;
     }
 
     .payment-helper-button {
-      background: #008080;
-      color: #FFD700;
-      border: 2px solid #FFD700;
-      padding: 12px 24px;
+      background: transparent;
+      color: var(--color-highlight-strong);
+      border: 2px solid var(--color-highlight-strong);
+      padding: 12px 28px;
       border-radius: 999px;
       font-size: 1rem;
       font-weight: 700;
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      background-color: rgba(15, 95, 88, 0.25);
     }
 
     .payment-helper-button:hover,
-    .payment-helper-button:focus {
+    .payment-helper-button:focus-visible {
       transform: translateY(-2px);
-      box-shadow: 0 6px 14px rgba(0, 128, 128, 0.35);
-      outline: none;
+      box-shadow: 0 6px 18px rgba(240, 199, 83, 0.25);
+      background-color: rgba(15, 95, 88, 0.45);
     }
 
-    .xec-modal {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 128, 128, 0.55);
-      padding: 20px;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.25s ease, visibility 0.25s ease;
-      z-index: 2000;
+    .reviews-section {
+      background: var(--color-surface);
+      padding-block: clamp(40px, 7vw, 64px);
+      text-align: center;
+      border-top: 1px solid rgba(15, 95, 88, 0.4);
     }
 
-    .xec-modal.is-visible {
-      opacity: 1;
-      visibility: visible;
+    .reviews-section h2 {
+      color: var(--color-highlight-strong);
+      margin-bottom: 20px;
     }
 
-    .xec-modal__dialog {
-      background: #ffffff;
-      border-radius: 20px;
+    .reviews-section form {
       max-width: 520px;
-      width: 100%;
-      padding: 24px;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
-      color: #0A0A0A;
-      position: relative;
-    }
-
-    .xec-modal__title {
-      margin-top: 0;
-      margin-bottom: 16px;
-      color: #990000;
-      font-size: 1.4rem;
-    }
-
-    .xec-modal__list {
-      padding-left: 20px;
-      margin: 0 0 20px;
-      line-height: 1.6;
-      color: #008080;
-    }
-
-    .xec-modal__warning {
-      background: rgba(255, 215, 0, 0.15);
-      border-left: 4px solid #FFD700;
-      padding: 12px 16px;
-      border-radius: 12px;
-      font-weight: 600;
-      color: #990000;
-      margin-bottom: 20px;
-    }
-
-    .xec-modal__address {
-      background: rgba(0, 128, 128, 0.12);
-      padding: 12px 16px;
-      border-radius: 12px;
-      font-family: 'Courier New', Courier, monospace;
-      word-break: break-all;
-      margin-bottom: 20px;
-      color: #FFD700;
-    }
-
-    .xec-modal__actions {
+      margin: 0 auto;
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       gap: 12px;
     }
 
-    .xec-modal__button {
-      flex: 1 1 160px;
+    .reviews-section .form-field {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .reviews-section label {
+      font-weight: 600;
+      color: var(--color-highlight-strong);
+    }
+
+    .reviews-section input,
+    .reviews-section textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid rgba(240, 199, 83, 0.35);
+      border-radius: 12px;
+      background: rgba(22, 29, 29, 0.9);
+      color: var(--color-text);
+      font-size: 1rem;
+    }
+
+    .reviews-section input::placeholder,
+    .reviews-section textarea::placeholder {
+      color: rgba(228, 214, 189, 0.75);
+    }
+
+    .reviews-section textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .reviews-section button {
+      background: var(--color-highlight-strong);
+      color: #201c09;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .reviews-section button:hover,
+    .reviews-section button:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 22px rgba(249, 221, 108, 0.25);
+    }
+
+    .sticky-buy {
+      position: fixed;
+      inset-inline: clamp(16px, 6vw, 48px);
+      bottom: 24px;
+      background: rgba(16, 21, 21, 0.92);
+      border: 1px solid rgba(240, 199, 83, 0.35);
+      border-radius: 18px;
+      box-shadow: var(--shadow-elevated);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 1000;
+      transform: translateY(150%);
+      opacity: 0;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+
+    .sticky-buy.is-visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .sticky-buy__title {
+      margin: 0;
+      font-size: 1rem;
+      color: var(--color-highlight-strong);
+    }
+
+    .sticky-buy__actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+    }
+
+    .sticky-buy__action {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      border: none;
-      padding: 12px;
       border-radius: 12px;
-      font-weight: 600;
-      cursor: pointer;
+      padding: 12px;
+      font-weight: 700;
       text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .sticky-buy__action--xec {
+      background: var(--color-highlight-strong);
+      color: #201c09;
+    }
+
+    .sticky-buy__action--whatsapp {
+      background: var(--color-primary);
+      color: var(--color-text-strong);
+    }
+
+    .sticky-buy__action:hover,
+    .sticky-buy__action:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+    }
+
+    .site-footer {
+      background: linear-gradient(135deg, rgba(26, 8, 8, 0.95), rgba(74, 12, 12, 0.92));
+      color: var(--color-text-strong);
+      text-align: center;
+      padding: clamp(32px, 6vw, 48px) 20px;
+      border-top: 2px solid var(--color-highlight);
+    }
+
+    .site-footer__link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--color-highlight-strong);
+      color: #201c09;
+      padding: 12px 24px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .xec-modal__button--primary {
-      background: #008080;
-      color: #FFD700;
-      border: 2px solid #FFD700;
+    .site-footer__copy {
+      margin-bottom: 20px;
     }
 
-    .xec-modal__button--secondary {
-      background: #FFD700;
-      color: #008080;
-      border: 2px solid #008080;
+    .site-footer__link:hover,
+    .site-footer__link:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(249, 221, 108, 0.3);
     }
 
-    .xec-modal__button:hover,
-    .xec-modal__button:focus {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0, 128, 128, 0.25);
-      outline: none;
+    @media (max-width: 1024px) {
+      .hero {
+        background-attachment: scroll;
+      }
+
+      .sticky-buy {
+        inset-inline: clamp(16px, 4vw, 32px);
+      }
     }
 
-    .xec-modal__close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: transparent;
-      border: none;
-      color: #FFD700;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
+    @media (max-width: 768px) {
+      header {
+        padding-block: 48px;
+      }
 
-    .xec-modal__feedback {
-      margin-top: 12px;
-      font-size: 0.9rem;
-      color: #008080;
-      min-height: 1.2em;
+      .hero-content {
+        padding: 28px;
+      }
+
+      .hero-content h1 {
+        font-size: clamp(1.8rem, 6vw, 2.4rem);
+      }
+
+      .hero-content p {
+        font-size: 1.1rem;
+      }
+
+      .card {
+        padding: 24px;
+      }
+
+      .sticky-buy {
+        max-width: 520px;
+        margin-inline: auto;
+      }
     }
 
     @media (max-width: 600px) {
-      .xec-modal__dialog {
-        padding: 20px 18px;
+      section {
+        padding-inline: clamp(16px, 6vw, 28px);
       }
 
-      .xec-modal__actions {
-        flex-direction: column;
+      .hero {
+        min-height: 60vh;
       }
 
-      .xec-modal__button {
-        width: 100%;
+      .hero-content {
+        padding: 24px 20px;
+      }
+
+      .product-3d {
+        height: 220px;
+      }
+
+      .reviews-section form {
+        gap: 10px;
+      }
+
+      .sticky-buy {
+        bottom: 16px;
+        padding: 14px;
       }
     }
-  
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: clamp(1.8rem, 8vw, 2.1rem);
+      }
+
+      .hero-content .btn {
+        width: 100%;
+      }
+
+      .sticky-buy__actions {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 
   </head>
 <body>
-  <header>
-    <h1>xolosArmy Naturals</h1>
+  <header role="banner">
+    <h1 id="siteTitle">xolosArmy Naturals</h1>
   </header>
-  <main>
-   <section class="hero" aria-label="Introducción xolosArmy Naturals">
-  <video class="hero-video" autoplay loop muted playsinline>
+  <main id="mainContent" role="main">
+   <section class="hero" aria-labelledby="heroTitle heroTagline">
+  <video class="hero-video" autoplay loop muted playsinline aria-hidden="true" tabindex="-1">
     <source src="https://cdn.pixabay.com/download/video/2020/09/19/50576-459235985_large.mp4?filename=teotihuacan-pyramid-50576.mp4" type="video/mp4" />
     Tu navegador no soporta video HTML5.
   </video>
   <div class="hero-content">
-    <h1>xolosArmy Naturals</h1>
-    <p>Cuidado Ancestral para piel de Guerrero</p>
-    <a href="#productos" class="btn">Descubre nuestros naturales</a>
+    <h1 id="heroTitle">xolosArmy Naturals</h1>
+    <p id="heroTagline">Cuidado Ancestral para piel de Guerrero</p>
+    <a href="#productos" class="btn" aria-describedby="heroTagline">
+      <span class="visually-hidden">Ir a la sección de productos.</span>
+      Descubre nuestros naturales
+    </a>
   </div>
 </section>
 
@@ -439,10 +692,10 @@
   <span>Guardianes del Mictlán</span>
 </section>
 
-<section class="audio-section" aria-label="Ambiente sonoro prehispánico">
-  <h2>Activa la atmósfera ritual</h2>
-  <p>Reproduce el ambiente sonoro de selva, tambores y cantos para acompañar tu recorrido por los remedios sagrados.</p>
-  <audio controls loop muted autoplay>
+<section class="audio-section" aria-labelledby="audioTitle">
+  <h2 id="audioTitle">Activa la atmósfera ritual</h2>
+  <p id="audioDescription">Reproduce el ambiente sonoro de selva, tambores y cantos para acompañar tu recorrido por los remedios sagrados.</p>
+  <audio controls loop muted autoplay aria-label="Ambiente sonoro prehispánico" aria-describedby="audioDescription">
     <source src="https://cdn.pixabay.com/download/audio/2023/03/24/audio_e7ce4a751f.mp3?filename=aztec-ritual-143189.mp3" type="audio/mpeg" />
     Tu navegador no soporta el elemento de audio.
   </audio>
@@ -454,13 +707,16 @@
 
 
     <!-- Sección de video de presentación (YouTube) -->
-<section style="text-align: center; padding: 40px 20px;">
-  <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-    <iframe src="https://www.youtube.com/embed/5FIy-vXmGt0?si=scFV48DhB8fiW391&autoplay=1&mute=1" 
-            title="Video de presentación Xoloitzcuintle" 
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+<section class="video-section" aria-labelledby="videoSectionTitle">
+  <div class="section-heading">
+    <h2 id="videoSectionTitle">Descubre nuestra filosofía ancestral</h2>
+    <p>Sumérgete en la narrativa Xoloitzcuintle con este video que presenta nuestra propuesta holística de bienestar.</p>
+  </div>
+  <div class="video-section__frame">
+    <iframe src="https://www.youtube.com/embed/5FIy-vXmGt0?si=scFV48DhB8fiW391&autoplay=1&mute=1"
+            title="Video de presentación Xoloitzcuintle"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
     </iframe>
   </div>
@@ -469,14 +725,21 @@
 
 
 
-  <section class="payment-helper" aria-label="Guía de pago con eCash">
-    <button id="openXecModal" class="payment-helper-button" type="button">
+  <section class="payment-helper" role="region" aria-labelledby="paymentHelperTitle">
+    <h2 id="paymentHelperTitle" class="visually-hidden">Guía de pago con eCash</h2>
+    <button id="openXecModal" class="payment-helper-button" type="button" data-open-xec-modal aria-controls="xecModal" aria-haspopup="dialog" aria-expanded="false">
       <i class="fa-solid fa-wallet" aria-hidden="true"></i>
       ¿Cómo pagar con eCash (XEC)?
     </button>
   </section>
 
-  <section id="productos" class="grid">
+  <section id="productos" class="products-section" aria-labelledby="productosTitle">
+    <div class="section-heading">
+      <h2 id="productosTitle">Remedios botánicos para Xoloitzcuintles guardianes</h2>
+      <p>Cada fórmula artesanal está pensada para proteger la piel sensible del Xoloitzcuintle con ingredientes naturales de alto rendimiento.</p>
+    </div>
+
+    <div class="grid">
 
     <!-- Producto 1 -->
     <div class="card animate-on-scroll">
@@ -485,6 +748,7 @@
       <p><strong>≈ $522 MXN</strong> Forjado con savia de árbol de té bajo la tutela de Xólotl, este bálsamo repara la piel del compañero de guerra como si sellara códices de obsidiana, para que siga guiando almas a través del Mictlán sin que el tiempo marque su pelaje.</p>
       <div class="paybutton-widget"
         data-ga-event="begin_checkout_xec"
+        data-item="Ungüento Solar del Guardián Xólotl"
         to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
         amount=1333333
         text="Comprar con XEC"
@@ -493,9 +757,13 @@
         theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
         op-return="Compra Balsamo Arbol de Té XolosArmy">
       </div>
-      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Bálsamo+Arbol+de+té" 
-         class="boton whatsapp-buy" target="_blank" data-ga-event="whatsapp_lead">
-         🟢 Comprar por WhatsApp (Transferencia Bancaria)
+      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Bálsamo+Arbol+de+té"
+         class="whatsapp-buy" target="_blank" rel="noopener noreferrer"
+         data-ga-event="whatsapp_lead"
+         data-item="Ungüento Solar del Guardián Xólotl"
+         aria-label="Abrir WhatsApp para comprar el Ungüento Solar del Guardián Xólotl mediante transferencia bancaria">
+        <span aria-hidden="true">🟢</span>
+        <span>Comprar por WhatsApp (Transferencia bancaria)</span>
       </a>
     </div>
 
@@ -506,6 +774,7 @@
       <p><strong>≈ $522 MXN</strong> Al caer la noche, Tlazōlteōtl susurra lavanda y vitamina E sobre la piel del Xoloitzcuintle, acunando sus sueños de guerrero con neblinas moradas que lo preparan para custodiar los portales entre la tierra y el firmamento.</p>
       <div class="paybutton-widget"
         data-ga-event="begin_checkout_xec"
+        data-item="Néctar Onírico de Tlazōlteōtl"
         to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
         amount=1333333
         text="Comprar con XEC"
@@ -514,9 +783,12 @@
         theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
         op-return="Compra Balsamo Lavanda XolosArmy">
       </div>
-      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Bálsamo+Lavanda" 
-         class="boton whatsapp-buy" target="_blank" data-ga-event="whatsapp_lead">
-         🟢 Comprar por WhatsApp (Transferencia Bancaria)
+      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Bálsamo+Lavanda"
+         class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
+         data-item="Néctar Onírico de Tlazōlteōtl"
+         aria-label="Abrir WhatsApp para comprar el Néctar Onírico de Tlazōlteōtl mediante transferencia bancaria">
+        <span aria-hidden="true">🟢</span>
+        <span>Comprar por WhatsApp (Transferencia bancaria)</span>
       </a>
     </div>
 
@@ -527,6 +799,7 @@
       <p><strong>≈ $522 MXN</strong> Cada aurora, los sacerdotes exprimen limones sagrados para trazar sobre el Xoloitzcuintle un círculo de luz que purifica heridas y despierta la valentía, como si Tonatiuh mismo lo ungiera antes de una batalla cósmica.</p>
       <div class="paybutton-widget"
         data-ga-event="begin_checkout_xec"
+        data-item="Esencia Citlalinahuatl del Amanecer"
         to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
         amount=1333333
         text="Comprar con XEC"
@@ -535,9 +808,12 @@
         theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
         op-return="Compra Balsamo Limón XolosArmy">
       </div>
-      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Bálsamo+Limón" 
-         class="boton whatsapp-buy" target="_blank" data-ga-event="whatsapp_lead">
-         🟢 Comprar por WhatsApp (Transferencia Bancaria)
+      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Bálsamo+Limón"
+         class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
+         data-item="Esencia Citlalinahuatl del Amanecer"
+         aria-label="Abrir WhatsApp para comprar la Esencia Citlalinahuatl del Amanecer mediante transferencia bancaria">
+        <span aria-hidden="true">🟢</span>
+        <span>Comprar por WhatsApp (Transferencia bancaria)</span>
       </a>
     </div>
 
@@ -548,6 +824,7 @@
       <p><strong>≈ $522 MXN</strong> Una nube ritual de cítricos y hojas guardianas envuelve al can mestizo del inframundo, convirtiéndose en armadura sutil que Quetzalcóatl extiende para rechazar a los insectos como si fueran flechas perdidas en el viento nocturno.</p>
       <div class="paybutton-widget"
         data-ga-event="begin_checkout_xec"
+        data-item="Escudo de Bruma de Quetzalcóatl"
         to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
         amount=1333333
         text="Comprar con XEC"
@@ -556,16 +833,19 @@
         theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
         op-return="Compra Repelente Limón XolosArmy">
       </div>
-      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Repelente+Limón" 
-         class="boton whatsapp-buy" target="_blank" data-ga-event="whatsapp_lead">
-         🟢 Comprar por WhatsApp (Transferencia Bancaria)
+      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Repelente+Limón"
+         class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
+         data-item="Escudo de Bruma de Quetzalcóatl"
+         aria-label="Abrir WhatsApp para comprar el Escudo de Bruma de Quetzalcóatl mediante transferencia bancaria">
+        <span aria-hidden="true">🟢</span>
+        <span>Comprar por WhatsApp (Transferencia bancaria)</span>
       </a>
     </div>
 
     <!-- Producto 5 -->
     <div class="card animate-on-scroll">
       <div class="product-3d" role="img" aria-label="Modelo 3D del dúo ritual de espuma" data-variant="duo" data-base-color="#f3efe0" data-highlight-color="#d9c7a0"></div>
-      <h3>Dúo Ritual de Espuma del Mictlán</h3>
+      <h2>Dúo Ritual de Espuma del Mictlán</h2>
   <p><strong>≈ $522 MXN</strong> Dos barras gemelas invocan aguas termales ancestrales y arenas celestes para purificar al Xoloitzcuintle antes de cada travesía, envolviéndolo en una exfoliación sagrada que honra su misión de custodio entre mundos.</p>
   <ul>
     <li>Glicerina vegetal</li>
@@ -574,6 +854,7 @@
   </ul>
       <div class="paybutton-widget"
         data-ga-event="begin_checkout_xec"
+        data-item="Dúo Ritual de Espuma del Mictlán"
         to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
         amount=1333333
         text="Comprar con XEC"
@@ -582,9 +863,12 @@
         theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
         op-return="Jabón Neutro y Exfoliante Suave xolosArmy">
       </div>
-      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+jabon+exfoliante" 
-         class="boton whatsapp-buy" target="_blank" data-ga-event="whatsapp_lead">
-         🟢 Comprar por WhatsApp (Transferencia Bancaria)
+      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+jabon+exfoliante"
+         class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
+         data-item="Dúo Ritual de Espuma del Mictlán"
+         aria-label="Abrir WhatsApp para comprar el Dúo Ritual de Espuma del Mictlán mediante transferencia bancaria">
+        <span aria-hidden="true">🟢</span>
+        <span>Comprar por WhatsApp (Transferencia bancaria)</span>
       </a>
     </div>
 
@@ -592,7 +876,7 @@
     <!-- Producto 6 -->
     <div class="card animate-on-scroll">
       <div class="product-3d" role="img" aria-label="Modelo 3D del paquete bienestar integral" data-variant="kit" data-base-color="#ffbf75" data-highlight-color="#ffeed6"></div>
-      <h3>Paquete Bienestar Integral Xoloitzcuintle</h3>
+      <h2>Paquete Bienestar Integral Xoloitzcuintle</h2>
   <p><strong>≈ $1950 MXN</strong> Cuidado completo de la piel y protección natural: incluye bálsamos de Árbol de Té, Limón y Lavanda, repelente con esencia de limón y dos jabones neutros exfoliantes.</p>
   <ul>
     <li>Bálsamos calmantes y nutritivos: Árbol de Té, Limón y Lavanda.</li>
@@ -602,6 +886,7 @@
   </ul>
       <div class="paybutton-widget"
         data-ga-event="begin_checkout_xec"
+        data-item="Paquete Bienestar Integral Xoloitzcuintle"
         to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
         amount=5666666
         text="Comprar con XEC"
@@ -610,53 +895,67 @@
         theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
         op-return="Paquete Bienestar Integral Xoloitzcuintle">
       </div>
-      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Paquete+Bienestar+Integral+Xoloitzcuintle" 
-         class="boton whatsapp-buy" target="_blank" data-ga-event="whatsapp_lead">
-         🟢 Comprar por WhatsApp (Transferencia Bancaria)
+      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Paquete+Bienestar+Integral+Xoloitzcuintle"
+         class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
+         data-item="Paquete Bienestar Integral Xoloitzcuintle"
+         aria-label="Abrir WhatsApp para comprar el Paquete Bienestar Integral Xoloitzcuintle mediante transferencia bancaria">
+        <span aria-hidden="true">🟢</span>
+        <span>Comprar por WhatsApp (Transferencia bancaria)</span>
       </a>
     </div>
 
   </section>
 
   <!-- Sección de reseñas de clientes -->
-  <section id="reseñas" class="reviews-section">
-    <h2>Comparte tu reseña</h2>
-    <p>¿Ya probaste nuestros productos? ¡Cuéntanos tu experiencia!</p>
-    <form action="https://formspree.io/f/your-form-id" method="POST">
-      <input type="text" name="nombre" placeholder="Tu nombre" required />
-      <textarea name="mensaje" placeholder="Tu reseña" required></textarea>
+  <section id="reseñas" class="reviews-section" role="region" aria-labelledby="reviewsTitle">
+    <h2 id="reviewsTitle">Comparte tu reseña</h2>
+    <p id="reviewsDescription">¿Ya probaste nuestros productos? ¡Cuéntanos tu experiencia y ayuda a otras familias Xoloitzcuintle!</p>
+    <form action="https://formspree.io/f/your-form-id" method="POST" aria-describedby="reviewsDescription">
+      <div class="form-field">
+        <label for="reviewName">Nombre</label>
+        <input id="reviewName" type="text" name="nombre" placeholder="Tu nombre" required aria-required="true" />
+      </div>
+      <div class="form-field">
+        <label for="reviewMessage">Reseña</label>
+        <textarea id="reviewMessage" name="mensaje" placeholder="Tu reseña" required aria-required="true"></textarea>
+      </div>
       <button type="submit">Enviar reseña</button>
     </form>
   </section>
 
-  <!-- Botón Sticky para WhatsApp -->
-  <div id="stickyBuy" class="sticky-buy">
-    <a href="https://wa.me/message/435RTKGJLTX2J1" target="_blank" style="color:white; text-decoration:none;">
-      🟢 Comprar por WhatsApp (Transferencia)
-    </a>
-  </div>
-
-  <script>
-    window.addEventListener('scroll', () => {
-      const sticky = document.getElementById('stickyBuy');
-      sticky.style.display = window.scrollY > 200 ? 'block' : 'none';
-    });
-  </script>
-
-
-
+  <aside id="stickyBuy" class="sticky-buy" aria-hidden="true" role="region" aria-labelledby="stickyBuyTitle">
+    <p id="stickyBuyTitle" class="sticky-buy__title">Compra rápida</p>
+    <div class="sticky-buy__actions">
+      <button type="button" class="sticky-buy__action sticky-buy__action--xec" data-open-xec-modal aria-controls="xecModal" aria-haspopup="dialog" aria-expanded="false">
+        <i class="fa-solid fa-coins" aria-hidden="true"></i>
+        Pagar con XEC
+      </button>
+      <a
+        class="sticky-buy__action sticky-buy__action--whatsapp"
+        href="https://wa.me/message/435RTKGJLTX2J1"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-ga-event="whatsapp_lead"
+        data-item="Compra rápida WhatsApp"
+        aria-label="Abrir WhatsApp para una compra rápida por transferencia"
+      >
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+        WhatsApp
+      </a>
+    </div>
+  </aside>
 
   </main>
-  <footer style="background:#990000; color:#FFD700; text-align:center; padding:30px 20px;">
-  <p style="margin: 0 0 10px;">&copy; 2025 Xolos Ramírez · Xoloitzcuintles con amor</p>
+  <footer class="site-footer" role="contentinfo">
+    <p class="site-footer__copy">&copy; 2025 Xolos Ramírez · Xoloitzcuintles con amor</p>
 
-  <div style="margin-bottom:15px;">
-    <a href="https://xolosarmy.xyz" style="background:#FFD700; color:#008080; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:bold; border:2px solid #008080;">
-      ← Volver a la página principal
-    </a>
-  </div>
+    <div>
+      <a href="https://xolosarmy.xyz" class="site-footer__link">
+        ← Volver a la página principal
+      </a>
+    </div>
 
-</footer>
+  </footer>
 
   <div id="xecModal" class="xec-modal" aria-hidden="true">
     <div class="xec-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="xecModalTitle">
@@ -707,35 +1006,65 @@ document.addEventListener('click', function(e){
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const modal = document.getElementById('xecModal');
-      const openBtn = document.getElementById('openXecModal');
+      const openButtons = document.querySelectorAll('[data-open-xec-modal]');
       const closeBtn = document.getElementById('closeXecModal');
       const copyBtn = document.getElementById('copyXecAddress');
       const feedback = document.getElementById('xecCopyFeedback');
+      const stickyBuy = document.getElementById('stickyBuy');
       const xecAddress = 'ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8';
       let lastFocusedElement = null;
+      let focusableNodes = [];
+
+      const focusableSelectors = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+
+      const updateFocusableNodes = () => {
+        if (!modal) return;
+        focusableNodes = Array.from(modal.querySelectorAll(focusableSelectors)).filter((node) => !node.hasAttribute('disabled'));
+      };
 
       const openModal = () => {
+        if (!modal) return;
         lastFocusedElement = document.activeElement;
         modal.classList.add('is-visible');
         modal.setAttribute('aria-hidden', 'false');
-        closeBtn.focus();
+        updateFocusableNodes();
+        openButtons.forEach((btn) => btn.setAttribute('aria-expanded', 'true'));
+        (focusableNodes[0] || closeBtn)?.focus();
       };
 
       const closeModal = () => {
+        if (!modal) return;
         modal.classList.remove('is-visible');
         modal.setAttribute('aria-hidden', 'true');
         feedback.textContent = '';
+        openButtons.forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
         if (lastFocusedElement) {
           lastFocusedElement.focus();
         }
       };
 
-      openBtn?.addEventListener('click', openModal);
+      openButtons.forEach((button) => {
+        button.addEventListener('click', openModal);
+      });
       closeBtn?.addEventListener('click', closeModal);
 
       modal?.addEventListener('click', (event) => {
         if (event.target === modal) {
           closeModal();
+        }
+      });
+
+      modal?.addEventListener('keydown', (event) => {
+        if (event.key === 'Tab' && focusableNodes.length) {
+          const first = focusableNodes[0];
+          const last = focusableNodes[focusableNodes.length - 1];
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
         }
       });
 
@@ -764,6 +1093,16 @@ document.addEventListener('click', function(e){
           feedback.style.color = '#990000';
         }
       });
+
+      const toggleStickyBuy = () => {
+        if (!stickyBuy) return;
+        const shouldShow = window.scrollY > 240;
+        stickyBuy.classList.toggle('is-visible', shouldShow);
+        stickyBuy.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
+      };
+
+      toggleStickyBuy();
+      window.addEventListener('scroll', toggleStickyBuy, { passive: true });
 
       // Animaciones al hacer scroll
       const revealObserver = new IntersectionObserver(
