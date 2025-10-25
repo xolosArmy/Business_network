@@ -1291,30 +1291,68 @@ document.addEventListener('click', function(e){
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
       if (window.AOS) {
         AOS.init({
           once: true,
-          offset: 160,
-          duration: 900,
+          offset: isMobile ? 100 : 160,
+          duration: isMobile ? 700 : 900,
           easing: 'ease-out-quart',
         });
       }
 
       if (window.gsap) {
-        gsap.set('.hero-content', { autoAlpha: 0, y: 48 });
-        const heroTimeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
-        heroTimeline
-          .to('.hero-content', { duration: 1.4, autoAlpha: 1, y: 0 })
-          .from(
-            '.hero .btn',
-            {
-              duration: 0.8,
-              scale: 0.92,
-              autoAlpha: 0,
-              ease: 'elastic.out(1, 0.6)',
-            },
-            '-=0.6'
-          );
+        const dur = isMobile ? 0.9 : 1.4;
+        gsap.set('.hero-content', { autoAlpha: 0, y: 42 });
+        gsap
+          .timeline({ defaults: { ease: 'power3.out' } })
+          .to('.hero-content', { duration: dur, autoAlpha: 1, y: 0 })
+          .from('.hero .btn', { duration: 0.6, scale: 0.94, autoAlpha: 0 }, '-=0.5');
+      }
+
+      const stickyBuy = document.getElementById('stickyBuy');
+      const showAt = isMobile ? 140 : 240;
+      const toggleStickyBuy = () => {
+        if (!stickyBuy) return;
+        const shouldShow = window.scrollY > showAt;
+        stickyBuy.classList.toggle('is-visible', shouldShow);
+        stickyBuy.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
+      };
+      toggleStickyBuy();
+      window.addEventListener('scroll', toggleStickyBuy, { passive: true });
+
+      const heroVideo = document.querySelector('.hero-video');
+      if (!isMobile && heroVideo) {
+        let scrollTarget = 0;
+        let currentOffset = 0;
+        const updateParallax = () => {
+          currentOffset += (scrollTarget - currentOffset) * 0.08;
+          heroVideo.style.transform = `translate(-50%, -50%) translateY(${currentOffset}px)`;
+          requestAnimationFrame(updateParallax);
+        };
+        window.addEventListener(
+          'scroll',
+          () => {
+            scrollTarget = window.scrollY * 0.18;
+          },
+          { passive: true }
+        );
+        updateParallax();
+      }
+
+      const ritualVideo = document.getElementById('ritualVideo');
+      if (ritualVideo && 'IntersectionObserver' in window) {
+        const ritualObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) ritualVideo.play().catch(() => {});
+              else ritualVideo.pause();
+            });
+          },
+          { threshold: 0.4 }
+        );
+        ritualObserver.observe(ritualVideo);
       }
 
       const modal = document.getElementById('xecModal');
@@ -1322,7 +1360,6 @@ document.addEventListener('click', function(e){
       const closeBtn = document.getElementById('closeXecModal');
       const copyBtn = document.getElementById('copyXecAddress');
       const feedback = document.getElementById('xecCopyFeedback');
-      const stickyBuy = document.getElementById('stickyBuy');
       const xecAddress = 'ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8';
       let lastFocusedElement = null;
       let focusableNodes = [];
@@ -1406,16 +1443,6 @@ document.addEventListener('click', function(e){
         }
       });
 
-      const toggleStickyBuy = () => {
-        if (!stickyBuy) return;
-        const shouldShow = window.scrollY > 240;
-        stickyBuy.classList.toggle('is-visible', shouldShow);
-        stickyBuy.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
-      };
-
-      toggleStickyBuy();
-      window.addEventListener('scroll', toggleStickyBuy, { passive: true });
-
       // Animaciones al hacer scroll
       const revealObserver = new IntersectionObserver(
         (entries, observer) => {
@@ -1433,48 +1460,6 @@ document.addEventListener('click', function(e){
         element.style.transitionDelay = `${index * 0.08}s`;
         revealObserver.observe(element);
       });
-
-      // Parallax del video hero
-      const heroVideo = document.querySelector('.hero-video');
-      const ritualVideo = document.getElementById('ritualVideo');
-      let scrollTarget = 0;
-      let currentOffset = 0;
-
-      const updateParallax = () => {
-        currentOffset += (scrollTarget - currentOffset) * 0.08;
-        if (heroVideo) {
-          heroVideo.style.transform = `translate(-50%, -50%) translateY(${currentOffset}px)`;
-        }
-        requestAnimationFrame(updateParallax);
-      };
-
-      window.addEventListener(
-        'scroll',
-        () => {
-          scrollTarget = window.scrollY * 0.18;
-        },
-        { passive: true }
-      );
-
-      updateParallax();
-
-      if (ritualVideo) {
-        const ritualObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                ritualVideo.play().catch(() => {
-                  /* El navegador puede impedir la reproducción automática */
-                });
-              } else {
-                ritualVideo.pause();
-              }
-            });
-          },
-          { threshold: 0.4 }
-        );
-        ritualObserver.observe(ritualVideo);
-      }
 
       // Escaparates 3D interactivos
       const initProductShowcases = () => {
