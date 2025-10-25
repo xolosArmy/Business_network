@@ -711,6 +711,32 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* === Proceso: imágenes responsivas (Opción 1: contain, sin recortes) === */
+    .process-figure{
+      margin: 0 auto;
+      padding: 0 16px;
+      max-width: 1100px; /* puedes ajustar */
+    }
+
+    .process-img{
+      width: 100%;
+      display: block;
+      border-radius: 18px;
+    }
+
+    /* Alto fluido, “que quepa toda” */
+    .process-img--contain{
+      height: clamp(280px, 55vw, 640px);
+      object-fit: contain;
+      background: #0a0a0a; /* color de fondo detrás de la imagen */
+    }
+
+    /* Respiro para que la barra fija no tape el contenido inferior */
+    .process-figure,
+    .products-section{
+      margin-bottom: 120px; /* ajusta según la altura de tu sticky-buy */
+    }
   </style>
 
   </head>
