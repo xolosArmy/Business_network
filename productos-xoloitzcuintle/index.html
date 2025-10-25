@@ -904,8 +904,7 @@
   <h2 id="audioTitle">Activa la atmósfera ritual</h2>
   <p id="audioDescription">Reproduce el ambiente sonoro de selva, tambores y cantos para acompañar tu recorrido por los remedios sagrados.</p>
   <audio controls loop muted autoplay aria-label="Ambiente sonoro prehispánico" aria-describedby="audioDescription">
-    <source src="https://raw.githubusercontent.com/xolosArmy/Business_network/main/assets/Bendici%C3%B3n%20al%20Amanecer%20ext%20v1.1.mp3
-" type="audio/mp3" />
+    <source src="https://raw.githubusercontent.com/xolosArmy/Business_network/main/assets/Bendici%C3%B3n%20al%20Amanecer%20ext%20v1.1.mp3" type="audio/mpeg">
     Tu navegador no soporta el elemento de audio.
   </audio>
 </section>
@@ -1015,7 +1014,6 @@
 </section>
 
 
-  <script src="https://unpkg.com/@paybutton/paybutton/dist/paybutton.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
@@ -1252,18 +1250,17 @@
     <p id="stickyBuyTitle" class="sticky-buy__title">Compra rápida</p>
     <div class="sticky-buy__actions">
       <!-- DESPUÉS (PayButton real) -->
-<paybutton-widget
-  id="stickyXec"
-  style="width:100%"
-  to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
-  amount="1333333"
-  text="Pagar con XEC"
-  hover-text="Enviar XEC"
-  success-text="Gracias por tu compra"
-  theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
-  op-return="Compra rápida XolosArmy">
-</paybutton-widget>
-
+      <div style="width:100%; border-radius:12px; overflow:hidden">
+        <div class="paybutton-widget"
+             to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
+             amount="1333333"
+             text="Pagar con XEC"
+             hover-text="Enviar XEC"
+             success-text="Gracias por tu compra"
+             theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
+             op-return="Compra rápida XolosArmy">
+        </div>
+      </div>
 
       <a
         class="sticky-buy__action sticky-buy__action--whatsapp"
@@ -1769,6 +1766,16 @@ document.addEventListener('click', function(e){
     });
   </script>
 
+  <script>
+    // Abre la guía de pago si el widget arroja error (p. ej., sin wallet instalada)
+    document.addEventListener('DOMContentLoaded', function () {
+      const w = document.querySelector('.paybutton-widget');
+      const opener = document.querySelector('#openXecModal');
+      if (w && opener) {
+        w.addEventListener('paybutton:error', () => opener.click());
+      }
+    });
+  </script>
   <script defer src="https://unpkg.com/@paybutton/paybutton/dist/paybutton.js"></script>
 
 
