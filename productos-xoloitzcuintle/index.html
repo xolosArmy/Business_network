@@ -1251,10 +1251,18 @@
   <aside id="stickyBuy" class="sticky-buy" aria-hidden="true" role="region" aria-labelledby="stickyBuyTitle">
     <p id="stickyBuyTitle" class="sticky-buy__title">Compra rápida</p>
     <div class="sticky-buy__actions">
-      <button type="button" class="sticky-buy__action sticky-buy__action--xec" data-open-xec-modal aria-controls="xecModal" aria-haspopup="dialog" aria-expanded="false">
-        <i class="fa-solid fa-coins" aria-hidden="true"></i>
-        Pagar con XEC
-      </button>
+      <!-- DESPUÉS (PayButton real) -->
+<paybutton-widget
+  class="sticky-buy__action sticky-buy__action--xec"
+  to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
+  amount="1333333"
+  text="Pagar con XEC"
+  hover-text="Enviar XEC"
+  success-text="Gracias por tu compra"
+  theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
+  op-return="Compra rápida XolosArmy">
+</paybutton-widget>
+
       <a
         class="sticky-buy__action sticky-buy__action--whatsapp"
         href="https://wa.me/message/435RTKGJLTX2J1"
