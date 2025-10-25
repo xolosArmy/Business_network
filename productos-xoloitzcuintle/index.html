@@ -223,7 +223,7 @@
       position: absolute;
       inset: 0;
       background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.8) 75%);
-      z-index: 0;
+      z-index: 1;
     }
 
     .hero-video {
@@ -784,10 +784,27 @@
     .hero { min-height: 58vh; }
     .hero .hero-media,
     .hero-video,
-    .hero .hero-media img,
     .hero-video img {
       width: 100%;
       height: 100%;
+      object-fit: cover;
+    }
+
+    .hero .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero .hero-media__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero .hero-media__img.process-img--contain {
+      height: 100%;
+      background: transparent;
       object-fit: cover;
     }
 
@@ -857,13 +874,16 @@
      
 <!-- HERO IMAGE -->
 <picture class="hero-media">
-  <source srcset="https://i.imgur.com/dVIYMQU.jpeg?v=1" media="(min-width:1200px)" type="image/jpeg">
-  <source srcset="https://i.imgur.com/dVIYMQU.jpeg?v=1" media="(min-width:768px)" type="image/jpeg">
   <img
-    src="https://i.imgur.com/dVIYMQU.jpeg?v=1"
+    class="hero-media__img process-img process-img--contain"
+    src="https://i.imgur.com/dVIYMQU.jpeg?width=1024&auto=compress"
+    srcset="https://i.imgur.com/dVIYMQU.jpeg?width=640&auto=compress 640w,
+            https://i.imgur.com/dVIYMQU.jpeg?width=1024&auto=compress 1024w,
+            https://i.imgur.com/dVIYMQU.jpeg?width=1536&auto=compress 1536w"
+    sizes="(max-width: 768px) 100vw, 1920px"
+    loading="lazy" decoding="async" fetchpriority="low"
     alt="Xoloitzcuintle guardián frente a Tenochtitlán al atardecer, lago de Texcoco y templo azteca."
-    width="1920" height="640" loading="eager" decoding="async" fetchpriority="high"
-    style="position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;transform:translate(-50%,-50%);object-fit:cover;">
+  />
 </picture>
 
   <div class="hero-content">
@@ -900,13 +920,17 @@
     <div class="step">
       <div class="doodle" aria-hidden="true">
         <picture>
-    <source srcset="https://i.imgur.com/KfI2gM7.jpeg" type="image/jpeg">
-    <img
-      src="https://i.imgur.com/KfI2gM7.jpeg"
-      alt="Ilustración del paso I: recolección de botánicos con xoloitzcuintle"
-      loading="lazy" decoding="async" fetchpriority="low" width="1200" height="800"
-    >
-  </picture>
+          <img
+            class="process-img process-img--contain"
+            src="https://i.imgur.com/KfI2gM7.jpeg?width=1024&auto=compress"
+            srcset="https://i.imgur.com/KfI2gM7.jpeg?width=640&auto=compress 640w,
+                    https://i.imgur.com/KfI2gM7.jpeg?width=1024&auto=compress 1024w,
+                    https://i.imgur.com/KfI2gM7.jpeg?width=1536&auto=compress 1536w"
+            sizes="(max-width: 768px) 92vw, 1100px"
+            loading="lazy" decoding="async" fetchpriority="low"
+            alt="Ilustración del paso I: recolección de botánicos con xoloitzcuintle"
+          />
+        </picture>
       </div>
       <h3>1. Recolección</h3>
       <p>Botánicos frescos (árbol de té, caléndula, lavanda, limón).</p>
@@ -915,13 +939,17 @@
     <div class="step">
       <div class="doodle" aria-hidden="true">
         <picture>
-    <source srcset="https://i.imgur.com/twXFkrI.jpeg" type="image/jpeg">
-    <img
-      src="https://i.imgur.com/twXFkrI.jpeg"
-      alt="Extraemos activos con tiempo, temperatura y oscuridad controlada."
-      loading="lazy" decoding="async" fetchpriority="low" width="1200" height="800"
-    >
-  </picture>
+          <img
+            class="process-img process-img--contain"
+            src="https://i.imgur.com/twXFkrI.jpeg?width=1024&auto=compress"
+            srcset="https://i.imgur.com/twXFkrI.jpeg?width=640&auto=compress 640w,
+                    https://i.imgur.com/twXFkrI.jpeg?width=1024&auto=compress 1024w,
+                    https://i.imgur.com/twXFkrI.jpeg?width=1536&auto=compress 1536w"
+            sizes="(max-width: 768px) 92vw, 1100px"
+            loading="lazy" decoding="async" fetchpriority="low"
+            alt="Extraemos activos con tiempo, temperatura y oscuridad controlada."
+          />
+        </picture>
       </div>
       <h3>2. Macerado</h3>
       <p>Extraemos activos con tiempo, temperatura y oscuridad controlada.</p>
@@ -930,13 +958,17 @@
     <div class="step">
       <div class="doodle" aria-hidden="true">
         <picture>
-    <source srcset="https://i.imgur.com/SpeWtOy.jpeg" type="image/jpeg">
-    <img
-      src="https://i.imgur.com/SpeWtOy.jpeg"
-      alt="Combinamos aceites, ceras y vitamina E hasta lograr la textura justa."
-      loading="lazy" decoding="async" fetchpriority="low" width="1200" height="800"
-    >
-  </picture>
+          <img
+            class="process-img process-img--contain"
+            src="https://i.imgur.com/SpeWtOy.jpeg?width=1024&auto=compress"
+            srcset="https://i.imgur.com/SpeWtOy.jpeg?width=640&auto=compress 640w,
+                    https://i.imgur.com/SpeWtOy.jpeg?width=1024&auto=compress 1024w,
+                    https://i.imgur.com/SpeWtOy.jpeg?width=1536&auto=compress 1536w"
+            sizes="(max-width: 768px) 92vw, 1100px"
+            loading="lazy" decoding="async" fetchpriority="low"
+            alt="Combinamos aceites, ceras y vitamina E hasta lograr la textura justa."
+          />
+        </picture>
       </div>
       <h3>3. Mezcla</h3>
       <p>Combinamos aceites, ceras y vitamina E hasta lograr la textura justa.</p>
@@ -945,13 +977,17 @@
     <div class="step">
       <div class="doodle" aria-hidden="true">
         <picture>
-    <source srcset="https://i.imgur.com/lIoKy0s.jpeg" type="image/jpeg">
-    <img
-      src="https://i.imgur.com/lIoKy0s.jpeg"
-      alt="Llenado a mano y curado. Probado en lomitos, no en laboratorios crueles."
-      loading="lazy" decoding="async" fetchpriority="low" width="1200" height="800"
-    >
-  </picture>
+          <img
+            class="process-img process-img--contain"
+            src="https://i.imgur.com/lIoKy0s.jpeg?width=1024&auto=compress"
+            srcset="https://i.imgur.com/lIoKy0s.jpeg?width=640&auto=compress 640w,
+                    https://i.imgur.com/lIoKy0s.jpeg?width=1024&auto=compress 1024w,
+                    https://i.imgur.com/lIoKy0s.jpeg?width=1536&auto=compress 1536w"
+            sizes="(max-width: 768px) 92vw, 1100px"
+            loading="lazy" decoding="async" fetchpriority="low"
+            alt="Llenado a mano y curado. Probado en lomitos, no en laboratorios crueles."
+          />
+        </picture>
       </div>
       <h3>4. Envasado</h3>
       <p>Llenado a mano y curado. Probado en lomitos, no en laboratorios crueles.</p>
