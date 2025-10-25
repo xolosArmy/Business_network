@@ -635,6 +635,35 @@
       box-shadow: 0 10px 22px rgba(249, 221, 108, 0.3);
     }
 
+    /* Pastillas compactas en el sticky */
+    .sticky-buy__action {
+      min-height: 48px;
+      border-radius: 14px;
+      font-weight: 700;
+    }
+
+    /* Contenedor del widget dentro del modal de pago */
+    .paybutton-holder {
+      max-width: 520px;
+      margin: 10px auto 0;
+    }
+
+    /* Control de altura del iframe del PayButton SOLO dentro del modal */
+    .paybutton-holder .paybutton-widget,
+    .paybutton-holder .paybutton-widget iframe {
+      width: 100% !important;
+      height: 360px !important;
+      border: 0;
+      border-radius: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .paybutton-holder .paybutton-widget,
+      .paybutton-holder .paybutton-widget iframe {
+        height: 300px !important;
+      }
+    }
+
     @media (max-width: 1024px) {
       .hero {
         background-attachment: scroll;
@@ -863,28 +892,13 @@
       .site-footer__link { padding: 10px 16px; }
     }
 
-    /* Tamaño compacto del PayButton en la barra fija */
     .sticky-buy__actions {
       grid-template-columns: 1.2fr 0.8fr;     /* XEC un poco más ancho que WhatsApp */
       align-items: stretch;
     }
 
-    /* Contenedor para forzar tamaño del iframe del PayButton */
-    .paybutton-compact .paybutton-widget,
-    .paybutton-compact .paybutton-widget iframe {
-      width: 100% !important;
-      height: 260px !important;               /* Ajustable: 220–300px */
-      border: 0;
-      border-radius: 12px;
-    }
-
-    /* En pantallas chicas: 1 columna + PayButton más bajito */
     @media (max-width: 640px) {
       .sticky-buy__actions { grid-template-columns: 1fr; }
-      .paybutton-compact .paybutton-widget,
-      .paybutton-compact .paybutton-widget iframe {
-        height: 220px !important;
-      }
     }
   </style>
 
@@ -1273,18 +1287,14 @@
   <aside id="stickyBuy" class="sticky-buy" aria-hidden="true" role="region" aria-labelledby="stickyBuyTitle">
     <p id="stickyBuyTitle" class="sticky-buy__title">Compra rápida</p>
     <div class="sticky-buy__actions">
-      <!-- DESPUÉS (PayButton real) -->
-      <div class="paybutton-compact">
-        <div class="paybutton-widget"
-             to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
-             amount="1333333"
-             text="Pagar con XEC"
-             hover-text="Enviar XEC"
-             success-text="Gracias por tu compra"
-             theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
-             op-return="Compra rápida XolosArmy">
-        </div>
-      </div>
+      <button type="button"
+        class="sticky-buy__action sticky-buy__action--xec"
+        id="openPayModal"
+        aria-haspopup="dialog"
+        aria-expanded="false">
+        <i class="fa-solid fa-coins" aria-hidden="true"></i>
+        Pagar con XEC
+      </button>
 
       <a
         class="sticky-buy__action sticky-buy__action--whatsapp"
@@ -1344,6 +1354,27 @@
         </a>
       </div>
       <div class="xec-modal__feedback" id="xecCopyFeedback" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <div id="payModal" class="xec-modal" aria-hidden="true">
+    <div class="xec-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="payModalTitle">
+      <button class="xec-modal__close" id="closePayModal" type="button" aria-label="Cerrar pago">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+      <h2 class="xec-modal__title" id="payModalTitle">Pagar con eCash (XEC)</h2>
+
+      <div class="paybutton-holder">
+        <paybutton-widget
+          to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
+          amount="1333333"
+          text="Enviar XEC"
+          hover-text="Enviar XEC"
+          success-text="Gracias por tu compra"
+          theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
+          op-return="Compra rápida XolosArmy">
+        </paybutton-widget>
+      </div>
     </div>
   </div>
 
@@ -1789,6 +1820,46 @@ document.addEventListener('click', function(e){
       }
     });
   </script>
+
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const payModal = document.getElementById('payModal');
+  const openPay = document.getElementById('openPayModal');
+  const closePay = document.getElementById('closePayModal');
+  const focusableSel = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+  let lastFocus = null, nodes = [];
+
+  function refreshNodes() {
+    nodes = Array.from(payModal.querySelectorAll(focusableSel)).filter(n => !n.disabled);
+  }
+  function open() {
+    lastFocus = document.activeElement;
+    payModal.classList.add('is-visible');
+    payModal.setAttribute('aria-hidden','false');
+    openPay?.setAttribute('aria-expanded','true');
+    refreshNodes();
+    (nodes[0] || closePay)?.focus();
+  }
+  function close() {
+    payModal.classList.remove('is-visible');
+    payModal.setAttribute('aria-hidden','true');
+    openPay?.setAttribute('aria-expanded','false');
+    (lastFocus || openPay)?.focus();
+  }
+
+  openPay?.addEventListener('click', open);
+  closePay?.addEventListener('click', close);
+  payModal?.addEventListener('click', e => { if (e.target === payModal) close(); });
+  payModal?.addEventListener('keydown', e => {
+    if (e.key === 'Escape') return close();
+    if (e.key === 'Tab' && nodes.length) {
+      const first = nodes[0], last = nodes[nodes.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+});
+</script>
 
   <script>
     // Abre la guía de pago si el widget arroja error (p. ej., sin wallet instalada)
