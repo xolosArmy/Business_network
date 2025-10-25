@@ -862,6 +862,30 @@
       }
       .site-footer__link { padding: 10px 16px; }
     }
+
+    /* Tamaño compacto del PayButton en la barra fija */
+    .sticky-buy__actions {
+      grid-template-columns: 1.2fr 0.8fr;     /* XEC un poco más ancho que WhatsApp */
+      align-items: stretch;
+    }
+
+    /* Contenedor para forzar tamaño del iframe del PayButton */
+    .paybutton-compact .paybutton-widget,
+    .paybutton-compact .paybutton-widget iframe {
+      width: 100% !important;
+      height: 260px !important;               /* Ajustable: 220–300px */
+      border: 0;
+      border-radius: 12px;
+    }
+
+    /* En pantallas chicas: 1 columna + PayButton más bajito */
+    @media (max-width: 640px) {
+      .sticky-buy__actions { grid-template-columns: 1fr; }
+      .paybutton-compact .paybutton-widget,
+      .paybutton-compact .paybutton-widget iframe {
+        height: 220px !important;
+      }
+    }
   </style>
 
   </head>
@@ -1250,7 +1274,7 @@
     <p id="stickyBuyTitle" class="sticky-buy__title">Compra rápida</p>
     <div class="sticky-buy__actions">
       <!-- DESPUÉS (PayButton real) -->
-      <div style="width:100%; border-radius:12px; overflow:hidden">
+      <div class="paybutton-compact">
         <div class="paybutton-widget"
              to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
              amount="1333333"
