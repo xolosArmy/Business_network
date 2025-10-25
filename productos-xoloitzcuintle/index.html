@@ -1253,7 +1253,8 @@
     <div class="sticky-buy__actions">
       <!-- DESPUÉS (PayButton real) -->
 <paybutton-widget
-  class="sticky-buy__action sticky-buy__action--xec"
+  id="stickyXec"
+  style="width:100%"
   to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
   amount="1333333"
   text="Pagar con XEC"
@@ -1262,6 +1263,7 @@
   theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
   op-return="Compra rápida XolosArmy">
 </paybutton-widget>
+
 
       <a
         class="sticky-buy__action sticky-buy__action--whatsapp"
@@ -1766,6 +1768,9 @@ document.addEventListener('click', function(e){
       }
     });
   </script>
+
+  <script defer src="https://unpkg.com/@paybutton/paybutton/dist/paybutton.js"></script>
+
 
 </body>
 </html>
