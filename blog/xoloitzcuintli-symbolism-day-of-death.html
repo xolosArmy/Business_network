@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>The Xoloitzcuintli: Guardian of Souls on the Day of the Dead</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="An interpretative report on the symbolism of the Xoloitzcuintli during Mexico’s Day of the Dead: myth, memory, and cultural revival." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="The Xoloitzcuintli: Guardian of Souls on the Day of the Dead" />
+  <meta property="og:description" content="An interpretative report on the symbolism of the Xoloitzcuintli during Mexico’s Day of the Dead." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="hero-placeholder.jpg" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Basic palette -->
+  <style>
+    :root{
+      --bg:#0e0e10;
+      --paper:#111114;
+      --ink:#eaeaea;
+      --muted:#bcbcbc;
+      --accent:#df3a3a;     /* brand-ish red */
+      --gold:#e5a94f;       /* cempasúchil vibe */
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --max: 980px;
+      --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+      --sans: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    }
+
+    /* Reset-ish */
+    * { box-sizing: border-box; }
+    html {scroll-behavior: smooth;}
+    body{
+      margin:0; background: radial-gradient(1200px 600px at 65% -10%, rgba(223,58,58,.08), transparent 60%), var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a{ color: var(--gold); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+
+    /* Header */
+    .site-header{
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      position: sticky; top:0; backdrop-filter: blur(6px);
+      background: linear-gradient(to bottom, rgba(14,14,16,.9), rgba(14,14,16,.6));
+      z-index: 50;
+    }
+    .nav{
+      max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 20px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:.6rem; font-weight: 700; letter-spacing:.4px;
+    }
+    .brand-mark{
+      width: 28px; height: 28px; border-radius: 6px;
+      background: conic-gradient(from 0deg, var(--accent), #ff6b6b, var(--gold), var(--accent));
+      box-shadow: 0 0 0 2px rgba(255,255,255,.1) inset, 0 0 18px rgba(223,58,58,.35);
+    }
+    .nav a.small{
+      color: var(--muted); font-size: .9rem;
+      border:1px solid rgba(255,255,255,.08); padding: 6px 10px; border-radius:10px;
+    }
+    .nav a.small:hover{ border-color: rgba(255,255,255,.18); }
+
+    /* Hero */
+    .hero{
+      position: relative;
+      isolation: isolate;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      background:
+        radial-gradient(1000px 280px at 50% 0%, rgba(229,169,79,.10), transparent 70%),
+        linear-gradient(180deg, rgba(223,58,58,.06), transparent 40%),
+        url('hero-placeholder.jpg') center/cover no-repeat;
+    }
+    .hero::after{
+      content:""; position:absolute; inset:0;
+      background: linear-gradient(0deg, rgba(14,14,16,.8), rgba(14,14,16,.25));
+      z-index:0;
+    }
+    .hero-inner{
+      max-width: var(--max);
+      margin: 0 auto; padding: 80px 20px 60px;
+      position: relative; z-index: 1;
+    }
+    .eyebrow{
+      display:inline-block; font-size:.85rem; letter-spacing:.18em; text-transform: uppercase; color: var(--muted);
+      border:1px solid rgba(255,255,255,.12); padding: 6px 10px; border-radius: 999px; backdrop-filter: blur(2px);
+    }
+    h1.title{
+      margin: 16px 0 12px; font-family: var(--serif); line-height: 1.15;
+      font-weight: 700; font-size: clamp(2rem, 5vw, 3.2rem);
+      text-shadow: 0 2px 18px rgba(0,0,0,.35);
+    }
+    .dek{
+      max-width: 60ch; color: #e2e2e2; font-size: 1.1rem;
+    }
+    .meta{
+      margin-top: 16px; color: var(--muted); font-size:.95rem;
+    }
+
+    /* Body */
+    .page{
+      max-width: var(--max); margin: 0 auto; padding: 40px 20px 80px;
+      display: grid; grid-template-columns: 1fr; gap: 28px;
+    }
+    @media (min-width: 960px){
+      .page{ grid-template-columns: 2.2fr 1fr; align-items: start; }
+    }
+    article{
+      background: linear-gradient(180deg, rgba(255,255,255,.02), transparent 30%);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 16px; padding: 28px; box-shadow: var(--shadow);
+    }
+    article p{ margin: 0 0 1.05em; color: #e9e9e9; }
+    article h2{
+      font-family: var(--serif); font-size: clamp(1.35rem, 2.2vw, 1.8rem); margin: 1.2em 0 .5em;
+    }
+    .dropcap:first-letter{
+      float:left; font-family: var(--serif); font-weight: 700; font-size: 3.2rem; line-height: .9;
+      padding: .15em .18em 0 .08em; margin: .03em .18em 0 0;
+      background: linear-gradient(180deg, var(--gold), #f6d39a);
+      color:#231709; border-radius: 6px;
+    }
+
+    /* Pullquote */
+    .pull{
+      margin: 1.2em 0; padding: 18px 20px; border-left: 4px solid var(--gold);
+      background: rgba(229,169,79,.08); color: #ffe9c7; border-radius: 10px;
+      font-size: 1.05rem; font-style: italic;
+    }
+
+    /* Sidebar */
+    aside{
+      display: grid; gap: 18px;
+    }
+    .card{
+      background: var(--paper);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius: 16px; padding: 18px 18px 16px;
+      box-shadow: var(--shadow);
+    }
+    .card h3{ margin: 6px 0 8px; font-size: 1rem; color: #f5f5f5; }
+    .badge{
+      display:inline-block; font-size:.8rem; color:#141414; background: var(--gold); border-radius: 999px; padding: 4px 10px; font-weight: 700;
+    }
+    .list{
+      list-style: none; padding: 0; margin: 8px 0 0;
+    }
+    .list li{
+      display:flex; align-items: flex-start; gap: 10px; padding: 8px 0; color: #e8e8e8;
+      border-bottom: 1px dashed rgba(255,255,255,.06);
+    }
+    .list li:last-child{ border-bottom: 0; }
+    .kicker{ color: var(--muted); font-size: .92rem; }
+
+    /* Footer */
+    .site-footer{
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: var(--muted); padding: 22px 20px 60px; text-align: center;
+    }
+
+    /* “Aztec” divider */
+    .divider{
+      --w:44px; height: 10px; width: fit-content; display:inline-grid; grid-auto-flow: column; gap:6px; margin: 18px 0 8px;
+    }
+    .divider span{
+      display:block; width: var(--w); height: 10px;
+      background:
+        repeating-linear-gradient(135deg, rgba(223,58,58,.7) 0 4px, rgba(223,58,58,.3) 4px 8px),
+        linear-gradient(90deg, rgba(229,169,79,.9), rgba(223,58,58,.8));
+      box-shadow: 0 0 10px rgba(229,169,79,.25) inset;
+      clip-path: polygon(0 0, 92% 0, 100% 50%, 92% 100%, 0 100%, 8% 50%);
+    }
+
+    /* Figures */
+    figure{ margin: 1.2em 0; }
+    figcaption{ color: var(--muted); font-size: .9rem; margin-top: .4rem; }
+
+    /* Print */
+    @media print{
+      .site-header, .card.share { display: none !important; }
+      body{ background: #fff; color:#111; }
+      article, .card{ border: none; box-shadow: none; }
+      a{ color: #000; text-decoration: underline; }
+    }
+  </style>
+
+  <!-- Schema.org Article -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"The Xoloitzcuintli: Guardian of Souls on the Day of the Dead",
+    "author":{"@type":"Person","name":"Fernando Ramírez"},
+    "datePublished":"2025-10-27",
+    "description":"Interpretative report on the symbolism of the Xoloitzcuintli during Día de Muertos.",
+    "articleSection":"Culture",
+    "inLanguage":"en"
+  }
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Xolos Ramírez • Culture</span>
+      </div>
+      <a class="small" href="#report">Read</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Day of the Dead</span>
+      <h1 class="title">The Xoloitzcuintli: Guardian of Souls on the Day of the Dead</h1>
+      <p class="dek">From Mictlán’s rivers to modern altars, the Xolo stands as a messenger between worlds—born of darkness, bringing light.</p>
+      <p class="meta">By <strong>Fernando Ramírez</strong> • Feature • ~6 min read</p>
+      <div class="divider" aria-hidden="true"><span></span><span></span><span></span></div>
+    </div>
+  </section>
+
+  <main id="report" class="page" role="main">
+    <article>
+      <p class="dropcap">Each year, as the scent of marigolds fills the air and candlelight flickers on altars across Mexico, the <em>Xoloitzcuintli</em>—the ancient hairless dog of the Aztecs—emerges from myth to memory. To many, it is only another symbol of <em>Día de Muertos</em>. Yet for those who understand its legacy, the Xolo is far more: guardian, guide, and companion of souls on their journey back from the underworld.</p>
+
+      <h2>Messenger Between Worlds</h2>
+      <p>The origins of the Xoloitzcuintli reach deep into pre-Hispanic cosmology. According to Mexica legend, the god <em>Xólotl</em>, twin brother of <em>Quetzalcóatl</em>, created this sacred dog from a shard of the Bone of Life—the same bone from which humanity was formed. He gifted the Xolo to humans so that, when death came, they would not walk alone.</p>
+      <p>In the mythology of <em>Mictlán</em>—the Aztec underworld—souls must cross nine perilous rivers before reaching eternal rest. It is the Xolo who carries the departed across these waters, guiding them safely through the shadows. Only those who treated their dogs with kindness in life could count on this spiritual guide after death.</p>
+
+      <div class="pull">“Born of darkness, the Xolo brings light—escorting memory home across the marigold path.”</div>
+
+      <h2>Symbolism on the Day of the Dead</h2>
+      <p>Today, the Xolo remains a living thread that ties modern Mexico to its ancestral past. On <em>Día de Muertos</em>, the dog appears in <em>ofrendas</em>, murals, and processions as a bridge between realms. Its dark, hairless skin—often compared to obsidian—symbolizes night and earth, domains where life and death intertwine. Its warmth, conversely, represents the persistence of life within the hush of the grave.</p>
+      <p>For families who include the image of a Xolo on the altar, it is a gesture of remembrance—an invocation of protection and guidance for the spirits returning home. In rural regions, stories still circulate of spectral Xolos appearing at crossroads or cemeteries, eyes glowing like embers, leading souls toward the scent of marigolds.</p>
+
+      <figure>
+        <img src="xolo-cempasuchil-placeholder.jpg" alt="A Xoloitzcuintli standing beside marigold petals and candles, symbolic altar light behind." style="width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.08)">
+        <figcaption>A living thread: Xoloitzcuintli among cempasúchil petals and candlelight.</figcaption>
+      </figure>
+
+      <h2>A Cultural Revival</h2>
+      <p>In recent decades, the Xoloitzcuintli has transcended folklore to become a national emblem. Artists like Diego Rivera and Frida Kahlo depicted them as symbols of indigenous pride. In global popular culture—from animated films to museum exhibits—the Xolo represents Mexico’s intimate dialogue with death: not fear, but continuity.</p>
+      <p>Breeders and cultural projects such as <strong>Xolos Ramírez</strong> preserve not just the genetics of this ancient species, but its spiritual narrative. Every Xolo born today carries, in a sense, a fragment of the mythic past—embodying loyalty, connection, and the cyclical nature of existence.</p>
+
+      <div class="pull">“When the souls return, the Xolos guide them back home.”</div>
+
+      <h2>When the Veil Thins</h2>
+      <p>On the night of November 1st, as families light candles and the veil grows thin, some say you can feel the silent presence of the Xolo moving between offerings. Perhaps it’s only the wind through the petals—or perhaps it’s the echo of an ancient guardian fulfilling its task once more. In this moment, the Xolo is not merely a symbol: it is the eternal companion of humanity’s spirit, the guide who never forgets the way home.</p>
+    </article>
+
+    <aside aria-label="Supplement">
+      <div class="card">
+        <span class="badge">Key Motifs</span>
+        <ul class="list">
+          <li>Obsidian skin → night/earth</li>
+          <li>Warmth → life within death</li>
+          <li>Marigold path → memory and return</li>
+          <li>Rivers of Mictlán → passage</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>About the Author</h3>
+        <p class="kicker">Fernando Ramírez documents the living heritage of the Xoloitzcuintli through breeding, culture, and media at Xolos Ramírez & XolosArmy Network.</p>
+      </div>
+
+      <div class="card share">
+        <h3>Share</h3>
+        <p class="kicker">Spread the story of the Guardian of Souls.</p>
+        <ul class="list">
+          <li><a href="#" aria-label="Share on X/Twitter">Share on X</a></li>
+          <li><a href="#" aria-label="Share on Facebook">Share on Facebook</a></li>
+          <li><a href="#" aria-label="Copy link">Copy link</a></li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    © 2025 Xolos Ramírez • This article may be reproduced with attribution.
+  </footer>
+</body>
+</html>
