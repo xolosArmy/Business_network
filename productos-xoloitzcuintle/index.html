@@ -150,6 +150,39 @@
       margin: 0 auto;
     }
 
+    /* Marco uniforme para las imágenes de producto */
+    .card .product-media{
+      width: 100%;
+      aspect-ratio: 4 / 3;        /* usa 1/1 si prefieres miniatura cuadrada */
+      border-radius: 18px;
+      overflow: hidden;
+      display: block;
+      margin: 0 auto 16px;
+      background: rgba(0,0,0,.25);
+    }
+
+    /* Imagen rellena el marco sin deformarse */
+    .card .product-media img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Tarjetas con alturas consistentes */
+    .card{
+      display: flex;
+      flex-direction: column;
+    }
+    .card h2{ margin-top: 0; }
+    .card .card-body{ flex: 1; }   /* el texto ocupa el espacio elástico */
+    .card .card-actions{ margin-top: 12px; }
+
+    /* El grid alinea todas las tarjetas desde arriba */
+    .grid{
+      align-items: start;
+    }
+
     .card {
       background: var(--color-card);
       border: 1px solid var(--color-border);
@@ -419,50 +452,6 @@
       align-items: center;
       justify-content: center;
       margin-bottom: 12px;
-    }
-
-    /* Imagen de producto (sustituye al product-3d para fotos) */
-    .product-photo {
-      width: 100%;
-      height: 220px;                 /* alto coherente con las demás cards */
-      border-radius: 18px;
-      overflow: hidden;
-      background: radial-gradient(circle at 30% 20%, rgba(240,199,83,.12), transparent 60%),
-                  radial-gradient(circle at 70% 80%, rgba(13,127,114,.12), transparent 55%);
-      box-shadow: 0 12px 32px rgba(0,0,0,.35);
-      margin-bottom: 12px;
-      border: 1px solid rgba(240,199,83,.18);
-    }
-
-    .product-photo img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;              /* rellena sin deformar */
-      filter: saturate(1.05) contrast(1.03);
-      transform: scale(1.001);        /* evita líneas de subpíxel */
-    }
-
-    /* Ajustes responsivos */
-    @media (max-width: 600px) {
-      .product-photo { height: 200px; }
-    }
-
-    /* === Media de producto (reemplaza el placeholder 3D) === */
-    .product-media {
-      width: 100%;
-      height: 230px;              /* alto armonizado con tu layout */
-      border-radius: 16px;
-      display: block;
-      object-fit: cover;          /* llena el marco sin deformar */
-      filter: saturate(1.05) contrast(1.02);
-      box-shadow: 0 12px 32px rgba(0,0,0,.35);
-      background: #0c0f0f;
-    }
-    @media (max-width: 600px) {
-      .product-media {
-        height: 200px;
-      }
     }
 
     .product-3d canvas {
@@ -1217,210 +1206,232 @@
 
     <!-- Producto 1 -->
     <div class="card animate-on-scroll">
-      <picture>
+      <div class="product-media">
         <img
-          class="product-media"
           src="https://i.imgur.com/J8mc04B.png"
           loading="lazy"
           decoding="async"
           alt="Ungüento Solar del Guardián Xólotl – bálsamo en frasco ámbar esmerilado con tapa blanca."
         />
-      </picture>
-      <h2>Ungüento Solar del Guardián Xólotl</h2>
-      <p><strong>≈ $522 MXN</strong> Forjado con savia de árbol de té bajo la tutela de Xólotl, este bálsamo repara la piel del compañero de guerra como si sellara códices de obsidiana, para que siga guiando almas a través del Mictlán sin que el tiempo marque su pelaje.</p>
-      <div class="paybutton-widget"
-        data-ga-event="begin_checkout_xec"
-        data-item="Ungüento Solar del Guardián Xólotl"
-        to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
-        amount=1900000
-        text="Comprar con XEC"
-        hover-text="Enviar XEC"
-        success-text="Gracias por tu compra"
-        theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
-        op-return="Compra Balsamo Arbol de Té XolosArmy">
       </div>
-      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Bálsamo+Arbol+de+té"
-         class="whatsapp-buy" target="_blank" rel="noopener noreferrer"
-         data-ga-event="whatsapp_lead"
-         data-item="Ungüento Solar del Guardián Xólotl"
-         aria-label="Abrir WhatsApp para comprar el Ungüento Solar del Guardián Xólotl mediante transferencia bancaria">
-        <span aria-hidden="true">🟢</span>
-        <span>Comprar por WhatsApp (Transferencia bancaria)</span>
-      </a>
+      <div class="card-body">
+        <h2>Ungüento Solar del Guardián Xólotl</h2>
+        <p><strong>≈ $522 MXN</strong> Forjado con savia de árbol de té bajo la tutela de Xólotl, este bálsamo repara la piel del compañero de guerra como si sellara códices de obsidiana, para que siga guiando almas a través del Mictlán sin que el tiempo marque su pelaje.</p>
+      </div>
+      <div class="card-actions">
+        <div class="paybutton-widget"
+          data-ga-event="begin_checkout_xec"
+          data-item="Ungüento Solar del Guardián Xólotl"
+          to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
+          amount=1900000
+          text="Comprar con XEC"
+          hover-text="Enviar XEC"
+          success-text="Gracias por tu compra"
+          theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
+          op-return="Compra Balsamo Arbol de Té XolosArmy">
+        </div>
+        <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Bálsamo+Arbol+de+té"
+           class="whatsapp-buy" target="_blank" rel="noopener noreferrer"
+           data-ga-event="whatsapp_lead"
+           data-item="Ungüento Solar del Guardián Xólotl"
+           aria-label="Abrir WhatsApp para comprar el Ungüento Solar del Guardián Xólotl mediante transferencia bancaria">
+          <span aria-hidden="true">🟢</span>
+          <span>Comprar por WhatsApp (Transferencia bancaria)</span>
+        </a>
+      </div>
     </div>
 
     <!-- Producto 2 -->
     <div class="card animate-on-scroll">
-      <picture>
+      <div class="product-media">
         <img
-          class="product-media"
           src="https://i.imgur.com/hosQNaj.png"
           loading="lazy"
           decoding="async"
           alt="Néctar Onírico de Tlazōlteōtl – frasco con esencia de lavanda."
         />
-      </picture>
-      <h2>Néctar Onírico de Tlazōlteōtl</h2>
-      <p><strong>≈ $522 MXN</strong> Al caer la noche, Tlazōlteōtl susurra lavanda y vitamina E sobre la piel del Xoloitzcuintle, acunando sus sueños de guerrero con neblinas moradas que lo preparan para custodiar los portales entre la tierra y el firmamento.</p>
-      <div class="paybutton-widget"
-        data-ga-event="begin_checkout_xec"
-        data-item="Néctar Onírico de Tlazōlteōtl"
-        to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
-        amount=1900000
-        text="Comprar con XEC"
-        hover-text="Enviar XEC"
-        success-text="Gracias por tu compra"
-        theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
-        op-return="Compra Balsamo Lavanda XolosArmy">
       </div>
-      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Bálsamo+Lavanda"
-         class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
-         data-item="Néctar Onírico de Tlazōlteōtl"
-         aria-label="Abrir WhatsApp para comprar el Néctar Onírico de Tlazōlteōtl mediante transferencia bancaria">
-        <span aria-hidden="true">🟢</span>
-        <span>Comprar por WhatsApp (Transferencia bancaria)</span>
-      </a>
+      <div class="card-body">
+        <h2>Néctar Onírico de Tlazōlteōtl</h2>
+        <p><strong>≈ $522 MXN</strong> Al caer la noche, Tlazōlteōtl susurra lavanda y vitamina E sobre la piel del Xoloitzcuintle, acunando sus sueños de guerrero con neblinas moradas que lo preparan para custodiar los portales entre la tierra y el firmamento.</p>
+      </div>
+      <div class="card-actions">
+        <div class="paybutton-widget"
+          data-ga-event="begin_checkout_xec"
+          data-item="Néctar Onírico de Tlazōlteōtl"
+          to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
+          amount=1900000
+          text="Comprar con XEC"
+          hover-text="Enviar XEC"
+          success-text="Gracias por tu compra"
+          theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
+          op-return="Compra Balsamo Lavanda XolosArmy">
+        </div>
+        <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Bálsamo+Lavanda"
+           class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
+           data-item="Néctar Onírico de Tlazōlteōtl"
+           aria-label="Abrir WhatsApp para comprar el Néctar Onírico de Tlazōlteōtl mediante transferencia bancaria">
+          <span aria-hidden="true">🟢</span>
+          <span>Comprar por WhatsApp (Transferencia bancaria)</span>
+        </a>
+      </div>
     </div>
 
     <!-- Producto 3 -->
     <div class="card animate-on-scroll">
-      <picture>
+      <div class="product-media">
         <img
-          class="product-media"
           src="https://i.imgur.com/PloLYl4.png"
           loading="lazy"
           decoding="async"
           alt="Esencia Citlalinahuatl del Amanecer – frasco con aceite esencial de limón."
         />
-      </picture>
-      <h2>Esencia Citlalinahuatl del Amanecer</h2>
-      <p><strong>≈ $522 MXN</strong> Cada aurora, los sacerdotes exprimen limones sagrados para trazar sobre el Xoloitzcuintle un círculo de luz que purifica heridas y despierta la valentía, como si Tonatiuh mismo lo ungiera antes de una batalla cósmica.</p>
-      <div class="paybutton-widget"
-        data-ga-event="begin_checkout_xec"
-        data-item="Esencia Citlalinahuatl del Amanecer"
-        to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
-        amount=1900000
-        text="Comprar con XEC"
-        hover-text="Enviar XEC"
-        success-text="Gracias por tu compra"
-        theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
-        op-return="Compra Balsamo Limón XolosArmy">
       </div>
-      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Bálsamo+Limón"
-         class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
-         data-item="Esencia Citlalinahuatl del Amanecer"
-         aria-label="Abrir WhatsApp para comprar la Esencia Citlalinahuatl del Amanecer mediante transferencia bancaria">
-        <span aria-hidden="true">🟢</span>
-        <span>Comprar por WhatsApp (Transferencia bancaria)</span>
-      </a>
+      <div class="card-body">
+        <h2>Esencia Citlalinahuatl del Amanecer</h2>
+        <p><strong>≈ $522 MXN</strong> Cada aurora, los sacerdotes exprimen limones sagrados para trazar sobre el Xoloitzcuintle un círculo de luz que purifica heridas y despierta la valentía, como si Tonatiuh mismo lo ungiera antes de una batalla cósmica.</p>
+      </div>
+      <div class="card-actions">
+        <div class="paybutton-widget"
+          data-ga-event="begin_checkout_xec"
+          data-item="Esencia Citlalinahuatl del Amanecer"
+          to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
+          amount=1900000
+          text="Comprar con XEC"
+          hover-text="Enviar XEC"
+          success-text="Gracias por tu compra"
+          theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
+          op-return="Compra Balsamo Limón XolosArmy">
+        </div>
+        <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Bálsamo+Limón"
+           class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
+           data-item="Esencia Citlalinahuatl del Amanecer"
+           aria-label="Abrir WhatsApp para comprar la Esencia Citlalinahuatl del Amanecer mediante transferencia bancaria">
+          <span aria-hidden="true">🟢</span>
+          <span>Comprar por WhatsApp (Transferencia bancaria)</span>
+        </a>
+      </div>
     </div>
 
     <!-- Producto 4 -->
     <div class="card animate-on-scroll">
-      <figure class="product-photo">
-        <img
-          src="https://i.imgur.com/EQqSZqA.jpeg"
-          loading="lazy"
-          decoding="async"
-          alt="Spray repelente natural Escudo de Bruma de Quetzalcóatl, frasco ámbar con atomizador en fondo botánico tenue."
-        />
-      </figure>
-      <h2>Escudo de Bruma de Quetzalcóatl</h2>
-      <p><strong>≈ $522 MXN</strong> Una nube ritual de cítricos y hojas guardianas envuelve al can mestizo del inframundo, convirtiéndose en armadura sutil que Quetzalcóatl extiende para rechazar a los insectos como si fueran flechas perdidas en el viento nocturno.</p>
-      <div class="paybutton-widget"
-        data-ga-event="begin_checkout_xec"
-        data-item="Escudo de Bruma de Quetzalcóatl"
-        to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
-        amount=1900000
-        text="Comprar con XEC"
-        hover-text="Enviar XEC"
-        success-text="Gracias por tu compra"
-        theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
-        op-return="Compra Repelente Limón XolosArmy">
-      </div>
-      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Repelente+Limón"
-         class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
-         data-item="Escudo de Bruma de Quetzalcóatl"
-         aria-label="Abrir WhatsApp para comprar el Escudo de Bruma de Quetzalcóatl mediante transferencia bancaria">
-        <span aria-hidden="true">🟢</span>
-        <span>Comprar por WhatsApp (Transferencia bancaria)</span>
-      </a>
-    </div>
-
-    <!-- Producto 5 -->
-    <div class="card animate-on-scroll">
-      <figure class="product-photo">
+      <div class="product-media">
         <img
           src="https://i.imgur.com/b9GOJK6.jpeg"
           loading="lazy"
           decoding="async"
-          alt="Spray repelente natural Escudo de Bruma de Quetzalcóatl, frasco ámbar con atomizador en fondo botánico tenue."
+          alt="Escudo de Bruma de Quetzalcóatl — spray repelente XolosArmy Naturals"
         />
-        </figure>
-      <h2>Dúo Ritual de Espuma del Mictlán</h2>
-  <p><strong>≈ $522 MXN</strong> Dos barras gemelas invocan aguas termales ancestrales y arenas celestes para purificar al Xoloitzcuintle antes de cada travesía, envolviéndolo en una exfoliación sagrada que honra su misión de custodio entre mundos.</p>
-  <ul>
-    <li>Glicerina vegetal</li>
-    <li>Aceite de caléndula</li>
-    <li>Avena coloidal</li>
-  </ul>
-      <div class="paybutton-widget"
-        data-ga-event="begin_checkout_xec"
-        data-item="Dúo Ritual de Espuma del Mictlán"
-        to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
-        amount=1900000
-        text="Comprar con XEC"
-        hover-text="Enviar XEC"
-        success-text="Gracias por tu compra"
-        theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
-        op-return="Jabón Neutro y Exfoliante Suave xolosArmy">
       </div>
-      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+jabon+exfoliante"
-         class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
-         data-item="Dúo Ritual de Espuma del Mictlán"
-         aria-label="Abrir WhatsApp para comprar el Dúo Ritual de Espuma del Mictlán mediante transferencia bancaria">
-        <span aria-hidden="true">🟢</span>
-        <span>Comprar por WhatsApp (Transferencia bancaria)</span>
-      </a>
+      <div class="card-body">
+        <h2>Escudo de Bruma de Quetzalcóatl</h2>
+        <p><strong>≈ $522 MXN</strong> Una nube ritual de cítricos y hojas guardianas envuelve al can mestizo del inframundo, convirtiéndose en armadura sutil que Quetzalcóatl extiende para rechazar a los insectos como si fueran flechas perdidas en el viento nocturno.</p>
+      </div>
+      <div class="card-actions">
+        <div class="paybutton-widget"
+          data-ga-event="begin_checkout_xec"
+          data-item="Escudo de Bruma de Quetzalcóatl"
+          to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
+          amount=1900000
+          text="Comprar con XEC"
+          hover-text="Enviar XEC"
+          success-text="Gracias por tu compra"
+          theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
+          op-return="Compra Repelente Limón XolosArmy">
+        </div>
+        <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Repelente+Limón"
+           class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
+           data-item="Escudo de Bruma de Quetzalcóatl"
+           aria-label="Abrir WhatsApp para comprar el Escudo de Bruma de Quetzalcóatl mediante transferencia bancaria">
+          <span aria-hidden="true">🟢</span>
+          <span>Comprar por WhatsApp (Transferencia bancaria)</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Producto 5 -->
+    <div class="card animate-on-scroll">
+      <div class="product-media">
+        <img
+          src="https://i.imgur.com/EQqSZqA.jpeg"
+          loading="lazy"
+          decoding="async"
+          alt="Jabón artesanal XolosArmy Naturals — dúo ritual de espuma"
+        />
+      </div>
+      <div class="card-body">
+        <h2>Dúo Ritual de Espuma del Mictlán</h2>
+        <p><strong>≈ $522 MXN</strong> Dos barras gemelas invocan aguas termales ancestrales y arenas celestes para purificar al Xoloitzcuintle antes de cada travesía, envolviéndolo en una exfoliación sagrada que honra su misión de custodio entre mundos.</p>
+        <ul>
+          <li>Glicerina vegetal</li>
+          <li>Aceite de caléndula</li>
+          <li>Avena coloidal</li>
+        </ul>
+      </div>
+      <div class="card-actions">
+        <div class="paybutton-widget"
+          data-ga-event="begin_checkout_xec"
+          data-item="Dúo Ritual de Espuma del Mictlán"
+          to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
+          amount=1900000
+          text="Comprar con XEC"
+          hover-text="Enviar XEC"
+          success-text="Gracias por tu compra"
+          theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
+          op-return="Jabón Neutro y Exfoliante Suave xolosArmy">
+        </div>
+        <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+jabon+exfoliante"
+           class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
+           data-item="Dúo Ritual de Espuma del Mictlán"
+           aria-label="Abrir WhatsApp para comprar el Dúo Ritual de Espuma del Mictlán mediante transferencia bancaria">
+          <span aria-hidden="true">🟢</span>
+          <span>Comprar por WhatsApp (Transferencia bancaria)</span>
+        </a>
+      </div>
     </div>
 
     
     <!-- Producto 6 -->
     <div class="card animate-on-scroll">
-      <figure class="product-photo">
+      <div class="product-media">
         <img
           src="https://i.imgur.com/dAHwm7a.png"
           loading="lazy"
           decoding="async"
-          alt="Spray repelente natural Escudo de Bruma de Quetzalcóatl, frasco ámbar con atomizador en fondo botánico tenue."
+          alt="Paquete Bienestar Integral Xoloitzcuintle — 3 bálsamos, 2 jabones y spray"
         />
-        </figure>
-      <h2>Paquete Bienestar Integral Xoloitzcuintle</h2>
-  <p><strong>≈ $1950 MXN</strong> Cuidado completo de la piel y protección natural: incluye bálsamos de Árbol de Té, Limón y Lavanda, repelente con esencia de limón y dos jabones neutros exfoliantes.</p>
-  <ul>
-    <li>Bálsamos calmantes y nutritivos: Árbol de Té, Limón y Lavanda.</li>
-    <li>Repelente natural con esencia de limón: protege de insectos sin químicos agresivos.</li>
-    <li>Jabones exfoliantes neutros: limpian suavemente mientras cuidan la piel.</li>
-
-  </ul>
-      <div class="paybutton-widget"
-        data-ga-event="begin_checkout_xec"
-        data-item="Paquete Bienestar Integral Xoloitzcuintle"
-        to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
-        amount=6900000
-        text="Comprar con XEC"
-        hover-text="Enviar XEC"
-        success-text="Gracias por tu compra"
-        theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
-        op-return="Paquete Bienestar Integral Xoloitzcuintle">
       </div>
-      <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Paquete+Bienestar+Integral+Xoloitzcuintle"
-         class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
-         data-item="Paquete Bienestar Integral Xoloitzcuintle"
-         aria-label="Abrir WhatsApp para comprar el Paquete Bienestar Integral Xoloitzcuintle mediante transferencia bancaria">
-        <span aria-hidden="true">🟢</span>
-        <span>Comprar por WhatsApp (Transferencia bancaria)</span>
-      </a>
+      <div class="card-body">
+        <h2>Paquete Bienestar Integral Xoloitzcuintle</h2>
+        <p><strong>≈ $1950 MXN</strong> Cuidado completo de la piel y protección natural: incluye bálsamos de Árbol de Té, Limón y Lavanda, repelente con esencia de limón y dos jabones neutros exfoliantes.</p>
+        <ul>
+          <li>Bálsamos calmantes y nutritivos: Árbol de Té, Limón y Lavanda.</li>
+          <li>Repelente natural con esencia de limón: protege de insectos sin químicos agresivos.</li>
+          <li>Jabones exfoliantes neutros: limpian suavemente mientras cuidan la piel.</li>
+        </ul>
+      </div>
+      <div class="card-actions">
+        <div class="paybutton-widget"
+          data-ga-event="begin_checkout_xec"
+          data-item="Paquete Bienestar Integral Xoloitzcuintle"
+          to="ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8"
+          amount=6900000
+          text="Comprar con XEC"
+          hover-text="Enviar XEC"
+          success-text="Gracias por tu compra"
+          theme='{"palette":{"primary":"#008080","secondary":"#FFD700","tertiary":"#231f20"}}'
+          op-return="Paquete Bienestar Integral Xoloitzcuintle">
+        </div>
+        <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Paquete+Bienestar+Integral+Xoloitzcuintle"
+           class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
+           data-item="Paquete Bienestar Integral Xoloitzcuintle"
+           aria-label="Abrir WhatsApp para comprar el Paquete Bienestar Integral Xoloitzcuintle mediante transferencia bancaria">
+          <span aria-hidden="true">🟢</span>
+          <span>Comprar por WhatsApp (Transferencia bancaria)</span>
+        </a>
+      </div>
+    </div>
+
     </div>
 
   </section>
