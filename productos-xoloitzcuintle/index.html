@@ -421,6 +421,23 @@
       margin-bottom: 12px;
     }
 
+    /* === Media de producto (reemplaza el placeholder 3D) === */
+    .product-media {
+      width: 100%;
+      height: 230px;              /* alto armonizado con tu layout */
+      border-radius: 16px;
+      display: block;
+      object-fit: cover;          /* llena el marco sin deformar */
+      filter: saturate(1.05) contrast(1.02);
+      box-shadow: 0 12px 32px rgba(0,0,0,.35);
+      background: #0c0f0f;
+    }
+    @media (max-width: 600px) {
+      .product-media {
+        height: 200px;
+      }
+    }
+
     .product-3d canvas {
       width: 100% !important;
       height: 100% !important;
@@ -1173,7 +1190,15 @@
 
     <!-- Producto 1 -->
     <div class="card animate-on-scroll">
-      <div class="product-3d" role="img" aria-label="Modelo 3D del ungüento solar inspirado en Xólotl" data-variant="balm" data-base-color="#d0a85a" data-highlight-color="#ffd700"></div>
+      <picture>
+        <img
+          class="product-media"
+          src="https://i.imgur.com/J8mc04B.png"
+          loading="lazy"
+          decoding="async"
+          alt="Ungüento Solar del Guardián Xólotl – bálsamo en frasco ámbar esmerilado con tapa blanca."
+        />
+      </picture>
       <h2>Ungüento Solar del Guardián Xólotl</h2>
       <p><strong>≈ $522 MXN</strong> Forjado con savia de árbol de té bajo la tutela de Xólotl, este bálsamo repara la piel del compañero de guerra como si sellara códices de obsidiana, para que siga guiando almas a través del Mictlán sin que el tiempo marque su pelaje.</p>
       <div class="paybutton-widget"
@@ -1199,7 +1224,15 @@
 
     <!-- Producto 2 -->
     <div class="card animate-on-scroll">
-      <div class="product-3d" role="img" aria-label="Modelo 3D del néctar onírico de Tlazōlteōtl" data-variant="elixir" data-base-color="#7a4c9e" data-highlight-color="#d8b7ff"></div>
+      <picture>
+        <img
+          class="product-media"
+          src="https://i.imgur.com/hosQNaj.png"
+          loading="lazy"
+          decoding="async"
+          alt="Néctar Onírico de Tlazōlteōtl – frasco con esencia de lavanda."
+        />
+      </picture>
       <h2>Néctar Onírico de Tlazōlteōtl</h2>
       <p><strong>≈ $522 MXN</strong> Al caer la noche, Tlazōlteōtl susurra lavanda y vitamina E sobre la piel del Xoloitzcuintle, acunando sus sueños de guerrero con neblinas moradas que lo preparan para custodiar los portales entre la tierra y el firmamento.</p>
       <div class="paybutton-widget"
@@ -1224,7 +1257,15 @@
 
     <!-- Producto 3 -->
     <div class="card animate-on-scroll">
-      <div class="product-3d" role="img" aria-label="Modelo 3D de la esencia Citlalinahuatl" data-variant="serum" data-base-color="#f2c94c" data-highlight-color="#ffecb3"></div>
+      <picture>
+        <img
+          class="product-media"
+          src="https://i.imgur.com/PloLYl4.png"
+          loading="lazy"
+          decoding="async"
+          alt="Esencia Citlalinahuatl del Amanecer – frasco con aceite esencial de limón."
+        />
+      </picture>
       <h2>Esencia Citlalinahuatl del Amanecer</h2>
       <p><strong>≈ $522 MXN</strong> Cada aurora, los sacerdotes exprimen limones sagrados para trazar sobre el Xoloitzcuintle un círculo de luz que purifica heridas y despierta la valentía, como si Tonatiuh mismo lo ungiera antes de una batalla cósmica.</p>
       <div class="paybutton-widget"
