@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ChronikClient, type ScriptUtxos } from 'chronik-client';
 
-import { addressToHash160 } from '../utils/address';
+import { ecashToP2PKHHash160Hex } from '../utils/chronik';
 
 import {
   CHRONIK_FALLBACK_URLS,
@@ -23,23 +23,59 @@ interface TokenLike {
 type BaseScriptUtxo = ScriptUtxos['utxos'] extends (infer U)[] ? U : never;
 type ScriptUtxoWithToken = BaseScriptUtxo & { readonly token?: TokenLike | null };
 
+export interface RmzBalance {
+  readonly decimals: number;
+  readonly atoms: string;
+  readonly human: number;
+}
+
 @Injectable({ providedIn: 'root' })
 export class TokenBalanceService {
   private readonly chronikClients: readonly ChronikClient[] = UNIQUE_CHRONIK_URLS.map(
     (url) => new ChronikClient(url),
   );
 
-  async getRMZBalance(address: string): Promise<bigint> {
+  async getRmzBalance(address: string): Promise<RmzBalance> {
     if (!address) {
-      return 0n;
+      return { decimals: 0, atoms: '0', human: 0 };
     }
 
-    const scriptHash = addressToHash160(address);
-    const utxos = await this.fetchScriptUtxos(scriptHash);
-    return utxos.reduce((total, utxo) => total + this.extractRmzAmount(utxo), 0n);
+    const hash160 = ecashToP2PKHHash160Hex(address);
+    const { utxos, client } = await this.fetchScriptUtxos(hash160);
+
+    const tokenUtxos = utxos.filter(
+      (utxo): utxo is ScriptUtxoWithToken & {
+        readonly token: TokenLike & { readonly amount: string | number | bigint };
+      } => {
+        const token = utxo.token;
+        return (
+          !!token &&
+          token.tokenId === RMZ_TOKEN_ID &&
+          token.amount !== undefined &&
+          token.amount !== null
+        );
+      },
+    );
+
+    const decimals = await this.fetchTokenDecimals(client, RMZ_TOKEN_ID);
+
+    const atomsSum = tokenUtxos.reduce((sum, utxo) => {
+      const amount = utxo.token.amount as string | number | bigint;
+      return sum + BigInt(amount);
+    }, 0n);
+
+    const human = Number(atomsSum) / 10 ** decimals;
+
+    return {
+      decimals,
+      atoms: atomsSum.toString(),
+      human,
+    };
   }
 
-  private async fetchScriptUtxos(scriptHash: string): Promise<ScriptUtxoWithToken[]> {
+  private async fetchScriptUtxos(
+    scriptHash: string,
+  ): Promise<{ readonly utxos: ScriptUtxoWithToken[]; readonly client: ChronikClient | null }> {
     let lastError: unknown;
 
     for (const client of this.chronikClients) {
@@ -47,7 +83,7 @@ export class TokenBalanceService {
         const script = await client.script('p2pkh', scriptHash);
         const scriptUtxos: ScriptUtxos = await script.utxos();
         const utxos = (scriptUtxos?.utxos ?? []) as ScriptUtxoWithToken[];
-        return utxos;
+        return { utxos, client };
       } catch (error) {
         lastError = error;
       }
@@ -57,41 +93,35 @@ export class TokenBalanceService {
       throw lastError;
     }
 
-    return [];
+    return { utxos: [], client: null };
   }
 
-  private extractRmzAmount(utxo: ScriptUtxoWithToken): bigint {
-    const token = utxo.token;
-    if (!token || token.tokenId !== RMZ_TOKEN_ID) {
-      return 0n;
-    }
+  private async fetchTokenDecimals(
+    preferredClient: ChronikClient | null,
+    tokenId: string,
+  ): Promise<number> {
+    const clients = preferredClient
+      ? [
+          preferredClient,
+          ...this.chronikClients.filter((client) => client !== preferredClient),
+        ]
+      : this.chronikClients;
 
-    const { amount } = token;
-    if (amount === undefined || amount === null) {
-      return 0n;
-    }
+    let lastError: unknown;
 
-    if (typeof amount === 'bigint') {
-      return amount;
-    }
-
-    if (typeof amount === 'number') {
-      if (!Number.isFinite(amount)) {
-        return 0n;
-      }
-
-      return BigInt(Math.trunc(amount));
-    }
-
-    if (typeof amount === 'string') {
+    for (const client of clients) {
       try {
-        return BigInt(amount);
+        const token = await client.token(tokenId);
+        return token.token?.decimals ?? 0;
       } catch (error) {
-        console.warn('No se pudo convertir el monto del token a BigInt', error);
-        return 0n;
+        lastError = error;
       }
     }
 
-    return 0n;
+    if (lastError) {
+      throw lastError;
+    }
+
+    return 0;
   }
 }

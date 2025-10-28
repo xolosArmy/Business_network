@@ -7,7 +7,10 @@ import { SaldoService } from '../../services/saldo.service';
 import { EnviarService } from '../../services/enviar.service';
 import { BleService } from '../../services/ble.service';
 import { OfflineStorageService } from '../../services/offline-storage.service';
-import { TokenBalanceService } from '../../services/token-balance.service';
+import {
+  TokenBalanceService,
+  type RmzBalance,
+} from '../../services/token-balance.service';
 import { RMZ_TOKEN_ID } from '../../services/chronik.constants';
 
 @Component({
@@ -33,7 +36,7 @@ export class HomePage implements OnInit, OnDestroy {
   readonly rmzSendForm: FormGroup;
   readonly rmzTokenId = RMZ_TOKEN_ID;
 
-  rmzTokenBalance: bigint | null = null;
+  rmzTokenBalance: RmzBalance | null = null;
 
   private removeConnectionListeners: (() => void) | null = null;
 
@@ -85,7 +88,15 @@ export class HomePage implements OnInit, OnDestroy {
       return '-- RMZ';
     }
 
-    return `${this.rmzTokenBalance.toString()} RMZ`;
+    const fractionDigits = Math.max(
+      0,
+      Math.min(this.rmzTokenBalance.decimals, 20),
+    );
+
+    return `${this.rmzTokenBalance.human.toLocaleString(undefined, {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: fractionDigits,
+    })} RMZ`;
   }
 
   async loadWallet(): Promise<void> {
@@ -275,9 +286,9 @@ export class HomePage implements OnInit, OnDestroy {
     }
   }
 
-  private async fetchRmzTokenBalance(address: string): Promise<bigint | null> {
+  private async fetchRmzTokenBalance(address: string): Promise<RmzBalance | null> {
     try {
-      return await this.tokenBalanceService.getRMZBalance(address);
+      return await this.tokenBalanceService.getRmzBalance(address);
     } catch (error) {
       console.warn('No se pudo obtener el saldo del token RMZ.', error);
       return null;
