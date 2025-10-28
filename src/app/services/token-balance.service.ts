@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ChronikClient, type ScriptUtxo } from 'chronik-client';
+import { ChronikClient, type ScriptUtxos } from 'chronik-client';
 
 import { addressToHash160 } from '../utils/address';
 
@@ -20,7 +20,8 @@ interface TokenLike {
   readonly capability?: string;
 }
 
-type ScriptUtxoWithToken = ScriptUtxo & { readonly token?: TokenLike | null };
+type BaseScriptUtxo = ScriptUtxos['utxos'] extends (infer U)[] ? U : never;
+type ScriptUtxoWithToken = BaseScriptUtxo & { readonly token?: TokenLike | null };
 
 @Injectable({ providedIn: 'root' })
 export class TokenBalanceService {
@@ -44,7 +45,8 @@ export class TokenBalanceService {
     for (const client of this.chronikClients) {
       try {
         const script = await client.script('p2pkh', scriptHash);
-        const utxos = (script?.utxos ?? []) as ScriptUtxoWithToken[];
+        const scriptUtxos: ScriptUtxos = await script.utxos();
+        const utxos = (scriptUtxos?.utxos ?? []) as ScriptUtxoWithToken[];
         return utxos;
       } catch (error) {
         lastError = error;
