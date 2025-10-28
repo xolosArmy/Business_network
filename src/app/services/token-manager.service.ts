@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ChronikClient } from 'chronik-client';
-import AdapterRouter from 'minimal-xec-wallet/lib/adapters/router';
-import HybridTokenManager, {
+import {
+  AdapterRouter,
+  HybridTokenManager,
   type HybridTokenBalance,
-} from 'minimal-xec-wallet/lib/hybrid-token-manager';
-import KeyDerivation from 'minimal-xec-wallet/lib/key-derivation';
+  KeyDerivation,
+} from 'minimal-xec-wallet';
 
 import {
   CHRONIK_FALLBACK_URLS,
