@@ -7,7 +7,10 @@ import { BleService } from '../../services/ble.service';
 import { EnviarService } from '../../services/enviar.service';
 import { WalletService } from '../../services/wallet.service';
 import { CarteraService } from '../../services/cartera.service';
-import { TokenBalanceService } from '../../services/token-balance.service';
+import {
+  TokenBalanceService,
+  type RmzBalance,
+} from '../../services/token-balance.service';
 import { RMZ_TOKEN_ID } from '../../services/chronik.constants';
 
 @Component({
@@ -32,7 +35,7 @@ export class WalletPage implements OnInit {
   sendTokenForm: FormGroup;
   bleAvailable = false;
   tokenErrorMessage = '';
-  rmzTokenBalance: bigint | null = null;
+  rmzTokenBalance: RmzBalance | null = null;
   readonly rmzTokenId = RMZ_TOKEN_ID;
 
   constructor(
@@ -191,7 +194,15 @@ export class WalletPage implements OnInit {
       return '-- RMZ';
     }
 
-    return `${this.rmzTokenBalance.toString()} RMZ`;
+    const fractionDigits = Math.max(
+      0,
+      Math.min(this.rmzTokenBalance.decimals, 20),
+    );
+
+    return `${this.rmzTokenBalance.human.toLocaleString(undefined, {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: fractionDigits,
+    })} RMZ`;
   }
 
   private async refreshBalance(address?: string): Promise<void> {
@@ -206,7 +217,7 @@ export class WalletPage implements OnInit {
       const [balance, rmzBalance] = await Promise.all([
         this.walletService.getBalance(addr),
         this.tokenBalanceService
-          .getRMZBalance(addr)
+          .getRmzBalance(addr)
           .catch((error) => {
             console.warn('No se pudo obtener el saldo del token RMZ.', error);
             return null;
