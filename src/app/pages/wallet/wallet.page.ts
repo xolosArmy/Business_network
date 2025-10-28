@@ -1,7 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Wallet } from 'ecash-wallet';
 import * as QRCode from 'qrcode';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { IonContent } from '@ionic/angular';
 
 import { BleService } from '../../services/ble.service';
 import { EnviarService } from '../../services/enviar.service';
@@ -18,7 +28,7 @@ import { RMZ_TOKEN_ID } from '../../services/chronik.constants';
   templateUrl: './wallet.page.html',
   styleUrls: ['./wallet.page.scss'],
 })
-export class WalletPage implements OnInit {
+export class WalletPage implements OnInit, OnDestroy, AfterViewInit {
   address = '';
   wallet: Wallet | null = null;
   balanceLabel = '0 XEC';
@@ -37,6 +47,17 @@ export class WalletPage implements OnInit {
   tokenErrorMessage = '';
   rmzTokenBalance: RmzBalance | null = null;
   readonly rmzTokenId = RMZ_TOKEN_ID;
+  highlightTokenSection = false;
+
+  @ViewChild('walletContent', { read: IonContent })
+  private walletContent?: IonContent;
+
+  @ViewChild('tokenSendSection', { read: ElementRef })
+  private tokenSendSection?: ElementRef<HTMLElement>;
+
+  private routeSubscription?: Subscription;
+  private highlightTimeoutId: number | null = null;
+  private pendingScrollToToken = false;
 
   constructor(
     private readonly walletService: WalletService,
@@ -44,6 +65,8 @@ export class WalletPage implements OnInit {
     private readonly carteraService: CarteraService,
     private readonly tokenBalanceService: TokenBalanceService,
     private readonly bleService: BleService,
+    private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute,
     formBuilder: FormBuilder,
   ) {
     this.sendForm = formBuilder.group({
@@ -58,7 +81,29 @@ export class WalletPage implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    this.routeSubscription = this.activatedRoute.queryParamMap.subscribe(
+      (params) => {
+        const tokenId = params.get('tokenId');
+        this.handleSendTokenNavigation(tokenId);
+      },
+    );
+
     await this.initWallet();
+  }
+
+  ngAfterViewInit(): void {
+    if (this.pendingScrollToToken) {
+      this.pendingScrollToToken = false;
+      void this.scrollToTokenSection();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.routeSubscription?.unsubscribe();
+    if (this.highlightTimeoutId !== null) {
+      window.clearTimeout(this.highlightTimeoutId);
+      this.highlightTimeoutId = null;
+    }
   }
 
   async initWallet(): Promise<void> {
@@ -205,6 +250,47 @@ export class WalletPage implements OnInit {
     })} RMZ`;
   }
 
+  get abbreviatedRmzTokenId(): string {
+    return this.abbreviateTokenId(this.rmzTokenId);
+  }
+
+  get rmzBalanceCardLabel(): string {
+    if (this.rmzTokenBalance === null) {
+      return '-- RMZ';
+    }
+
+    const fractionDigits = Math.max(
+      0,
+      Math.min(this.rmzTokenBalance.decimals, 20),
+    );
+
+    const amount = this.rmzTokenBalance.human.toLocaleString(undefined, {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: fractionDigits,
+    });
+
+    return `${amount} RMZ`;
+  }
+
+  get rmzBalanceDecimalsLabel(): string {
+    if (this.rmzTokenBalance === null) {
+      return '--';
+    }
+
+    return `${this.rmzTokenBalance.decimals}`;
+  }
+
+  goToSendRmz(): void {
+    void this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: { tokenId: this.rmzTokenId },
+      queryParamsHandling: 'merge',
+    });
+
+    this.triggerSendTokenFocus();
+    void this.scrollToTokenSection();
+  }
+
   private async refreshBalance(address?: string): Promise<void> {
     try {
       const addr = address ?? this.walletService.getAddress();
@@ -257,5 +343,66 @@ export class WalletPage implements OnInit {
     }
 
     return 'Se produjo un error inesperado.';
+  }
+
+  private abbreviateTokenId(tokenId: string): string {
+    if (!tokenId) {
+      return '';
+    }
+
+    if (tokenId.length <= 8) {
+      return tokenId;
+    }
+
+    const prefix = tokenId.slice(0, 4);
+    const suffix = tokenId.slice(-4);
+    return `${prefix}...${suffix}`;
+  }
+
+  private handleSendTokenNavigation(tokenId: string | null): void {
+    if (!tokenId) {
+      return;
+    }
+
+    if (tokenId.toLowerCase() !== this.rmzTokenId.toLowerCase()) {
+      return;
+    }
+
+    this.triggerSendTokenFocus();
+    void this.scrollToTokenSection();
+  }
+
+  private triggerSendTokenFocus(): void {
+    if (this.highlightTimeoutId !== null) {
+      window.clearTimeout(this.highlightTimeoutId);
+      this.highlightTimeoutId = null;
+    }
+
+    this.highlightTokenSection = true;
+    this.highlightTimeoutId = window.setTimeout(() => {
+      this.highlightTokenSection = false;
+      this.highlightTimeoutId = null;
+    }, 1600);
+  }
+
+  private async scrollToTokenSection(): Promise<void> {
+    const content = this.walletContent;
+    const tokenElement = this.tokenSendSection?.nativeElement;
+
+    if (!content || !tokenElement) {
+      this.pendingScrollToToken = true;
+      return;
+    }
+
+    this.pendingScrollToToken = false;
+
+    const scrollElement = await content.getScrollElement();
+    const elementRect = tokenElement.getBoundingClientRect();
+    const scrollRect = scrollElement.getBoundingClientRect();
+    const currentScrollTop = scrollElement.scrollTop ?? 0;
+    const offset = elementRect.top - scrollRect.top;
+    const targetY = currentScrollTop + offset - 24;
+
+    await content.scrollToPoint(0, targetY > 0 ? targetY : 0, 400);
   }
 }

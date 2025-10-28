@@ -4,13 +4,28 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content #walletContent class="ion-padding">
   <ion-text color="danger" *ngIf="errorMessage">
     <p class="ion-text-center">{{ errorMessage }}</p>
   </ion-text>
   <ion-text color="success" *ngIf="successMessage">
     <p class="ion-text-center">{{ successMessage }}</p>
   </ion-text>
+
+  <ion-card *ngIf="address">
+    <ion-card-header>
+      <ion-card-title>Xolos RMZ</ion-card-title>
+      <ion-card-subtitle>{{ abbreviatedRmzTokenId }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p class="ion-text-center ion-margin-bottom">
+        Saldo: {{ rmzBalanceCardLabel }} ({{ rmzBalanceDecimalsLabel }})
+      </p>
+      <ion-button expand="block" color="secondary" (click)="goToSendRmz()">
+        Enviar RMZ
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 
   <ion-card>
     <ion-card-header>
@@ -115,7 +130,10 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+  <ion-card
+    #tokenSendSection
+    [color]="highlightTokenSection ? 'secondary' : undefined"
+  >
     <ion-card-header>
       <ion-card-title>Enviar Xolos RMZ</ion-card-title>
     </ion-card-header>
