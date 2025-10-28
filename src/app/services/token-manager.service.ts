@@ -17,7 +17,7 @@ const DEFAULT_HD_PATH = "m/44'/899'/0'/0/0";
 const DEFAULT_FEE_RATE = 1.2;
 
 interface AdapterRouterWithBroadcast extends AdapterRouter {
-  sendTx?: (hex: string) => Promise<unknown>;
+  sendTx: (hex: string) => Promise<string | { txid?: string }>;
 }
 
 export interface SendRmzTokenOptions {
@@ -211,9 +211,9 @@ export class TokenManagerService {
 
     const record = candidate as Record<string, unknown>;
     return (
-      typeof record.outpoint === 'object' &&
-      record.outpoint !== null &&
-      typeof (record.outpoint as Record<string, unknown>).txid === 'string'
+      typeof record['outpoint'] === 'object' &&
+      record['outpoint'] !== null &&
+      typeof (record['outpoint'] as Record<string, unknown>)['txid'] === 'string'
     );
   }
 }
