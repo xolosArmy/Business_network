@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
-import KeyDerivation from 'minimal-xec-wallet/lib/key-derivation';
+import { KeyDerivation } from 'minimal-xec-wallet';
 
 import { OfflineStorageService } from './offline-storage.service';
 import { RMZ_TOKEN_ID } from './chronik.constants';
