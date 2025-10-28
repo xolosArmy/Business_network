@@ -28,7 +28,9 @@
             "allowedCommonJsDependencies": [
               "qrcode",
               "chronik-client",
-              "ecash-lib"
+              "ecash-lib",
+              "ecashaddrjs",
+              "ecash-wallet"
             ]
           },
           "configurations": {
@@ -98,5 +100,6 @@
   },
   "cli": {
     "analytics": false
-  }
+  },
+  "defaultProject": "rmzwallet"
 }
