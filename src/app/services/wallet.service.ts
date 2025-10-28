@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Wallet } from 'ecash-wallet';
 import { ChronikClient } from 'chronik-client';
+import { ecashToP2PKHHash160Hex } from '../utils/chronik';
 
 import { CHRONIK_URL } from './chronik.constants';
 
@@ -37,8 +38,9 @@ export class WalletService {
       throw new Error('Wallet no inicializada y no se proporcionó dirección');
     }
 
-    const chronikAddress = this.chronikClient.address(address);
-    const { utxos } = await chronikAddress.utxos();
+    const hash160 = ecashToP2PKHHash160Hex(address);
+    const chronikScript = this.chronikClient.script('p2pkh', hash160);
+    const { utxos } = await chronikScript.utxos();
     return utxos.reduce((sum: number, utxo: any) => {
       const sats = typeof utxo.sats === 'bigint' ? Number(utxo.sats) : Number(utxo.sats ?? 0);
       return sum + (Number.isFinite(sats) ? sats : 0);
