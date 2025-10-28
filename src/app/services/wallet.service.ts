@@ -3,7 +3,7 @@ import { Wallet } from 'ecash-wallet';
 import { ChronikClient } from 'chronik-client';
 import { ecashToP2PKHHash160Hex } from '../utils/chronik';
 
-import { CHRONIK_URL } from './chronik.constants';
+import { CHRONIK_URL, RMZ_TOKEN_ID } from './chronik.constants';
 
 @Injectable({ providedIn: 'root' })
 export class WalletService {
@@ -45,6 +45,51 @@ export class WalletService {
       const sats = typeof utxo.sats === 'bigint' ? Number(utxo.sats) : Number(utxo.sats ?? 0);
       return sum + (Number.isFinite(sats) ? sats : 0);
     }, 0);
+  }
+
+  async subscribeRmz(
+    address: string,
+    onChange: () => void | Promise<void>,
+  ): Promise<() => void> {
+    const hash160 = ecashToP2PKHHash160Hex(address);
+    const expectedOutputScript = `76a914${hash160}88ac`.toLowerCase();
+
+    const handledTxids = new Set<string>();
+
+    const ws = this.chronikClient.ws({
+      onMessage: async msg => {
+        const { type } = msg as { type?: string };
+        const txid = (msg as { txid?: string }).txid;
+
+        if (!txid || handledTxids.has(txid) || (type !== 'AddedToMempool' && type !== 'Confirmed')) {
+          return;
+        }
+
+        try {
+          const tx = await this.chronikClient.tx(txid);
+          const tokenId = tx.slpTxData?.slpMeta?.tokenId?.toLowerCase();
+          if (tokenId !== RMZ_TOKEN_ID) {
+            return;
+          }
+
+          const hasTokenOutput = tx.outputs?.some(output => {
+            return output.slpToken && output.outputScript?.toLowerCase() === expectedOutputScript;
+          });
+
+          if (hasTokenOutput) {
+            handledTxids.add(txid);
+            await onChange();
+          }
+        } catch (error) {
+          console.warn('Error processing RMZ subscription message', { txid, error });
+        }
+      },
+    });
+
+    await ws.waitForOpen();
+    ws.subscribe('p2pkh', hash160);
+
+    return () => ws.close();
   }
 
   async createAndBroadcastTx(_toAddress: string, _amountSats: number): Promise<string> {
