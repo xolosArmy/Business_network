@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Hilo Dorado: Xoloitzcuintle y Día de Muertos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Warm Neutrals & Cempasúchil (Marigold) -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        .nav-link { @apply px-3 py-2 rounded-md text-sm font-medium text-zinc-700 hover:bg-orange-100 hover:text-orange-700 transition-colors; }
+        .nav-link-active { @apply bg-orange-200 text-orange-800; }
+        .tab-button { @apply px-4 py-2 font-semibold text-zinc-600 bg-white border border-zinc-200 rounded-t-lg -mb-px hover:bg-amber-50; }
+        .tab-button-active { @apply bg-white border-zinc-300 border-b-white text-orange-600; }
+        .tab-button-xolo { @apply px-4 py-2 font-semibold text-zinc-600 bg-zinc-50 rounded-lg hover:bg-zinc-100; }
+        .tab-button-xolo-active { @apply bg-orange-600 text-white hover:bg-orange-700; }
+        /* CTA flotante */
+        .cta-fab { @apply fixed right-4 bottom-4 md:bottom-8 z-[60] shadow-lg rounded-full px-5 py-3 text-white bg-orange-600 hover:bg-orange-700 transition; }
+    </style>
+</head>
+<body class="bg-amber-50 text-zinc-800">
+
+    <header class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-sm shadow-sm">
+        <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <a href="https://www.xolosramirez.com" target="_blank" rel="noopener noreferrer" class="flex-shrink-0">
+                        <span class="text-xl font-bold text-orange-600">Xolos Ramírez</span>
+                    </a>
+                    <span class="hidden md:inline text-zinc-300">|</span>
+                    <span class="hidden md:inline text-sm text-zinc-600">El Hilo Dorado</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#inicio" class="nav-link">Inicio</a>
+                        <a href="#cosmovisiones" class="nav-link">Cosmovisiones</a>
+                        <a href="#coincidencia" class="nav-link">El Guía Canino</a>
+                        <a href="#xolo" class="nav-link">El Xoloitzcuintle</a>
+                        <a href="#diamuertos" class="nav-link">Día de Muertos</a>
+                        <a href="#sintesis" class="nav-link">Síntesis</a>
+                        <!-- Enlaces externos a Xolos Ramírez -->
+                        <a href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener noreferrer" class="nav-link">Xolos disponibles</a>
+                        <a href="https://www.xolosramirez.com/contacto/" target="_blank" rel="noopener noreferrer" class="nav-link">Contacto</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <select id="mobile-nav" class="block w-full rounded-md border-zinc-300 shadow-sm focus:border-orange-500 focus:ring-orange-500">
+                        <option value="#inicio">Inicio</option>
+                        <option value="#cosmovisiones">Cosmovisiones</option>
+                        <option value="#coincidencia">El Guía Canino</option>
+                        <option value="#xolo">El Xoloitzcuintle</option>
+                        <option value="#diamuertos">Día de Muertos</option>
+                        <option value="#sintesis">Síntesis</option>
+                        <option value="https://www.xolosramirez.com/xolos-disponibles/">Xolos disponibles (externo)</option>
+                        <option value="https://www.xolosramirez.com/">XolosRamirez.com (externo)</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-6xl mx-auto p-4 sm:p-8 space-y-24 mt-8">
+
+        <section id="inicio">
+            <div class="text-center rounded-lg p-8">
+                <h1 class="text-4xl md:text-5xl font-bold text-orange-700 mb-4">El Hilo Dorado</h1>
+                <p class="text-xl md:text-2xl text-zinc-700 mb-2">El Xoloitzcuintle y el Día de Muertos como Eje de la Cosmogonía</p>
+                <p class="text-sm text-zinc-500 mb-6">
+                    Un ensayo interactivo publicado en <a class="underline decoration-dotted hover:text-orange-700" href="https://xolosarmy.xyz" target="_blank" rel="noopener noreferrer">XolosArmy Network</a>.
+                </p>
+                <p class="text-lg text-zinc-600 max-w-3xl mx-auto">
+                    Esta aplicación explora la fascinación universal de la humanidad con la muerte y el inframundo. A través de diferentes civilizaciones, buscamos un "punto de coincidencia" que nos revela una profunda conexión simbólica. Este hilo dorado nos guía hasta el 
+                    <a href="https://www.xolosramirez.com/blog/" target="_blank" rel="noopener noreferrer" class="font-semibold text-orange-700 hover:underline">Xoloitzcuintle</a> 
+                    y el Día de Muertos, no como conceptos aislados, sino como la síntesis de una relación recíproca entre el mundo de los vivos y el de los muertos.
+                </p>
+
+                <!-- CTA a Xolos disponibles -->
+                <div class="mt-8 inline-flex flex-col sm:flex-row items-center gap-3">
+                    <a href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-lg bg-orange-600 text-white font-semibold hover:bg-orange-700 transition">
+                        Ver Xolos disponibles
+                    </a>
+                    <a href="https://www.xolosramirez.com/" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-lg border border-orange-200 text-orange-700 font-semibold hover:bg-orange-50 transition">
+                        Conocer Xolos Ramírez
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="cosmovisiones" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center text-zinc-800 mb-4">Un Viaje a Otros Mundos</h2>
+            <p class="text-lg text-center text-zinc-600 max-w-3xl mx-auto mb-12">
+                Casi todas las grandes civilizaciones concibieron la muerte no como un final, sino como el inicio de un arduo viaje. El alma del difunto debía navegar reinos complejos, a menudo peligrosos, para alcanzar su destino final. Esta sección le permite explorar interactivamente algunas de estas visiones del inframundo. Seleccione una civilización para conocer su mapa del más allá.
+            </p>
+
+            <div class="border-b border-zinc-300">
+                <nav class="flex flex-wrap -mb-px" aria-label="Tabs">
+                    <button data-tab-button="cosmo" data-target="azteca" class="tab-button tab-button-active">Azteca</button>
+                    <button data-tab-button="cosmo" data-target="griega" class="tab-button">Griega</button>
+                    <button data-tab-button="cosmo" data-target="egipcia" class="tab-button">Egipcia</button>
+                    <button data-tab-button="cosmo" data-target="nordica" class="tab-button">Nórdica</button>
+                    <button data-tab-button="cosmo" data-target="maya" class="tab-button">Maya</button>
+                </nav>
+            </div>
+            <div class="bg-white p-6 rounded-b-lg shadow-md">
+                <div data-tab-content="cosmo" id="azteca">
+                    <h3 class="text-2xl font-semibold text-orange-700 mb-3">Azteca: El Mictlán</h3>
+                    <p class="text-zinc-700">El destino de la mayoría de los muertos era el Mictlán, un inframundo sombrío en el norte, gobernado por Mictlantecuhtli y Mictlancíhuatl. Para llegar, el alma debía emprender un viaje de cuatro años a través de nueve peligrosos niveles, enfrentando montañas que chocaban, vientos de obsidiana y más. El primer y más formidable obstáculo era cruzar el ancho río Chiconahuapan, una hazaña imposible sin la ayuda de un guía muy especial.</p>
+                </div>
+                <div data-tab-content="cosmo" id="griega" class="hidden">
+                    <h3 class="text-2xl font-semibold text-orange-700 mb-3">Griega: El Hades</h3>
+                    <p class="text-zinc-700">Gobernado por el dios Hades, el inframundo griego estaba separado del mundo de los vivos por el río Estigia. El barquero Caronte transportaba a las almas a cambio de una moneda (el óbolo), colocada en la boca del difunto. La entrada era custodiada por Cerbero, un feroz perro de tres cabezas. Las almas eran juzgadas y enviadas a uno de tres destinos: los Campos Elíseos (para los héroes), los Campos de Asfódelos (para la mayoría) o el Tártaro (para los castigados).</p>
+                </div>
+                <div data-tab-content="cosmo" id="egipcia" class="hidden">
+                    <h3 class="text-2xl font-semibold text-orange-700 mb-3">Egipcia: La Duat</h3>
+                    <p class="text-zinc-700">La Duat era el reino de los muertos y el dominio del dios Osiris. El alma (Ka/Ba) del difunto viajaba por este complejo mundo, enfrentando pruebas descritas en el Libro de los Muertos. El evento central era el "Pesaje del Corazón", donde Anubis, el dios con cabeza de chacal, pesaba el corazón del difunto contra la pluma de Ma'at (la verdad). Si el corazón era ligero, el alma alcanzaba el paraíso (el Aaru); si era pesado, era devorado por la bestia Ammit.</p>
+                </div>
+                <div data-tab-content="cosmo" id="nordica" class="hidden">
+                    <h3 class="text-2xl font-semibold text-orange-700 mb-3">Nórdica: Hel y Valhalla</h3>
+                    <p class="text-zinc-700">Los vikingos no tenían un solo inframundo. Los guerreros que morían gloriosamente en batalla eran llevados por las Valquirias al Valhalla, el gran salón de Odín, donde festejaban y se preparaban para el Ragnarök. La mayoría de las otras almas viajaban a Hel (o Helheim), un reino frío y oscuro gobernado por la diosa Hela, hija de Loki. La entrada a Hel estaba custodiada por un perro monstruoso llamado Garmr.</p>
+                </div>
+                <div data-tab-content="cosmo" id="maya" class="hidden">
+                    <h3 class="text-2xl font-semibold text-orange-700 mb-3">Maya: El Xibalbá</h3>
+                    <p class="text-zinc-700">Conocido como el "lugar del miedo", el Xibalbá era el inframundo maya, un reino subterráneo gobernado por los dioses de la muerte, los Señores de Xibalbá. El Popol Vuh narra el viaje de los Héroes Gemelos, quienes descendieron al Xibalbá y derrotaron a sus señores a través del ingenio y el juego de pelota. Era un lugar de pruebas y trampas, como casas de oscuridad, frío y jaguares.</p>
+                </div>
+            </div>
+
+            <!-- Bloque informativo con enlace a Xolos Ramírez -->
+            <div class="mt-8 bg-orange-50 border border-orange-200 rounded-lg p-6">
+                <p class="text-zinc-700">
+                    ¿Te interesa conocer más sobre el papel del 
+                    <a href="https://www.xolosramirez.com/blog/" target="_blank" rel="noopener noreferrer" class="font-semibold text-orange-700 hover:underline">Xoloitzcuintle en la cultura mexicana</a>? 
+                    Explora el blog de <a href="https://www.xolosramirez.com" target="_blank" rel="noopener noreferrer" class="font-semibold text-orange-700 hover:underline">Xolos Ramírez</a>.
+                </p>
+            </div>
+        </section>
+        
+        <section id="coincidencia" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center text-zinc-800 mb-4">El Punto de Coincidencia: El Guía Canino</h2>
+            <p class="text-lg text-center text-zinc-600 max-w-3xl mx-auto mb-12">
+                Al explorar estas visiones del más allá, emerge un símbolo recurrente y poderoso: la figura del perro o cánido. Este animal no es un simple detalle, sino un arquetipo fundamental que actúa como guardián, juez o guía en el umbral entre la vida y la muerte. Esta sección compara a estos guardianes caninos, revelando el papel único que juega el <a href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener noreferrer" class="font-semibold text-orange-700 hover:underline">Xoloitzcuintle</a> en la cosmovisión azteca.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-orange-500">
+                    <h4 class="text-xl font-bold text-zinc-800 mb-2">Cerbero (Grecia)</h4>
+                    <p class="text-zinc-700">El <span class="font-semibold">Guardián.</span> Un perro monstruoso de tres cabezas cuya función era <span class="font-semibold">impedir</span> que los muertos escaparan del Hades y que los vivos entraran sin permiso. Es una figura de terror y contención.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-orange-500">
+                    <h4 class="text-xl font-bold text-zinc-800 mb-2">Anubis (Egipto)</h4>
+                    <p class="text-zinc-700">El <span class="font-semibold">Juez y Protector.</span> Con cabeza de chacal (o perro salvaje), Anubis era el dios del embalsamamiento y <span class="font-semibold">guiaba</span> al alma a la sala del juicio. Supervisaba el pesaje del corazón, actuando como un psicopompo justo pero solemne.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-orange-500">
+                    <h4 class="text-xl font-bold text-zinc-800 mb-2">Garmr (Nórdico)</h4>
+                    <p class="text-zinc-700">El <span class="font-semibold">Vigilante.</span> Un perro atado a la entrada de Helheim, a menudo descrito con el pecho manchado de sangre. Al igual que Cerbero, su papel principal era el de un <span class="font-semibold">guardián</span> temible que anunciaría el inicio del Ragnarök con su aullido.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-orange-700">
+                    <h4 class="text-xl font-bold text-zinc-800 mb-2">Xoloitzcuintle (Azteca)</h4>
+                    <p class="text-zinc-700">El <span class="font-semibold">Guía Indispensable.</span> A diferencia de los otros, el Xoloitzcuintle no es un monstruo ni un dios temible. Es un <span class="font-semibold">compañero y ayudante</span>. Su propósito no es juzgar ni guardar, sino <span class="font-semibold">servir</span> al alma humana, ayudándola a cruzar el río Mictlán. Esta es la clave de la simbiosis. <a href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted text-orange-700">Conoce a nuestros Xolos</a>.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="xolo" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center text-zinc-800 mb-4">El Xoloitzcuintle: La Simbiosis de Dos Mundos</h2>
+            <p class="text-lg text-center text-zinc-600 max-w-3xl mx-auto mb-12">
+                El Xoloitzcuintle es el nexo viviente entre lo terrenal y lo cosmogónico. Su misma existencia es un puente. Creado por el dios Xólotl para ser el compañero del hombre, su propósito se extiende más allá de la vida. Esta sección explora su doble naturaleza, la cual fundamenta la relación de reciprocidad entre el humano y su guía espiritual.
+            </p>
+
+            <div class="text-center mb-6 space-x-2">
+                <button data-tab-button="xolo" data-target="terrenal" class="tab-button-xolo tab-button-xolo-active">Plano Terrenal</button>
+                <button data-tab-button="xolo" data-target="cosmogonico" class="tab-button-xolo">Plano Cosmogónico</button>
+            </div>
+
+            <div class="bg-white p-8 rounded-lg shadow-lg max-w-3xl mx-auto">
+                <div data-tab-content="xolo" id="terrenal">
+                    <h3 class="text-2xl font-semibold text-orange-700 mb-3">El Compañero en la Vida</h3>
+                    <p class="text-zinc-700 mb-4">En el mundo de los vivos, el Xoloitzcuintle era un perro venerado pero también cotidiano. Su nombre proviene del náhuatl: <span class="font-semibold">Xólotl</span> (dios del ocaso y de los gemelos) e <span class="font-semibold">Itzcuintli</span> (perro). Era apreciado por su compañía y su calor corporal, que se creía tenía propiedades curativas para el reumatismo. Sin embargo, este lazo terrenal era la preparación para su misión final. <a href="https://www.xolosramirez.com/blog/" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted text-orange-700">Lee más en el blog</a>.</p>
+                    <p class="text-zinc-700 font-semibold">El trato que una persona le daba a sus perros en vida determinaba si el Xoloitzcuintle la ayudaría en la muerte.</p>
+                </div>
+                <div data-tab-content="xolo" id="cosmogonico" class="hidden">
+                    <h3 class="text-2xl font-semibold text-orange-700 mb-3">El Guía en la Muerte</h3>
+                    <p class="text-zinc-700 mb-4">El dios Xólotl, el gemelo de Quetzalcóatl, era la estrella vespertina (Venus) que acompaña al sol en su viaje por el inframundo. Xólotl creó al Xoloitzcuintle como un regalo para la humanidad, una extensión de sí mismo para guiar a las almas a través de la oscuridad del Mictlán. Al morir una persona, su alma llegaba a la orilla del río Chiconahuapan. Allí, buscaba a su Xoloitzcuintle. Si el perro (de color bermejo o rojizo) lo reconocía como un amo bondadoso, se ofrecía para llevar al alma sobre su lomo y cruzar las aguas caudalosas, permitiéndole continuar su viaje por los nueve niveles.</p>
+                    <p class="text-zinc-700 font-semibold">Esta es la simbiosis perfecta: "Yo te cuido en la vida; tú me guías en la muerte." <a href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted text-orange-700">Descubre nuestros cachorros</a>.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="diamuertos" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center text-zinc-800 mb-4">Día de Muertos: El Viaje de Regreso</h2>
+            <p class="text-lg text-center text-zinc-600 max-w-3xl mx-auto mb-12">
+                Si el Xoloitzcuintle representa el viaje de ida hacia el Mictlán, el Día de Muertos representa el viaje de regreso. Esta celebración, una fusión de las creencias prehispánicas y el calendario católico, se fundamenta en la idea de que, una vez al año, el umbral entre los mundos se disuelve. Los que se fueron tienen permiso de volver, y los vivos tienen la sagrada tarea de guiarlos de vuelta a casa.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-semibold text-orange-700 mb-3">El Umbral Delgado</h3>
+                    <p class="text-zinc-700">Las festividades de los mexicas para honrar a los muertos duraban meses, pero se consolidaron en estas fechas. Se cree que el 1 y 2 de noviembre, las almas de los difuntos regresan en orden. No es un evento sombrío, sino una fiesta de bienvenida. La barrera entre la vida y la muerte se vuelve porosa, permitiendo una reunión temporal. Esta creencia en un universo cíclico permite que la muerte no sea una separación permanente, sino una ausencia temporal.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-semibold text-orange-700 mb-3">La Ofrenda como Guía</h3>
+                    <p class="text-zinc-700">Así como el Xolo guía al alma por el río, la <span class="font-semibold">ofrenda</span> o altar de muertos actúa como un faro para el viaje de regreso. Cada elemento tiene una función de guía:</p>
+                    <ul class="list-disc list-inside mt-4 space-y-2 text-zinc-700">
+                        <li><span class="font-semibold">Velas:</span> La luz que ilumina el camino de vuelta.</li>
+                        <li><span class="font-semibold">Cempasúchil:</span> Su color vibrante y aroma penetrante crean un sendero que el alma puede seguir.</li>
+                        <li><span class="font-semibold">Incienso (Copal):</span> Purifica el ambiente y eleva las oraciones, llamando a los espíritus.</li>
+                        <li><span class="font-semibold">Comida y Bebida:</span> Nutren al alma cansada después de su largo viaje.</li>
+                        <li><span class="font-semibold">Agua y Sal:</span> Calman la sed y purifican el espíritu.</li>
+                    </ul>
+                    <div class="mt-6 p-4 bg-orange-50 border border-orange-200 rounded-lg">
+                        <p class="text-sm text-zinc-700">Explora más tradiciones y fotografías en <a href="https://www.xolosramirez.com/blog/" target="_blank" rel="noopener noreferrer" class="font-semibold text-orange-700 hover:underline">el blog de Xolos Ramírez</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sintesis" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center text-zinc-800 mb-4">Síntesis: El Eje de la Reciprocidad</h2>
+            <p class="text-lg text-center text-zinc-600 max-w-3xl mx-auto mb-12">
+                Aquí, el círculo se completa y el Hilo Dorado se revela en su totalidad. El Xoloitzcuintle y el Día de Muertos no son dos ideas separadas; son las dos caras de una misma filosofía de <span class="font-semibold">reciprocidad cósmica</span>.
+            </p>
+            <div class="bg-white p-8 md:p-12 rounded-lg shadow-xl border-t-8 border-orange-600">
+                <p class="text-xl text-zinc-700 leading-relaxed">
+                    La relación del pueblo azteca con la muerte es una simbiosis ininterrumpida. Mientras que otras culturas veían el inframundo con terror, protegido por monstruos y guardianes (Cerbero, Garmr), la visión mexica, aunque respetuosa de los peligros del Mictlán, se centraba en la <span class="font-semibold">ayuda mutua</span>.
+                </p>
+                <br>
+                <p class="text-xl text-zinc-700 leading-relaxed">
+                    <span class="font-bold text-orange-700">1. El Xoloitzcuintle es el guía de IDA:</span> Representa el pacto terrenal. El cuidado y el amor dado en vida se transforma en el guía espiritual necesario para navegar el primer y más grande obstáculo del inframundo. Es la lealtad que trasciende la muerte.
+                </p>
+                <br>
+                <p class="text-xl text-zinc-700 leading-relaxed">
+                    <span class="font-bold text-orange-700">2. El Día de Muertos es el guía de VUELTA:</span> Representa el pacto de la memoria. El amor y el recuerdo de los vivos se materializan en la <span class="font-semibold">ofrenda</span>, que actúa como un mapa sensorial (luz, aroma, sabor) que guía a las almas de regreso a casa para la celebración.
+                </p>
+                <br>
+                <p class="text-xl text-zinc-700 font-semibold leading-relaxed">
+                    Juntos, estos dos conceptos forman el eje central de una cosmovisión donde la muerte no es una ruptura, sino una continuación de la relación. El vínculo entre los vivos y los muertos nunca se corta; simplemente cambia de forma, sustentado por la lealtad (el Xolo) y la memoria (la Ofrenda).
+                </p>
+
+                <!-- CTA final -->
+                <div class="mt-10 flex flex-col sm:flex-row gap-3 sm:items-center">
+                    <a href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-lg bg-orange-600 text-white font-semibold hover:bg-orange-700 transition text-center">
+                        Ver Xolos disponibles
+                    </a>
+                    <a href="https://www.xolosramirez.com/contacto/" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-lg border border-orange-200 text-orange-700 font-semibold hover:bg-orange-50 transition text-center">
+                        Agendar una visita / Contacto
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="text-center p-6 mt-16 bg-white shadow-inner">
+        <p class="text-sm text-zinc-500">Una exploración interactiva de la cosmogonía de la muerte.</p>
+        <p class="text-xs text-zinc-500 mt-2">
+            Más en <a href="https://www.xolosramirez.com" target="_blank" rel="noopener noreferrer" class="underline hover:text-orange-700">XolosRamirez.com</a> · 
+            <a href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener noreferrer" class="underline hover:text-orange-700">Xolos disponibles</a> · 
+            <a href="https://www.xolosramirez.com/blog/" target="_blank" rel="noopener noreferrer" class="underline hover:text-orange-700">Blog</a>
+        </p>
+    </footer>
+
+    <!-- Botón flotante CTA -->
+    <a href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener noreferrer" class="cta-fab">
+        Xolos disponibles
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileNav = document.getElementById('mobile-nav');
+
+            const scrollHandler = (event) => {
+                // Permitir seleccionar opciones externas en el select móvil
+                const value = event.currentTarget.value;
+                if (event.currentTarget.tagName === 'SELECT' && value && value.startsWith('http')) {
+                    window.open(value, '_blank', 'noopener,noreferrer');
+                    return;
+                }
+                event.preventDefault();
+                const targetId = event.currentTarget.getAttribute('href') || value;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            };
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', scrollHandler);
+            });
+            
+            if (mobileNav) {
+                mobileNav.addEventListener('change', scrollHandler);
+            }
+
+            const setupTabs = (groupName) => {
+                const buttons = document.querySelectorAll(`[data-tab-button="${groupName}"]`);
+                const contents = document.querySelectorAll(`[data-tab-content="${groupName}"]`);
+                const activeClasses = groupName === 'xolo' ? ['tab-button-xolo-active'] : ['tab-button-active'];
+                const inactiveClasses = groupName === 'xolo' ? [] : [];
+
+                buttons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const targetId = button.dataset.target;
+
+                        buttons.forEach(btn => {
+                            btn.classList.remove(...activeClasses);
+                            if (inactiveClasses.length) btn.classList.add(...inactiveClasses);
+                        });
+                        button.classList.add(...activeClasses);
+                        if (inactiveClasses.length) button.classList.remove(...inactiveClasses);
+
+                        contents.forEach(content => {
+                            if (content.id === targetId) {
+                                content.classList.remove('hidden');
+                            } else {
+                                content.classList.add('hidden');
+                            }
+                        });
+                    });
+                });
+            };
+
+            setupTabs('cosmo');
+            setupTabs('xolo');
+        });
+    </script>
+</body>
+</html>
