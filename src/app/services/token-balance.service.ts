@@ -3,25 +3,16 @@ import { ChronikClient, type ScriptUtxos } from 'chronik-client';
 
 import { ecashToP2PKHHash160Hex } from '../utils/chronik';
 
-import {
-  CHRONIK_FALLBACK_URLS,
-  CHRONIK_URL,
-  RMZ_TOKEN_ID,
-} from './chronik.constants';
+import { CHRONIK_URL } from './chronik.constants';
 
-const UNIQUE_CHRONIK_URLS = Array.from(
-  new Set<string>([CHRONIK_URL, ...CHRONIK_FALLBACK_URLS]),
-);
+const RMZ_ID = '9e0a9d4720782cf661beaea6c5513f1972e0f3b1541ba4c83f4c87ef65f843dc';
 
-interface TokenLike {
-  readonly tokenId: string;
-  readonly amount?: string | number | bigint;
-  readonly commitment?: string;
-  readonly capability?: string;
-}
+type ChronikUtxo = NonNullable<ScriptUtxos['utxos']>[number];
 
-type BaseScriptUtxo = ScriptUtxos['utxos'] extends (infer U)[] ? U : never;
-type ScriptUtxoWithToken = BaseScriptUtxo & { readonly token?: TokenLike | null };
+type TokenizedUtxo = ChronikUtxo & {
+  readonly slpMeta: NonNullable<ChronikUtxo['slpMeta']>;
+  readonly slpToken: NonNullable<ChronikUtxo['slpToken']>;
+};
 
 export interface RmzBalance {
   readonly decimals: number;
@@ -31,9 +22,7 @@ export interface RmzBalance {
 
 @Injectable({ providedIn: 'root' })
 export class TokenBalanceService {
-  private readonly chronikClients: readonly ChronikClient[] = UNIQUE_CHRONIK_URLS.map(
-    (url) => new ChronikClient(url),
-  );
+  private readonly chronikClient = new ChronikClient(CHRONIK_URL);
 
   async getRmzBalance(address: string): Promise<RmzBalance> {
     if (!address) {
@@ -41,87 +30,31 @@ export class TokenBalanceService {
     }
 
     const hash160 = ecashToP2PKHHash160Hex(address);
-    const { utxos, client } = await this.fetchScriptUtxos(hash160);
+    const script = this.chronikClient.script('p2pkh', hash160);
+    const info = await this.chronikClient.token(RMZ_ID);
+    const decimals = info?.slpTxData?.genesisInfo?.decimals ?? 0;
 
-    const tokenUtxos = utxos.filter(
-      (utxo): utxo is ScriptUtxoWithToken & {
-        readonly token: TokenLike & { readonly amount: string | number | bigint };
-      } => {
-        const token = utxo.token;
+    const scriptUtxos = (await script.utxos()) as unknown as ScriptUtxos; // Chronik devuelve { outputScript, utxos }
+    const allUtxos = scriptUtxos.utxos ?? [];
+    const tokenUtxos = allUtxos.filter(
+      (utxo): utxo is TokenizedUtxo => {
+        const tokenId = utxo.slpMeta?.tokenId?.toLowerCase();
+        const amount = utxo.slpToken?.amount;
         return (
-          !!token &&
-          token.tokenId === RMZ_TOKEN_ID &&
-          token.amount !== undefined &&
-          token.amount !== null
+          tokenId === RMZ_ID &&
+          amount !== undefined &&
+          amount !== null
         );
       },
     );
 
-    const decimals = await this.fetchTokenDecimals(client, RMZ_TOKEN_ID);
+    const atoms = tokenUtxos.reduce<bigint>(
+      (sum, utxo) => sum + BigInt(utxo.slpToken.amount),
+      0n,
+    );
 
-    const atomsSum = tokenUtxos.reduce((sum, utxo) => {
-      const amount = utxo.token.amount as string | number | bigint;
-      return sum + BigInt(amount);
-    }, 0n);
+    const human = Number(atoms) / 10 ** decimals;
 
-    const human = Number(atomsSum) / 10 ** decimals;
-
-    return {
-      decimals,
-      atoms: atomsSum.toString(),
-      human,
-    };
-  }
-
-  private async fetchScriptUtxos(
-    scriptHash: string,
-  ): Promise<{ readonly utxos: ScriptUtxoWithToken[]; readonly client: ChronikClient | null }> {
-    let lastError: unknown;
-
-    for (const client of this.chronikClients) {
-      try {
-        const script = await client.script('p2pkh', scriptHash);
-        const scriptUtxos: ScriptUtxos = await script.utxos();
-        const utxos = (scriptUtxos?.utxos ?? []) as ScriptUtxoWithToken[];
-        return { utxos, client };
-      } catch (error) {
-        lastError = error;
-      }
-    }
-
-    if (lastError) {
-      throw lastError;
-    }
-
-    return { utxos: [], client: null };
-  }
-
-  private async fetchTokenDecimals(
-    preferredClient: ChronikClient | null,
-    tokenId: string,
-  ): Promise<number> {
-    const clients = preferredClient
-      ? [
-          preferredClient,
-          ...this.chronikClients.filter((client) => client !== preferredClient),
-        ]
-      : this.chronikClients;
-
-    let lastError: unknown;
-
-    for (const client of clients) {
-      try {
-        const token = await client.token(tokenId);
-        return token.token?.decimals ?? 0;
-      } catch (error) {
-        lastError = error;
-      }
-    }
-
-    if (lastError) {
-      throw lastError;
-    }
-
-    return 0;
+    return { decimals, atoms: atoms.toString(), human };
   }
 }

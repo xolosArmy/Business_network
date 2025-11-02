@@ -12,4 +12,11 @@ if (environment.production) {
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
-  .catch((err) => console.error(err));
+  .catch((err) => {
+    console.error('BOOTSTRAP ERROR →', err);
+    // Angular attaches the injection path when it can; helpful for NullInjectorError.
+    const tokenPath = (err as any)?.ngTempTokenPath;
+    if (tokenPath) {
+      console.error('TokenPath:', tokenPath);
+    }
+  });

@@ -1,13 +1,10 @@
+import { Buffer } from 'buffer';
 import { Injectable } from '@angular/core';
 import { ChronikClient } from 'chronik-client';
-import {
-  AdapterRouter,
-  HybridTokenManager,
-  type HybridTokenBalance,
-  KeyDerivation,
-} from 'minimal-xec-wallet';
-
-import { addressToHash160 } from '../utils/address';
+import type { Utxo } from 'chronik-client';
+import { HybridTokenManager, KeyDerivation } from 'minimal-xec-wallet';
+import type { AdapterRouter } from 'src/types/minimal-xec-wallet';
+import * as ecashaddr from 'ecashaddrjs';
 
 import {
   CHRONIK_FALLBACK_URLS,
@@ -18,8 +15,18 @@ import {
 const DEFAULT_HD_PATH = "m/44'/899'/0'/0/0";
 const DEFAULT_FEE_RATE = 1.2;
 
-interface AdapterRouterWithBroadcast extends AdapterRouter {
-  sendTx: (hex: string) => Promise<string | { txid?: string }>;
+interface HybridTokenBalance {
+  readonly tokenId: string;
+  readonly protocol: string;
+  readonly ticker: string;
+  readonly name: string;
+  readonly decimals: number;
+  readonly balance: {
+    readonly display: number;
+    readonly atoms: bigint;
+  };
+  readonly utxoCount: number;
+  readonly [key: string]: unknown;
 }
 
 export interface SendRmzTokenOptions {
@@ -51,35 +58,38 @@ export interface SendRmzHybridWalletInfo {
 @Injectable({ providedIn: 'root' })
 export class TokenManagerService {
   private readonly chronikClient = new ChronikClient(CHRONIK_URL);
-  private readonly adapterRouter = new AdapterRouter({
-    chronik: this.chronikClient,
-    chronikUrls: [...CHRONIK_FALLBACK_URLS],
-  });
-  private readonly hybridTokenManager = new HybridTokenManager({
-    chronik: this.chronikClient,
-    ar: this.adapterRouter,
-    chronikUrls: [...CHRONIK_FALLBACK_URLS],
-  });
+  private readonly adapterRouter: AdapterRouter;
   private readonly keyDerivation = new KeyDerivation();
+
+  constructor() {
+    const chronik = this.chronikClient;
+
+    const adapter: AdapterRouter = {
+      sendTx: async (hex: string) => {
+        const res = await chronik.broadcastTx(hex);
+        return typeof res === 'string' ? res : (res?.txid ?? '');
+      },
+
+      getUtxos: async (address: string | string[]): Promise<unknown> => this.fetchUtxos(address),
+    };
+
+    this.adapterRouter = adapter;
+  }
 
   get chronik(): ChronikClient {
     return this.chronikClient;
   }
 
-  get manager(): HybridTokenManager {
-    return this.hybridTokenManager;
-  }
-
   async getTokenBalance(tokenId: string, address: string): Promise<TokenBalance> {
     const utxoData = await this.adapterRouter.getUtxos(address);
     const utxos = this.normalizeUtxos(utxoData);
-    return this.hybridTokenManager.getTokenBalance(tokenId, utxos);
+    return this.createHybridTokenManager().getTokenBalance(tokenId, utxos);
   }
 
   async listTokens(address: string): Promise<TokenBalance[]> {
     const utxoData = await this.adapterRouter.getUtxos(address);
     const utxos = this.normalizeUtxos(utxoData);
-    return this.hybridTokenManager.listTokensFromUtxos(utxos);
+    return this.createHybridTokenManager().listTokensFromUtxos(utxos);
   }
 
   async sendRmzToken(
@@ -87,144 +97,8 @@ export class TokenManagerService {
     amountHuman: number,
     walletInfo: SendRmzHybridWalletInfo,
   ): Promise<string> {
-    const destination = destAddress?.trim();
-    if (!destination) {
-      throw new Error('La dirección de destino es obligatoria.');
-    }
-
-    if (!Number.isFinite(amountHuman) || amountHuman <= 0) {
-      throw new Error('El monto del token debe ser un número mayor que cero.');
-    }
-
-    if (!walletInfo) {
-      throw new Error('Se requiere la información de la cartera.');
-    }
-
-    const hdPath = walletInfo.hdPath ?? DEFAULT_HD_PATH;
-    const feeRate = walletInfo.feeRate ?? DEFAULT_FEE_RATE;
-
-    const normalizedMnemonic = walletInfo.mnemonic
-      ? this.normalizeMnemonic(walletInfo.mnemonic)
-      : undefined;
-
-    const derivedKeys = normalizedMnemonic
-      ? this.keyDerivation.deriveFromMnemonic(normalizedMnemonic, hdPath)
-      : undefined;
-
-    const sourceAddress =
-      walletInfo.xecAddress?.trim() ||
-      walletInfo.address?.trim() ||
-      derivedKeys?.address;
-
-    if (!sourceAddress) {
-      throw new Error('No se pudo determinar la dirección de origen de la cartera.');
-    }
-
-    const privateKey = walletInfo.privateKey ?? derivedKeys?.privateKey;
-    if (!privateKey) {
-      throw new Error('Se requiere la clave privada para firmar la transacción.');
-    }
-
-    const publicKey = walletInfo.publicKey ?? derivedKeys?.publicKey;
-
-    const hash160 = addressToHash160(sourceAddress);
-    const utxoResponse = await this.chronikClient.script('p2pkh', hash160).utxos();
-    const utxos = this.normalizeUtxos(utxoResponse);
-
-    const balanceInfo = await this.hybridTokenManager.getTokenBalance(
-      RMZ_TOKEN_ID,
-      utxos,
-    );
-
-    let decimals = typeof balanceInfo?.decimals === 'number' ? balanceInfo.decimals : 0;
-    if (!Number.isFinite(decimals) || decimals < 0) {
-      const tokenInfo = await this.chronikClient.token(RMZ_TOKEN_ID);
-      const fallbackDecimals = tokenInfo?.genesisInfo?.decimals;
-      decimals = Number.isFinite(fallbackDecimals) && fallbackDecimals >= 0 ? fallbackDecimals : 0;
-    }
-
-    const atoms = this.toTokenAtoms(amountHuman, decimals);
-    if (atoms <= 0n) {
-      throw new Error('El monto convertido del token debe ser mayor que cero.');
-    }
-
-    const outputs = [
-      {
-        address: destination,
-        amount: Number(atoms),
-        value: amountHuman,
-      },
-    ];
-
-    const adapter = this.adapterRouter as AdapterRouterWithBroadcast;
-    const previousSendTx = adapter.sendTx?.bind(adapter);
-    let broadcastHex: string | null = null;
-
-    adapter.sendTx = async (hex: string) => {
-      if (typeof hex !== 'string' || !hex) {
-        throw new Error('Hex de transacción inválido.');
-      }
-
-      broadcastHex = hex;
-
-      try {
-        const response = await this.chronikClient.broadcastTx(hex);
-
-        if (response && typeof response === 'object') {
-          const possibleTxid = (response as { txid?: unknown }).txid;
-          if (typeof possibleTxid === 'string' && possibleTxid) {
-            return possibleTxid;
-          }
-        }
-
-        if (typeof response === 'string' && response) {
-          return response;
-        }
-      } catch (error) {
-        if (previousSendTx) {
-          return previousSendTx(hex);
-        }
-
-        const message =
-          error instanceof Error ? error.message : 'Error desconocido al difundir la transacción.';
-        throw new Error(`Error al difundir la transacción: ${message}`);
-      }
-
-      if (previousSendTx) {
-        return previousSendTx(hex);
-      }
-
-      throw new Error('La difusión de la transacción no devolvió un identificador válido.');
-    };
-
-    try {
-      const txid = await this.hybridTokenManager.sendTokens(
-        RMZ_TOKEN_ID,
-        outputs,
-        {
-          mnemonic: normalizedMnemonic ?? '',
-          xecAddress: sourceAddress,
-          hdPath,
-          fee: feeRate,
-          privateKey,
-          publicKey,
-        },
-        utxos,
-        feeRate,
-      );
-
-      if (!broadcastHex) {
-        throw new Error('No se pudo generar la transacción de token RMZ.');
-      }
-
-      return txid;
-    } finally {
-      if (previousSendTx) {
-        adapter.sendTx = previousSendTx;
-      } else {
-        delete adapter.sendTx;
-      }
-    }
+    const { txid } = await this.performRmzTokenSend(destAddress, amountHuman, walletInfo);
+    return txid;
   }
 
   async sendRMZToken(
@@ -258,76 +132,183 @@ export class TokenManagerService {
       throw new Error('No se pudo derivar la información necesaria de la cartera.');
     }
 
-    const utxoData = await this.adapterRouter.getUtxos(xecAddress);
-    const utxos = this.normalizeUtxos(utxoData);
+    const result = await this.performRmzTokenSend(trimmedDestination, amount, {
+      mnemonic: normalizedMnemonic,
+      xecAddress,
+      hdPath,
+      feeRate,
+      privateKey,
+      publicKey,
+    });
 
-    const outputs = [
-      {
-        address: trimmedDestination,
-        amount,
-      },
-    ];
+    return result;
+  }
 
-    const adapter = this.adapterRouter as AdapterRouterWithBroadcast;
-    const previousSendTx = adapter.sendTx?.bind(adapter);
+  private async performRmzTokenSend(
+    destination: string,
+    amountHuman: number,
+    walletInfo: SendRmzHybridWalletInfo,
+  ): Promise<SendRmzTokenResult> {
+    const targetAddress = destination?.trim();
+    if (!targetAddress) {
+      throw new Error('La dirección de destino es obligatoria.');
+    }
+
+    if (!Number.isFinite(amountHuman) || amountHuman <= 0) {
+      throw new Error('El monto del token debe ser un número mayor que cero.');
+    }
+
+    const hdPath = walletInfo.hdPath ?? DEFAULT_HD_PATH;
+    const feeRate = walletInfo.feeRate ?? DEFAULT_FEE_RATE;
+
+    const normalizedMnemonic = walletInfo.mnemonic
+      ? this.normalizeMnemonic(walletInfo.mnemonic)
+      : undefined;
+
+    const derivation = normalizedMnemonic
+      ? new KeyDerivation({ mnemonic: normalizedMnemonic })
+      : this.keyDerivation;
+
+    const derivedKeys = normalizedMnemonic
+      ? derivation.deriveFromMnemonic(normalizedMnemonic, hdPath)
+      : undefined;
+
+    const sourceAddress =
+      walletInfo.xecAddress?.trim() ||
+      walletInfo.address?.trim() ||
+      derivedKeys?.address;
+
+    if (!sourceAddress) {
+      throw new Error('No se pudo determinar la dirección de origen de la cartera.');
+    }
+
+    const privateKey = walletInfo.privateKey ?? derivedKeys?.privateKey;
+    if (!privateKey) {
+      throw new Error('Se requiere la clave privada para firmar la transacción.');
+    }
+
+    const publicKey = walletInfo.publicKey ?? derivedKeys?.publicKey;
+
+    const adapterUtxoData = await this.adapterRouter.getUtxos(sourceAddress);
+    const utxos = this.normalizeUtxos(adapterUtxoData);
+
+    const info = await this.chronikClient.token(RMZ_TOKEN_ID);
+    const decimals = info?.slpTxData?.genesisInfo?.decimals ?? 0;
+    const multiplier = 10 ** decimals;
+    const atoms = BigInt(Math.round(amountHuman * multiplier));
+    if (atoms <= 0n) {
+      throw new Error('El monto convertido del token debe ser mayor que cero.');
+    }
+
+    const baseAdapter = this.adapterRouter;
+    const originalSendTx = baseAdapter.sendTx?.bind(baseAdapter);
+    const broadcastTokenTransaction = this.broadcastTokenTransaction.bind(this);
     let broadcastHex: string | null = null;
 
-    adapter.sendTx = async (hex: string) => {
-      if (typeof hex !== 'string' || !hex) {
-        throw new Error('Hex de transacción inválido.');
-      }
+    const adapter: AdapterRouter = {
+      ...baseAdapter,
+      sendTx: async (hex: string) => {
+        if (typeof hex !== 'string' || !hex) {
+          throw new Error('Hex de transacción inválido.');
+        }
 
-      broadcastHex = hex;
-
-      try {
-        const response = await this.chronik.broadcastTx(hex);
-
-        if (response && typeof response === 'object') {
-          const possibleTxid = (response as { txid?: unknown }).txid;
-          if (typeof possibleTxid === 'string' && possibleTxid) {
-            return possibleTxid;
+        broadcastHex = hex;
+        try {
+          return await broadcastTokenTransaction(hex);
+        } catch (error) {
+          if (originalSendTx) {
+            return originalSendTx(hex);
           }
+          throw error;
         }
-
-        if (typeof response === 'string' && response) {
-          return response;
-        }
-      } catch (error) {
-        const message = error instanceof Error ? error.message : 'Error desconocido al difundir la transacción.';
-        throw new Error(`Error al difundir la transacción: ${message}`);
-      }
-
-      throw new Error('La difusión de la transacción no devolvió un identificador válido.');
+      },
+      getUtxos: async (address: string | string[]): Promise<unknown> => this.fetchUtxos(address),
     };
 
-    try {
-      const txid = await this.hybridTokenManager.sendTokens(
-        RMZ_TOKEN_ID,
-        outputs,
+    const txid = await this.createHybridTokenManager(normalizedMnemonic, adapter).sendTokens(
+      RMZ_TOKEN_ID,
+      [
         {
-          mnemonic: normalizedMnemonic,
-          xecAddress,
-          hdPath,
-          fee: feeRate,
-          privateKey,
-          publicKey,
+          address: targetAddress,
+          amount: atoms,
         },
-        utxos,
-        feeRate,
-      );
+      ],
+      {
+        mnemonic: normalizedMnemonic,
+        xecAddress: sourceAddress,
+        hdPath,
+        fee: feeRate,
+        privateKey,
+        publicKey,
+      },
+      utxos,
+      feeRate,
+    );
 
-      if (!broadcastHex) {
-        throw new Error('No se pudo generar la transacción de token RMZ.');
-      }
-
-      return { txid, hex: broadcastHex };
-    } finally {
-      if (previousSendTx) {
-        adapter.sendTx = previousSendTx;
-      } else {
-        delete adapter.sendTx;
-      }
+    if (!broadcastHex) {
+      throw new Error('No se pudo generar la transacción de eToken RMZ.');
     }
+
+    return { txid, hex: broadcastHex };
+  }
+
+  private async fetchUtxos(addresses: string | string[]): Promise<Utxo[]> {
+    const addrs = Array.isArray(addresses) ? addresses : [addresses];
+
+    const lists = await Promise.all(
+      addrs.map(async (addr) => {
+        const decoded = ecashaddr.decode(addr, true);
+        const hashHex =
+          typeof decoded.hash === 'string'
+            ? decoded.hash
+            : Buffer.from(decoded.hash).toString('hex');
+
+        const script = this.chronikClient.script('p2pkh', hashHex);
+
+        // Puede regresar ScriptUtxos | ScriptUtxos[] según versión/uso.
+        const res: any = await script.utxos();
+
+        const utxos: Utxo[] = Array.isArray(res)
+          ? res.flatMap((s: any) => s?.utxos ?? [])
+          : res?.utxos ?? [];
+
+        return utxos;
+      }),
+    );
+
+    return lists.flat();
+  }
+
+  private createHybridTokenManager(
+    mnemonic?: string,
+    adapterOverride?: AdapterRouter,
+  ): HybridTokenManager {
+    const kd =
+      typeof mnemonic === 'string' && mnemonic.length > 0
+        ? new KeyDerivation({ mnemonic })
+        : this.keyDerivation;
+
+    const adapter = adapterOverride ?? this.adapterRouter;
+    const chronik = this.chronikClient;
+
+    return new HybridTokenManager({
+      adapter,
+      ar: adapter,
+      chronik,
+      chronikUrls: [...CHRONIK_FALLBACK_URLS],
+      keyDerivation: kd,
+    });
+  }
+
+  private async broadcastTokenTransaction(hex: string): Promise<string> {
+    const response = await this.chronikClient.broadcastTx(hex);
+    const txid = typeof response === 'string' ? response : response?.txid;
+
+    if (typeof txid === 'string' && txid) {
+      return txid;
+    }
+
+    throw new Error('La difusión de la transacción no devolvió un identificador válido.');
   }
 
   private normalizeMnemonic(mnemonic: string): string {
@@ -374,27 +355,4 @@ export class TokenManagerService {
     );
   }
 
-  private toTokenAtoms(amount: number, decimals: number): bigint {
-    if (!Number.isFinite(amount) || amount <= 0) {
-      throw new Error('El monto debe ser un número mayor que cero.');
-    }
-
-    if (!Number.isInteger(decimals) || decimals < 0) {
-      throw new Error('Los decimales del token no son válidos.');
-    }
-
-    if (decimals === 0) {
-      return BigInt(Math.floor(amount));
-    }
-
-    const multiplier = 10n ** BigInt(decimals);
-    const amountFixed = amount.toFixed(decimals);
-    const [integerPart, fractionalPart = ''] = amountFixed.split('.');
-    const sanitizedFractional = fractionalPart.padEnd(decimals, '0');
-
-    const integerAtoms = BigInt(integerPart) * multiplier;
-    const fractionalAtoms = sanitizedFractional ? BigInt(sanitizedFractional) : 0n;
-
-    return integerAtoms + fractionalAtoms;
-  }
 }

@@ -28,7 +28,7 @@
             "allowedCommonJsDependencies": [
               "qrcode",
               "chronik-client",
-              "ecash-lib",
+              "minimal-xec-wallet",
               "ecashaddrjs",
               "ecash-wallet"
             ]
@@ -83,14 +83,14 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "rmzwallet:build"
+            "buildTarget": "rmzwallet:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "rmzwallet:build:production"
+              "buildTarget": "rmzwallet:build:production"
             },
             "development": {
-              "browserTarget": "rmzwallet:build:development"
+              "buildTarget": "rmzwallet:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -100,6 +100,5 @@
   },
   "cli": {
     "analytics": false
-  },
-  "defaultProject": "rmzwallet"
+  }
 }

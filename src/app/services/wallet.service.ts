@@ -40,11 +40,15 @@ export class WalletService {
 
     const hash160 = ecashToP2PKHHash160Hex(address);
     const chronikScript = this.chronikClient.script('p2pkh', hash160);
-    const { utxos } = await chronikScript.utxos();
-    return utxos.reduce((sum: number, utxo: any) => {
-      const sats = typeof utxo.sats === 'bigint' ? Number(utxo.sats) : Number(utxo.sats ?? 0);
-      return sum + (Number.isFinite(sats) ? sats : 0);
-    }, 0);
+    const scriptUtxos = await chronikScript.utxos();
+    const utxos = scriptUtxos.flatMap((entry) => entry.utxos ?? []);
+
+    const total = utxos.reduce<bigint>((sum, utxo) => {
+      const value = typeof utxo.value === 'string' ? utxo.value : '0';
+      return sum + BigInt(value);
+    }, 0n);
+
+    return Number(total);
   }
 
   async subscribeRmz(

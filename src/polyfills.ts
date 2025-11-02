@@ -1,3 +1,7 @@
+/******************************************************************
+ * Angular necesita Zone.js para change detection (modo por defecto)
+ ******************************************************************/
+import 'zone.js'; // ✅ obligatorio salvo que uses zone-less (noop)
 import { Buffer } from 'buffer';
 import process from 'process';
 
