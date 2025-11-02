@@ -11,6 +11,43 @@ declare module 'minimal-xec-wallet' {
     sendTx(hex: string): Promise<string | { txid?: string }>;
   }
 
+  export interface KeyDerivationFactoryResult {
+    derive?(hdPath: string): {
+      address?: string;
+      ecashAddress?: string;
+      cashAddress?: string;
+      xecAddress?: string;
+      cashaddr?: string;
+      publicKey?: string;
+      pubkey?: string;
+      privateKey?: string;
+      wif?: string;
+      [key: string]: unknown;
+    };
+    derivePath?(hdPath: string): {
+      address?: string;
+      ecashAddress?: string;
+      cashAddress?: string;
+      xecAddress?: string;
+      cashaddr?: string;
+      publicKey?: string;
+      pubkey?: string;
+      privateKey?: string;
+      wif?: string;
+      [key: string]: unknown;
+    };
+    deriveFromMnemonic?(
+      mnemonic: string,
+      hdPath?: string,
+    ): {
+      address?: string;
+      publicKey?: string;
+      privateKey?: string;
+      [key: string]: unknown;
+    };
+    [key: string]: unknown;
+  }
+
   export class KeyDerivation {
     constructor(localConfig?: Record<string, unknown>);
     deriveFromMnemonic(
@@ -32,6 +69,11 @@ declare module 'minimal-xec-wallet' {
     };
     generateMnemonic(strength?: number): string;
     validateMnemonic(mnemonic: string): boolean;
+    static fromMnemonic?(mnemonic: string): KeyDerivation | KeyDerivationFactoryResult;
+    static keyDerivationFromMnemonic?(mnemonic: string): KeyDerivation | KeyDerivationFactoryResult;
+    static create?(localConfig?: Record<string, unknown>): KeyDerivation | KeyDerivationFactoryResult;
+    static generateMnemonic?(strength?: number): string;
+    static validateMnemonic?(mnemonic: string): boolean;
   }
 
   export interface HybridTokenSendOutputs {

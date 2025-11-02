@@ -2,9 +2,13 @@ import { Buffer } from 'buffer';
 import { Injectable } from '@angular/core';
 import { ChronikClient } from 'chronik-client';
 import type { Utxo } from 'chronik-client';
-import { HybridTokenManager, KeyDerivation } from 'minimal-xec-wallet';
+import { HybridTokenManager } from 'minimal-xec-wallet';
 import type { AdapterRouter } from 'src/types/minimal-xec-wallet';
-import * as ecashaddr from 'ecashaddrjs';
+import { decodeCashAddress } from 'ecashaddrjs';
+import {
+  getSharedInstance as getSharedKeyDerivation,
+  type KDLike,
+} from '../utils/key-derivation.adapter';
 
 import {
   CHRONIK_FALLBACK_URLS,
@@ -59,7 +63,8 @@ export interface SendRmzHybridWalletInfo {
 export class TokenManagerService {
   private readonly chronikClient = new ChronikClient(CHRONIK_URL);
   private readonly adapterRouter: AdapterRouter;
-  private readonly keyDerivation = new KeyDerivation();
+  private readonly keyDerivationReady: Promise<KDLike>;
+  private keyDerivation: KDLike | null = null;
 
   constructor() {
     const chronik = this.chronikClient;
@@ -74,6 +79,23 @@ export class TokenManagerService {
     };
 
     this.adapterRouter = adapter;
+    this.keyDerivationReady = getSharedKeyDerivation()
+      .then((kd) => {
+        this.keyDerivation = kd;
+        return kd;
+      })
+      .catch((error) => {
+        console.error('No se pudo inicializar KeyDerivation.', error);
+        throw error;
+      });
+  }
+
+  async warmup(): Promise<void> {
+    try {
+      await this.keyDerivationReady;
+    } catch (error) {
+      console.warn('TokenManager warmup failed.', error);
+    }
   }
 
   get chronik(): ChronikClient {
@@ -83,13 +105,15 @@ export class TokenManagerService {
   async getTokenBalance(tokenId: string, address: string): Promise<TokenBalance> {
     const utxoData = await this.adapterRouter.getUtxos(address);
     const utxos = this.normalizeUtxos(utxoData);
-    return this.createHybridTokenManager().getTokenBalance(tokenId, utxos);
+    const manager = await this.createHybridTokenManager();
+    return manager.getTokenBalance(tokenId, utxos);
   }
 
   async listTokens(address: string): Promise<TokenBalance[]> {
     const utxoData = await this.adapterRouter.getUtxos(address);
     const utxos = this.normalizeUtxos(utxoData);
-    return this.createHybridTokenManager().listTokensFromUtxos(utxos);
+    const manager = await this.createHybridTokenManager();
+    return manager.listTokensFromUtxos(utxos);
   }
 
   async sendRmzToken(
@@ -123,7 +147,7 @@ export class TokenManagerService {
     const hdPath = options.hdPath ?? DEFAULT_HD_PATH;
     const feeRate = options.feeRate ?? DEFAULT_FEE_RATE;
 
-    const derivedKeys = this.keyDerivation.deriveFromMnemonic(normalizedMnemonic, hdPath);
+    const derivedKeys = await this.deriveKeysForMnemonic(normalizedMnemonic, hdPath);
     const xecAddress = options.address?.trim() || derivedKeys.address;
     const privateKey = options.privateKey ?? derivedKeys.privateKey;
     const publicKey = options.publicKey ?? derivedKeys.publicKey;
@@ -165,12 +189,8 @@ export class TokenManagerService {
       ? this.normalizeMnemonic(walletInfo.mnemonic)
       : undefined;
 
-    const derivation = normalizedMnemonic
-      ? new KeyDerivation({ mnemonic: normalizedMnemonic })
-      : this.keyDerivation;
-
     const derivedKeys = normalizedMnemonic
-      ? derivation.deriveFromMnemonic(normalizedMnemonic, hdPath)
+      ? await this.deriveKeysForMnemonic(normalizedMnemonic, hdPath)
       : undefined;
 
     const sourceAddress =
@@ -225,7 +245,8 @@ export class TokenManagerService {
       getUtxos: async (address: string | string[]): Promise<unknown> => this.fetchUtxos(address),
     };
 
-    const txid = await this.createHybridTokenManager(normalizedMnemonic, adapter).sendTokens(
+    const manager = await this.createHybridTokenManager(normalizedMnemonic, adapter);
+    const txid = await manager.sendTokens(
       RMZ_TOKEN_ID,
       [
         {
@@ -252,16 +273,50 @@ export class TokenManagerService {
     return { txid, hex: broadcastHex };
   }
 
+  private async getKeyDerivationInstance(): Promise<KDLike> {
+    if (this.keyDerivation) {
+      return this.keyDerivation;
+    }
+
+    const kd = await this.keyDerivationReady;
+    this.keyDerivation = kd;
+    return kd;
+  }
+
+  private async createKeyDerivationForMnemonic(mnemonic: string): Promise<KDLike> {
+    const base = await this.getKeyDerivationInstance();
+
+    if (typeof (base as any)?.createForMnemonic === 'function') {
+      return (base as any).createForMnemonic(mnemonic);
+    }
+
+    return base;
+  }
+
+  private async deriveKeysForMnemonic(mnemonic: string, hdPath: string): Promise<any> {
+    const base = await this.getKeyDerivationInstance();
+
+    if (typeof (base as any)?.deriveKeysFromMnemonic === 'function') {
+      return (base as any).deriveKeysFromMnemonic(mnemonic, hdPath);
+    }
+
+    if (typeof (base as any)?.createForMnemonic === 'function') {
+      const ctx = await (base as any).createForMnemonic(mnemonic, hdPath);
+      if (ctx && typeof ctx.deriveKeys === 'function') {
+        return ctx.deriveKeys();
+      }
+    }
+
+    throw new Error('KeyDerivation no expone un método para derivar claves.');
+  }
+
   private async fetchUtxos(addresses: string | string[]): Promise<Utxo[]> {
     const addrs = Array.isArray(addresses) ? addresses : [addresses];
 
     const lists = await Promise.all(
       addrs.map(async (addr) => {
-        const decoded = ecashaddr.decode(addr, true);
-        const hashHex =
-          typeof decoded.hash === 'string'
-            ? decoded.hash
-            : Buffer.from(decoded.hash).toString('hex');
+        const decoded = decodeCashAddress(addr);
+        const hashHex = Buffer.from(decoded.hash).toString('hex');
 
         const script = this.chronikClient.script('p2pkh', hashHex);
 
@@ -279,14 +334,14 @@ export class TokenManagerService {
     return lists.flat();
   }
 
-  private createHybridTokenManager(
+  private async createHybridTokenManager(
     mnemonic?: string,
     adapterOverride?: AdapterRouter,
-  ): HybridTokenManager {
+  ): Promise<HybridTokenManager> {
     const kd =
       typeof mnemonic === 'string' && mnemonic.length > 0
-        ? new KeyDerivation({ mnemonic })
-        : this.keyDerivation;
+        ? await this.createKeyDerivationForMnemonic(mnemonic)
+        : await this.getKeyDerivationInstance();
 
     const adapter = adapterOverride ?? this.adapterRouter;
     const chronik = this.chronikClient;

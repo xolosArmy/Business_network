@@ -56,7 +56,7 @@ export class EnviarService {
 
   async sendTransaction(fromWallet: WalletSource, toAddress: string, amount: number): Promise<string> {
     try {
-      const mnemonic = fromWallet?.mnemonic?.trim();
+      const mnemonic = fromWallet?.mnemonic?.trim?.() || '';
       if (!mnemonic) {
         throw new Error('La cartera de origen debe incluir la frase mnemónica.');
       }
@@ -138,7 +138,8 @@ export class EnviarService {
       }
 
       const wallet = await this.offlineStorage.getWallet();
-      if (!wallet?.mnemonic) {
+      const mnemonic = wallet?.mnemonic?.trim?.() || '';
+      if (!mnemonic) {
         return;
       }
 
@@ -147,7 +148,7 @@ export class EnviarService {
         return;
       }
 
-      const walletInstance = await this.createWallet(wallet.mnemonic);
+      const walletInstance = await this.createWallet(mnemonic);
 
       for (const transaction of pendingTransactions) {
         await this.processPendingTransaction(walletInstance, transaction);

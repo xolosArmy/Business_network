@@ -1,175 +1,21 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Mi Cartera</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content #walletContent class="ion-padding">
-  <ion-text color="danger" *ngIf="errorMessage">
-    <p class="ion-text-center">{{ errorMessage }}</p>
-  </ion-text>
-  <ion-text color="success" *ngIf="successMessage">
-    <p class="ion-text-center">{{ successMessage }}</p>
-  </ion-text>
-
-  <ion-card *ngIf="address">
-    <ion-card-header>
-      <ion-card-title>Xolos RMZ</ion-card-title>
-      <ion-card-subtitle>{{ abbreviatedRmzTokenId }}</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <p class="ion-text-center ion-margin-bottom">
-        Saldo: {{ rmzBalanceCardLabel }} ({{ rmzBalanceDecimalsLabel }})
-      </p>
-      <ion-button expand="block" color="secondary" (click)="goToSendRmz()">
-        Enviar RMZ
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
-
+<ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Información de la cartera</ion-card-title>
+      <ion-card-title>Gestión de Cartera</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-item lines="none">
-        <ion-label>
-          <h2>Dirección pública</h2>
-          <p>{{ address || 'No disponible' }}</p>
-        </ion-label>
-      </ion-item>
+      <p>Genera una nueva cartera para comenzar a recibir eCash.</p>
 
-      <ion-item lines="none">
-        <ion-label>
-          <h2>Balance disponible</h2>
-          <p>{{ balanceLabel }}</p>
-        </ion-label>
-        <ion-spinner slot="end" *ngIf="isLoading"></ion-spinner>
-      </ion-item>
+      <ion-button expand="block" (click)="onCrear()">Crear cartera</ion-button>
 
-      <ion-item lines="none">
-        <ion-label>
-          <h2>Xolos RMZ (RMZ)</h2>
-          <p>{{ formattedRmzBalance }}</p>
-          <p class="token-id">ID: {{ rmzTokenId }}</p>
-        </ion-label>
-      </ion-item>
-
-      <ion-button
-        expand="block"
-        color="primary"
-        (click)="toggleQr()"
-        [disabled]="!address"
-      >
-        {{ showQr ? 'Ocultar código QR' : 'Mostrar código QR' }}
-      </ion-button>
-
-      <div *ngIf="showQr" class="qr-wrapper">
-        <img
-          *ngIf="qrImageSrc; else qrFallback"
-          class="qr-image"
-          [src]="qrImageSrc"
-          alt="Código QR de la dirección"
-        />
-        <ng-template #qrFallback>
-          <p>No se pudo generar el código QR.</p>
-        </ng-template>
-      </div>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card *ngIf="bleAvailable">
-    <ion-card-header>
-      <ion-card-title>Estado de conexión BLE</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item lines="none">
-        <ion-icon
-          slot="start"
-          [color]="bleConnected ? 'success' : 'medium'"
-          [name]="bleConnected ? 'bluetooth' : 'cloud-offline'"
-        ></ion-icon>
-        <ion-label>
-          <h2>{{ bleConnected ? 'Dispositivo conectado' : 'Sin conexión BLE' }}</h2>
-          <p *ngIf="bleConnected">{{ bleDeviceName }}</p>
-          <p *ngIf="!bleConnected">Las transacciones usarán la red disponible.</p>
-        </ion-label>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Enviar XEC</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <form [formGroup]="sendForm" (ngSubmit)="onSubmit()">
-        <ion-item>
-          <ion-label position="floating">Dirección destino</ion-label>
-          <ion-input formControlName="toAddr" required></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Cantidad (XEC)</ion-label>
-          <ion-input
-            type="number"
-            min="0.000001"
-            step="0.000001"
-            formControlName="amount"
-            required
-          ></ion-input>
-        </ion-item>
-
-        <ion-button
-          expand="block"
-          type="submit"
-          [disabled]="sendForm.invalid || sending"
-        >
-          {{ sending ? 'Enviando…' : 'Enviar transacción' }}
-        </ion-button>
-      </form>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card
-    #tokenSendSection
-    [color]="highlightTokenSection ? 'secondary' : undefined"
-  >
-    <ion-card-header>
-      <ion-card-title>Enviar Xolos RMZ</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item lines="none">
-        <ion-note>Token ID: {{ rmzTokenId }}</ion-note>
-      </ion-item>
-
-      <form [formGroup]="sendTokenForm" (ngSubmit)="onSubmitToken()">
-        <ion-item>
-          <ion-label position="floating">Dirección destino</ion-label>
-          <ion-input formControlName="tokenDestination" required></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Cantidad (RMZ)</ion-label>
-          <ion-input
-            type="number"
-            min="1"
-            step="1"
-            formControlName="tokenAmount"
-            required
-          ></ion-input>
-        </ion-item>
-
-        <ion-text color="danger" *ngIf="tokenErrorMessage">
-          <p class="ion-text-center">{{ tokenErrorMessage }}</p>
-        </ion-text>
-
-        <ion-button
-          expand="block"
-          type="submit"
-          [disabled]="sendTokenForm.invalid || sendingToken"
-        >
-          {{ sendingToken ? 'Enviando…' : 'Enviar eToken' }}
-        </ion-button>
-      </form>
+      <ng-container *ngIf="cartera.state$ | async as s">
+        <div *ngIf="s.address" class="ion-margin-top">
+          <p><strong>Dirección:</strong> {{ s.address }}</p>
+          <p class="ion-text-wrap ion-text-muted">
+            <strong>Mnemonic:</strong> {{ s.mnemonicPreview }}
+          </p>
+        </div>
+      </ng-container>
     </ion-card-content>
   </ion-card>
 </ion-content>

@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, Injector, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   BleClient,
@@ -45,14 +45,22 @@ export class BLEService {
   private rxNotificationHandler: ((event: Event) => void) | null = null;
   private discoveredDevices = new Map<string, BleDevice>();
   private readonly chronikUrl = 'https://chronik.e.cash';
+  private txBleService: TxBLEService | null = null;
 
   constructor(
     private readonly walletService: WalletService,
     private readonly zone: NgZone,
     private readonly http: HttpClient,
     private readonly txs: TransactionsService,
-    private readonly txBle: TxBLEService,
+    private readonly injector: Injector,
   ) {}
+
+  private get tx(): TxBLEService {
+    if (!this.txBleService) {
+      this.txBleService = this.injector.get(TxBLEService);
+    }
+    return this.txBleService;
+  }
 
   private async ensureInitialized(): Promise<void> {
     if (this.initialized) {
@@ -184,7 +192,7 @@ export class BLEService {
       const bytes = new Uint8Array(dataView.buffer, dataView.byteOffset, dataView.byteLength);
       const value = new TextDecoder().decode(bytes);
       console.log('📩 Mensaje BLE recibido:', value);
-      void this.txBle.receiveAndBroadcast(value);
+      void this.tx.receiveAndBroadcast(value);
     };
 
     void this.rxCharacteristic

@@ -122,6 +122,7 @@ export class HomePage implements OnInit, OnDestroy {
   async onCreateWallet(): Promise<void> {
     this.isCreatingWallet = true;
     this.errorMessage = '';
+    console.log('click crear cartera');
 
     try {
       this.wallet = await this.carteraService.createWallet();

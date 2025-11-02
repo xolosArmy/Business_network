@@ -1,169 +1,79 @@
+// src/app/services/cartera.service.ts
 import { Injectable } from '@angular/core';
-import { Preferences } from '@capacitor/preferences';
-import { KeyDerivation } from 'minimal-xec-wallet';
+import { BehaviorSubject } from 'rxjs';
+import { getSharedInstance } from '../utils/key-derivation.adapter';
 
-import { OfflineStorageService } from './offline-storage.service';
-import { RMZ_TOKEN_ID } from './chronik.constants';
-import {
-  SendRmzTokenResult,
-  TokenBalance,
-  TokenManagerService,
-} from './token-manager.service';
-
-export interface WalletInfo {
-  mnemonic: string;
-  address: string;
-  publicKey: string;
-  privateKey: string;
+export interface CarteraState {
+  address?: string;
+  mnemonic?: string;          // <- guardamos la frase completa en memoria (ojo: solo dev!)
+  mnemonicPreview?: string;
+  balance?: number;
 }
 
-const DEFAULT_DERIVATION_PATH = "m/44'/899'/0'/0/0";
-const STORAGE_KEY = 'rmz_wallet';
+// Compat con código existente:
+export interface WalletInfo {
+  address: string;
+  balance: number;
+  mnemonic?: string;          // <- añadimos campo opcional que la UI actual espera
+}
+
 @Injectable({ providedIn: 'root' })
 export class CarteraService {
-  private cachedWallet: WalletInfo | null = null;
-  private readonly keyDerivation = new KeyDerivation();
+  readonly state$ = new BehaviorSubject<CarteraState>({ balance: 0 });
 
-  constructor(
-    private readonly offlineStorage: OfflineStorageService,
-    private readonly tokenManager: TokenManagerService,
-  ) {}
+  // Nueva API interna
+  async crearNuevaCartera(): Promise<void> {
+    const kd = await getSharedInstance();
 
+    // No pases parámetro de bits; la lib maneja default
+    const mnemonic = await kd.generateMnemonic();
+    const keys = await kd.deriveKeysFromMnemonic(mnemonic);
+
+    const addr =
+      keys?.address ??
+      keys?.cashaddr ??
+      keys?.xecaddr ??
+      keys?.p2pkh ??
+      '(sin dirección)';
+
+    this.state$.next({
+      address: addr,
+      mnemonic, // <- guardamos para que HomePage y enviar.service puedan leerlo
+      mnemonicPreview: mnemonic.split(' ').slice(0, 3).join(' ') + ' …',
+      balance: 0,
+    });
+
+    console.log('[RMZWallet] MNEMONIC', mnemonic);
+    console.log('[RMZWallet] KEYS', keys);
+  }
+
+  // ---------- Compatibilidad (API legacy) ----------
+
+  /** API legacy: getWalletInfo() */
+  async getWalletInfo(): Promise<WalletInfo> {
+    const s = this.state$.value;
+    return {
+      address: s.address ?? '',
+      balance: s.balance ?? 0,
+      mnemonic: s.mnemonic, // <- incluimos mnemonic
+    };
+  }
+
+  /** API legacy: createWallet() -> crea y regresa WalletInfo */
   async createWallet(): Promise<WalletInfo> {
-    const mnemonic = this.generateMnemonic();
-    const wallet = await this.buildWalletFromMnemonic(mnemonic);
-    return this.persistWallet(wallet);
+    await this.crearNuevaCartera();
+    return this.getWalletInfo();
   }
 
-  async importWallet(mnemonic: string): Promise<WalletInfo> {
-    const normalized = this.normalizeMnemonic(mnemonic);
-    this.validateMnemonic(normalized);
-    const wallet = await this.buildWalletFromMnemonic(normalized);
-    return this.persistWallet(wallet);
-  }
-
-  async getWalletInfo(): Promise<WalletInfo | null> {
-    if (this.cachedWallet) {
-      return this.cachedWallet;
-    }
-
-    try {
-      const offlineWallet = await this.offlineStorage.getWallet();
-      if (offlineWallet) {
-        this.cachedWallet = offlineWallet;
-        return this.cachedWallet;
-      }
-    } catch (error) {
-      console.warn('No se pudo recuperar la cartera de IndexedDB', error);
-    }
-
-    try {
-      const { value } = await Preferences.get({ key: STORAGE_KEY });
-      if (!value) {
-        return null;
-      }
-      const parsed = JSON.parse(value) as Partial<WalletInfo>;
-      if (
-        typeof parsed?.mnemonic === 'string' &&
-        typeof parsed?.address === 'string' &&
-        typeof parsed?.publicKey === 'string' &&
-        typeof parsed?.privateKey === 'string'
-      ) {
-        this.cachedWallet = parsed as WalletInfo;
-        await this.offlineStorage.setWallet(this.cachedWallet);
-        return this.cachedWallet;
-      }
-    } catch (error) {
-      console.warn('No se pudo cargar la cartera almacenada', error);
-    }
-
-    return null;
-  }
-
-  async getRmzTokenBalance(): Promise<TokenBalance | null> {
-    const wallet = await this.getWalletInfo();
-    if (!wallet?.address) {
-      return null;
-    }
-
-    try {
-      return await this.tokenManager.getTokenBalance(RMZ_TOKEN_ID, wallet.address);
-    } catch (error) {
-      console.warn('No se pudo obtener el balance del token RMZ', error);
-      return null;
-    }
-  }
-
+  /**
+   * API legacy: sendRMZToken(dest, amount).
+   * Stub temporal para no romper la UI; integrar envío real después.
+   */
   async sendRMZToken(
     destination: string,
-    amount: number,
-    feeRate?: number,
-  ): Promise<SendRmzTokenResult> {
-    const wallet = await this.getWalletInfo();
-    if (!wallet) {
-      throw new Error('No se encontró una cartera inicializada.');
-    }
-
-    return this.tokenManager.sendRMZToken(destination, amount, {
-      mnemonic: wallet.mnemonic,
-      address: wallet.address,
-      publicKey: wallet.publicKey,
-      privateKey: wallet.privateKey,
-      hdPath: DEFAULT_DERIVATION_PATH,
-      feeRate,
-    });
-  }
-
-  private validateMnemonic(mnemonic: string): void {
-    if (!this.keyDerivation.validateMnemonic(mnemonic)) {
-      throw new Error('La frase mnemónica proporcionada no es válida.');
-    }
-  }
-
-  private normalizeMnemonic(mnemonic: string): string {
-    return mnemonic
-      .trim()
-      .split(/\s+/u)
-      .map((word) => word.toLowerCase())
-      .join(' ');
-  }
-
-  private generateMnemonic(): string {
-    return this.keyDerivation.generateMnemonic(128);
-  }
-
-  private async persistWallet(wallet: WalletInfo): Promise<WalletInfo> {
-    this.cachedWallet = wallet;
-    try {
-      await Preferences.set({ key: STORAGE_KEY, value: JSON.stringify(wallet) });
-    } catch (error) {
-      console.warn('No se pudo almacenar la cartera localmente', error);
-    }
-
-    try {
-      await this.offlineStorage.setWallet(wallet);
-    } catch (error) {
-      console.warn('No se pudo almacenar la cartera en IndexedDB', error);
-    }
-
-    return wallet;
-  }
-
-  private async buildWalletFromMnemonic(mnemonic: string): Promise<WalletInfo> {
-    const { address, publicKey, privateKey } = this.keyDerivation.deriveFromMnemonic(
-      mnemonic,
-      DEFAULT_DERIVATION_PATH,
-    );
-
-    if (!address || !publicKey || !privateKey) {
-      throw new Error('No se pudo derivar la información de la cartera.');
-    }
-
-    return {
-      mnemonic,
-      address,
-      publicKey,
-      privateKey,
-    };
+    amount: number
+  ): Promise<{ ok: boolean; txid?: string; reason?: string }> {
+    console.warn('[RMZWallet] sendRMZToken(): stub no implementado todavía', { destination, amount });
+    return { ok: false, reason: 'not-implemented' };
   }
 }

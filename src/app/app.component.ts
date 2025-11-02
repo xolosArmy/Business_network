@@ -5,6 +5,7 @@ import { SyncService } from './services/sync.service';
 import { ChronikService } from './services/chronik.service';
 import { TxStorageService } from './services/tx-storage.service';
 import { NotificationService } from './services/notification.service';
+import { TokenManagerService } from './services/token-manager.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
     private chronik: ChronikService,
     private store: TxStorageService,
     private notify: NotificationService,
+    private tokenMgr: TokenManagerService,
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -43,6 +45,8 @@ export class AppComponent implements OnInit {
     if (permission !== 'unsupported') {
       console.log('🔔 Permiso notificaciones:', permission);
     }
+
+    void this.tokenMgr.warmup().catch((error) => console.warn('TokenManager warmup failed', error));
 
     window.addEventListener('online', async () => {
       const pending = localStorage.getItem('pendingTx');
