@@ -11,3 +11,4 @@ coverage/
 www/
 dist/
 node_modules/
+.angular/
