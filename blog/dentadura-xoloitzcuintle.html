@@ -630,5 +630,66 @@
 
         });
     </script>
+<script>
+// Fix YouTube embed visibility: swap to youtube-nocookie and add click-to-play fallback if blocked
+(function(){
+  function upgradeIframe(iframe){
+    try{
+      const src = iframe.getAttribute('src') || '';
+      if(!/64L7CRtoihc/.test(src)) return;
+      // Prefer nocookie domain
+      if(!src.includes('youtube-nocookie.com')){
+        const url = new URL(src, window.location.href);
+        url.hostname = 'www.youtube-nocookie.com';
+        // ensure rel=0 and allow autoplay on user action
+        if(!url.searchParams.has('rel')) url.searchParams.set('rel','0');
+        iframe.setAttribute('src', url.toString());
+      }
+      iframe.setAttribute('loading','lazy');
+      iframe.setAttribute('referrerpolicy','strict-origin-when-cross-origin');
+      iframe.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+      iframe.setAttribute('allowfullscreen','');
+    }catch(e){}
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    const ifr = document.querySelector('section#podcast iframe, iframe[src*="64L7CRtoihc"]');
+    if (ifr){
+      upgradeIframe(ifr);
+    } else {
+      // Build a clickable preview if iframe wasn't found (robust fallback)
+      const host = document.querySelector('section#podcast .card') || document.querySelector('main');
+      if(!host) return;
+      const wrap = document.createElement('div');
+      wrap.className = 'relative w-full overflow-hidden rounded-lg bg-black max-w-4xl mx-auto';
+      wrap.style.paddingTop = '56.25%';
+      const btn = document.createElement('button');
+      btn.setAttribute('aria-label','Reproducir video');
+      btn.className = 'absolute inset-0 w-full h-full flex items-center justify-center group';
+      const img = document.createElement('img');
+      img.src = 'https://i.ytimg.com/vi/64L7CRtoihc/hqdefault.jpg';
+      img.alt = 'Miniatura del video xolosArmy Podcast';
+      img.className = 'absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity';
+      const play = document.createElement('span');
+      play.className = 'relative z-10 inline-flex items-center justify-center rounded-full w-16 h-16 bg-white/90 group-hover:bg-white shadow-lg';
+      play.innerHTML = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7L8 5z" fill="#111"/></svg>';
+      btn.appendChild(img); btn.appendChild(play); wrap.appendChild(btn);
+      host.appendChild(wrap);
+      btn.addEventListener('click', function(){
+        const iframe = document.createElement('iframe');
+        iframe.className = 'absolute top-0 left-0 w-full h-full rounded-lg';
+        iframe.src = 'https://www.youtube-nocookie.com/embed/64L7CRtoihc?autoplay=1&rel=0';
+        iframe.title = 'xolosArmy Podcast: Dientes en el Xoloitzcuintle';
+        iframe.frameBorder = '0';
+        iframe.loading = 'lazy';
+        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.allowFullscreen = true;
+        wrap.innerHTML = '';
+        wrap.appendChild(iframe);
+      }, { once: true });
+    }
+  });
+})();
+</script>
 </body>
 </html>
