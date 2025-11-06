@@ -5,10 +5,7 @@ import type { Utxo } from 'chronik-client';
 import { HybridTokenManager } from 'minimal-xec-wallet';
 import type { AdapterRouter } from 'src/types/minimal-xec-wallet';
 import { decodeCashAddress } from 'ecashaddrjs';
-import {
-  getSharedInstance as getSharedKeyDerivation,
-  type KDLike,
-} from '../utils/key-derivation.adapter';
+import { getSharedInstance } from '../utils/key-derivation.adapter';
 
 import {
   CHRONIK_FALLBACK_URLS,
@@ -63,8 +60,8 @@ export interface SendRmzHybridWalletInfo {
 export class TokenManagerService {
   private readonly chronikClient = new ChronikClient(CHRONIK_URL);
   private readonly adapterRouter: AdapterRouter;
-  private readonly keyDerivationReady: Promise<KDLike>;
-  private keyDerivation: KDLike | null = null;
+  private readonly keyDerivationInit: Promise<void>;
+  private kd!: Awaited<ReturnType<typeof getSharedInstance>>;
 
   constructor() {
     const chronik = this.chronikClient;
@@ -79,20 +76,25 @@ export class TokenManagerService {
     };
 
     this.adapterRouter = adapter;
-    this.keyDerivationReady = getSharedKeyDerivation()
-      .then((kd) => {
-        this.keyDerivation = kd;
-        return kd;
-      })
-      .catch((error) => {
-        console.error('No se pudo inicializar KeyDerivation.', error);
-        throw error;
-      });
+    this.keyDerivationInit = this.keyDerivationReady().catch((error) => {
+      console.error('No se pudo inicializar KeyDerivation.', error);
+      throw error;
+    });
+  }
+
+  private async keyDerivationReady(): Promise<void> {
+    this.kd = await getSharedInstance();
+    if (
+      typeof this.kd.createForMnemonic !== 'function' &&
+      typeof this.kd.deriveKeysFromMnemonic !== 'function'
+    ) {
+      throw new Error('KD API incompleta');
+    }
   }
 
   async warmup(): Promise<void> {
     try {
-      await this.keyDerivationReady;
+      await this.keyDerivationInit;
     } catch (error) {
       console.warn('TokenManager warmup failed.', error);
     }
@@ -273,41 +275,51 @@ export class TokenManagerService {
     return { txid, hex: broadcastHex };
   }
 
-  private async getKeyDerivationInstance(): Promise<KDLike> {
-    if (this.keyDerivation) {
-      return this.keyDerivation;
+  private async getKeyDerivationInstance(): Promise<
+    Awaited<ReturnType<typeof getSharedInstance>>
+  > {
+    await this.keyDerivationInit;
+    if (!this.kd) {
+      throw new Error('KeyDerivation no está disponible.');
+    }
+    return this.kd;
+  }
+
+  private async createKeyDerivationForMnemonic(mnemonic: string): Promise<any> {
+    const kd = await this.getKeyDerivationInstance();
+
+    if (typeof kd.createForMnemonic === 'function') {
+      return kd.createForMnemonic(mnemonic);
     }
 
-    const kd = await this.keyDerivationReady;
-    this.keyDerivation = kd;
+    if (typeof kd.deriveKeysFromMnemonic === 'function') {
+      return kd.deriveKeysFromMnemonic(mnemonic);
+    }
+
     return kd;
   }
 
-  private async createKeyDerivationForMnemonic(mnemonic: string): Promise<KDLike> {
-    const base = await this.getKeyDerivationInstance();
-
-    if (typeof (base as any)?.createForMnemonic === 'function') {
-      return (base as any).createForMnemonic(mnemonic);
-    }
-
-    return base;
-  }
-
   private async deriveKeysForMnemonic(mnemonic: string, hdPath: string): Promise<any> {
-    const base = await this.getKeyDerivationInstance();
+    const kd = await this.getKeyDerivationInstance();
 
-    if (typeof (base as any)?.deriveKeysFromMnemonic === 'function') {
-      return (base as any).deriveKeysFromMnemonic(mnemonic, hdPath);
+    if (typeof kd.deriveKeysFromMnemonic === 'function') {
+      return kd.deriveKeysFromMnemonic(mnemonic);
     }
 
-    if (typeof (base as any)?.createForMnemonic === 'function') {
-      const ctx = await (base as any).createForMnemonic(mnemonic, hdPath);
-      if (ctx && typeof ctx.deriveKeys === 'function') {
-        return ctx.deriveKeys();
+    if (typeof kd.createForMnemonic === 'function') {
+      const wallet = await kd.createForMnemonic(mnemonic);
+      if (wallet && typeof wallet.derive === 'function') {
+        return wallet.derive(hdPath);
       }
+      if (wallet && typeof wallet.deriveFromMnemonic === 'function') {
+        return wallet.deriveFromMnemonic(mnemonic, hdPath);
+      }
+      return wallet;
     }
 
-    throw new Error('KeyDerivation no expone un método para derivar claves.');
+    throw new Error(
+      'KeyDerivation no expone un método para derivar claves con el mnemónico proporcionado.'
+    );
   }
 
   private async fetchUtxos(addresses: string | string[]): Promise<Utxo[]> {
