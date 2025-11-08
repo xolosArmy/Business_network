@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Informe Experto sobre el Ecosistema Integrado Xolos: Sinergia de Cultura, Comercio y Finanzas Descentralizadas</title>
+  <meta name="description" content="Análisis estratégico del Ecosistema Xolos: Xolos Ramírez, XolosArmy Naturals, token $RMZ$ en eCash, y la billetera RMZWallet. Recomendaciones, tokenomics y hoja de ruta." />
+  <style>
+    :root{
+      --brand:#df3a3a; /* rojo Xolos */
+      --ink:#0b0b0b;
+      --muted:#5a5a5a;
+      --bg:#fffdfa;
+      --card:#ffffff;
+      --accent:#1f2937;
+      --ring: rgba(223,58,58,.15);
+    }
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Arial,sans-serif;line-height:1.6;background:var(--bg);color:var(--ink)}
+    header{position:sticky;top:0;z-index:10;background:linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.85));backdrop-filter:saturate(1.4) blur(6px);border-bottom:1px solid #eee}
+    .wrap{max-width:1000px;margin:auto;padding:1.25rem}
+    .title{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}
+    .pill{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--brand);color:var(--brand);padding:.25rem .5rem;border-radius:999px;font-size:.8rem;font-weight:700;}
+    nav{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+    nav a{font-size:.9rem;color:var(--accent);text-decoration:none;border:1px solid #e5e7eb;padding:.35rem .6rem;border-radius:.6rem}
+    nav a:hover{border-color:var(--brand);color:var(--brand)}
+    main{padding:1.25rem}
+    h1,h2,h3{line-height:1.25}
+    h1{font-size:clamp(1.6rem,2.6vw,2.1rem);margin:.25rem 0 .5rem}
+    h2{font-size:1.35rem;margin:2.2rem 0 .75rem;border-left:4px solid var(--brand);padding-left:.6rem}
+    h3{font-size:1.05rem;margin:1.4rem 0 .4rem;color:var(--accent)}
+    p{margin:.65rem 0}
+    .card{background:var(--card);border:1px solid #eee;padding:1rem 1.1rem;border-radius:1rem;box-shadow:0 1px 0 rgba(0,0,0,.02)}
+    .muted{color:var(--muted)}
+    .grid{display:grid;gap:1rem}
+    @media(min-width:800px){.grid.cols-2{grid-template-columns:1fr 1fr}}
+    .badge{background:var(--brand);color:#fff;padding:.2rem .5rem;border-radius:.4rem;font-size:.75rem;font-weight:700}
+    .cta{display:inline-block;background:var(--brand);color:#fff !important;text-decoration:none;padding:.7rem 1rem;border-radius:.75rem;font-weight:800;box-shadow:0 6px 14px var(--ring)}
+    .cta.secondary{background:#111}
+    .note{border-left:3px solid var(--brand);padding:.6rem .8rem;background:#fff;border-radius:.5rem;margin:.8rem 0}
+    .kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;background:#111;color:#fff;padding:.15rem .35rem;border-radius:.35rem}
+    table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid #eee;background:#fff}
+    th,td{border:1px solid #eee;padding:.6rem .5rem;vertical-align:top}
+    th{background:#fafafa;text-align:left}
+    tfoot td{font-weight:700}
+    .footnotes{font-size:.92rem;color:#555}
+    .tick{color:var(--brand);font-weight:900}
+    .hr{height:1px;background:#eee;margin:1.25rem 0}
+    .top-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem}
+    .small{font-size:.92rem}
+    .caps{letter-spacing:.04em;text-transform:uppercase;font-weight:800;font-size:.78rem;color:#666}
+    .toc{border:1px dashed #e5e7eb;border-radius:.8rem;padding:.8rem;background:#fff}
+    .toc a{display:block;color:#333;text-decoration:none;padding:.25rem .1rem}
+    .toc a:hover{color:var(--brand)}
+  :root{--brand:#df3a3a;--ink:#0b0b0b;--muted:#5a5a5a;--bg:#fffdfa;--card:#ffffff;--accent:#1f2937;--ring: rgba(223,58,58,.15)}
+/* --- Cinematic theme overrides --- */
+body.cinema{--bg:#0a0a0a;--ink:#f3f3f3;--card:#111214;--accent:#e5e7eb;--muted:#a1a1a1}
+/* Film grain + vignette */
+body.cinema::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at center, rgba(0,0,0,.0) 0%, rgba(0,0,0,.2) 60%, rgba(0,0,0,.5) 100%);mix-blend-mode:multiply;z-index:1}
+body.cinema::after{content:"";position:fixed;inset:-10%;pointer-events:none;background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%222%22 stitchTiles=%22stitch%22/></filter><rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22 opacity=%220.035%22/></svg>');animation:grain 6s steps(6,end) infinite;opacity:.9;z-index:1}
+@keyframes grain{0%{transform:translate(0,0)}10%{transform:translate(-2%,1%)}20%{transform:translate(1%,-1%)}30%{transform:translate(2%,1%)}40%{transform:translate(1%,2%)}50%{transform:translate(-1%,1%)}60%{transform:translate(-2%,-2%)}70%{transform:translate(0,1%)}80%{transform:translate(2%,0)}90%{transform:translate(1%,-2%)}100%{transform:translate(0,0)}}
+/* Hero cinematic */
+.hero{position:relative;isolation:isolate;overflow:hidden;border-radius:1.25rem;margin:1rem 0 1.25rem;background:radial-gradient(1200px 600px at 20% -10%, rgba(223,58,58,.35), transparent 60%), radial-gradient(900px 500px at 90% 10%, rgba(255,255,255,.06), transparent 55%), linear-gradient(180deg, rgba(16,16,18,.9), rgba(10,10,12,.9));box-shadow:0 20px 60px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05)}
+.hero .inner{position:relative;z-index:2;display:grid;gap:.8rem;padding:clamp(1rem,2.5vw,2rem)}
+.hero h1{font-size:clamp(1.8rem,3vw,2.6rem);color:#fff;margin:.25rem 0 .35rem}
+.hero p{color:#d7d7d7;max-width:60ch}
+.hero .cta-row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem}
+.gridfx{position:absolute;inset:-20%;z-index:0;opacity:.18;background-image:repeating-linear-gradient(90deg, rgba(255,255,255,.2) 0 1px, transparent 1px 80px), repeating-linear-gradient(0deg, rgba(255,255,255,.2) 0 1px, transparent 1px 80px);transform:perspective(900px) rotateX(60deg) translateY(10%);animation:gridshift 14s linear infinite}
+@keyframes gridshift{0%{background-position:0 0,0 0}100%{background-position:160px 160px,160px 160px}}
+/* Animated blockchain nodes */
+.nodes{position:absolute;inset:0;z-index:1;pointer-events:none}
+.node{position:absolute;width:8px;height:8px;border-radius:999px;background:#fff;box-shadow:0 0 24px rgba(223,58,58,.85), 0 0 2px #fff}
+.node.r{background:var(--brand)}
+@keyframes orbitA{from{transform:rotate(0deg) translateX(220px) rotate(0)}to{transform:rotate(360deg) translateX(220px) rotate(-360deg)}}
+@keyframes orbitB{from{transform:rotate(360deg) translateX(140px) rotate(360deg)}to{transform:rotate(0deg) translateX(140px) rotate(0)}}
+/* Stylized Xolo silhouette */
+.xolo{position:absolute;right:5%;bottom:-2%;width:min(40vw,520px);opacity:.9;filter:drop-shadow(0 30px 40px rgba(0,0,0,.55))}
+.xolo svg{display:block;width:100%;height:auto}
+/* Buttons tweak on dark */
+body.cinema .cta{box-shadow:0 10px 24px rgba(223,58,58,.25)}
+body.cinema header{background:linear-gradient(180deg, rgba(10,10,10,.9), rgba(10,10,10,.75));border-bottom:1px solid rgba(255,255,255,.06)}
+body.cinema nav a{border-color:rgba(255,255,255,.08);color:#e7e7e7}
+body.cinema nav a:hover{border-color:var(--brand);color:#fff}
+</style>
+</head>
+<body class="cinema">
+  <header>
+    <div class="wrap">
+      <div class="title">
+        <span class="pill">Informe experto</span>
+        <h1>Eco­sistema Integrado Xolos: Sinergia de Cultura, Comercio y Finanzas Descentralizadas</h1>
+      </div>
+      <div class="top-actions">
+        <a class="cta" href="https://www.xolosramirez.com/" target="_blank" rel="noopener">Conocer Xolos Ramírez</a>
+        <a class="cta secondary" href="https://xolosarmy.xyz/" target="_blank" rel="noopener">Visitar XolosArmy Network</a>
+      </div>
+      <nav aria-label="Índice rápido">
+        <a href="#resumen">Resumen ejecutivo</a>
+        <a href="#capa-cultural">Capa cultural</a>
+        <a href="#naturals">XolosArmy Naturals</a>
+        <a href="#network-ecash">Network &amp; eCash</a>
+        <a href="#tokenomics">Tokenomics $RMZ</a>
+        <a href="#rmzwallet">RMZWallet</a>
+        <a href="#riesgos">Riesgos</a>
+        <a href="#conclusion">Conclusión</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO CINEMÁTICO XOLO + BLOCKCHAIN -->
+  <section id="hero" class="hero wrap">
+    <div class="inner">
+      <span class="pill">Xolo • Web3 • eCash</span>
+      <h1>Donde la herencia mexica se encuentra con la cadena de bloques</h1>
+      <p>Un ecosistema anclado en cultura viva: <strong>Xolos Ramírez</strong> como IP tangible, <strong>XolosArmy Naturals</strong> como motor comercial y <strong>$RMZ</strong> sobre <strong>eCash (XEC)</strong> como capa de valor. UX cinematográfica, costos mínimos y una comunidad que crece con propósito.</p>
+      <div class="cta-row">
+        <a class="cta" href="#resumen">Leer el informe</a>
+        <a class="cta secondary" href="https://xolosarmy.xyz/productos-xoloitzcuintle/" target="_blank" rel="noopener">Explorar Naturals</a>
+      </div>
+    </div>
+    <div class="gridfx" aria-hidden="true"></div>
+    <div class="nodes" aria-hidden="true">
+      <span class="node" style="left:18%; top:28%; animation:orbitA 18s linear infinite"></span>
+      <span class="node r" style="left:35%; top:42%; animation:orbitB 22s linear infinite"></span>
+      <span class="node" style="left:62%; top:20%; animation:orbitA 26s linear infinite"></span>
+      <span class="node r" style="left:78%; top:46%; animation:orbitB 19s linear infinite"></span>
+    </div>
+    <figure class="xolo" aria-hidden="true">
+      <!-- Silueta estilizada del Xolo con detalle geométrico -->
+      <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Silueta Xoloitzcuintle">
+        <defs>
+          <linearGradient id="g" x1="0" x2="1">
+            <stop offset="0" stop-color="#ffffff" stop-opacity=".85"/>
+            <stop offset="1" stop-color="#df3a3a" stop-opacity=".9"/>
+          </linearGradient>
+        </defs>
+        <g fill="none" stroke="url(#g)" stroke-width="2.2">
+          <!-- Contorno del Xolo -->
+          <path d="M90,300 C140,210 170,170 220,150 C260,135 290,140 330,150 C350,155 370,160 395,150 C435,135 455,110 470,80 C480,60 505,55 520,60 C540,68 545,95 525,110 C505,125 493,130 485,140 C470,160 460,185 455,205 C445,245 450,275 455,300 C460,330 440,350 410,355 C355,364 300,360 240,352 C180,344 135,330 90,300 Z"/>
+          <!-- Líneas geométricas tipo circuito -->
+          <path d="M250,160 L260,120 M260,120 L290,110 M260,120 L270,140" opacity=".8"/>
+          <path d="M340,155 L355,120 L380,115" opacity=".8"/>
+          <path d="M210,190 L195,165 L170,160" opacity=".8"/>
+          <!-- Nodos -->
+          <circle cx="260" cy="120" r="3.6"/>
+          <circle cx="355" cy="120" r="3.6"/>
+          <circle cx="210" cy="190" r="3.6"/>
+          <circle cx="395" cy="150" r="3.6"/>
+        </g>
+      </svg>
+    </figure>
+  </section>
+
+  <main class="wrap">
+    <section id="resumen" class="card">
+      <h2>I. Resumen Ejecutivo: El Ecosistema Integrado Xolos</h2>
+      <p>Este informe analiza la iniciativa <strong>Xolos</strong>, que integra la cría de Xoloitzcuintles por <strong>Xolos Ramírez</strong>, la línea <strong>XolosArmy Naturals</strong> y una arquitectura <strong>DeFi</strong> anclada en la red <strong>eCash (XEC)</strong>, con el activo nativo <strong>$RMZ</strong> y el desarrollo de <strong>RMZWallet</strong>.</p>
+      <h3>Hallazgos clave</h3>
+      <ul>
+        <li><span class="tick">●</span> Los activos e infraestructura (<em>Naturals</em>, <em>$RMZ</em>, <em>XolosArmy Network</em>, <em>RMZWallet</em>) existen o están en desarrollo activo.</li>
+        <li><span class="tick">●</span> Estrategia anclada en <strong>capital cultural verificable</strong>: la IP cultural y la operación del criadero reducen el sesgo especulativo.</li>
+        <li><span class="tick">●</span> <strong>RMZWallet</strong> busca abstraer la complejidad de eCash, habilitando adopción para una audiencia no cripto.</li>
+        <li><span class="tick">●</span> Integración <strong>comercio físico ↔ token</strong>: utilidad del token ligada a productos Naturals y potencial mecanismo de <em>quema</em>.</li>
+        <li><span class="tick">●</span> Hoja de ruta: lanzar RMZWallet, formalizar tokenomics (suministro, asignación, quema), ampliar utilidad ($RMZ$ &rarr; membresías, descuentos, prioridad).</li>
+      </ul>
+      <div class="note small"><span class="caps">Veredicto estratégico</span><br/> El anclaje cultural + comercio físico + capa cripto de bajo costo (XEC) construyen un <strong>foso sostenible</strong>. La clave operativa inmediata es <strong>materializar la utilidad pagada</strong> de $RMZ$ en Naturals y publicar una <strong>política de quema</strong> transparente.</div>
+    </section>
+
+    <section id="capa-cultural">
+      <h2>II. La Capa Fundamental: Cultura Xoloitzcuintle y Xolos Ramírez</h2>
+      <h3>2.1 Significado cultural y conservación</h3>
+      <p>El Xoloitzcuintle, símbolo histórico de México, provee <em>reconocimiento</em> y <em>afinidad emocional</em> inmediatos. La misión de conservación (pureza, salud genética, difusión) refuerza la narrativa del proyecto.</p>
+      <h3>2.2 Xolos Ramírez: el núcleo comercial</h3>
+      <ul>
+        <li>Posicionamiento líder y <strong>oferta anual</strong> en tallas estándar, miniatura y toy.</li>
+        <li>Programa de cría con <strong>selección genética</strong>, dieta de alto valor biológico y protocolos sanitarios completos (pedigrí internacional, microchip, vacunas, desparasitación, certificados de viaje).</li>
+        <li>Envíos internacionales activos y <strong>prueba social</strong> que habilita la extensión de marca (<em>Naturals</em>) y la capa Web3.</li>
+      </ul>
+    </section>
+
+    <section id="naturals">
+      <h2>III. Extensión Comercial: XolosArmy Naturals</h2>
+      <p>Línea de <strong>remedios botánicos y bálsamos</strong> para piel sensible del Xoloitzcuintle (<a href="https://xolosarmy.xyz/productos-xoloitzcuintle/" target="_blank" rel="noopener">xolosarmy.xyz/productos-xoloitzcuintle</a>).</p>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Catálogo &amp; posicionamiento</h3>
+          <p class="muted small">Precios unitarios aproximados: $522 MXN; paquete integral: ~ $1,950 MXN.</p>
+          <table>
+            <thead>
+              <tr><th>Producto</th><th>Ingredientes/Uso</th><th>Precio aprox.</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Ungüento Solar del Guardián Xólotl</td><td>Árbol de té, reparación cutánea</td><td>$522</td></tr>
+              <tr><td>Néctar Onírico de Tlazōlteōtl</td><td>Lavanda + Vit. E, calma y descanso</td><td>$522</td></tr>
+              <tr><td>Esencia Citlalinahuatl del Amanecer</td><td>Limón, purifica heridas</td><td>$522</td></tr>
+              <tr><td>Escudo de Bruma de Quetzalcóatl</td><td>Repelente cítrico en spray</td><td>$522</td></tr>
+              <tr><td>Dúo Ritual de Espuma del Mictlán</td><td>2 jabones, glicerina + avena</td><td>$522</td></tr>
+              <tr><td><strong>Paquete Bienestar Integral</strong></td><td>3 bálsamos + repelente + 2 jabones</td><td><strong>$1,950</strong></td></tr>
+            </tbody>
+          </table>
+          <p class="small muted">Filosofía: “Cuidado ancestral para piel de guerrero”. Sin parabenos ni fragancias agresivas.</p>
+        </div>
+        <div class="card">
+          <h3>Integración con $RMZ$</h3>
+          <ul>
+            <li>Descuentos y <strong>acceso prioritario</strong> con $RMZ$ en lanzamientos y bundles.</li>
+            <li>Pago directo con <strong>eCash (XEC)</strong> — Dirección: <span class="kbd">ecash:qplm2jhzuteklx9naquzwfe97tx3h8eu4gyq385tw8</span>.</li>
+            <li><strong>Propuesta</strong>: quema parcial del $RMZ$ utilizado en compras para introducir <em>deflación programática</em>.</li>
+          </ul>
+        </div>
+      </div>
+      <h3>Matriz de utilidad del token $RMZ$</h3>
+      <table>
+        <thead>
+          <tr><th>Categoría</th><th>Caso de uso</th><th>Beneficio</th><th>Impacto en oferta</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Incentivo</td><td>Premios en trivias/streams</td><td>Engagement y lealtad</td><td>Mayor circulación</td></tr>
+          <tr><td>Acceso</td><td>Precios/ prioridad en cachorros &amp; merch</td><td>Valor tangible</td><td>Potencial staking/ quema</td></tr>
+          <tr><td>Consumo</td><td>Pago/ descuento en Naturals</td><td>Ahorro inmediato</td><td><strong>Quema directa</strong></td></tr>
+          <tr><td>Gobernanza</td><td>Voto tesorería/ roadmap (futuro)</td><td>Control comunitario</td><td><em>Lock</em> por staking</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="network-ecash">
+      <h2>IV. Arquitectura Descentralizada: XolosArmy Network + eCash</h2>
+      <p><strong>XolosArmy Network State initiative</strong>: misión de comunidad sostenible con pagos y recompensas de bajo costo en <strong>eCash (XEC)</strong>, optimizada para micropagos y alto volumen.</p>
+      <ul>
+        <li>Recompensas frecuentes en XEC/$RMZ$ para educación y participación.</li>
+        <li>Costos transaccionales mínimos para ventas de Naturals.</li>
+        <li>Gobernanza futura estilo DAO con foco en tesorería y asignación.</li>
+      </ul>
+    </section>
+
+    <section id="tokenomics">
+      <h2>V. Análisis profundo de Tokenomics: $RMZ$</h2>
+      <h3>5.1 Distribución inicial</h3>
+      <p>Modelo de <em>Prueba de Conocimiento/Contribución</em>: distribución vía trivias y streams, alineando a los primeros tenedores con la misión.</p>
+      <h3>5.2 Liquidez y estabilidad</h3>
+      <ul>
+        <li>Pares de referencia: <strong>RMZ/XEC</strong>; incentivos a LPs; <em>market‑making</em> programático.</li>
+        <li>Uso real (compras Naturals) para absorber emisión y estabilizar precio.</li>
+      </ul>
+      <h3>5.3 Principios comparativos</h3>
+      <ul>
+        <li>Escasez y <strong>quema por uso</strong> (&rarr; deflación neta).</li>
+        <li>Captura de valor vía <strong>gobernanza + staking</strong>.</li>
+      </ul>
+    </section>
+
+    <section id="rmzwallet">
+      <h2>VI. Infraestructura técnica: RMZWallet</h2>
+      <div class="card">
+        <h3>Objetivo</h3>
+        <p>Abstraer la complejidad de eCash para usuarios no cripto: recuperación social, operaciones en un clic (agrupación de aprobación+compra+confirmación), soporte nativo $RMZ$.</p>
+        <h3>Claves de éxito</h3>
+        <ul>
+          <li>Experiencia <strong>sin fricción</strong> en pagos Naturals.</li>
+          <li><strong>Auditorías</strong> rigurosas antes de despliegue masivo.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="riesgos">
+      <h2>VII. Sinergia del ecosistema y riesgos</h2>
+      <h3>Modelo circular</h3>
+      <p><strong>Confianza &rarr; Incentivos &rarr; Consumo &rarr; Captura de valor</strong>: el ciclo se sostiene cuando $RMZ$ tiene utilidad pagada y la <em>quema</em> es verificable.</p>
+      <h3>Riesgos</h3>
+      <ul>
+        <li><strong>Regulatorio</strong>: documentar utilidad y gobernanza para evitar clasificación especulativa.</li>
+        <li><strong>Liquidez</strong>: programas de LP y <em>market‑making</em> necesarios en XEC.</li>
+        <li><strong>Desarrollo</strong>: ejecución y seguridad de RMZWallet.</li>
+      </ul>
+    </section>
+
+    <section id="conclusion" class="card">
+      <h2>VIII. Conclusión y recomendaciones</h2>
+      <div class="grid cols-2">
+        <div>
+          <h3>Hoja de ruta inmediata</h3>
+          <ul>
+            <li><span class="badge">1</span> Lanzamiento seguro de <strong>RMZWallet</strong>.</li>
+            <li><span class="badge">2</span> <strong>Whitepaper</strong> con suministro, asignación y <strong>tasa de quema</strong> ligada a ingresos Naturals.</li>
+            <li><span class="badge">3</span> Ampliar <strong>utilidad</strong>: membresías y prioridad en listas de espera.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Adopción &amp; liquidez</h3>
+          <ul>
+            <li>Incentivos a LP (RMZ/XEC) y <em>yield</em> responsable.</li>
+            <li>Refuerzo cultural: streams, trivias y educación Web3.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="hr"></div>
+      <p class="small muted">El valor del protocolo se ancla en activos culturales y operaciones reales. La <strong>utilidad transaccional</strong> de $RMZ$ y la <strong>experiencia</strong> de RMZWallet son los multiplicadores clave.</p>
+      <p>
+        <a class="cta" href="#resumen">Volver arriba</a>
+      </p>
+    </section>
+
+    <section class="footnotes">
+      <h3>Notas &amp; referencias (contexto interno)</h3>
+      <ol>
+        <li>XolosArmy Naturals — productos y filosofía de cuidado.</li>
+        <li>Token $RMZ$ — distribución comunitaria inicial (trivias/streams).</li>
+        <li>XolosArmy Network — iniciativa “Network State”; repos y roadmap.</li>
+        <li>Xolos Ramírez — criadero, programa de cría, documentación y envíos.</li>
+        <li>RMZWallet — abstracción de UX y smart‑wallet patterns.</li>
+        <li>Estabilidad y liquidez — quema por uso, MM, incentivos LP.</li>
+        <li>Cultura Xoloitzcuintle — base simbólica y misión de conservación.</li>
+        <li>AMAs/educación — contenidos y sesiones públicas para adopción.</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h3>Accesos rápidos</h3>
+      <p>
+        <a class="cta" href="https://xolosarmy.xyz/productos-xoloitzcuintle/" target="_blank" rel="noopener">Ver productos Naturals</a>
+        &nbsp;&nbsp;
+        <a class="cta secondary" href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener">Xolos disponibles</a>
+      </p>
+    </section>
+  </main>
+</body>
+</html>
