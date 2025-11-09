@@ -89,6 +89,10 @@ body.cinema th, body.cinema td{border-color:#262626}
 body.cinema th{background:#141418;color:#fafafa}
 /* Improve list readability */
 body.cinema li{color:#e6e6e6}
+/* --- Podcast video embed (responsive 16:9) --- */
+.video-16x9{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:1rem;overflow:hidden}
+.video-16x9 iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+body.cinema .video-16x9{box-shadow:0 14px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.06)}
 </style>
 </head>
 <body class="cinema">
@@ -106,6 +110,7 @@ body.cinema li{color:#e6e6e6}
         <a href="#resumen">Resumen ejecutivo</a>
         <a href="#capa-cultural">Capa cultural</a>
         <a href="#naturals">XolosArmy Naturals</a>
+        <a href="#podcast">Podcast</a>
         <a href="#network-ecash">Network &amp; eCash</a>
         <a href="#tokenomics">Tokenomics $RMZ</a>
         <a href="#rmzwallet">RMZWallet</a>
@@ -157,6 +162,21 @@ body.cinema li{color:#e6e6e6}
         </g>
       </svg>
     </figure>
+  </section>
+
+  <section id="podcast" class="wrap card">
+    <h2>Podcast — Ecosistema Xolos: Cultura, Naturals, $RMZ y eCash</h2>
+    <p class="muted small">Episodio de XolosArmy Podcast asociado a este informe. Mira el resumen audiovisual.</p>
+    <div class="video-16x9">
+      <iframe
+        src="https://www.youtube.com/embed/3YROlV9G5YU?si=rARHe7CpKxQtPlCk"
+        title="XolosArmy Podcast — Ecosistema Xolos"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
   </section>
 
   <main class="wrap">
