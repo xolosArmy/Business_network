@@ -11,6 +11,6 @@
 
 /* Variables globales personalizadas */
 :root {
-  --ion-background-color: #12181f;
-  --ion-text-color: #ffffff;
+  --ion-background-color: var(--rmz-bg);
+  --ion-text-color: var(--rmz-text);
 }

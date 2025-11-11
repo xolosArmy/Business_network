@@ -19,7 +19,12 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              {
+                "glob": "**/*",
+                "input": "public",
+                "output": "/"
+              }
             ],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json",
@@ -30,7 +35,12 @@
               "chronik-client",
               "minimal-xec-wallet",
               "ecashaddrjs",
-              "ecash-wallet"
+              "ecash-wallet",
+              "bip39",
+              "@noble/hashes/pbkdf2",
+              "@noble/hashes/sha256",
+              "@noble/hashes/sha512",
+              "@noble/hashes/utils"
             ]
           },
           "configurations": {
@@ -58,7 +68,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
+                  "maximumWarning": "3mb",
                   "maximumError": "5mb"
                 },
                 {
@@ -66,6 +76,18 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
+              ],
+              "allowedCommonJsDependencies": [
+                "qrcode",
+                "chronik-client",
+                "minimal-xec-wallet",
+                "ecashaddrjs",
+                "ecash-wallet",
+                "bip39",
+                "@noble/hashes/pbkdf2",
+                "@noble/hashes/sha256",
+                "@noble/hashes/sha512",
+                "@noble/hashes/utils"
               ]
             },
             "development": {
@@ -78,7 +100,19 @@
               "extractLicenses": false,
               "buildOptimizer": false,
               "serviceWorker": false,
-              "ngswConfigPath": "ngsw-config.json"
+              "ngswConfigPath": "ngsw-config.json",
+              "allowedCommonJsDependencies": [
+                "qrcode",
+                "chronik-client",
+                "minimal-xec-wallet",
+                "ecashaddrjs",
+                "ecash-wallet",
+                "bip39",
+                "@noble/hashes/pbkdf2",
+                "@noble/hashes/sha256",
+                "@noble/hashes/sha512",
+                "@noble/hashes/utils"
+              ]
             }
           },
           "defaultConfiguration": "production"

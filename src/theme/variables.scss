@@ -1,0 +1,25 @@
+ion-content {
+  --background: var(--rmz-bg);
+  color: var(--rmz-text);
+}
+
+ion-card {
+  --background: var(--rmz-card);
+  border-radius: var(--radius-lg);
+}
+
+ion-button[color="primary"] {
+  --background: var(--rmz-primary);
+  border-radius: var(--radius-md);
+}
+
+:root {
+  --rmz-primary:#df3a3a;
+  --rmz-dark:#0f0f0f;
+  --rmz-accent:#E07A5F;
+  --rmz-bg:#0b0b0b;
+  --rmz-card:#141414;
+  --rmz-text:#f4f4f4;
+  --rmz-muted:#9aa0a6;
+  --radius-lg:20px; --radius-md:14px; --radius-sm:10px;
+}

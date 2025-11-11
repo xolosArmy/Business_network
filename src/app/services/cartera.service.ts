@@ -1,7 +1,12 @@
 // src/app/services/cartera.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { getSharedInstance } from '../utils/key-derivation.adapter';
+import {
+  generateMnemonicAsync,
+  validateMnemonicAsync,
+  deriveKeysFromMnemonicAsync,
+  getSharedInstance,
+} from '../utils/key-derivation.adapter';
 
 export interface CarteraState {
   address?: string;
@@ -17,23 +22,43 @@ export interface WalletInfo {
   mnemonic?: string;          // <- añadimos campo opcional que la UI actual espera
 }
 
+const DEFAULT_HD_PATH = "m/44'/899'/0'/0/0";
+
 @Injectable({ providedIn: 'root' })
 export class CarteraService {
   readonly state$ = new BehaviorSubject<CarteraState>({ balance: 0 });
 
   // Nueva API interna
   async crearNuevaCartera(): Promise<void> {
-    const kd = await getSharedInstance();
+    const mnemonic = await generateMnemonicAsync();
+    const isValid = await validateMnemonicAsync(mnemonic);
+    if (!isValid) {
+      throw new Error('No se pudo generar un mnemónico válido.');
+    }
 
-    // No pases parámetro de bits; la lib maneja default
-    const mnemonic = await kd.generateMnemonic();
-    const keys = await kd.deriveKeysFromMnemonic(mnemonic);
+    const { seedHex } = await deriveKeysFromMnemonicAsync(mnemonic);
+
+    const kd = await getSharedInstance();
+    let derivedKeys: any | null = null;
+
+    try {
+      if (typeof kd.createForMnemonic === 'function') {
+        const wallet = await kd.createForMnemonic(mnemonic);
+        derivedKeys = typeof wallet?.derive === 'function' ? wallet.derive(DEFAULT_HD_PATH) : wallet;
+      } else if (typeof kd.deriveKeysFromMnemonic === 'function') {
+        derivedKeys = await kd.deriveKeysFromMnemonic(mnemonic);
+      }
+    } catch (error) {
+      console.warn('[RMZWallet] No se pudo derivar la dirección desde KeyDerivation.', error);
+    }
 
     const addr =
-      keys?.address ??
-      keys?.cashaddr ??
-      keys?.xecaddr ??
-      keys?.p2pkh ??
+      derivedKeys?.address ??
+      derivedKeys?.cashaddr ??
+      derivedKeys?.xecaddr ??
+      derivedKeys?.cashAddress ??
+      derivedKeys?.xecAddress ??
+      derivedKeys?.p2pkh ??
       '(sin dirección)';
 
     this.state$.next({
@@ -44,7 +69,8 @@ export class CarteraService {
     });
 
     console.log('[RMZWallet] MNEMONIC', mnemonic);
-    console.log('[RMZWallet] KEYS', keys);
+    console.log('[RMZWallet] seedHex', seedHex);
+    console.log('[RMZWallet] KEYS', derivedKeys);
   }
 
   // ---------- Compatibilidad (API legacy) ----------

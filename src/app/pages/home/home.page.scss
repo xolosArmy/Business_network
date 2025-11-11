@@ -1,39 +1,48 @@
-.error-text {
-  margin-top: 0.75rem;
-}
+.rmz-bg { --background: #fafafa; }
+.rmz-hero { background: #101010; color: #fff; }
+.rmz-balance { font-size: 34px; font-weight: 800; letter-spacing: .5px; }
+.rmz-secondary { display: block; margin-top: .35rem; font-size: 16px; color: #ffcf88; font-weight: 600; }
+.rmz-actions { display:flex; gap: .5rem; flex-wrap: wrap; }
+.rmz-token-balance {
+  margin-top: 1rem;
+  border-radius: 12px;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --background: rgba(255, 255, 255, 0.05);
+  color: inherit;
 
-.address-label {
-  white-space: pre-wrap;
-  word-break: break-word;
-}
+  ion-icon {
+    font-size: 28px;
+  }
 
-.label-title {
-  font-weight: 600;
-}
+  ion-label h3 {
+    margin: 0;
+    font-weight: 600;
+  }
 
-.balance-row {
-  align-items: center;
+  ion-label p {
+    margin: 2px 0 0;
+    font-size: 14px;
+    color: #d7d7d7;
+  }
 }
+.break-all { word-break: break-all; }
+.mt-2 { margin-top: .5rem; }
 
-.token-balance {
-  margin: 0;
-  font-weight: 600;
+/* brand color token */
+:root {
+  --ion-color-rmz: #df3a3a;
+  --ion-color-rmz-rgb: 223,58,58;
+  --ion-color-rmz-contrast: #ffffff;
+  --ion-color-rmz-contrast-rgb: 255,255,255;
+  --ion-color-rmz-shade: #c73636;
+  --ion-color-rmz-tint: #e25050;
 }
-
-.token-id {
-  margin: 0.25rem 0 0;
-  font-size: 0.75rem;
-  color: var(--ion-color-medium, #6b7280);
-  word-break: break-all;
-}
-
-.token-section-title {
-  display: block;
-  font-weight: 600;
-}
-
-.token-section-title h2 {
-  margin: 0;
-  font-size: 1rem;
-  color: var(--ion-color-dark, #1f2937);
+.ion-color-rmz {
+  --ion-color-base: var(--ion-color-rmz);
+  --ion-color-base-rgb: var(--ion-color-rmz-rgb);
+  --ion-color-contrast: var(--ion-color-rmz-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-rmz-contrast-rgb);
+  --ion-color-shade: var(--ion-color-rmz-shade);
+  --ion-color-tint: var(--ion-color-rmz-tint);
 }

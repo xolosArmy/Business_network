@@ -1,17 +1,12 @@
-import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Toast } from '@capacitor/toast';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NavController, ToastController } from '@ionic/angular';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
-import { CarteraService, WalletInfo } from '../../services/cartera.service';
+import { CarteraService } from '../../services/cartera.service';
+import { ChronikService } from '../../services/chronik.service';
 import { SaldoService } from '../../services/saldo.service';
-import { EnviarService } from '../../services/enviar.service';
-import { BleService } from '../../services/ble.service';
-import { OfflineStorageService } from '../../services/offline-storage.service';
-import {
-  TokenBalanceService,
-  type RmzBalance,
-} from '../../services/token-balance.service';
-import { RMZ_TOKEN_ID } from '../../services/chronik.constants';
+import { TokenBalanceService } from '../../services/token-balance.service';
+import { TxStorageService } from '../../services/tx-storage.service';
 
 @Component({
   selector: 'app-home-page',
@@ -19,321 +14,242 @@ import { RMZ_TOKEN_ID } from '../../services/chronik.constants';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit, OnDestroy {
-  wallet: WalletInfo | null = null;
-  balance: number | null = null;
-  isLoadingWallet = false;
-  isCreatingWallet = false;
-  isRefreshingBalance = false;
-  isSendModalOpen = false;
-  isSending = false;
-  isSendingToken = false;
-  errorMessage = '';
-  sendErrorMessage = '';
-  rmzSendErrorMessage = '';
-  isOnline = typeof navigator === 'undefined' ? true : navigator.onLine;
+  public wallet: any = null;
+  public connected = false;
+  public loading = false;
+  public balanceXec = this.saldo?.balanceXec$; // Observable<number>
+  public balanceRmz = this.tokens?.balanceRmz$; // Observable<number>
+  public txs = new BehaviorSubject<any[]>([]);
 
-  readonly sendForm: FormGroup;
-  readonly rmzSendForm: FormGroup;
-  readonly rmzTokenId = RMZ_TOKEN_ID;
-
-  rmzTokenBalance: RmzBalance | null = null;
-
-  private removeConnectionListeners: (() => void) | null = null;
+  private readonly subscriptions: Subscription[] = [];
+  private readonly cleanupFns: Array<() => void> = [];
 
   constructor(
-    private readonly carteraService: CarteraService,
-    private readonly saldoService: SaldoService,
-    private readonly enviarService: EnviarService,
-    private readonly offlineStorage: OfflineStorageService,
-    private readonly tokenBalanceService: TokenBalanceService,
-    private readonly ngZone: NgZone,
-    public readonly ble: BleService,
-    formBuilder: FormBuilder,
+    private readonly cartera: CarteraService,
+    private readonly saldo: SaldoService,
+    private readonly tokens: TokenBalanceService,
+    private readonly chronik: ChronikService,
+    private readonly txStore: TxStorageService,
+    private readonly toast: ToastController,
+    private readonly nav: NavController,
   ) {
-    this.sendForm = formBuilder.group({
-      destination: ['', Validators.required],
-      amount: [null, [Validators.required, Validators.min(0.000001)]],
-    });
-
-    this.rmzSendForm = formBuilder.group({
-      tokenDestination: ['', Validators.required],
-      tokenAmount: [null, [Validators.required, Validators.min(1)]],
-    });
-
-    this.registerConnectionListeners();
+    this.balanceXec = this.saldo.balanceXec$;
+    this.balanceRmz = this.tokens.balanceRmz$;
+    this.connected = typeof navigator === 'undefined' ? false : navigator.onLine;
   }
 
   async ngOnInit(): Promise<void> {
     await this.loadWallet();
+    const anyCartera = this.cartera as any;
+    if (!this.wallet) {
+      if (typeof anyCartera.getWalletInfo === 'function') {
+        this.wallet = await anyCartera.getWalletInfo();
+      } else if (typeof anyCartera.getWallet === 'function') {
+        this.wallet = await anyCartera.getWallet();
+      }
+    }
+    this.refreshTransactions();
+    this.observeStoredTransactions();
+    this.observeChronikStreams();
+    this.observeNetworkStatus();
   }
 
   ngOnDestroy(): void {
-    this.removeConnectionListeners?.();
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
+    this.cleanupFns.forEach((fn) => fn());
   }
 
-  get hasWallet(): boolean {
-    return !!this.wallet?.address;
-  }
-
-  get formattedBalance(): string {
-    if (this.balance === null) {
-      return '--';
+  async onCrear(): Promise<void> {
+    if (this.loading) {
+      return;
     }
 
-    return `${this.saldoService.formatBalance(this.balance)} XEC`;
+    this.loading = true;
+    try {
+      await this.cartera.createWallet();
+      await this.loadWallet();
+      await this.showToast('Cartera creada');
+    } catch (error) {
+      console.warn('No se pudo crear la cartera', error);
+      await this.showToast('No se pudo crear la cartera');
+    } finally {
+      this.loading = false;
+    }
   }
 
-  get formattedRmzBalance(): string {
-    if (this.rmzTokenBalance === null) {
-      return '-- RMZ';
+  onEnviar(): void {
+    this.nav.navigateForward('/tabs/wallet');
+  }
+
+  async onRecibir(): Promise<void> {
+    const address = this.wallet?.address;
+    if (!address) {
+      await this.showToast('Genera una cartera primero');
+      return;
     }
 
-    const fractionDigits = Math.max(
-      0,
-      Math.min(this.rmzTokenBalance.decimals, 20),
-    );
-
-    return `${this.rmzTokenBalance.human.toLocaleString(undefined, {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: fractionDigits,
-    })} RMZ`;
+    await this.showToast('Muestra QR aquí (TODO)');
   }
 
-  async loadWallet(): Promise<void> {
-    this.isLoadingWallet = true;
-    this.errorMessage = '';
+  mostrarQR(): void {
+    void this.onRecibir();
+  }
+
+  async copiar(addr?: string): Promise<void> {
+    if (!addr) {
+      return;
+    }
 
     try {
-      this.wallet = await this.carteraService.getWalletInfo();
+      if (typeof navigator !== 'undefined' && navigator.clipboard) {
+        await navigator.clipboard.writeText(addr);
+      }
+      await this.showToast('Dirección copiada');
+    } catch (error) {
+      console.warn('No se pudo copiar la dirección', error);
+      await this.showToast('Error al copiar');
+    }
+  }
+
+  abrirTx(tx: any): void {
+    const txid = tx?.txid || tx?.id;
+    if (!txid || typeof window === 'undefined') {
+      return;
+    }
+
+    const url = `https://explorer.e.cash/tx/${txid}`;
+    window.open(url, '_blank', 'noopener');
+  }
+
+  private async loadWallet(): Promise<void> {
+    this.loading = true;
+    try {
+      const current = await this.cartera.getWalletInfo();
+      const stored = this.readPersistedWallet();
+      this.wallet = current?.address ? current : stored;
+
       if (this.wallet?.address) {
-        await this.refreshBalance();
-      } else {
-        this.balance = null;
-        this.rmzTokenBalance = null;
-        await this.loadCachedBalance();
+        this.persistWallet(this.wallet);
+        await this.subscribeToChronik(this.wallet.address);
+      } else if (stored?.address) {
+        await this.subscribeToChronik(stored.address);
       }
     } catch (error) {
-      this.errorMessage = this.resolveErrorMessage(error);
+      console.warn('No se pudo cargar la cartera', error);
+      const stored = this.readPersistedWallet();
+      this.wallet = stored;
     } finally {
-      this.isLoadingWallet = false;
+      this.loading = false;
     }
   }
 
-  async onCreateWallet(): Promise<void> {
-    this.isCreatingWallet = true;
-    this.errorMessage = '';
-    console.log('click crear cartera');
+  private async subscribeToChronik(address: string | undefined): Promise<void> {
+    if (!address) {
+      return;
+    }
 
     try {
-      this.wallet = await this.carteraService.createWallet();
-      await this.refreshBalance();
-      await Toast.show({ text: 'Cartera creada correctamente.' });
+      await this.chronik.subscribeToAddress(address);
+      this.connected = true;
     } catch (error) {
-      this.errorMessage = this.resolveErrorMessage(error);
-    } finally {
-      this.isCreatingWallet = false;
+      console.warn('No se pudo suscribir a Chronik', error);
+      this.connected = false;
     }
   }
 
-  async refreshBalance(): Promise<void> {
-    if (!this.wallet?.mnemonic) {
-      await this.loadCachedBalance();
-      this.rmzTokenBalance = null;
-      return;
+  private refreshTransactions(): void {
+    const stored = this.txStore.getAll();
+    this.txs.next(this.normalizeTransactions(stored));
+  }
+
+  private observeStoredTransactions(): void {
+    const sub = this.txStore.tx$.subscribe((entries) => {
+      this.txs.next(this.normalizeTransactions(entries));
+    });
+    this.subscriptions.push(sub);
+  }
+
+  private observeChronikStreams(): void {
+    const anyChronik = this.chronik as any;
+    if (anyChronik.connected$?.subscribe) {
+      const statusSub = anyChronik.connected$.subscribe((v: boolean) => {
+        this.connected = !!v;
+      });
+      this.subscriptions.push(statusSub);
+    } else {
+      this.connected = true;
     }
 
-    this.isRefreshingBalance = true;
-    this.errorMessage = '';
-
-    try {
-      const online = typeof navigator === 'undefined' ? true : navigator.onLine;
-
-      if (!online) {
-        const cachedBalance = await this.offlineStorage.getCachedBalance();
-        if (cachedBalance === null) {
-          throw new Error('Sin conexión y sin saldo almacenado localmente.');
-        }
-        this.balance = cachedBalance;
-        this.rmzTokenBalance = null;
-        return;
-      }
-
-      const address = this.wallet?.address ?? '';
-      if (!address) {
-        this.balance = 0;
-        await this.offlineStorage.setCachedBalance(0);
-        this.rmzTokenBalance = null;
-        return;
-      }
-
-      const [xecBalance, rmzBalance] = await Promise.all([
-        this.saldoService.getBalance(address),
-        this.fetchRmzTokenBalance(address),
-      ]);
-
-      this.balance = xecBalance;
-      this.rmzTokenBalance = rmzBalance;
-      await this.offlineStorage.setCachedBalance(this.balance ?? 0);
-    } catch (error) {
-      const cachedBalance = await this.offlineStorage.getCachedBalance();
-      if (cachedBalance !== null) {
-        this.balance = cachedBalance;
-        this.errorMessage = `${this.resolveErrorMessage(error)}. Mostrando saldo almacenado.`;
-      } else {
-        this.errorMessage = this.resolveErrorMessage(error);
-      }
-      this.rmzTokenBalance = null;
-    } finally {
-      this.isRefreshingBalance = false;
+    if (anyChronik.txs$?.subscribe) {
+      const txSub = anyChronik.txs$.subscribe((list: any[]) => {
+        this.txs.next(list || []);
+      });
+      this.subscriptions.push(txSub);
     }
   }
 
-  openSendModal(): void {
-    this.sendForm.reset({ destination: '', amount: null });
-    this.sendErrorMessage = '';
-    this.rmzSendForm.reset({ tokenDestination: '', tokenAmount: null });
-    this.rmzSendErrorMessage = '';
-    this.isSendModalOpen = true;
-  }
-
-  closeSendModal(): void {
-    this.isSendModalOpen = false;
-    this.isSendingToken = false;
-  }
-
-  async onSubmitSend(): Promise<void> {
-    if (!this.wallet?.mnemonic) {
-      this.sendErrorMessage = 'Debes crear una cartera antes de enviar fondos.';
-      return;
-    }
-
-    if (this.sendForm.invalid) {
-      this.sendForm.markAllAsTouched();
-      return;
-    }
-
-    const destination = String(this.sendForm.value.destination ?? '').trim();
-    const amount = Number(this.sendForm.value.amount);
-
-    if (!destination) {
-      this.sendErrorMessage = 'La dirección de destino es obligatoria.';
-      return;
-    }
-
-    if (!Number.isFinite(amount) || amount <= 0) {
-      this.sendErrorMessage = 'El monto debe ser mayor que cero.';
-      return;
-    }
-
-    this.isSending = true;
-    this.sendErrorMessage = '';
-
-    try {
-      const txid = await this.enviarService.sendTransaction(
-        { mnemonic: this.wallet.mnemonic, address: this.wallet.address },
-        destination,
-        amount,
-      );
-      const isPending = txid.startsWith('pending-offline-');
-      const toastMessage = isPending
-        ? 'Transacción guardada para envío cuando regreses a internet.'
-        : `Transacción enviada: ${txid}`;
-      await Toast.show({ text: toastMessage });
-      this.closeSendModal();
-      await this.refreshBalance();
-    } catch (error) {
-      this.sendErrorMessage = this.resolveErrorMessage(error);
-    } finally {
-      this.isSending = false;
-    }
-  }
-
-  async onSubmitSendToken(): Promise<void> {
-    if (!this.wallet?.mnemonic) {
-      this.rmzSendErrorMessage = 'Debes crear una cartera antes de enviar eTokens.';
-      return;
-    }
-
-    if (this.rmzSendForm.invalid) {
-      this.rmzSendForm.markAllAsTouched();
-      return;
-    }
-
-    const destination = String(this.rmzSendForm.value.tokenDestination ?? '').trim();
-    const amount = Number(this.rmzSendForm.value.tokenAmount);
-
-    if (!destination) {
-      this.rmzSendErrorMessage = 'La dirección de destino es obligatoria.';
-      return;
-    }
-
-    if (!Number.isInteger(amount) || amount <= 0) {
-      this.rmzSendErrorMessage = 'El monto del eToken debe ser un número entero mayor que cero.';
-      return;
-    }
-
-    this.isSendingToken = true;
-    this.rmzSendErrorMessage = '';
-
-    try {
-      const result = await this.carteraService.sendRMZToken(destination, amount);
-      await Toast.show({ text: `eToken enviado: ${result.txid}` });
-      this.rmzSendForm.reset({ tokenDestination: '', tokenAmount: null });
-      await this.refreshBalance();
-    } catch (error) {
-      this.rmzSendErrorMessage = this.resolveErrorMessage(error);
-    } finally {
-      this.isSendingToken = false;
-    }
-  }
-
-  private async fetchRmzTokenBalance(address: string): Promise<RmzBalance | null> {
-    try {
-      return await this.tokenBalanceService.getRmzBalance(address);
-    } catch (error) {
-      console.warn('No se pudo obtener el saldo del token RMZ.', error);
-      return null;
-    }
-  }
-
-  private async loadCachedBalance(): Promise<void> {
-    const cachedBalance = await this.offlineStorage.getCachedBalance();
-    if (cachedBalance !== null) {
-      this.balance = cachedBalance;
-    }
-  }
-
-  private registerConnectionListeners(): void {
+  private observeNetworkStatus(): void {
     if (typeof window === 'undefined') {
       return;
     }
 
-    const onlineHandler = () =>
-      this.ngZone.run(() => {
-        this.isOnline = true;
-        void this.refreshBalance();
-      });
+    const setOnline = () => (this.connected = true);
+    const setOffline = () => (this.connected = false);
 
-    const offlineHandler = () =>
-      this.ngZone.run(() => {
-        this.isOnline = false;
-        void this.loadCachedBalance();
-      });
+    window.addEventListener('online', setOnline);
+    window.addEventListener('offline', setOffline);
 
-    window.addEventListener('online', onlineHandler);
-    window.addEventListener('offline', offlineHandler);
-
-    this.removeConnectionListeners = () => {
-      window.removeEventListener('online', onlineHandler);
-      window.removeEventListener('offline', offlineHandler);
-    };
+    this.cleanupFns.push(() => {
+      window.removeEventListener('online', setOnline);
+      window.removeEventListener('offline', setOffline);
+    });
   }
 
-  private resolveErrorMessage(error: unknown): string {
-    if (error instanceof Error) {
-      return error.message;
+  private persistWallet(wallet: any): void {
+    if (typeof localStorage === 'undefined') {
+      return;
     }
 
-    return String(error ?? 'Ocurrió un error desconocido.');
+    localStorage.setItem('rmz_wallet', JSON.stringify(wallet));
+  }
+
+  private readPersistedWallet(): any {
+    if (typeof localStorage === 'undefined') {
+      return null;
+    }
+
+    const raw = localStorage.getItem('rmz_wallet');
+    if (!raw) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(raw);
+    } catch {
+      return null;
+    }
+  }
+
+  private normalizeTransactions(entries: any[] | null | undefined): any[] {
+    if (!Array.isArray(entries)) {
+      return [];
+    }
+
+    return entries.map((tx) => ({
+      type: tx?.type === 'sent' ? 'send' : 'receive',
+      amount: Number(tx?.amount ?? 0),
+      time: tx?.timestamp ?? tx?.time ?? new Date().toISOString(),
+      confirmed: tx?.status === 'confirmed',
+      txid: tx?.txid ?? tx?.id,
+    }));
+  }
+
+  private async showToast(message: string): Promise<void> {
+    const toast = await this.toast.create({
+      message,
+      duration: 2000,
+      position: 'top',
+    });
+    await toast.present();
   }
 }

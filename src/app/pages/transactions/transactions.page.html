@@ -5,7 +5,20 @@
 </ion-header>
 
 <ion-content color="dark">
-  <ion-list *ngIf="txs.length > 0; else noTx">
+  <ion-list>
+    <ion-item *ngIf="!txs?.length" lines="none" class="empty">
+      <ion-label>
+        <div style="display:flex;gap:12px;align-items:center;">
+          <img src="assets/xolin/idle.png" width="56" height="56" alt="Xolín"/>
+          <div>
+            <h3 style="margin:0;">Sin movimientos todavía</h3>
+            <p class="ion-text-wrap" style="color:var(--rmz-muted);margin:4px 0 0 0;">
+              Cuando llegue tu primera TX, Xolín te avisará al instante.
+            </p>
+          </div>
+        </div>
+      </ion-label>
+    </ion-item>
     <ion-item *ngFor="let tx of txs" lines="full" [@fadeIn] [ngClass]="{'new-tx': tx.status === 'pending'}">
       <ion-label>
         <h2>
@@ -21,12 +34,6 @@
       </ion-badge>
     </ion-item>
   </ion-list>
-
-  <ng-template #noTx>
-    <ion-text color="medium">
-      <p style="text-align:center; margin-top: 20px;">Sin transacciones registradas</p>
-    </ion-text>
-  </ng-template>
 </ion-content>
 
 <ion-footer>
