@@ -173,11 +173,13 @@ export class ChronikService {
     const settings = this.settingsService.getSettings();
 
     if (msg.type === 'AddedToMempool' && settings.network) {
+      void this.notify.toast(`📥 TX recibida: ${txid}`);
       this.notify.show('💸 Nueva TX detectada', 'Se ha recibido una transacción pendiente');
       this.store.updateStatusByTxid(txid, 'broadcasted');
     }
 
     if (msg.type === 'Confirmed' && settings.network) {
+      void this.notify.toast(`✅ TX confirmada: ${txid}`, 'success');
       this.notify.show('✅ Transacción confirmada', 'Una transacción ha sido incluida en bloque');
       this.store.updateStatusByTxid(txid, 'confirmed');
     }

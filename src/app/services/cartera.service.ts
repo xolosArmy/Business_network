@@ -1,6 +1,8 @@
 // src/app/services/cartera.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { RMZ_TOKEN_ID } from './chronik.constants';
+import { TokenManagerService } from './token-manager.service';
 import {
   generateMnemonicAsync,
   validateMnemonicAsync,
@@ -27,6 +29,8 @@ const DEFAULT_HD_PATH = "m/44'/899'/0'/0/0";
 @Injectable({ providedIn: 'root' })
 export class CarteraService {
   readonly state$ = new BehaviorSubject<CarteraState>({ balance: 0 });
+
+  constructor(private readonly tokenManager: TokenManagerService) {}
 
   // Nueva API interna
   async crearNuevaCartera(): Promise<void> {
@@ -91,15 +95,38 @@ export class CarteraService {
     return this.getWalletInfo();
   }
 
-  /**
-   * API legacy: sendRMZToken(dest, amount).
-   * Stub temporal para no romper la UI; integrar envío real después.
-   */
+  /** API legacy: envía RMZ usando el TokenManager */
   async sendRMZToken(
     destination: string,
     amount: number
   ): Promise<{ ok: boolean; txid?: string; reason?: string }> {
-    console.warn('[RMZWallet] sendRMZToken(): stub no implementado todavía', { destination, amount });
-    return { ok: false, reason: 'not-implemented' };
+    const state = this.state$.value;
+    const mnemonic = state.mnemonic?.trim();
+    const address = state.address?.trim();
+    const toAddress = destination?.trim();
+
+    if (!mnemonic || !address) {
+      throw new Error('No hay una cartera inicializada con frase mnemónica.');
+    }
+
+    if (!toAddress) {
+      throw new Error('La dirección de destino es obligatoria.');
+    }
+
+    if (!Number.isFinite(amount) || amount <= 0) {
+      throw new Error('La cantidad de RMZ a enviar debe ser mayor que cero.');
+    }
+
+    try {
+      const { txid } = await this.tokenManager.sendRMZToken(toAddress, amount, {
+        mnemonic,
+        address,
+      });
+
+      return { ok: true, txid };
+    } catch (error) {
+      const reason = error instanceof Error ? error.message : String(error);
+      throw new Error(`No se pudo enviar el token RMZ (${RMZ_TOKEN_ID}): ${reason}`);
+    }
   }
 }

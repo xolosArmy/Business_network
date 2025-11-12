@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { NotificationSettingsService } from './notification-settings.service';
 
 interface NotificationPreferences {
@@ -12,10 +13,27 @@ interface NotificationPreferences {
 export class NotificationService {
   private audioCtx?: AudioContext;
 
-  constructor(private settingsService: NotificationSettingsService) {
+  constructor(
+    private settingsService: NotificationSettingsService,
+    private readonly toastController: ToastController,
+  ) {
     // Evitar errores en SSR y solo inicializar en el navegador
     if (typeof window !== 'undefined' && 'AudioContext' in window) {
       this.audioCtx = new (window.AudioContext as any)();
+    }
+  }
+
+  async toast(message: string, color: 'dark' | 'success' | 'danger' | 'medium' = 'dark'): Promise<void> {
+    try {
+      const toast = await this.toastController.create({
+        message,
+        duration: 2500,
+        color,
+        position: 'top',
+      });
+      await toast.present();
+    } catch (error) {
+      console.warn('No se pudo mostrar el toast de notificación', error);
     }
   }
 

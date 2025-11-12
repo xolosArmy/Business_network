@@ -9,14 +9,14 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'home',
+        path: 'wallet',
         loadChildren: () =>
           import('../home/home.module').then((m) => m.HomePageModule),
       },
       {
-        path: 'wallet',
-        loadChildren: () =>
-          import('../wallet/wallet.module').then((m) => m.WalletPageModule),
+        path: 'home',
+        redirectTo: 'wallet',
+        pathMatch: 'full',
       },
       {
         path: 'transactions',
@@ -51,7 +51,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'wallet',
         pathMatch: 'full',
       },
     ],

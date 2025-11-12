@@ -1,7 +1,9 @@
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import type { BleDevice } from '@capacitor-community/bluetooth-le';
 
 import { BleService } from '../../services/ble.service';
+import { SyncService, type SyncStatus } from '../../services/sync.service';
 
 @Component({
   selector: 'app-status-bar',
@@ -10,12 +12,15 @@ import { BleService } from '../../services/ble.service';
 })
 export class StatusBarComponent implements OnInit, OnDestroy {
   isOnline = typeof navigator === 'undefined' ? true : navigator.onLine;
+  syncStatus: SyncStatus = 'idle';
 
   private removeConnectionListeners: (() => void) | null = null;
+  private syncSub?: Subscription;
 
   constructor(
     private readonly zone: NgZone,
     public readonly bleService: BleService,
+    private readonly syncService: SyncService,
   ) {}
 
   ngOnInit(): void {
@@ -36,10 +41,17 @@ export class StatusBarComponent implements OnInit, OnDestroy {
       window.removeEventListener('online', updateOnlineStatus);
       window.removeEventListener('offline', updateOnlineStatus);
     };
+
+    this.syncSub = this.syncService.status$.subscribe((status) => {
+      this.zone.run(() => {
+        this.syncStatus = status;
+      });
+    });
   }
 
   ngOnDestroy(): void {
     this.removeConnectionListeners?.();
+    this.syncSub?.unsubscribe();
   }
 
   get internetIcon(): string {
@@ -66,5 +78,22 @@ export class StatusBarComponent implements OnInit, OnDestroy {
       (typeof extendedDevice?.deviceName === 'string' ? extendedDevice.deviceName : undefined) ||
       'Unknown';
     return name && name.trim().length > 0 ? name : null;
+  }
+
+  get chronikIcon(): string {
+    return this.syncStatus === 'synced' ? 'radio-outline' : 'alert-circle-outline';
+  }
+
+  get chronikText(): string {
+    switch (this.syncStatus) {
+      case 'synced':
+        return 'Chronik ok';
+      case 'syncing':
+        return 'Sincronizando…';
+      case 'disconnected':
+        return 'Chronik offline';
+      default:
+        return 'WS inactivo';
+    }
   }
 }

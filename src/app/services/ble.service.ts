@@ -379,7 +379,7 @@ export class BLEService {
       throw new Error('No hay un dispositivo BLE conectado.');
     }
 
-    const txid = await this.walletService.createAndBroadcastTx(toAddress, amount);
+    const txid = await this.walletService.sendXec(toAddress, amount);
     const payload: BleTransferPayload = {
       txid,
       amount,

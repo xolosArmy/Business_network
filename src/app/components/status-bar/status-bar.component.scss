@@ -29,7 +29,8 @@
   }
 
   .network,
-  .ble {
+  .ble,
+  .chronik {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -49,5 +50,13 @@
 
   .disconnected {
     color: #ffcc00;
+  }
+
+  .chronik {
+    color: #f6c343;
+
+    &.connected {
+      color: #4cd964;
+    }
   }
 }

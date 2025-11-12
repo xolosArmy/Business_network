@@ -1,12 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NavController, ToastController } from '@ionic/angular';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
+import * as QRCode from 'qrcode';
+import { ToastController } from '@ionic/angular';
 
+import { WalletService } from '../../services/wallet.service';
+import { TransactionsService } from '../../services/transactions.service';
+import { SyncService, type SyncStatus } from '../../services/sync.service';
 import { CarteraService } from '../../services/cartera.service';
-import { ChronikService } from '../../services/chronik.service';
-import { SaldoService } from '../../services/saldo.service';
-import { TokenBalanceService } from '../../services/token-balance.service';
-import { TxStorageService } from '../../services/tx-storage.service';
+
+type Section = 'overview' | 'send' | 'receive';
 
 @Component({
   selector: 'app-home-page',
@@ -14,240 +16,177 @@ import { TxStorageService } from '../../services/tx-storage.service';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit, OnDestroy {
-  public wallet: any = null;
-  public connected = false;
-  public loading = false;
-  public balanceXec = this.saldo?.balanceXec$; // Observable<number>
-  public balanceRmz = this.tokens?.balanceRmz$; // Observable<number>
-  public txs = new BehaviorSubject<any[]>([]);
+  readonly state$ = this.walletService.state$;
+  readonly transactions$ = this.transactionsService.transactions$;
+  readonly syncStatus$ = this.syncService.status$;
 
-  private readonly subscriptions: Subscription[] = [];
-  private readonly cleanupFns: Array<() => void> = [];
+  currentSection: Section = 'overview';
+  sendToAddress = '';
+  sendAmount: number | null = null;
+  selectedAsset: 'XEC' | 'RMZ' = 'XEC';
+  statusMessage = '';
+  qrDataUrl: string | null = null;
+  showInlineQr = false;
+
+  private readonly syncLabels: Record<SyncStatus, string> = {
+    idle: 'Esperando sincronización',
+    syncing: 'Sincronizando…',
+    synced: 'Sincronizado',
+    disconnected: 'Sin conexión',
+  };
+  private currentAddress: string | null = null;
+  private subscriptions: Subscription[] = [];
 
   constructor(
-    private readonly cartera: CarteraService,
-    private readonly saldo: SaldoService,
-    private readonly tokens: TokenBalanceService,
-    private readonly chronik: ChronikService,
-    private readonly txStore: TxStorageService,
-    private readonly toast: ToastController,
-    private readonly nav: NavController,
-  ) {
-    this.balanceXec = this.saldo.balanceXec$;
-    this.balanceRmz = this.tokens.balanceRmz$;
-    this.connected = typeof navigator === 'undefined' ? false : navigator.onLine;
-  }
+    public readonly walletService: WalletService,
+    private readonly transactionsService: TransactionsService,
+    private readonly syncService: SyncService,
+    private readonly carteraService: CarteraService,
+    private readonly toastController: ToastController,
+  ) {}
 
   async ngOnInit(): Promise<void> {
-    await this.loadWallet();
-    const anyCartera = this.cartera as any;
-    if (!this.wallet) {
-      if (typeof anyCartera.getWalletInfo === 'function') {
-        this.wallet = await anyCartera.getWalletInfo();
-      } else if (typeof anyCartera.getWallet === 'function') {
-        this.wallet = await anyCartera.getWallet();
-      }
-    }
-    this.refreshTransactions();
-    this.observeStoredTransactions();
-    this.observeChronikStreams();
-    this.observeNetworkStatus();
+    await this.walletService.initWallet();
+    this.subscriptions.push(
+      this.state$.subscribe((state) => {
+        const nextAddress = state.address ?? null;
+        if (nextAddress && nextAddress !== this.currentAddress) {
+          this.currentAddress = nextAddress;
+          void this.transactionsService.refreshHistory(nextAddress);
+          void this.buildQrCode(nextAddress);
+          this.showInlineQr = false;
+        }
+      }),
+    );
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
-    this.cleanupFns.forEach((fn) => fn());
   }
 
-  async onCrear(): Promise<void> {
-    if (this.loading) {
+  async setSection(section: Section): Promise<void> {
+    this.currentSection = section;
+    if (section === 'receive' && this.currentAddress) {
+      await this.buildQrCode(this.currentAddress);
+    }
+  }
+
+  async sendPayment(): Promise<void> {
+    if (!this.sendToAddress?.trim() || !this.sendAmount || this.sendAmount <= 0) {
+      this.statusMessage = '⚠️ Completa dirección y monto para continuar.';
       return;
     }
 
-    this.loading = true;
+    if (!this.currentAddress) {
+      this.statusMessage = '⚠️ Aún no hay una cartera activa. Crea o importa una antes de enviar.';
+      return;
+    }
+
     try {
-      await this.cartera.createWallet();
-      await this.loadWallet();
-      await this.showToast('Cartera creada');
+      const destination = this.sendToAddress.trim();
+      const amount = this.sendAmount;
+      let txid: string;
+
+      if (this.selectedAsset === 'XEC') {
+        txid = await this.walletService.sendXec(destination, amount);
+      } else {
+        const result = await this.carteraService.sendRMZToken(destination, amount);
+        if (!result?.txid) {
+          const fallbackMessage = '❌ Envío de eToken fallido.';
+          this.statusMessage = fallbackMessage;
+          await this.presentToast(fallbackMessage, 'danger');
+          return;
+        }
+        txid = result.txid;
+        await this.presentToast(`✅ eToken enviado. TXID: ${txid}`, 'success');
+      }
+
+      this.statusMessage = `✅ Enviado. TXID: ${txid}`;
+      this.sendToAddress = '';
+      this.sendAmount = null;
+      await this.transactionsService.refreshHistory(this.currentAddress ?? destination);
     } catch (error) {
-      console.warn('No se pudo crear la cartera', error);
-      await this.showToast('No se pudo crear la cartera');
-    } finally {
-      this.loading = false;
+      const message = error instanceof Error ? error.message : String(error);
+      this.statusMessage = `❌ Error al enviar: ${message}`;
     }
   }
 
-  onEnviar(): void {
-    this.nav.navigateForward('/tabs/wallet');
-  }
-
-  async onRecibir(): Promise<void> {
-    const address = this.wallet?.address;
-    if (!address) {
-      await this.showToast('Genera una cartera primero');
+  async copyAddress(address?: string | null): Promise<void> {
+    const target = address ?? this.currentAddress;
+    if (!target) {
       return;
     }
-
-    await this.showToast('Muestra QR aquí (TODO)');
-  }
-
-  mostrarQR(): void {
-    void this.onRecibir();
-  }
-
-  async copiar(addr?: string): Promise<void> {
-    if (!addr) {
-      return;
-    }
-
     try {
       if (typeof navigator !== 'undefined' && navigator.clipboard) {
-        await navigator.clipboard.writeText(addr);
+        await navigator.clipboard.writeText(target);
       }
-      await this.showToast('Dirección copiada');
+      this.statusMessage = '📋 Dirección copiada.';
     } catch (error) {
-      console.warn('No se pudo copiar la dirección', error);
-      await this.showToast('Error al copiar');
+      console.error('No se pudo copiar la dirección', error);
+      this.statusMessage = '❌ No se pudo copiar la dirección.';
     }
   }
 
-  abrirTx(tx: any): void {
-    const txid = tx?.txid || tx?.id;
-    if (!txid || typeof window === 'undefined') {
+  async toggleInlineQr(): Promise<void> {
+    if (!this.currentAddress) {
+      this.showInlineQr = false;
       return;
     }
 
-    const url = `https://explorer.e.cash/tx/${txid}`;
-    window.open(url, '_blank', 'noopener');
+    if (!this.qrDataUrl) {
+      await this.buildQrCode(this.currentAddress);
+    }
+
+    this.showInlineQr = !this.showInlineQr;
   }
 
-  private async loadWallet(): Promise<void> {
-    this.loading = true;
-    try {
-      const current = await this.cartera.getWalletInfo();
-      const stored = this.readPersistedWallet();
-      this.wallet = current?.address ? current : stored;
+  async refreshHistory(): Promise<void> {
+    if (this.currentAddress) {
+      await this.transactionsService.refreshHistory(this.currentAddress);
+    }
+  }
 
-      if (this.wallet?.address) {
-        this.persistWallet(this.wallet);
-        await this.subscribeToChronik(this.wallet.address);
-      } else if (stored?.address) {
-        await this.subscribeToChronik(stored.address);
+  trackTx(_index: number, item: { txid: string }): string {
+    return item.txid;
+  }
+
+  statusText(status: SyncStatus | null): string {
+    if (!status) {
+      return this.syncLabels.idle;
+    }
+    return this.syncLabels[status];
+  }
+
+  private async buildQrCode(address: string): Promise<void> {
+    try {
+      this.qrDataUrl = await QRCode.toDataURL(address);
+    } catch (error) {
+      console.warn('No se pudo generar el QR', error);
+      this.qrDataUrl = null;
+    }
+  }
+
+  async createNewWallet(): Promise<void> {
+    try {
+      const state = await this.walletService.createWallet();
+      this.currentAddress = state.address ?? null;
+      if (this.currentAddress) {
+        void this.transactionsService.refreshHistory(this.currentAddress);
+        void this.buildQrCode(this.currentAddress);
+        this.statusMessage = '✅ Nueva cartera creada con éxito.';
       }
     } catch (error) {
-      console.warn('No se pudo cargar la cartera', error);
-      const stored = this.readPersistedWallet();
-      this.wallet = stored;
-    } finally {
-      this.loading = false;
+      const message = error instanceof Error ? error.message : String(error);
+      this.statusMessage = `❌ No se pudo crear la cartera: ${message}`;
+      await this.presentToast(this.statusMessage, 'danger');
     }
   }
 
-  private async subscribeToChronik(address: string | undefined): Promise<void> {
-    if (!address) {
-      return;
-    }
-
-    try {
-      await this.chronik.subscribeToAddress(address);
-      this.connected = true;
-    } catch (error) {
-      console.warn('No se pudo suscribir a Chronik', error);
-      this.connected = false;
-    }
-  }
-
-  private refreshTransactions(): void {
-    const stored = this.txStore.getAll();
-    this.txs.next(this.normalizeTransactions(stored));
-  }
-
-  private observeStoredTransactions(): void {
-    const sub = this.txStore.tx$.subscribe((entries) => {
-      this.txs.next(this.normalizeTransactions(entries));
-    });
-    this.subscriptions.push(sub);
-  }
-
-  private observeChronikStreams(): void {
-    const anyChronik = this.chronik as any;
-    if (anyChronik.connected$?.subscribe) {
-      const statusSub = anyChronik.connected$.subscribe((v: boolean) => {
-        this.connected = !!v;
-      });
-      this.subscriptions.push(statusSub);
-    } else {
-      this.connected = true;
-    }
-
-    if (anyChronik.txs$?.subscribe) {
-      const txSub = anyChronik.txs$.subscribe((list: any[]) => {
-        this.txs.next(list || []);
-      });
-      this.subscriptions.push(txSub);
-    }
-  }
-
-  private observeNetworkStatus(): void {
-    if (typeof window === 'undefined') {
-      return;
-    }
-
-    const setOnline = () => (this.connected = true);
-    const setOffline = () => (this.connected = false);
-
-    window.addEventListener('online', setOnline);
-    window.addEventListener('offline', setOffline);
-
-    this.cleanupFns.push(() => {
-      window.removeEventListener('online', setOnline);
-      window.removeEventListener('offline', setOffline);
-    });
-  }
-
-  private persistWallet(wallet: any): void {
-    if (typeof localStorage === 'undefined') {
-      return;
-    }
-
-    localStorage.setItem('rmz_wallet', JSON.stringify(wallet));
-  }
-
-  private readPersistedWallet(): any {
-    if (typeof localStorage === 'undefined') {
-      return null;
-    }
-
-    const raw = localStorage.getItem('rmz_wallet');
-    if (!raw) {
-      return null;
-    }
-
-    try {
-      return JSON.parse(raw);
-    } catch {
-      return null;
-    }
-  }
-
-  private normalizeTransactions(entries: any[] | null | undefined): any[] {
-    if (!Array.isArray(entries)) {
-      return [];
-    }
-
-    return entries.map((tx) => ({
-      type: tx?.type === 'sent' ? 'send' : 'receive',
-      amount: Number(tx?.amount ?? 0),
-      time: tx?.timestamp ?? tx?.time ?? new Date().toISOString(),
-      confirmed: tx?.status === 'confirmed',
-      txid: tx?.txid ?? tx?.id,
-    }));
-  }
-
-  private async showToast(message: string): Promise<void> {
-    const toast = await this.toast.create({
+  private async presentToast(message: string, color: 'success' | 'danger' | 'medium' = 'medium'): Promise<void> {
+    const toast = await this.toastController.create({
       message,
-      duration: 2000,
+      duration: 2500,
+      color,
       position: 'top',
     });
     await toast.present();

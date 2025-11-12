@@ -14,12 +14,36 @@ ion-button[color="primary"] {
 }
 
 :root {
+  --xolos-red:#c11313;
+  --xolos-black:#050505;
+  --xolos-gold:#f9d777;
   --rmz-primary:#df3a3a;
   --rmz-dark:#0f0f0f;
   --rmz-accent:#E07A5F;
-  --rmz-bg:#0b0b0b;
-  --rmz-card:#141414;
+  --rmz-bg:#050505;
+  --rmz-card:#151515;
   --rmz-text:#f4f4f4;
   --rmz-muted:#9aa0a6;
   --radius-lg:20px; --radius-md:14px; --radius-sm:10px;
+
+  --ion-color-primary: #df3a3a;
+  --ion-color-primary-rgb: 223,58,58;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255,255,255;
+  --ion-color-primary-shade: #c73636;
+  --ion-color-primary-tint: #e45151;
+
+  --ion-color-secondary: #e07a5f;
+  --ion-color-secondary-rgb: 224,122,95;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255,255,255;
+  --ion-color-secondary-shade: #c46b54;
+  --ion-color-secondary-tint: #e58970;
+
+  --ion-color-danger: var(--xolos-red);
+  --ion-color-danger-rgb: 193,19,19;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255,255,255;
+  --ion-color-danger-shade: #aa0f0f;
+  --ion-color-danger-tint: #cf2c2c;
 }

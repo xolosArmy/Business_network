@@ -1,39 +1,52 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
-import { ChronikService } from './chronik.service';
+import { BehaviorSubject } from 'rxjs';
+import { ChronikClient } from 'chronik-client';
 
-/**
- * Servicio muy simple para saldo de XEC:
- * - Escucha UTXOs o balance$ que ya emita ChronikService (ajusta nombres si difieren)
- * - Expone balanceXec$ como BehaviorSubject<number>
- */
+import { CHRONIK_URL, RMZ_TOKEN_ID } from './chronik.constants';
+import { ecashToP2PKHHash160Hex } from '../utils/chronik';
+
+export interface BalanceSnapshot {
+  xecBalance: number;
+  rmzBalance: bigint;
+}
+
 @Injectable({ providedIn: 'root' })
 export class SaldoService {
-  private _balanceXec = new BehaviorSubject<number>(0);
-  public readonly balanceXec$ = this._balanceXec.asObservable();
+  private readonly chronikClient = new ChronikClient(CHRONIK_URL);
+  private readonly balanceSubject = new BehaviorSubject<BalanceSnapshot>({
+    xecBalance: 0,
+    rmzBalance: 0n,
+  });
 
-  constructor(private chronik: ChronikService) {
-    // Ajusta a la fuente real que tengas disponible:
-    // Opción 1: si chronik ya expone balance en XEC:
-    if ((this.chronik as any).balanceXec$) {
-      (this.chronik as any).balanceXec$.subscribe((v: number) => {
-        this._balanceXec.next(Number(v || 0));
-      });
-      return;
+  readonly balance$ = this.balanceSubject.asObservable();
+
+  async actualizarSaldo(address: string): Promise<BalanceSnapshot> {
+    const normalized = address?.trim();
+    if (!normalized) {
+      throw new Error('La dirección es obligatoria para consultar el saldo.');
     }
 
-    // Opción 2: calcular por UTXOs (asumiendo utxos$ emite [{satoshis:number}]):
-    const utxos$ = (this.chronik as any).utxos$;
-    if (utxos$?.subscribe) {
-      utxos$
-        .pipe(
-          map((list: any[] = []) => {
-            const sats = list.reduce((acc, u) => acc + (u?.satoshis || 0), 0);
-            // 1 XEC = 100 satoshis (XEC), ajusta si usas otra unidad.
-            return sats / 100;
-          })
-        )
-        .subscribe((v: number) => this._balanceXec.next(v));
-    }
+    const hash160 = ecashToP2PKHHash160Hex(normalized);
+    const scriptUtxos = await this.chronikClient.script('p2pkh', hash160).utxos();
+    const utxos = scriptUtxos.flatMap((entry) => entry.utxos ?? []);
+
+    const totalSats = utxos.reduce<bigint>((sum, utxo) => {
+      const value = typeof utxo?.value === 'string' ? BigInt(utxo.value) : BigInt(utxo?.value ?? 0);
+      return sum + value;
+    }, 0n);
+
+    const rmzBalance = utxos.reduce<bigint>((sum, utxo) => {
+      const tokenId = utxo?.slpMeta?.tokenId?.toLowerCase();
+      if (tokenId !== RMZ_TOKEN_ID) {
+        return sum;
+      }
+      const amountRaw = utxo?.slpToken?.amount ?? 0;
+      return sum + BigInt(amountRaw);
+    }, 0n);
+
+    const xecBalance = Number(totalSats) / 100;
+    const snapshot: BalanceSnapshot = { xecBalance, rmzBalance };
+    this.balanceSubject.next(snapshot);
+    return snapshot;
   }
 }

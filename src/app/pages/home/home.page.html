@@ -1,132 +1,172 @@
-<ion-header>
-  <ion-toolbar color="light">
-    <ion-title>RMZ Wallet</ion-title>
-    <ion-buttons slot="end">
-      <ion-chip color="medium" outline="true">
-        <ion-icon name="radio-outline"></ion-icon>
-        <ion-label>Chronik</ion-label>
-        <ion-badge [color]="connected ? 'success' : 'warning'">{{ connected ? 'Online' : 'Reconectando' }}</ion-badge>
-      </ion-chip>
-    </ion-buttons>
+<ion-header class="xolos-header">
+  <ion-toolbar color="dark">
+    <div class="hero">
+      <div class="hero__avatar">
+        <img src="assets/logo.png" alt="Logo Xolos RMZ" />
+      </div>
+      <div class="hero__content">
+        <p class="eyebrow">XolosArmy</p>
+        <h1>Xolos RMZ Wallet</h1>
+        <p class="tagline">Tecnología eCash para la nación rojinegra</p>
+        <ng-container *ngIf="syncStatus$ | async as syncStatus">
+          <span class="sync-pill" [class.connected]="syncStatus === 'synced'">
+            🛰️ {{ statusText(syncStatus) }}
+          </span>
+        </ng-container>
+      </div>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="rmz-bg">
-  <ion-grid fixed>
+<ion-content class="wallet-content">
+  <ng-container *ngIf="state$ | async as state">
+    <ng-container *ngIf="state.address; else walletSetup">
+      <section class="card balance-card">
+        <div class="balance-values">
+          <div>
+            <p class="label">Saldo eCash</p>
+            <h2>{{ state.xecBalance | number: '1.2-2' }} XEC</h2>
+          </div>
+          <div>
+            <p class="label">Saldo RMZ</p>
+            <h2>{{ state.rmzBalanceFormatted }} RMZ</h2>
+          </div>
+        </div>
+        <div class="address-shell">
+          <div class="address-text">
+            {{ (state.address | slice: 0:8) + '…' + (state.address | slice: -6) }}
+          </div>
+          <div class="address-actions">
+            <ion-button size="small" fill="clear" color="light" (click)="copyAddress(state.address)">
+              <ion-icon name="copy-outline" slot="start"></ion-icon>
+              Copiar
+            </ion-button>
+            <ion-button size="small" fill="clear" color="light" (click)="toggleInlineQr()">
+              <ion-icon name="qr-code" slot="start"></ion-icon>
+              {{ showInlineQr ? 'Ocultar QR' : 'Mostrar QR' }}
+            </ion-button>
+          </div>
+        </div>
+        <div class="inline-qr" *ngIf="showInlineQr && qrDataUrl">
+          <img [src]="qrDataUrl" alt="QR de la dirección" />
+        </div>
+        <div class="cta-buttons">
+          <ion-button expand="block" color="danger" (click)="setSection('send')">
+            <ion-icon name="paper-plane" slot="start"></ion-icon>
+            Enviar
+          </ion-button>
+          <ion-button expand="block" fill="outline" color="light" (click)="setSection('receive')">
+            <ion-icon name="qr-code" slot="start"></ion-icon>
+            Recibir
+          </ion-button>
+        </div>
+      </section>
 
-    <!-- Si no hay cartera, onboarding simple -->
-    <ng-container *ngIf="!wallet?.address; else walletDashboard">
-      <ion-row>
-        <ion-col size="12">
-          <ion-card>
-            <ion-card-header>
-              <ion-card-title>Gestión de Cartera</ion-card-title>
-              <ion-card-subtitle>Genera una nueva cartera para comenzar a recibir eCash.</ion-card-subtitle>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-button color="rmz" expand="block" size="large" (click)="onCrear()" [disabled]="loading">
-                <ion-icon name="sparkles-outline" slot="start"></ion-icon>
-                Crear cartera
-              </ion-button>
-              <ion-text color="medium">
-                <p class="mt-2">Xolín cuidará tu primer recibo y te avisará al instante.</p>
-              </ion-text>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
+      <section class="card receive-card" *ngIf="currentSection === 'receive'">
+        <div class="section-header">
+          <h3>Recibir fondos</h3>
+          <ion-button fill="clear" size="small" (click)="setSection('overview')">
+            <ion-icon name="close" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+        <div class="qr-wrapper" *ngIf="qrDataUrl; else qrPlaceholder">
+          <img [src]="qrDataUrl" alt="QR de la dirección" />
+        </div>
+        <ng-template #qrPlaceholder>
+          <p class="muted">Generando código QR…</p>
+        </ng-template>
+        <p class="address-full">{{ state.address }}</p>
+        <ion-button size="small" fill="outline" color="light" (click)="copyAddress(state.address)">
+          <ion-icon name="copy-outline" slot="start"></ion-icon>
+          Copiar dirección
+        </ion-button>
+      </section>
+
+      <section class="card action-card" *ngIf="currentSection === 'send'">
+        <div class="section-header">
+          <h3>Enviar fondos</h3>
+          <ion-segment [(ngModel)]="selectedAsset" color="dark">
+            <ion-segment-button value="XEC">
+              <ion-label>XEC</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="RMZ">
+              <ion-label>RMZ</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </div>
+        <ion-list lines="none">
+          <ion-item>
+            <ion-label position="floating">Dirección destino</ion-label>
+            <ion-input [(ngModel)]="sendToAddress" autocapitalize="none" autocomplete="off"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Monto ({{ selectedAsset }})</ion-label>
+            <ion-input type="number" [(ngModel)]="sendAmount"></ion-input>
+          </ion-item>
+        </ion-list>
+        <div class="actions">
+          <ion-button expand="block" color="danger" (click)="sendPayment()">
+            <ion-icon name="rocket" slot="start"></ion-icon>
+            Confirmar envío
+          </ion-button>
+          <ion-button expand="block" fill="clear" (click)="setSection('overview')">Cerrar</ion-button>
+        </div>
+        <p class="status-msg" *ngIf="statusMessage">{{ statusMessage }}</p>
+      </section>
+
+      <section class="card history-card">
+        <div class="section-header">
+          <h3>Historial de movimientos</h3>
+          <ion-button size="small" fill="clear" (click)="refreshHistory()">
+            <ion-icon name="refresh" slot="start"></ion-icon>
+            Actualizar
+          </ion-button>
+        </div>
+        <ng-container *ngIf="transactions$ | async as txs; else emptyHistory">
+          <ion-list lines="none">
+            <ion-item *ngFor="let tx of txs | slice: 0:10; trackBy: trackTx">
+              <ion-label>
+                <div class="tx-row">
+                  <span class="badge" [class.in]="tx.direction === 'in'" [class.out]="tx.direction === 'out'">
+                    {{ tx.direction === 'in' ? '➕' : '➖' }}
+                  </span>
+                  <div class="tx-amounts">
+                    <strong>{{ tx.xecAmount | number: '1.2-2' }} XEC</strong>
+                    <span *ngIf="tx.tokenAmount">· {{ tx.tokenAmount }} RMZ</span>
+                  </div>
+                </div>
+                <div class="tx-meta">
+                  <span>{{ tx.timestamp | date: 'short' }}</span>
+                  <span class="status-chip" [class.pending]="tx.status === 'pending'">
+                    {{ tx.status === 'pending' ? '⏳ Pendiente' : '✅ Confirmada' }}
+                  </span>
+                </div>
+              </ion-label>
+              <ion-note slot="end">{{ tx.txid | slice: 0:6 }}…{{ tx.txid | slice: -4 }}</ion-note>
+            </ion-item>
+          </ion-list>
+        </ng-container>
+        <ng-template #emptyHistory>
+          <p class="muted">Aún no registramos movimientos. En cuanto recibas o envíes XEC aparecerán aquí.</p>
+        </ng-template>
+      </section>
     </ng-container>
 
-    <!-- Dashboard cuando ya existe cartera -->
-    <ng-template #walletDashboard>
-      <ion-row>
-        <ion-col size="12" sizeMd="6">
-          <ion-card class="rmz-hero">
-            <ion-card-header>
-              <ion-card-subtitle>Saldo disponible</ion-card-subtitle>
-              <ion-card-title class="rmz-balance">
-                {{ (balanceXec | async) ?? 0 | number:'1.2-2' }} XEC
-              </ion-card-title>
-              <ion-card-subtitle class="rmz-secondary">
-                {{ (balanceRmz | async) ?? 0 | number:'1.0-4' }} RMZ
-              </ion-card-subtitle>
-            </ion-card-header>
-            <ion-card-content>
-              <div class="rmz-actions">
-                <ion-button color="rmz" (click)="onEnviar()" [disabled]="loading">
-                  <ion-icon slot="start" name="arrow-up-circle-outline"></ion-icon>
-                  Enviar
-                </ion-button>
-                <ion-button color="dark" fill="outline" (click)="onRecibir()" [disabled]="loading">
-                  <ion-icon slot="start" name="arrow-down-circle-outline"></ion-icon>
-                  Recibir
-                </ion-button>
-              </div>
-              <ion-item lines="none" class="rmz-token-balance">
-                <ion-icon slot="start" name="logo-buffer" color="rmz"></ion-icon>
-                <ion-label>
-                  <h3>Saldo RMZ</h3>
-                  <p>{{ (balanceRmz | async) ?? 0 | number:'1.0-4' }} RMZ</p>
-                </ion-label>
-              </ion-item>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-
-        <ion-col size="12" sizeMd="6">
-          <ion-card>
-            <ion-card-header>
-              <ion-card-subtitle>Tu dirección</ion-card-subtitle>
-              <ion-card-title class="break-all">{{ wallet?.address || '—' }}</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-button size="small" fill="outline" (click)="copiar(wallet?.address)">
-                <ion-icon name="copy-outline" slot="start"></ion-icon>
-                Copiar
-              </ion-button>
-              <ion-button size="small" fill="clear" (click)="mostrarQR()">
-                <ion-icon name="qr-code-outline" slot="start"></ion-icon>
-                QR
-              </ion-button>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col size="12">
-          <ion-card>
-            <ion-card-header>
-              <ion-card-title>Actividad</ion-card-title>
-            </ion-card-header>
-
-            <!-- Estado vacío -->
-            <ion-list *ngIf="(txs | async)?.length === 0">
-              <ion-item lines="none">
-                <ion-label>
-                  <h2>Xolín</h2>
-                  <p>Sin movimientos todavía. Cuando llegue tu primera TX, Xolín te avisará al instante.</p>
-                </ion-label>
-              </ion-item>
-            </ion-list>
-
-            <!-- Lista de transacciones -->
-            <ion-list *ngIf="(txs | async)?.length">
-              <ion-item *ngFor="let t of (txs | async)" detail="true" (click)="abrirTx(t)">
-                <ion-avatar slot="start">
-                  <ion-icon [name]="t.type === 'send' ? 'swap-vertical-outline' : 'download-outline'"></ion-icon>
-                </ion-avatar>
-                <ion-label>
-                  <h3>{{ t.type === 'send' ? 'Envío' : 'Recepción' }} • {{ t.amount | number:'1.2-8' }} XEC</h3>
-                  <p>{{ t.time | date:'short' }} • {{ t.confirmed ? 'Confirmada' : 'Pendiente' }}</p>
-                </ion-label>
-                <ion-badge [color]="t.confirmed ? 'success' : 'warning'">{{ t.confirmed ? 'OK' : '...' }}</ion-badge>
-              </ion-item>
-            </ion-list>
-          </ion-card>
-        </ion-col>
-      </ion-row>
+    <ng-template #walletSetup>
+      <section class="card empty-wallet">
+        <div class="empty-wallet__logo">
+          <img src="assets/logo.png" alt="Logo Xolos RMZ" />
+        </div>
+        <h3>Activa tu Xolos RMZ Wallet</h3>
+        <p>
+          Aún no encontramos una cartera configurada en este dispositivo. Crea una nueva para empezar a
+          recibir y enviar eCash y RMZ.
+        </p>
+        <ion-button color="danger" expand="block" (click)="createNewWallet()">
+          <ion-icon name="shield-checkmark" slot="start"></ion-icon>
+          Crear nueva cartera
+        </ion-button>
+      </section>
     </ng-template>
-
-  </ion-grid>
+  </ng-container>
 </ion-content>

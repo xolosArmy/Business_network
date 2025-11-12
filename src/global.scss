@@ -8,9 +8,57 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
-/* Variables globales personalizadas */
+body {
+  background-color: #0b0b0b;
+  color: #f5f5f5;
+  font-family: 'Montserrat', 'Roboto', 'Helvetica Neue', sans-serif;
+}
+
 :root {
   --ion-background-color: var(--rmz-bg);
   --ion-text-color: var(--rmz-text);
+}
+
+#mnemonic-modal {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 999;
+}
+
+#mnemonic-modal .modal-content {
+  background: #1f1f1f;
+  color: #f5f5f5;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+}
+
+#mnemonic-modal input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #2b2b2b;
+  color: #fff;
+}
+
+#mnemonic-modal button {
+  background: var(--rmz-primary);
+  border: none;
+  border-radius: 8px;
+  padding: 0.55rem 1.4rem;
+  color: #fff;
+  margin: 0.25rem;
+  cursor: pointer;
 }

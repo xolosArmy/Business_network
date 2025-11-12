@@ -1,0 +1,61 @@
+:host {
+  display: block;
+  background: var(--xolos-black, #050505);
+}
+
+.tabs-header {
+  ion-toolbar {
+    --background: linear-gradient(120deg, #050505 0%, #5a0404 45%, #b80606 100%);
+    --color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  &__logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 6px;
+    object-fit: contain;
+  }
+
+  &__titles {
+    h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+    }
+  }
+
+  &__eyebrow {
+    margin: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+  }
+}
+
+ion-tab-bar {
+  --background: rgba(5, 5, 5, 0.96);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+ion-tabs {
+  background: var(--xolos-black, #050505);
+}
+
+ion-tab-button {
+  --color: rgba(255, 255, 255, 0.6);
+  --color-selected: var(--xolos-red, #c11313);
+
+  ion-icon {
+    font-size: 1.25rem;
+  }
+}

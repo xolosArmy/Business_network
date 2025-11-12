@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Network } from '@capacitor/network';
+import { Toast } from '@capacitor/toast';
 import { Wallet } from 'ecash-wallet';
 import { ChronikClient } from 'chronik-client';
 import type { WalletInfo } from './cartera.service';
@@ -21,20 +22,25 @@ type WalletSource =
 @Injectable({ providedIn: 'root' })
 export class EnviarService {
   private isProcessingPending = false;
+  private isProcessingLegacyQueue = false;
+  private readonly storageReady: Promise<void>;
 
   constructor(
     private readonly offlineStorage: OfflineStorageService,
     private readonly storage: StorageService,
     private readonly walletService: WalletService,
   ) {
-    if (typeof window !== 'undefined') {
-      void this.storage
-        .initDB()
-        .catch((error) => console.error('IndexedDB init failed', error));
-    }
+    this.storageReady = this.initializeStorage();
     if (typeof window !== 'undefined') {
       window.addEventListener('online', () => {
-        void this.processPendingTransactions();
+        void this.handleConnectivityRestored();
+      });
+    }
+    if (typeof Network?.addListener === 'function') {
+      Network.addListener('networkStatusChange', (status) => {
+        if (status.connected) {
+          void this.handleConnectivityRestored();
+        }
       });
     }
   }
@@ -45,7 +51,7 @@ export class EnviarService {
     error?: string;
   }> {
     try {
-      const txid = await this.walletService.createAndBroadcastTx(toAddress, amount);
+      const txid = await this.walletService.sendXec(toAddress, amount);
       return { success: true, txid };
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
@@ -78,6 +84,7 @@ export class EnviarService {
           txid: Date.now().toString(),
           pending: true,
         };
+        await this.waitForStorage();
         this.storage.saveTx(tx);
         await this.queueTransaction(destination, amount, timestamp);
         console.log('Transacción guardada localmente (offline).');
@@ -158,6 +165,14 @@ export class EnviarService {
     }
   }
 
+  private async handleConnectivityRestored(): Promise<void> {
+    await this.waitForStorage();
+    await Promise.allSettled([
+      this.processPendingTransactions(),
+      this.processLegacyPendingTransactions(),
+    ]);
+  }
+
   private async queueTransaction(destination: string, amount: number, date: string): Promise<StoredTransaction> {
     return this.offlineStorage.addTransaction({
       description: `Envío pendiente a ${destination}`,
@@ -202,6 +217,39 @@ export class EnviarService {
         status: 'failed',
         errorMessage: message,
       });
+    }
+  }
+
+  private async processLegacyPendingTransactions(): Promise<void> {
+    if (this.isProcessingLegacyQueue) {
+      return;
+    }
+
+    this.isProcessingLegacyQueue = true;
+    try {
+      await this.waitForStorage();
+      const txs = await this.storage.getAllTxs();
+      const pendings = txs.filter((tx) => tx.pending);
+      for (const tx of pendings) {
+        const destination = typeof tx.toAddress === 'string' ? tx.toAddress.trim() : '';
+        const amount = Number(tx.amount);
+        if (!destination || !Number.isFinite(amount) || amount <= 0) {
+          continue;
+        }
+        try {
+          const txid = await this.walletService.sendXec(destination, amount);
+          if (typeof tx.txid === 'string') {
+            this.storage.markAsSent(tx.txid);
+          }
+          await this.showToast('Tx reenviada tras reconexión');
+        } catch (error) {
+          console.warn(`[EnviarService] Error reenviando tx ${tx.txid ?? 'sin id'}`, error);
+        }
+      }
+    } catch (error) {
+      console.warn('[EnviarService] No se pudieron sincronizar transacciones pendientes (IndexedDB).', error);
+    } finally {
+      this.isProcessingLegacyQueue = false;
     }
   }
 
@@ -270,5 +318,32 @@ export class EnviarService {
     }
 
     return null;
+  }
+
+  private async initializeStorage(): Promise<void> {
+    if (typeof window === 'undefined') {
+      return Promise.resolve();
+    }
+    try {
+      await this.storage.initDB();
+    } catch (error) {
+      console.error('IndexedDB init failed', error);
+    }
+  }
+
+  private async waitForStorage(): Promise<void> {
+    try {
+      await this.storageReady;
+    } catch {
+      // Ya se registró el error durante la inicialización.
+    }
+  }
+
+  private async showToast(message: string): Promise<void> {
+    try {
+      await Toast.show({ text: message, duration: 'short' });
+    } catch {
+      // No se puede mostrar el toast fuera de Capacitor; ignorar.
+    }
   }
 }

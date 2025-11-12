@@ -15,6 +15,11 @@
         <ion-icon [name]="bleIcon" aria-hidden="true"></ion-icon>
         <span>{{ bleConnected ? bleDevice ?? 'BLE conectado' : 'BLE desconectado' }}</span>
       </div>
+
+      <div class="chronik" [class.connected]="syncStatus === 'synced'" aria-live="polite">
+        <ion-icon [name]="chronikIcon" aria-hidden="true"></ion-icon>
+        <span>{{ chronikText }}</span>
+      </div>
     </div>
   </ion-toolbar>
 </div>
