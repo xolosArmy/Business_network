@@ -64,6 +64,18 @@ export class HomePage implements OnInit, OnDestroy {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
+  onClickEnviar(): void {
+    this.currentSection = 'send';
+  }
+
+  onClickRecibir(): void {
+    this.currentSection = 'receive';
+    this.showInlineQr = true;
+    if (this.currentAddress) {
+      void this.buildQrCode(this.currentAddress);
+    }
+  }
+
   async setSection(section: Section): Promise<void> {
     this.currentSection = section;
     if (section === 'receive' && this.currentAddress) {

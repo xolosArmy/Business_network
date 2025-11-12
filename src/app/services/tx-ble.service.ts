@@ -3,7 +3,6 @@ import { Wallet } from 'ecash-wallet';
 import { ChronikClient } from 'chronik-client';
 
 import { BLEService } from './ble.service';
-import { ChronikService } from './chronik.service';
 import { NotificationService } from './notification.service';
 import { NotificationSettingsService } from './notification-settings.service';
 import { StoredTx, TxStorageService } from './tx-storage.service';
@@ -20,7 +19,6 @@ export class TxBLEService {
   constructor(
     private readonly ble: BLEService,
     private readonly store: TxStorageService,
-    private readonly chronik: ChronikService,
     private readonly notify: NotificationService,
     private readonly settingsService: NotificationSettingsService,
   ) {}
@@ -39,11 +37,9 @@ export class TxBLEService {
     const address = this.getWalletAddress(this.wallet);
     if (address) {
       console.log('✅ Cartera inicializada:', address);
-      void this.chronik.subscribeToAddress(address);
     } else {
       console.warn('✅ Cartera inicializada sin dirección derivada');
     }
-    void this.chronik.syncAll();
   }
 
   async createAndSendTx(to: string, amountXec: number): Promise<void> {
@@ -101,9 +97,6 @@ export class TxBLEService {
       console.log('📡 TX BLE enviada:', { to, amountXec });
 
       this.store.updateStatus(txId, 'broadcasted');
-      if (txid) {
-        void this.chronik.checkTxStatus(txid);
-      }
     } catch (error) {
       console.error('❌ Error al crear/enviar TX:', error);
       this.ble.notify('Error al enviar TX por BLE');
@@ -163,7 +156,6 @@ export class TxBLEService {
             status: 'broadcasted',
             txid: broadcastedTxid,
           });
-          void this.chronik.checkTxStatus(broadcastedTxid);
         } else {
           this.store.updateStatus(id, 'broadcasted');
         }

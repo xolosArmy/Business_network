@@ -1,13 +1,12 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Network } from '@capacitor/network';
 import { BehaviorSubject } from 'rxjs';
 import { ChronikClient, type ScriptType, type SubscribeMsg } from 'chronik-client';
 
-import { ChronikService } from './chronik.service';
 import { OfflineStorageService } from './offline-storage.service';
-import { EnviarService } from './enviar.service';
 import { CHRONIK_URL } from './chronik.constants';
 import { toChronikScript } from '../utils/chronik';
+import { WalletService } from './wallet.service';
 
 export type SyncStatus = 'idle' | 'syncing' | 'synced' | 'disconnected';
 type SyncHandler = (msg: SubscribeMsg) => void;
@@ -28,19 +27,16 @@ export class SyncService {
   private reconnectTimer?: ReturnType<typeof setTimeout>;
   private readonly watchedScripts = new Map<string, WatchedScript>();
   private syncingPending = false;
-  private enviarServiceInstance?: EnviarService;
 
   constructor(
-    private readonly chronik: ChronikService,
     private readonly offlineStorage: OfflineStorageService,
-    private readonly injector: Injector,
+    private readonly walletService: WalletService,
   ) {}
 
   listenForNetwork(): void {
     Network.addListener('networkStatusChange', (status) => {
       if (status.connected) {
         void this.syncPendingTxs();
-        void this.chronik.syncAll();
         if (this.watchedScripts.size > 0) {
           void this.ensureWebSocket();
         }
@@ -65,15 +61,12 @@ export class SyncService {
         return;
       }
 
-      const senderWallet = {
-        mnemonic,
-        address,
-      } as const;
-
       const pending = await this.offlineStorage.getPendingTransactions();
       if (!pending.length) {
         return;
       }
+
+      await this.ensureWalletInitialized(mnemonic);
 
       for (const transaction of pending) {
         if (!transaction.id || transaction.txid) {
@@ -95,7 +88,7 @@ export class SyncService {
         }
 
         try {
-          const txid = await this.enviarService.sendTransaction(senderWallet, destination, amount);
+          const txid = await this.walletService.sendXec(destination, amount);
           await this.offlineStorage.updateTransaction(transaction.id, {
             status: 'confirmed',
             txid,
@@ -113,15 +106,19 @@ export class SyncService {
       }
     } finally {
       this.syncingPending = false;
-      void this.chronik.syncAll();
     }
   }
 
-  private get enviarService(): EnviarService {
-    if (!this.enviarServiceInstance) {
-      this.enviarServiceInstance = this.injector.get(EnviarService);
+  private async ensureWalletInitialized(mnemonic: string): Promise<void> {
+    const normalizedMnemonic = mnemonic?.trim();
+    if (!normalizedMnemonic) {
+      return;
     }
-    return this.enviarServiceInstance;
+    const current = this.walletService.mnemonic?.trim();
+    if (current && current === normalizedMnemonic) {
+      return;
+    }
+    await this.walletService.initWallet(normalizedMnemonic);
   }
 
   async watchAddress(address: string, handler: SyncHandler): Promise<void> {

@@ -51,14 +51,8 @@
           <img [src]="qrDataUrl" alt="QR de la dirección" />
         </div>
         <div class="cta-buttons">
-          <ion-button expand="block" color="danger" (click)="setSection('send')">
-            <ion-icon name="paper-plane" slot="start"></ion-icon>
-            Enviar
-          </ion-button>
-          <ion-button expand="block" fill="outline" color="light" (click)="setSection('receive')">
-            <ion-icon name="qr-code" slot="start"></ion-icon>
-            Recibir
-          </ion-button>
+          <ion-button expand="block" color="danger" (click)="onClickEnviar()">ENVIAR</ion-button>
+          <ion-button expand="block" fill="outline" color="light" (click)="onClickRecibir()">RECIBIR</ion-button>
         </div>
       </section>
 

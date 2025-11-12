@@ -30,15 +30,13 @@ export class AppComponent implements OnInit {
 
     const txs = this.store.getAll();
     if (txs.length > 0) {
-      console.log('🔄 Sincronizando TX con Chronik...');
-      await this.chronik.syncAll();
-      this.chronik.startAutoSync();
+      console.log('🔄 Transacciones pendientes en almacenamiento local.');
     }
 
     const walletData = localStorage.getItem('rmz_wallet');
     if (walletData) {
       const { address } = JSON.parse(walletData);
-      await this.chronik.subscribeToAddress(address);
+      this.chronik.connectWS([address]);
     }
 
     const permission = await this.notify.requestPermission();

@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Wallet } from 'ecash-wallet';
 import { ChronikClient, type SubscribeMsg } from 'chronik-client';
 import { generateMnemonic, validateMnemonic } from 'bip39';
 import { SLP_TOKEN_TYPE_FUNGIBLE, toHex } from 'ecash-lib';
 
-import { CHRONIK_URL, RMZ_TOKEN_ID } from './chronik.constants';
-import { SaldoService } from './saldo.service';
+import { ChronikService } from './chronik.service';
 import { SyncService, type SyncStatus } from './sync.service';
+import { CHRONIK } from '../../environments/chronik.config';
 
 const MNEMONIC_STORAGE_KEY = 'mnemonicKey';
 const ADDRESS_STORAGE_KEY = 'walletAddress';
@@ -38,7 +38,7 @@ export class WalletService {
   });
   readonly state$ = this.stateSubject.asObservable();
 
-  private chronik?: ChronikClient;
+  private chronikClient?: ChronikClient;
   private wallet?: Wallet;
 
   public lastSentTxid?: string;
@@ -48,15 +48,15 @@ export class WalletService {
   private rmzMultiplier = 1n;
   private rmzInfoLoaded = false;
   private rmzInfoLoading?: Promise<void>;
+  private syncServiceInstance?: SyncService;
 
   constructor(
-    private readonly saldoService: SaldoService,
-    private readonly syncService: SyncService,
+    private readonly chronikService: ChronikService,
+    private readonly injector: Injector,
   ) {
-    this.syncService.status$.subscribe((status) => {
+    this.chronikService.wsConnected$.subscribe((connected) => {
       this.patchState({
-        syncStatus: status,
-        chronikConnected: status === 'synced' || status === 'syncing',
+        chronikConnected: connected || this.stateSubject.value.chronikConnected,
       });
     });
   }
@@ -105,8 +105,8 @@ export class WalletService {
     }
 
     if (!phrase) {
-      const stored = this.retrieveMnemonic();
-      phrase = stored ?? undefined;
+      const stored = this.retrieveMnemonic() || undefined;
+      phrase = stored;
     }
 
     if (!phrase) {
@@ -142,8 +142,13 @@ export class WalletService {
     }
 
     try {
-      const { xecBalance, rmzBalance } = await this.saldoService.actualizarSaldo(address);
-      await this.ensureRmzTokenMetadata();
+      const utxos = await this.chronikService.getAddressUtxos(address);
+      const sats = utxos.reduce((sum, utxo) => sum + (utxo.value || 0), 0);
+      const xecBalance = sats / 1e8;
+      const tokenInfo = await this.chronikService.getTokenInfo(CHRONIK.RMZ_TOKEN_ID);
+      await this.ensureRmzTokenMetadata(tokenInfo);
+      const rmzBalanceRaw = await this.computeRmzBalance(utxos, CHRONIK.RMZ_TOKEN_ID);
+      const rmzBalance = BigInt(rmzBalanceRaw);
 
       this.patchState({
         xecBalance,
@@ -184,7 +189,7 @@ export class WalletService {
         .build();
 
       const txHex = toHex(built.tx.ser());
-      const resp = await this.ensureChronik().broadcastTx(txHex);
+      const resp = await this.ensureChronikClient().broadcastTx(txHex);
 
       this.lastSentTxid = resp.txid;
       this.lastSentStatus = 'pendiente';
@@ -219,7 +224,7 @@ export class WalletService {
             { sats: 0n },
             {
               address: destino.trim(),
-              tokenId: RMZ_TOKEN_ID,
+              tokenId: CHRONIK.RMZ_TOKEN_ID,
               atoms,
               isMintBaton: false,
               sats: MIN_TOKEN_SATS,
@@ -228,7 +233,7 @@ export class WalletService {
           tokenActions: [
             {
               type: 'SEND',
-              tokenId: RMZ_TOKEN_ID,
+              tokenId: CHRONIK.RMZ_TOKEN_ID,
               tokenType: SLP_TOKEN_TYPE_FUNGIBLE,
             },
           ],
@@ -237,7 +242,7 @@ export class WalletService {
         .build();
 
       const txHex = toHex(built.tx.ser());
-      const resp = await this.ensureChronik().broadcastTx(txHex);
+      const resp = await this.ensureChronikClient().broadcastTx(txHex);
 
       this.lastSentTxid = resp.txid;
       this.lastSentStatus = 'pendiente';
@@ -278,16 +283,31 @@ export class WalletService {
     this.stateSubject.next(next);
   }
 
-  private ensureChronik(): ChronikClient {
-    if (!this.chronik) {
-      this.chronik = new ChronikClient(CHRONIK_URL);
+  private getSyncService(): SyncService {
+    if (!this.syncServiceInstance) {
+      const service = this.injector.get(SyncService);
+      this.syncServiceInstance = service;
+      service.status$.subscribe((status) => {
+        const chronikConnected = status === 'synced' || status === 'syncing' || this.stateSubject.value.chronikConnected;
+        this.patchState({
+          syncStatus: status,
+          chronikConnected,
+        });
+      });
     }
-    return this.chronik;
+    return this.syncServiceInstance;
+  }
+
+  private ensureChronikClient(): ChronikClient {
+    if (!this.chronikClient) {
+      this.chronikClient = new ChronikClient(CHRONIK.REST_BASES[0]);
+    }
+    return this.chronikClient;
   }
 
   private async initializeFromMnemonic(mnemonic: string): Promise<void> {
-    const chronik = this.ensureChronik();
-    this.wallet = await Wallet.fromMnemonic(mnemonic, chronik);
+    const chronikClient = this.ensureChronikClient();
+    this.wallet = await Wallet.fromMnemonic(mnemonic, chronikClient);
     this.patchState({ mnemonic });
 
     try {
@@ -300,10 +320,11 @@ export class WalletService {
     this.patchState({ address });
     this.persistAddress();
     await this.ensureRmzTokenMetadata();
-    await this.syncService.watchAddress(address, (msg) => {
+    await this.getSyncService().watchAddress(address, (msg) => {
       void this.handleChronikMessage(msg);
     });
-    await this.updateBalances();
+    this.chronikService.connectWS([address]);
+    await this.sync();
   }
 
   private async handleChronikMessage(msg: SubscribeMsg): Promise<void> {
@@ -318,9 +339,17 @@ export class WalletService {
     }
 
     try {
-      await this.updateBalances();
+      await this.sync();
     } catch {
       // El estado de conexión ya se maneja en updateBalances.
+    }
+  }
+
+  private async sync(): Promise<void> {
+    try {
+      await this.updateBalances();
+    } catch {
+      // updateBalances already logs connectivity issues.
     }
   }
 
@@ -352,9 +381,8 @@ export class WalletService {
     window.alert(`Se generó una nueva cartera.\n\nGuarda tu frase:\n${mnemonic}`);
   }
 
-  private async ensureRmzTokenMetadata(): Promise<void> {
-    const chronik = this.chronik;
-    if (!chronik || this.rmzInfoLoaded) {
+  private async ensureRmzTokenMetadata(tokenInfo?: any): Promise<void> {
+    if (this.rmzInfoLoaded) {
       return;
     }
     if (this.rmzInfoLoading) {
@@ -364,8 +392,8 @@ export class WalletService {
 
     this.rmzInfoLoading = (async () => {
       try {
-        const tokenInfo = await chronik.token(RMZ_TOKEN_ID);
-        const decimals = tokenInfo?.slpTxData?.genesisInfo?.decimals ?? 0;
+        const info = tokenInfo ?? (await this.chronikService.getTokenInfo(CHRONIK.RMZ_TOKEN_ID));
+        const decimals = info?.slpTxData?.genesisInfo?.decimals ?? 0;
         this.rmzDecimals = typeof decimals === 'number' && decimals >= 0 ? decimals : 0;
         this.rmzMultiplier = BigInt(10) ** BigInt(this.rmzDecimals);
         this.rmzInfoLoaded = true;
@@ -379,6 +407,22 @@ export class WalletService {
     })();
 
     await this.rmzInfoLoading;
+  }
+
+  private async computeRmzBalance(utxos: any[], tokenId: string): Promise<number> {
+    let sum = 0n;
+    const normalizedTokenId = tokenId?.toLowerCase?.() ?? tokenId;
+    for (const utxo of utxos) {
+      const currentTokenId = utxo?.token?.tokenId?.toLowerCase?.();
+      if (currentTokenId === normalizedTokenId) {
+        try {
+          sum += BigInt(utxo.token.amount);
+        } catch {
+          // ignore malformed amounts
+        }
+      }
+    }
+    return Number(sum);
   }
 
   private tokenAmountToAtoms(amount: number | string | bigint): bigint {
