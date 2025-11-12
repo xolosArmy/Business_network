@@ -166,6 +166,60 @@
       color: var(--accent-amber-400);
     }
 
+    .blog-list {
+      list-style: none;
+      margin: 2rem 0 0;
+      padding: 0;
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .blog-card {
+      background: rgba(28, 25, 23, 0.78);
+      border: 1px solid rgba(251, 191, 36, 0.22);
+      border-radius: 20px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin: 0;
+    }
+
+    .blog-card h3 {
+      margin: 0;
+      font-family: var(--heading-font);
+      font-size: clamp(1.4rem, 2.6vw, 1.8rem);
+    }
+
+    .blog-card h3 a {
+      color: var(--accent-amber-400);
+      text-decoration: none;
+    }
+
+    .blog-card h3 a:hover {
+      opacity: 0.85;
+    }
+
+    .blog-card time {
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(229, 231, 235, 0.65);
+    }
+
+    .blog-card p {
+      margin: 0;
+      color: rgba(229, 231, 235, 0.85);
+      font-family: var(--body-font);
+      line-height: 1.7;
+    }
+
+    .blog-card .cta-button {
+      align-self: flex-start;
+      font-size: 0.95rem;
+      padding: 0.7rem 1.6rem;
+    }
+
     .cta-button {
       display: inline-flex;
       align-items: center;
@@ -460,7 +514,7 @@
         <a href="#whitepaper">Nuestro Whitepaper</a>
         <a href="#xolos-ramirez">Xolos Ramírez</a>
         <a href="#vision">Nuestra Vision</a>
-        <a href="/blog/">Blog</a>
+        <a href="#blog">Blog</a>
         <a href="#section-below" class="scroll-down-arrow">&#x2193;</a>
       </nav>
     </div>
@@ -490,6 +544,22 @@
     </div>
     <!-- Canvas: Golden Ancestral Fire -->
     <canvas id="xolo-fire" aria-hidden="true"></canvas>
+  </section>
+
+  <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10" data-aos="fade-up"></div>
+
+  <section id="blog" class="section-shell" data-aos="fade-up">
+    <div class="max-w-6xl mx-auto surface-panel" data-aos="fade-up">
+      <h2 class="section-heading">Blog</h2>
+      <ul class="blog-list">
+        <li class="blog-card">
+          <h3><a href="/blog/xolosarmy-analisis-xoloitzcuintle.html">Análisis Zootécnico y Genético del Xoloitzcuintle</a></h3>
+          <time datetime="2025-11-12">2025-11-12</time>
+          <p>Alopecia congénita (FOXI3), letalidad genética HH y morfometría racial. Documento técnico con enlaces a Xolos Ramírez (Criadero Xoloitzcuintle).</p>
+          <a class="cta-button transition-all duration-500 ease-in-out" href="/blog/xolosarmy-analisis-xoloitzcuintle.html">Leer</a>
+        </li>
+      </ul>
+    </div>
   </section>
 
   <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10" data-aos="fade-up"></div>
