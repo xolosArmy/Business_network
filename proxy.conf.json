@@ -1,0 +1,7 @@
+{
+  "/chronik": {
+    "target": "https://chronik.be.cash",
+    "changeOrigin": true,
+    "secure": true
+  }
+}

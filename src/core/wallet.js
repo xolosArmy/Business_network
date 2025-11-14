@@ -12,10 +12,12 @@ import * as secp from '@noble/secp256k1';
 import { sha256 } from '@noble/hashes/sha256';
 import { ripemd160 } from '@noble/hashes/ripemd160';
 import { ChronikClient } from 'chronik-client';
+import { environment } from '../environments/environment';
 
 // ------- Config -------
 export const DERIVE_PATH = "m/44'/899'/0'/0/0"; // XEC BIP44
-export const CHRONIK_MIRROR = 'https://chronik.e.cash'; // mirror estable
+const CHRONIK_BASE = environment?.CHRONIK_BASE?.replace(/\/+$/, '') ?? '/chronik/xec';
+export const CHRONIK_MIRROR = CHRONIK_BASE; // mirror estable
 const SHOW_ALERTS = true; // ponlo en false si no quieres avisos al consultar saldo
 
 const showAlert = (title, message) => {
@@ -172,9 +174,14 @@ async function tryClient(address) {
   try {
     console.log('[balance] client ->', base);
     const cli = new ChronikClient([base]);
-    const { utxos } = await cli.address(address).utxos();
-    const sats = sumUtxosSats(utxos);
-    console.log('[balance] client OK', { base, utxos: utxos?.length ?? 0, sats: String(sats) });
+    const { hash160 } = decodeECashP2PKH(address);
+    const hashHex = toHex(hash160);
+    const scriptUtxos = await cli.script('p2pkh', hashHex).utxos();
+    const utxoList = Array.isArray(scriptUtxos)
+      ? scriptUtxos.flatMap((entry) => entry?.utxos ?? [])
+      : scriptUtxos?.utxos ?? [];
+    const sats = sumUtxosSats(utxoList);
+    console.log('[balance] client OK', { base, utxos: utxoList?.length ?? 0, sats: String(sats) });
     return sats;
   } catch (e) {
     console.log('[balance] client FAIL', base, e?.message || e);

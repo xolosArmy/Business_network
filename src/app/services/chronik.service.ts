@@ -1,77 +1,140 @@
 import { Injectable, NgZone } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, firstValueFrom } from 'rxjs';
-import { CHRONIK } from '../../environments/chronik.config';
+import { BehaviorSubject } from 'rxjs';
+import {
+  ChronikClient,
+  type ScriptUtxos,
+  type TxHistoryPage,
+  type Utxo,
+} from 'chronik-client';
+import * as ecashaddr from 'ecashaddrjs';
+import { Buffer } from 'buffer';
 
-type AddressUtxo = {
-  outpoint: { txid: string; outIdx: number };
-  value: number; // sats
-  token?: { tokenId: string; amount: string };
-};
+import { environment } from '../../environments/environment';
+
+export type ChronikConnectionState = 'idle' | 'connecting' | 'connected' | 'disconnected';
+
+function u8ToHex(u8: Uint8Array): string {
+  return Array.from(u8)
+    .map((byte) => byte.toString(16).padStart(2, '0'))
+    .join('');
+}
 
 @Injectable({ providedIn: 'root' })
+type AddressBalance = {
+  confirmed: number;
+  unconfirmed: number;
+  utxos: Utxo[];
+};
+
+type AddressUtxos = {
+  utxos: Utxo[];
+  raw: ScriptUtxos[];
+};
+
 export class ChronikService {
-  private restBase = CHRONIK.REST_BASES[0];
-  private ws?: WebSocket;
+  private readonly client = new ChronikClient(environment.CHRONIK_BASE);
+  private activeWs?: ReturnType<ChronikClient['ws']>;
 
-  public wsConnected$ = new BehaviorSubject<boolean>(false);
+  readonly connectionState$ = new BehaviorSubject<ChronikConnectionState>('idle');
+  readonly wsConnected$ = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient, private zone: NgZone) {}
+  constructor(private readonly zone: NgZone) {}
 
-  /** Fallback circular a siguientes bases si falla la actual */
-  private rotateRestBase() {
-    const idx = CHRONIK.REST_BASES.indexOf(this.restBase);
-    this.restBase = CHRONIK.REST_BASES[(idx + 1) % CHRONIK.REST_BASES.length];
+  get chronikClient(): ChronikClient {
+    return this.client;
   }
 
-  async getAddressUtxos(address: string): Promise<AddressUtxo[]> {
-    for (let i = 0; i < CHRONIK.REST_BASES.length; i++) {
-      try {
-        const url = `${this.restBase}/address/${address}/utxos`;
-        const res = await firstValueFrom(this.http.get<{utxos: AddressUtxo[]}>(url));
-        return res.utxos || [];
-      } catch {
-        this.rotateRestBase();
-      }
-    }
-    return [];
+  private toHash160(address: string): string {
+    const decoded = ecashaddr.decode(address);
+    return u8ToHex(decoded.hash);
   }
 
-  async getTokenInfo(tokenId: string) {
-    for (let i = 0; i < CHRONIK.REST_BASES.length; i++) {
-      try {
-        const url = `${this.restBase}/token/${tokenId}`;
-        return await firstValueFrom(this.http.get(url));
-      } catch {
-        this.rotateRestBase();
-      }
-    }
-    return null;
+  async getBalanceByAddress(address: string): Promise<AddressBalance> {
+    const { utxos } = await this.getUtxosByAddress(address);
+    const { confirmed, unconfirmed } = utxos.reduce(
+      (acc, utxo) => {
+        const value = typeof utxo.value === 'string' ? Number(utxo.value) : utxo.value ?? 0;
+        if ((utxo.blockHeight ?? -1) >= 0) {
+          acc.confirmed += value;
+        } else {
+          acc.unconfirmed += value;
+        }
+        return acc;
+      },
+      { confirmed: 0, unconfirmed: 0 },
+    );
+    return { confirmed, unconfirmed, utxos };
   }
 
-  /** WS opcional: no rompe la app si no conecta */
-  connectWS(addressesToWatch: string[] = []) {
-    let connected = false;
-    for (const base of CHRONIK.WS_BASES) {
-      try {
-        const ws = new WebSocket(base);
-        this.ws = ws;
+  async getUtxosByAddress(address: string): Promise<AddressUtxos> {
+    const h160 = this.toHash160(address);
+    const scriptUtxos = await this.client.script('p2pkh', h160).utxos();
+    const utxos = Array.isArray(scriptUtxos)
+      ? scriptUtxos.flatMap((entry) => entry?.utxos ?? [])
+      : scriptUtxos?.utxos ?? [];
+    return { utxos, raw: Array.isArray(scriptUtxos) ? scriptUtxos : scriptUtxos ? [scriptUtxos] : [] };
+  }
 
-        ws.onopen = () => {
-          connected = true;
-          this.zone.run(() => this.wsConnected$.next(true));
-          // Suscribir a direcciones (REST usa address text)
-          for (const addr of addressesToWatch) {
-            ws.send(JSON.stringify({ type: 'subscribe', script: `address:${addr}` }));
-          }
-        };
-        ws.onclose = () => this.zone.run(() => this.wsConnected$.next(false));
-        ws.onerror  = () => {/* silencioso, usamos REST de todos modos */};
-        break;
-      } catch {
-        // intenta siguiente base
-      }
-    }
-    if (!connected) this.zone.run(() => this.wsConnected$.next(false));
+  async getHistoryByAddress(address: string, page = 0): Promise<TxHistoryPage> {
+    const h160 = this.toHash160(address);
+    return this.client.script('p2pkh', h160).history(page);
+  }
+
+  async broadcast(rawTxHex: string) {
+    const raw = Uint8Array.from(Buffer.from(rawTxHex, 'hex'));
+    return this.client.broadcastTx(raw);
+  }
+
+  async getToken(tokenId: string) {
+    return this.client.token(tokenId);
+  }
+
+  wsSubscribeAddress(
+    address: string,
+    handlers: {
+      onConnect?: (e: any) => void;
+      onMessage?: (m: any) => void;
+      onError?: (e: any) => void;
+      onEnd?: () => void;
+    },
+  ) {
+    const h160 = this.toHash160(address);
+    this.activeWs?.close?.();
+
+    this.zone.run(() => {
+      this.connectionState$.next('connecting');
+      this.wsConnected$.next(false);
+    });
+
+    const ws = this.client.ws({
+      onConnect: (event: any) => {
+        this.zone.run(() => {
+          this.connectionState$.next('connected');
+          this.wsConnected$.next(true);
+        });
+        handlers.onConnect?.(event);
+      },
+      onMessage: (message: any) => {
+        handlers.onMessage?.(message);
+      },
+      onError: (error: any) => {
+        this.zone.run(() => {
+          this.connectionState$.next('disconnected');
+          this.wsConnected$.next(false);
+        });
+        handlers.onError?.(error);
+      },
+      onEnd: () => {
+        this.zone.run(() => {
+          this.connectionState$.next('disconnected');
+          this.wsConnected$.next(false);
+        });
+        handlers.onEnd?.();
+      },
+    });
+
+    ws.subscribe('p2pkh', h160);
+    this.activeWs = ws;
+    return ws;
   }
 }

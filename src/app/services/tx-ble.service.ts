@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Wallet } from 'ecash-wallet';
-import { ChronikClient } from 'chronik-client';
 
 import { BLEService } from './ble.service';
 import { NotificationService } from './notification.service';
 import { NotificationSettingsService } from './notification-settings.service';
 import { StoredTx, TxStorageService } from './tx-storage.service';
-
-const chronik: ChronikClient = new ChronikClient('https://chronik.e.cash');
+import { ChronikService } from './chronik.service';
 const SATS_PER_XEC = 100;
 
 @Injectable({
@@ -21,6 +19,7 @@ export class TxBLEService {
     private readonly store: TxStorageService,
     private readonly notify: NotificationService,
     private readonly settingsService: NotificationSettingsService,
+    private readonly chronikService: ChronikService,
   ) {}
 
   private generateId(): string {
@@ -33,7 +32,8 @@ export class TxBLEService {
   }
 
   async initWallet(mnemonic: string): Promise<void> {
-    this.wallet = await Wallet.fromMnemonic(this.normalizeMnemonic(mnemonic), chronik);
+    const chronikClient = this.chronikService.chronikClient;
+    this.wallet = await Wallet.fromMnemonic(this.normalizeMnemonic(mnemonic), chronikClient);
     const address = this.getWalletAddress(this.wallet);
     if (address) {
       console.log('✅ Cartera inicializada:', address);
@@ -134,30 +134,23 @@ export class TxBLEService {
       console.log('📥 TX recibida por BLE:', txData);
 
       if (navigator.onLine) {
-        const response = await fetch('https://chronik.e.cash/tx', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ hex: txData.raw }),
-        });
-
-        if (!response.ok) {
-          console.error('❌ Error al retransmitir TX a la red:', await response.text());
+        try {
+          const result = await this.chronikService.broadcast(txData.raw);
+          console.log('✅ TX transmitida a red:', result);
+          this.ble.notify('TX retransmitida a la red eCash');
+          const broadcastedTxid = result?.txid ?? computedTxid;
+          if (broadcastedTxid) {
+            this.store.update(id, {
+              status: 'broadcasted',
+              txid: broadcastedTxid,
+            });
+          } else {
+            this.store.updateStatus(id, 'broadcasted');
+          }
+        } catch (error) {
+          console.error('❌ Error al retransmitir TX a la red:', error);
           this.store.updateStatus(id, 'failed');
           this.ble.notify('Error al retransmitir TX a la red eCash');
-          return;
-        }
-
-        const result = await response.json();
-        console.log('✅ TX transmitida a red:', result);
-        this.ble.notify('TX retransmitida a la red eCash');
-        const broadcastedTxid = result?.txid ?? computedTxid;
-        if (broadcastedTxid) {
-          this.store.update(id, {
-            status: 'broadcasted',
-            txid: broadcastedTxid,
-          });
-        } else {
-          this.store.updateStatus(id, 'broadcasted');
         }
       } else {
         console.warn('🌐 Sin conexión — TX almacenada localmente');

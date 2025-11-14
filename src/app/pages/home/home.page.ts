@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import * as QRCode from 'qrcode';
 import { ToastController } from '@ionic/angular';
 
-import { WalletService } from '../../services/wallet.service';
+import { WalletService, type WalletState } from '../../services/wallet.service';
 import { TransactionsService } from '../../services/transactions.service';
 import { SyncService, type SyncStatus } from '../../services/sync.service';
 import { CarteraService } from '../../services/cartera.service';
@@ -21,10 +21,13 @@ export class HomePage implements OnInit, OnDestroy {
   readonly syncStatus$ = this.syncService.status$;
 
   currentSection: Section = 'overview';
+  isSyncing = true;
+  canSend = false;
+  canReceive = false;
   sendToAddress = '';
   sendAmount: number | null = null;
   selectedAsset: 'XEC' | 'RMZ' = 'XEC';
-  statusMessage = '';
+  statusMessage = 'Esperando sincronización…';
   qrDataUrl: string | null = null;
   showInlineQr = false;
 
@@ -36,6 +39,7 @@ export class HomePage implements OnInit, OnDestroy {
   };
   private currentAddress: string | null = null;
   private subscriptions: Subscription[] = [];
+  private latestState: WalletState | null = null;
 
   constructor(
     public readonly walletService: WalletService,
@@ -45,10 +49,10 @@ export class HomePage implements OnInit, OnDestroy {
     private readonly toastController: ToastController,
   ) {}
 
-  async ngOnInit(): Promise<void> {
-    await this.walletService.initWallet();
+  ngOnInit(): void {
     this.subscriptions.push(
       this.state$.subscribe((state) => {
+        this.latestState = state;
         const nextAddress = state.address ?? null;
         if (nextAddress && nextAddress !== this.currentAddress) {
           this.currentAddress = nextAddress;
@@ -56,19 +60,31 @@ export class HomePage implements OnInit, OnDestroy {
           void this.buildQrCode(nextAddress);
           this.showInlineQr = false;
         }
+        this.updateActionStates();
+      }),
+      this.syncStatus$.subscribe((status) => {
+        this.isSyncing = status === 'syncing' || status === 'idle';
+        this.updateActionStates();
       }),
     );
+    void this.bootstrapWallet();
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
-  onClickEnviar(): void {
+  onSend(): void {
+    if (!this.canSend) {
+      return;
+    }
     this.currentSection = 'send';
   }
 
-  onClickRecibir(): void {
+  onReceive(): void {
+    if (!this.canReceive) {
+      return;
+    }
     this.currentSection = 'receive';
     this.showInlineQr = true;
     if (this.currentAddress) {
@@ -192,6 +208,27 @@ export class HomePage implements OnInit, OnDestroy {
       this.statusMessage = `❌ No se pudo crear la cartera: ${message}`;
       await this.presentToast(this.statusMessage, 'danger');
     }
+  }
+
+  private updateActionStates(): void {
+    const state = this.latestState;
+    const hasAddress = !!state?.address;
+    const hasXec = (state?.xecBalance ?? 0) > 0;
+    const hasRmz = (state?.rmzBalance ?? 0n) > 0n;
+    const hasFunds = hasXec || hasRmz;
+    this.canReceive = hasAddress;
+    this.canSend = hasAddress && hasFunds;
+  }
+
+  private async bootstrapWallet(): Promise<void> {
+    try {
+      await this.walletService.initWallet();
+    } catch (error) {
+      console.error('No se pudo inicializar la cartera', error);
+      this.statusMessage = '❌ No se pudo inicializar la cartera.';
+      return;
+    }
+    void this.walletService.syncSafe();
   }
 
   private async presentToast(message: string, color: 'success' | 'danger' | 'medium' = 'medium'): Promise<void> {

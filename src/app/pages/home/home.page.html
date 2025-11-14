@@ -51,8 +51,27 @@
           <img [src]="qrDataUrl" alt="QR de la dirección" />
         </div>
         <div class="cta-buttons">
-          <ion-button expand="block" color="danger" (click)="onClickEnviar()">ENVIAR</ion-button>
-          <ion-button expand="block" fill="outline" color="light" (click)="onClickRecibir()">RECIBIR</ion-button>
+          <ion-button
+            expand="block"
+            color="danger"
+            (click)="onSend()"
+            [disabled]="!canSend"
+          >
+            ENVIAR
+          </ion-button>
+          <ion-button
+            expand="block"
+            fill="outline"
+            color="light"
+            (click)="onReceive()"
+            [disabled]="!canReceive"
+          >
+            RECIBIR
+          </ion-button>
+        </div>
+        <div class="sync-hint" *ngIf="isSyncing">
+          <ion-spinner name="lines-small"></ion-spinner>
+          <span>Esperando sincronización…</span>
         </div>
       </section>
 
@@ -99,7 +118,7 @@
           </ion-item>
         </ion-list>
         <div class="actions">
-          <ion-button expand="block" color="danger" (click)="sendPayment()">
+          <ion-button expand="block" color="danger" (click)="sendPayment()" [disabled]="!canSend">
             <ion-icon name="rocket" slot="start"></ion-icon>
             Confirmar envío
           </ion-button>

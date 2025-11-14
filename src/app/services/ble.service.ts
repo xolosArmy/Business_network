@@ -1,5 +1,4 @@
 import { Injectable, Injector, NgZone } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import {
   BleClient,
   BleDevice,
@@ -13,6 +12,7 @@ import { Toast } from '@capacitor/toast';
 import { WalletService } from './wallet.service';
 import { TransactionsService } from './transactions.service';
 import { TxBLEService } from './tx-ble.service';
+import { ChronikService } from './chronik.service';
 
 interface BleTransferPayload {
   amount?: number;
@@ -44,15 +44,14 @@ export class BLEService {
   private notificationsActive = false;
   private rxNotificationHandler: ((event: Event) => void) | null = null;
   private discoveredDevices = new Map<string, BleDevice>();
-  private readonly chronikUrl = 'https://chronik.e.cash';
   private txBleService: TxBLEService | null = null;
 
   constructor(
     private readonly walletService: WalletService,
     private readonly zone: NgZone,
-    private readonly http: HttpClient,
     private readonly txs: TransactionsService,
     private readonly injector: Injector,
+    private readonly chronikService: ChronikService,
   ) {}
 
   private get tx(): TxBLEService {
@@ -422,9 +421,7 @@ export class BLEService {
       sent = true;
     } catch (error) {
       try {
-        await this.http
-          .post(`${this.chronikUrl}/broadcast-tx`, { rawTx: txHex })
-          .toPromise();
+        await this.chronikService.broadcast(txHex);
         await Toast.show({ text: '🌐 Transacción enviada vía Internet' });
         sent = true;
       } catch (err) {

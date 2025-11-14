@@ -14,18 +14,9 @@ export function toChronikScript(address: string): {
     throw new Error('La dirección debe ser una cadena no vacía.');
   }
 
-  let decoded: { type?: string; hash: Uint8Array } | undefined;
+  const decoded = ecashaddr.decode(normalized);
 
-  if (typeof (ecashaddr as any).decode === 'function') {
-    decoded = (ecashaddr as any).decode(normalized, true);
-  } else if (typeof ecashaddr.decodeCashAddress === 'function') {
-    decoded = ecashaddr.decodeCashAddress(normalized) as unknown as {
-      type?: string;
-      hash: Uint8Array;
-    };
-  }
-
-  if (!decoded || !decoded.hash) {
+  if (!decoded?.hash) {
     throw new Error('No se pudo decodificar la dirección proporcionada.');
   }
 

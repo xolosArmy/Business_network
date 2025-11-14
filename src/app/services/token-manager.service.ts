@@ -4,7 +4,7 @@ import { ChronikClient } from 'chronik-client';
 import type { Utxo } from 'chronik-client';
 import { HybridTokenManager } from 'minimal-xec-wallet';
 import type { AdapterRouter } from 'src/types/minimal-xec-wallet';
-import { decodeCashAddress } from 'ecashaddrjs';
+import { decode } from 'ecashaddrjs';
 import { getSharedInstance } from '../utils/key-derivation.adapter';
 
 import {
@@ -327,7 +327,7 @@ export class TokenManagerService {
 
     const lists = await Promise.all(
       addrs.map(async (addr) => {
-        const decoded = decodeCashAddress(addr);
+        const decoded = decode(addr);
         const hashHex = Buffer.from(decoded.hash).toString('hex');
 
         const script = this.chronikClient.script('p2pkh', hashHex);

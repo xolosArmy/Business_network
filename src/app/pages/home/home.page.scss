@@ -184,6 +184,20 @@ $ash: #8a8f9a;
   }
 }
 
+.sync-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+
+  ion-spinner {
+    width: 18px;
+    height: 18px;
+  }
+}
+
 .action-card,
 .receive-card,
 .history-card {

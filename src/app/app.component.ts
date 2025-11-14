@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { PwaService } from './services/pwa.service';
 import { EnviarService } from './services/enviar.service';
 import { SyncService } from './services/sync.service';
-import { ChronikService } from './services/chronik.service';
 import { TxStorageService } from './services/tx-storage.service';
 import { NotificationService } from './services/notification.service';
 import { TokenManagerService } from './services/token-manager.service';
+import { ChronikService } from './services/chronik.service';
 
 @Component({
   selector: 'app-root',
@@ -33,12 +33,6 @@ export class AppComponent implements OnInit {
       console.log('🔄 Transacciones pendientes en almacenamiento local.');
     }
 
-    const walletData = localStorage.getItem('rmz_wallet');
-    if (walletData) {
-      const { address } = JSON.parse(walletData);
-      this.chronik.connectWS([address]);
-    }
-
     const permission = await this.notify.requestPermission();
     if (permission !== 'unsupported') {
       console.log('🔔 Permiso notificaciones:', permission);
@@ -50,14 +44,12 @@ export class AppComponent implements OnInit {
       const pending = localStorage.getItem('pendingTx');
       if (pending) {
         const data = JSON.parse(pending);
-        const res = await fetch('https://chronik.e.cash/tx', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ hex: data.raw }),
-        });
-        if (res.ok) {
+        try {
+          await this.chronik.broadcast(data.raw);
           console.log('✅ TX enviada tras reconexión');
           localStorage.removeItem('pendingTx');
+        } catch (error) {
+          console.warn('❌ No se pudo retransmitir la TX pendiente', error);
         }
       }
     });
