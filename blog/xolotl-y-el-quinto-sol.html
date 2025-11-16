@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Theology of Transit: The Fifth Sun, Xólotl and the Psychopomp Function of the Xoloitzcuintli</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Theology of transit in the Nahua worldview: the Fifth Sun, Xólotl and the psychopomp role of the Xoloitzcuintli, published for XolosArmy Network." />
+
+  <style>
+    :root {
+      --bg: #05070a;
+      --bg-alt: #0b0f17;
+      --card: #101623;
+      --accent: #f0b44b;
+      --accent-soft: rgba(240,180,75,0.12);
+      --text-main: #f4f5f7;
+      --text-muted: #b3b8c7;
+      --border-subtle: #242b3a;
+      --link: #ffd37a;
+      --link-hover: #ffe7b5;
+      --code: #1a2233;
+      --shadow-soft: 0 24px 60px rgba(0,0,0,0.65);
+      --radius-lg: 16px;
+      --radius-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #05070a 52%, #020308 100%);
+      color: var(--text-main);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    header.article-header {
+      margin-bottom: 32px;
+      padding: 24px 22px 26px;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 0 0, rgba(240,180,75,0.16), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(96,165,250,0.14), transparent 55%),
+        linear-gradient(135deg, #050816, #020308);
+      border: 1px solid rgba(148,163,184,0.18);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .article-kicker {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .article-kicker span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(240,180,75,0.7);
+    }
+
+    header.article-header h1 {
+      font-size: clamp(1.8rem, 3vw, 2.3rem);
+      line-height: 1.25;
+      margin: 0 0 10px;
+      letter-spacing: 0.02em;
+    }
+
+    .article-subtitle {
+      font-size: 0.95rem;
+      max-width: 640px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .meta-badge {
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      background-color: rgba(15,23,42,0.8);
+      border: 1px solid rgba(148,163,184,0.28);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meta-badge strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .meta-badge span {
+      opacity: 0.8;
+    }
+
+    .brand-note {
+      margin: 18px 0 0;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.82rem;
+      background: linear-gradient(90deg, rgba(240,180,75,0.16), transparent);
+      border: 1px solid rgba(240,180,75,0.35);
+      max-width: 540px;
+    }
+
+    .brand-note a {
+      color: var(--link);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .brand-note a:hover {
+      color: var(--link-hover);
+      text-decoration: underline;
+    }
+
+    main {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr);
+      gap: 24px;
+    }
+
+    article {
+      background-color: rgba(15,23,42,0.9);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: 24px 22px 28px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+    }
+
+    .abstract-block {
+      padding: 14px 16px 16px;
+      border-radius: 14px;
+      background-color: rgba(15,23,42,0.9);
+      border: 1px dashed rgba(148,163,184,0.5);
+      margin-bottom: 18px;
+      font-size: 0.9rem;
+    }
+
+    .abstract-block h2 {
+      font-size: 0.95rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin: 0 0 6px;
+      color: var(--accent);
+    }
+
+    .keywords {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+      margin-top: 24px;
+      margin-bottom: 4px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    h3 {
+      font-size: 1rem;
+      margin-top: 16px;
+      margin-bottom: 4px;
+      color: #e5e7eb;
+    }
+
+    p {
+      margin: 8px 0;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    p.lead {
+      font-size: 0.98rem;
+      color: var(--text-main);
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    strong {
+      font-weight: 600;
+    }
+
+    sup {
+      font-size: 0.7em;
+      vertical-align: super;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--link-hover);
+      text-decoration: underline;
+    }
+
+    .highlight-box {
+      margin: 14px 0;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background-color: rgba(15,23,42,0.95);
+      border: 1px solid rgba(148,163,184,0.4);
+      font-size: 0.9rem;
+    }
+
+    .highlight-box strong {
+      color: var(--accent);
+    }
+
+    .table-wrapper {
+      margin: 12px 0 18px;
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      background-color: rgba(10,15,25,0.95);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      min-width: 540px;
+    }
+
+    thead {
+      background: linear-gradient(90deg, rgba(240,180,75,0.22), rgba(15,23,42,1));
+    }
+
+    th, td {
+      padding: 9px 10px;
+      border-bottom: 1px solid rgba(31,41,55,0.9);
+      text-align: left;
+    }
+
+    th {
+      font-weight: 600;
+      color: #fefce8;
+      white-space: nowrap;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: rgba(17,24,39,0.85);
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: rgba(15,23,42,0.85);
+    }
+
+    .footnote-hint {
+      margin-top: 18px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    @media (max-width: 720px) {
+      header.article-header {
+        padding: 20px 16px 22px;
+      }
+      .page {
+        padding: 20px 16px 44px;
+      }
+      article {
+        padding: 20px 16px 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="article-header">
+      <div class="article-kicker">
+        <span class="dot"></span>
+        <span>XolosArmy Network – Myth & Cosmology</span>
+      </div>
+      <h1>The Theology of Transit: The Fifth Sun, Xólotl and the Psychopomp Function of the Xoloitzcuintli in the Nahua Worldview</h1>
+      <p class="article-subtitle">
+        From the unstable cosmos of <em>Nahui Ollin</em> to the dog-god Xólotl and the earthly Xoloitzcuintli, this essay explores how transit, sacrifice and duality sustain both the Sun and the human soul.
+      </p>
+      <div class="meta-row">
+        <div class="meta-badge">
+          <strong>Category</strong><span> • Theology & Mythology</span>
+        </div>
+        <div class="meta-badge">
+          <strong>Focus</strong><span> • Fifth Sun • Xólotl • Xoloitzcuintli</span>
+        </div>
+      </div>
+      <p class="brand-note">
+        This article is part of the XolosArmy Network project. To meet real xoloitzcuintles and learn about responsible breeding in Mexico, visit
+        <a href="https://www.xolosramirez.com" target="_blank" rel="noopener">Xolos Ramírez (Criadero Xoloitzcuintle)</a>.
+      </p>
+    </header>
+
+    <main>
+      <article>
+        <section class="abstract-block">
+          <h2>Abstract</h2>
+          <p>
+            This work explores a “theology of transit” in the Nahua worldview through the legend of the Fifth Sun and the complex figure of Xólotl, together with his earthly manifestation in the Xoloitzcuintli. First, it situates the myth of the Five Suns within a cyclical conception of time, in which the Fifth Sun (<em>Nahui Ollin</em>) is sustained by divine and human sacrifice as a condition for cosmic continuity. It then examines the duality Quetzalcóatl–Xólotl as a complementary pair life/death and dawn/dusk, in close relation to the cycles of Venus and the Sun’s journey through Mictlan. Theological attributes of Xólotl as deity of deformity, liminality and night are analyzed, as well as his key role in the creation of humanity in the Fifth Sun through the recovery of primordial bones. On the earthly level, the Xoloitzcuintli appears as ritual materialization of the dog-god, performing a psychopomp function in funerary rites. Finally, ethnohistorical tradition is contrasted with recent archaeozoological evidence, showing that the symbolic function of the dog as guide of souls is more determinant than its specific phenotype, and that the Xoloitzcuintli emerges as the idealized form of a broader canine archetype.
+          </p>
+          <p class="keywords">
+            <strong>Keywords:</strong> theology of transit; Fifth Sun; <em>Nahui Ollin</em>; Xólotl; Quetzalcóatl; Xoloitzcuintli; psychopomp; Mictlan; Nahua cosmology; cyclical time; Venus; Five Suns myth; archaeozoology; ethnohistory.
+          </p>
+        </section>
+
+        <section id="intro">
+          <h2>I. Introduction to the Mexica Worldview and Cyclical Time</h2>
+
+          <h3>A. Contextualizing the Creation Myth and the Centrality of Sacrifice</h3>
+          <p>
+            Understanding the legend of the Fifth Sun, or the era of <em>Nahui Ollin</em> (Four Movement), requires immersion in the cosmological foundations of the Mexica, who imagined the universe as a system of cyclical eras that is inherently unstable.<sup>1</sup> This cosmos is sustained by divine sacrifice and demands constant energetic renewal in order to persist. Time is not linear but recurrent, and each previous Sun (era) was destroyed by specific cataclysms, underlining the fragility of existence.<sup>1</sup>
+          </p>
+          <p>
+            The Fifth Sun is defined not only by its governing deity but also by the concept of the blood debt. The present humanity exists thanks to the primordial sacrifice of the gods at Teotihuacan. For this reason, the Mexica called themselves <em>macehuali</em>, “those merited by the sacrifice of the gods.”<sup>1</sup> This name implies a transcendental obligation: to keep the Sun alive. Blood (<em>atl-tlachinolli</em>) is a fundamental element that, just as it maintains human life, also gives vitality to the Sun.<sup>2</sup> Therefore, the current Sun must be continually fed with the blood of warriors, sacrificed captives, and even women who died in childbirth, thus ensuring the energetic cycle.<sup>2</sup>
+          </p>
+
+          <h3>B. Duality (<em>Ome</em>) as Governing Principle of the Nahua Cosmos</h3>
+          <p>
+            The Nahua universe is articulated around the principle of duality (<em>ome</em>), where existence and continuity depend on the complementarity of opposites: day and night, life and death, light and darkness. This principle is crucial for understanding the relationship between Quetzalcóatl and Xólotl. While Quetzalcóatl represents life, light and rising (the Morning Star), Xólotl embodies darkness, transformation, sunset and transit, acting as his essential complement and twin.<sup>3</sup>
+          </p>
+          <p>
+            The intrinsic instability of the Fifth Sun, whose calendrical name is <em>Nahui Ollin</em> (Four Movement) and whose final destruction is predicted through movements of the earth or earthquakes,<sup>1</sup> establishes a theology of perpetual risk. The previous Suns were destroyed by “static” elements (jaguar, wind, rain, water).<sup>1</sup> In contrast, the Fifth Sun, ruled by movement, requires active management of incessant transit—particularly the movement between life and death.
+          </p>
+          <p>
+            Xólotl, as the deity who governs planetary transit (Venus) and the transport of the Sun during the night, becomes the stabilizing principle of this cosmic instability. His function is not destructive but that of an engineer of transit: he guarantees that the cycle continues despite the universe’s inherent precariousness.
+          </p>
+        </section>
+
+        <section id="five-suns">
+          <h2>II. The Legend of the Five Suns and the Present Era (<em>Nahui Ollin</em>)</h2>
+
+          <h3>A. The Four Preceding Suns: Structure of Destruction</h3>
+          <p>
+            The Mexica cosmogonic cycle is composed of five solar eras, four of which ended in total catastrophe, establishing a pattern of destruction and renewal.
+          </p>
+          <p>
+            The first era was <em>Tlalticpac Tonatiuh</em> (Sun of Earth), which concluded on the day <em>Nahui Ocelotl</em> (Four Jaguar). Humanity—then a race of giants—was devoured by jaguars sent by Tezcatlipoca.<sup>1</sup> The second era, <em>Ehecatonatiuh</em> (Sun of Wind), was annihilated on the day <em>Nahui Ehecatl</em> (Four Wind). It was followed by <em>Xiuh Tonatiuh</em> (Sun of Fire), destroyed on the day <em>Nahui Quiahuitl</em> (Four Rain).<sup>1</sup> Finally, the fourth era, <em>Atonatiuh</em> (Sun of Water), ended on the day <em>Nahui Atl</em> (Four Water) through a great flood.<sup>1</sup>
+          </p>
+          <p>
+            These events culminate in the current era, the Fifth Sun, the era of <em>Nahui Ollin</em> (Four Movement), which is foretold to end through earthquakes and violent movements of the earth.<sup>1</sup>
+          </p>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Solar Era (Sun)</th>
+                  <th>Final Day (Nahui…)</th>
+                  <th>Primary Governing Deity</th>
+                  <th>Form of Destruction</th>
+                  <th>Ref.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>First Sun</td>
+                  <td><em>Nahui Ocelotl</em> (Four Jaguar)</td>
+                  <td>Tezcatlipoca</td>
+                  <td>Humanity devoured by jaguars</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>Second Sun</td>
+                  <td><em>Nahui Ehecatl</em> (Four Wind)</td>
+                  <td>Quetzalcóatl</td>
+                  <td>Destruction by mighty winds</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>Third Sun</td>
+                  <td><em>Nahui Quiahuitl</em> (Four Rain)</td>
+                  <td>Tláloc</td>
+                  <td>Rain of fire</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>Fourth Sun</td>
+                  <td><em>Nahui Atl</em> (Four Water)</td>
+                  <td>Chalchiuhtlicue</td>
+                  <td>Great deluge and flooding</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>Fifth Sun</td>
+                  <td><em>Nahui Ollin</em> (Four Movement)</td>
+                  <td>Nanahuatzin / Tonatiuh</td>
+                  <td>Earthquakes and movements of the earth</td>
+                  <td>1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>B. Genesis of the Fifth Sun: The Sacrifice at Teotihuacan</h3>
+          <p>
+            The creation of the Fifth Sun is narrated as an event of supreme sacrifice in the city of Teotihuacan. Two gods were chosen to throw themselves into the sacred fire: Tecuciztécatl, an arrogant deity carrying precious offerings, and Nanahuatzin, a humble and diseased god.<sup>4</sup>
+          </p>
+          <p>
+            When the time came, Tecuciztécatl—although first chosen—feared the flames and recoiled. Instead, Nanahuatzin bravely leapt into the fire, was consumed, and became the powerful and resplendent Fifth Sun. Witnessing his companion’s courage, Tecuciztécatl also threw himself into the blaze, becoming the Moon.<sup>4</sup> After both were consumed, the gods sat beneath the reddened sky to wait. Only Quetzalcóatl and Tezcatlipoca could predict the direction of the new rising, indicating that Nanahuatzin, now the Sun, would appear in the East.<sup>5</sup>
+          </p>
+
+          <h3>C. Post-Solar Phase: Descent for the Creation of Humanity</h3>
+          <p>
+            Although the Sun had been born and light secured in the upper realm, the mission of creation remained incomplete, for the humanity of previous eras had perished. Light alone was not enough to bring forth life. Quetzalcóatl, as creator god, assumed the task of forming the new humans.<sup>6</sup>
+          </p>
+          <p>
+            This mission did not take place in the heavenly realm but in the realm of death: Mictlan. Quetzalcóatl was to descend to recover the bones of past generations (<em>omitl</em>), guarded by Mictlantecuhtli and Mictlancíhuatl.<sup>7</sup> The success of this mission was crucial for the stability of the Fifth Sun. In this era, the creation of life depended on primordial matter preserved in darkness. Light requires darkness as its material reservoir, which justifies the leading role of Xólotl, god of transit and master of the underworld.
+          </p>
+        </section>
+
+        <section id="xolotl">
+          <h2>III. Xólotl: Deity of Twilight, Transformation and Death</h2>
+          <p>
+            Xólotl is one of the most complex deities in Nahua mythology, acting as a theological hinge uniting duality, sacrifice and cosmic movement. His existence defines the necessity of passing through darkness in order to achieve renewal.
+          </p>
+
+          <h3>A. Xólotl as the Nocturnal Twin of Quetzalcóatl</h3>
+          <p>
+            Xólotl is recognized in tradition as the twin of Quetzalcóatl, his indispensable complement.<sup>8</sup> In mortuary contexts, he appears as his <em>nahual</em>, or night-side doubling, manifesting in the realm of darkness.<sup>3</sup>
+          </p>
+          <p>
+            This twin relationship is closely tied to the planet Venus. While Quetzalcóatl personifies the Morning Star, herald of the rising Sun, Xólotl is the Evening Star, descending with the light at dusk.<sup>3</sup> Xólotl thus symbolizes death, twilight and inversion, the side that sinks into the underworld—necessary counterpart to his brother’s emergence.<sup>10</sup>
+          </p>
+
+          <h3>B. Theological Attributes and the Iconography of Monstrosity</h3>
+          <p>
+            Xólotl’s identity is linked to anomaly and transition. He is recognized as god of monstrous births, twins and bodily deformities.<sup>3</sup> This dominion over “border conditions” mirrors his role in transitions between defined states, embodying liminality.<sup>3</sup>
+          </p>
+          <p>
+            Etymology reinforces this association with irregularity. The word <em>xólotl</em> is related to the idea of monstrosity or deformity.<sup>11</sup> From this root comes the name of the <em>axólotl</em>, the “water monster,” an amphibian native to the lakes of central Mexico.<sup>11</sup> According to one myth, when the gods were sacrificing themselves to give life to the Sun, Xólotl tried to escape death by transforming into various beings; his final form was the axolotl, but he was caught and killed to complete the cycle.<sup>12</sup> The sacrifice of Xólotl—who attempted to flee death and failed—establishes a fundamental cosmic pattern: not even the deity of transformation can evade the sacrifice required for regeneration.<sup>12</sup>
+          </p>
+          <p>
+            Xólotl is also associated with the fire that falls from the sky (lightning) and, by extension, with human sacrifice.<sup>8</sup>
+          </p>
+
+          <h3>C. Xólotl and Cosmic Movement: Conductor of the Nocturnal Sun</h3>
+          <p>
+            One of Xólotl’s most vital functions, and the one that directly connects him to the dynamics of the Fifth Sun, is his role as conductor of the Nocturnal Sun. Xólotl is responsible for accompanying and transporting the solar deity, <em>Tlachitonatiuh</em> (the Sun in its dark phase), through Mictlan, ensuring the Sun’s journey each night through the realm of death.<sup>10</sup>
+          </p>
+          <p>
+            This mission of escorting the dying Sun at dusk is essential for the cosmic cycle.<sup>10</sup> Xólotl, by guiding the light into darkness and guaranteeing its passage, prepares the scene for rebirth. In the Codex Borbonicus, Xólotl appears next to the solar god, bearing on his chest the cut conch shell, Quetzalcóatl’s symbol. This is a prefiguration of the Sun’s return: once Xólotl completes his transit mission, he transforms into his twin (Quetzalcóatl, the Morning Star) to bring the Sun back from the surface of the earth to the celestial realm.<sup>10</sup>
+          </p>
+          <p>
+            The theology of transit thus implies that darkness, abnormality and death—the domain of Xólotl—are indispensable components of life and rebirth.
+          </p>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Main Theological Domain</th>
+                  <th>Key Mythic Function</th>
+                  <th>Astronomical / Temporal Association</th>
+                  <th>Symbolism of Duality</th>
+                  <th>Ref.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Death and Underworld (Mictlan)</td>
+                  <td>Guide of souls and conductor of the Nocturnal Sun (<em>Tlachitonatiuh</em>)</td>
+                  <td>Venus as Evening Star (sunset)</td>
+                  <td>Nocturnal twin of Quetzalcóatl</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td>Regeneration and Transformation</td>
+                  <td>Assistant in the creation of Fifth Sun humanity</td>
+                  <td>Venus cycle (death / rebirth)</td>
+                  <td>God of deformities, twins and liminal spaces</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td>Fire and Lightning</td>
+                  <td>Embodiment of human sacrifice</td>
+                  <td>Descent into the underworld</td>
+                  <td>Expression of “necessary death”</td>
+                  <td>8</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="creation-humanity">
+          <h2>IV. Xólotl’s Participation in the Creation of Fifth Sun Humanity</h2>
+
+          <h3>A. Xólotl as Psychopomp Helper in Recovering Primordial Matter</h3>
+          <p>
+            The gestation of humanity in the Fifth Sun is narrated as a process of resurrection that requires Xólotl’s mediation. Quetzalcóatl’s mission to recover the primordial bones (<em>omitl</em>) from Mictlan demanded the active assistance of Xólotl, his nocturnal double.<sup>3</sup>
+          </p>
+          <p>
+            In this narrative, Xólotl, as god of movement and transit, facilitates Quetzalcóatl’s entrance into and exit from Mictlantecuhtli’s domain. To obtain permission to carry away the bones, Quetzalcóatl must blow a conch shell to produce the primordial sound.<sup>7</sup> Xólotl, as twin and companion who knows the paths of night, acts as the facilitator or guide who allows Quetzalcóatl to evade the vigilance of the Lord of Death or to fulfill the required trials.
+          </p>
+
+          <h3>B. Self-Sacrifice and the Birth of the <em>Macehuales</em></h3>
+          <p>
+            Once the bones of past generations had been recovered from Mictlan, Quetzalcóatl returned to the upper world. There, he ground the precious bones (<em>chalchiuhomitl</em>) in a jade basin (<em>chalchiuhapazco</em>), a vessel that symbolizes a cosmic womb for new life.<sup>7</sup>
+          </p>
+          <p>
+            The final act of infusing life was a bloody sacrifice. Quetzalcóatl bled his member over the ground mixture of bones, letting his blood fall on them. After a long period of penance, the <em>macehuales</em> (those born of penitence) were born, children of the Fifth Sun and of Maize.<sup>6</sup> Quetzalcóatl felt deep affection and a sense of debt toward these humans, his own creation.<sup>4</sup>
+          </p>
+          <p>
+            The creation of humanity in this era is not interpreted as a purely luminous act, but as a re-birth process managed through dead matter. The collaboration Quetzalcóatl–Xólotl in Mictlan is an archetypal analogy, in which the underworld becomes a cosmic uterus. The myth tells that the time Venus (embodied by Xólotl) spends in darkness is similar to the average period of human gestation.<sup>3</sup> Thus, Xólotl—the god of twins and deformity (what is forming and in transition)—ensures that the life of the Fifth Sun emerges through chaos and darkness, demonstrating that rebirth (Venus rising into the light) is always preceded by sacrifice and descent.<sup>3</sup>
+          </p>
+        </section>
+
+        <section id="xoloitzcuintli">
+          <h2>V. The Xoloitzcuintli: Earthly Materialization of the Dog-God</h2>
+          <p>
+            The link between Xólotl and the hairless dog, the Xoloitzcuintli, is the direct manifestation in the earthly plane of this theology of transit.
+          </p>
+
+          <h3>A. Etymology and Symbolism of the Name</h3>
+          <p>
+            The name of this canine breed, <em>Xoloitzcuintli</em>, literally translates as “dog of Xólotl” (<em>Xólotl</em> + <em>itzcuintli</em>).<sup>15</sup> This millenary etymological connection (the breed dates back at least 2,000 years)<sup>16</sup> establishes the animal as physical vehicle, biological <em>nahual</em> or operative manifestation of the deity on Earth, particularly in funerary traditions.<sup>16</sup>
+          </p>
+          <p>
+            The dog’s symbolism was indispensable in the cycle of life and death. Due to its scavenging habits, the dog intervened in the destruction of organic matter in putrefaction, facilitating its passage to the underworld. Once there, that organic matter could be returned to be reused by life. This dynamic made the dog an ideal companion in funerary rites.<sup>17</sup>
+          </p>
+
+          <h3>B. Psychopomp Role: Guide of Souls to Mictlan</h3>
+          <p>
+            The primordial function of the Xoloitzcuintli is that of psychopomp, guide of souls. It was believed that the dog was responsible for guiding its owner’s soul through Mictlan, the land of the dead.<sup>18</sup> This function is the operative, earthly counterpart of Xólotl’s cosmic mission of guiding the Sun through the night.<sup>10</sup> The dog ensures that the human spirit completes its post-mortem journey.
+          </p>
+          <p>
+            The most dangerous point along this path was the crossing of a deep and swift river in the land of the dead.<sup>20</sup> The dog, acting as guide, would take the soul on its back and carry it safely to the other shore.<sup>20</sup> This service, however, depended on a moral condition: the dog would willingly carry only the soul of a person who had treated dogs well in life.<sup>20</sup> For this reason, Xoloitzcuintli were often sacrificed and buried in the tombs next to their owners.<sup>18</sup>
+          </p>
+
+          <h3>C. The Xoloitzcuintli as Mirror of Xólotl’s Duality</h3>
+          <p>
+            The hairless dog manifested the duality inherent in its patron god, Xólotl, deity of limits and thresholds.<sup>21</sup>
+          </p>
+          <p>
+            On one hand, it possessed protective and healing properties: it was known as a “healer dog” and believed to be capable of warding off evil spirits and protecting homes.<sup>18</sup> On the other hand, as everything in the Nahua worldview is dual, it also had a malign aspect. The Xoloitzcuintli was associated with disease and physical deformity, reflecting Xólotl’s dominion over anomaly and the transfigured body.<sup>18</sup>
+          </p>
+          <p>
+            Xólotl and the hairless dog operate together as engineers of death’s transit. The deity guarantees that the cosmic cycle of the Sun continues (death at sunset and rebirth at dawn), and the animal guarantees that the individual cycle (the human soul) completes its journey so that regeneration can occur.
+          </p>
+        </section>
+
+        <section id="discussion">
+          <h2>VI. Critical Discussion: Tradition vs. Archaeological Evidence</h2>
+
+          <h3>A. Controversy over Symbolic Exclusivity</h3>
+          <p>
+            The traditional narrative that has endured into contemporary culture—and has been popularized, for example, through artists like Diego Rivera or modern animated films<sup>22</sup>—elevates the Xoloitzcuintli as an animal of enormous, exclusive symbolic importance in pre-Hispanic cultures, especially in funerary rituals.<sup>23</sup>
+          </p>
+          <p>
+            However, recent archaeozoological research, such as that carried out by Raúl Valadez, has posed a significant critique of this narrative. These studies show that biological disciplines and genetics do not always support traditional ethnohistorical views, which are sometimes dismissed as irrelevant when they are not aligned with material evidence.<sup>23</sup>
+          </p>
+
+          <h3>B. Evidence of Other Canids in Funerary Burials</h3>
+          <p>
+            Archaeological excavations over the past decades have confirmed the practice of burying dogs together with humans, just as Bernardino de Sahagún described.<sup>24</sup> Nonetheless, the findings demonstrate that this practice was not strictly limited to the hairless breed. Skeletal remains corresponding to “common dogs” and possibly other varieties, such as the <em>techichi</em>, have been identified.<sup>24</sup>
+          </p>
+          <p>
+            In many cases, the decisive factor for funerary sacrifice and accompaniment was not the absence of hair but the color of the animal (preferably reddish or brown) or the dog’s general value as a human companion—a co-existence that dates back some 50,000 years.<sup>24</sup> The dog was idealized as a loyal companion, facilitating its use in rites.<sup>17</sup>
+          </p>
+
+          <h3>C. Symbolic Consequences of the Discrepancy</h3>
+          <p>
+            This discrepancy between traditional idealization and archaeological evidence has important symbolic consequences. The central importance of the dog (<em>itzcuintli</em>) in the Nahua worldview lies in its archetypal function as human companion and its role in regenerating matter, given its intervention in putrefaction and passage to the underworld, where it is associated with Mictlantecuhtli.<sup>17</sup>
+          </p>
+          <p>
+            Xólotl’s myth provided a theological framework so powerful—that death demands a guide—that the physical animal (<em>itzcuintli</em>) was ritualized. The dog’s function (psychopomp) turned out to be more important than its form (the hairless breed). The persistence of this custom, even under Spanish prohibition,<sup>24</sup> demonstrates that the archetypal need for a guide of souls surpassed restrictions and racial specificity. The Xoloitzcuintli was consolidated as the idealized, symbolic form of this archetype, the perfect emblem of Xólotl’s cosmic function.
+          </p>
+        </section>
+
+        <section id="conclusions">
+          <h2>VII. Conclusions and Legacy</h2>
+
+          <h3>A. The Theological Axis: A Triad that Guarantees the Fifth Sun</h3>
+          <p>
+            The legend of the Fifth Sun and the complex figure of Xólotl—together with his earthly manifestation in the Xoloitzcuintli—reveal the deep structure of the Nahua worldview, grounded in complementary duality and the inescapable need for sacrifice as the path to renewal.
+          </p>
+          <p>
+            Xólotl emerges as an indispensable theological nexus, linking the macrocosm (the cycle of the Fifth Sun, <em>Nahui Ollin</em>) with the microcosm (the fate of the human soul). The Fifth Sun, governed by unstable movement, requires a deity to manage transit. Xólotl fulfills this essential cosmic function by:
+          </p>
+          <div class="highlight-box">
+            <ul>
+              <li><strong>Guaranteeing the solar cycle:</strong> as Evening Star, he ensures that the Sun (light) safely descends through the realm of death (darkness) so it can be reborn at dawn.</li>
+              <li><strong>Making human life possible:</strong> as twin of Quetzalcóatl, he assists in recovering dead matter (<em>omitl</em>) to create current humanity, showing that life must be gestated in darkness.</li>
+              <li><strong>Extending this function to individual death:</strong> the Xoloitzcuintli, “dog of Xólotl,” is the extension of this function at the personal level, ensuring that the human soul traverses Mictlan successfully.</li>
+            </ul>
+          </div>
+          <p>
+            The dog-god and the hairless dog are, in essence, the embodiment of transit as a principle. They ensure that the perpetual movement (<em>Ollin</em>) required for this solar era not to collapse is maintained at the cosmic, collective and individual levels.
+          </p>
+
+          <h3>B. Enduring Legacy in Contemporary Culture</h3>
+          <p>
+            Although the Aztec civilization disappeared centuries ago, the influence of Xólotl and the Xoloitzcuintli persists as a reminder of the deep connection between Mexican culture and death.<sup>19</sup> The Xoloitzcuintli continues to be appreciated and respected, and its story as guide to Mictlan keeps the cultural tradition alive.<sup>19</sup>
+          </p>
+          <p>
+            Iconographically, Xólotl remains relevant, inspiring contemporary art such as monumental <em>alebrijes</em>, where he is represented as the dog-god, guardian of the Sun in the underworld and brother of Quetzalcóatl.<sup>26</sup> This artistic resurgence not only honors his mythic role in the creation of humanity but also stimulates the imagination around the complexity of Mesoamerican deities and their role in the duality of existence.<sup>27</sup>
+          </p>
+          <p>
+            Today, projects such as XolosArmy Network and breeders like
+            <a href="https://www.xolosramirez.com" target="_blank" rel="noopener">Xolos Ramírez (Criadero Xoloitzcuintle)</a>
+            recover this legacy in a new register: by caring for living xoloitzcuintles, telling their stories, and reconnecting global audiences with the ancestral symbolism of the dog that walks between worlds.
+          </p>
+
+          <p class="footnote-hint">
+            Note: Numerical references (1–27) follow the internal order of the original research and can be mapped to a formal bibliography if you choose to add one at the end of this article on XolosArmy Network.
+          </p>
+        </section>
+      </article>
+    </main>
+  </div>
+</body>
+</html>
