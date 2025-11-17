@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Xoloitzcuintle Legacy — A Conservation Journey | XolosArmy Network</title>
+  <meta name="description" content="Explore the Xoloitzcuintle’s journey from ancient Mexico to near extinction and modern conservation—including ethical breeding, genetic health, public education, and cultural legacy." />
+  <link rel="canonical" href="https://xolosarmy.xyz/legacy-xoloitzcuintle.html" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="The Xoloitzcuintle Legacy — A Conservation Journey" />
+  <meta property="og:description" content="From Mictlán to modern conservation: the story, the recovery, and how to preserve the Xoloitzcuintle." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://xolosarmy.xyz/legacy-xoloitzcuintle.html" />
+  <meta property="og:image" content="https://xolosarmy.xyz/assets/og/xolo-legacy.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Preconnects -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Tailwind (CDN) + Chart.js (defer) -->
+  <script src="https://cdn.tailwindcss.com" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+
+  <!-- Inter font with swap -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --bg:#FAF8F5;
+      --ink:#3D352E;
+      --muted:#78716C;
+      --brand:#D97706;      /* Amber 600 */
+      --panel:#FFFFFF;
+      --ring:rgba(217,119,6,.35);
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0f0e0c;
+        --ink:#f2efe9;
+        --muted:#c8c3bb;
+        --brand:#f59e0b;   /* Amber 500 for dark */
+        --panel:#171513;
+        --ring:rgba(245,158,11,.45);
+      }
+    }
+    html,body{height:100%}
+    body{
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+      background:var(--bg); color:var(--ink);
+    }
+    /* Utilities mapped from the original */
+    .bg-custom-primary{background:var(--bg)}
+    .text-custom-primary{color:var(--ink)}
+    .text-custom-secondary{color:var(--muted)}
+    .accent-bg{background:var(--brand)}
+    .accent-text{color:var(--brand)}
+    .accent-border{border-color:var(--brand)}
+    .nav-link{position:relative; transition:color .25s ease}
+    .nav-link::after{
+      content:""; position:absolute; width:0; height:2px; bottom:-4px; left:50%;
+      transform:translateX(-50%); background:var(--brand); transition:width .25s ease;
+    }
+    .nav-link:hover::after, .nav-link[aria-current="true"]::after{width:100%}
+    .chart-container{position:relative; width:100%; max-width:800px; margin-inline:auto; height:50vh; max-height:450px}
+    .xolo-icon-display{
+      width:100%; height:150px; border:2px dashed rgba(209,213,219,.6);
+      display:flex; align-items:center; justify-content:center; font-size:5rem; color:var(--muted); transition:all .2s ease;
+    }
+    .link-chip{
+      display:inline-flex; align-items:center; gap:.5rem; border:1px solid var(--brand);
+      color:var(--brand); padding:.5rem .75rem; border-radius:.75rem; font-weight:600; background:color-mix(in oklab, var(--brand) 8%, transparent);
+    }
+    .link-chip:hover{background:color-mix(in oklab, var(--brand) 14%, transparent)}
+    .btn{
+      border:1px solid transparent; border-radius:.5rem; padding:.5rem 1rem; line-height:1.25; font-weight:600;
+    }
+    .btn-ghost{background:rgba(127,127,127,.12); color:var(--ink)}
+    .btn-ghost[aria-pressed="true"]{background:var(--brand); color:white}
+    .focus-ring:focus-visible{outline:2px solid var(--ring); outline-offset:2px; border-radius:.6rem}
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important; transition:none !important; scroll-behavior:auto !important}
+    }
+    /* Section anchor offset for sticky header */
+    :target{scroll-margin-top:88px}
+  </style>
+
+  <!-- JSON-LD (Article referencing the Xolos Ramírez piece) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"The Xoloitzcuintle Legacy — A Conservation Journey",
+    "inLanguage":"en",
+    "isPartOf":{"@type":"WebSite","name":"XolosArmy Network","url":"https://xolosarmy.xyz/"},
+    "mainEntityOfPage":{"@type":"WebPage","@id":"https://xolosarmy.xyz/legacy-xoloitzcuintle.html"},
+    "author":{"@type":"Organization","name":"XolosArmy Network"},
+    "publisher":{"@type":"Organization","name":"XolosArmy Network"},
+    "image":"https://xolosarmy.xyz/assets/og/xolo-legacy.jpg",
+    "about":[{"@type":"Thing","name":"Xoloitzcuintle"},{"@type":"Thing","name":"Conservation"}],
+    "citation":{
+      "@type":"WebPage",
+      "name":"El Xoloitzcuintle en peligro de extinción: la importancia del esfuerzo de conservación de Xolos Ramírez",
+      "url":"https://www.xolosramirez.com/2023/01/10/el-xoloitzcuintle-en-peligro-de-extinci%C3%B3n-la-importancia-del-esfuerzo-de-conservaci%C3%B3n-de-xolos-ramirez/"
+    }
+  }
+  </script>
+</head>
+<body class="antialiased">
+  <!-- Skip link for a11y -->
+  <a href="#main" class="sr-only focus:not-sr-only focus-ring inline-block m-2 px-3 py-2 bg-white/80 rounded">Skip to content</a>
+
+  <!-- Theme toggle (optional) -->
+  <div class="fixed right-4 bottom-4 z-50">
+    <button id="themeToggle" class="btn btn-ghost focus-ring" type="button" aria-pressed="false" aria-label="Toggle dark mode">🌓</button>
+  </div>
+
+  <!-- Sticky nav appears after hero scroll -->
+  <header id="navbar" class="bg-custom-primary/80 backdrop-blur-md sticky top-0 z-40 hidden" role="navigation" aria-label="Primary">
+    <nav class="container mx-auto px-6 py-3">
+      <ul class="flex justify-center items-center gap-6 md:gap-8">
+        <li><a href="#history" class="nav-link text-custom-secondary font-semibold tracking-wide focus-ring">History</a></li>
+        <li><a href="#recovery" class="nav-link text-custom-secondary font-semibold tracking-wide focus-ring">Recovery</a></li>
+        <li><a href="#conservation" class="nav-link text-custom-secondary font-semibold tracking-wide focus-ring">Conservation</a></li>
+        <li><a href="#breed" class="nav-link text-custom-secondary font-semibold tracking-wide focus-ring">The Breed</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section id="hero" class="min-h-screen flex flex-col justify-center items-center text-center px-4">
+      <h1 class="text-4xl md:text-6xl font-bold text-custom-primary leading-tight">
+        The Legacy of the <span class="accent-text">Xoloitzcuintle</span>
+      </h1>
+      <p class="mt-4 text-lg md:text-xl text-custom-secondary max-w-3xl">
+        A journey through the history, survival, and conservation of one of the world’s oldest and most emblematic breeds—Mexico’s living treasure.
+      </p>
+
+      <!-- Link to the Xolos Ramírez article -->
+      <div class="mt-6">
+        <a class="link-chip focus-ring"
+           href="https://www.xolosramirez.com/2023/01/10/el-xoloitzcuintle-en-peligro-de-extinci%C3%B3n-la-importancia-del-esfuerzo-de-conservaci%C3%B3n-de-xolos-ramirez/"
+           target="_blank" rel="noopener">
+           📖 Read the Xolos Ramírez conservation article
+        </a>
+      </div>
+
+      <div class="mt-12 text-7xl text-gray-400/60" aria-hidden="true">&#128021;</div>
+
+      <a href="#history" class="absolute bottom-10 animate-bounce focus-ring" aria-label="Scroll to History">
+        <svg class="w-8 h-8 text-custom-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+      </a>
+    </section>
+
+    <!-- HISTORY -->
+    <section id="history" class="py-20 md:py-32 bg-white/60 dark:bg-panel">
+      <div class="container mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-bold text-custom-primary">Mexico’s Spiritual Guide</h2>
+          <p class="mt-4 text-custom-secondary text-lg">
+            With more than 3,500 years of history, the Xoloitzcuintle is more than a dog; it is a living symbol of Mexican culture. Its story is woven with gods, artists, and the struggle for cultural survival. Explore the milestones that have defined this unique breed.
+          </p>
+        </div>
+
+        <div class="mt-16 grid md:grid-cols-3 gap-8">
+          <!-- Card -->
+          <article class="history-card bg-custom-primary rounded-lg p-6 cursor-pointer transform hover:-translate-y-1 transition-transform duration-200 shadow-lg focus-within:ring-2 focus-within:ring-[var(--ring)]" tabindex="0">
+            <header class="flex items-center">
+              <span class="text-3xl mr-4" aria-hidden="true">📜</span>
+              <h3 class="text-xl font-bold accent-text">Aztec Mythology</h3>
+            </header>
+            <p class="history-content text-custom-secondary mt-4">
+              In the Aztec worldview, the Xolo was created by the god Xólotl to protect the living and guide the souls of the dead through the perilous underworld, Mictlán—a sacred companion and spiritual guardian.
+            </p>
+          </article>
+
+          <article class="history-card bg-custom-primary rounded-lg p-6 cursor-pointer transform hover:-translate-y-1 transition-transform duration-200 shadow-lg focus-within:ring-2 focus-within:ring-[var(--ring)]" tabindex="0">
+            <header class="flex items-center">
+              <span class="text-3xl mr-4" aria-hidden="true">🎨</span>
+              <h3 class="text-xl font-bold accent-text">Art & Culture</h3>
+            </header>
+            <p class="history-content text-custom-secondary mt-4">
+              Immortalized by masters like Diego Rivera and Frida Kahlo, the Xolo became an icon of post-revolutionary Mexican nationalism—representing Indigenous heritage and pride in the nation’s pre-Hispanic roots.
+            </p>
+          </article>
+
+          <article class="history-card bg-custom-primary rounded-lg p-6 cursor-pointer transform hover:-translate-y-1 transition-transform duration-200 shadow-lg focus-within:ring-2 focus-within:ring-[var(--ring)]" tabindex="0">
+            <header class="flex items-center">
+              <span class="text-3xl mr-4" aria-hidden="true">💔</span>
+              <h3 class="text-xl font-bold accent-text">Near Extinction</h3>
+            </header>
+            <p class="history-content text-custom-secondary mt-4">
+              After the Spanish conquest, the breed was pushed to the brink of extinction. Seen as “pagan” and even consumed as food, Xolos survived for centuries only in remote rural areas of Mexico, preserving their ancient lineage in secret.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECOVERY -->
+    <section id="recovery" class="py-20 md:py-32">
+      <div class="container mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-bold text-custom-primary">The Rebirth of a Breed</h2>
+          <p class="mt-4 text-custom-secondary text-lg">
+            The Xoloitzcuintle’s story is not one of permanent endangerment but of extraordinary recovery. Thanks to dedicated efforts in the 20th century, the breed was saved from oblivion. The chart below illustrates this successful comeback—proof of Mexico’s commitment to its living heritage.
+          </p>
+        </div>
+
+        <div class="mt-16">
+          <div class="chart-container bg-white p-4 rounded-lg shadow-xl dark:bg-panel">
+            <canvas id="populationChart" role="img" aria-label="Line chart showing estimated Xolo registrations increasing from 1955 to 2023"></canvas>
+          </div>
+
+          <!-- No-JS fallback table -->
+          <noscript>
+            <div class="max-w-xl mx-auto mt-6 text-sm">
+              <table class="w-full text-left border border-gray-300 dark:border-gray-600 rounded">
+                <caption class="sr-only">Estimated registered Xolos over time</caption>
+                <thead>
+                  <tr><th class="p-2">Year</th><th class="p-2">Registered Xolos (Estimate)</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td class="p-2">1955</td><td class="p-2">10</td></tr>
+                  <tr><td class="p-2">1970</td><td class="p-2">75</td></tr>
+                  <tr><td class="p-2">1985</td><td class="p-2">400</td></tr>
+                  <tr><td class="p-2">2000</td><td class="p-2">2,000</td></tr>
+                  <tr><td class="p-2">2015</td><td class="p-2">8,000</td></tr>
+                  <tr><td class="p-2">2023</td><td class="p-2">11,000</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </noscript>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONSERVATION -->
+    <section id="conservation" class="py-20 md:py-32 bg-white/60 dark:bg-panel">
+      <div class="container mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-bold text-custom-primary">Conservation Today: The “Xolos Ramírez” Model</h2>
+          <p class="mt-4 text-custom-secondary text-lg">
+            Today the challenge is not survival but preservation. The conservation effort—embodied by responsible breeders like the “Xolos Ramírez” archetype—focuses on maintaining the breed’s purity, health, and cultural meaning. This model stands on four core pillars.
+          </p>
+        </div>
+
+        <div class="mt-16 flex flex-col md:flex-row gap-8">
+          <div class="md:w-1/3">
+            <div class="grid grid-cols-2 md:grid-cols-1 gap-4" role="tablist" aria-label="Conservation pillars">
+              <button data-pillar="ethics" role="tab" aria-selected="true" class="pillar-btn p-4 border-2 accent-border bg-amber-50 rounded-lg text-left transition duration-200 focus-ring">
+                <h3 class="font-bold accent-text">Ethical Breeding</h3>
+                <p class="text-sm text-custom-secondary">Prioritize health and temperament over trends.</p>
+              </button>
+              <button data-pillar="health" role="tab" aria-selected="false" class="pillar-btn p-4 border-2 border-gray-300 rounded-lg text-left transition duration-200 focus-ring">
+                <h3 class="font-bold text-custom-primary">Genetic Health</h3>
+                <p class="text-sm text-custom-secondary">Maintain diversity and lineage integrity.</p>
+              </button>
+              <button data-pillar="education" role="tab" aria-selected="false" class="pillar-btn p-4 border-2 border-gray-300 rounded-lg text-left transition duration-200 focus-ring">
+                <h3 class="font-bold text-custom-primary">Public Education</h3>
+                <p class="text-sm text-custom-secondary">Share history and correct care practices.</p>
+              </button>
+              <button data-pillar="legacy" role="tab" aria-selected="false" class="pillar-btn p-4 border-2 border-gray-300 rounded-lg text-left transition duration-200 focus-ring">
+                <h3 class="font-bold text-custom-primary">Cultural Legacy</h3>
+                <p class="text-sm text-custom-secondary">Promote the Xolo as a symbol of Mexican heritage.</p>
+              </button>
+            </div>
+          </div>
+
+          <div class="md:w-2/3 bg-custom-primary p-8 rounded-lg shadow-lg" role="tabpanel" aria-live="polite">
+            <div id="pillar-content" class="text-white"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BREED -->
+    <section id="breed" class="py-20 md:py-32">
+      <div class="container mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-bold text-custom-primary">Meet the Xolo</h2>
+          <p class="mt-4 text-custom-secondary text-lg">
+            The Xoloitzcuintle is diverse, appearing in different sizes and varieties. Each shares the same ancient lineage and loyal temperament. Use the filters to explore what makes each Xolo unique.
+          </p>
+        </div>
+
+        <div class="mt-16 max-w-4xl mx-auto">
+          <div class="flex justify-center gap-6 flex-wrap">
+            <div class="flex flex-col items-center">
+              <label class="mb-2 font-semibold text-custom-secondary" id="sizeLabel">Size</label>
+              <div class="flex gap-2 bg-gray-200/70 p-1 rounded-lg dark:bg-white/10" role="group" aria-labelledby="sizeLabel">
+                <button class="filter-btn size-btn btn btn-ghost focus-ring" data-type="size" data-value="miniature" aria-pressed="false">Miniature</button>
+                <button class="filter-btn size-btn btn btn-ghost focus-ring" data-type="size" data-value="intermediate" aria-pressed="true">Intermediate</button>
+                <button class="filter-btn size-btn btn btn-ghost focus-ring" data-type="size" data-value="standard" aria-pressed="false">Standard</button>
+              </div>
+            </div>
+            <div class="flex flex-col items-center">
+              <label class="mb-2 font-semibold text-custom-secondary" id="varietyLabel">Variety</label>
+              <div class="flex gap-2 bg-gray-200/70 p-1 rounded-lg dark:bg-white/10" role="group" aria-labelledby="varietyLabel">
+                <button class="filter-btn variety-btn btn btn-ghost focus-ring" data-type="variety" data-value="hairless" aria-pressed="true">Hairless</button>
+                <button class="filter-btn variety-btn btn btn-ghost focus-ring" data-type="variety" data-value="coated" aria-pressed="false">Coated</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 bg-white p-8 rounded-lg shadow-xl dark:bg-panel">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <h3 id="xolo-title" class="text-2xl font-bold accent-text"></h3>
+                <p id="xolo-description" class="mt-4 text-custom-secondary"></p>
+
+                <!-- Secondary link to the article for SEO & UX -->
+                <div class="mt-6">
+                  <a class="link-chip focus-ring"
+                     href="https://www.xolosramirez.com/2023/01/10/el-xoloitzcuintle-en-peligro-de-extinci%C3%B3n-la-importancia-del-esfuerzo-de-conservaci%C3%B3n-de-xolos-ramirez/"
+                     target="_blank" rel="noopener">
+                     🔗 Learn more in the Xolos Ramírez article
+                  </a>
+                </div>
+              </div>
+
+              <div class="xolo-icon-display rounded-lg" aria-hidden="true">
+                <span id="xolo-icon">&#128021;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-custom-primary text-white py-12">
+    <div class="container mx-auto px-6 text-center">
+      <p class="font-semibold">A Living Legacy</p>
+      <p class="mt-2 text-sm text-gray-300 max-w-2xl mx-auto">
+        Conserving the Xoloitzcuintle is a shared responsibility. Support ethical breeders and organizations dedicated to protecting Mexico’s cultural heritage.
+      </p>
+      <div class="mt-6 text-xs text-gray-400">
+        Interactive app for exploration and education about the Xoloitzcuintle. © XolosArmy Network
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Wait until all deferred scripts are ready
+    window.addEventListener('DOMContentLoaded', () => {
+      /* Theme toggle */
+      const themeToggle = document.getElementById('themeToggle');
+      const STORAGE_KEY = 'xolosarmy-theme';
+      const apply = (mode) => {
+        if(mode === 'dark'){ document.documentElement.classList.add('dark'); themeToggle.setAttribute('aria-pressed','true'); }
+        else { document.documentElement.classList.remove('dark'); themeToggle.setAttribute('aria-pressed','false'); }
+      };
+      apply(localStorage.getItem(STORAGE_KEY) || '');
+      themeToggle?.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem(STORAGE_KEY, isDark ? 'dark' : '');
+        themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+      });
+
+      /* Sticky navbar show/hide */
+      const navbar = document.getElementById('navbar');
+      const heroSection = document.getElementById('hero');
+      const navObserver = new IntersectionObserver((entries) => {
+        if (!entries[0].isIntersecting) {
+          navbar.classList.remove('hidden'); navbar.classList.add('flex');
+        } else {
+          navbar.classList.add('hidden'); navbar.classList.remove('flex');
+        }
+      }, { threshold: 0.1 });
+      navObserver.observe(heroSection);
+
+      /* Active link by section in view */
+      const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+      const sections = document.querySelectorAll('main section[id]');
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            navLinks.forEach(link => {
+              const active = link.getAttribute('href') === `#${id}`;
+              link.setAttribute('aria-current', active ? 'true' : 'false');
+              if(active){ link.classList.add('accent-text'); link.classList.remove('text-custom-secondary'); }
+              else { link.classList.remove('accent-text'); link.classList.add('text-custom-secondary'); }
+            });
+          }
+        });
+      }, { rootMargin: '-50% 0px -50% 0px' });
+      sections.forEach(section => sectionObserver.observe(section));
+
+      /* Chart.js: population recovery (guard if Chart not loaded) */
+      const chartCanvas = document.getElementById('populationChart');
+      if (window.Chart && chartCanvas) {
+        const chartCtx = chartCanvas.getContext('2d');
+        const populationData = {
+          labels: ['1955','1970','1985','2000','2015','2023'],
+          datasets: [{
+            label: 'Registered Xolos (Estimate)',
+            data: [10, 75, 400, 2000, 8000, 11000],
+            borderColor: getComputedStyle(document.documentElement).getPropertyValue('--brand').trim() || '#D97706',
+            backgroundColor: 'rgba(217, 119, 6, 0.12)',
+            fill: true,
+            tension: 0.35
+          }]
+        };
+        new Chart(chartCtx, {
+          type: 'line',
+          data: populationData,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              title: {
+                display: true,
+                text: 'Xoloitzcuintle Registrations Over Time',
+                color: getComputedStyle(document.documentElement).getPropertyValue('--ink').trim() || '#3D352E',
+                font: { size: 16, family: 'Inter' }
+              },
+              tooltip: { intersect: false, mode: 'index' }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                title: { display: true, text: 'Registered Dogs', color: getComputedStyle(document.documentElement).getPropertyValue('--muted').trim() || '#78716C' },
+                grid: { color: 'rgba(125,125,125,.15)' }
+              },
+              x: {
+                title: { display: true, text: 'Year', color: getComputedStyle(document.documentElement).getPropertyValue('--muted').trim() || '#78716C' },
+                grid: { display:false }
+              }
+            }
+          }
+        });
+      }
+
+      /* Conservation pillars data & logic */
+      const pillarBtns = document.querySelectorAll('.pillar-btn');
+      const pillarContentEl = document.getElementById('pillar-content');
+      const pillarData = {
+        ethics: {
+          title: 'Ethical & Responsible Breeding',
+          content: 'Selective breeding preserves the breed’s noble temperament and robust health. Overproduction is avoided. Each litter is carefully planned to improve the breed, not merely to produce puppies.'
+        },
+        health: {
+          title: 'Preserving Genetic Health',
+          content: 'Modern conservation uses genetic testing to avoid hereditary diseases and maintain broad diversity. Breeding the coated variety is essential for long-term health, since the hairless gene in double dose is lethal.'
+        },
+        education: {
+          title: 'Education & Public Awareness',
+          content: 'A core effort is educating the public about Xolo history, specific care needs (especially skin), and debunking myths. Responsible breeders serve as ambassadors so new owners are well informed.'
+        },
+        legacy: {
+          title: 'Protecting the Cultural Legacy',
+          content: 'Promote the Xoloitzcuintle as a living symbol of Mexican heritage—participating in cultural events, collaborating with museums and artists, and ensuring recognition not just for appearance but for deep historical and spiritual meaning.'
+        }
+      };
+
+      function updatePillarContent(key){
+        const data = pillarData[key];
+        pillarContentEl.innerHTML = `
+          <h3 class="text-2xl font-bold text-amber-400 mb-4">${data.title}</h3>
+          <p class="text-gray-200">${data.content}</p>
+        `;
+        pillarBtns.forEach(btn => {
+          const isActive = btn.dataset.pillar === key;
+          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          const h3 = btn.querySelector('h3');
+          if(isActive){
+            btn.classList.add('accent-border','bg-amber-50'); btn.classList.remove('border-gray-300');
+            h3.classList.add('accent-text'); h3.classList.remove('text-custom-primary');
+          }else{
+            btn.classList.remove('accent-border','bg-amber-50'); btn.classList.add('border-gray-300');
+            h3.classList.remove('accent-text'); h3.classList.add('text-custom-primary');
+          }
+        });
+      }
+      pillarBtns.forEach(btn => btn.addEventListener('click', () => updatePillarContent(btn.dataset.pillar)));
+      updatePillarContent('ethics');
+
+      /* Breed filters (size/variety) with ARIA pressed states */
+      const xoloData = {
+        miniature:{
+          hairless:{ title:'Miniature Hairless', desc:'The smallest Xolo (25–35 cm). Ideal for apartments and small spaces. Skin needs sun protection and moisturization. Agile, alert, and deeply affectionate with family.' },
+          coated:{ title:'Miniature Coated', desc:'Short, full coat. Vital for genetic diversity. Shares size and loyal temperament with its hairless sibling, with more traditional coat care.' }
+        },
+        intermediate:{
+          hairless:{ title:'Intermediate Hairless', desc:'The most common size (36–45 cm)—the classic Xolo image. Versatile and balanced family dog. Elegant, muscular, and calm at home.' },
+          coated:{ title:'Intermediate Coated', desc:'Structurally similar to the hairless intermediate, with a dense coat. Robust companions showcasing the breed’s full genetic heritage.' }
+        },
+        standard:{
+          hairless:{ title:'Standard Hairless', desc:'Largest and most majestic (46–60 cm), akin to ancestors. A serene, protective guardian—elegant and athletic with an imposing presence.' },
+          coated:{ title:'Standard Coated', desc:'Largest coated variety—powerful and loyal. Pure Xolo, crucial to breeding programs for overall health.' }
+        }
+      };
+
+      let currentSize='intermediate', currentVariety='hairless';
+      const titleEl = document.getElementById('xolo-title');
+      const descEl = document.getElementById('xolo-description');
+
+      function styleActiveFilters(){
+        document.querySelectorAll('.filter-btn').forEach(btn=>{
+          const pressed = (btn.dataset.type==='size' && btn.dataset.value===currentSize)
+                       || (btn.dataset.type==='variety' && btn.dataset.value===currentVariety);
+          btn.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+          if(pressed){ btn.classList.add('!bg-[var(--brand)]','!text-white'); }
+          else{ btn.classList.remove('!bg-[var(--brand)]','!text-white'); }
+        });
+      }
+      function updateXoloInfo(){
+        const data = xoloData[currentSize][currentVariety];
+        titleEl.textContent = data.title;
+        descEl.textContent = data.desc;
+        styleActiveFilters();
+      }
+      document.querySelectorAll('.filter-btn').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          if(btn.dataset.type==='size'){ currentSize = btn.dataset.value; }
+          else{ currentVariety = btn.dataset.value; }
+          updateXoloInfo();
+        });
+        // Keyboard activation for accessibility
+        btn.addEventListener('keydown', (e)=>{
+          if(e.key==='Enter' || e.key===' '){ e.preventDefault(); btn.click(); }
+        });
+      });
+      updateXoloInfo();
+    });
+  </script>
+</body>
+</html>

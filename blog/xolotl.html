@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xolotl and the Fire: The Xoloitzcuintli Myth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Nahua Ember -->
+    <!-- Application Structure Plan: A single-page, scrolling narrative design guides readers through the myth of Xolotl and the theft of fire. The flow: intro to Xolotl, the role of the Xoloitzcuintli, an interactive step-by-step retelling, and a symbolism summary. This linear, story-driven approach builds context before the core narrative. -->
+    <!-- Visualization & Content Choices:
+         1) Pantheon Diagram — Relationships between Nahua gods. Goal: Organize. Viz: Interactive HTML/CSS diagram. Interaction: Click to reveal info pop-ups. Method: HTML/CSS with JS toggles.
+         2) Fire Myth Narrative — Story of Xolotl stealing fire. Goal: Show change/process. Presentation: Step-by-step text blocks. Interaction: Next/Prev controls update content from an array.
+         3) Symbolism Grid — Key concepts (duality, fire). Goal: Organize/Inform. Viz: Grid of cards. Interaction: Hover highlight. Method: HTML/CSS hover effects. NO SVG/Mermaid used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        :root {
+            --bg-color: #FDF6E3; /* Parchment */
+            --text-color: #372A23; /* Dark Brown */
+            --primary-color: #D35400; /* Ember Orange */
+            --secondary-color: #8B4513; /* Saddle Brown */
+            --accent-color: #C0392B; /* Pomegranate Red */
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Georgia', serif;
+        }
+        .text-ember { color: var(--primary-color); }
+        .bg-ember { background-color: var(--primary-color); }
+        .border-ember { border-color: var(--primary-color); }
+        .text-saddle { color: var(--secondary-color); }
+        .bg-saddle { background-color: var(--secondary-color); }
+        .border-saddle { border-color: var(--secondary-color); }
+        .text-accent { color: var(--accent-color); }
+        .bg-accent { background-color: var(--accent-color); }
+        .nav-link {
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .interactive-story-content { min-height: 200px; }
+        .dot {
+            height: 10px; width: 10px; background-color: #bbb;
+            border-radius: 50%; display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+        .dot.active { background-color: var(--primary-color); }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-saddle/10 backdrop-blur-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-saddle">Xolotl & the Fire</h1>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#introduction" class="nav-link">Introduction</a>
+                <a href="#pantheon" class="nav-link">Pantheon</a>
+                <a href="#myth" class="nav-link">The Fire Myth</a>
+                <a href="#symbolism" class="nav-link">Symbolism</a>
+                <!-- Added external link to Xolos Ramírez website -->
+                <a href="https://www.xolosramirez.com" target="_blank" rel="noopener" class="nav-link text-accent">Visit Xolos Ramírez</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- Section: Hero -->
+        <section id="introduction" class="text-center min-h-[60vh] flex flex-col justify-center items-center">
+            <h2 class="text-4xl md:text-6xl font-extrabold text-saddle tracking-tight leading-tight">The Divine Spark</h2>
+            <p class="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-ember">
+                The story of Xolotl—the dog-faced god who defied the underworld to bring fire to humankind.
+            </p>
+            <div class="mt-8">
+                <canvas id="fireCanvas" width="200" height="150"></canvas>
+            </div>
+            <p class="mt-2 text-sm text-gray-500">An exploration of Nahua cosmogony, lightning, and the faithful Xoloitzcuintli.</p>
+        </section>
+
+        <!-- Section: Pantheon -->
+        <section id="pantheon" class="py-20">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-saddle">Xolotl’s Universe</h3>
+                <p class="mt-2 text-md text-saddle max-w-2xl mx-auto">
+                    To understand Xolotl, we must place him in the Nahua pantheon. He was not an isolated deity but a key piece in cosmic balance—embodying dusk, transformation, and the monstrous. His existence was intrinsically linked to his twin, Quetzalcoatl.
+                </p>
+            </div>
+            <div class="relative flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16">
+                 <!-- Connecting line -->
+                <div class="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-1 w-1/4 bg-saddle/30"></div>
+                
+                <div class="text-center group cursor-pointer" onclick="showInfo('quetzalcoatl')">
+                    <div class="w-32 h-32 bg-amber-100 border-2 border-amber-300 rounded-full flex items-center justify-center mx-auto transition-transform group-hover:scale-105">
+                        <span class="text-4xl"> feathered_serpent </span>
+                    </div>
+                    <h4 class="mt-4 font-bold text-lg text-saddle">Quetzalcoatl</h4>
+                    <p class="text-sm text-saddle/80">The Precious Twin</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-32 h-32 bg-ember border-2 border-accent rounded-full flex items-center justify-center mx-auto scale-110 shadow-lg">
+                         <span class="text-4xl"> dog_face </span>
+                    </div>
+                    <h4 class="mt-4 font-bold text-lg text-ember">Xolotl</h4>
+                    <p class="text-sm text-ember/80">The Dark Twin</p>
+                </div>
+
+                <div class="text-center group cursor-pointer" onclick="showInfo('mictlan')">
+                    <div class="w-32 h-32 bg-slate-200 border-2 border-slate-400 rounded-full flex items-center justify-center mx-auto transition-transform group-hover:scale-105">
+                        <span class="text-4xl"> skull </span>
+                    </div>
+                    <h4 class="mt-4 font-bold text-lg text-saddle">Mictlan</h4>
+                    <p class="text-sm text-saddle/80">The Underworld</p>
+                </div>
+            </div>
+            <div id="info-panel" class="mt-12 max-w-2xl mx-auto p-6 bg-white/50 rounded-lg shadow-md border border-saddle/20 hidden transition-opacity duration-500">
+                <h5 id="info-title" class="text-xl font-bold text-ember mb-2"></h5>
+                <p id="info-text" class="text-saddle"></p>
+            </div>
+        </section>
+
+
+        <!-- Section: Interactive Myth -->
+        <section id="myth" class="py-20 bg-saddle/5 rounded-lg">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-saddle">The Ember Heist</h3>
+                <p class="mt-2 text-md text-saddle max-w-2xl mx-auto">
+                    Humanity once lived in twilight—without warmth or light. The gods decided the time had come to grant them fire, but the only flame burned in the depths of Mictlan. This interactive tale follows how brave, cunning Xolotl took on the perilous mission.
+                </p>
+            </div>
+            <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-saddle/10">
+                <div id="interactive-story-content" class="text-center text-lg text-saddle leading-relaxed mb-8 transition-opacity duration-700 ease-in-out"></div>
+                <div class="flex justify-between items-center">
+                    <button id="prev-story" class="bg-saddle/80 hover:bg-saddle text-white font-bold py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
+                    <div id="story-dots" class="flex space-x-2"></div>
+                    <button id="next-story" class="bg-ember hover:bg-accent text-white font-bold py-2 px-4 rounded-lg transition-colors">Next</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section: Symbolism -->
+        <section id="symbolism" class="py-20">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-saddle">Symbolism & Legacy</h3>
+                <p class="mt-2 text-md text-saddle max-w-2xl mx-auto">
+                    The myth of Xolotl and the fire is more than a legend—it’s a window into the Nahua worldview. It encapsulates duality, life and death, and humanity’s role in the cosmos. Xolotl’s legacy endures in Mexican culture, especially through his canine counterpart.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card bg-white p-6 rounded-lg shadow-md border border-saddle/10">
+                    <div class="text-3xl text-ember mb-4">🔥</div>
+                    <h4 class="font-bold text-xl text-saddle mb-2">Creative Fire</h4>
+                    <p class="text-saddle/80">Fire is not only destruction; it’s the origin of cooking, metallurgy, the community around the hearth, and protection against the night. It’s the spark of civilization.</p>
+                </div>
+                <div class="card bg-white p-6 rounded-lg shadow-md border border-saddle/10">
+                    <div class="text-3xl text-ember mb-4">🌗</div>
+                    <h4 class="font-bold text-xl text-saddle mb-2">Cosmic Duality</h4>
+                    <p class="text-saddle/80">Xolotl (darkness, dusk, death) and Quetzalcoatl (light, dawn, life) embody essential duality. One cannot exist without the other. The stolen ember bridges both.</p>
+                </div>
+                <div class="card bg-white p-6 rounded-lg shadow-md border border-saddle/10">
+                    <div class="text-3xl text-ember mb-4">🐾</div>
+                    <h4 class="font-bold text-xl text-saddle mb-2">The Xoloitzcuintli</h4>
+                    <p class="text-saddle/80">This dog—“the dog of Xolotl”—is the living legacy of the god. It was believed to guide souls through the perils of Mictlan, ensuring safe passage to the beyond.</p>
+                </div>
+                <div class="card bg-white p-6 rounded-lg shadow-md border border-saddle/10">
+                    <div class="text-3xl text-ember mb-4">⚡️</div>
+                    <h4 class="font-bold text-xl text-saddle mb-2">Lightning</h4>
+                    <p class="text-saddle/80">Xolotl was also the god of lightning—a form of fire falling from the sky. A tree-splitting strike that sparks a blaze was a direct manifestation of his divine power.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-saddle/10 py-6 mt-12">
+        <div class="container mx-auto text-center text-saddle/70 text-sm">
+            <p>An interactive exploration of Nahua mythology.</p>
+            <p>&copy; 2025. Created for educational and cultural purposes.</p>
+            <!-- Added footer link to Xolos Ramírez -->
+            <p class="mt-2">
+                Learn more about the breed at 
+                <a href="https://www.xolosramirez.com" target="_blank" rel="noopener" class="text-accent underline">Xolos Ramírez</a>.
+            </p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Canvas Fire Animation
+    const canvas = document.getElementById('fireCanvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        const particles = [];
+        const particleCount = 60;
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
+
+        class Particle {
+            constructor() {
+                this.x = canvasWidth / 2;
+                this.y = canvasHeight;
+                this.vx = (Math.random() - 0.5) * 1.5;
+                this.vy = -Math.random() * 3 - 1;
+                this.size = Math.random() * 3 + 2;
+                this.life = 100;
+                this.opacity = 1;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life--;
+                this.opacity = this.life / 100;
+                if (this.size > 0.2) this.size -= 0.05;
+            }
+            draw(context) {
+                context.beginPath();
+                context.globalAlpha = this.opacity;
+                const r = Math.floor(211 + (44 * (this.life / 100)));
+                const g = Math.floor(84 - (30 * (this.life/100)));
+                context.fillStyle = `rgb(${r}, ${g}, 0)`;
+                context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                context.fill();
+            }
+        }
+
+        function createParticles() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateFire() {
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            
+            particles.forEach((p, index) => {
+                p.update();
+                p.draw(ctx);
+                if (p.life <= 0) {
+                    particles.splice(index, 1);
+                }
+            });
+
+            if (particles.length < particleCount) {
+                particles.push(new Particle());
+            }
+
+            requestAnimationFrame(animateFire);
+        }
+
+        createParticles();
+        animateFire();
+    }
+
+    // Interactive Pantheon Logic
+    const godInfo = {
+        quetzalcoatl: {
+            title: 'Quetzalcoatl: The Feathered Serpent',
+            text: 'Twin brother of Xolotl—embodying life, light, fertility, and knowledge. He is day, while Xolotl is night. Together they form a fundamental cosmic balance in the Nahua worldview.'
+        },
+        mictlan: {
+            title: 'Mictlan: The Realm of the Dead',
+            text: 'The Nahua underworld, ruled by Mictlantecuhtli and Mictecacihuatl. It was the destination for most souls. Xolotl, a guide who knew its paths, was uniquely able to enter and leave this perilous realm.'
+        }
+    };
+
+    window.showInfo = (god) => {
+        const panel = document.getElementById('info-panel');
+        const titleEl = document.getElementById('info-title');
+        const textEl = document.getElementById('info-text');
+
+        if (godInfo[god]) {
+            titleEl.textContent = godInfo[god].title;
+            textEl.textContent = godInfo[god].text;
+            panel.classList.remove('hidden');
+        }
+    };
+
+    // Interactive Story Logic
+    const storySteps = [
+        { icon: '🌍', text: 'In the beginning, humanity shivered in a cold, dark world. Nights were long and perilous, and food was eaten raw.' },
+        { icon: '🔥', text: 'The gods, moved by compassion, knew fire was the solution. But the only flame burned in Mictlan—the realm of the dead—a place they feared.' },
+        { icon: '🐶', text: 'Only Xolotl, the dog-faced god and twin of the creator Quetzalcoatl, master of the dark paths, dared to accept the quest.' },
+        { icon: '💀', text: 'He descended into the depths, evading Mictlan’s dangers with cunning. His dual nature—divine and monstrous—let him move where others could not.' },
+        { icon: '✨', text: 'At the heart of the underworld he seized an ember from the eternal fire, hid it in a conch shell, and began the arduous journey back.' },
+        { icon: '🙌', text: 'Emerging from darkness, Xolotl gave the ember to humankind. With it came warmth, light, cooked food, and the birth of community.' }
+    ];
+
+    let currentStep = 0;
+    const storyContent = document.getElementById('interactive-story-content');
+    const nextBtn = document.getElementById('next-story');
+    const prevBtn = document.getElementById('prev-story');
+    const storyDotsContainer = document.getElementById('story-dots');
+    
+    function createDots() {
+        storySteps.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            dot.dataset.index = index;
+            storyDotsContainer.appendChild(dot);
+        });
+    }
+
+    function updateStory() {
+        storyContent.style.opacity = 0;
+        setTimeout(() => {
+            storyContent.innerHTML = `<div class="text-4xl mb-4">${storySteps[currentStep].icon}</div><p>${storySteps[currentStep].text}</p>`;
+            storyContent.style.opacity = 1;
+        }, 300);
+
+        prevBtn.disabled = currentStep === 0;
+        nextBtn.disabled = currentStep === storySteps.length - 1;
+        
+        document.querySelectorAll('#story-dots .dot').forEach((dot, index) => {
+            if (index === currentStep) dot.classList.add('active');
+            else dot.classList.remove('active');
+        });
+    }
+
+    nextBtn.addEventListener('click', () => {
+        if (currentStep < storySteps.length - 1) {
+            currentStep++;
+            updateStory();
+        }
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (currentStep > 0) {
+            currentStep--;
+            updateStory();
+        }
+    });
+    
+    createDots();
+    updateStory();
+
+    // Smooth scrolling for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+});
+</script>
+</body>
+</html>

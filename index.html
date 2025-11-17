@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>XolosArmy Network | Cultura Xoloitzcuintle + NFTs en Blockchain</title>
+
+  <meta name="description" content="Únete a XolosArmy Network, la comunidad descentralizada que conecta el legado del Xoloitzcuintle con el mundo NFT y la blockchain.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="XolosArmy Network — Guardians of the Digital Xoloitzcuintli">
+  <meta property="og:description" content="Join XolosArmy Network: culture, blockchain, and art united through the Xoloitzcuintli.">
+  <meta property="og:image" content="https://xolosarmy.xyz/assets/xolo-hero.jpg">
+  <meta property="og:url" content="https://xolosarmy.xyz">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://xolosarmy.xyz">
+  <meta name="twitter:title" content="XolosArmy Network — Guardians of the Digital Xoloitzcuintli">
+  <meta name="twitter:description" content="Join XolosArmy Network: culture, blockchain, and art united through the Xoloitzcuintli.">
+  <meta name="twitter:image" content="https://xolosarmy.xyz/assets/xolo-hero.jpg">
+  <meta name="theme-color" content="#000000">
+  <!-- Palabras clave -->
+  <meta name="keywords" content="Xoloitzcuintle, NFT, blockchain, cultura mexicana, Xolos Ramírez, XolosArmy, arte digital, eCash, comunidad descentralizada">
+  <!-- Estilos y scripts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --xolo-gold: #f9d777;
+      --xolo-ember: #ff7e3f;
+      --xolo-ink: #060606;
+      --xolo-slate: #161111;
+      --bg-neutral-950: #0a0a0a;
+      --text-gray-200: #e5e7eb;
+      --accent-amber-400: #fbbf24;
+      --heading-font: "Playfair Display", serif;
+      --body-font: "Inter", sans-serif;
+    }
+
+    .scroll-smooth {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--body-font);
+      background-color: var(--bg-neutral-950);
+      color: var(--text-gray-200);
+      margin: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: var(--heading-font);
+      color: var(--text-gray-200);
+    }
+
+    a {
+      color: var(--accent-amber-400);
+    }
+
+    .text-accent {
+      color: var(--accent-amber-400);
+    }
+
+    .surface-panel {
+      background: rgba(28, 25, 23, 0.6);
+      border: 1px solid rgba(251, 191, 36, 0.18);
+      border-radius: 24px;
+      padding: 2.5rem;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(14px);
+    }
+
+    .section-heading {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: rgba(229, 231, 235, 0.78);
+      line-height: 1.8;
+    }
+
+    .max-w-6xl {
+      max-width: 72rem;
+    }
+
+    .mx-auto {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .grid {
+      display: grid;
+    }
+
+    .gap-12 {
+      gap: 3rem;
+    }
+
+    .md\:grid-cols-2 {
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 768px) {
+      .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .transition-all {
+      transition-property: all;
+    }
+
+    .duration-500 {
+      transition-duration: 500ms;
+    }
+
+    .ease-in-out {
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .section-shell {
+      padding: clamp(3rem, 6vw, 5.5rem) 1.5rem;
+    }
+
+    .section-shell .section-eyebrow {
+      font-size: 0.95rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(251, 191, 36, 0.78);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-shell ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .section-shell li {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      color: rgba(229, 231, 235, 0.86);
+      margin-bottom: 1rem;
+    }
+
+    .section-shell li span {
+      color: var(--accent-amber-400);
+    }
+
+    .section-shell strong {
+      color: var(--accent-amber-400);
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.75rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(251, 191, 36, 0.6);
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.92), rgba(217, 119, 6, 0.88));
+      color: #111111;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 18px 45px rgba(251, 191, 36, 0.25);
+    }
+
+    .cta-button:hover {
+      box-shadow: 0 22px 55px rgba(251, 191, 36, 0.4);
+      transform: translateY(-3px);
+    }
+
+    #particles {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1000;
+      mix-blend-mode: screen;
+    }
+
+    #xolo-fire {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      /* Glow aditivo suave sobre el hero */
+      mix-blend-mode: screen;
+      z-index: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #xolo-fire {
+        display: none;
+      }
+    }
+
+    #hero.cinematic-hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 20px;
+      color: #fdf6e8;
+      text-align: center;
+      background: radial-gradient(circle at 20% 20%, rgba(249, 215, 119, 0.12), transparent 55%),
+        radial-gradient(circle at 80% 0%, rgba(255, 174, 94, 0.16), transparent 50%),
+        linear-gradient(145deg, #040404 10%, #120c08 45%, #24140f 100%);
+      isolation: isolate;
+    }
+
+    #hero .hero-visuals,
+    #hero .animated-bg,
+    #hero .light-lines,
+    #hero .particle-field {
+      position: absolute;
+      inset: 0;
+    }
+
+    #hero .hero-visuals {
+      z-index: -3;
+    }
+
+    #hero .animated-bg {
+      background: linear-gradient(-45deg, #000000, #111111, #1a0f0a, #302010);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
+      filter: brightness(1.1);
+    }
+
+    #hero .light-lines {
+      z-index: -2;
+    }
+
+    #hero .light-lines::before,
+    #hero .light-lines::after {
+      content: "";
+      position: absolute;
+      inset: -50% -20%;
+      background: repeating-linear-gradient(
+          120deg,
+          rgba(249, 215, 119, 0.12) 0px,
+          rgba(249, 215, 119, 0.12) 2px,
+          transparent 2px,
+          transparent 26px
+        );
+      mix-blend-mode: screen;
+      opacity: 0.55;
+      animation: linesMove 18s linear infinite;
+    }
+
+    #hero .light-lines::after {
+      transform: rotate(8deg);
+      opacity: 0.35;
+      animation-duration: 28s;
+    }
+
+    #hero .particle-field {
+      z-index: -1;
+      mix-blend-mode: screen;
+    }
+
+    #hero .particle-field::before,
+    #hero .particle-field::after {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background-image: radial-gradient(rgba(249, 215, 119, 0.4) 0.6px, transparent 1px);
+      background-size: 120px 120px;
+      opacity: 0.6;
+      animation: particleDrift 40s linear infinite;
+    }
+
+    #hero .particle-field::after {
+      background-size: 80px 80px;
+      opacity: 0.35;
+      animation-duration: 55s;
+      animation-direction: reverse;
+    }
+
+    #hero .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 70px 48px;
+      background: rgba(10, 7, 6, 0.58);
+      border: 1px solid rgba(249, 215, 119, 0.28);
+      border-radius: 32px;
+      box-shadow: 0 40px 90px rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(18px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 22px;
+    }
+
+    #hero .hero-content h1 {
+      font-family: var(--heading-font);
+      font-size: clamp(2.75rem, 6vw, 4.8rem);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin: 0;
+      background: linear-gradient(120deg, rgba(255, 215, 130, 0.95), #f9d777 45%, #f9a83a 80%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    #hero .glow-subtitle {
+      font-family: var(--body-font);
+      font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+      color: rgba(229, 231, 235, 0.92);
+      line-height: 1.7;
+      max-width: 620px;
+    }
+
+    #hero .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    #hero .hero-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: 999px;
+      font-family: var(--body-font);
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: #0a0605;
+      text-decoration: none;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.98), rgba(217, 119, 6, 0.96));
+      box-shadow: 0 20px 40px rgba(249, 215, 119, 0.25);
+      border: 1px solid rgba(249, 215, 119, 0.45);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
+    }
+
+    #hero .hero-button:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 26px 55px rgba(249, 215, 119, 0.35);
+      filter: brightness(1.07);
+    }
+
+    #hero .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      letter-spacing: 0.22em;
+      color: rgba(249, 215, 119, 0.9);
+      text-transform: uppercase;
+      border: 1px solid rgba(249, 215, 119, 0.35);
+      margin-bottom: 22px;
+      backdrop-filter: blur(6px);
+      background: rgba(12, 8, 8, 0.55);
+    }
+
+    #hero .hero-badge i {
+      color: var(--xolo-gold);
+      text-shadow: 0 0 12px rgba(249, 215, 119, 0.6);
+    }
+
+    @keyframes gradientMove {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @keyframes linesMove {
+      from {
+        transform: translate3d(-5%, 0, 0);
+      }
+      to {
+        transform: translate3d(5%, 0, 0);
+      }
+    }
+
+    @keyframes particleDrift {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(-6%, -8%, 0) scale(1.05);
+      }
+      100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+
+    @media (max-width: 768px) {
+      #hero.cinematic-hero {
+        padding: 120px 18px 100px;
+      }
+
+      #hero .hero-content {
+        padding: 44px 26px;
+      }
+
+      #hero .hero-actions {
+        flex-direction: column;
+        gap: 18px;
+      }
+    }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YTZMJ41WMY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YTZMJ41WMY');
+  </script>
+</head>
+
+<body>
+  <canvas id="particles" aria-hidden="true"></canvas>
+  <button id="theme-toggle" class="theme-toggle transition-all duration-500 ease-in-out" type="button" aria-label="Alternar modo de color">🌙</button>
+  <header data-aos="fade-up">
+    <div class="container">
+      <h1>XolosArmy Network State</h1>
+      <div id="google_translate_element"></div>
+      <nav>
+        <a href="#hero">Leyenda</a>
+        <a href="#xoloitzcuintli-gospel">Evangelio RMZ del Xoloitzcuintle</a>
+        <a href="#whitepaper">Nuestro Whitepaper</a>
+        <a href="#xolos-ramirez">Xolos Ramírez</a>
+        <a href="#vision">Nuestra Vision</a>
+        <a href="/blog/">Blog</a>
+        <a href="#section-below" class="scroll-down-arrow">&#x2193;</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="hero" class="cinematic-hero" data-aos="fade-up">
+    <div class="hero-visuals">
+      <div class="animated-bg"></div>
+      <div class="light-lines"></div>
+      <div class="particle-field"></div>
+    </div>
+    <div class="hero-content">
+      <span class="hero-badge"><i class="fas fa-paw"></i> Energía ancestral del Xoloitzcuintle</span>
+      <h1>XolosArmy Network</h1>
+      <p class="glow-subtitle">
+        Guardians of Culture, Blockchain, and Spirit. <br>
+        Siente la vibración dorada de la manada XolosArmy: arte, historia y futuro unidos en la blockchain.
+      </p>
+      <div class="hero-actions">
+          <a href="https://cashtab.com/?utm_source=hero_btn_nft#/token/8fd3f14abd2b176a1d4bd5136542cd2a7ba3df0e11947dd19326c9d1cd81ae09" target="_blank" class="hero-button transition-all duration-500 ease-in-out">
+            🔥 Mint NFT Cigars
+          </a>
+          <a href="https://cashtab.com/?utm_source=hero_btn_rmz#/token/9e0a9d4720782cf661beaea6c5513f1972e0f3b1541ba4c83f4c87ef65f843dc" target="_blank" class="hero-button transition-all duration-500 ease-in-out">
+            💰 Obtén $RMZ Ahora
+          </a>
+      </div>
+    </div>
+    <!-- Canvas: Golden Ancestral Fire -->
+    <canvas id="xolo-fire" aria-hidden="true"></canvas>
+  </section>
+
+  <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10" data-aos="fade-up"></div>
+
+  <!-- Nueva sección: Próximo Lanzamiento de RMZWallet -->
+  <section id="rmzwallet" class="section-shell" data-aos="fade-up">
+    <div class="max-w-6xl mx-auto surface-panel" data-aos="fade-up">
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+          <span class="section-eyebrow">🚀 Coming Soon</span>
+          <h2 class="section-heading">RMZWallet</h2>
+          <p class="section-subtitle">
+            RMZWallet es la cartera diseñada por XolosArmy para transaccionar eCash incluso sin conexión.
+            Con soporte offline y conectividad Bluetooth (BLE), la manada podrá sincronizar valor y cultura desde cualquier lugar.
+          </p>
+          <p class="section-subtitle">
+            Regístrate para obtener acceso anticipado y ayudar a definir las funciones que impulsarán la economía del Xoloitzcuintle digital.
+          </p>
+        </div>
+        <div>
+          <ul>
+            <li><span>✅</span> Modo PWA para operar sin instalar apps nativas.</li>
+            <li><span>🔄</span> Sincronización entre dispositivos mediante malla BLE cifrada.</li>
+            <li><span>🛡️</span> Custodia local de claves y UTXOs con almacenamiento seguro.</li>
+          </ul>
+          <a
+            href="mailto:xolosarmynetwork@gmail.com?subject=RMZWallet%20Early%20Access&body=I%20would%20like%20to%20join%20the%20RMZWallet%20early%20access%20list.%20Please%20keep%20me%20updated%21"
+            class="cta-button transition-all duration-500 ease-in-out"
+          >
+            ¡Mantenerme informado!
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10" data-aos="fade-up"></div>
+
+  <section class="shop-promo" style="background:rgba(28, 25, 23, 0.85); color:var(--text-gray-200); padding:30px 20px; text-align:center;" data-aos="fade-up">
+  <h2 style="font-family: var(--heading-font);">🌿 Nuevo: XolosArmy Essentials</h2>
+  <p style="font-family: var(--body-font);">Visita nuestra tienda de productos naturales para Xoloitzcuintles</p>
+  <a href="/productos-xoloitzcuintle/" class="cta-button transition-all duration-500 ease-in-out">Ir a la tienda</a>
+</section>
+
+  <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10" data-aos="fade-up"></div>
+
+
+  <main>
+    
+
+          <section id="xolos-rmz" style="padding: 50px 20px;" data-aos="fade-up">
+            <div class="container" style="text-align: center; max-width: 800px; margin: auto;" data-aos="fade-up">
+              <h2 style="font-family: var(--heading-font); color: var(--text-gray-200); margin-bottom: 20px;">Xolos $RMZ: El Token del Xoloitzcuintle en la Blockchain</h2>
+              <p style="font-family: var(--body-font); font-size: 18px; color: rgba(229, 231, 235, 0.82); margin-bottom: 30px; line-height: 1.6;">
+              Xolos $RMZ es el corazón digital de XolosArmy Network: un token descentralizado que honra al Xoloitzcuintle y abre las puertas a una comunidad global.
+            </p>
+            <p>
+              Con Xolos $RMZ accedes a contenido exclusivo, NFTs legendarios, y participación en una red viva que fusiona cultura ancestral, tecnología y comunidad.
+            </p>
+              <a href="https://cashtab.com/#/token/9e0a9d4720782cf661beaea6c5513f1972e0f3b1541ba4c83f4c87ef65f843dc" target="_blank"
+                 class="cta-button transition-all duration-500 ease-in-out">
+                Obtén Xolos $RMZ Ahora
+              </a>
+          </div>
+        </section>
+
+        <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10" data-aos="fade-up"></div>
+
+        <div class="video-container" data-aos="fade-up">
+          <h2>Prueba xolosArmy Naturals, Visita nuestra tienda online de productos xoloitzcuintle</h2>
+          <iframe src="https://www.youtube.com/embed/qlbwHRimEPg?si=AllnNBT2Dev277le&autoplay=1&mute=1" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10" data-aos="fade-up"></div>
+
+    <!-- Dedicated Section for Xoloitzcuintli RMZ Gospel -->
+    <section id="xoloitzcuintli-gospel" data-aos="fade-up">
+      <div class="container" style="text-align: center; padding: 50px 20px;" data-aos="fade-up">
+        <h2 style="font-family: var(--heading-font); color: var(--text-gray-200); margin-bottom: 20px;">El Evangelio RMZ del Xoloitzcuintle: Guardianes Eternos</h2>
+        <p style="font-family: var(--body-font); font-size: 18px; color: rgba(229, 231, 235, 0.82); margin-bottom: 30px;">
+          Sumérgete en el Evangelio del Xoloitzcuintli RMZ, un manifiesto cultural que celebra al Xoloitzcuintle como guardián ancestral de los mundos visibles e invisibles.
+        </p>
+        <p>
+          Este documento único fusiona espiritualidad, historia y tecnología en un canto a la raza más antigua de América, ahora inmortalizada en la blockchain a través del token Xolos $RMZ.
+        </p>
+        <a href="assets/RMZGospel.pdf" target="_blank" class="cta-button transition-all duration-500 ease-in-out">
+          Lee el PDF del Evangelio RMZ
+        </a>
+      </div>
+    </section>
+
+    <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10" data-aos="fade-up"></div>
+
+    <!-- Dedicated Section for RMZ Whitepaper -->
+    <section id="whitepaper" style="padding: 50px 20px; text-align: center;" data-aos="fade-up">
+      <div class="container" data-aos="fade-up">
+        <h2 style="font-family: var(--heading-font); margin-bottom: 20px; color: var(--text-gray-200);">Whitepaper Oficial de Xolos $RMZ: Token de Cultura y Comunidad</h2>
+        <p style="font-family: var(--body-font); font-size: 18px; margin-bottom: 30px; color: rgba(229, 231, 235, 0.82);">
+          El token <strong>Xolos $RMZ</strong> es más que una criptomoneda: es un manifiesto digital que une blockchain, arte ancestral y comunidad global.
+        </p>
+        <p style="font-family: var(--body-font); font-size: 18px; margin-bottom: 30px; color: rgba(229, 231, 235, 0.82);">
+          Explora nuestro Whitepaper oficial y conoce la visión detrás del proyecto, su utilidad real, la filosofía que lo sustenta, y cómo puedes formar parte de esta revolución descentralizada inspirada en el Xoloitzcuintle.
+        </p>
+        <iframe src="assets/XolosRMZ_Whitepaper.pdf" width="100%" height="600px" style="border: none;"></iframe>
+        <p style="font-family: var(--body-font); font-size: 16px; margin-top: 20px; color: rgba(229, 231, 235, 0.7);">
+          También puedes <a href="assets/XolosRMZ_Whitepaper.pdf" target="_blank" style="color: var(--accent-amber-400); text-decoration: none;">descargar el Whitepaper</a> para leerlo más tarde.
+        </p>
+      </div>
+    </section>
+
+    <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10" data-aos="fade-up"></div>
+
+    <!-- Xolos Ramírez Section -->
+    <section id="xolos-ramirez" style="padding:50px 20px;" data-aos="fade-up">
+      <div class="container" style="max-width:900px; margin:auto; text-align:center;" data-aos="fade-up">
+        <h2 style="font-family:var(--heading-font); font-size:32px; color:var(--text-gray-200); margin-bottom:20px;">
+          Conoce a Xolos Ramírez
+        </h2>
+        <p style="font-family:var(--body-font); color:rgba(229, 231, 235, 0.82); margin-bottom:30px;">
+          Visita <a href="https://www.xolosramirez.com" target="_blank" style="color:var(--accent-amber-400); text-decoration:none;">xolosramirez.com</a> y descubre más.
+        </p>
+        <div class="gallery" id="xolos-ramirez-gallery" data-aos="fade-up">
+          <a href="https://www.xolosramirez.com" target="_blank" class="gallery-item">
+            <picture>
+              <source type="image/webp" srcset="https://i.imgur.com/T3GzoTX.webp">
+              <img loading="lazy" src="https://i.imgur.com/T3GzoTX.jpeg" alt="Xolos Ramírez 1">
+            </picture>
+          </a>
+          <a href="https://www.xolosramirez.com" target="_blank" class="gallery-item">
+            <picture>
+              <source type="image/webp" srcset="https://i.imgur.com/nYsecpz.webp">
+              <img loading="lazy" src="https://i.imgur.com/nYsecpz.png" alt="Xolos Ramírez 2">
+            </picture>
+          </a>
+          <a href="https://www.xolosramirez.com" target="_blank" class="gallery-item">
+            <picture>
+              <source type="image/webp" srcset="https://i.imgur.com/ZZ7YYNt.webp">
+              <img loading="lazy" src="https://i.imgur.com/ZZ7YYNt.jpeg" alt="Xolos Ramírez 3">
+            </picture>
+          </a>
+          <a href="https://www.xolosramirez.com" target="_blank" class="gallery-item">
+            <picture>
+              <source type="image/webp" srcset="https://i.imgur.com/SgXx5Ox.webp">
+              <img loading="lazy" src="https://i.imgur.com/SgXx5Ox.jpeg" alt="Xolos Ramírez 4">
+            </picture>
+          </a>
+          <a href="https://www.xolosramirez.com" target="_blank" class="gallery-item">
+            <picture>
+              <source type="image/webp" srcset="https://i.imgur.com/pKVHzSk.webp">
+              <img loading="lazy" src="https://i.imgur.com/pKVHzSk.jpeg" alt="Xolos Ramírez 5">
+            </picture>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10" data-aos="fade-up"></div>
+
+    <!-- Vision Section -->
+    <section id="vision" class="vision-section" data-aos="fade-up">
+      <div class="container" data-aos="fade-up">
+        <h2>Our Vision for the XolosArmy Network State</h2>
+        <p>Compartimos la visión, los objetivos y los planes futuros de la Red XolosArmy.</p>
+        
+        <!-- Card Layout for the Recording -->
+        <div class="card" data-aos="fade-up">
+          <!-- Embed Twitter Space recording (use actual embed link if available) -->
+          <iframe src="https://www.youtube.com/embed/NqUb5ckLz_c?si=DftzeD-Cc2nRD0P7&autoplay=1&mute=1" width="100%" height="200" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+          <div class="summary" data-aos="fade-up">
+            <h3>Aspectos Clave</h3>
+            <ul>
+              <li>Nuestra misión de construir una Red XolosArmy impulsada por la comunidad.</li>
+              <li>Planes para NFTs, participación comunitaria y desarrollos futuros.</li>
+              <li>Oportunidades para que los seguidores se involucren y contribuyan.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10" data-aos="fade-up"></div>
+
+  <!-- Sección: Roadmap RMZWallet -->
+  <section id="rmzwallet-roadmap" class="section-shell" data-aos="fade-up">
+    <div class="max-w-6xl mx-auto surface-panel" data-aos="fade-up">
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+          <span class="section-eyebrow">🔒 Roadmap</span>
+          <h2 class="section-heading">RMZWallet Roadmap</h2>
+          <p class="section-subtitle">
+            Nuestra hoja de ruta prioriza resiliencia fuera de línea, sincronización segura y un lanzamiento comunitario sólido.
+            Cada hito desbloquea herramientas para que los guardianes del Xoloitzcuintle gestionen valor en cualquier territorio.
+          </p>
+        </div>
+        <div>
+          <ul>
+            <li><span>✅</span> Fundamentos PWA con modo sin conexión y carga instantánea.</li>
+            <li><span>🔄</span> Prototipo de malla BLE para sincronización entre dispositivos.</li>
+            <li><span>🧩</span> Gestión local de UTXOs mediante IndexedDB cifrado.</li>
+            <li><span>🚀</span> Lanzamiento público con gobernanza comunitaria — Q4 2025.</li>
+          </ul>
+          <p class="section-subtitle">
+            ¿Quieres aportar ideas al roadmap? Escríbenos y suma tu voz a la evolución del RMZWallet.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10" data-aos="fade-up"></div>
+
+    <!-- Sección: Team & Vision -->
+    <section id="team" class="section-shell" data-aos="fade-up">
+      <div class="max-w-6xl mx-auto surface-panel" data-aos="fade-up">
+        <div class="grid md:grid-cols-2 gap-12">
+          <div>
+            <span class="section-eyebrow">🌎 Team & Vision</span>
+            <h2 class="section-heading">Guardianes detrás de XolosArmy</h2>
+            <p class="section-subtitle">
+              XolosArmy Network es liderado por <strong>Fernando Ramírez</strong>, desarrollador y custodio de la herencia Xoloitzcuintle.
+              Combinamos código abierto, blockchain y narrativas ancestrales para preservar la cultura con herramientas descentralizadas.
+            </p>
+          </div>
+          <div>
+            <ul>
+              <li><span>🤝</span> Comunidad abierta que colabora en proyectos culturales y Web3.</li>
+              <li><span>📡</span> Investigación constante en conectividad alternativa y economía circular.</li>
+              <li><span>🔥</span> Experiencias NFT que honran el linaje del Xoloitzcuintle.</li>
+            </ul>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+              <a href="https://t.me/xolosramirez" target="_blank" class="cta-button transition-all duration-500 ease-in-out">Join Telegram</a>
+              <a href="https://xolosramirez.club" target="_blank" class="cta-button transition-all duration-500 ease-in-out">Mastodon</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10" data-aos="fade-up"></div>
+
+  <footer data-aos="fade-up">
+  <div class="container">
+    <p>&copy; 2024 XolosArmy Network</p>
+
+    <!-- ID del eToken (compacto) con botón de copiar -->
+    <div class="etoken-id">
+      <strong>Xolos $RMZ eToken ID:</strong>
+      <a href="https://explorer.e.cash/tx/9e0a9d4720782cf661beaea6c5513f1972e0f3b1541ba4c83f4c87ef65f843dc" 
+         target="_blank"
+         title="9e0a9d4720782cf661beaea6c5513f1972e0f3b1541ba4c83f4c87ef65f843dc">
+        9e0a9d47…65f843dc
+      </a>
+      <button id="copy-etoken" class="transition-all duration-500 ease-in-out" title="Copiar ID completo">📋</button>
+    </div>
+
+    <!-- Iconos sociales -->
+    <div class="social-icons">
+      <a href="https://www.youtube.com/channel/UCKtNKCavbBmxtcdHSDd9BsA" target="_blank" aria-label="YouTube">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a href="https://x.com/xolosArmy" target="_blank" aria-label="Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://t.me/xolosramirez" target="_blank" aria-label="Telegram">
+        <i class="fab fa-telegram"></i>
+      </a>
+      <a href="https://www.tiktok.com/@xolosarmy" target="_blank" aria-label="TikTok">
+        <i class="fab fa-tiktok"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<style>
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--bg-neutral-950);
+  color: var(--text-gray-200);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+  background-color: var(--bg-neutral-950);
+  color: var(--text-gray-200);
+}
+
+body.light-mode {
+  background-color: #fdf9f2;
+  color: #1f2937;
+}
+
+body.light-mode a {
+  color: #b45309;
+}
+
+body.dark-mode a {
+  color: var(--accent-amber-400);
+}
+
+body.light-mode .surface-panel {
+  background: rgba(255, 255, 255, 0.82);
+  color: #1f2937;
+  border-color: rgba(217, 119, 6, 0.35);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.15);
+}
+
+body.light-mode .section-subtitle {
+  color: rgba(55, 65, 81, 0.75);
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  background: rgba(17, 17, 17, 0.8);
+  color: var(--accent-amber-400);
+  border: 2px solid rgba(251, 191, 36, 0.65);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10000;
+  transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05);
+  background: rgba(251, 191, 36, 0.12);
+}
+
+body.light-mode .theme-toggle {
+  background: rgba(255, 255, 255, 0.85);
+  color: #b45309;
+  border-color: rgba(217, 119, 6, 0.6);
+}
+
+footer {
+  background-color: rgba(17, 17, 17, 0.88);
+  color: var(--text-gray-200);
+  padding: 24px 0;
+  text-align: center;
+}
+
+footer .container {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 16px;
+}
+
+footer .etoken-id {
+  margin: 8px 0 4px;
+  font-size: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+}
+
+footer .etoken-id strong {
+  color: var(--accent-amber-400);
+}
+
+footer .etoken-id a {
+  color: var(--accent-amber-400);
+  text-decoration: none;
+}
+
+footer .etoken-id a:hover {
+  text-decoration: underline;
+}
+
+footer .etoken-id button {
+  background: var(--accent-amber-400);
+  color: #111;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 2px 6px;
+  font-size: 14px;
+}
+
+footer .etoken-id button:hover {
+  background: #f59e0b;
+}
+
+footer .social-icons {
+  margin-top: 10px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+footer .social-icons a {
+  color: var(--text-gray-200);
+  font-size: 20px;
+}
+
+footer .social-icons a:hover {
+  color: var(--accent-amber-400);
+}
+
+@media (max-width: 420px) {
+  footer .etoken-id { font-size: 13px; }
+}
+</style>
+
+<script>
+  (() => {
+    const canvas = document.getElementById('xolo-fire');
+    if (!canvas) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (prefersReduced.matches) {
+      return;
+    }
+
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
+
+    let w = 0;
+    let h = 0;
+    let dpr = Math.max(1, window.devicePixelRatio || 1);
+    let running = true;
+
+    const CFG = {
+      countDesktop: 90,
+      countMobile: 45,
+      baseSize: 1.5,
+      sizeVar: 2.0,
+      speed: 0.35,
+      noiseScale: 0.0009,
+      timeScale: 0.00025,
+      fadeTrail: 0.06,
+      hue: 48,
+      sat: 90,
+      lightMin: 60,
+      lightMax: 85,
+      alphaMin: 0.15,
+      alphaMax: 0.55,
+    };
+
+    const isMobile = () => Math.min(window.innerWidth, window.innerHeight) < 720;
+    let PARTICLE_COUNT = isMobile() ? CFG.countMobile : CFG.countDesktop;
+
+    const particles = [];
+    let t0 = performance.now();
+
+    function resize() {
+      const rect = canvas.parentElement?.getBoundingClientRect();
+      if (!rect) return;
+      dpr = Math.max(1, window.devicePixelRatio || 1);
+      w = Math.max(1, Math.floor(rect.width));
+      h = Math.max(1, Math.floor(rect.height));
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function drawGlow(x, y, r, alpha, hue, light) {
+      const g = ctx.createRadialGradient(x, y, 0, x, y, r * 2.5);
+      g.addColorStop(0, `hsla(${hue} ${CFG.sat}% ${light}% / ${alpha})`);
+      g.addColorStop(0.35, `hsla(${hue} ${CFG.sat}% ${Math.min(light + 10, 95)}% / ${alpha * 0.7})`);
+      g.addColorStop(1, `hsla(${hue} ${CFG.sat}% ${Math.max(light - 20, 30)}% / 0)`);
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(x, y, r * 2.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function flowAngle(x, y, t) {
+      const s = CFG.noiseScale;
+      const ts = t * CFG.timeScale;
+      const n1 = Math.sin(x * s + ts) + Math.cos(y * s - ts * 1.3);
+      const n2 = Math.sin((x + y) * s * 0.6 - ts * 0.7) - Math.cos((x - y) * s * 0.7 + ts * 1.1);
+      const n3 = Math.sin(x * 0.7 * s + y * 1.3 * s + ts * 0.9);
+      const v = n1 * 0.6 + n2 * 0.3 + n3 * 0.1;
+      return v * Math.PI;
+    }
+
+    function initParticles() {
+      particles.length = 0;
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: CFG.baseSize + Math.random() * CFG.sizeVar,
+          seed: Math.random() * 1e6,
+          life: Math.random(),
+        });
+      }
+    }
+
+    function step(now) {
+      if (!running) return;
+      const dt = Math.min(32, now - t0);
+      t0 = now;
+
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = `rgba(0, 0, 0, ${CFG.fadeTrail})`;
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.globalCompositeOperation = 'lighter';
+
+      for (const p of particles) {
+        const ang = flowAngle(p.x + p.seed, p.y - p.seed, now);
+        const sp = CFG.speed * (0.7 + 0.6 * Math.sin((now + p.seed) * 0.0013));
+        p.x += Math.cos(ang) * sp * dt * 0.06;
+        p.y += Math.sin(ang) * sp * dt * 0.06;
+
+        if (p.x < -10) p.x = w + 10;
+        if (p.x > w + 10) p.x = -10;
+        if (p.y < -10) p.y = h + 10;
+        if (p.y > h + 10) p.y = -10;
+
+        p.life += dt * 0.0012;
+        const pulse = 0.5 + 0.5 * Math.sin(2.4 * p.life + p.seed * 0.0008);
+        const alpha = CFG.alphaMin + (CFG.alphaMax - CFG.alphaMin) * pulse;
+        const light = Math.round(CFG.lightMin + (CFG.lightMax - CFG.lightMin) * pulse);
+
+        drawGlow(p.x, p.y, p.r, alpha, CFG.hue, light);
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      running = !document.hidden;
+      if (running) {
+        t0 = performance.now();
+        requestAnimationFrame(step);
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      resize();
+      PARTICLE_COUNT = isMobile() ? CFG.countMobile : CFG.countDesktop;
+      initParticles();
+    }, { passive: true });
+
+    resize();
+    initParticles();
+    requestAnimationFrame(step);
+  })();
+</script>
+
+<script>
+(function() {
+  const body = document.body;
+  const themeToggle = document.getElementById('theme-toggle');
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const storedTheme = localStorage.getItem('preferred-theme');
+
+  if (!themeToggle) {
+    return;
+  }
+
+  function applyTheme(theme) {
+    if (theme === 'dark') {
+      body.classList.add('dark-mode');
+      body.classList.remove('light-mode');
+      themeToggle.textContent = '🌞';
+      themeToggle.setAttribute('aria-label', 'Cambiar a modo claro');
+    } else {
+      body.classList.remove('dark-mode');
+      body.classList.add('light-mode');
+      themeToggle.textContent = '🌙';
+      themeToggle.setAttribute('aria-label', 'Cambiar a modo oscuro');
+    }
+  }
+
+  if (storedTheme === 'dark' || storedTheme === 'light') {
+    applyTheme(storedTheme);
+  } else if (prefersDarkScheme.matches) {
+    applyTheme('dark');
+  }
+
+  prefersDarkScheme.addEventListener('change', (event) => {
+    if (!localStorage.getItem('preferred-theme')) {
+      applyTheme(event.matches ? 'dark' : 'light');
+    }
+  });
+
+  themeToggle.addEventListener('click', () => {
+    const isDark = body.classList.contains('dark-mode');
+    const newTheme = isDark ? 'light' : 'dark';
+    localStorage.setItem('preferred-theme', newTheme);
+    applyTheme(newTheme);
+  });
+
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'preferred-theme') {
+      const newTheme = event.newValue;
+      if (newTheme === 'dark' || newTheme === 'light') {
+        applyTheme(newTheme);
+      }
+    }
+  });
+})();
+
+document.getElementById('copy-etoken').addEventListener('click', function() {
+  const etokenID = "9e0a9d4720782cf661beaea6c5513f1972e0f3b1541ba4c83f4c87ef65f843dc";
+  navigator.clipboard.writeText(etokenID).then(() => {
+    alert("ID copiado al portapapeles");
+  }).catch(err => {
+    console.error("Error al copiar el ID: ", err);
+  });
+});
+</script>
+
+<script>
+  (function () {
+    const canvas = document.getElementById('particles');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const particles = Array.from({ length: 60 }, () => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      r: Math.random() * 2 + 1,
+      dx: Math.random() * 0.5 - 0.25,
+      dy: Math.random() * 0.5 - 0.25,
+    }));
+
+    function drawParticles(width, height) {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = 'rgba(255, 215, 0, 0.6)';
+      particles.forEach((particle) => {
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        particle.x += particle.dx;
+        particle.y += particle.dy;
+
+        if (particle.x < 0 || particle.x > width) {
+          particle.dx *= -1;
+        }
+        if (particle.y < 0 || particle.y > height) {
+          particle.dy *= -1;
+        }
+      });
+    }
+
+    function animate() {
+      const dpr = window.devicePixelRatio || 1;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      drawParticles(width, height);
+      window.requestAnimationFrame(animate);
+    }
+
+    animate();
+  })();
+</script>
+
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ElevenLabs Integration
+  <elevenlabs-convai agent-id="ao2s5Z7zdZPW9gthoihX"></elevenlabs-convai>
+  <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script> -->
+
+  <div id="popup-xolo" style="display:none; position: fixed; bottom: 30px; right: 30px; background-color: #111; border: 2px solid #ff5733; border-radius: 12px; padding: 20px; z-index: 9999; width: 300px; color: white; box-shadow: 0 0 15px rgba(0,0,0,0.6); font-family: var(--body-font);" data-aos="fade-up">
+    <button onclick="document.getElementById('popup-xolo').style.display='none'"
+            class="transition-all duration-500 ease-in-out"
+            style="position: absolute; top: 5px; right: 8px; background: transparent; border: none; color: #ff5733; font-size: 20px; cursor: pointer;">×</button>
+    <h3 style="margin-top: 0;">🌀 El Xolo te ha encontrado</h3>
+    <p style="font-size: 16px; margin-bottom: 20px;">
+      Explora el Evangelio RMZ y descubre tu lugar en esta historia ancestral.
+    </p>
+    <a href="#xoloitzcuintli-gospel" class="cta-button transition-all duration-500 ease-in-out" style="padding: 10px 20px; font-size: 14px;">Leer ahora</a>
+  </div>
+
+
+<a id="shop-cta" href="/productos-xoloitzcuintle/">🛒 Ver Tienda XolosArmy Essentials</a>
+
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1200
+    });
+  </script>
+  <!-- Custom Script -->
+  <script src="script.js"></script>
+</body>
+</html>
+

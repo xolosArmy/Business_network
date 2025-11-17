@@ -1,0 +1,401 @@
+```html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>The Ancestral DNA of the Xolo — and Its Registration on the Blockchain | XolosArmy Network</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="How XolosArmy Network anchors verifiable genetics, pedigree proofs, and ownership records of the Xoloitzcuintli on the eCash blockchain with privacy-first design." />
+  <meta name="author" content="XolosArmy Network" />
+  <meta name="theme-color" content="#0f172a" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="The Ancestral DNA of the Xolo — and Its Registration on the Blockchain" />
+  <meta property="og:description" content="A privacy-first, on-chain registry for Xolo DNA evidence and pedigree proofs on eCash ($RMZ)." />
+  <meta property="og:site_name" content="XolosArmy Network" />
+  <!-- <meta property="og:image" content="https://xolosarmy.xyz/path/to/hero.jpg" /> -->
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Ancestral DNA of the Xolo — and Its Registration on the Blockchain" />
+  <meta name="twitter:description" content="A privacy-first, on-chain registry for Xolo DNA evidence and pedigree proofs on eCash ($RMZ)." />
+  <!-- <meta name="twitter:image" content="https://xolosarmy.xyz/path/to/hero.jpg" /> -->
+
+  <style>
+    :root{
+      --bg: #0b1020;         /* deep slate navy (dark mode base) */
+      --panel:#0f172a;       /* slate-900 */
+      --ink:#e5e7eb;         /* gray-200 */
+      --muted:#94a3b8;       /* slate-400 */
+      --brand:#22d3ee;       /* cyan-400 */
+      --brand-ink:#0e7490;   /* cyan-700 */
+      --accent:#a78bfa;      /* violet-400 */
+      --ok:#22c55e;          /* green-500 */
+      --warn:#f59e0b;        /* amber-500 */
+      --code-bg:#0f172a;
+      --code-ink: #e5e7eb; 
+      --code-border:#1f2a44;
+      --border:#1f2937;      /* gray-800 */
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
+      --maxw: 880px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#ffffff;
+        --panel:#ffffff;
+        --ink:#0f172a;
+        --muted:#475569;
+        --brand:#0ea5e9;
+        --brand-ink:#075985;
+        --accent:#7c3aed;
+        --ok:#16a34a;
+        --warn:#b45309;
+        --code-bg:#0f172a;
+        --code-border:#e2e8f0;
+        --border:#e5e7eb;
+        --shadow: 0 10px 30px rgba(2,6,23,.08);
+      }
+    }
+
+    /* Base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(34,211,238,.12), transparent 55%),
+                  radial-gradient(900px 500px at 110% 20%, rgba(167,139,250,.14), transparent 60%),
+                  var(--bg);
+      color:var(--ink);
+      font:16px/1.65 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a{color:var(--brand); text-decoration: none;}
+    a:hover{text-decoration: underline}
+    .wrap{max-width:var(--maxw); margin:0 auto; padding:24px}
+
+    /* Hero */
+    header.hero{
+      margin: 28px auto 18px;
+      background: linear-gradient(180deg, rgba(34,211,238,.12), rgba(167,139,250,.10) 60%, transparent 100%), var(--panel);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero-inner{padding: 28px 28px 20px;}
+    .eyebrow{
+      display:inline-flex; gap:8px; align-items:center;
+      font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+      font-size:.72rem; color:var(--brand);
+      border:1px solid rgba(34,211,238,.35);
+      background: rgba(34,211,238,.06);
+      padding:6px 10px; border-radius:999px;
+    }
+    h1{
+      margin:14px 0 8px; font-size: clamp(1.6rem, 2.2vw + 1rem, 2.4rem);
+      line-height:1.15; letter-spacing:-.01em;
+    }
+    .sub{
+      color:var(--muted); max-width:60ch; margin: 6px 0 0;
+      font-size:1.02rem;
+    }
+    .meta{margin-top:14px; color:var(--muted); font-size:.9rem}
+    .tags{margin-top:12px; display:flex; flex-wrap:wrap; gap:8px}
+    .tag{
+      border:1px solid var(--border); color:var(--muted);
+      padding:4px 10px; border-radius:999px; font-size:.8rem;
+      background: rgba(255,255,255,.02);
+    }
+
+    /* Panel / content */
+    .panel{
+      background: var(--panel); border:1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      margin: 18px 0; overflow:hidden;
+    }
+    .content{padding: 26px}
+    h2{font-size:1.35rem; margin: 26px 0 12px}
+    h3{font-size:1.05rem; margin: 22px 0 8px}
+    p{margin: 12px 0}
+    ul,ol{padding-left:1.2rem; margin: 12px 0}
+    li+li{margin-top:6px}
+    hr{border:0; height:1px; background: var(--border); margin: 28px 0}
+
+    /* ToC */
+    .toc{
+      background:linear-gradient(180deg, rgba(167,139,250,.08), transparent),
+                 rgba(255,255,255,.02);
+      border:1px dashed var(--border); border-radius:12px; padding:16px 18px;
+      margin: 6px 0 18px;
+    }
+    .toc strong{display:block; margin-bottom:8px}
+    .toc a{color:var(--ink)}
+    .toc ol{margin:8px 0 0; padding-left:1.1rem}
+    .toc li{margin:6px 0}
+
+    /* Callouts */
+    .callout{
+      border-left:4px solid var(--accent);
+      background: linear-gradient(90deg, rgba(167,139,250,.12), transparent 60%);
+      padding:12px 14px; border-radius:8px; margin: 14px 0;
+    }
+    .callout.warn{border-left-color: var(--warn); background: linear-gradient(90deg, rgba(245,158,11,.14), transparent 60%);}
+    .callout.ok{border-left-color: var(--ok); background: linear-gradient(90deg, rgba(34,197,94,.12), transparent 60%);}
+
+    /* Code / pre */
+    pre{
+      background: var(--code-bg);
+      border:1px solid var(--code-border);
+      border-radius:12px;
+      padding:14px;
+      overflow:auto;
+      margin:14px 0;
+      position: relative;
+      color: var(--code-ink);     
+    }
+    code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace; font-size:.91rem}
+    .copy{
+      position:absolute; top:8px; right:8px; font-size:.75rem;
+      padding:6px 10px; border-radius:8px; border:1px solid var(--border);
+      background: rgba(255,255,255,.04); color:var(--ink);
+      cursor:pointer;
+    }
+    .copy:active{transform: translateY(1px)}
+
+    /* Footer */
+    footer{
+      color:var(--muted); font-size:.9rem; text-align:center; padding:24px 0 40px;
+    }
+
+    /* Print */
+    @media print{
+      body{background:#fff; color:#111}
+      header.hero, .panel{box-shadow:none}
+      a{color:#111; text-decoration:underline}
+      .copy{ color: var(--code-ink);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="hero-inner">
+        <span class="eyebrow">XolosArmy Network • $RMZ</span>
+        <h1>The Ancestral DNA of the Xolo — and Its Registration on the Blockchain</h1>
+        <p class="sub">The Xoloitzcuintli (Xolo) is more than a dog: it’s a living bridge between contemporary Mexico and the deep memory of Mesoamerica. Today, genomics lets us read that memory directly from the Xolo’s DNA. We preserve that heritage by anchoring verifiable genetics, pedigree proofs, and ownership records on-chain—so each Xolo’s story can be audited, transferred, and celebrated far into the future.</p>
+        <div class="meta">Last updated: <time datetime="2025-09-12">September 12, 2025</time> • Network: eCash (XEC)</div>
+        <div class="tags" aria-label="tags">
+          <span class="tag">Xoloitzcuintli</span>
+          <span class="tag">Blockchain Registry</span>
+          <span class="tag">eCash • $RMZ</span>
+          <span class="tag">Pedigree Proofs</span>
+          <span class="tag">Privacy by Design</span>
+        </div>
+      </div>
+    </header>
+
+    <article class="panel content" id="top">
+      <nav class="toc" aria-label="Table of contents">
+        <strong>Contents</strong>
+        <ol>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#genome">The story written in the Xolo’s genome</a></li>
+          <li><a href="#why-chain">Why register DNA evidence on a blockchain?</a></li>
+          <li><a href="#protocol">The XolosArmy “Proof-of-Pedigree” protocol (v1)</a></li>
+          <li><a href="#schema">Minimal, open metadata schema</a></li>
+          <li><a href="#privacy">Privacy, consent, and revocation</a></li>
+          <li><a href="#benefits">Benefits for the Xolo community</a></li>
+          <li><a href="#verify">Verifying a claim (how it works)</a></li>
+          <li><a href="#roadmap">Roadmap</a></li>
+          <li><a href="#tldr">TL;DR</a></li>
+        </ol>
+      </nav>
+
+      <section id="overview" aria-labelledby="h-overview">
+        <h2 id="h-overview">Overview</h2>
+        <p>This article explains <strong>what “ancestral DNA” means for the Xolo</strong>, <strong>why a blockchain registry matters</strong>, and <strong>how our open, privacy-respecting protocol works</strong> on the eCash (XEC) network with the $RMZ eToken.</p>
+      </section>
+
+      <section id="genome" aria-labelledby="h-genome">
+        <h2 id="h-genome">The story written in the Xolo’s genome</h2>
+        <p>Modern genetic testing can confirm key aspects of breed identity and lineage continuity. For the Xolo, markers associated with:</p>
+        <ul>
+          <li><strong>Coat phenotype</strong> (notably the <em>FOXI3</em> variant—often informally called “FOX-13”) tied to hairlessness,</li>
+          <li><strong>Population structure and diversity</strong>, and</li>
+          <li><strong>Lineage relationships</strong> across kennels and generations,</li>
+        </ul>
+        <p>…help document a dog’s place within a uniquely Mexican bloodline that spans centuries of culture and art. While DNA doesn’t “prove” history on its own, <strong>genetic signatures plus archival records</strong> (pedigrees, show results, photos, and breeder attestations) create a robust, multi-source evidence trail.</p>
+        <div class="callout ok">
+          <strong>Why this matters:</strong> For guardians, breeders, museums, and researchers, DNA-anchored provenance combats misinformation, protects the breed’s identity, and builds confidence for families who adopt a Xolo around the world.
+        </div>
+      </section>
+
+      <section id="why-chain" aria-labelledby="h-why">
+        <h2 id="h-why">Why register DNA evidence on a blockchain?</h2>
+        <p>Traditional databases are useful—but centralized systems can be altered, lost, or siloed. By <strong>anchoring proofs to the blockchain</strong>, we gain:</p>
+        <ol>
+          <li><strong>Immutability:</strong> A timestamped, tamper-evident record for certificates and pedigree events.</li>
+          <li><strong>Portability:</strong> Owners can prove a claim without relying on a single website or authority.</li>
+          <li><strong>Composability:</strong> On-chain proofs link to NFTs, tokens, and future dApps (e.g., exhibition passports, health-record wallets).</li>
+          <li><strong>Community governance:</strong> Open standards encourage multi-breeder participation and third-party verification.</li>
+        </ol>
+        <div class="callout warn">
+          <strong>Privacy first:</strong> We do <em>not</em> store raw DNA data on-chain. We anchor <strong>cryptographic hashes</strong> and minimal metadata pointers. This preserves privacy while enabling global verification.
+        </div>
+      </section>
+
+      <section id="protocol" aria-labelledby="h-protocol">
+        <h2 id="h-protocol">The XolosArmy “Proof-of-Pedigree” protocol (v1)</h2>
+
+        <h3>1) Evidence collection (off-chain)</h3>
+        <ul>
+          <li><strong>DNA certificate</strong> from a recognized lab (PDF or paper scan).</li>
+          <li><strong>Key fields</strong> extracted: Dog Name, Sex, Microchip (if any), Lab Sample ID, Issue Date, Lab Name/Contact, and relevant genotype notes.</li>
+          <li><strong>Context media:</strong> Pedigree PDF, kennel letter, and provenance photos (owner handover, show certificates, etc.).</li>
+          <li><strong>Owner consent:</strong> Permission to publish <em>hashes</em> and minimal metadata.</li>
+        </ul>
+
+        <h3>2) Hashing &amp; packaging</h3>
+        <ul>
+          <li><code>file_hash</code>: SHA-256 of the DNA certificate file.</li>
+          <li><code>summary_hash</code>: SHA-256 of a canonical JSON summary (ordered keys) with key fields only.</li>
+          <li><strong>Optional content-addressed pointers</strong> (e.g., IPFS CIDs) for redacted PDFs/photos stored off-chain.</li>
+        </ul>
+
+        <h3>3) On-chain anchoring (eCash)</h3>
+        <p>We write a compact, human-readable <strong>OP_RETURN</strong> note in a transaction controlled by the XolosArmy registry wallet. Example (UTF-8 payload):</p>
+        <pre><button class="copy" data-copy="#opret">Copy</button><code id="opret">XOLODNA|v1|sha256:7b6c…d3a2|summary:9f41…2b07|cert:cid:bafy…kq|ped:cid:bafy…9n|id:XR-2025-001|owner:ecash:qq…9x</code></pre>
+        <ul>
+          <li><code>sha256</code> = hash of the full certificate file</li>
+          <li><code>summary</code> = hash of the JSON summary</li>
+          <li><code>cert</code> / <code>ped</code> = optional content-addressed locations for redacted documents</li>
+          <li><code>id</code> = canonical XolosArmy Registry ID</li>
+          <li><code>owner</code> = current owner’s eCash address (for signed updates)</li>
+        </ul>
+
+        <h3>4) Token-bound identity (optional)</h3>
+        <p>Link the registry entry to a <strong>non-transferable NFT “Pedigree Badge”</strong> or a <strong>transferable collector NFT</strong> that includes the dog’s media (respecting privacy). This enables:</p>
+        <ul>
+          <li>Exhibition “passes” for galleries and cultural events</li>
+          <li>Proof-of-ownership updates</li>
+          <li>Community perks for $RMZ holders</li>
+        </ul>
+
+        <h3>5) Ownership &amp; status updates</h3>
+        <p>Changes (owner transfer, corrections, vet updates) are published as <strong>new on-chain notes</strong> referencing the original <code>id</code>. The newest valid note is current state; all history remains auditable.</p>
+      </section>
+
+      <section id="schema" aria-labelledby="h-schema">
+        <h2 id="h-schema">Minimal, open metadata schema</h2>
+        <p>For interoperability, we publish a small, vendor-neutral JSON. Only non-sensitive fields are included; raw genotype is never on-chain.</p>
+        <pre><button class="copy" data-copy="#json">Copy</button><code id="json">{
+  "schema": "xolosarmy.xoloDNA.v1",
+  "registry_id": "XR-2025-001",
+  "dog": {
+    "name": "Yoalli Ramírez",
+    "breed": "Xoloitzcuintli",
+    "variety": "Hairless / Standard",
+    "sex": "F",
+    "microchip": "9851-...-1234"
+  },
+  "lab": {
+    "name": "Example Genetics",
+    "sample_id": "EG-2025-7781",
+    "issued": "2025-08-30"
+  },
+  "genotype_notes": ["FOXI3 variant present"],
+  "hashes": {
+    "certificate_sha256": "7b6c...d3a2",
+    "summary_sha256": "9f41...2b07"
+  },
+  "media": {
+    "certificate_cid": "bafy...kq",
+    "pedigree_cid": "bafy...9n",
+    "photos_cid": "bafy...xy"
+  },
+  "chain": {
+    "network": "eCash",
+    "txid": "…",
+    "op_return": "XOLODNA|v1|..."
+  }
+}</code></pre>
+      </section>
+
+      <section id="privacy" aria-labelledby="h-privacy">
+        <h2 id="h-privacy">Privacy, consent, and revocation</h2>
+        <ul>
+          <li><strong>Privacy by design:</strong> Only hashes and minimal descriptors go on-chain. Certificates remain off-chain; sharing is voluntary.</li>
+          <li><strong>Owner control:</strong> Owners decide which media to reveal (e.g., redacted PDFs).</li>
+          <li><strong>Corrections:</strong> If a certificate is superseded, we anchor a new hash and <strong>mark the old hash as retired</strong> via a follow-up on-chain note.</li>
+          <li><strong>Right to be forgotten vs. immutability:</strong> We cannot delete a past hash, but we can publish a <strong>revocation/update</strong> instructing verifiers to ignore prior entries for that <code>registry_id</code>.</li>
+        </ul>
+      </section>
+
+      <section id="benefits" aria-labelledby="h-benefits">
+        <h2 id="h-benefits">Benefits for the Xolo community</h2>
+        <ul>
+          <li><strong>For families &amp; collectors:</strong> Transparent provenance with a simple QR or txid lookup.</li>
+          <li><strong>For breeders:</strong> Credible proof-of-pedigree without exposing private client data; a neutral, multi-party standard.</li>
+          <li><strong>For culture carriers:</strong> Museums, curators, and researchers gain durable references that connect living dogs to Mexico’s artistic and archaeological record—respectfully and verifiably.</li>
+          <li><strong>For developers:</strong> An open schema to build explorers, verification bots, and gallery apps.</li>
+        </ul>
+      </section>
+
+      <section id="verify" aria-labelledby="h-verify">
+        <h2 id="h-verify">Verifying a claim (how it works)</h2>
+        <ol>
+          <li>Download the owner-shared certificate file (or a redacted version).</li>
+          <li>Compute its SHA-256 locally.</li>
+          <li>Compare with the <code>certificate_sha256</code> anchored on-chain (via the tx’s OP_RETURN).</li>
+          <li>Confirm the <code>registry_id</code> lineage (initial record + latest update note).</li>
+          <li>(Optional) Check media CIDs and summary JSON hash for additional assurance.</li>
+        </ol>
+        <p>If the hash matches, the <strong>certificate existed in that exact form at the time of the transaction</strong>—a powerful guarantee against tampering.</p>
+      </section>
+
+      <section id="roadmap" aria-labelledby="h-roadmap">
+        <h2 id="h-roadmap">Roadmap</h2>
+        <ul>
+          <li><strong>v1 (live):</strong> OP_RETURN anchoring, open JSON schema, basic explorer views.</li>
+          <li><strong>v1.1:</strong> Non-transferable “Pedigree Badge” NFTs + QR verification cards.</li>
+          <li><strong>v2:</strong> Multi-lab attestations, zk-proofs for selective disclosure (prove a trait without revealing the whole report).</li>
+          <li><strong>v3:</strong> Cross-chain mirrors and museum-grade exhibit passports.</li>
+        </ul>
+      </section>
+
+      <section id="tldr" aria-labelledby="h-tldr">
+        <h2 id="h-tldr">TL;DR</h2>
+        <p>The Xolo’s DNA carries a unique, living heritage. By <strong>anchoring DNA evidence and pedigree proofs on the eCash blockchain</strong>, XolosArmy Network gives every guardian, breeder, and curator a durable, verifiable way to <strong>protect identity, prove provenance, and celebrate culture</strong>—without exposing private data.</p>
+      </section>
+
+      <p style="margin-top:28px"><a href="#top" aria-label="Back to top">↑ Back to top</a></p>
+    </article>
+
+    <footer>
+      © <span id="y">2025</span> XolosArmy Network • Made with ❤️ for the Xoloitzcuintli
+    </footer>
+  </div>
+
+  <script>
+    // Copy buttons for code blocks
+    document.querySelectorAll('.copy').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const target = document.querySelector(btn.dataset.copy);
+        const text = target ? target.textContent : '';
+        if (!text) return;
+        navigator.clipboard.writeText(text).then(()=>{
+          const prev = btn.textContent;
+          btn.textContent = 'Copied!';
+          setTimeout(()=> btn.textContent = prev, 1200);
+        });
+      });
+    });
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+```

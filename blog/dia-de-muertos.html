@@ -1,0 +1,375 @@
+
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Día de Muertos y el Xoloitzcuintle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Tierra y Cempasúchil -->
+    <!-- Application Structure Plan... (se mantiene igual) -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDF8F2;
+            color: #4A3F35;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        .nav-link {
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #D35400;
+            border-bottom-color: #D35400;
+        }
+        .interactive-element {
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out, filter 0.2s;
+        }
+        .interactive-element:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+        .mictlan-step {
+            transition: all 0.3s ease;
+        }
+        .mictlan-step.active {
+            transform: scale(1.1);
+            border-color: #D35400;
+            background-color: #FAD7A0;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        /* Badge Xolos */
+        .xolos-badge {
+            background: linear-gradient(90deg,#4A3F35 0%, #D35400 100%);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header id="header" class="bg-[#FDF8F2]/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Marca con link a Xolos Ramírez -->
+            <a href="https://www.xolosramirez.com" target="_blank" rel="noopener" class="text-xl font-bold text-[#D35400] hover:opacity-90">
+                Xolos Ramírez
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#diademuertos" class="nav-link font-semibold pb-1">Día de Muertos</a>
+                <a href="#xoloitzcuintle" class="nav-link font-semibold pb-1">El Xoloitzcuintle</a>
+                <a href="#mictlan" class="nav-link font-semibold pb-1">Viaje al Mictlán</a>
+            </div>
+            <!-- CTA directo al sitio -->
+            <a href="https://www.xolosramirez.com" target="_blank" rel="noopener"
+               class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full text-white xolos-badge shadow">
+                Visita XolosRamírez.com
+                <span aria-hidden="true">↗</span>
+            </a>
+            <button id="mobile-menu-button" class="md:hidden text-2xl">☰</button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-[#FDF8F2] px-6 pb-4">
+            <a href="#diademuertos" class="block py-2 text-center nav-link font-semibold">Día de Muertos</a>
+            <a href="#xoloitzcuintle" class="block py-2 text-center nav-link font-semibold">El Xoloitzcuintle</a>
+            <a href="#mictlan" class="block py-2 text-center nav-link font-semibold">Viaje al Mictlán</a>
+            <!-- CTA móvil -->
+            <a href="https://www.xolosramirez.com" target="_blank" rel="noopener"
+               class="mt-2 block text-center font-semibold text-[#D35400] underline">
+               Ir a XolosRamírez.com
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="inicio" class="text-center mb-24">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 text-[#4A3F35]">El Vínculo Sagrado</h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-700">
+                Descubre la profunda conexión entre el Día de Muertos, una celebración de vida y memoria, y el Xoloitzcuintle, el antiguo perro guía de las almas en su viaje al más allá.
+            </p>
+
+            <!-- Badge de referencia a Xolos Ramírez -->
+            <div class="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm text-white xolos-badge shadow">
+                Contenido inspirado por <a class="underline font-semibold" href="https://www.xolosramirez.com" target="_blank" rel="noopener">Xolos Ramírez</a>
+            </div>
+        </section>
+
+        <section id="diademuertos" class="mb-24 scroll-mt-20">
+            <h2 class="text-4xl font-bold text-center mb-4 text-[#D35400]">El Día de Muertos: Una Ofrenda a la Memoria</h2>
+            <p class="text-center max-w-4xl mx-auto mb-12 text-gray-700">
+                Más que un día de luto, es una festividad vibrante para honrar y recordar a los seres queridos que han partido. El elemento central es la ofrenda o altar, un portal de bienvenida lleno de simbolismo. Explora los elementos de nuestro altar interactivo para conocer su significado.
+            </p>
+
+            <div class="relative bg-amber-100/50 p-6 md:p-10 rounded-lg shadow-lg max-w-5xl mx-auto">
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-6 items-center justify-center">
+                    <div id="ofrenda-foto" class="interactive-element text-center">
+                        <div class="text-5xl mb-2">🖼️</div>
+                        <p class="font-semibold">Retrato</p>
+                    </div>
+                    <div id="ofrenda-comida" class="interactive-element text-center">
+                        <div class="text-5xl mb-2">🍲</div>
+                        <p class="font-semibold">Comida y Bebida</p>
+                    </div>
+                    <div id="ofrenda-pan" class="interactive-element text-center">
+                        <div class="text-5xl mb-2">🍞</div>
+                        <p class="font-semibold">Pan de Muerto</p>
+                    </div>
+                    <div id="ofrenda-calavera" class="interactive-element text-center">
+                        <div class="text-5xl mb-2">💀</div>
+                        <p class="font-semibold">Calaveritas</p>
+                    </div>
+                    <div id="ofrenda-flor" class="interactive-element text-center">
+                        <div class="text-5xl mb-2">🌼</div>
+                        <p class="font-semibold">Cempasúchil</p>
+                    </div>
+                    <div id="ofrenda-velas" class="interactive-element text-center">
+                        <div class="text-5xl mb-2">🕯️</div>
+                        <p class="font-semibold">Velas</p>
+                    </div>
+                </div>
+
+                <div id="ofrenda-info" class="mt-8 p-6 bg-white rounded-lg shadow-inner min-h-[100px] flex items-center justify-center">
+                    <p class="text-lg text-center text-gray-600">Haz clic en un elemento para descubrir su simbolismo.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="xoloitzcuintle" class="mb-24 scroll-mt-20">
+            <h2 class="text-4xl font-bold text-center mb-4 text-[#D35400]">El Xoloitzcuintle: El Guía Divino</h2>
+            <p class="text-center max-w-4xl mx-auto mb-12 text-gray-700">
+                Con más de 3,500 años de historia en México, el Xoloitzcuintle es más que una raza de perro. Su nombre en náhuatl proviene de "Xolotl", el dios del ocaso, y "itzcuintli", perro. Se creía que este ser, casi sin pelo y de piel cálida, fue creado por los dioses para ser un compañero sagrado en la vida y en la muerte.
+            </p>
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold mb-4">Un Compañero Multifacético</h3>
+                    <p class="mb-4">
+                        En la vida, el Xoloitzcuintle era altamente valorado. Su calor corporal, sentido directamente a través de su piel, se utilizaba con fines terapéuticos para aliviar dolores como el reumatismo. Era un compañero leal y un símbolo viviente de la conexión con lo divino.
+                    </p>
+                    <p class="mb-4">
+                        Pero su rol más trascendental se revelaba tras la muerte. Se convertía en el psicopompo, el guía de almas, indispensable para que el espíritu del difunto pudiera sortear los peligros del inframundo y alcanzar su destino final, el Mictlán.
+                    </p>
+
+                    <!-- Tarjeta referencia Xolos Ramírez -->
+                    <div class="mt-6 p-4 rounded-lg border border-amber-300 bg-amber-50">
+                        <p class="text-sm text-gray-700">
+                            ¿Quieres conocer Xoloitzcuintles reales y su preservación cultural? Visita el criadero
+                            <a href="https://www.xolosramirez.com" target="_blank" rel="noopener" class="font-semibold text-[#D35400] underline">
+                                Xolos Ramírez
+                            </a>.
+                        </p>
+                    </div>
+                </div>
+                <div class="md:w-1/2 w-full">
+                    <h3 class="text-2xl font-bold mb-4 text-center">Roles del Xoloitzcuintle</h3>
+                    <div class="chart-container">
+                        <canvas id="xoloChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mictlan" class="scroll-mt-20">
+            <h2 class="text-4xl font-bold text-center mb-4 text-[#D35400]">El Viaje al Mictlán</h2>
+            <p class="text-center max-w-4xl mx-auto mb-12 text-gray-700">
+                La mitología mexica describe el Mictlán como el lugar de los muertos, un destino que se alcanzaba tras un arduo viaje de cuatro años a través de nueve niveles llenos de peligros. El Xoloitzcuintle era el único que podía ayudar al alma a superar el desafío más grande. Haz clic en el paso crucial para ver su importancia.
+            </p>
+
+            <div class="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-4 flex-wrap mb-8">
+                <div id="mictlan-1" class="mictlan-step border-2 border-gray-300 rounded-lg p-3 text-center w-40">Nivel 1: Tierra</div>
+                <div class="text-gray-400 font-bold hidden md:block">→</div>
+                <div id="mictlan-2" class="mictlan-step border-2 border-gray-300 rounded-lg p-3 text-center w-40">Nivel 2-8: Pruebas</div>
+                <div class="text-gray-400 font-bold hidden md:block">→</div>
+                <div id="mictlan-3" class="mictlan-step border-2 border-amber-600 rounded-lg p-3 text-center w-40 bg-amber-100 interactive-element">
+                    <p class="font-bold">Nivel 9</p>
+                    <p>Río Chiconauhuapan</p>
+                </div>
+                <div class="text-gray-400 font-bold hidden md:block">→</div>
+                <div id="mictlan-4" class="mictlan-step border-2 border-gray-300 rounded-lg p-3 text-center w-40">Destino: Mictlán</div>
+            </div>
+            
+            <div id="mictlan-info" class="mt-8 p-6 bg-white rounded-lg shadow-inner min-h-[120px] max-w-3xl mx-auto flex items-center justify-center">
+                 <p class="text-lg text-center text-gray-600">El viaje del alma culmina en el último nivel...</p>
+            </div>
+
+            <!-- Mini sección: Conoce Xolos Ramírez -->
+            <div class="max-w-3xl mx-auto mt-10 p-6 rounded-lg border border-amber-300 bg-amber-50">
+                <h3 class="text-2xl font-bold mb-2">Conoce a Xolos Ramírez</h3>
+                <p class="text-gray-700">
+                    Xolos Ramírez es un criadero dedicado a la conservación responsable del Xoloitzcuintle y a difundir su legado cultural.
+                    Explora más historias, videos y artículos en
+                    <a href="https://www.xolosramirez.com" target="_blank" rel="noopener" class="font-semibold text-[#D35400] underline">
+                        xolosramirez.com
+                    </a>.
+                </p>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-[#4A3F35] text-white mt-24 py-6">
+        <div class="container mx-auto px-6 text-center space-y-2">
+            <p>&copy; 2025 Explorador Cultural. Creado con fines educativos.</p>
+            <!-- Enlace claro en el pie -->
+            <p>
+                Visita <a href="https://www.xolosramirez.com" target="_blank" rel="noopener" class="underline font-semibold">Xolos Ramírez</a> para conocer más sobre el Xoloitzcuintle.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const ofrendaElements = {
+                'ofrenda-foto': {
+                    title: 'Retrato del Difunto',
+                    desc: 'Honra a la persona a la que se dedica el altar. Su imagen preside la ofrenda, recordándonos a quién esperamos en esta celebración.'
+                },
+                'ofrenda-comida': {
+                    title: 'Comida y Bebida',
+                    desc: 'Se colocan los platillos y bebidas favoritos del difunto para que el alma pueda disfrutar de los aromas y sabores que amaba en vida.'
+                },
+                'ofrenda-pan': {
+                    title: 'Pan de Muerto',
+                    desc: 'Representa el esqueleto y el ciclo de la vida y la muerte. Es un elemento fraternal que se comparte con los difuntos y los vivos.'
+                },
+                'ofrenda-calavera': {
+                    title: 'Calaveritas de Azúcar',
+                    desc: 'Son una alusión a la muerte siempre presente y una forma de verla con familiaridad y dulzura, en lugar de temor. Llevan el nombre del difunto.'
+                },
+                'ofrenda-flor': {
+                    title: 'Flor de Cempasúchil',
+                    desc: 'Con su color vibrante y su aroma, se cree que su luz guía a las almas desde el mundo de los muertos hasta la ofrenda.'
+                },
+                'ofrenda-velas': {
+                    title: 'Velas y Veladoras',
+                    desc: 'Representan la luz, la fe y la esperanza. Sirven como una guía para que las almas no pierdan su camino de regreso a casa.'
+                }
+            };
+
+            const ofrendaInfoBox = document.getElementById('ofrenda-info');
+
+            Object.keys(ofrendaElements).forEach(id => {
+                const el = document.getElementById(id);
+                el.addEventListener('click', () => {
+                    const data = ofrendaElements[id];
+                    ofrendaInfoBox.innerHTML = `<h3 class="text-xl font-bold mb-2 text-[#D35400]">${data.title}</h3><p class="text-center">${data.desc}</p>`;
+                });
+            });
+
+            const xoloCtx = document.getElementById('xoloChart').getContext('2d');
+            const xoloChart = new Chart(xoloCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Guía Espiritual', 'Símbolo Cultural', 'Compañero Terapéutico'],
+                    datasets: [{
+                        label: 'Roles del Xoloitzcuintle',
+                        data: [60, 25, 15],
+                        backgroundColor: [
+                            '#D35400', 
+                            '#FAD7A0',
+                            '#4A3F35'
+                        ],
+                        borderColor: '#FDF8F2',
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#4A3F35',
+                                font: {
+                                    size: 14,
+                                    family: 'Inter'
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const mictlanSteps = document.querySelectorAll('.mictlan-step');
+            const mictlanInfoBox = document.getElementById('mictlan-info');
+            const mictlanContent = {
+                'mictlan-1': 'El viaje comienza en la tierra, donde el alma se desprende del cuerpo.',
+                'mictlan-2': 'El alma enfrenta ocho desafíos, como montañas que chocan y vientos de obsidiana.',
+                'mictlan-3': 'Al llegar al río Chiconauhuapan, el alma solo puede cruzar con la ayuda de un Xoloitzcuintle. El perro reconoce a su amo, se echa al río y lo transporta sobre su lomo, llevándolo a salvo a la otra orilla.',
+                'mictlan-4': 'Tras cruzar el río, el alma finalmente llega al Mictlán, el lugar del descanso eterno.'
+            };
+
+            mictlanSteps.forEach(step => {
+                step.addEventListener('click', () => {
+                    mictlanSteps.forEach(s => s.classList.remove('active'));
+                    step.classList.add('active');
+                    mictlanInfoBox.innerHTML = `<p class="text-lg text-center">${mictlanContent[step.id]}</p>`;
+                });
+            });
+
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            mobileMenu.addEventListener('click', () => {
+                 mobileMenu.classList.add('hidden');
+            });
+            
+            const sections = document.querySelectorAll('section[id]');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: '-30% 0px -70% 0px' });
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
+```

@@ -1,0 +1,39 @@
+.blog-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: #ffffff;
+    color: #333;
+}
+
+.blog-post {
+    margin-bottom: 40px;
+}
+
+.blog-post h2 {
+    margin-bottom: 10px;
+    font-size: 1.8em;
+}
+
+.blog-post h2 a {
+    color: #c20003;
+    text-decoration: none;
+}
+
+.blog-post h2 a:hover {
+    text-decoration: underline;
+}
+
+.blog-post p {
+    color: #555;
+}
+
+.blog-article h1 {
+    margin-bottom: 20px;
+    color: #c20003;
+}
+
+.blog-article p {
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
