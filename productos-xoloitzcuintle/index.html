@@ -401,13 +401,24 @@
       margin-bottom: clamp(24px, 6vw, 40px);
     }
 
-    .immersive-gallery__frame,
-    .ritual-video__frame {
+    .immersive-gallery__frame {
       position: relative;
       width: min(100%, 960px);
       margin: 0 auto;
       border-radius: 20px;
       overflow: hidden;
+      box-shadow: var(--shadow-elevated);
+    }
+
+    .ritual-video__frame {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 1rem;
+      margin: 2rem auto;
+      max-width: 800px;
+      width: 100%;
       box-shadow: var(--shadow-elevated);
     }
 
@@ -429,15 +440,27 @@
       display: block;
     }
 
-    .ritual-video__frame video {
-      display: block;
+    .ritual-video__frame iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      border: 0;
     }
 
-    .ritual-video__frame video::-webkit-media-controls-panel {
-      background: rgba(16, 21, 21, 0.8);
+    .ritual-video__caption {
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-top: 0.75rem;
+    }
+
+    @media (max-width: 768px) {
+      .ritual-video .section-heading p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
     }
 
     .product-3d {
@@ -1150,7 +1173,7 @@
       id="ritualVideo"
       width="560"
       height="315"
-      src="https://www.youtube.com/embed/xbUrzJE6VBo?si=CTHRHXYkQ7cpO2nY"
+      src="https://www.youtube.com/embed/xbUrzJE6VBo?si=ZxFmYGIQnwJqO43V"
       title="Ritual de aplicación guiada - XolosArmy Naturals"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -1158,6 +1181,9 @@
       loading="lazy"
     ></iframe>
   </div>
+  <p class="ritual-video__caption">
+    Video oficial de aplicación del Bálsamo Natural XolosArmy Naturals.
+  </p>
 </section>
 
 
