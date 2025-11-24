@@ -186,6 +186,43 @@
       transform: translateY(-3px);
     }
 
+    .wallet-launch-card {
+      background: rgba(28, 25, 23, 0.6);
+      border: 1px solid rgba(251, 191, 36, 0.18);
+      border-radius: 24px;
+      padding: 2.5rem;
+    }
+
+    .launch-badge {
+      font-size: 0.95rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent-amber-400);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-launch {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.75rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(251, 191, 36, 0.6);
+      background: linear-gradient(135deg, rgba(249, 215, 119, 0.92), rgba(217, 119, 6, 0.88));
+      color: #111111;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 18px 45px rgba(249, 215, 119, 0.25);
+      transition: all 0.3s ease;
+    }
+
+    .btn-launch:hover {
+      box-shadow: 0 22px 55px rgba(249, 215, 119, 0.4);
+      transform: translateY(-3px);
+    }
+
     #particles {
       position: fixed;
       inset: 0;
@@ -494,34 +531,20 @@
 
   <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10" data-aos="fade-up"></div>
 
-  <!-- Nueva sección: Próximo Lanzamiento de RMZWallet -->
+  <!-- Nueva sección: Lanzamiento RMZWallet v1.0 -->
   <section id="rmzwallet" class="section-shell" data-aos="fade-up">
     <div class="max-w-6xl mx-auto surface-panel" data-aos="fade-up">
-      <div class="grid md:grid-cols-2 gap-12">
-        <div>
-          <span class="section-eyebrow">🚀 Coming Soon</span>
-          <h2 class="section-heading">RMZWallet</h2>
-          <p class="section-subtitle">
-            RMZWallet es la cartera diseñada por XolosArmy para transaccionar eCash incluso sin conexión.
-            Con soporte offline y conectividad Bluetooth (BLE), la manada podrá sincronizar valor y cultura desde cualquier lugar.
-          </p>
-          <p class="section-subtitle">
-            Regístrate para obtener acceso anticipado y ayudar a definir las funciones que impulsarán la economía del Xoloitzcuintle digital.
-          </p>
-        </div>
-        <div>
-          <ul>
-            <li><span>✅</span> Modo PWA para operar sin instalar apps nativas.</li>
-            <li><span>🔄</span> Sincronización entre dispositivos mediante malla BLE cifrada.</li>
-            <li><span>🛡️</span> Custodia local de claves y UTXOs con almacenamiento seguro.</li>
-          </ul>
-          <a
-            href="mailto:xolosarmynetwork@gmail.com?subject=RMZWallet%20Early%20Access&body=I%20would%20like%20to%20join%20the%20RMZWallet%20early%20access%20list.%20Please%20keep%20me%20updated%21"
-            class="cta-button transition-all duration-500 ease-in-out"
-          >
-            ¡Mantenerme informado!
-          </a>
-        </div>
+      <div class="wallet-launch-card">
+        <div class="launch-badge">🚀 Ya Disponible</div>
+        <h3>RMZWallet v1.0</h3>
+        <p>La primera versión oficial de la billetera no custodial de XolosArmy ha sido lanzada. Gestiona tus tokens $RMZ y XEC directamente desde el navegador, con cifrado local y sin intermediarios.</p>
+        <ul>
+          <li>🔐 Custodia local de claves y semilla cifrada.</li>
+          <li>⚡ Envío rápido de tokens $RMZ.</li>
+          <li>📊 Modo Solo Lectura disponible.</li>
+          <li>🧠 Compatible con red eCash (XEC).</li>
+        </ul>
+        <a href="https://cartera.xolosarmy.xyz" class="btn-launch" target="_blank">Ir a RMZWallet</a>
       </div>
     </div>
   </section>
