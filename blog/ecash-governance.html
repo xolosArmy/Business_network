@@ -167,6 +167,71 @@
       color: #d7d7eb;
     }
 
+    .promo-banner {
+      margin: 2.2rem 0;
+      padding: 1.4rem 1.6rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: radial-gradient(circle at top left, var(--accent-soft), #060513 55%);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+    }
+
+    .rmzwallet-banner h3 {
+      margin: 0.2rem 0 0.4rem;
+      font-size: 1.1rem;
+    }
+
+    .rmzwallet-banner p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #e9e9ff;
+    }
+
+    .promo-kicker {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .rmzwallet-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: linear-gradient(135deg, var(--accent), #ff8a3c);
+      color: #05040a;
+      font-size: 0.86rem;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.6);
+    }
+
+    .rmzwallet-cta:hover {
+      filter: brightness(1.05);
+    }
+
+    @media (max-width: 640px) {
+      .promo-banner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .rmzwallet-cta {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
     .body p strong {
       color: #ffffff;
     }
@@ -352,6 +417,26 @@
         <p>
           This approach is not &ldquo;marketing.&rdquo; It&rsquo;s economic policy.
         </p>
+
+        <div class="promo-banner rmzwallet-banner">
+          <div class="rmzwallet-text">
+            <span class="promo-kicker">Cyber-Aztek Self-Custody</span>
+            <h3>RMZWallet: your temple for $XEC and $RMZ</h3>
+            <p>
+              Take full control of your eCash economy. RMZWallet v1.0 is the first
+              cyber-aztek wallet in the eCash ecosystem, designed for self-custody,
+              sovereignty and builders.
+            </p>
+          </div>
+          <a
+            class="rmzwallet-cta"
+            href="https://cartera.xolosarmy.xyz"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Enter the Wallet
+          </a>
+        </div>
 
         <h2>You Want to Build on eCash? Start a Node.</h2>
 
