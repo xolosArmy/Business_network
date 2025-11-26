@@ -253,6 +253,46 @@
       letter-spacing: 0.12em;
       color: var(--text-muted);
     }
+
+    .podcast-embed {
+      margin: 2.5rem 0;
+      padding: 1.75rem 1.25rem;
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, rgba(249, 115, 22, 0.12), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(249, 115, 22, 0.6);
+    }
+
+    .podcast-embed__inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .podcast-embed h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.25rem;
+    }
+
+    .podcast-embed p {
+      margin: 0 0 1rem;
+      font-size: 0.95rem;
+    }
+
+    .podcast-embed__frame {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+    }
+
+    .podcast-embed__frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -451,6 +491,27 @@
           a incrementar la vitalidad del consumidor, alineándose con la creencia de que la energía no se destruye, sino
           que se transfiere mediante la ingesta.
         </p>
+
+        <section class="podcast-embed" aria-labelledby="podcastTonalliTitle">
+          <div class="podcast-embed__inner">
+            <h2 id="podcastTonalliTitle">🎙️ XolosArmy Podcast: Tonalli y el xoloitzcuintle</h2>
+            <p>
+              Complementa este ensayo escuchando el episodio especial del
+              <strong>XolosArmy Podcast</strong> sobre la termodinámica ritual del
+              <em>tonalli</em> y la ontología sagrada del xoloitzcuintle.
+            </p>
+            <div class="podcast-embed__frame">
+              <iframe
+                src="https://www.youtube.com/embed/HXgq93NsqN0"
+                title="XolosArmy Podcast · Tonalli y el xoloitzcuintle"
+                loading="lazy"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </section>
 
         <div class="table-wrapper">
           <table>
