@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Research Report – Mini-Server Architecture for 24/7 eCash Nodes | XolosArmy Network</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Research report for XolosArmy Network on the architecture and deployment of a 24/7 mini-server for eCash full nodes, Chronik, Agora and RMZWallet infrastructure." />
+  <style>
+    :root {
+      --bg: #05040a;
+      --bg-alt: #0c0b13;
+      --card: #11101a;
+      --card-alt: #181626;
+      --fg: #f5f5f5;
+      --muted: #b3b3c2;
+      --accent: #ff4b21;
+      --accent-soft: rgba(255, 75, 33, 0.12);
+      --border-subtle: #2b283d;
+      --code-bg: #171627;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #16122b 0, #05040a 55%);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 2.5rem 1.25rem 3rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1080px;
+    }
+
+    .card {
+      background: linear-gradient(145deg, var(--card) 0, var(--card-alt) 100%);
+      border-radius: 1.25rem;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.4);
+      padding: 2.25rem 1.75rem;
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        padding: 2.75rem 3rem;
+      }
+    }
+
+    .report-header {
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .report-kicker {
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+
+    .report-title {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .report-subtitle {
+      font-size: 0.98rem;
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .report-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.15rem 0.65rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    h2 {
+      margin-top: 2.1rem;
+      margin-bottom: 0.6rem;
+      font-size: 1.3rem;
+    }
+
+    h3 {
+      margin-top: 1.4rem;
+      margin-bottom: 0.4rem;
+      font-size: 1.05rem;
+    }
+
+    p {
+      margin: 0.3rem 0 0.6rem;
+      color: var(--fg);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    ul, ol {
+      padding-left: 1.3rem;
+      margin: 0.1rem 0 0.8rem;
+    }
+
+    li {
+      margin: 0.15rem 0;
+    }
+
+    .section {
+      margin-bottom: 1.8rem;
+    }
+
+    .abstract {
+      padding: 1.1rem 1.2rem;
+      border-radius: 0.9rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed var(--border-subtle);
+      margin-bottom: 2rem;
+    }
+
+    .abstract-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .banner {
+      margin: 1.9rem 0 2.1rem;
+      padding: 1.35rem 1.5rem;
+      border-radius: 1rem;
+      background: radial-gradient(circle at top left, rgba(255, 75, 33, 0.16), rgba(0, 0, 0, 0.4));
+      border: 1px solid rgba(255, 75, 33, 0.4);
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .banner-title {
+      font-size: 1.02rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .banner-body {
+      font-size: 0.94rem;
+      color: var(--fg);
+    }
+
+    .banner-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 0.25rem;
+    }
+
+    .banner-tagline {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1.1rem;
+      background: #ff4b21;
+      color: #05040a;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border-radius: 999px;
+      border: none;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.2), 0 10px 25px rgba(0,0,0,0.4);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+      white-space: nowrap;
+    }
+
+    .btn span {
+      font-size: 0.95em;
+    }
+
+    .btn:hover {
+      text-decoration: none;
+      background: #ff6743;
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.5);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    .btn-pill-secondary {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid rgba(255, 75, 33, 0.7);
+      box-shadow: none;
+      padding: 0.45rem 0.9rem;
+      font-size: 0.8rem;
+    }
+
+    .btn-pill-secondary:hover {
+      background: rgba(255, 75, 33, 0.1);
+      box-shadow: none;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin: 0.6rem 0 1.4rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      min-width: 480px;
+    }
+
+    th, td {
+      padding: 0.55rem 0.6rem;
+      border: 1px solid var(--border-subtle);
+      text-align: left;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.03);
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    code {
+      font-family: "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.85rem;
+      background: var(--code-bg);
+      padding: 0.08rem 0.35rem;
+      border-radius: 0.3rem;
+      border: 1px solid #26243b;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border-radius: 0.55rem;
+      padding: 0.75rem 0.9rem;
+      overflow-x: auto;
+      border: 1px solid #26243b;
+      font-size: 0.86rem;
+    }
+
+    pre code {
+      border: none;
+      padding: 0;
+      background: none;
+    }
+
+    .footnote {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 1.6rem;
+    }
+
+    @media (max-width: 600px) {
+      .report-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .banner {
+        padding: 1.1rem 1.1rem;
+      }
+
+      .banner-cta-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <main class="container">
+      <article class="card">
+        <header class="report-header">
+          <div class="report-kicker">XolosArmy Network – Infrastructure Research</div>
+          <h1 class="report-title">
+            Mini-Server Architecture and Deployment Blueprint for 24/7 eCash Nodes
+          </h1>
+          <p class="report-subtitle">
+            Practical infrastructure design for running an eCash full node with Chronik and Agora indexing, plus auxiliary VMs such as RMZWallet backends and web services, tailored to solo operators and small validators in the Mexican market.
+          </p>
+          <div class="report-meta">
+            <span class="badge">
+              <span class="badge-dot"></span>
+              Research Report
+            </span>
+            <span>Project: XolosArmy Network &mdash; eCash Infrastructure</span>
+          </div>
+        </header>
+
+        <section class="abstract section">
+          <div class="abstract-title">Abstract</div>
+          <p>
+            This research report presents a practical, Mexico-based infrastructure blueprint for running a 24/7 eCash full node with Chronik and Agora indexing, alongside auxiliary virtual machines (VMs) such as RMZWallet backends and web services for XolosArmy Network.
+          </p>
+          <p>
+            The study focuses on selecting energy-efficient Mini-PC hardware with dual NVMe storage, dimensioning SSD endurance (TBW) for high I/O blockchain workloads, designing a resilient power layer using a line-interactive UPS, implementing Proxmox VE and ZFS for virtualized multi-service deployment, and establishing operational practices for monitoring, backups, and graceful shutdown. Cost estimates reference retail pricing in Mexico and target solo-operator or small community validator scenarios.
+          </p>
+        </section>
+
+        <!-- RMZWALLET BANNER -->
+        <section class="banner" aria-label="RMZWallet Banner">
+          <p class="banner-tagline">RMZWallet &bull; Cyber-Aztek Self-Custody Layer</p>
+          <h2 class="banner-title">RMZWallet on Your Mini-Server: The Cyber-Aztek Wallet Temple</h2>
+          <p class="banner-body">
+            This mini-server blueprint is not just about keeping an eCash node online. It is the <strong>physical backbone</strong> of the XolosArmy Network’s digital temple:
+          </p>
+          <ul class="banner-body">
+            <li>Run your <strong>eCash full node + Chronik + Agora</strong> as the local trust anchor.</li>
+            <li>Host the <strong>RMZWallet backend</strong> for a fully self-custodial, cyber-Aztek wallet experience.</li>
+            <li>Serve <strong>$RMZ tokens, NFTs, and community dApps</strong> directly from your own sovereign hardware.</li>
+          </ul>
+          <div class="banner-cta-row">
+            <a class="btn" href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener">
+              <span>Enter the Wallet Temple</span>
+              <span>&rarr;</span>
+            </a>
+            <a class="btn btn-pill-secondary" href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener">
+              RMZWallet &mdash; Self-Custody for $RMZ
+            </a>
+          </div>
+        </section>
+
+        <section class="section" id="executive-summary">
+          <h2>1. Executive Summary: 24/7 Mini-Server Architecture for eCash</h2>
+
+          <h3>1.1 Architectural Design Principles</h3>
+          <p>
+            The proposed architecture is built around three core principles:
+          </p>
+          <ul>
+            <li><strong>Energy efficiency</strong> – low TDP CPUs minimize power draw and extend UPS autonomy.</li>
+            <li><strong>Logical I/O isolation</strong> – dual NVMe design separates heavy node writes from the hypervisor and auxiliary VMs.</li>
+            <li><strong>End-to-end resilience</strong> – from SSD endurance planning to automatic power-loss recovery and backup strategy.</li>
+          </ul>
+
+          <h3>I/O Isolation via Dual NVMe</h3>
+          <p>
+            The Mini-PC <strong>must</strong> provide two M.2 NVMe 2280 slots:
+          </p>
+          <ul>
+            <li><strong>2 TB NVMe:</strong> dedicated ZFS dataset for the eCash node (full node + Chronik + Agora).</li>
+            <li><strong>1 TB NVMe:</strong> Proxmox VE hypervisor, system services, and secondary VMs (RMZWallet backend, web, monitoring, etc.).</li>
+          </ul>
+          <p>
+            This separation reduces contention and shields the hypervisor and auxiliary services from the intense write patterns of the node’s database.
+          </p>
+
+          <h3>Electrical Efficiency and Resilience</h3>
+          <p>
+            Modern low-power CPUs (e.g., Ryzen 7 5825U / 7840HS class) combine:
+          </p>
+          <ul>
+            <li><strong>Very low idle consumption</strong> (around 10&nbsp;W or less).</li>
+            <li><strong>Moderate peak loads</strong> (up to ~50&nbsp;W for node + VMs).</li>
+          </ul>
+          <p>
+            Because total system draw is so low, a <strong>1500 VA / ~900 W line-interactive UPS</strong> can keep the node alive for many hours during a power outage, or at the very least guarantee a clean, controlled shutdown in extended blackouts—critical for 24/7 blockchain uptime.
+          </p>
+
+          <h3>Hypervisor-Centric Management</h3>
+          <p>
+            A <strong>Type-1 hypervisor</strong> (Proxmox VE) is recommended as the base layer because it:
+          </p>
+          <ul>
+            <li>Manages both <strong>KVM VMs</strong> (e.g. eCash node VM) and <strong>LXC containers</strong> (auxiliary services).</li>
+            <li>Integrates <strong>ZFS</strong>, enabling robust datasets and snapshots.</li>
+            <li>Provides an intuitive <strong>web UI</strong> for lifecycle management, backups, and resource allocation across 32–64 GB of RAM and multiple CPU cores.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="components-cost">
+          <h2>2. Component Sourcing and Cost Analysis (Mexico)</h2>
+
+          <h3>2.1 Central Platform (Mini-PC)</h3>
+          <p>
+            Key selection criteria include:
+          </p>
+          <ul>
+            <li><strong>CPU:</strong> 6–8 cores, modern architecture (e.g., Ryzen 7 7840HS-class).</li>
+            <li><strong>RAM:</strong> minimum <strong>32 GB DDR5</strong>, with an option to upgrade to 64 GB.</li>
+            <li><strong>Storage:</strong> <strong>dual M.2 2280 NVMe</strong> slots (strict requirement).</li>
+          </ul>
+          <p>
+            Specialized Mini-PCs such as models similar to the AOOSTAR MACO&nbsp;H255 (dual M.2, DDR5 support) or equivalent platforms meet the dual-NVMe requirement. Business-class ASUS NUC-style systems or small-form-factor workstations also qualify, but often at a higher cost.
+          </p>
+          <p>
+            <strong>Estimated price range (Mexico):</strong> Mini-PC (Ryzen 7, 32 GB RAM, dual NVMe support) – <strong>$9,000–$15,000 MXN</strong> (approximate).
+          </p>
+
+          <h3>2.2 Storage Subsystem (NVMe): Endurance and Performance</h3>
+          <p>
+            The storage layer is the <strong>primary vulnerability</strong> of this mini-server architecture due to:
+          </p>
+          <ul>
+            <li><strong>High write volume</strong> generated by the full node, Chronik, and Agora.</li>
+            <li>Lack of RAID redundancy (only two slots available).</li>
+          </ul>
+
+          <h3>2.2.1 Endurance (TBW) Constraints</h3>
+          <p>
+            Experience with Bitcoin-class nodes suggests that yearly writes can exceed <strong>300 TBW</strong>. Many consumer-grade 2&nbsp;TB SSDs advertise:
+          </p>
+          <ul>
+            <li>~<strong>440 TBW</strong> (e.g., cheaper drives like Crucial P3).</li>
+            <li>~<strong>1,200 TBW</strong> for higher-end models (e.g., Samsung 990 Pro 2 TB).</li>
+          </ul>
+          <p>
+            Under continuous node workloads, lower-end drives may hit their TBW rating in a bit over a year; even high-end drives may need proactive replacement every 1–2 years. This makes <strong>planned replacement</strong> and <strong>SMART monitoring</strong> non-optional.
+          </p>
+
+          <h3>2.2.2 Recommended NVMe 2 TB for the Node</h3>
+          <p>
+            For the <strong>2 TB node drive</strong>, the recommendation is:
+          </p>
+          <ul>
+            <li>
+              <strong>Samsung 990 Pro 2 TB</strong> or similar high-IOPS PCIe 4.0 SSD
+              <ul>
+                <li>Excellent random write performance (up to ~1,550K random write IOPS).</li>
+                <li>Widely available in Mexico in the <strong>$3,500–$4,500 MXN</strong> range (approx.).</li>
+              </ul>
+            </li>
+          </ul>
+          <p>
+            Alternatives such as <strong>WD Black SN850X 2 TB</strong> are acceptable but generally offer lower random write IOPS. Enterprise SSDs (with multi-PB endurance) are usually unavailable in M.2&nbsp;2280 form for Mini-PCs and are sized and priced for rack servers, so this architecture intentionally uses the <strong>strongest available consumer NVMe</strong> and compensates with operational discipline.
+          </p>
+
+          <h3>2.2.3 NVMe 1 TB for OS and VMs</h3>
+          <p>
+            The <strong>1 TB NVMe</strong> (PCIe 4.0, good but not necessarily flagship performance) hosts:
+          </p>
+          <ul>
+            <li>Proxmox VE.</li>
+            <li>Secondary VMs (e.g. RMZWallet backend, analytics, monitoring).</li>
+            <li>Local backups (with care, due to TBW limits).</li>
+          </ul>
+          <p>
+            Estimated price: <strong>$1,800–$2,500 MXN</strong> (approx.).
+          </p>
+
+          <h3>2.3 Power Backup and Operational Continuity (UPS)</h3>
+          <p>
+            A <strong>1000–1500 VA</strong> UPS is appropriate; this report recommends <strong>1500 VA</strong> with pure sine wave output:
+          </p>
+          <ul>
+            <li>Compatible with <strong>Active PFC</strong> power supplies.</li>
+            <li>Provides significantly more than the required wattage for a Mini-PC + router stack.</li>
+            <li>Ensures long autonomy, often capable of several hours of runtime at 50–80&nbsp;W load.</li>
+          </ul>
+          <p>
+            The UPS must support <strong>USB communication</strong>, allowing the Proxmox host to monitor battery state and trigger automated shutdown procedures.
+          </p>
+          <p>
+            Estimated price: <strong>$5,200–$7,000 MXN</strong> (approx.).
+          </p>
+
+          <h3>2.4 Network Infrastructure: WiFi 6 Router</h3>
+          <p>
+            The router will typically sit behind the ISP modem, ideally configured in <strong>bridge/AP mode</strong>:
+          </p>
+          <ul>
+            <li><strong>WiFi 6 (AX)</strong> capability for local wireless devices.</li>
+            <li><strong>Gigabit Ethernet</strong> on all LAN ports.</li>
+            <li>Example class: TP-Link Archer AX6000-type routers (WAN 2.5&nbsp;Gbps + multiple Gigabit LAN ports).</li>
+          </ul>
+          <p>
+            Critical configuration points:
+          </p>
+          <ul>
+            <li>Place router in <strong>bridge / AP mode</strong> (avoid double NAT).</li>
+            <li>Ensure <strong>DHCP is disabled</strong> on the router so the ISP modem remains the primary DHCP server.</li>
+            <li>Assign a static IP in the ISP subnet to manage the router itself.</li>
+          </ul>
+
+          <h3>2.5 Estimated Total Cost (Mexico)</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Recommended Spec</th>
+                  <th>Est. Cost (MXN)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mini-PC Base</td>
+                  <td>Ryzen 7, 32 GB RAM, dual NVMe</td>
+                  <td>$9,000 – $15,000</td>
+                </tr>
+                <tr>
+                  <td>NVMe 2 TB (Node)</td>
+                  <td>PCIe Gen4, high IOPS, 990 Pro/SN850X-class</td>
+                  <td>$3,500 – $4,500</td>
+                </tr>
+                <tr>
+                  <td>NVMe 1 TB (OS/VMs)</td>
+                  <td>PCIe Gen4</td>
+                  <td>$1,800 – $2,500</td>
+                </tr>
+                <tr>
+                  <td>UPS 1500 VA</td>
+                  <td>Line-interactive, pure sine wave</td>
+                  <td>$5,200 – $7,000</td>
+                </tr>
+                <tr>
+                  <td>WiFi 6 Router</td>
+                  <td>AX-class, full Gigabit</td>
+                  <td>$2,500 – $4,500</td>
+                </tr>
+                <tr>
+                  <td><strong>Total Estimate</strong></td>
+                  <td></td>
+                  <td><strong>$22,000 – $33,500</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="hypervisor">
+          <h2>3. Deployment of the Hypervisor Layer (Proxmox VE)</h2>
+
+          <h3>3.1 Physical Assembly</h3>
+          <p>
+            Key practices during assembly:
+          </p>
+          <ul>
+            <li>Install RAM in <strong>dual-channel configuration</strong> (e.g. 2×16&nbsp;GB or 2×32&nbsp;GB).</li>
+            <li>Mount both NVMe drives securely with their retention screws.</li>
+            <li>Avoid touching PCB contacts with bare fingers; use proper handling to prevent ESD damage.</li>
+            <li>If the high-performance NVMe requires or includes a <strong>heatsink</strong>, install it to mitigate thermal throttling under sustained node load.</li>
+          </ul>
+
+          <h3>3.2 BIOS Configuration for Unattended Operation</h3>
+          <p>
+            Configure the Mini-PC firmware to recover automatically from power loss:
+          </p>
+          <ul>
+            <li>Access BIOS/UEFI (commonly via <strong>F2 / DEL / F10</strong> at boot).</li>
+            <li>Enable <strong>AC Power Loss Recovery / Restore on AC Power Loss / Power On</strong>.</li>
+          </ul>
+          <p>
+            Once the UPS battery drains completely and power later returns, the Mini-PC will <strong>boot automatically</strong>, restoring Proxmox and all services without manual intervention.
+          </p>
+
+          <h3>3.3 Proxmox VE as the Base OS</h3>
+          <p>
+            Proxmox VE is chosen over a simple Linux+KVM manual setup because:
+          </p>
+          <ul>
+            <li>It is purpose-built for virtualization, backed by <strong>Debian</strong>.</li>
+            <li>Provides an integrated <strong>web console</strong> for VM/LXC lifecycle, storage, and backup.</li>
+            <li>Natively supports <strong>ZFS</strong>, simplifying dataset creation, snapshots, and replication.</li>
+          </ul>
+          <p>
+            This stack aligns well with the eCash ecosystem (Chronik, Agora, RMZWallet backends), which are most stable on Linux.
+          </p>
+
+          <h3>3.4 Storage Architecture and ZFS Optimization</h3>
+
+          <h3>3.4.1 Storage Pools</h3>
+          <p>
+            Recommended logical layout:
+          </p>
+          <ul>
+            <li><strong>1 TB NVMe</strong>:
+              <ul>
+                <li>Proxmox system install.</li>
+                <li>ZFS pool for secondary VMs (e.g., <code>rpool-vm</code>).</li>
+              </ul>
+            </li>
+            <li><strong>2 TB NVMe</strong>:
+              <ul>
+                <li>Dedicated ZFS pool for eCash node data (e.g., <code>rpool-node</code>).</li>
+              </ul>
+            </li>
+          </ul>
+          <p>
+            Due to the constraint of only two NVMe slots, <strong>RAID-1 is not possible</strong> without sacrificing capacity. Each drive is therefore a <strong>single point of failure</strong>, which must be offset with strong backup and monitoring practices (see Section&nbsp;4.3).
+          </p>
+
+          <h3>3.4.2 ZFS Parameters for Node Workloads</h3>
+          <p>
+            Default ZFS compression (LZ4) may offer limited benefit because many blockchain payloads are already compressed or compress poorly. Compression can increase write amplification, impacting SSD endurance.
+          </p>
+          <p>
+            It is reasonable to <strong>experiment with disabling compression</strong> on the node pool:
+          </p>
+          <pre><code>zfs set compression=off rpool-node</code></pre>
+          <p>
+            The operator should measure I/O behavior and stability with and without compression to determine the optimal setting for Chronik/Agora.
+          </p>
+        </section>
+
+        <section class="section" id="operation">
+          <h2>4. 24/7 Operation, Maintenance, and Resilience</h2>
+
+          <h3>4.1 eCash Node VM and Auxiliary VMs</h3>
+
+          <h3>4.1.1 Resource Allocation</h3>
+          <p>
+            For a Mini-PC with <strong>32 GB RAM</strong>:
+          </p>
+          <ul>
+            <li>Allocate <strong>20–24 GB RAM</strong> to the eCash Node VM to:
+              <ul>
+                <li>Provide ample cache for the OS and database.</li>
+                <li>Support ZFS ARC if using ZFS inside or below the VM.</li>
+              </ul>
+            </li>
+          </ul>
+          <p>
+            The remaining RAM is reserved for Proxmox, RMZWallet backend services, monitoring containers, and OS overhead.
+          </p>
+          <p>
+            A modern <strong>Linux server distribution</strong> (e.g., Ubuntu Server) should be used inside the VM, as it is the standard environment for eCash node software and Node.js components (Chronik, Agora).
+          </p>
+
+          <h3>4.1.2 Pruned Node Strategy (If Space Becomes a Bottleneck)</h3>
+          <p>
+            If projected blockchain growth threatens to exceed the <strong>2 TB node drive</strong> capacity, XolosArmy operators can deploy <strong>pruned node</strong> mode:
+          </p>
+          <ul>
+            <li>Keeps the node fully validating.</li>
+            <li>Retains only a <strong>recent window of blocks</strong> (not full historical data).</li>
+            <li>Reduces required disk space dramatically.</li>
+          </ul>
+          <p>
+            For maximal archival capabilities and index depth, a full node is ideal. However, in constrained environments, pruning is a viable compromise to maintain security participation without immediate hardware expansion.
+          </p>
+
+          <h3>4.2 Preventive Maintenance for SSD Endurance (TBW)</h3>
+          <p>
+            Given the intense I/O patterns and lack of RAID, preventing catastrophic SSD failure is a matter of <strong>predictive maintenance</strong>, not luck.
+          </p>
+
+          <h3>4.2.1 SMART Monitoring</h3>
+          <p>
+            Use <code>smartctl</code> (from the <code>smartmontools</code> package) on the Proxmox host to monitor:
+          </p>
+          <ul>
+            <li><strong>Percentage Used</strong> or <strong>Wear Leveling Count</strong>.</li>
+            <li>Reallocated sectors or media errors.</li>
+          </ul>
+          <p>
+            Automated periodic checks should log endurance usage and alert when thresholds are crossed (e.g., at 70%, 80%, 90% of the rated TBW).
+          </p>
+
+          <h3>4.2.2 Planned Replacement</h3>
+          <p>
+            The operational rule for XolosArmy Network should be:
+          </p>
+          <ul>
+            <li>When endurance reaches <strong>~80–90%</strong> of the rated TBW, plan a <strong>controlled migration</strong> to a new NVMe drive.</li>
+            <li>Schedule a short downtime window, replicate datasets, and replace the disk before failure.</li>
+          </ul>
+          <p>
+            For sustained node + index workloads, it is realistic to assume <strong>annual or biennial SSD replacement</strong>, depending on actual write volume.
+          </p>
+
+          <h3>4.3 Power Resilience and Backup Strategy</h3>
+
+          <h3>4.3.1 Graceful Shutdown via NUT</h3>
+          <p>
+            Resilience is a combination of hardware and software:
+          </p>
+          <ul>
+            <li>Install <strong>Network UPS Tools (NUT)</strong> on the Proxmox host.</li>
+            <li>Link NUT to the UPS via USB to monitor battery charge, remaining runtime, and power state.</li>
+          </ul>
+          <p>
+            Configure NUT to:
+          </p>
+          <ul>
+            <li>Trigger a <strong>clean shutdown</strong> when estimated runtime falls below a safe threshold (for example, 10&nbsp;minutes).</li>
+            <li>Gracefully stop all VMs and containers.</li>
+            <li>Export ZFS pools cleanly, preventing data corruption.</li>
+          </ul>
+
+          <h3>4.3.2 Backups with Proxmox Backup Server (PBS)</h3>
+          <p>
+            To mitigate the single-disk risk on each NVMe drive:
+          </p>
+          <ul>
+            <li>Run <strong>Proxmox Backup Server</strong> (PBS) either:
+              <ul>
+                <li>On the same 1&nbsp;TB NVMe (for short-term, fast backups), and/or</li>
+                <li>On an <strong>external DAS</strong> (see Section&nbsp;5.1) for more durable redundancy.</li>
+              </ul>
+            </li>
+          </ul>
+          <p>
+            PBS offers incremental, deduplicated backups of VMs and containers, efficient use of disk TBW, and faster recovery in the event of node corruption or SSD failure.
+          </p>
+        </section>
+
+        <section class="section" id="scalability">
+          <h2>5. Future Scalability for XolosArmy Network</h2>
+
+          <h3>5.1 Scaling Up</h3>
+          <p>
+            As XolosArmy Network and RMZ-centric services grow, the following upgrades are recommended:
+          </p>
+          <ol>
+            <li>
+              <strong>RAM Expansion to 64 GB</strong><br />
+              Improves overall system responsiveness, expands ZFS ARC cache for faster reads across multiple VMs and datasets, and enables more simultaneous services: extra indexers, analytics dashboards, or experimental side projects.
+            </li>
+            <li>
+              <strong>External DAS for Long-Term Backups</strong><br />
+              Use a USB 3.0 or USB4 <strong>Direct-Attached Storage</strong> enclosure to keep periodic full or incremental backups of critical VMs (eCash node, Chronik/Agora, RMZWallet backend, etc.), adding an extra layer of resilience against catastrophic NVMe failure or local file system issues.
+            </li>
+          </ol>
+        </section>
+
+        <section class="section" id="conclusions">
+          <h2>6. Conclusions</h2>
+          <p>
+            Deploying a 24/7 mini-server for an eCash node with Chronik and Agora indexes in Mexico is both technically feasible and economically accessible, provided operators:
+          </p>
+          <ul>
+            <li>Choose a <strong>dual-NVMe Mini-PC</strong> with sufficient CPU and RAM.</li>
+            <li>Invest in a <strong>high-IOPS, high-TBW SSD</strong> (e.g., Samsung 990 Pro 2&nbsp;TB) for the node dataset.</li>
+            <li>Protect the system with a <strong>pure sine wave UPS (1500 VA)</strong> and robust NUT-based shutdown logic.</li>
+            <li>Use <strong>Proxmox VE + ZFS</strong> as a flexible, hypervisor-centric platform to host the node, RMZWallet, and other XolosArmy services.</li>
+            <li>Implement <strong>SMART monitoring</strong>, planned SSD replacement, and PBS-based backups to avoid data loss.</li>
+          </ul>
+          <p>
+            For XolosArmy Network, this architecture is not merely infrastructure—it is a <strong>sovereign digital altar</strong> where the eCash consensus, RMZ token, and community applications coexist under a single, operator-controlled node.
+          </p>
+          <p>
+            By following this blueprint, any community member or operator can stand up a robust, energy-efficient, and research-driven infrastructure that aligns with the long-term vision of XolosArmy Network: <strong>decentralized guardianship of value and culture, anchored in eCash and embodied by the RMZWallet temple.</strong>
+          </p>
+        </section>
+
+        <p class="footnote">
+          &copy; XolosArmy Network &mdash; Research and Infrastructure Blueprint for Community eCash Nodes.
+        </p>
+      </article>
+    </main>
+  </div>
+</body>
+</html>
