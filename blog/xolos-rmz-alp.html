@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Xolos RMZ Migrates from SLP to ALP – XolosArmy Network</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg-dark: #050812;
+      --bg-card: #0c1220;
+      --bg-pill: #111a2b;
+      --accent: #26e0ff;
+      --accent-soft: rgba(38, 224, 255, 0.07);
+      --accent-strong: #3bf1ff;
+      --text-main: #f5f7ff;
+      --text-muted: #94a3b8;
+      --border-soft: #1e293b;
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px 12px 40px;
+      font-family: var(--font-sans);
+      background: radial-gradient(circle at top, #0b1220 0, #020617 52%, #000 100%);
+      color: var(--text-main);
+    }
+
+    .page {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--accent-soft);
+      background: linear-gradient(90deg, #020617, #020617, #020617);
+      color: var(--accent-strong);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #f9fafb 0, var(--accent) 50%, transparent 70%);
+      box-shadow: 0 0 14px var(--accent);
+    }
+
+    h1 {
+      margin: 16px 0 10px;
+      font-size: clamp(1.9rem, 3vw, 2.3rem);
+      letter-spacing: 0.03em;
+    }
+
+    .subtitle {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .meta {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, rgba(148, 163, 253, 0.12), transparent 45%),
+                  radial-gradient(circle at top right, rgba(45, 212, 191, 0.12), transparent 45%),
+                  var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      padding: 24px 20px;
+    }
+
+    @media (min-width: 720px) {
+      .card {
+        padding: 32px 32px 32px;
+      }
+    }
+
+    h2 {
+      margin-top: 28px;
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    h3 {
+      margin-top: 22px;
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    p {
+      margin: 10px 0;
+      font-size: 0.98rem;
+      line-height: 1.7;
+      color: var(--text-main);
+    }
+
+    a {
+      color: var(--accent-strong);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .token-summary {
+      margin: 18px 0 8px;
+      padding: 16px 18px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(148, 163, 253, 0.4);
+    }
+
+    .token-summary-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .token-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 6px 18px;
+      font-size: 0.9rem;
+    }
+
+    .token-grid strong {
+      color: var(--accent-strong);
+      font-weight: 600;
+    }
+
+    .token-id-box {
+      margin-top: 12px;
+      font-family: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.84rem;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: #020617;
+      border: 1px solid rgba(148, 163, 253, 0.6);
+      word-break: break-all;
+    }
+
+    .callout {
+      margin: 18px 0;
+      padding: 14px 16px;
+      border-radius: var(--radius-lg);
+      border: 1px dashed rgba(148, 163, 253, 0.6);
+      background: rgba(15, 23, 42, 0.85);
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .section-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--accent-soft);
+      background: var(--bg-pill);
+      color: var(--accent-strong);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 6px;
+    }
+
+    ul, ol {
+      margin: 8px 0 10px 20px;
+      padding: 0;
+      font-size: 0.96rem;
+      color: var(--text-main);
+    }
+
+    li + li {
+      margin-top: 4px;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-soft);
+      padding-top: 14px;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        XolosArmy Network • Ecosystem Update
+      </div>
+      <h1>Xolos RMZ Migrates from SLP to ALP</h1>
+      <p class="subtitle">
+        A new chapter for the XolosArmy eToken ecosystem: migrating Xolos RMZ to the modern ALP standard on eCash,
+        unlocking stronger infrastructure, DEX integrations and long-term growth.
+      </p>
+      <div class="meta">
+        Date: 30 November 2025 · Project: XolosArmy Network – Xolos RMZ eToken
+      </div>
+    </header>
+
+    <article class="card">
+      <section>
+        <p>
+          XolosArmy Network is taking an important step forward in the evolution of its community token.
+          We are officially <strong>migrating Xolos RMZ from the legacy SLP standard to the new ALP-based eToken standard on eCash</strong>.
+        </p>
+        <p>
+          From now on, <strong>all development, integrations and utilities will use the new ALP token</strong>:
+        </p>
+
+        <div class="token-summary">
+          <div class="token-summary-title">Official ALP eToken Parameters</div>
+          <div class="token-grid">
+            <div><strong>Name:</strong> Xolos RMZ</div>
+            <div><strong>Ticker:</strong> RMZ</div>
+            <div><strong>Decimals:</strong> 2</div>
+            <div><strong>Total Supply:</strong> 21,000,000.00 RMZ (fixed)</div>
+            <div><strong>Website:</strong> <a href="https://xolosarmy.xyz" target="_blank" rel="noopener noreferrer">xolosarmy.xyz</a></div>
+          </div>
+          <div class="token-id-box">
+            <strong>Token ID:</strong>
+            c923bd0f09c630c5e9980cf518c8d34b6353802a3cb7c3f34fa7cc85c9305908
+          </div>
+        </div>
+
+        <p>
+          The previous <strong>SLP-based version of RMZ is now considered “legacy”</strong> and will no longer be the focus
+          of new features.
+        </p>
+      </section>
+
+      <section>
+        <div class="section-pill">Why We Are Moving from SLP to ALP</div>
+        <p>
+          The XolosArmy vision is to build a <strong>long-term cultural and technological ecosystem</strong> around the
+          xoloitzcuintli: NFTs, DeFi, independent media, and community tools. For that, we need a token standard that is:
+        </p>
+        <ul>
+          <li><strong>Native to modern eCash infrastructure</strong></li>
+          <li><strong>Efficient to index and query</strong> for Chronik and Agora</li>
+          <li><strong>Well supported by current wallets and tooling</strong></li>
+        </ul>
+        <p>
+          SLP served the early stages of our project, but it has several limitations for the roadmap we are building:
+        </p>
+
+        <h3>1. Tooling and ecosystem have moved to ALP</h3>
+        <p>
+          New infrastructure, such as <strong>Cashtab’s eToken implementation</strong>, indexers like <strong>Chronik</strong>,
+          and smart-contract layers such as <strong>Agora</strong>, are designed to work with ALP eTokens as first-class citizens.
+          This makes ALP the realistic standard for future integrations.
+        </p>
+
+        <h3>2. Better compatibility with DEX and advanced features</h3>
+        <p>
+          Our plans for a <strong>non-custodial XEC ↔ RMZ DEX</strong>, order-book or AMM functionality, and other on-chain logic
+          are designed around <strong>ALP + Chronik + Agora</strong>. Running these on SLP would be fragile or impossible;
+          on ALP it becomes straightforward and maintainable.
+        </p>
+
+        <h3>3. Cleaner, long-term token identity</h3>
+        <p>
+          Migrating now allows us to establish <strong>one canonical RMZ token ID</strong> on the modern standard,
+          avoiding confusion with multiple parallel contracts and giving the community a clear reference for what is
+          “real RMZ”.
+        </p>
+
+        <div class="callout">
+          In short: <strong>SLP was the first chapter; ALP is the format that lets Xolos RMZ grow into its full potential.</strong>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-pill">What Exactly Is Changing?</div>
+
+        <h3>1. A New Canonical Token</h3>
+        <p>
+          The ALP version of Xolos RMZ is a <strong>fresh token genesis</strong> with:
+        </p>
+        <ul>
+          <li>A <strong>fixed maximum supply of 21,000,000 RMZ</strong>, mirroring the symbolic scarcity of 21 million Bitcoin.</li>
+          <li><strong>Two decimal places</strong>, making RMZ intuitive to use for prices, tips, and rewards.</li>
+          <li>A permanent link to our official website, so explorers and wallets can easily identify the token as part of XolosArmy Network.</li>
+        </ul>
+        <p>
+          From now on, whenever we say <strong>“Xolos RMZ”</strong>, we are referring to this <strong>ALP token</strong>.
+        </p>
+
+        <h3>2. The SLP Version Becomes Legacy</h3>
+        <p>
+          The old SLP-based RMZ:
+        </p>
+        <ul>
+          <li>Will <strong>no longer receive new utilities or integrations</strong>.</li>
+          <li>Is effectively <strong>frozen in time</strong> and treated as a historical artifact of the early phase of the project.</li>
+          <li>Exists only as a reference for the <strong>migration snapshot</strong> used to allocate the new ALP tokens.</li>
+        </ul>
+        <p>
+          The economic and cultural value of the project now lives in the <strong>ALP token</strong>.
+        </p>
+      </section>
+
+      <section>
+        <div class="section-pill">What This Means for Holders</div>
+        <p>
+          If you were already holding Xolos RMZ in its SLP form, the migration is designed to
+          <strong>respect your position and your support for the project</strong>.
+        </p>
+        <p>
+          The migration process follows three principles:
+        </p>
+        <h3>1. Snapshot of SLP Holders</h3>
+        <p>
+          A snapshot of SLP balances at a specific block height is (or will be) taken.
+          This snapshot defines <strong>who is entitled to receive RMZ on ALP</strong> and in what amount.
+        </p>
+
+        <h3>2. Allocation of ALP RMZ</h3>
+        <p>
+          The new total supply of 21,000,000 RMZ ALP is used to:
+        </p>
+        <ul>
+          <li>Match SLP balances (for example at a 1:1 ratio, or another clearly documented ratio), and</li>
+          <li>Allocate a defined portion to the <strong>community treasury, development fund, and ecosystem rewards</strong>.</li>
+        </ul>
+
+        <h3>3. Simple User Experience</h3>
+        <p>
+          The goal is that <strong>most holders do not need to take any complex action</strong>:
+        </p>
+        <ul>
+          <li>You simply keep control of your wallet.</li>
+          <li>You receive the new RMZ ALP according to the published migration rules.</li>
+          <li>You use RMZ ALP going forward in all XolosArmy tools.</li>
+        </ul>
+        <p>
+          Detailed instructions (including block height, snapshot date, and distribution ratio) will be published on
+          <a href="https://xolosarmy.xyz" target="_blank" rel="noopener noreferrer">xolosarmy.xyz</a>
+          and through our official communication channels (Telegram, Twitter/X, etc.).
+        </p>
+      </section>
+
+      <section>
+        <div class="section-pill">Benefits for the XolosArmy Ecosystem</div>
+
+        <h3>1. Stronger Infrastructure for RMZWallet / Tonalli</h3>
+        <p>
+          Our community wallet (RMZWallet / “Tonalli”) is being built around:
+        </p>
+        <ul>
+          <li>Full nodes and indexers for eCash</li>
+          <li>Chronik for on-chain queries</li>
+          <li>Agora for advanced smart-contract logic and DEX features</li>
+        </ul>
+        <p>
+          All of this is designed with <strong>ALP eTokens in mind</strong>. Standardizing on ALP means:
+        </p>
+        <ul>
+          <li><strong>More reliable balances and history</strong> for RMZ users</li>
+          <li>Faster and more accurate <strong>on-chain analytics</strong></li>
+          <li>The ability to plug RMZ into <strong>non-custodial trading, liquidity pools, and programmable incentives</strong></li>
+        </ul>
+        <p>
+          In practical terms, it means <strong>RMZ will work better, faster and more safely</strong> in the apps that matter.
+        </p>
+
+        <h3>2. Cleaner Integration with DEX and On-Chain Markets</h3>
+        <p>
+          With a single, canonical ALP token ID for RMZ:
+        </p>
+        <ul>
+          <li>We can set up <strong>XEC/RMZ trading pairs</strong> on smart-contract-based DEX infrastructure.</li>
+          <li>The market can clearly distinguish <strong>the real RMZ</strong> from impostors or look-alike tokens.</li>
+          <li>Builders can integrate RMZ with <strong>confidence</strong>, knowing they are using the official contract.</li>
+        </ul>
+        <p>
+          This is essential for the long-term vision of <strong>XolosArmy as a cultural + financial network</strong>,
+          not just a fan token.
+        </p>
+
+        <h3>3. Security, Transparency and Governance</h3>
+        <p>
+          A fixed supply of <strong>21,000,000 RMZ</strong> on ALP reinforces several values:
+        </p>
+        <ul>
+          <li><strong>Transparency</strong>: everyone can verify total supply and circulating amounts on-chain.</li>
+          <li><strong>Predictability</strong>: no hidden minting; tokenomics are clear and auditable.</li>
+          <li><strong>Governance-ready</strong>: ALP tokens can become the foundation for
+              <strong>future community voting, treasury management and incentive programs</strong>
+              without worrying about legacy quirks.</li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="section-pill">How to Verify the Official Xolos RMZ Token</div>
+        <p>
+          To avoid confusion, always verify RMZ by its <strong>ALP token ID</strong>:
+        </p>
+        <div class="token-id-box">
+          c923bd0f09c630c5e9980cf518c8d34b6353802a3cb7c3f34fa7cc85c9305908
+        </div>
+        <p>
+          In <strong>Cashtab</strong> or any compatible wallet / explorer:
+        </p>
+        <ol>
+          <li>Look up the token by <strong>Token ID</strong>, not just by name or ticker.</li>
+          <li>
+            Confirm:
+            <ul>
+              <li>Name: <strong>Xolos RMZ</strong></li>
+              <li>Ticker: <strong>RMZ</strong></li>
+              <li>Decimals: <strong>2</strong></li>
+              <li>Total Supply: <strong>21,000,000.00 RMZ (fixed)</strong></li>
+              <li>Website: <strong>xolosarmy.xyz</strong></li>
+            </ul>
+          </li>
+        </ol>
+        <p>
+          If any of these details do not match, you are <strong>not</strong> looking at the official RMZ.
+        </p>
+      </section>
+
+      <section>
+        <div class="section-pill">Roadmap: What Comes Next</div>
+        <p>
+          With the ALP migration in place, XolosArmy Network can focus on building:
+        </p>
+        <ul>
+          <li><strong>RMZWallet / Tonalli</strong> as a sovereign wallet for XEC and RMZ.</li>
+          <li>
+            <strong>On-chain markets and incentives</strong>: XEC/RMZ pairs, liquidity campaigns,
+            and reward programs.
+          </li>
+          <li>
+            <strong>Cultural and media projects</strong> (podcasts, comics, NFT collections, Mastodon access, etc.)
+            where RMZ is the native way to participate, tip, and unlock experiences.
+          </li>
+        </ul>
+        <p>
+          Migrating to ALP is a foundational step. It gives us the <strong>technical stability</strong> we need
+          to keep doing what XolosArmy does best:
+          <strong>connecting xoloitzcuintli guardians around the world, and anchoring their stories forever on the blockchain.</strong>
+        </p>
+      </section>
+
+      <div class="footer-note">
+        For official announcements and updates, visit
+        <a href="https://xolosarmy.xyz" target="_blank" rel="noopener noreferrer">xolosarmy.xyz</a>
+        and follow our social channels.
+      </div>
+    </article>
+  </main>
+</body>
+</html>
