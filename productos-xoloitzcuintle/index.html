@@ -150,6 +150,78 @@
       margin: 0 auto;
     }
 
+    .newsletter-banner {
+      max-width: 960px;
+      margin: 0 auto 32px;
+      padding: 18px 22px;
+      border-radius: 18px;
+      background: radial-gradient(circle at 10% 0%, rgba(240, 199, 83, 0.16), transparent 55%),
+                  radial-gradient(circle at 90% 100%, rgba(13, 127, 114, 0.18), transparent 55%),
+                  rgba(16, 21, 21, 0.94);
+      border: 1px solid rgba(240, 199, 83, 0.35);
+      box-shadow: var(--shadow-elevated);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .newsletter-banner__icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .newsletter-banner__content {
+      flex: 1;
+    }
+
+    .newsletter-banner__title {
+      margin: 0 0 4px;
+      font-size: 1.2rem;
+      color: var(--color-highlight-strong);
+    }
+
+    .newsletter-banner__text {
+      margin: 0;
+      font-size: 0.98rem;
+      color: var(--color-text-muted);
+    }
+
+    .newsletter-banner__cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--color-primary);
+      color: var(--color-text-strong);
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid rgba(13, 127, 114, 0.5);
+      white-space: nowrap;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .newsletter-banner__cta:hover,
+    .newsletter-banner__cta:focus-visible {
+      background: var(--color-primary-strong);
+      box-shadow: 0 10px 24px rgba(13, 127, 114, 0.4);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+      .newsletter-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 18px 16px;
+      }
+
+      .newsletter-banner__cta {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
     /* Marco uniforme para las imágenes de producto */
     .card .product-media{
       width: 100%;
@@ -1233,6 +1305,22 @@
     <div class="section-heading">
       <h2 id="productosTitle">Remedios botánicos para Xoloitzcuintles guardianes</h2>
       <p>Cada fórmula artesanal está pensada para proteger la piel sensible del Xoloitzcuintle con ingredientes naturales de alto rendimiento.</p>
+    </div>
+
+    <div class="newsletter-banner" role="complementary" aria-label="Suscripción a boletín XolosArmy Naturals">
+      <span class="newsletter-banner__icon" aria-hidden="true">📩</span>
+      <div class="newsletter-banner__content">
+        <h3 class="newsletter-banner__title">Suscríbete al boletín de XolosArmy Naturals</h3>
+        <p class="newsletter-banner__text">
+          Recibe en tu correo lanzamientos de nuevos bálsamos, tips de cuidado ancestral y noticias sobre el Xoloitzcuintle.
+        </p>
+      </div>
+      <a
+        class="newsletter-banner__cta"
+        href="mailto:contacto@xolosarmy.xyz?subject=Suscripci%C3%B3n%20bolet%C3%ADn%20XolosArmy%20Naturals&body=Hola%2C%20quiero%20suscribirme%20al%20bolet%C3%ADn%20de%20productos%20Xoloitzcuintle."
+      >
+        Quiero suscribirme
+      </a>
     </div>
 
     <div class="grid">
