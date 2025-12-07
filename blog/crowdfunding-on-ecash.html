@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipstarter 2.0 - Informe Interactivo</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Awesome for Icons (Canvas substitute) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chosen Palette: Warm Neutrals & Tech Accents -->
+    <!-- Application Structure Plan:
+        1. Hero Section: Introduction to Flipstarter 2.0 and xolosArmy Network.
+        2. Tech Core Grid: Interactive cards explaining the complex terms (UTXO, Covenants, Introspection).
+        3. Architecture Diagram: A CSS-Grid based interactive schema showing the relationship between Frontend, Backend (Express/TS), and Wallets.
+        4. Campaign Simulator (The "Wow" Factor): A fully functional mock crowdfunding widget.
+           - Uses Chart.js to show funding progress.
+           - Allows users to simulate the 3 modes: PLEDGE, FINALIZE, REFUND.
+           - Logs simulated "Unsigned Hex" transactions to demonstrate the backend logic described in the text.
+        5. Ecosystem: Details on Wallets and Tokens.
+        This structure moves from abstract concepts to concrete architecture, ending with a hands-on simulation of the user flow.
+    -->
+
+    <!-- Visualization & Content Choices:
+        - Tech Stack: Card Grid. Goal: Break down dense keywords. Interaction: Hover effects.
+        - Architecture: HTML/CSS Schematic. Goal: Visualize the data flow. Interaction: Click to highlight path.
+        - Campaign Simulator: Chart.js Doughnut Chart + Event Log. Goal: Demonstrate the Pledge/Finalize/Refund logic. Interaction: Buttons to add funds, trigger expiry, or finalize. Justification: Best way to understand a smart contract state machine is to use it.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        /* Custom styles for chart containers as per requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Tech Card Hover Effect */
+        .tech-card {
+            transition: all 0.3s ease;
+        }
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Active Tab Styling */
+        .tab-active {
+            border-bottom: 2px solid #ea580c; /* Orange-600 */
+            color: #ea580c;
+            font-weight: 600;
+        }
+        
+        /* Console/Log Styling */
+        .console-log {
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Architecture connector lines (simulated with borders) */
+        .connector-line {
+            border-left: 2px dashed #cbd5e1;
+            height: 20px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans leading-relaxed">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-stone-900 tracking-tight">
+                        Flipstarter <span class="text-orange-600">2.0</span>
+                    </span>
+                </div>
+                <div class="hidden sm:flex space-x-8 items-center">
+                    <button onclick="scrollToSection('overview')" class="text-stone-600 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Visión General</button>
+                    <button onclick="scrollToSection('architecture')" class="text-stone-600 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Arquitectura</button>
+                    <button onclick="scrollToSection('simulation')" class="text-stone-600 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Simulador de Flujo</button>
+                    <button onclick="scrollToSection('ecosystem')" class="text-stone-600 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Ecosistema</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="overview" class="bg-white border-b border-stone-200">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl font-extrabold text-stone-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
+                Covenant-based Crowdfunding
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-stone-500">
+                Explora la evolución del crowdfunding en <strong>eCash (XEC)</strong> desarrollada por <strong>xolosArmy Network</strong>.
+                Un sistema impulsado por covenants recursivos y el modelo UTXO.
+            </p>
+            <div class="mt-8 flex justify-center gap-4">
+                <button onclick="scrollToSection('simulation')" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-colors">
+                    Probar el Simulador
+                </button>
+                <button onclick="scrollToSection('tech-core')" class="inline-flex items-center px-6 py-3 border border-stone-300 text-base font-medium rounded-md text-stone-700 bg-white hover:bg-stone-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-colors">
+                    Ver Tecnología
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- RMZWallet Promo Banner -->
+    <section class="bg-gradient-to-r from-stone-900 via-stone-800 to-orange-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-full bg-stone-100/10 border border-stone-400/40">
+                        <i class="fas fa-wallet text-xl text-orange-300"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase tracking-[0.2em] text-stone-300 mb-1">
+                            Patrocinado por RMZWallet
+                        </p>
+                        <h2 class="text-lg md:text-xl font-semibold text-white">
+                            Firma tus pledges Flipstarter 2.0 con <span class="text-orange-300">RMZWallet (Tonalli)</span>
+                        </h2>
+                        <p class="text-sm text-stone-200 mt-1 max-w-xl">
+                            Billetera no custodial optimizada para eCash (XEC) y Xolos RMZ eToken. Ideal para interactuar con campañas basadas en covenants.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm
