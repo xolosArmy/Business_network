@@ -139,4 +139,500 @@
                         </p>
                     </div>
                 </div>
-                <div class="flex flex-col sm
+                <div class="flex flex-col sm:flex-row items-center gap-3">
+                    <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center px-5 py-2.5 rounded-lg bg-orange-500 hover:bg-orange-400 text-sm font-medium text-white shadow transition-colors">
+                        <i class="fas fa-download mr-2 text-xs"></i>
+                        Abrir RMZWallet
+                    </a>
+                    <button onclick="scrollToSection('ecosystem')"
+                            class="text-xs text-stone-200 hover:text-white underline decoration-dotted underline-offset-4">
+                        Ver integración con Flipstarter 2.0
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
+
+        <!-- 1. Technical Core Section -->
+        <section id="tech-core">
+            <div class="mb-8 border-l-4 border-orange-500 pl-4">
+                <h2 class="text-3xl font-bold text-stone-900">Núcleo Tecnológico</h2>
+                <p class="mt-2 text-lg text-stone-600">
+                    Flipstarter 2.0 no es solo una web, es un sistema basado en contratos inteligentes avanzados sobre el modelo UTXO. Entiende los conceptos clave que hacen posible esta plataforma.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="tech-card bg-white rounded-xl shadow p-6 border border-stone-100">
+                    <div class="h-12 w-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-4 text-xl">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-stone-900 mb-2">Monorepo</h3>
+                    <p class="text-stone-600 text-sm">
+                        Estructura de código unificada que integra contratos, servicios backend y frontend en un solo repositorio para mayor coherencia y mantenibilidad.
+                    </p>
+                </div>
+                <!-- Card 2 -->
+                <div class="tech-card bg-white rounded-xl shadow p-6 border border-stone-100">
+                    <div class="h-12 w-12 bg-green-100 text-green-600 rounded-lg flex items-center justify-center mb-4 text-xl">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-stone-900 mb-2">Covenants</h3>
+                    <p class="text-stone-600 text-sm">
+                        Mecanismos que imponen restricciones sobre cómo se pueden gastar los fondos futuros, asegurando que las promesas (pledges) cumplan las reglas de la campaña.
+                    </p>
+                </div>
+                <!-- Card 3 -->
+                <div class="tech-card bg-white rounded-xl shadow p-6 border border-stone-100">
+                    <div class="h-12 w-12 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center mb-4 text-xl">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-stone-900 mb-2">Recursividad</h3>
+                    <p class="text-stone-600 text-sm">
+                        Uso de covenants recursivos que permiten a los contratos actualizar su estado y continuar operando a través de múltiples transacciones.
+                    </p>
+                </div>
+                <!-- Card 4 -->
+                <div class="tech-card bg-white rounded-xl shadow p-6 border border-stone-100">
+                    <div class="h-12 w-12 bg-orange-100 text-orange-600 rounded-lg flex items-center justify-center mb-4 text-xl">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-stone-900 mb-2">Introspección</h3>
+                    <p class="text-stone-600 text-sm">
+                        Capacidad del contrato para analizar los detalles de la propia transacción que lo está gastando, verificando inputs y outputs en tiempo real.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. System Architecture Section -->
+        <section id="architecture" class="bg-white rounded-2xl shadow-lg border border-stone-200 overflow-hidden">
+            <div class="p-8">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-stone-900">Arquitectura del Sistema</h2>
+                    <p class="mt-2 text-stone-600">
+                        Cómo interactúan los componentes para garantizar la seguridad. El backend <strong>nunca toca las claves privadas</strong>; solo prepara las transacciones. Interactúa con el diagrama para ver el flujo.
+                    </p>
+                </div>
+
+                <!-- Interactive Diagram Area -->
+                <div class="relative bg-stone-50 rounded-xl p-6 md:p-10 border border-stone-200">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center items-start">
+                        
+                        <!-- Col 1: Frontend/User -->
+                        <div id="node-frontend" class="group cursor-pointer p-4 bg-white rounded-lg shadow border-2 border-transparent hover:border-blue-400 transition-all" onclick="highlightFlow('frontend')">
+                            <div class="text-4xl text-blue-500 mb-2"><i class="fas fa-laptop-code"></i></div>
+                            <h3 class="font-bold text-lg">Frontend UI</h3>
+                            <p class="text-xs text-stone-500 mt-2">Crea Campañas<br>Inicia Promesas</p>
+                        </div>
+
+                        <!-- Col 2: Backend -->
+                        <div id="node-backend" class="group cursor-pointer p-4 bg-white rounded-lg shadow border-2 border-transparent hover:border-purple-400 transition-all" onclick="highlightFlow('backend')">
+                            <div class="text-4xl text-purple-500 mb-2"><i class="fas fa-server"></i></div>
+                            <h3 class="font-bold text-lg">Backend Service</h3>
+                            <p class="text-xs text-stone-500 mt-2">Express + TypeScript<br>Genera Hex sin firmar</p>
+                        </div>
+
+                        <!-- Col 3: Wallet -->
+                        <div id="node-wallet" class="group cursor-pointer p-4 bg-white rounded-lg shadow border-2 border-transparent hover:border-green-400 transition-all" onclick="highlightFlow('wallet')">
+                            <div class="text-4xl text-green-500 mb-2"><i class="fas fa-wallet"></i></div>
+                            <h3 class="font-bold text-lg">Billetera</h3>
+                            <p class="text-xs text-stone-500 mt-2">Tonalli / RMZWallet<br>Firma y Difunde</p>
+                        </div>
+                    </div>
+
+                    <!-- Flow Description Box -->
+                    <div id="flow-description" class="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800 flex items-start">
+                        <i class="fas fa-info-circle mt-1 mr-3"></i>
+                        <p>Haz clic en los componentes de arriba para entender su rol en el ciclo de vida de Flipstarter.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. The Simulation Section (Core Feature) -->
+        <section id="simulation" class="scroll-mt-24">
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold text-stone-900 flex items-center gap-3">
+                    <span class="bg-orange-600 text-white rounded-full h-10 w-10 flex items-center justify-center text-lg"><i class="fas fa-play"></i></span>
+                    Simulador de Campaña
+                </h2>
+                <p class="mt-2 text-stone-600 max-w-3xl">
+                    Flipstarter opera en tres modos principales: <strong>Pledge</strong> (Promesa), <strong>Finalize</strong> (Finalización) y <strong>Refund</strong> (Reembolso). 
+                    Utiliza este panel interactivo para simular el ciclo de vida de una campaña utilizando el token <strong>Xolos RMZ</strong>.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left: Controls & Status -->
+                <div class="lg:col-span-1 space-y-6">
+                    <!-- Campaign Info Card -->
+                    <div class="bg-white p-6 rounded-xl shadow border border-stone-200">
+                        <h3 class="text-sm uppercase tracking-wide text-stone-500 font-semibold mb-2">Estado de Campaña</h3>
+                        <div id="campaign-status" class="text-2xl font-bold text-green-600 mb-1">ACTIVA</div>
+                        <div class="text-xs text-stone-400 mb-6">ID: f2a9...8c10</div>
+
+                        <div class="flex justify-between text-sm mb-1">
+                            <span>Meta:</span>
+                            <span class="font-bold">5,000 XEC</span>
+                        </div>
+                        <div class="flex justify-between text-sm mb-4">
+                            <span>Recaudado:</span>
+                            <span id="amount-raised-text" class="font-bold text-orange-600">0 XEC</span>
+                        </div>
+                        
+                        <!-- Progress Bar -->
+                        <div class="w-full bg-stone-200 rounded-full h-2.5 mb-6">
+                            <div id="progress-bar" class="bg-orange-600 h-2.5 rounded-full" style="width: 0%"></div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="space-y-3">
+                            <button id="btn-pledge" onclick="simulateAction('pledge')" class="w-full flex justify-between items-center px-4 py-3 bg-stone-900 text-white rounded-lg hover:bg-stone-800 transition shadow">
+                                <span><i class="fas fa-hand-holding-dollar mr-2"></i> Hacer Promesa (Pledge)</span>
+                                <span class="text-xs bg-stone-700 px-2 py-1 rounded">+1000 XEC</span>
+                            </button>
+                            
+                            <button id="btn-finalize" onclick="simulateAction('finalize')" disabled class="w-full flex justify-between items-center px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition shadow disabled:opacity-50 disabled:cursor-not-allowed">
+                                <span><i class="fas fa-check-circle mr-2"></i> Finalizar (Finalize)</span>
+                                <span class="text-xs bg-green-800 px-2 py-1 rounded">Meta Alcanzada</span>
+                            </button>
+
+                            <button id="btn-refund" onclick="simulateAction('refund')" class="w-full flex justify-between items-center px-4 py-3 bg-red-100 text-red-700 border border-red-200 rounded-lg hover:bg-red-200 transition">
+                                <span><i class="fas fa-undo mr-2"></i> Simular Reembolso (Refund)</span>
+                                <span class="text-xs border border-red-300 px-2 py-1 rounded">Cancelar</span>
+                            </button>
+                        </div>
+                        
+                        <button onclick="resetSimulation()" class="mt-4 text-xs text-stone-400 hover:text-stone-600 underline w-full text-center">Reiniciar Simulación</button>
+                    </div>
+                </div>
+
+                <!-- Middle: Visualization -->
+                <div class="lg:col-span-1 bg-white p-6 rounded-xl shadow border border-stone-200 flex flex-col justify-center items-center">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 self-start">Distribución de Fondos</h3>
+                    
+                    <!-- Chart Container -->
+                    <div class="chart-container">
+                        <canvas id="fundingChart"></canvas>
+                    </div>
+                    
+                    <div class="mt-6 text-center">
+                        <p id="chart-caption" class="text-sm text-stone-500">
+                            La campaña está esperando contribuciones. Las transacciones se mantienen como UTXOs hasta la finalización.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right: System Log (Backend Simulation) -->
+                <div class="lg:col-span-1 bg-stone-900 rounded-xl shadow overflow-hidden flex flex-col">
+                    <div class="bg-stone-800 px-4 py-3 border-b border-stone-700 flex justify-between items-center">
+                        <span class="text-stone-300 text-xs font-mono">Backend & Wallet Logs</span>
+                        <div class="flex space-x-1.5">
+                            <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                        </div>
+                    </div>
+                    <div id="console-output" class="console-log p-4 text-xs text-green-400 h-96 overflow-y-auto space-y-2">
+                        <div class="opacity-50">> Sistema iniciado.</div>
+                        <div class="opacity-50">> Esperando interacción del usuario...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Integration Section -->
+        <section id="ecosystem" class="bg-stone-100 rounded-2xl p-8 md:p-12">
+            <div class="max-w-4xl mx-auto text-center mb-10">
+                <h2 class="text-3xl font-bold text-stone-900">Integración del Ecosistema</h2>
+                <p class="mt-4 text-stone-600">
+                    Flipstarter 2.0 no funciona de forma aislada. Está diseñado para integrarse perfectamente con las herramientas existentes en la comunidad de xolosArmy.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Wallets -->
+                <div class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4">
+                    <div class="flex-shrink-0 bg-stone-100 p-3 rounded-lg">
+                        <i class="fas fa-wallet text-2xl text-stone-700"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold text-stone-900">Billeteras Compatibles</h4>
+                        <p class="mt-2 text-sm text-stone-600">
+                            La seguridad es gestionada por el usuario. El backend prepara la transacción, pero solo <strong>Tonalli</strong> y <strong>RMZWallet</strong> pueden firmar y difundir al nodo.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Token -->
+                <div class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4">
+                    <div class="flex-shrink-0 bg-stone-100 p-3 rounded-lg">
+                        <i class="fas fa-coins text-2xl text-orange-600"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold text-stone-900">Xolos RMZ eToken</h4>
+                        <p class="mt-2 text-sm text-stone-600">
+                            Divisa nativa planificada para iniciar y gestionar campañas dentro de la plataforma, aprovechando la velocidad y bajos costes de eCash.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-stone-200 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <span class="text-xl font-bold text-stone-900">Flipstarter 2.0</span>
+                <p class="text-sm text-stone-500 mt-1">Desarrollado por xolosArmy Network</p>
+            </div>
+            <div class="text-sm text-stone-400">
+                Resumen Interactivo Generado para Análisis
+            </div>
+        </div>
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        // --- State Management ---
+        const GOAL = 5000;
+        let raised = 0;
+        let status = 'ACTIVE'; // ACTIVE, FUNDED, REFUNDED
+        let chartInstance = null;
+
+        // --- Chart Initialization ---
+        function initChart() {
+            const ctx = document.getElementById('fundingChart').getContext('2d');
+            
+            // Custom plugin to draw text in center of doughnut
+            const centerTextPlugin = {
+                id: 'centerText',
+                beforeDraw: function(chart) {
+                    if (chart.config.type !== 'doughnut') return;
+                    var width = chart.width,
+                        height = chart.height,
+                        ctx = chart.ctx;
+            
+                    ctx.restore();
+                    var fontSize = (height / 114).toFixed(2);
+                    ctx.font = "bold " + fontSize + "em sans-serif";
+                    ctx.textBaseline = "middle";
+                    ctx.fillStyle = "#1c1917";
+            
+                    var text = Math.round((raised / GOAL) * 100) + "%",
+                        textX = Math.round((width - ctx.measureText(text).width) / 2),
+                        textY = height / 2;
+            
+                    ctx.fillText(text, textX, textY);
+                    ctx.save();
+                }
+            };
+
+            chartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Recaudado', 'Restante'],
+                    datasets: [{
+                        data: [0, GOAL],
+                        backgroundColor: [
+                            '#ea580c', // Orange-600
+                            '#e7e5e4'  // Stone-200
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + ' XEC';
+                                }
+                            }
+                        }
+                    }
+                },
+                plugins: [centerTextPlugin]
+            });
+        }
+
+        // --- Console Logic ---
+        function logMessage(msg, type = 'info') {
+            const consoleEl = document.getElementById('console-output');
+            const div = document.createElement('div');
+            const time = new Date().toLocaleTimeString('es-ES');
+            
+            let colorClass = 'text-green-400';
+            if (type === 'backend') colorClass = 'text-purple-400';
+            if (type === 'wallet') colorClass = 'text-blue-400';
+            if (type === 'error') colorClass = 'text-red-400';
+
+            div.className = `${colorClass} font-mono text-xs border-l-2 pl-2 mb-1 border-stone-700 animate-pulse`;
+            // Remove pulse after animation
+            setTimeout(() => div.classList.remove('animate-pulse'), 1000);
+            
+            div.innerHTML = `<span class="opacity-50">[${time}]</span> ${msg}`;
+            consoleEl.appendChild(div);
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+        }
+
+        // --- Interaction Logic ---
+        function updateUI() {
+            // Update Text
+            document.getElementById('amount-raised-text').innerText = `${raised} XEC`;
+            
+            // Update Progress Bar
+            const percentage = Math.min((raised / GOAL) * 100, 100);
+            document.getElementById('progress-bar').style.width = `${percentage}%`;
+
+            // Update Status Badge
+            const statusEl = document.getElementById('campaign-status');
+            if (status === 'ACTIVE') {
+                statusEl.innerText = 'ACTIVA';
+                statusEl.className = 'text-2xl font-bold text-blue-600 mb-1';
+            } else if (status === 'FUNDED') {
+                statusEl.innerText = 'FINALIZADA (ÉXITO)';
+                statusEl.className = 'text-2xl font-bold text-green-600 mb-1';
+            } else if (status === 'REFUNDED') {
+                statusEl.innerText = 'REEMBOLSADA';
+                statusEl.className = 'text-2xl font-bold text-red-600 mb-1';
+            }
+
+            // Update Buttons State
+            document.getElementById('btn-pledge').disabled = status !== 'ACTIVE';
+            document.getElementById('btn-pledge').className = status !== 'ACTIVE' ? 'w-full flex justify-between items-center px-4 py-3 bg-stone-300 text-stone-500 rounded-lg cursor-not-allowed' : 'w-full flex justify-between items-center px-4 py-3 bg-stone-900 text-white rounded-lg hover:bg-stone-800 transition shadow';
+            
+            const canFinalize = raised >= GOAL && status === 'ACTIVE';
+            document.getElementById('btn-finalize').disabled = !canFinalize;
+            
+            // Update Chart
+            if (chartInstance) {
+                if (status === 'REFUNDED') {
+                    chartInstance.data.datasets[0].data = [0, GOAL];
+                    chartInstance.data.datasets[0].backgroundColor = ['#ef4444', '#e7e5e4']; // Red for refund
+                } else {
+                    chartInstance.data.datasets[0].data = [raised, Math.max(0, GOAL - raised)];
+                    chartInstance.data.datasets[0].backgroundColor = ['#ea580c', '#e7e5e4'];
+                }
+                chartInstance.update();
+            }
+        }
+
+        function simulateAction(action) {
+            if (action === 'pledge') {
+                if (status !== 'ACTIVE') return;
+                
+                // Simulate Backend Request
+                logMessage('Frontend solicita parámetros de pledge...', 'info');
+                setTimeout(() => {
+                    logMessage('Backend: Generando HEX de transacción sin firmar...', 'backend');
+                    
+                    setTimeout(() => {
+                        logMessage('Wallet: Usuario firma transacción con clave privada.', 'wallet');
+                        logMessage('Red: UTXO de 1000 XEC bloqueado en contrato.', 'info');
+                        
+                        raised += 1000;
+                        updateUI();
+                        
+                        if (raised >= GOAL) {
+                            logMessage('¡META ALCANZADA! Modo Finalize disponible.', 'info');
+                            document.getElementById('chart-caption').innerText = "Meta alcanzada. La campaña puede ser finalizada para liberar fondos.";
+                        }
+                    }, 800);
+                }, 500);
+
+            } else if (action === 'finalize') {
+                logMessage('Iniciando proceso de FINALIZACIÓN...', 'info');
+                setTimeout(() => {
+                    logMessage('Backend: Verificando UTXOs acumulados...', 'backend');
+                    logMessage('Smart Contract: Introspección valida inputs y outputs.', 'backend');
+                    
+                    setTimeout(() => {
+                        status = 'FUNDED';
+                        logMessage('Red: Transacción minada. Fondos liberados al creador.', 'info');
+                        updateUI();
+                        document.getElementById('chart-caption').innerText = "Campaña completada exitosamente. Fondos transferidos.";
+                    }, 1000);
+                }, 500);
+
+            } else if (action === 'refund') {
+                logMessage('Simulando expiración de campaña...', 'error');
+                setTimeout(() => {
+                    status = 'REFUNDED';
+                    logMessage('Smart Contract: Tiempo expirado. Modo REFUND activado.', 'backend');
+                    logMessage('Wallet: Usuarios reclaman sus UTXOs originales.', 'wallet');
+                    raised = 0; // Visual reset for refund
+                    updateUI();
+                    document.getElementById('chart-caption').innerText = "Campaña cancelada. Los fondos han sido devueltos a los usuarios.";
+                }, 800);
+            }
+        }
+
+        function resetSimulation() {
+            raised = 0;
+            status = 'ACTIVE';
+            document.getElementById('console-output').innerHTML = '<div class="opacity-50 text-green-400 font-mono text-xs">> Sistema reiniciado.</div>';
+            document.getElementById('chart-caption').innerText = "La campaña está esperando contribuciones. Las transacciones se mantienen como UTXOs hasta la finalización.";
+            updateUI();
+        }
+
+        // --- Architecture Diagram Logic ---
+        function highlightFlow(node) {
+            const desc = document.getElementById('flow-description');
+            
+            if (node === 'frontend') {
+                desc.innerHTML = `
+                    <strong class="block text-blue-700 mb-1">Frontend UI</strong>
+                    El punto de entrada. El usuario configura la campaña o decide apoyar una. 
+                    El frontend envía los datos al backend solicitando la estructura de la transacción, 
+                    pero <span class="font-bold text-red-600">nunca maneja claves privadas</span>.
+                `;
+            } else if (node === 'backend') {
+                desc.innerHTML = `
+                    <strong class="block text-purple-700 mb-1">Backend Service (Express + TS)</strong>
+                    El cerebro lógico. Construye la transacción compleja con los covenants necesarios y devuelve 
+                    un <strong>Hexadecimal (HEX) sin firmar</strong> al frontend. No tiene custodia de fondos.
+                `;
+            } else if (node === 'wallet') {
+                desc.innerHTML = `
+                    <strong class="block text-green-700 mb-1">Billetera (Wallet)</strong>
+                    El ejecutor. Recibe el HEX sin firmar del backend. El usuario lo revisa y lo firma con su 
+                    clave privada. Finalmente, la billetera difunde la transacción a la red eCash.
+                `;
+            }
+        }
+
+        // --- Utility ---
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // --- Init ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initChart();
+            updateUI();
+        });
+
+    </script>
+</body>
+</html>
