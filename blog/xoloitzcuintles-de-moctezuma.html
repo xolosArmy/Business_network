@@ -142,6 +142,32 @@
             line-height: 1.25;
         }
 
+        .post-video {
+            margin: 1.5rem 0 2rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-caption {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
         @media (min-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -304,8 +330,24 @@
 
             <h1>El Xoloitzcuintle en la Zootecnia Imperial Azteca: Entorno, Trato y Función Biocultural en la Era Precolonial</h1>
 
+            <section class="post-video">
+                <div class="video-wrapper">
+                    <iframe
+                        src="https://www.youtube.com/embed/QmE5XqCjxws?si=5rdSqg8kX2POx43-"
+                        title="XolosArmy Podcast – Xoloitzcuintles de Moctezuma"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+                <p class="video-caption">
+                    🎧 Escucha el episodio del XolosArmy Podcast sobre los Xoloitzcuintles de Moctezuma y su papel en la zootecnia imperial azteca.
+                </p>
+            </section>
+
             <div class="highlight-box">
-                <strong>Nota XolosArmy Network:</strong>  
+                <strong>Nota XolosArmy Network:</strong>
                 Este texto dialoga con el trabajo vivo del criadero
                 <a href="https://www.xolosramirez.com" target="_blank" rel="noopener noreferrer">Xolos Ramírez</a>, que hoy preserva al Xoloitzcuintle como patrimonio biocultural de México.
                 <div class="xolos-links">
