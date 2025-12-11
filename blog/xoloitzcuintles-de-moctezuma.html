@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>El Xoloitzcuintle en la Zootecnia Imperial Azteca – XolosArmy Network</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Análisis biocultural del Xoloitzcuintle en la zootecnia imperial azteca: entorno, trato y función en la era precolonial.">
+    <style>
+        :root {
+            --bg: #05060a;
+            --bg-alt: #0b0d12;
+            --card: #111522;
+            --accent: #00d4b1;
+            --accent-soft: rgba(0,212,177,0.12);
+            --text: #f5f5f5;
+            --muted: #b3b7c4;
+            --border: #252b3b;
+            --link: #4fd1c5;
+            --link-hover: #9ae6b4;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #141a2a 0, #05060a 48%, #000 100%);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: var(--link);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--link-hover);
+        }
+
+        .page {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 32px 16px 64px;
+        }
+
+        header.site-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 32px;
+            padding: 14px 18px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(0,212,177,0.1), rgba(79,70,229,0.16));
+            border: 1px solid rgba(0,212,177,0.3);
+        }
+
+        .brand {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .brand-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .brand-sub {
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        nav.site-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-pill {
+            font-size: 0.85rem;
+            padding: 6px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(180, 198, 255, 0.4);
+            background: rgba(8, 12, 30, 0.85);
+        }
+
+        .nav-pill--accent {
+            border-color: rgba(0,212,177,0.7);
+            background: rgba(0,212,177,0.15);
+        }
+
+        main {
+            display: block;
+        }
+
+        article {
+            background: rgba(5, 7, 15, 0.9);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            padding: 28px 20px 32px;
+            box-shadow: 0 28px 60px rgba(0,0,0,0.6);
+        }
+
+        @media (min-width: 768px) {
+            article {
+                padding: 36px 40px 40px;
+            }
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .article-tag {
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(0,212,177,0.5);
+            background: rgba(0,212,177,0.12);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        h1 {
+            font-size: 1.7rem;
+            margin: 8px 0 16px;
+            line-height: 1.25;
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        h2 {
+            font-size: 1.35rem;
+            margin: 26px 0 10px;
+            border-left: 3px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        h3 {
+            font-size: 1.08rem;
+            margin: 18px 0 6px;
+            color: #e2e8f0;
+        }
+
+        p {
+            margin: 0 0 12px;
+            color: var(--text);
+        }
+
+        em {
+            font-style: italic;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+
+        .highlight-box {
+            margin: 16px 0 24px;
+            padding: 14px 16px;
+            border-radius: 14px;
+            border: 1px dashed rgba(0,212,177,0.45);
+            background: radial-gradient(circle at top left, var(--accent-soft), transparent 55%);
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        .highlight-box strong {
+            color: #e6fffa;
+        }
+
+        .xolos-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .xolos-link-pill {
+            font-size: 0.85rem;
+            padding: 6px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(148,163,184,0.6);
+            background: rgba(15,23,42,0.9);
+        }
+
+        .xolos-link-pill span {
+            opacity: 0.7;
+            margin-right: 6px;
+        }
+
+        ul {
+            margin: 0 0 12px 20px;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        .table-wrap {
+            margin: 18px 0 24px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: radial-gradient(circle at top, rgba(15,23,42,0.96), rgba(3,7,18,0.98));
+            overflow: hidden;
+        }
+
+        .table-caption {
+            padding: 10px 14px;
+            font-size: 0.9rem;
+            color: var(--muted);
+            border-bottom: 1px solid var(--border);
+            background: rgba(15,23,42,0.95);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+
+        thead {
+            background: rgba(15,23,42,0.96);
+        }
+
+        th, td {
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(30,41,59,0.9);
+            vertical-align: top;
+        }
+
+        th {
+            text-align: left;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        tbody tr:nth-child(even) {
+            background: rgba(15,23,42,0.7);
+        }
+
+        footer.article-footer {
+            margin-top: 28px;
+            padding-top: 18px;
+            border-top: 1px dashed rgba(148,163,184,0.4);
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        .small-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(148,163,184,0.9);
+            margin-bottom: 4px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <header class="site-header">
+        <div class="brand">
+            <div class="brand-title">XolosArmy Network</div>
+            <div class="brand-sub">Xoloitzcuintle, cultura y blockchain</div>
+        </div>
+        <nav class="site-nav">
+            <a class="nav-pill" href="https://www.xolosramirez.com" target="_blank" rel="noopener noreferrer">
+                Criadero Xolos Ramírez
+            </a>
+            <a class="nav-pill nav-pill--accent" href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener noreferrer">
+                Ver Xolos disponibles
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <div class="article-meta">
+                <span>Ensayo biocultural</span>
+                <span class="article-tag">Xoloitzcuintle prehispánico</span>
+            </div>
+
+            <h1>El Xoloitzcuintle en la Zootecnia Imperial Azteca: Entorno, Trato y Función Biocultural en la Era Precolonial</h1>
+
+            <div class="highlight-box">
+                <strong>Nota XolosArmy Network:</strong>  
+                Este texto dialoga con el trabajo vivo del criadero
+                <a href="https://www.xolosramirez.com" target="_blank" rel="noopener noreferrer">Xolos Ramírez</a>, que hoy preserva al Xoloitzcuintle como patrimonio biocultural de México.
+                <div class="xolos-links">
+                    <a class="xolos-link-pill" href="https://www.xolosramirez.com" target="_blank" rel="noopener noreferrer">
+                        <span>🌐</span> Sitio oficial Xolos Ramírez
+                    </a>
+                    <a class="xolos-link-pill" href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener noreferrer">
+                        <span>🐾</span> Xolos disponibles hoy
+                    </a>
+                </div>
+            </div>
+
+            <section id="i-introduccion">
+                <h2>I. Introducción y marco teórico biocultural del <em>Canis familiaris</em> prehispánico</h2>
+
+                <p>
+                    El Xoloitzcuintle, conocido en náhuatl como <em>Xólotl-itzcuintli</em> (perro de Xólotl, el dios), es una raza canina endémica que funciona como artefacto biocultural vivo y emblema de la profunda cosmovisión mesoamericana.<sup>1</sup> Su existencia, documentada a lo largo de al menos 2,000 años, se remonta a orígenes en el occidente de México y destaca por su papel como fiel compañero tanto en la vida como en la muerte.<sup>3</sup>
+                </p>
+
+                <h3>A. Definición del Xoloitzcuintle dentro de la zootecnia mesoamericana</h3>
+
+                <p>
+                    Para comprender la crianza especializada del Xolo es fundamental distinguirlo de otras variedades caninas presentes en Mesoamérica.
+                    Los cronistas españoles describieron varios tipos de perros: <em>itzcuintli</em> (perro común), <em>techichi</em> (posiblemente un perro de engorda),
+                    <em>teuitzotl</em>, <em>xochiocoyotl</em> y <em>tetlamin</em>, entre otros.<sup>5</sup> El Xoloitzcuintle, en su forma castellanizada,
+                    se distingue por su característica ausencia de pelo.<sup>6</sup>
+                </p>
+
+                <p>
+                    Desde una perspectiva biológica, la peculiaridad del Xolo sin pelo no es solo superficial, sino que obedece a una mutación específica en el gen
+                    <strong>FOXI3</strong>, asociada a un síndrome conocido como displasia ectodérmica canina.<sup>7</sup> Esta mutación se manifiesta tanto en la falta de pelaje como en una dentición anómala,
+                    caracterizada por ausencia de premolares y, en ocasiones, de caninos, además de incisivos cónicos simples.<sup>8</sup>
+                </p>
+
+                <p>
+                    El perro prehispánico fue objeto de una selección empírica por parte de sus criadores, quienes lograron preservar este linaje durante milenios a pesar de sus debilidades genéticas asociadas.<sup>10</sup>
+                    La zooarqueología ha validado la existencia de este fenotipo en el Posclásico, con restos de ejemplares pelones identificados por sus particularidades dentales en sitios como Tula y Teotihuacan.<sup>8</sup>
+                </p>
+
+                <p>
+                    No obstante, la naturaleza taxonómica del llamado “perro pelón” pudo haber sido manipulada. Fray Bernardino de Sahagún relató en el Códice Florentino que
+                    “otros perrillos criaban que llamaban xoloitzcuintle que apenitas ningún pelo tenían”, pero también mencionó que “estos perros no nacen así sino que de pequeños los untan con resina, que se llama óxitl (aguarrás), y con esto se les cae el pelo quedando el cuerpo muy liso”.<sup>11</sup>
+                </p>
+
+                <p>
+                    La referencia a la depilación artificial con <em>óxitl</em> complejiza la crianza del Xolo de élite. Si la apariencia desnuda era crucial para el valor simbólico o curativo, los mexicas pudieron haber desarrollado técnicas para manipular el fenotipo de perros comunes (<em>itzcuintli</em>) con fines de mercado o consumo masivo. Sin embargo, el linaje sagrado —especialmente los ejemplares destinados a la élite y a los rituales funerarios— debía ser genéticamente puro, reconocible por sus características dentales y su linaje ancestral. Esta diferenciación es esencial para entender el trato diferenciado otorgado a los Xolos de la nobleza en comparación con el perro común.
+                </p>
+
+                <h3>B. Dualidad cosmológica: guía de almas y deidad de transformación</h3>
+
+                <p>
+                    El Xoloitzcuintle poseía un valor simbólico profundo en la cosmovisión prehispánica, constituyéndose como un elemento indispensable en el ciclo de la vida y la muerte.<sup>3</sup>
+                    Estaba intrínsecamente ligado a la figura del dios Xólotl, deidad del fuego, la muerte y la transformación, hermano gemelo y contraparte de Quetzalcóatl.<sup>9</sup>
+                </p>
+
+                <p>
+                    Según la tradición, Xólotl, representado como perro, se encargaba de cuidar a los muertos en su tránsito hacia el inframundo o Mictlán.<sup>13</sup>
+                    En la tradición mexica, al morir, el alma emprendía un largo viaje y un perro era sacrificado para guiarla a través de los nueve ríos del Mictlán, en especial el peligroso río Chiconahuapan.<sup>14</sup>
+                    Se creía que, si la persona en vida había tratado bien a los perros, el Xolo aceptaría gustoso tomar su alma y llevarla a salvo hasta el otro lado.<sup>14</sup>
+                </p>
+
+                <p>
+                    Este rol de guía y “símbolo de la muerte” se relaciona con la dinámica de destrucción y regeneración de la materia, favoreciendo el paso de lo orgánico al inframundo para luego ser devuelto a lo vivo, según las investigaciones de Raúl Valadez Azúa.<sup>3</sup>
+                </p>
+            </section>
+
+            <section id="ii-estatus-imperial">
+                <h2>II. El estatus imperial: la crianza del Xolo por los <em>tlatoanis</em> aztecas</h2>
+
+                <p>
+                    La posesión de Xoloitzcuintles por la más alta élite mexica, incluidos los <em>tlatoanis</em>, es un hecho documentado que ilustra la transición de la raza desde un animal de culto regional a un activo estratégico imperial en el Posclásico Tardío.
+                </p>
+
+                <h3>A. Tenencia por Moctezuma II: análisis crítico</h3>
+
+                <p>
+                    La pregunta sobre si algún <em>tlatoani</em> criaba Xolos encuentra una respuesta afirmativa en las fuentes etnohistóricas. Cronistas como Gonzalo Fernández de Oviedo y Fray Bernardino de Sahagún describen la vida en la Cuenca de México. Algunos historiadores señalan que el emperador Moctezuma II llegó a poseer más de cien ejemplares de perros y, lo que resulta crucial para el análisis del entorno y del trato, “cada uno tenía un mozo para su cuidado”.<sup>5</sup>
+                </p>
+
+                <p>
+                    La magnitud de esta colección canina en el palacio<sup>17</sup> y la asignación de un mozo dedicado a cada perro constituyen indicios claros de una zootecnia imperial y del valor excepcional del Xolo en el seno de la élite.
+                </p>
+
+                <p>
+                    Al igual que el famoso aviario imperial de Tenochtitlan, la posesión de grandes colecciones de fauna no era una actividad meramente recreativa; funcionaba como demostración de poder, riqueza y control de recursos exóticos o sagrados. El Xolo, cargado de significados rituales, se integraba plenamente en esta lógica de soberanía. La inversión de tiempo y recursos humanos —dedicar un mozo por ejemplar— subraya que estos Xolos de Moctezuma no eran tratados como simple ganado de engorda (<em>techichi</em>).
+                </p>
+
+                <p>
+                    Este manejo tan detallado solo se justifica si los animales eran considerados raros, sagrados o funcionalmente indispensables para los rituales de Estado.
+                </p>
+
+                <h3>B. Implicaciones de la zootecnia imperial</h3>
+
+                <p>
+                    La cría masiva de Xolos bajo control del <em>tlatoani</em> no estaba orientada principalmente al consumo, que era cubierto por los <em>itzcuintli</em> en los mercados (donde se vendían cerca de 400 perros diarios en Acolman).<sup>5</sup>
+                    La función central de la cría imperial era asegurar el suministro de guías del Mictlán de linaje puro para la nobleza y para los ritos estatales de mayor jerarquía.
+                </p>
+
+                <p>
+                    El éxito de la cría real de Xolos, a pesar de las vulnerabilidades genéticas y la sensibilidad climática de la raza, se convierte en testimonio de la capacidad tecnológica y del control administrativo del <em>tlatoani</em>. Mantener vivos y saludables más de cien perros sin pelo en un entorno de alta altitud, que exige cuidado constante y específico, revela una empresa estatal sofisticada.
+                </p>
+
+                <p>
+                    La crianza de Xolos imperiales era, por tanto, una forma de prestigio político-ritual y, al mismo tiempo, un mecanismo para mantener el equilibrio cosmológico, asegurando que las almas de la élite contaran con los guías adecuados para su travesía eterna.
+                </p>
+
+                <div class="table-wrap">
+                    <div class="table-caption"><strong>Tabla 1.</strong> Evidencia historiográfica del estatus imperial del Xoloitzcuintle</div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Fuente etnohistórica</th>
+                            <th>Detalle sobre Tlatoani/Élite</th>
+                            <th>Implicación en el entorno de crianza</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Cronistas (referencia a Moctezuma II)<sup>5</sup></td>
+                            <td>Posesión de más de 100 ejemplares con mozos dedicados a su cuidado.</td>
+                            <td>Indica manejo imperial, altísimo costo de mantenimiento y un entorno de crianza formalizado.</td>
+                        </tr>
+                        <tr>
+                            <td>Fray Bernardino de Sahagún (Códice Florentino)<sup>11</sup></td>
+                            <td>“De noche abrigábanlos con mantas para dormir.”</td>
+                            <td>El entorno palaciego proveía refugio y cuidado activo contra el frío, mitigando el factor ambiental.</td>
+                        </tr>
+                        <tr>
+                            <td>Sahagún (venta en mercados)<sup>5</sup></td>
+                            <td>Venta de 400 perros diarios en mercados (Acolman).</td>
+                            <td>Amplia crianza comercial de perros comunes; sugiere control de la línea sagrada (Xolos) por la élite.</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="iii-entorno-trato">
+                <h2>III. Entorno, trato y manejo físico: necesidades biológicas del perro pelón</h2>
+
+                <p>
+                    La crianza del Xoloitzcuintle en el Altiplano Central mexica exigía adaptaciones específicas debido a las particularidades fisiológicas de la raza sin pelo. El trato brindado por la élite refleja un entendimiento avanzado de sus necesidades biológicas y una valoración clara de sus propiedades terapéuticas.
+                </p>
+
+                <h3>A. Entorno térmico y protección ambiental especializada</h3>
+
+                <p>
+                    Los Xolos sin pelo son altamente sensibles al frío debido a la ausencia de pelaje, lo cual representaba un desafío en el clima fresco y a menudo frío de Tenochtitlan.<sup>18</sup>
+                    La respuesta a esta vulnerabilidad constituye una de las evidencias más claras del trato especializado e inversión de recursos por parte de la nobleza.
+                </p>
+
+                <p>
+                    Sahagún relató que a estos perros “de noche abrigábanlos con mantas para dormir”.<sup>11</sup> Este gesto no era solo una muestra de afecto, sino una estrategia de termorregulación asistida.
+                    La provisión constante de mantas y el mantenimiento en interiores durante condiciones extremas<sup>18</sup> indican que el entorno de crianza de la élite estaba diseñado para compensar la mutación genética.
+                </p>
+
+                <p>
+                    Además, la piel desnuda requiere cuidados dermatológicos. Los Xolos de colores claros pueden necesitar protección ante la exposición solar, ya que su piel tiende a oscurecer con la luz o a palidecer en invierno si pasan la mayor parte del tiempo bajo techo.<sup>19</sup>
+                    Aunque la evidencia directa de ungüentos prehispánicos es limitada, la práctica moderna de lubricar zonas resecas (como la punta de la cola) y aplicar cremas o lanolina<sup>20</sup> sugiere que la necesidad de hidratación es inherente a la raza y que la élite, con sus mozos dedicados, probablemente gestionaba el cuidado de la piel.
+                </p>
+
+                <h3>B. Uso terapéutico: el perro curandero</h3>
+
+                <p>
+                    Una de las funciones más singulares del Xolo era su uso terapéutico, lo que implicaba una relación de gran proximidad física. La falta de pelo permite que el calor corporal del Xolo, dentro del rango normal de otras razas pero con una transferencia superficial más eficiente, se utilice como compresa.<sup>19</sup>
+                </p>
+
+                <p>
+                    En la medicina azteca, el Xolo era valorado como “perro curandero”.<sup>21</sup> Se acostumbraba presionar su cuerpo contra zonas doloridas para que el calor mitigara diversas dolencias.
+                    Estos perros se utilizaban para aliviar reumatismo, dolores musculares, asma, insomnio e incluso malaria.<sup>21</sup> Este rol funcional integraba al animal en la vida cotidiana y en las prácticas de salud del hogar, fortaleciendo el vínculo afectivo y la convivencia humano-perro.<sup>3</sup>
+                </p>
+
+                <h3>C. Zootecnia de un linaje vulnerable</h3>
+
+                <p>
+                    La crianza y preservación del Xolo a lo largo de 2,000 años, pese a las debilidades asociadas a su mutación, evidencia una zootecnia empírica altamente efectiva.
+                    Los criadores prehispánicos debieron manejar activamente consecuencias genéticas como la fragilidad dental.<sup>8</sup>
+                </p>
+
+                <p>
+                    El éxito en mantener vivo y funcional a un animal biológicamente vulnerable —que requería inversión constante de recursos humanos y materiales (mozos, mantas, cuidados específicos)— convierte al Xolo en más que un objeto valioso:
+                    es un bien que exige sacrificio y conocimiento especializado para su conservación. La nobleza mexica, al invertir en esta crianza, no solo adquiría un animal, sino que preservaba un linaje funcionalmente (terapia) y ritualmente (guía) esencial para su cultura.
+                </p>
+            </section>
+
+            <section id="iv-trato-dual">
+                <h2>IV. Trato dual: ritual, compañía y economía cárnica</h2>
+
+                <p>
+                    El trato del Xoloitzcuintle se caracterizó por una profunda dualidad: era, simultáneamente, guía sagrado del inframundo y recurso práctico, aunque su estatus en la élite lo protegía en gran medida de los usos más utilitarios reservados a otros perros.
+                </p>
+
+                <h3>A. Trato sacrificial y rol ceremonial</h3>
+
+                <p>
+                    El destino final de muchos Xolos, especialmente aquellos de linaje noble o destinados a acompañar a sus dueños, era el sacrificio funerario. La creencia central sostenía que el perro debía ser inmolado y enterrado junto al difunto para poder guiar su alma a través del Mictlán.
+                </p>
+
+                <p>
+                    Crónicas y hallazgos arqueológicos confirman esta práctica, que persistió incluso después de la Conquista y de la prohibición española, demostrando el profundo arraigo cultural de esta función.<sup>7</sup>
+                    Para que el perro fuera un guía efectivo se exigían cualidades rituales específicas: se menciona que el perro acompañante debía ser bermejo o totalmente negro.<sup>15</sup>
+                    Los ejemplares con manchas se consideraban impuros porque ya habrían servido al alma de otro difunto.<sup>21</sup> Esta exigencia cromática impulsaba la crianza selectiva de la nobleza, que aseguraba ejemplares puros y ritualmente aptos.
+                </p>
+
+                <p>
+                    Además de su función funeraria, el perro podía asumir un papel sacrificial destacado en ciertas festividades, actuando como sustituto de un ser humano.<sup>23</sup>
+                    Su vínculo con Mictlantecuhtli y su condición de símbolo de la muerte lo convertían en candidato ideal para ritos funerarios y ceremoniales.<sup>3</sup>
+                </p>
+
+                <h3>B. Estratificación del trato y exclusión cárnica</h3>
+
+                <p>
+                    Aunque el Xolo era un animal ceremonial, no puede ignorarse que el perro en general era una de las pocas fuentes de proteína domesticada de los mexicas, junto con el pavo.<sup>24</sup>
+                    Los cronistas españoles comentaron la costumbre de consumir perros y señalaron que grandes cantidades eran servidas en banquetes.<sup>7</sup>
+                </p>
+
+                <p>
+                    Sin embargo, existía una clara estratificación canina en la sociedad azteca. El animal de engorda era probablemente el <em>techichi</em> o el <em>itzcuintli</em> común, descrito como el perro más abundante de la época.<sup>25</sup>
+                    El valor de la carne de perro parecía bajo en la escala social: cuando se servía junto con pavo, la carne de perro se colocaba en el fondo del plato.<sup>7</sup>
+                </p>
+
+                <p>
+                    La dedicación de Moctezuma de cien mozos a cien Xolos<sup>5</sup>, junto con la exigencia cromática para los ritos funerarios<sup>15</sup>, indica que el Xolo de la élite estaba ritualmente separado de la cadena de consumo general.
+                    Resultaría culturalmente contradictorio sacrificar al animal encargado de guiar el alma hacia Xólotl para servirlo de manera indiscriminada como alimento. Por ello, el trato del Xolo de la nobleza era de protección y sacralidad, excluyéndolo de la economía cárnica, salvo en contextos de sacrificio ritual de altísima jerarquía.
+                </p>
+
+                <div class="table-wrap">
+                    <div class="table-caption"><strong>Tabla 2.</strong> Estratificación del trato canino prehispánico</div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Rol funcional/ritual</th>
+                            <th>Trato y cuidado asociado</th>
+                            <th>Fenotipo preferido/requerido</th>
+                            <th>Contexto social</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Guía espiritual (Mictlán)<sup>14</sup></td>
+                            <td>Sacrificio ritual y entierro conjunto; protección y lealtad.</td>
+                            <td>Xoloitzcuintle sin pelo, preferentemente bermejo o totalmente negro (pureza).<sup>15</sup></td>
+                            <td>Ritos funerarios de nobleza y del pueblo.</td>
+                        </tr>
+                        <tr>
+                            <td>Perro curandero<sup>21</sup></td>
+                            <td>Proximidad física; abrigo con mantas; cuidado dermatológico.</td>
+                            <td>Xoloitzcuintle sin pelo (por su temperatura corporal).</td>
+                            <td>Medicina azteca y ámbito doméstico.</td>
+                        </tr>
+                        <tr>
+                            <td>Animal de engorda<sup>7</sup></td>
+                            <td>Crianza utilitaria; manejo en alto volumen para venta y consumo.</td>
+                            <td><em>Techichi</em> o <em>itzcuintli</em> común (perro criollo bermejo/amarillo).<sup>25</sup></td>
+                            <td>Comercio y banquetes (trato principalmente utilitario).</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="v-evidencia-zooarqueologica">
+                <h2>V. Evidencia zooarqueológica: tallas, linajes y continuidad cultural</h2>
+
+                <p>
+                    La zooarqueología proporciona el sustento material para las interpretaciones etnohistóricas y confirma que la diversidad de perros, incluido el linaje Xolo, formaba parte integral de las sociedades prehispánicas mucho antes del apogeo mexica.
+                </p>
+
+                <h3>A. Hallazgos esqueléticos y morfología prehispánica</h3>
+
+                <p>
+                    Las excavaciones han revelado colecciones significativas de restos caninos en el Centro de México. El estudio de 27 perros provenientes de entierros en Tula, Hidalgo, correspondientes a la ocupación más antigua (650–750 d.C.), ha demostrado la presencia de al menos tres razas bien definidas.<sup>26</sup>
+                </p>
+
+                <p>
+                    La identificación del Xolo se realiza mediante el análisis de las anomalías dentales características.<sup>8</sup>
+                    Las mediciones osteológicas de ejemplares prehispánicos (incluyendo restos de Teotihuacan y Tula) indican que los Xolos tenían una alzada estimada entre 389 y 438 mm, lo que los sitúa en el rango de perros de talla media.<sup>27</sup>
+                    Esta información confirma que la raza, con sus rasgos fenotípicos y genéticos distintivos, fue conservada por selección empírica durante largos periodos.
+                </p>
+
+                <h3>B. Continuidad cultural del linaje</h3>
+
+                <p>
+                    La persistencia del linaje Xoloitzcuintle —definido por sus rasgos esqueléticos y la mutación genética— durante milenios<sup>3</sup> demuestra un proceso de crianza selectiva orientado a preservar un fenotipo valioso a pesar de sus desventajas biológicas.
+                    La dificultad de mantener un animal con anomalías dentales y alta sensibilidad térmica implica que las culturas prehispánicas, y en particular la élite azteca, poseían métodos de manejo y conocimientos biológicos que iban más allá del simple cuidado de mascotas.
+                </p>
+
+                <p>
+                    La costumbre de enterrar perros o figurillas que los representan junto a los difuntos, rasgo distintivo de la función ritual del Xolo, revela una resiliencia cultural extraordinaria.
+                    Esta práctica se mantuvo incluso frente a las prohibiciones posteriores a la Conquista,<sup>15</sup> confirmando que el trato ritual dado al Xolo era un componente esencial de la identidad cultural y de las creencias sobre el destino final del alma.
+                </p>
+            </section>
+
+            <section id="vi-conclusiones">
+                <h2>VI. Conclusiones</h2>
+
+                <p>
+                    En la era precolonial —y específicamente bajo el dominio azteca— el Xoloitzcuintle ostentaba un estatus elevado que requería un entorno y un trato sumamente especializados, lo que lo diferenciaba claramente del perro común (<em>itzcuintli</em>) destinado al comercio o consumo.
+                </p>
+
+                <p>
+                    El análisis etnohistórico confirma que la nobleza azteca participaba activamente en la cría y mantenimiento de esta raza. La posesión de un gran número de ejemplares por parte del <em>tlatoani</em> Moctezuma II (más de cien perros)<sup>5</sup> y la asignación de un mozo dedicado a cada uno revelan la existencia de una zootecnia imperial.
+                    Este sistema aseguraba la preservación de la pureza ritual del linaje, indispensable para las funciones cosmológicas del imperio.
+                </p>
+
+                <p>
+                    El entorno de crianza del Xolo era adaptado meticulosamente para mitigar sus vulnerabilidades biológicas. El trato físico incluía el abrigo constante con mantas durante la noche<sup>11</sup> para contrarrestar el frío del Altiplano, lo cual demuestra un conocimiento práctico de sus necesidades térmicas.
+                    Además de su rol como compañero y guardián<sup>19</sup>, el Xolo cumplía una función terapéutica esencial como “perro curandero”, cuyo calor corporal se utilizaba en la medicina azteca para tratar distintas dolencias.<sup>21</sup>
+                </p>
+
+                <p>
+                    La dualidad de su función —guía sagrada del Mictlán frente a recurso alimenticio— se resolvía mediante una marcada estratificación social canina. Los Xolos de la élite, seleccionados por su pureza ritual (color negro o bermejo), recibían un trato de protección y sacralidad, quedando excluidos de la cadena de consumo general a la que eran sometidos otros perros.
+                </p>
+
+                <p>
+                    En suma, el Xoloitzcuintle precolonial constituye un testimonio de la compleja interconexión biocultural en Mesoamérica, donde la vida animal funcionaba como nexo con lo divino, recurso médico funcional y marcador de estatus imperial. La inversión en su crianza y cuidado especializado por parte de figuras como el <em>tlatoani</em> Moctezuma II evidencia la importancia estratégica y religiosa que esta raza milenaria poseía para la civilización mexica.
+                </p>
+            </section>
+
+            <footer class="article-footer">
+                <span class="small-label">Vínculo vivo</span>
+                Hoy, proyectos como <a href="https://www.xolosramirez.com" target="_blank" rel="noopener noreferrer">Xolos Ramírez</a> y
+                <strong>XolosArmy Network</strong> continúan esta historia, trasladando el linaje del Xoloitzcuintle del mundo ritual prehispánico
+                al ecosistema digital, documental y comunitario de la era blockchain.
+            </footer>
+        </article>
+    </main>
+</div>
+</body>
+</html>
