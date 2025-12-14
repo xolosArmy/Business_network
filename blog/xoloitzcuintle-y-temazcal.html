@@ -47,6 +47,28 @@
     .btn.ghost{color:var(--text); background:transparent; border:1px solid var(--line); font-weight:600;}
     footer{margin-top:18px; color:var(--muted); font-size:14px;}
     ul{margin:10px 0 0 18px; color:var(--muted);}
+
+    .podcast-embed { margin: 24px 0; }
+    .podcast-embed h2 { margin: 0 0 8px; }
+    .podcast-embed p { margin: 0 0 12px; opacity: 0.9; }
+
+    .video-wrap {
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+      background: #000;
+    }
+
+    .video-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
   </style>
 </head>
 
@@ -68,6 +90,20 @@
         <a href="#biblio">Bibliografía</a>
       </nav>
     </header>
+
+    <section class="podcast-embed" aria-label="XolosArmy Podcast">
+      <h2>XolosArmy Podcast</h2>
+      <p>Escucha el episodio completo sobre el calor vital: temazcal + xoloitzcuintle.</p>
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/BvZZ0KCX8ps?si=ywkNeyU06VsjLkpn"
+          title="XolosArmy Podcast — Xoloitzcuintle y Temazcal"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+    </section>
 
     <section id="marco">
       <h2>I. Marco conceptual</h2>
