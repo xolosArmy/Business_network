@@ -146,6 +146,23 @@
       font-size: 13px;
       color: var(--muted);
     }
+    .videoWrap{
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(0,0,0,.25);
+      box-shadow: var(--shadow);
+    }
+    .videoWrap iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
     .callout{
       border-left: 3px solid var(--accent2);
       padding: 12px 14px;
@@ -262,6 +279,25 @@
         <a class="btn primary" href="https://www.xolosramirez.com/" target="_blank" rel="noopener">Conoce Xolos Ramírez</a>
         <a class="btn" href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener">Ver Xolos disponibles</a>
         <a class="btn" href="#niveles">Ir a los 9 niveles</a>
+      </div>
+    </section>
+
+    <section class="card" id="podcast" aria-label="xolosArmy Podcast">
+      <h2>🎙️ xolosArmy Podcast</h2>
+      <p class="note">Episodio relacionado con el Mictlán, el Itzcuintlan y el xoloitzcuintle como guardián del umbral.</p>
+
+      <div class="videoWrap" role="region" aria-label="Reproductor de video">
+        <iframe
+          src="https://www.youtube.com/embed/C-U4cDqIDnk?si=K4PFXyQnTTVf3Rmz"
+          title="xolosArmy Podcast — Mictlán y Xoloitzcuintle"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+
+      <div class="btnrow">
+        <a class="btn primary" href="#introduccion">Continuar leyendo</a>
+        <a class="btn" href="https://www.xolosramirez.com/" target="_blank" rel="noopener">Xolos Ramírez</a>
       </div>
     </section>
 
@@ -656,7 +692,6 @@
             <a href="https://www.xolosramirez.com/" target="_blank" rel="noopener">Xolos Ramírez</a> ·
             <a href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener">Xolos disponibles</a>
           </p>
-          <p class="note">Tip: si vas a incrustar esto en tu sitio, puedes copiar solo el contenido dentro de <span class="kbd">&lt;article&gt;</span> y conservar el <span class="kbd">style</span>.</p>
         </div>
       </article>
 
