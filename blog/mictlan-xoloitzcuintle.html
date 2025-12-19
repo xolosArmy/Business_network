@@ -17,120 +17,226 @@
 
   <style>
     :root{
-      --bg:#0b0c10; --panel:#10121a; --text:#e9ecf1; --muted:#b3bac6;
-      --line:rgba(255,255,255,.10);
-      --accent:#ffd166; --accent2:#2dd4bf;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-      --radius:16px; --max:980px;
+      --bg: #0b0c10;
+      --panel: #10121a;
+      --text: #e9ecf1;
+      --muted: #b3bac6;
+      --line: rgba(255,255,255,.10);
+      --accent: #ffd166;
+      --accent2: #2dd4bf;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+      --max: 980px;
     }
-    *{box-sizing:border-box}
+    *{ box-sizing: border-box; }
+    html, body{ height:100%; }
     body{
       margin:0;
       background: radial-gradient(1200px 900px at 20% 0%, rgba(45,212,191,.15), transparent 55%),
                   radial-gradient(900px 700px at 85% 10%, rgba(255,209,102,.12), transparent 60%),
                   var(--bg);
-      color:var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      line-height:1.65;
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      line-height: 1.65;
     }
-    a{color:var(--accent2); text-decoration:none}
-    a:hover{text-decoration:underline}
+    a{ color: var(--accent2); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 28px 18px 60px;
+    }
     header{
-      position:sticky; top:0; z-index:10;
+      position: sticky;
+      top: 0;
+      z-index: 10;
       backdrop-filter: blur(10px);
       background: rgba(11,12,16,.75);
-      border-bottom:1px solid var(--line);
+      border-bottom: 1px solid var(--line);
     }
     .nav{
-      max-width:var(--max); margin:0 auto; padding:12px 18px;
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
     }
-    .brand{display:flex; align-items:center; gap:10px; font-weight:800; white-space:nowrap;}
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight: 800;
+      letter-spacing: .2px;
+      white-space: nowrap;
+    }
     .dot{
-      width:10px; height:10px; border-radius:999px;
-      background:linear-gradient(135deg,var(--accent2),var(--accent));
-      box-shadow:0 0 0 6px rgba(45,212,191,.10);
+      width: 10px; height: 10px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      box-shadow: 0 0 0 6px rgba(45,212,191,.10);
     }
-    .navlinks{display:flex; flex-wrap:wrap; gap:10px 14px; font-size:14px; color:var(--muted);}
-    .navlinks a{color:var(--muted)}
-    .navlinks a:hover{color:var(--text); text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 60px;}
+    .navlinks{
+      display:flex; flex-wrap: wrap; gap:10px 14px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .navlinks a{ color: var(--muted); }
+    .navlinks a:hover{ color: var(--text); text-decoration: none; }
     .hero{
-      margin-top:18px;
+      margin-top: 18px;
       background: linear-gradient(180deg, rgba(16,18,26,.85), rgba(16,18,26,.55));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:26px 22px;
-      box-shadow:var(--shadow);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px 22px;
+      box-shadow: var(--shadow);
     }
-    h1{margin:0 0 8px; font-size:clamp(26px,3.2vw,42px); line-height:1.15; letter-spacing:-.5px;}
-    .subtitle{margin:0; color:var(--muted); font-size:15px; max-width:70ch;}
-    .meta{margin-top:14px; display:flex; flex-wrap:wrap; gap:8px; color:var(--muted); font-size:13px;}
-    .pill{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid var(--line); border-radius:999px; background:rgba(255,255,255,.03);}
-    main{margin-top:18px; display:grid; grid-template-columns:1fr; gap:18px;}
-    @media (min-width:900px){ main{grid-template-columns:1.6fr .8fr; align-items:start;} }
+    h1{
+      margin: 0 0 8px;
+      font-size: clamp(26px, 3.2vw, 42px);
+      line-height: 1.15;
+      letter-spacing: -.5px;
+    }
+    .subtitle{
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 70ch;
+    }
+    .meta{
+      margin-top: 14px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.03);
+    }
+    main{
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
     .card{
-      background:rgba(16,18,26,.70);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:22px;
-      box-shadow:var(--shadow);
+      background: rgba(16,18,26,.70);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
     }
-    h2{margin:0 0 10px; font-size:22px;}
-    h3{margin:18px 0 8px; font-size:18px;}
-    p{margin:10px 0;}
-    .note{font-size:13px; color:var(--muted);}
+    h2{
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing: -.2px;
+    }
+    h3{
+      margin: 18px 0 8px;
+      font-size: 18px;
+      letter-spacing: -.2px;
+    }
+    p{ margin: 10px 0; }
+    .note{
+      font-size: 13px;
+      color: var(--muted);
+    }
     .callout{
-      border-left:3px solid var(--accent2);
-      padding:12px 14px;
-      background:rgba(45,212,191,.08);
-      border-radius:12px;
-      margin:14px 0;
+      border-left: 3px solid var(--accent2);
+      padding: 12px 14px;
+      background: rgba(45,212,191,.08);
+      border-radius: 12px;
+      margin: 14px 0;
+    }
+    .callout strong{ color: var(--text); }
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 900px){
+      main{ grid-template-columns: 1.6fr .8fr; align-items: start; }
+      .grid2{ grid-template-columns: 1fr 1fr; }
     }
     table{
-      width:100%;
-      border-collapse:collapse;
-      margin:12px 0 6px;
-      border-radius:12px;
-      overflow:hidden;
-      border:1px solid var(--line);
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 6px;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid var(--line);
       background: rgba(0,0,0,.12);
     }
-    th,td{padding:10px; border-bottom:1px solid var(--line); vertical-align:top; font-size:14px;}
-    th{background:rgba(255,255,255,.03); font-weight:700; text-align:left;}
-    tr:last-child td{border-bottom:0}
-    .btnrow{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:10px 12px; border-radius:12px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      color:var(--text); font-weight:650; font-size:14px;
-      text-decoration:none;
+    th, td{
+      padding: 10px 10px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      font-size: 14px;
     }
-    .btn:hover{background:rgba(255,255,255,.07); text-decoration:none;}
-    .btn.primary{border-color:rgba(45,212,191,.35); background:rgba(45,212,191,.10);}
+    th{
+      text-align: left;
+      color: var(--text);
+      background: rgba(255,255,255,.03);
+      font-weight: 700;
+    }
+    tr:last-child td{ border-bottom: 0; }
+    .footnotes ol{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .footer{
+      margin-top: 18px;
+      padding: 18px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+    }
+    .btnrow{ display:flex; flex-wrap: wrap; gap:10px; margin-top: 12px; }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-weight: 650;
+      font-size: 14px;
+      text-decoration: none;
+    }
+    .btn:hover{ background: rgba(255,255,255,.07); text-decoration: none; }
+    .btn.primary{
+      border-color: rgba(45,212,191,.35);
+      background: rgba(45,212,191,.10);
+    }
     .kbd{
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
-      font-size:12px; padding:2px 6px; border:1px solid var(--line); border-radius:8px; background:rgba(0,0,0,.25); color:var(--muted);
+      font-size: 12px;
+      padding: 2px 6px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(0,0,0,.25);
+      color: var(--muted);
     }
-    .audio{
-      display:grid; gap:10px;
-      padding:14px;
-      border:1px solid var(--line);
-      border-radius:14px;
-      background: rgba(0,0,0,.18);
-      margin-top:14px;
-    }
-    audio{width:100%;}
-    .audioTitle{font-weight:750;}
   </style>
 </head>
 
 <body>
   <header>
     <div class="nav">
-      <div class="brand"><span class="dot"></span><span>Ensayo — Mictlán</span></div>
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Ensayo — Mictlán</span>
+      </div>
       <nav class="navlinks" aria-label="Enlaces">
         <a href="https://www.xolosramirez.com/" target="_blank" rel="noopener">Xolos Ramírez</a>
         <a href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener">Xolos disponibles</a>
@@ -149,7 +255,7 @@
       <div class="meta">
         <span class="pill">Tema: Mictlán · Ontología · Cosmovisión mexica</span>
         <span class="pill">Eje: Itzcuintlan · Xoloitzcuintle</span>
-        <span class="pill">Formato: Artículo + Audio</span>
+        <span class="pill">Formato: Artículo / Blog</span>
       </div>
 
       <div class="btnrow">
@@ -157,23 +263,10 @@
         <a class="btn" href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener">Ver Xolos disponibles</a>
         <a class="btn" href="#niveles">Ir a los 9 niveles</a>
       </div>
-
-      <!-- AUDIO (pon el MP3 junto a este HTML o cambia el src a una URL) -->
-      <div class="audio" role="region" aria-label="Reproductor de audio">
-        <div class="audioTitle">🎧 Audio: “El Mictlán no es el Infierno — reciclaje cósmico”</div>
-        <div class="note">Tip: si lo subes a tu web, cambia el <span class="kbd">src</span> por la ruta real (ej. <span class="kbd">/audio/mictlan.mp3</span>).</div>
-        <audio controls preload="metadata">
-          <source src="El Mictlán no es el Infierno es reciclaje cósmico.mp3" type="audio/mpeg" />
-          Tu navegador no soporta audio HTML5.
-        </audio>
-        <div class="btnrow" style="margin-top:6px;">
-          <a class="btn" href="El Mictlán no es el Infierno es reciclaje cósmico.mp3" download>Descargar MP3</a>
-          <a class="btn" href="https://www.xolosramirez.com/" target="_blank" rel="noopener">Xolos Ramírez</a>
-        </div>
-      </div>
     </section>
 
     <main>
+      <!-- Columna principal -->
       <article class="card">
         <h2 id="introduccion">Introducción</h2>
         <p>
@@ -187,50 +280,316 @@
           interminable en el que la materia y la esencia anímica se purifican para reintegrarse al flujo vital del
           universo.<sup><a href="#n1">1</a></sup>
         </p>
+        <p>
+          Este informe examina exhaustivamente la geografía sagrada, la “física” alterada y la razón metafísica de este
+          inframundo, con especial énfasis en el nivel del <strong>Itzcuintlan</strong>, como umbral de la travesía hacia
+          la liberación final o el reposo absoluto.
+        </p>
 
-        <h2 id="niveles">Anatomía de la Travesía: Los Nueve Niveles del Mictlán</h2>
-        <table aria-label="Nueve niveles del Mictlán">
+        <h2 id="razon">La Razón Metafísica de la Existencia del Mictlán</h2>
+        <p>
+          La existencia del Mictlán responde a una necesidad sistémica del cosmos mesoamericano: el mantenimiento de la
+          vida a través de la muerte. En la cosmogonía náhuatl, el mundo fue creado mediante el sacrificio de los dioses;
+          por tanto, la existencia humana es una “deuda” que debe ser pagada mediante el retorno de los componentes del ser
+          a su fuente original.<sup><a href="#n5">5</a></sup>
+        </p>
+        <p>
+          El Mictlán funciona como el espacio necrógeno por excelencia: una matriz invertida donde el individuo es despojado
+          de su identidad para que su energía pueda ser reutilizada en la creación de nuevas formas de vida.<sup><a href="#n1">1</a></sup>
+        </p>
+
+        <h3>Funciones primordiales</h3>
+        <ul>
+          <li><strong>Función desconstructiva:</strong> el individuo debe deshacerse de sus envolturas físicas y anímicas; la identidad personal es una carga que impide el retorno a la unidad primordial.<sup><a href="#n1">1</a></sup></li>
+          <li><strong>Función almacén:</strong> el inframundo opera como “bodega” de gérmenes de vida, huesos y esencias aún no encapsuladas.<sup><a href="#n8">8</a></sup></li>
+          <li><strong>Función de equilibrio dual:</strong> contrapeso de la luminosidad celeste: frío, humedad y noche como condición del calor, la sequedad y el día.<sup><a href="#n2">2</a></sup></li>
+        </ul>
+
+        <table aria-label="Contrastes metafísicos">
           <thead>
             <tr>
-              <th>Orden</th><th>Nivel</th><th>Desafío ontológico</th><th>Significado metafísico</th>
+              <th>Atributo metafísico</th>
+              <th>Plano terrestre (Tlaltícpac)</th>
+              <th>Inframundo (Mictlán)</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>1</td><td>Itzcuintlan</td><td>Cruce del río Apanohuacalhuia</td><td>Juicio de la compasión y fin de la soledad</td></tr>
-            <tr><td>2</td><td>Tepectli Monamictlan</td><td>Montañas que chocan</td><td>Trituración del ego y la forma física</td></tr>
-            <tr><td>3</td><td>Iztepetl</td><td>Cerro de obsidiana con pedernales</td><td>Dolor purificador y descarnamiento inicial</td></tr>
-            <tr><td>4</td><td>Itzehecayan</td><td>Nieve y vientos cortantes</td><td>Pérdida de propiedad y del “vestido social”</td></tr>
-            <tr><td>5</td><td>Paniecatacoyan</td><td>Flotan como banderas</td><td>Pérdida de gravedad y orientación vital</td></tr>
-            <tr><td>6</td><td>Timiminaloayan</td><td>Sendero de flechas invisibles</td><td>Desangramiento: peso de batallas pasadas</td></tr>
-            <tr><td>7</td><td>Teocoyohuehualoyan</td><td>El jaguar devora el corazón</td><td>Liberación de memoria emocional e identidad</td></tr>
-            <tr><td>8</td><td>Izmictlan Apochcalolca</td><td>Nueve ríos de aguas negras y niebla</td><td>Ceguera sensorial y disolución de sentidos</td></tr>
-            <tr><td>9</td><td>Chicunamictlan</td><td>Reposo final en oscuridad total</td><td>Retorno al vacío y unión con el Todo</td></tr>
+            <tr>
+              <td>Estado de la materia</td>
+              <td>Sólida / organizada</td>
+              <td>En descomposición / huesos</td>
+            </tr>
+            <tr>
+              <td>Cualidad térmica</td>
+              <td>Cálida (solar)</td>
+              <td>Fría (Mictlampa)</td>
+            </tr>
+            <tr>
+              <td>Sentido del tiempo</td>
+              <td>Cíclico / generativo</td>
+              <td>Involutivo / disolutivo</td>
+            </tr>
+            <tr>
+              <td>Entidad regente</td>
+              <td>Hombres / deidades solares</td>
+              <td>Mictlantecuhtli / Mictecacíhuatl</td>
+            </tr>
+            <tr>
+              <td>Función primaria</td>
+              <td>Experiencia de la dualidad</td>
+              <td>Retorno a la unidad</td>
+            </tr>
           </tbody>
         </table>
 
-        <h2>Relación Espacio-Tiempo</h2>
-        <p>$$V(t) = V_0 \cdot e^{-\lambda t}$$</p>
+        <h2 id="itzcuintlan">Itzcuintlan: El Umbral Canino y la Ética de la Alteridad</h2>
+        <p>
+          El Itzcuintlan, o “Lugar en el que habita el perro”, constituye la primera etapa del descenso al inframundo.
+          Es aquí donde el alma del difunto enfrenta su primera prueba de separación del mundo de los vivos: el cruce del
+          caudaloso río Apanohuacalhuia.<sup><a href="#n20">20</a></sup>
+        </p>
 
-        <section class="card" style="margin-top:16px;">
+        <div class="callout">
+          <strong>Puente simbólico:</strong> el tránsito hacia la muerte no se hace en soledad. La identidad humana requiere
+          de la alteridad animal para completarse en el proceso de desprendimiento.<sup><a href="#n24">24</a></sup>
+        </div>
+
+        <h3>El Xoloitzcuintle como mediador ontológico</h3>
+        <p>
+          El perro no es simplemente un acompañante, sino un psicopompo o guía de almas. Según el mito, el Xoloitzcuintle
+          fue creado por el dios Xólotl —el gemelo oscuro de Quetzalcóatl— a partir de una astilla del Hueso de la Vida.<sup><a href="#n5">5</a></sup>
+          La razón de su presencia en este nivel inicial radica en su capacidad para transitar entre dimensiones; el perro
+          es un ser de frontera que puede “oler” la esencia del espíritu cuando este se desprende del cuerpo.<sup><a href="#n23">23</a></sup>
+        </p>
+
+        <h3>La prueba moral</h3>
+        <p>
+          La prueba del Itzcuintlan depende estrictamente del comportamiento moral del individuo en vida hacia los canes.
+          Aquellos que maltrataron a un perro son rechazados por el animal, quedando condenados a vagar como sombras inconclusas,
+          vulnerables a Xochitonal, que devora a quienes intentan cruzar sin guía.<sup><a href="#n9">9</a></sup>
+        </p>
+        <p>
+          Por el contrario, quien fue bondadoso es reconocido por su compañero canino, quien lo carga sobre su lomo para atravesar
+          las aguas que separan lo tangible de lo espiritual.<sup><a href="#n25">25</a></sup>
+        </p>
+
+        <h3>La física del color</h3>
+        <p class="note">
+          (Existen variantes por fuente; el simbolismo del color se presenta aquí como lectura comparada.)
+        </p>
+        <ul>
+          <li><strong>Perros blancos:</strong> “limpieza” excesiva; no desean ensuciarse en el río turbio.<sup><a href="#n24">24</a></sup></li>
+          <li><strong>Perros negros:</strong> “saturados”; ya han cargado demasiadas almas.<sup><a href="#n24">24</a></sup></li>
+          <li><strong>Perros pardos/bermejos:</strong> equilibrio entre pureza y experiencia; poseen “calor” para el primer contacto con el frío del inframundo.<sup><a href="#n18">18</a></sup></li>
+        </ul>
+
+        <h2 id="tiempo">Relación Espacio-Tiempo dentro del Inframundo</h2>
+        <h3>El ciclo de los cuatro años</h3>
+        <p>
+          El viaje al Mictlán dura exactamente cuatro años.<sup><a href="#n1">1</a></sup> Este periodo se vincula al proceso biológico
+          de la putrefacción: el tiempo en que el cuerpo se reduce a huesos se sincroniza con el “lavado” ontológico de la esencia.<sup><a href="#n4">4</a></sup>
+        </p>
+        <p>
+          Esta relación puede expresarse como una función conceptual de decadencia donde la vitalidad (<span class="kbd">V</span>)
+          es inversamente proporcional al tiempo (<span class="kbd">t</span>):
+        </p>
+        <p>$$V(t) = V_0 \cdot e^{-\lambda t}$$</p>
+        <p class="note">
+          Donde $V_0$ es la carga anímica al momento de la muerte y $\lambda$ la tasa de disolución impuesta por los obstáculos de cada nivel.<sup><a href="#n6">6</a></sup>
+        </p>
+
+        <h3>Gravedad y espacio neucrio</h3>
+        <p>
+          En niveles intermedios, como Paniecatacoyan, se produce una ruptura con la gravedad: las almas flotan como banderas,
+          símbolo de pérdida de orientación vital.<sup><a href="#n9">9</a></sup> López Austin define este espacio como “neucrio”:
+          un estado donde el tiempo se detiene o se curva, permitiendo experimentar los “nueve estados de la conciencia” antes de la
+          disolución final.<sup><a href="#n7">7</a></sup>
+        </p>
+
+        <h2 id="niveles">Anatomía de la Travesía: Los Nueve Niveles del Mictlán</h2>
+        <p>
+          Cada nivel del Mictlán es una etapa de deconstrucción sistemática del ser: se arrancan memorias, pasiones y vínculos
+          terrenales hasta alcanzar el reposo absoluto.<sup><a href="#n1">1</a></sup>
+        </p>
+
+        <table aria-label="Nueve niveles del Mictlán">
+          <thead>
+            <tr>
+              <th>Orden</th>
+              <th>Nivel</th>
+              <th>Desafío ontológico</th>
+              <th>Significado metafísico</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Itzcuintlan</td>
+              <td>Cruce del río Apanohuacalhuia</td>
+              <td>Juicio de la compasión y fin de la soledad</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Tepectli Monamictlan</td>
+              <td>Montañas que chocan</td>
+              <td>Trituración del ego y la forma física</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Iztepetl</td>
+              <td>Cerro de obsidiana con pedernales</td>
+              <td>Dolor purificador y descarnamiento inicial</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Itzehecayan</td>
+              <td>Nieve y vientos cortantes</td>
+              <td>Pérdida de propiedad y del “vestido social”</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Paniecatacoyan</td>
+              <td>Flotan como banderas</td>
+              <td>Pérdida de gravedad y orientación vital</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Timiminaloayan</td>
+              <td>Sendero de flechas invisibles</td>
+              <td>Desangramiento: peso de batallas pasadas</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>Teocoyohuehualoyan</td>
+              <td>El jaguar devora el corazón</td>
+              <td>Liberación de memoria emocional e identidad</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>Izmictlan Apochcalolca</td>
+              <td>Nueve ríos de aguas negras y niebla</td>
+              <td>Ceguera sensorial y disolución de sentidos</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>Chicunamictlan</td>
+              <td>Reposo final en oscuridad total</td>
+              <td>Retorno al vacío y unión con el Todo</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="anima">El Despojo de las Entidades Anímicas</h2>
+        <p>
+          El ser mexica estaba compuesto por tres entidades anímicas: <strong>Tonalli</strong> (cabeza), <strong>Teyolía</strong> (corazón)
+          e <strong>Ihiyotl</strong> (hígado).<sup><a href="#n34">34</a></sup>
+        </p>
+        <ul>
+          <li>El <strong>Tonalli</strong> se dispersa tras la muerte, regresando al sol o permaneciendo cerca de los huesos como sombra fría.<sup><a href="#n35">35</a></sup></li>
+          <li>El <strong>Ihiyotl</strong> se exhala como último aliento cargado de pasiones; puede transformarse en “aires” que enferman a los vivos.<sup><a href="#n12">12</a></sup></li>
+          <li>El <strong>Teyolía</strong> emprende el viaje al Mictlán: contiene memoria y personalidad.<sup><a href="#n34">34</a></sup></li>
+        </ul>
+
+        <p>
+          En el nivel siete, Teocoyohuehualoyan, el jaguar devora el corazón del alma: se destruye el teyolía. Sin corazón,
+          el muerto ya no tiene deseos ni recuerdos; deja de ser “alguien” para convertirse en esencia pura.<sup><a href="#n9">9</a></sup>
+        </p>
+
+        <h2 id="final">Chicunamictlan: Objetivo Final y Estado del Ser</h2>
+        <p>
+          La culminación del viaje ocurre en el noveno nivel, Chicunamictlan (también referido como Mictlán Apochcalocan),
+          morada de oscuridad absoluta de Mictlantecuhtli y Mictecacíhuatl, un lugar sin ventanas ni salida.<sup><a href="#n2">2</a></sup>
+        </p>
+
+        <h3>¿Liberación o reposo?</h3>
+        <p>
+          El “sueño mortal” no es un paraíso: es el cese de la conciencia individual. El reposo final es la disolución:
+          ya no existe el concepto de “yo” en el Chicunamictlan.<sup><a href="#n14">14</a></sup>
+        </p>
+
+        <h3>¿Reencarnación o reciclaje?</h3>
+        <p>
+          No reencarna la persona: refluye la energía divina. La esencia purificada retorna a la “bodega” del Monte Sagrado y queda
+          disponible para nuevas creaciones —plantas, animales u hombres—.<sup><a href="#n8">8</a></sup>
+        </p>
+        <p>
+          La excepción: niños muertos que van al Chichihuacuauhco, donde aguardan para volver a nacer cuando la humanidad actual perezca y comience una nueva era.<sup><a href="#n4">4</a></sup>
+        </p>
+
+        <h2 id="conclusion">Conclusión</h2>
+        <p>
+          El sistema del Mictlán es una ingeniería metafísica: integra la finitud humana a los ciclos naturales. El Itzcuintlan recuerda la
+          interdependencia con el mundo vivo; los niveles subsiguientes refinan ontológicamente al individuo hasta el reposo absoluto.
+        </p>
+        <p>
+          El objetivo final del Mictlán es el descanso a través de la desaparición: no castigo, sino liberación de la tensión de la dualidad.
+          Morir es, en última instancia, el acto final de entrega al cosmos: un retorno al silencio primordial del que todo surgió.<sup><a href="#n1">1</a></sup>
+        </p>
+
+        <section class="card footnotes" style="margin-top:16px;">
           <h2 id="notas">Notas (marcadores)</h2>
-          <p class="note">Aquí puedes reemplazar los marcadores con bibliografía real.</p>
-          <ol style="color:var(--muted); font-size:14px; padding-left:18px;">
+          <p class="note">
+            Aquí dejé tus números como marcadores para que luego pegues la bibliografía real (López Austin, León-Portilla, Sahagún, Durán, etc.).
+          </p>
+          <ol>
             <li id="n1">[1] Fuente / nota por completar.</li>
+            <li id="n2">[2] Fuente / nota por completar.</li>
+            <li id="n4">[4] Fuente / nota por completar.</li>
+            <li id="n5">[5] Fuente / nota por completar.</li>
+            <li id="n6">[6] Fuente / nota por completar.</li>
+            <li id="n7">[7] Fuente / nota por completar.</li>
+            <li id="n8">[8] Fuente / nota por completar.</li>
+            <li id="n9">[9] Fuente / nota por completar.</li>
+            <li id="n12">[12] Fuente / nota por completar.</li>
+            <li id="n18">[18] Fuente / nota por completar.</li>
+            <li id="n20">[20] Fuente / nota por completar.</li>
+            <li id="n23">[23] Fuente / nota por completar.</li>
+            <li id="n24">[24] Fuente / nota por completar.</li>
+            <li id="n25">[25] Fuente / nota por completar.</li>
+            <li id="n34">[34] Fuente / nota por completar.</li>
+            <li id="n35">[35] Fuente / nota por completar.</li>
+            <li id="n39">[39] Fuente / nota por completar.</li>
           </ol>
         </section>
 
-        <div class="note" style="margin-top:14px; border-top:1px solid var(--line); padding-top:14px;">
-          Enlaces: <a href="https://www.xolosramirez.com/" target="_blank" rel="noopener">Xolos Ramírez</a> ·
-          <a href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener">Xolos disponibles</a>
+        <div class="footer">
+          <p>
+            Enlaces recomendados:
+            <a href="https://www.xolosramirez.com/" target="_blank" rel="noopener">Xolos Ramírez</a> ·
+            <a href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener">Xolos disponibles</a>
+          </p>
+          <p class="note">Tip: si vas a incrustar esto en tu sitio, puedes copiar solo el contenido dentro de <span class="kbd">&lt;article&gt;</span> y conservar el <span class="kbd">style</span>.</p>
         </div>
       </article>
 
+      <!-- Sidebar -->
       <aside class="card">
         <h2>Recursos Xolos Ramírez</h2>
-        <p class="note">CTAs listos para tu publicación.</p>
+        <p class="note">
+          Si este ensayo se publicará junto a contenido del Xoloitzcuintle, aquí tienes CTAs listos para tu sitio.
+        </p>
+
         <div class="btnrow">
           <a class="btn primary" href="https://www.xolosramirez.com/" target="_blank" rel="noopener">Ir a XolosRamirez.com</a>
           <a class="btn" href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener">Ver cachorros disponibles</a>
+        </div>
+
+        <h3 style="margin-top:18px;">Índice rápido</h3>
+        <ul>
+          <li><a href="#introduccion">Introducción</a></li>
+          <li><a href="#razon">Razón metafísica</a></li>
+          <li><a href="#itzcuintlan">Itzcuintlan</a></li>
+          <li><a href="#tiempo">Espacio-tiempo</a></li>
+          <li><a href="#niveles">Los 9 niveles</a></li>
+          <li><a href="#anima">Entidades anímicas</a></li>
+          <li><a href="#final">Chicunamictlan</a></li>
+          <li><a href="#conclusion">Conclusión</a></li>
+          <li><a href="#notas">Notas</a></li>
+        </ul>
+
+        <div class="callout" style="margin-top:16px;">
+          <strong>Idea para tu sitio:</strong> coloca este ensayo como “pieza cultural” y al final agrega un bloque:
+          “Conoce el Xoloitzcuintle en la vida real” → link a Xolos Ramírez.
         </div>
       </aside>
     </main>
