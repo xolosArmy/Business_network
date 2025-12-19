@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Arquitectura de la Sombra y el Retorno al Origen — Mictlán</title>
+  <meta name="description" content="Análisis ontológico de los nueve niveles del Mictlán y el papel del Itzcuintlan en la cosmovisión mexica." />
+
+  <!-- MathJax (para LaTeX) -->
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <style>
+    :root{
+      --bg:#0b0c10; --panel:#10121a; --text:#e9ecf1; --muted:#b3bac6;
+      --line:rgba(255,255,255,.10);
+      --accent:#ffd166; --accent2:#2dd4bf;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:16px; --max:980px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 900px at 20% 0%, rgba(45,212,191,.15), transparent 55%),
+                  radial-gradient(900px 700px at 85% 10%, rgba(255,209,102,.12), transparent 60%),
+                  var(--bg);
+      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      line-height:1.65;
+    }
+    a{color:var(--accent2); text-decoration:none}
+    a:hover{text-decoration:underline}
+    header{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(10px);
+      background: rgba(11,12,16,.75);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      max-width:var(--max); margin:0 auto; padding:12px 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    }
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; white-space:nowrap;}
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background:linear-gradient(135deg,var(--accent2),var(--accent));
+      box-shadow:0 0 0 6px rgba(45,212,191,.10);
+    }
+    .navlinks{display:flex; flex-wrap:wrap; gap:10px 14px; font-size:14px; color:var(--muted);}
+    .navlinks a{color:var(--muted)}
+    .navlinks a:hover{color:var(--text); text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 60px;}
+    .hero{
+      margin-top:18px;
+      background: linear-gradient(180deg, rgba(16,18,26,.85), rgba(16,18,26,.55));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:26px 22px;
+      box-shadow:var(--shadow);
+    }
+    h1{margin:0 0 8px; font-size:clamp(26px,3.2vw,42px); line-height:1.15; letter-spacing:-.5px;}
+    .subtitle{margin:0; color:var(--muted); font-size:15px; max-width:70ch;}
+    .meta{margin-top:14px; display:flex; flex-wrap:wrap; gap:8px; color:var(--muted); font-size:13px;}
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid var(--line); border-radius:999px; background:rgba(255,255,255,.03);}
+    main{margin-top:18px; display:grid; grid-template-columns:1fr; gap:18px;}
+    @media (min-width:900px){ main{grid-template-columns:1.6fr .8fr; align-items:start;} }
+    .card{
+      background:rgba(16,18,26,.70);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+    h2{margin:0 0 10px; font-size:22px;}
+    h3{margin:18px 0 8px; font-size:18px;}
+    p{margin:10px 0;}
+    .note{font-size:13px; color:var(--muted);}
+    .callout{
+      border-left:3px solid var(--accent2);
+      padding:12px 14px;
+      background:rgba(45,212,191,.08);
+      border-radius:12px;
+      margin:14px 0;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:12px 0 6px;
+      border-radius:12px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.12);
+    }
+    th,td{padding:10px; border-bottom:1px solid var(--line); vertical-align:top; font-size:14px;}
+    th{background:rgba(255,255,255,.03); font-weight:700; text-align:left;}
+    tr:last-child td{border-bottom:0}
+    .btnrow{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:10px 12px; border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text); font-weight:650; font-size:14px;
+      text-decoration:none;
+    }
+    .btn:hover{background:rgba(255,255,255,.07); text-decoration:none;}
+    .btn.primary{border-color:rgba(45,212,191,.35); background:rgba(45,212,191,.10);}
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      font-size:12px; padding:2px 6px; border:1px solid var(--line); border-radius:8px; background:rgba(0,0,0,.25); color:var(--muted);
+    }
+    .audio{
+      display:grid; gap:10px;
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background: rgba(0,0,0,.18);
+      margin-top:14px;
+    }
+    audio{width:100%;}
+    .audioTitle{font-weight:750;}
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand"><span class="dot"></span><span>Ensayo — Mictlán</span></div>
+      <nav class="navlinks" aria-label="Enlaces">
+        <a href="https://www.xolosramirez.com/" target="_blank" rel="noopener">Xolos Ramírez</a>
+        <a href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener">Xolos disponibles</a>
+        <a href="https://www.xolosramirez.com/" target="_blank" rel="noopener">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="hero">
+      <h1>Arquitectura de la Sombra y el Retorno al Origen</h1>
+      <p class="subtitle">
+        Un análisis ontológico de los nueve niveles del Mictlán y la disolución del ser en la cosmovisión mexica,
+        con énfasis en el <strong>Itzcuintlan</strong> como umbral canino.
+      </p>
+      <div class="meta">
+        <span class="pill">Tema: Mictlán · Ontología · Cosmovisión mexica</span>
+        <span class="pill">Eje: Itzcuintlan · Xoloitzcuintle</span>
+        <span class="pill">Formato: Artículo + Audio</span>
+      </div>
+
+      <div class="btnrow">
+        <a class="btn primary" href="https://www.xolosramirez.com/" target="_blank" rel="noopener">Conoce Xolos Ramírez</a>
+        <a class="btn" href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener">Ver Xolos disponibles</a>
+        <a class="btn" href="#niveles">Ir a los 9 niveles</a>
+      </div>
+
+      <!-- AUDIO (pon el MP3 junto a este HTML o cambia el src a una URL) -->
+      <div class="audio" role="region" aria-label="Reproductor de audio">
+        <div class="audioTitle">🎧 Audio: “El Mictlán no es el Infierno — reciclaje cósmico”</div>
+        <div class="note">Tip: si lo subes a tu web, cambia el <span class="kbd">src</span> por la ruta real (ej. <span class="kbd">/audio/mictlan.mp3</span>).</div>
+        <audio controls preload="metadata">
+          <source src="El Mictlán no es el Infierno es reciclaje cósmico.mp3" type="audio/mpeg" />
+          Tu navegador no soporta audio HTML5.
+        </audio>
+        <div class="btnrow" style="margin-top:6px;">
+          <a class="btn" href="El Mictlán no es el Infierno es reciclaje cósmico.mp3" download>Descargar MP3</a>
+          <a class="btn" href="https://www.xolosramirez.com/" target="_blank" rel="noopener">Xolos Ramírez</a>
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <article class="card">
+        <h2 id="introduccion">Introducción</h2>
+        <p>
+          La comprensión del fenómeno de la muerte en el México antiguo exige un desprendimiento de las categorías
+          judeocristianas de salvación y condena. El Mictlán, el “Lugar de los Muertos”, no debe ser interpretado
+          como un infierno, sino como una región de transformación necesaria y reciclaje cósmico dentro de una
+          estructura universal regida por la dualidad y el equilibrio de fuerzas opuestas.<sup><a href="#n1">1</a></sup>
+        </p>
+        <p>
+          Para los mexicas, la vida y la muerte no eran estados antagónicos, sino fases complementarias de un ciclo
+          interminable en el que la materia y la esencia anímica se purifican para reintegrarse al flujo vital del
+          universo.<sup><a href="#n1">1</a></sup>
+        </p>
+
+        <h2 id="niveles">Anatomía de la Travesía: Los Nueve Niveles del Mictlán</h2>
+        <table aria-label="Nueve niveles del Mictlán">
+          <thead>
+            <tr>
+              <th>Orden</th><th>Nivel</th><th>Desafío ontológico</th><th>Significado metafísico</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Itzcuintlan</td><td>Cruce del río Apanohuacalhuia</td><td>Juicio de la compasión y fin de la soledad</td></tr>
+            <tr><td>2</td><td>Tepectli Monamictlan</td><td>Montañas que chocan</td><td>Trituración del ego y la forma física</td></tr>
+            <tr><td>3</td><td>Iztepetl</td><td>Cerro de obsidiana con pedernales</td><td>Dolor purificador y descarnamiento inicial</td></tr>
+            <tr><td>4</td><td>Itzehecayan</td><td>Nieve y vientos cortantes</td><td>Pérdida de propiedad y del “vestido social”</td></tr>
+            <tr><td>5</td><td>Paniecatacoyan</td><td>Flotan como banderas</td><td>Pérdida de gravedad y orientación vital</td></tr>
+            <tr><td>6</td><td>Timiminaloayan</td><td>Sendero de flechas invisibles</td><td>Desangramiento: peso de batallas pasadas</td></tr>
+            <tr><td>7</td><td>Teocoyohuehualoyan</td><td>El jaguar devora el corazón</td><td>Liberación de memoria emocional e identidad</td></tr>
+            <tr><td>8</td><td>Izmictlan Apochcalolca</td><td>Nueve ríos de aguas negras y niebla</td><td>Ceguera sensorial y disolución de sentidos</td></tr>
+            <tr><td>9</td><td>Chicunamictlan</td><td>Reposo final en oscuridad total</td><td>Retorno al vacío y unión con el Todo</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Relación Espacio-Tiempo</h2>
+        <p>$$V(t) = V_0 \cdot e^{-\lambda t}$$</p>
+
+        <section class="card" style="margin-top:16px;">
+          <h2 id="notas">Notas (marcadores)</h2>
+          <p class="note">Aquí puedes reemplazar los marcadores con bibliografía real.</p>
+          <ol style="color:var(--muted); font-size:14px; padding-left:18px;">
+            <li id="n1">[1] Fuente / nota por completar.</li>
+          </ol>
+        </section>
+
+        <div class="note" style="margin-top:14px; border-top:1px solid var(--line); padding-top:14px;">
+          Enlaces: <a href="https://www.xolosramirez.com/" target="_blank" rel="noopener">Xolos Ramírez</a> ·
+          <a href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener">Xolos disponibles</a>
+        </div>
+      </article>
+
+      <aside class="card">
+        <h2>Recursos Xolos Ramírez</h2>
+        <p class="note">CTAs listos para tu publicación.</p>
+        <div class="btnrow">
+          <a class="btn primary" href="https://www.xolosramirez.com/" target="_blank" rel="noopener">Ir a XolosRamirez.com</a>
+          <a class="btn" href="https://www.xolosramirez.com/xolos-disponibles/" target="_blank" rel="noopener">Ver cachorros disponibles</a>
+        </div>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>
