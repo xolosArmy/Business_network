@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RMZWallet Tonalli y xolosArmy Network — Soberanía Digital y Fusión Cultural</title>
+  <meta name="description" content="Análisis técnico y estratégico de la RMZWallet Tonalli y el ecosistema xolosArmy Network: arquitectura, Chronik, Agora DEX, seguridad no custodial y token RMZ (ALP/eTokens)." />
+
+  <style>
+    :root{
+      --bg:#070A0F;
+      --panel:#0B1220;
+      --panel2:#0E1A2F;
+      --text:#E6EEF8;
+      --muted:#A7B7CC;
+      --line:rgba(255,255,255,.10);
+      --teal:#30D6C8;
+      --amber:#FF9F2A;
+      --gold:#F3D27A;
+      --danger:#FF4D4D;
+      --shadow:0 18px 40px rgba(0,0,0,.45);
+      --radius:18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:var(--sans);
+      background:
+        radial-gradient(900px 500px at 20% -10%, rgba(48,214,200,.18), transparent 70%),
+        radial-gradient(900px 500px at 90% 10%, rgba(255,159,42,.16), transparent 65%),
+        radial-gradient(700px 500px at 60% 120%, rgba(243,210,122,.10), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    a{color:var(--teal); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1120px; margin:0 auto; padding:28px 18px 90px;}
+    .topbar{
+      display:flex; gap:12px; align-items:center; justify-content:space-between;
+      padding:12px 14px; border:1px solid var(--line); border-radius:999px;
+      background:rgba(11,18,32,.55); backdrop-filter: blur(10px);
+    }
+    .brand{
+      display:flex; gap:10px; align-items:center; min-width:0;
+    }
+    .sigil{
+      width:34px; height:34px; border-radius:12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(48,214,200,.85), rgba(48,214,200,.15) 55%, transparent 70%),
+        radial-gradient(circle at 70% 70%, rgba(255,159,42,.75), rgba(255,159,42,.10) 60%, transparent 70%),
+        linear-gradient(135deg, rgba(255,255,255,.14), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    .brand h1{
+      font-size:14px; margin:0; letter-spacing:.2px; font-weight:700;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .brand span{display:block; font-size:12px; color:var(--muted)}
+    .chips{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; align-items:center}
+    .chip{
+      font-size:12px; padding:8px 10px; border-radius:999px;
+      border:1px solid var(--line); color:var(--muted);
+      background:rgba(14,26,47,.65);
+    }
+
+    /* --- Translate UI --- */
+    .translateWrap{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    }
+    .translateBtn{
+      cursor:pointer;
+      font-size:12px; padding:8px 10px; border-radius:999px;
+      border:1px solid rgba(48,214,200,.25);
+      color:rgba(230,238,248,.92);
+      background:linear-gradient(135deg, rgba(48,214,200,.16), rgba(255,159,42,.10));
+    }
+    .translateBtn:hover{filter:brightness(1.05)}
+    /* Google translate element tends to inject inline styles; keep it tidy */
+    #google_translate_element{
+      display:inline-flex; align-items:center;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(14,26,47,.55);
+    }
+    /* Hide the "powered by" clutter (best-effort; Google may change classes) */
+    .goog-logo-link, .goog-te-gadget span { display:none !important; }
+    .goog-te-gadget { color:transparent !important; font-size:0 !important; }
+    .goog-te-combo{
+      font-size:12px !important;
+      padding:6px 10px !important;
+      border-radius:10px !important;
+      border:1px solid rgba(255,255,255,.14) !important;
+      background:rgba(0,0,0,.22) !important;
+      color:rgba(230,238,248,.92) !important;
+      outline:none !important;
+    }
+
+    header.hero{
+      margin-top:18px;
+      padding:26px 22px;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(11,18,32,.82), rgba(11,18,32,.60)),
+        radial-gradient(800px 420px at 18% 35%, rgba(48,214,200,.18), transparent 55%),
+        radial-gradient(700px 420px at 82% 22%, rgba(255,159,42,.16), transparent 55%);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    header.hero:after{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        linear-gradient(90deg, rgba(48,214,200,.0), rgba(48,214,200,.16), rgba(255,159,42,.18), rgba(48,214,200,.0));
+      opacity:.22;
+      filter: blur(18px);
+      pointer-events:none;
+    }
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      font-size:12px; letter-spacing:.18em; text-transform:uppercase;
+      color:rgba(243,210,122,.92);
+    }
+    .dot{
+      width:8px; height:8px; border-radius:50%;
+      background:var(--amber);
+      box-shadow: 0 0 0 3px rgba(255,159,42,.18);
+    }
+    header.hero h2{
+      margin:10px 0 8px;
+      font-size:30px; line-height:1.2;
+      letter-spacing:.2px;
+      position:relative; z-index:1;
+    }
+    header.hero p{
+      margin:0;
+      color:var(--muted);
+      max-width:82ch;
+      position:relative; z-index:1;
+    }
+    .ctaRow{
+      margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;
+      position:relative; z-index:1;
+    }
+    .btn{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(14,26,47,.7);
+      color:var(--text);
+      font-size:13px;
+    }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(48,214,200,.20), rgba(255,159,42,.16));
+      border-color: rgba(48,214,200,.22);
+    }
+    .btn .ico{font-family:var(--mono); font-size:12px; opacity:.85}
+
+    .grid{
+      display:grid; gap:18px;
+      grid-template-columns: 1fr;
+      margin-top:18px;
+    }
+    @media (min-width: 980px){
+      .grid{grid-template-columns: 340px 1fr;}
+      .sticky{position:sticky; top:18px; align-self:start;}
+    }
+
+    .card{
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:rgba(11,18,32,.65);
+      box-shadow: 0 14px 34px rgba(0,0,0,.35);
+    }
+    .toc{
+      padding:16px 16px 14px;
+    }
+    .toc h3{margin:0 0 10px; font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+    .toc a{
+      display:block; padding:10px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+      color:var(--text);
+      font-size:13px;
+    }
+    .toc a:hover{
+      border-color:rgba(48,214,200,.20);
+      background:rgba(14,26,47,.55);
+      text-decoration:none;
+    }
+    .toc .sub{margin-left:10px; opacity:.92}
+
+    article{
+      padding:20px 18px 18px;
+    }
+    article h3{
+      margin:26px 0 10px;
+      font-size:20px;
+      letter-spacing:.2px;
+    }
+    article h4{
+      margin:16px 0 8px;
+      font-size:16px;
+      color:rgba(230,238,248,.95);
+    }
+    article p{margin:0 0 12px; color:rgba(230,238,248,.92)}
+    article .muted{color:var(--muted)}
+    hr.sep{
+      border:0; height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent);
+      margin:18px 0;
+    }
+
+    .callout{
+      border-radius:16px;
+      border:1px solid rgba(48,214,200,.22);
+      background:linear-gradient(180deg, rgba(48,214,200,.08), rgba(14,26,47,.50));
+      padding:14px 14px 12px;
+      margin:14px 0;
+    }
+    .callout strong{color:rgba(48,214,200,.92)}
+    .callout.warn{
+      border-color:rgba(255,159,42,.30);
+      background:linear-gradient(180deg, rgba(255,159,42,.10), rgba(14,26,47,.52));
+    }
+    .callout.warn strong{color:rgba(255,159,42,.95)}
+    .kbd{
+      font-family:var(--mono);
+      background:rgba(0,0,0,.25);
+      border:1px solid rgba(255,255,255,.12);
+      padding:2px 6px;
+      border-radius:8px;
+      font-size:12px;
+    }
+
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      margin:12px 0 18px;
+      overflow:hidden;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(14,26,47,.42);
+    }
+    th, td{
+      padding:12px 12px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      vertical-align:top;
+      font-size:13px;
+    }
+    th{
+      text-align:left;
+      color:rgba(243,210,122,.92);
+      font-weight:700;
+      letter-spacing:.02em;
+      background:rgba(11,18,32,.55);
+    }
+    tr:last-child td{border-bottom:0}
+
+    /* --- Promo Banner --- */
+    .promo{
+      margin:14px 0 18px;
+      border-radius:18px;
+      border:1px solid rgba(48,214,200,.22);
+      background:
+        radial-gradient(900px 380px at 15% 30%, rgba(48,214,200,.16), transparent 60%),
+        radial-gradient(900px 380px at 85% 30%, rgba(255,159,42,.14), transparent 60%),
+        linear-gradient(180deg, rgba(14,26,47,.60), rgba(11,18,32,.65));
+      box-shadow: 0 18px 38px rgba(0,0,0,.40);
+      overflow:hidden;
+      position:relative;
+    }
+    .promo::after{
+      content:"";
+      position:absolute; inset:-2px;
+      background: linear-gradient(90deg, rgba(48,214,200,.0), rgba(48,214,200,.14), rgba(255,159,42,.16), rgba(48,214,200,.0));
+      opacity:.24;
+      filter: blur(18px);
+      pointer-events:none;
+    }
+    .promoInner{
+      position:relative; z-index:1;
+      padding:16px 16px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+    }
+    @media (min-width: 780px){
+      .promoInner{grid-template-columns: 1.2fr .8fr; align-items:center;}
+    }
+    .promoTitle{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+      margin-bottom:6px;
+    }
+    .promoBadge{
+      font-family:var(--mono);
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(243,210,122,.18);
+      background:rgba(0,0,0,.22);
+      color:rgba(243,210,122,.92);
+    }
+    .promoTitle h4{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.2px;
+    }
+    .promo p{margin:0 0 10px; color:rgba(230,238,248,.92)}
+    .promoList{
+      margin:10px 0 0;
+      padding-left:18px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .promoActions{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-start;}
+    .promoCard{
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.22);
+      padding:12px 12px;
+    }
+    .promoCard small{display:block; color:var(--muted); margin-top:6px}
+    .qr{
+      width:100%;
+      border-radius:14px;
+      border:1px dashed rgba(255,255,255,.16);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      padding:14px;
+      text-align:center;
+      color:rgba(230,238,248,.88);
+      font-family:var(--mono);
+      font-size:12px;
+    }
+
+    .footnotes{
+      padding:14px 14px 10px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(14,26,47,.45);
+    }
+    .footnotes h4{margin:0 0 8px}
+    .footnotes ol{margin:0; padding-left:18px}
+    .footnotes li{margin:8px 0; color:var(--muted); font-size:13px}
+
+    .footer{
+      margin-top:20px;
+      display:flex; gap:12px; flex-wrap:wrap; justify-content:space-between; align-items:center;
+      padding:14px 16px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:rgba(11,18,32,.55);
+    }
+    .footer small{color:var(--muted)}
+    .pill{
+      font-family:var(--mono);
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.22);
+      color:rgba(230,238,248,.92);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="topbar">
+      <div class="brand">
+        <div class="sigil" aria-hidden="true"></div>
+        <div>
+          <h1>xolosArmy Network · Research</h1>
+          <span>RMZWallet Tonalli · DeFi · Cultura · Soberanía Digital</span>
+        </div>
+      </div>
+
+      <div class="translateWrap">
+        <button class="translateBtn" type="button" onclick="translateToEnglish()">
+          Translate to English
+        </button>
+        <div id="google_translate_element" aria-label="Selector de idioma"></div>
+      </div>
+
+      <div class="chips" aria-label="Etiquetas">
+        <div class="chip">React + WASM</div>
+        <div class="chip">Chronik</div>
+        <div class="chip">Agora (DEX)</div>
+        <div class="chip">ALP / eTokens</div>
+      </div>
+    </div>
+
+    <header class="hero">
+      <div class="kicker"><span class="dot" aria-hidden="true"></span>Reporte técnico-estratégico</div>
+      <h2>Análisis Técnico y Estratégico de la RMZWallet Tonalli y el Ecosistema xolosArmy Network: Soberanía Digital y Fusión Cultural en la Era de la Post-Consenso</h2>
+      <p>
+        La RMZWallet Tonalli funciona como núcleo operativo de una visión “Network State”: infraestructura soberana sobre eCash (XEC),
+        con indexación en tiempo real (Chronik), un DEX no custodial (Agora) y una identidad visual “Cyber-aztec”.
+      </p>
+      <div class="ctaRow">
+        <a class="btn primary" href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener">
+          <span class="ico">↗</span> Abrir Tonalli (PWA)
+        </a>
+        <a class="btn" href="https://xolosarmy.xyz" target="_blank" rel="noopener">
+          <span class="ico">↗</span> xolosarmy.xyz
+        </a>
+        <a class="btn" href="https://www.xolosramirez.com" target="_blank" rel="noopener">
+          <span class="ico">↗</span> XolosRamírez.com
+        </a>
+      </div>
+    </header>
+
+    <div class="grid">
+      <aside class="card toc sticky">
+        <h3>Contenido</h3>
+        <a href="#intro">1. Contexto y tesis</a>
+        <a href="#arquitectura">2. Fundamentos arquitectónicos</a>
+        <a class="sub" href="#wasm">2.1 WASM + ecash-lib</a>
+        <a class="sub" href="#chronik">2.2 Chronik</a>
+        <a href="#dex">3. DEX (Fase 1) + Agora</a>
+        <a href="#ecash">4. eCash (XEC) como capa de liquidación</a>
+        <a class="sub" href="#avalanche">4.1 Nakamoto + Avalanche</a>
+        <a href="#seguridad">5. “Templo Seguro”: custodia soberana</a>
+        <a class="sub" href="#cashfusion">5.1 Privacidad y CashFusion</a>
+        <a href="#rmz">6. Token RMZ (ALP/eTokens) y economía</a>
+        <a href="#ux">7. UX + estética Cyber-aztec + PWA</a>
+        <a href="#datos">8. Infraestructura de datos y escalabilidad</a>
+        <a href="#estado-red">9. Estado-Red: herramientas y propósito</a>
+        <a href="#conclusiones">10. Conclusiones</a>
+        <a href="#referencias">Referencias</a>
+      </aside>
+
+      <main class="card">
+        <article>
+
+          <!-- ✅ Banner promocional Tonalli -->
+          <section class="promo" aria-label="Banner promocional RMZWallet Tonalli">
+            <div class="promoInner">
+              <div>
+                <div class="promoTitle">
+                  <span class="promoBadge">RMZWallet · Tonalli</span>
+                  <h4>Tu billetera soberana Cyber-aztec sobre eCash (XEC)</h4>
+                </div>
+                <p>
+                  Instálala como <strong>PWA</strong>, opera <strong>XEC + $RMZ (ALP/eTokens)</strong>, usa <strong>Chronik</strong> para lectura en tiempo real
+                  y accede al <strong>DEX (Agora)</strong> no custodial.
+                </p>
+                <ul class="promoList">
+                  <li><strong>No custodial:</strong> tu semilla permanece local y cifrada.</li>
+                  <li><strong>UX rápida:</strong> historial/UTXOs con Chronik + actualizaciones en vivo.</li>
+                  <li><strong>DEX Phase 1:</strong> maker/taker con Offer ID (swaps atómicos).</li>
+                </ul>
+                <div class="promoActions" style="margin-top:12px;">
+                  <a class="btn primary" href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener">
+                    <span class="ico">↗</span> Abrir Tonalli
+                  </a>
+                  <a class="btn" href="https://xolosarmy.xyz" target="_blank" rel="noopener">
+                    <span class="ico">↗</span> Conocer xolosArmy
+                  </a>
+                </div>
+              </div>
+
+              <div class="promoCard">
+                <div class="qr">
+                  QR Placeholder<br/>
+                  (opcional: reemplaza esto por una imagen)<br/>
+                  <span style="opacity:.75">cartera.xolosarmy.xyz</span>
+                </div>
+                <small>
+                  Tip: si agregas una imagen real, usa un <span class="kbd">.png</span> 900×900 y limita el peso para cargar rápido.
+                </small>
+              </div>
+            </div>
+          </section>
+
+          <section id="intro">
+            <h3>1) Contexto y tesis</h3>
+            <p>
+              La evolución de las finanzas descentralizadas (DeFi) ha trascendido la transferencia de valor para integrarse en estructuras sociopolíticas y culturales.
+              En ese marco, el ecosistema <strong>xolosArmy Network</strong> se presenta como un proyecto de infraestructura y narrativa:
+              eficiencia técnica sobre <strong>eCash (XEC)</strong> + cohesión simbólica bajo un imaginario de <strong>“Network State”</strong>.
+            </p>
+            <p class="muted">
+              Este reporte sintetiza la arquitectura de <strong>RMZWallet Tonalli</strong>, su DEX (Fase 1) con <strong>Agora</strong>,
+              el modelo de seguridad “Templo Seguro” y la viabilidad del token <strong>$RMZ</strong> como motor de utilidad interna.
+            </p>
+
+            <div class="callout">
+              <strong>Idea central:</strong> Tonalli no es “una wallet más”; es el <em>front-end soberano</em> del Estado-Red:
+              custodia local, indexación en tiempo real y herramientas de intercambio sin intermediarios.
+            </div>
+          </section>
+
+          <hr class="sep" />
+
+          <section id="arquitectura">
+            <h3>2) Fundamentos arquitectónicos: React, ecash-lib y el rol de WebAssembly</h3>
+            <p>
+              Tonalli se concibe como herramienta de ingeniería financiera orientada a alta disponibilidad y operación cotidiana.
+              La UI en <strong>React</strong> permite modularidad, estados reactivos y una experiencia fluida.
+              El núcleo operativo se apoya en librerías del ecosistema eCash (p. ej. <span class="kbd">ecash-lib</span> / <span class="kbd">ecash-wallet</span>)
+              para gestionar UTXOs, construcción/firmado de transacciones y compatibilidad con eTokens.
+            </p>
+
+            <section id="wasm">
+              <h4>2.1 Optimización con WebAssembly (WASM)</h4>
+              <p>
+                El soporte para bundles WASM indica madurez de performance: funciones criptográficas intensivas (p. ej. secp256k1 y cifrado local)
+                pueden ejecutarse cerca de velocidades nativas, reduciendo fricción en firma y protección de datos sin abandonar el navegador.
+              </p>
+
+              <table aria-label="Componentes técnicos principales">
+                <thead>
+                  <tr>
+                    <th>Componente Técnico</th>
+                    <th>Descripción de la Implementación</th>
+                    <th>Impacto en el Usuario</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Framework UI</strong></td>
+                    <td>React (arquitectura por componentes)</td>
+                    <td>Interfaz fluida y actualización en tiempo real</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Librerías core</strong></td>
+                    <td>SDKs eCash (TypeScript + opcional WASM)</td>
+                    <td>Gestión eficiente de UTXOs y operaciones cripto</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Motor de ejecución</strong></td>
+                    <td>WebAssembly (WASM)</td>
+                    <td>Firmas/cifrado más rápidos en navegador</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Indexador</strong></td>
+                    <td>Chronik client (HTTP + WebSocket)</td>
+                    <td>Sincronización acelerada, “push” en tiempo real</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section id="chronik">
+              <h4>2.2 La importancia del cliente Chronik</h4>
+              <p>
+                Chronik es un indexador de alta velocidad integrado al nodo, diseñado para consultas rápidas del historial de direcciones,
+                UTXOs y eventos on-chain. Para Tonalli, esto se traduce en experiencia “en vivo”: al llegar una transacción,
+                el backend puede empujar eventos vía WebSocket, reduciendo latencia y evitando <em>polling</em> constante.
+              </p>
+
+              <div class="callout warn">
+                <strong>Nota operativa:</strong> La calidad del UX (tiempos de carga, “instant updates”, fiabilidad del historial)
+                depende directamente de la salud del nodo Chronik (recursos, disco, red, mantenimiento).
+              </div>
+            </section>
+          </section>
+
+          <hr class="sep" />
+
+          <section id="dex">
+            <h3>3) Integración del DEX (Fase 1) y el protocolo Agora: intercambio atómico no custodial</h3>
+            <p>
+              La “joya de la corona” de la actualización es el DEX (Fase 1) basado en <strong>Agora</strong>, que permite swaps no custodiales de <strong>RMZ ↔ XEC</strong>.
+              A diferencia de AMMs con <em>liquidity pools</em>, el modelo de ofertas (maker/taker) busca minimizar riesgo de contrato y riesgo de contraparte.
+            </p>
+
+            <h4>Mecánica Maker / Taker</h4>
+            <p>
+              <strong>Maker (vendedor):</strong> crea una oferta de venta de RMZ y genera un <em>Offer ID</em>. Los fondos permanecen bajo su control hasta completarse la operación.
+              <br/>
+              <strong>Taker (comprador):</strong> pega el Offer ID, aporta los XEC requeridos y completa el intercambio. La operación es atómica: ocurre completa o no ocurre.
+            </p>
+
+            <div class="callout">
+              <strong>Resultado:</strong> Intercambio resistente a censura (sin motor de matching central) y con menor dependencia de terceros.
+            </div>
+          </section>
+
+          <hr class="sep" />
+
+          <section id="ecash">
+            <h3>4) eCash (XEC) como capa de liquidación</h3>
+            <p>
+              Tonalli opera sobre eCash, una red PoW (SHA-256) que incorpora una capa de consenso basada en Avalanche para acelerar finalización
+              y reducir riesgo de reorganizaciones profundas. A nivel de unidades, eCash utiliza “bits” (2 decimales) para hacer montos más intuitivos.
+            </p>
+
+            <section id="avalanche">
+              <h4>4.1 Consenso híbrido: Nakamoto + Avalanche</h4>
+              <p>
+                El enfoque híbrido habilita dos mejoras prácticas para pagos y UX: finalización rápida (en segundos, bajo las condiciones del protocolo)
+                y mayor resistencia a ataques tipo 51% una vez que bloques/conflictos son finalizados por la capa Avalanche.
+              </p>
+
+              <table aria-label="Atributos de red e implicaciones">
+                <thead>
+                  <tr>
+                    <th>Atributo</th>
+                    <th>Especificación (alto nivel)</th>
+                    <th>Implicación para Tonalli</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Unidad principal</strong></td>
+                    <td>Bits (2 decimales)</td>
+                    <td>Precios/montos más legibles en UX</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Modelo</strong></td>
+                    <td>UTXO + PoW (SHA-256)</td>
+                    <td>Composición atómica, scripts, ofertas</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Finalidad</strong></td>
+                    <td>Capa Avalanche (post / pre-consenso)</td>
+                    <td>Menor incertidumbre para pagos rápidos</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Supply (tope)</strong></td>
+                    <td>21T XEC (alto nivel)</td>
+                    <td>Mayor granularidad de unidades y “micro-fees”</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+          </section>
+
+          <hr class="sep" />
+
+          <section id="seguridad">
+            <h3>5) “Templo Seguro”: paradigma de custodia soberana</h3>
+            <p>
+              Tonalli se alinea con un principio fuerte: <strong>no custodial</strong>. La semilla no se transmite a servidores;
+              se protege localmente mediante cifrado y prácticas de “fricción positiva” para respaldo.
+            </p>
+
+            <h4>Cifrado local y verificación de semilla</h4>
+            <p>
+              La semilla (12/24 palabras) se almacena cifrada (p. ej. AES) en el dispositivo, y se desbloquea con un factor de conocimiento (PIN/contraseña).
+              El onboarding fuerza verificación de palabras para asegurar que exista respaldo físico antes de operar con valor real.
+            </p>
+
+            <section id="cashfusion">
+              <h4>5.1 Privacidad y CashFusion</h4>
+              <p>
+                Aunque la red es pública, el ecosistema eCash/BCH soporta <strong>CashFusion</strong>, un esquema de coinjoin para mejorar privacidad y dificultar trazabilidad.
+                En una visión de Estado-Red, la privacidad financiera funciona como un pilar de soberanía operativa.
+              </p>
+            </section>
+          </section>
+
+          <hr class="sep" />
+
+          <section id="rmz">
+            <h3>6) Token RMZ (ALP / eTokens): utilidad y economía interna</h3>
+            <p>
+              <strong>$RMZ</strong> es un eToken del ecosistema (ALP) orientado a utilidad: gobernanza, acceso a contenido/NFTs y uso como “tasa simbólica”
+              en herramientas como crowdfunding (p. ej., Flipstarter del proyecto) para mitigar spam y elevar compromiso.
+            </p>
+
+            <h4>Tarifa de Servicio Tonalli y sostenibilidad</h4>
+            <p>
+              El modelo incluye una <strong>Tarifa de Servicio Tonalli</strong> (p. ej., 55 XEC por operación desde la UI),
+              encaminada a sostener infraestructura (nodo/Chronik, mantenimiento, soporte y desarrollo) con micro-monetización.
+            </p>
+
+            <div class="callout warn">
+              <strong>Recomendación estratégica:</strong> Publicar de forma transparente (y auditable) la política de tarifas:
+              qué acciones la aplican, a qué dirección se envía, y un tablero de uso de tesorería.
+            </div>
+          </section>
+
+          <hr class="sep" />
+
+          <section id="ux">
+            <h3>7) UX + identidad “Cyber-aztec” + despliegue como PWA</h3>
+            <p>
+              La estética “Cyber-aztec” no es solo diseño: funciona como capa de identidad y alineación cultural.
+              Tonalli como PWA permite instalación sin tiendas centralizadas, mejorando resistencia a censura y accesibilidad multiplataforma.
+            </p>
+
+            <h4>Escáner QR y cálculo dinámico de comisiones</h4>
+            <p>
+              Un escáner QR integrado reduce errores de copiado/pegado y acelera pagos.
+              El cálculo dinámico de comisiones estima la tarifa de red según tamaño de transacción, manteniendo la experiencia “micro-fees”.
+            </p>
+          </section>
+
+          <hr class="sep" />
+
+          <section id="datos">
+            <h3>8) Infraestructura de datos y escalabilidad</h3>
+            <p>
+              En sistemas UTXO, los indexadores son críticos para UX. Chronik reduce fricción de lectura (historial/UTXOs)
+              y habilita experiencias “en vivo” vía WebSockets.
+            </p>
+
+            <div class="callout">
+              <strong>Sobre escalabilidad:</strong> eCash comunica un objetivo de largo plazo de millones de transacciones por segundo.
+              Conviene presentarlo como <em>target de roadmap</em>, no como fecha garantizada, y acompañarlo con enlaces a materiales oficiales.
+            </div>
+          </section>
+
+          <hr class="sep" />
+
+          <section id="estado-red">
+            <h3>9) El ecosistema xolosArmy: más allá de la billetera</h3>
+            <p>
+              Tonalli es puerta de entrada a un sistema mayor: DAO, DEX, crowdfunding y mensajería pública (p. ej. OP_RETURN) para anclar memoria cultural y coordinación.
+            </p>
+
+            <table aria-label="Herramientas del ecosistema y su propósito">
+              <thead>
+                <tr>
+                  <th>Herramienta</th>
+                  <th>Propósito técnico / social</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>RMZWallet Tonalli</strong></td>
+                  <td>Custodia soberana + acceso a servicios DeFi y pagos</td>
+                </tr>
+                <tr>
+                  <td><strong>RMZ DAO</strong></td>
+                  <td>Gobernanza comunitaria, propuestas y votación</td>
+                </tr>
+                <tr>
+                  <td><strong>Agora DEX</strong></td>
+                  <td>Intercambio de tokens sin intermediarios</td>
+                </tr>
+                <tr>
+                  <td><strong>RMZ Flipstarter</strong></td>
+                  <td>Crowdfunding para proyectos culturales/técnicos</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <hr class="sep" />
+
+          <section id="conclusiones">
+            <h3>10) Conclusiones técnicas y perspectivas</h3>
+            <p>
+              RMZWallet Tonalli se posiciona como un núcleo soberano: UI moderna (React), performance (WASM donde aplique),
+              lectura rápida (Chronik) y capacidades DeFi iniciales (Agora DEX).
+              El “Templo Seguro” enfatiza custodia local, mientras la tarifa de servicio sugiere un camino hacia autosostenibilidad.
+            </p>
+            <p class="muted">
+              El éxito del ecosistema dependerá de atraer usuarios que valoren simultáneamente eficiencia técnica y identidad cultural,
+              sosteniendo infraestructura robusta (nodos/Chronik) y gobernanza clara (DAO, tesorería, políticas de tarifas).
+            </p>
+          </section>
+
+          <hr class="sep" />
+
+          <section id="referencias" class="footnotes">
+            <h4>Referencias (enlaces externos)</h4>
+            <ol>
+              <li><a href="https://www.bitcoinabc.org/bcha/" target="_blank" rel="noopener">bitcoinabc.org/bcha</a></li>
+              <li><a href="https://e.cash/" target="_blank" rel="noopener">e.cash</a></li>
+              <li><a href="https://cashtab.com/" target="_blank" rel="noopener">cashtab.com</a></li>
+            </ol>
+          </section>
+
+        </article>
+      </main>
+    </div>
+
+    <div class="footer">
+      <small>© xolosArmy Network · Documento editorial listo para blog (HTML/CSS).</small>
+      <span class="pill">Cyber-aztec · Dark UI · Responsive</span>
+    </div>
+
+  </div>
+
+  <!-- Google Translate (inline) -->
+  <script>
+    // Best-effort: selects English in the injected Google Translate combo
+    function translateToEnglish(){
+      // If the dropdown exists, set it to 'en' and trigger change
+      var combo = document.querySelector('.goog-te-combo');
+      if (combo) {
+        combo.value = 'en';
+        combo.dispatchEvent(new Event('change'));
+        return;
+      }
+      // If not ready yet, try again shortly
+      setTimeout(translateToEnglish, 350);
+    }
+
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+        {
+          pageLanguage: 'es',
+          includedLanguages: 'en,es',
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          autoDisplay: false
+        },
+        'google_translate_element'
+      );
+    }
+  </script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
