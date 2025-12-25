@@ -487,17 +487,17 @@
 <body>
   <canvas id="particles" aria-hidden="true"></canvas>
   <button id="theme-toggle" class="theme-toggle transition-all duration-500 ease-in-out" type="button" aria-label="Alternar modo de color">🌙</button>
+  <button id="lang-toggle" class="theme-toggle lang-toggle transition-all duration-500 ease-in-out" type="button" aria-label="Cambiar idioma">EN</button>
   <header data-aos="fade-up">
     <div class="container">
       <h1>XolosArmy Network State</h1>
-      <div id="google_translate_element"></div>
       <nav>
-        <a href="#hero">Leyenda</a>
-        <a href="#xoloitzcuintli-gospel">Evangelio RMZ del Xoloitzcuintle</a>
-        <a href="#whitepaper">Nuestro Whitepaper</a>
-        <a href="#xolos-ramirez">Xolos Ramírez</a>
-        <a href="#vision">Nuestra Vision</a>
-        <a href="/blog/">Blog</a>
+        <a id="nav-legend" href="#hero">Leyenda</a>
+        <a id="nav-gospel" href="#xoloitzcuintli-gospel">Evangelio RMZ del Xoloitzcuintle</a>
+        <a id="nav-whitepaper" href="#whitepaper">Nuestro Whitepaper</a>
+        <a id="nav-xolos" href="#xolos-ramirez">Xolos Ramírez</a>
+        <a id="nav-vision" href="#vision">Nuestra Vision</a>
+        <a id="nav-blog" href="/blog/">Blog</a>
         <a href="#section-below" class="scroll-down-arrow">&#x2193;</a>
       </nav>
     </div>
@@ -510,17 +510,17 @@
       <div class="particle-field"></div>
     </div>
     <div class="hero-content">
-      <span class="hero-badge"><i class="fas fa-paw"></i> Energía ancestral del Xoloitzcuintle</span>
-      <h1>XolosArmy Network</h1>
-      <p class="glow-subtitle">
+      <span id="hero-badge" class="hero-badge"><i class="fas fa-paw"></i> Energía ancestral del Xoloitzcuintle</span>
+      <h1 id="hero-title">XolosArmy Network</h1>
+      <p id="hero-subtitle" class="glow-subtitle">
         Guardians of Culture, Blockchain, and Spirit. <br>
         Siente la vibración dorada de la manada XolosArmy: arte, historia y futuro unidos en la blockchain.
       </p>
       <div class="hero-actions">
-          <a href="https://cashtab.com/?utm_source=hero_btn_nft#/token/8fd3f14abd2b176a1d4bd5136542cd2a7ba3df0e11947dd19326c9d1cd81ae09" target="_blank" class="hero-button transition-all duration-500 ease-in-out">
+          <a id="hero-btn-nft" href="https://cashtab.com/?utm_source=hero_btn_nft#/token/8fd3f14abd2b176a1d4bd5136542cd2a7ba3df0e11947dd19326c9d1cd81ae09" target="_blank" class="hero-button transition-all duration-500 ease-in-out">
             🔥 Mint NFT Cigars
           </a>
-          <a href="https://cashtab.com/?utm_source=hero_btn_rmz#/token/c923bd0f09c630c5e9980cf518c8d34b6353802a3cb7c3f34fa7cc85c9305908" target="_blank" class="hero-button transition-all duration-500 ease-in-out">
+          <a id="hero-btn-rmz" href="https://cashtab.com/?utm_source=hero_btn_rmz#/token/c923bd0f09c630c5e9980cf518c8d34b6353802a3cb7c3f34fa7cc85c9305908" target="_blank" class="hero-button transition-all duration-500 ease-in-out">
             💰 Obtén $RMZ Ahora
           </a>
       </div>
@@ -535,16 +535,16 @@
   <section id="rmzwallet" class="section-shell" data-aos="fade-up">
     <div class="max-w-6xl mx-auto surface-panel" data-aos="fade-up">
       <div class="wallet-launch-card">
-        <div class="launch-badge">🚀 Ya Disponible</div>
-        <h3>RMZWallet v1.0</h3>
-        <p>La primera versión oficial de la billetera no custodial de XolosArmy ha sido lanzada. Gestiona tus tokens $RMZ y XEC directamente desde el navegador, con cifrado local y sin intermediarios.</p>
+        <div id="rmzwallet-badge" class="launch-badge">🚀 Ya Disponible</div>
+        <h3 id="rmzwallet-title">RMZWallet v1.0</h3>
+        <p id="rmzwallet-desc">La primera versión oficial de la billetera no custodial de XolosArmy ha sido lanzada. Gestiona tus tokens $RMZ y XEC directamente desde el navegador, con cifrado local y sin intermediarios.</p>
         <ul>
-          <li>🔐 Custodia local de claves y semilla cifrada.</li>
-          <li>⚡ Envío rápido de tokens $RMZ.</li>
-          <li>📊 Modo Solo Lectura disponible.</li>
-          <li>🧠 Compatible con red eCash (XEC).</li>
+          <li id="rmzwallet-feature-1">🔐 Custodia local de claves y semilla cifrada.</li>
+          <li id="rmzwallet-feature-2">⚡ Envío rápido de tokens $RMZ.</li>
+          <li id="rmzwallet-feature-3">📊 Modo Solo Lectura disponible.</li>
+          <li id="rmzwallet-feature-4">🧠 Compatible con red eCash (XEC).</li>
         </ul>
-        <a href="https://cartera.xolosarmy.xyz" class="btn-launch" target="_blank">Ir a RMZWallet</a>
+        <a id="rmzwallet-cta" href="https://cartera.xolosarmy.xyz" class="btn-launch" target="_blank">Ir a RMZWallet</a>
       </div>
     </div>
   </section>
@@ -565,14 +565,14 @@
 
           <section id="xolos-rmz" style="padding: 50px 20px;" data-aos="fade-up">
             <div class="container" style="text-align: center; max-width: 800px; margin: auto;" data-aos="fade-up">
-              <h2 style="font-family: var(--heading-font); color: var(--text-gray-200); margin-bottom: 20px;">Xolos $RMZ: El Token del Xoloitzcuintle en la Blockchain</h2>
-              <p style="font-family: var(--body-font); font-size: 18px; color: rgba(229, 231, 235, 0.82); margin-bottom: 30px; line-height: 1.6;">
+              <h2 id="rmz-token-title" style="font-family: var(--heading-font); color: var(--text-gray-200); margin-bottom: 20px;">Xolos $RMZ: El Token del Xoloitzcuintle en la Blockchain</h2>
+              <p id="rmz-token-desc" style="font-family: var(--body-font); font-size: 18px; color: rgba(229, 231, 235, 0.82); margin-bottom: 30px; line-height: 1.6;">
               Xolos $RMZ es el corazón digital de XolosArmy Network: un token descentralizado que honra al Xoloitzcuintle y abre las puertas a una comunidad global.
             </p>
-            <p>
+            <p id="rmz-token-extra">
               Con Xolos $RMZ accedes a contenido exclusivo, NFTs legendarios, y participación en una red viva que fusiona cultura ancestral, tecnología y comunidad.
             </p>
-              <a href="https://cashtab.com/#/token/c923bd0f09c630c5e9980cf518c8d34b6353802a3cb7c3f34fa7cc85c9305908" target="_blank"
+              <a id="rmz-token-cta" href="https://cashtab.com/#/token/c923bd0f09c630c5e9980cf518c8d34b6353802a3cb7c3f34fa7cc85c9305908" target="_blank"
                  class="cta-button transition-all duration-500 ease-in-out">
                 Obtén Xolos $RMZ Ahora
               </a>
@@ -582,7 +582,7 @@
         <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10" data-aos="fade-up"></div>
 
         <div class="video-container" data-aos="fade-up">
-          <h2>Prueba xolosArmy Naturals, Visita nuestra tienda online de productos xoloitzcuintle</h2>
+          <h2 id="video-title">Prueba xolosArmy Naturals, Visita nuestra tienda online de productos xoloitzcuintle</h2>
           <iframe src="https://www.youtube.com/embed/qlbwHRimEPg?si=AllnNBT2Dev277le&autoplay=1&mute=1" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
@@ -593,14 +593,14 @@
     <!-- Dedicated Section for Xoloitzcuintli RMZ Gospel -->
     <section id="xoloitzcuintli-gospel" data-aos="fade-up">
       <div class="container" style="text-align: center; padding: 50px 20px;" data-aos="fade-up">
-        <h2 style="font-family: var(--heading-font); color: var(--text-gray-200); margin-bottom: 20px;">El Evangelio RMZ del Xoloitzcuintle: Guardianes Eternos</h2>
-        <p style="font-family: var(--body-font); font-size: 18px; color: rgba(229, 231, 235, 0.82); margin-bottom: 30px;">
+        <h2 id="gospel-title" style="font-family: var(--heading-font); color: var(--text-gray-200); margin-bottom: 20px;">El Evangelio RMZ del Xoloitzcuintle: Guardianes Eternos</h2>
+        <p id="gospel-desc-1" style="font-family: var(--body-font); font-size: 18px; color: rgba(229, 231, 235, 0.82); margin-bottom: 30px;">
           Sumérgete en el Evangelio del Xoloitzcuintli RMZ, un manifiesto cultural que celebra al Xoloitzcuintle como guardián ancestral de los mundos visibles e invisibles.
         </p>
-        <p>
+        <p id="gospel-desc-2">
           Este documento único fusiona espiritualidad, historia y tecnología en un canto a la raza más antigua de América, ahora inmortalizada en la blockchain a través del token Xolos $RMZ.
         </p>
-        <a href="assets/RMZGospel.pdf" target="_blank" class="cta-button transition-all duration-500 ease-in-out">
+        <a id="gospel-cta" href="assets/RMZGospel.pdf" target="_blank" class="cta-button transition-all duration-500 ease-in-out">
           Lee el PDF del Evangelio RMZ
         </a>
       </div>
@@ -764,10 +764,10 @@
     <!-- Xolos Ramírez Section -->
     <section id="xolos-ramirez" style="padding:50px 20px;" data-aos="fade-up">
       <div class="container" style="max-width:900px; margin:auto; text-align:center;" data-aos="fade-up">
-        <h2 style="font-family:var(--heading-font); font-size:32px; color:var(--text-gray-200); margin-bottom:20px;">
+        <h2 id="xolos-title" style="font-family:var(--heading-font); font-size:32px; color:var(--text-gray-200); margin-bottom:20px;">
           Conoce a Xolos Ramírez
         </h2>
-        <p style="font-family:var(--body-font); color:rgba(229, 231, 235, 0.82); margin-bottom:30px;">
+        <p id="xolos-desc" style="font-family:var(--body-font); color:rgba(229, 231, 235, 0.82); margin-bottom:30px;">
           Visita <a href="https://www.xolosramirez.com" target="_blank" style="color:var(--accent-amber-400); text-decoration:none;">xolosramirez.com</a> y descubre más.
         </p>
         <div class="gallery" id="xolos-ramirez-gallery" data-aos="fade-up">
@@ -810,8 +810,8 @@
     <!-- Vision Section -->
     <section id="vision" class="vision-section" data-aos="fade-up">
       <div class="container" data-aos="fade-up">
-        <h2>Our Vision for the XolosArmy Network State</h2>
-        <p>Compartimos la visión, los objetivos y los planes futuros de la Red XolosArmy.</p>
+        <h2 id="vision-title">Our Vision for the XolosArmy Network State</h2>
+        <p id="vision-desc">Compartimos la visión, los objetivos y los planes futuros de la Red XolosArmy.</p>
         
         <!-- Card Layout for the Recording -->
         <div class="card" data-aos="fade-up">
@@ -825,11 +825,11 @@
             allowfullscreen
           ></iframe>
           <div class="summary" data-aos="fade-up">
-            <h3>Aspectos Clave</h3>
+            <h3 id="vision-card-title">Aspectos Clave</h3>
             <ul>
-              <li>Nuestra misión de construir una Red XolosArmy impulsada por la comunidad.</li>
-              <li>Planes para NFTs, participación comunitaria y desarrollos futuros.</li>
-              <li>Oportunidades para que los seguidores se involucren y contribuyan.</li>
+              <li id="vision-point-1">Nuestra misión de construir una Red XolosArmy impulsada por la comunidad.</li>
+              <li id="vision-point-2">Planes para NFTs, participación comunitaria y desarrollos futuros.</li>
+              <li id="vision-point-3">Oportunidades para que los seguidores se involucren y contribuyan.</li>
             </ul>
           </div>
         </div>
@@ -839,27 +839,27 @@
     <!-- Sección: Última publicación del Blog -->
     <section id="blog-destacado" class="section-shell" data-aos="fade-up">
       <div class="max-w-6xl mx-auto surface-panel blog-highlight" data-aos="fade-up" style="text-align: center; padding: 2rem;">
-        <h2 class="section-heading">Última entrada del Blog</h2>
+        <h2 id="blog-heading" class="section-heading">Última entrada del Blog</h2>
         <img src="assets/xolo-hero.jpg" alt="Última entrada del blog" style="max-width: 400px; width: 100%; border-radius: 16px; margin: 1rem 0;">
-        <h3>¡El Templo Digital ha abierto sus puertas! Lanzamiento oficial de la RMZWallet v1.0</h3>
-        <p style="font-size: 1.1rem; margin: 0 auto 1.5rem; max-width: 600px;">
+        <h3 id="blog-title">¡El Templo Digital ha abierto sus puertas! Lanzamiento oficial de la RMZWallet v1.0</h3>
+        <p id="blog-desc" style="font-size: 1.1rem; margin: 0 auto 1.5rem; max-width: 600px;">
           Anunciamos el despliegue oficial de RMZWallet, nuestra propia billetera self-custodial diseñada específicamente para navegar el ecosistema de xolosArmy Network sobre la red eCash (XEC). 
         </p>
-        <a href="/blog/rmzwallet.html" class="cta-button transition-all duration-500 ease-in-out">Leer más</a>
+        <a id="blog-cta" href="/blog/rmzwallet.html" class="cta-button transition-all duration-500 ease-in-out">Leer más</a>
       </div>
     </section>
   </main>
 
   <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-70 my-10" data-aos="fade-up"></div>
 
-  <  <!-- Sección: Roadmap RMZWallet -->
+  <!-- Sección: Roadmap RMZWallet -->
   <section id="rmzwallet-roadmap" class="section-shell" data-aos="fade-up">
     <div class="max-w-6xl mx-auto surface-panel" data-aos="fade-up">
       <div class="grid md:grid-cols-2 gap-12">
         <div>
-          <span class="section-eyebrow">🔒 Roadmap</span>
-          <h2 class="section-heading">RMZWallet / Tonalli Roadmap</h2>
-          <p class="section-subtitle">
+          <span id="roadmap-eyebrow" class="section-eyebrow">🔒 Roadmap</span>
+          <h2 id="roadmap-title" class="section-heading">RMZWallet / Tonalli Roadmap</h2>
+          <p id="roadmap-desc" class="section-subtitle">
             La billetera de XolosArmy evoluciona de un simple monedero no custodial
             a un hub completo para <strong>XEC, $RMZ y NFTs de XolosArmy</strong>.
             Cada etapa está pensada para que los guardianes del Xoloitzcuintle
@@ -868,18 +868,19 @@
         </div>
         <div>
           <ul>
-            <li><span>✅</span> Lanzamiento de <strong>RMZWallet v1.0</strong>:
+            <li id="roadmap-item-1"><span>✅</span> Lanzamiento de <strong>RMZWallet v1.0</strong>:
               envío y recepción de XEC y $RMZ, PWA con modo sin conexión y custodia local de claves.</li>
-            <li><span>💱</span> Integración de <strong>Atomic Swap DEX XEC ⇄ $RMZ</strong>
+            <li id="roadmap-item-2"><span>💱</span> Integración de <strong>Atomic Swap DEX XEC ⇄ $RMZ</strong>
               directamente en la billetera (sin salir a otras interfaces).</li>
-            <li><span>🖼️</span> Soporte nativo para <strong>almacenar y visualizar NFTs de XolosArmy</strong>
+            <li id="roadmap-item-3"><span>💡</span> <strong>Campaña Flipstarter</strong>: recaudación de fondos para las próximas mejoras del RMZWallet.</li>
+            <li id="roadmap-item-4"><span>🖼️</span> Soporte nativo para <strong>almacenar y visualizar NFTs de XolosArmy</strong>
               (galería integrada para colecciones culturales del Xoloitzcuintle).</li>
-            <li><span>🧠</span> Módulo de <strong>pagos con eToken para adopciones</strong>:
+            <li id="roadmap-item-5"><span>🧠</span> Módulo de <strong>pagos con eToken para adopciones</strong>:
               flujo simplificado para reservar y adoptar xoloitzcuintles usando $RMZ.</li>
-            <li><span>🚀</span> Evolución a <strong>Tonalli Wallet</strong>:
+            <li id="roadmap-item-6"><span>🚀</span> Evolución a <strong>Tonalli Wallet</strong>:
               mejoras de UX, multi-idioma (ES/EN) y herramientas avanzadas para la comunidad XolosArmy.</li>
           </ul>
-          <p class="section-subtitle">
+          <p id="roadmap-note" class="section-subtitle">
             Este roadmap es vivo: se ajusta junto con la manada y las necesidades reales
             de quienes usan el Xoloitzcuintle como puente entre cultura y blockchain.
           </p>
@@ -1028,6 +1029,11 @@ body.light-mode .theme-toggle {
   background: rgba(255, 255, 255, 0.85);
   color: #b45309;
   border-color: rgba(217, 119, 6, 0.6);
+}
+
+.lang-toggle {
+  right: 72px;
+  font-weight: 700;
 }
 
 footer {
