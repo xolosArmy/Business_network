@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const langToggle = document.getElementById('lang-toggle');
+  const rootHtml = document.documentElement;
   let currentLang = localStorage.getItem('preferred-lang') === 'en' ? 'en' : 'es';
 
   const translations = {
@@ -8,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'nav-gospel': 'Evangelio RMZ del Xoloitzcuintle',
       'nav-whitepaper': 'Nuestro Whitepaper',
       'nav-xolos': 'Xolos Ramírez',
-      'nav-vision': 'Nuestra Vision',
+      'nav-vision': 'Nuestra Visión',
       'nav-blog': 'Blog',
       'hero-badge': '<i class="fas fa-paw"></i> Energía ancestral del Xoloitzcuintle',
       'hero-title': 'XolosArmy Network',
@@ -34,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'gospel-cta': 'Lee el PDF del Evangelio RMZ',
       'xolos-title': 'Conoce a Xolos Ramírez',
       'xolos-desc': 'Visita <a href="https://www.xolosramirez.com" target="_blank" style="color:var(--accent-amber-400); text-decoration:none;">xolosramirez.com</a> y descubre más.',
-      'vision-title': 'Our Vision for the XolosArmy Network State',
+      'vision-title': 'Nuestra visión para el Network State XolosArmy',
       'vision-desc': 'Compartimos la visión, los objetivos y los planes futuros de la Red XolosArmy.',
       'vision-card-title': 'Aspectos Clave',
       'vision-point-1': 'Nuestra misión de construir una Red XolosArmy impulsada por la comunidad.',
@@ -46,7 +47,14 @@ document.addEventListener('DOMContentLoaded', () => {
       'blog-cta': 'Leer más',
       'roadmap-eyebrow': '🔒 Roadmap',
       'roadmap-title': 'RMZWallet / Tonalli Roadmap',
-      'roadmap-desc': 'La billetera de XolosArmy evoluciona de un simple monedero no custodial a un hub completo para <strong>XEC, $RMZ y NFTs de XolosArmy</strong>. Cada etapa está pensada para que los guardianes del Xoloitzcuintle puedan adoptar, intercambiar y coleccionar dentro del ecosistema eCash.'
+      'roadmap-desc': 'La billetera de XolosArmy evoluciona de un simple monedero no custodial a un hub completo para <strong>XEC, $RMZ y NFTs de XolosArmy</strong>. Cada etapa está pensada para que los guardianes del Xoloitzcuintle puedan adoptar, intercambiar y coleccionar dentro del ecosistema eCash.',
+      'roadmap-item-1': '<span>✅</span> Lanzamiento de <strong>RMZWallet v1.0</strong>: envío y recepción de XEC y $RMZ, PWA con modo sin conexión y custodia local de claves.',
+      'roadmap-item-2': '<span>💱</span> Integración de <strong>Atomic Swap DEX XEC ⇄ $RMZ</strong> directamente en la billetera (sin salir a otras interfaces).',
+      'roadmap-item-3': '<span>💡</span> <strong>Campaña Flipstarter</strong>: recaudación de fondos para las próximas mejoras del RMZWallet.',
+      'roadmap-item-4': '<span>🖼️</span> Soporte nativo para <strong>almacenar y visualizar NFTs de XolosArmy</strong> (galería integrada para colecciones culturales del Xoloitzcuintle).',
+      'roadmap-item-5': '<span>🧠</span> Módulo de <strong>pagos con eToken para adopciones</strong>: flujo simplificado para reservar y adoptar xoloitzcuintles usando $RMZ.',
+      'roadmap-item-6': '<span>🚀</span> Evolución a <strong>Tonalli Wallet</strong>: mejoras de UX, multi-idioma (ES/EN) y herramientas avanzadas para la comunidad XolosArmy.',
+      'roadmap-note': 'Este roadmap es vivo: se ajusta junto con la manada y las necesidades reales de quienes usan el Xoloitzcuintle como puente entre cultura y blockchain.'
     },
     en: {
       'nav-legend': 'Legend',
@@ -91,19 +99,15 @@ document.addEventListener('DOMContentLoaded', () => {
       'blog-cta': 'Read more',
       'roadmap-eyebrow': '🔒 Roadmap',
       'roadmap-title': 'RMZWallet / Tonalli Roadmap',
-      'roadmap-desc': 'The XolosArmy wallet evolves from a simple non-custodial wallet into a full hub for <strong>XEC, $RMZ, and XolosArmy NFTs</strong>. Each stage is designed so Xoloitzcuintle guardians can adopt, exchange, and collect within the eCash ecosystem.'
+      'roadmap-desc': 'The XolosArmy wallet evolves from a simple non-custodial wallet into a full hub for <strong>XEC, $RMZ, and XolosArmy NFTs</strong>. Each stage is designed so Xoloitzcuintle guardians can adopt, exchange, and collect within the eCash ecosystem.',
+      'roadmap-item-1': '<span>✅</span> Launch of <strong>RMZWallet v1.0</strong>: send and receive XEC and $RMZ, PWA with offline mode, and local key custody.',
+      'roadmap-item-2': '<span>💱</span> Integration of <strong>Atomic Swap DEX XEC ⇄ $RMZ</strong> directly in the wallet (no need to leave the interface).',
+      'roadmap-item-3': '<span>💡</span> <strong>Flipstarter Campaign</strong>: fundraising for upcoming RMZWallet improvements.',
+      'roadmap-item-4': '<span>🖼️</span> Native support to <strong>store and view XolosArmy NFTs</strong> (integrated gallery for Xoloitzcuintle cultural collections).',
+      'roadmap-item-5': '<span>🧠</span> <strong>eToken payments module for adoptions</strong>: simplified flow to reserve and adopt Xoloitzcuintles using $RMZ.',
+      'roadmap-item-6': '<span>🚀</span> Evolution to <strong>Tonalli Wallet</strong>: UX upgrades, multi-language (ES/EN), and advanced tools for the XolosArmy community.',
+      'roadmap-note': 'This roadmap is alive: it evolves with the pack and the real needs of those who use the Xoloitzcuintle as a bridge between culture and blockchain.'
     }
-  };
-
-  const applyTranslations = (lang) => {
-    const entries = translations[lang];
-    Object.entries(entries).forEach(([id, text]) => {
-      const el = document.getElementById(id);
-      if (el) {
-        el.innerHTML = text;
-      }
-    });
-    updateLangToggleLabel(lang);
   };
 
   const updateLangToggleLabel = (lang) => {
@@ -116,12 +120,30 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   };
 
+  const applyTranslations = (lang) => {
+    const entries = translations[lang];
+    if (!entries) return;
+    Object.entries(entries).forEach(([id, text]) => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.innerHTML = text;
+      }
+    });
+    rootHtml.setAttribute('lang', lang);
+    updateLangToggleLabel(lang);
+  };
+
+  const setLanguage = (lang) => {
+    currentLang = lang;
+    localStorage.setItem('preferred-lang', lang);
+    applyTranslations(lang);
+  };
+
   if (langToggle) {
     applyTranslations(currentLang);
     langToggle.addEventListener('click', () => {
-      currentLang = currentLang === 'es' ? 'en' : 'es';
-      localStorage.setItem('preferred-lang', currentLang);
-      applyTranslations(currentLang);
+      const nextLang = currentLang === 'es' ? 'en' : 'es';
+      setLanguage(nextLang);
     });
   }
 });
