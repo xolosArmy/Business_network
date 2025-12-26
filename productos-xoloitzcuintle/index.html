@@ -1213,6 +1213,67 @@
     @media (max-width: 640px) {
       .sticky-buy__actions { grid-template-columns: 1fr; }
     }
+
+    @media (max-width: 768px) {
+      body {
+        padding-bottom: 140px;
+      }
+
+      .sticky-buy {
+        padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+      }
+
+      .sticky-buy__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .sticky-buy__action {
+        flex: 1 1 200px;
+        min-height: 44px;
+      }
+
+      .xec-modal__dialog {
+        max-width: 95vw;
+        width: 95vw;
+        max-height: 88vh;
+        overflow-y: auto;
+      }
+
+      .xec-modal {
+        padding: 16px;
+      }
+
+      .xec-modal__title,
+      .xec-modal__list {
+        font-size: 1rem;
+        line-height: 1.55;
+      }
+
+      .card-actions {
+        align-items: stretch;
+        gap: 14px;
+      }
+
+      .offer-id-box,
+      .offer-id,
+      .txid-form input {
+        width: 100%;
+        overflow-wrap: anywhere;
+        word-break: break-all;
+      }
+
+      .card-actions a,
+      .card-actions button,
+      .txid-form button,
+      .copy-offer-btn,
+      .tonalli-guide,
+      .txid-toggle {
+        width: 100%;
+        min-height: 44px;
+      }
+    }
   </style>
 
   </head>
@@ -1780,7 +1841,7 @@
         <div class="xec-buttons">
           <button class="copy-xec" onclick="copyXecAddress()">📋 Copiar dirección</button>
           <a id="openWallet"
-             href="https://cashtab.com/pay/?to=ecash:qq7qn90ev23ecastqmn8as00u8mcp4tzsspvt5dtlk&amount=1333333&message=Compra%20r%C3%A1pida%20XolosArmy"
+             href="https://cartera.xolosarmy.xyz"
              target="_blank"
              rel="noopener noreferrer"
              class="open-wallet">
