@@ -1415,6 +1415,26 @@
       <i class="fa-solid fa-wallet" aria-hidden="true"></i>
       ¿Cómo pagar con eCash (XEC)?
     </button>
+    <div class="payment-helper__text">
+      <h3>Cómo usar XEC</h3>
+      <ul>
+        <li>Obtén eCash (XEC) en tu billetera o exchange.</li>
+        <li>Inicia el envío seleccionando la red eCash.</li>
+        <li>Usa el botón <strong>“Copiar dirección”</strong> para pegar la dirección de pago de XolosArmy.</li>
+        <li>Ingresa el monto exacto en XEC y confirma la transacción.</li>
+        <li>Espera la confirmación (1–3 minutos).</li>
+      </ul>
+      <p><strong>⚠️ Verifica siempre la dirección y la red antes de enviar.</strong></p>
+
+      <h3>Cómo usar Tonalli DEX (RMZ)</h3>
+      <p>Tip: copia primero el Offer ID del producto antes de abrir el DEX.</p>
+      <ol>
+        <li>Abre la RMZWallet Tonalli en <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">cartera.xolosarmy.xyz</a> y accede con tu cuenta.</li>
+        <li>En la sección DEX, pega el Offer ID copiado y haz clic en <strong>“Cargar oferta”</strong>.</li>
+        <li>Confirma <strong>“Comprar RMZ”</strong> y, cuando finalice, copia el TXID de la compra.</li>
+        <li>Pega ese TXID en el formulario de esta página para validar tu pedido.</li>
+      </ol>
+    </div>
   </section>
 
   <section id="productos" class="products-section" aria-labelledby="productosTitle" data-aos="fade-up">
@@ -1459,7 +1479,7 @@
         <p><strong>RMZ = comprobante digital de compra</strong></p>
         <p>Precio: <span class="price-rmz">3.8</span> RMZ</p>
         <div class="offer-id-box">
-          <span class="offer-id">REPLACE_WITH_TXID:1</span>
+          <span class="offer-id">44d97441db8e02e045181bf2f213d1f782af81b9e1c4eabab28e641c8e8b1f01:1</span>
           <button class="copy-offer-btn" type="button">Copiar Offer ID</button>
         </div>
         <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">
@@ -1540,7 +1560,7 @@
         <p><strong>RMZ = comprobante digital de compra</strong></p>
         <p>Precio: <span class="price-rmz">3.8</span> RMZ</p>
         <div class="offer-id-box">
-          <span class="offer-id">REPLACE_WITH_TXID:1</span>
+          <span class="offer-id">d007f09d6167d1c7a8517cfff7446d59d69b5afe90202d739e463436fa3aa092:1</span>
           <button class="copy-offer-btn" type="button">Copiar Offer ID</button>
         </div>
         <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">
@@ -1580,7 +1600,7 @@
         <p><strong>RMZ = comprobante digital de compra</strong></p>
         <p>Precio: <span class="price-rmz">3.8</span> RMZ</p>
         <div class="offer-id-box">
-          <span class="offer-id">REPLACE_WITH_TXID:1</span>
+          <span class="offer-id">24c72fd8fe3956c19e76a66d767f594228025d1a8330c45b8b59d5ed7efbff12:1</span>
           <button class="copy-offer-btn" type="button">Copiar Offer ID</button>
         </div>
         <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">
@@ -1625,7 +1645,7 @@
         <p><strong>RMZ = comprobante digital de compra</strong></p>
         <p>Precio: <span class="price-rmz">3.8</span> RMZ</p>
         <div class="offer-id-box">
-          <span class="offer-id">REPLACE_WITH_TXID:1</span>
+          <span class="offer-id">6d7bb2176f6bef06afb6a4b6ddef7447b3f72fd79a9a6795328d47f3216e9227:1</span>
           <button class="copy-offer-btn" type="button">Copiar Offer ID</button>
         </div>
         <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">
@@ -1671,7 +1691,7 @@
         <p><strong>RMZ = comprobante digital de compra</strong></p>
         <p>Precio: <span class="price-rmz">13.8</span> RMZ</p>
         <div class="offer-id-box">
-          <span class="offer-id">REPLACE_WITH_TXID:1</span>
+          <span class="offer-id">a16e9319ef221abf486a47dd43e1ab2035b2a1e0cabc688ac3462c31261c75e6:1</span>
           <button class="copy-offer-btn" type="button">Copiar Offer ID</button>
         </div>
         <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">
@@ -1828,12 +1848,12 @@ document.addEventListener('click', function(e){
     document.addEventListener('DOMContentLoaded', () => {
       const isMobile = window.matchMedia('(max-width: 768px)').matches;
       const PRODUCT_OFFERS = {
-        'xolo-unguento': { priceXEC: 1900000, rmz: 3.8, offerId: 'REPLACE_WITH_TXID:1' },
+        'xolo-unguento': { priceXEC: 1900000, rmz: 3.8, offerId: '44d97441db8e02e045181bf2f213d1f782af81b9e1c4eabab28e641c8e8b1f01:1' },
         'xolo-nectar': { priceXEC: 1900000, rmz: 3.8, offerId: 'REPLACE_WITH_TXID:1' },
-        'xolo-amanecer': { priceXEC: 1900000, rmz: 3.8, offerId: 'REPLACE_WITH_TXID:1' },
-        'xolo-escudo': { priceXEC: 1900000, rmz: 3.8, offerId: 'REPLACE_WITH_TXID:1' },
-        'xolo-duo': { priceXEC: 1900000, rmz: 3.8, offerId: 'REPLACE_WITH_TXID:1' },
-        'xolo-bienestar': { priceXEC: 6900000, rmz: 13.8, offerId: 'REPLACE_WITH_TXID:1' },
+        'xolo-amanecer': { priceXEC: 1900000, rmz: 3.8, offerId: 'd007f09d6167d1c7a8517cfff7446d59d69b5afe90202d739e463436fa3aa092:1' },
+        'xolo-escudo': { priceXEC: 1900000, rmz: 3.8, offerId: '24c72fd8fe3956c19e76a66d767f594228025d1a8330c45b8b59d5ed7efbff12:1' },
+        'xolo-duo': { priceXEC: 1900000, rmz: 3.8, offerId: '6d7bb2176f6bef06afb6a4b6ddef7447b3f72fd79a9a6795328d47f3216e9227:1' },
+        'xolo-bienestar': { priceXEC: 6900000, rmz: 13.8, offerId: 'a16e9319ef221abf486a47dd43e1ab2035b2a1e0cabc688ac3462c31261c75e6:1' },
       };
 
       const copyTextWithFallback = async (text) => {
