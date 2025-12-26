@@ -95,10 +95,9 @@
 
     a:focus-visible,
     button:focus-visible,
-    .tonalli-offer__copy-btn:focus-visible,
-    .tonalli-offer__cta:focus-visible,
-    .tonalli-offer__link:focus-visible,
-    .tonalli-offer__form button:focus-visible {
+    .copy-offer-btn:focus-visible,
+    .tonalli-guide:focus-visible,
+    .txid-form button:focus-visible {
       outline: 3px solid var(--color-highlight);
       outline-offset: 3px;
     }
@@ -285,67 +284,38 @@
       color: var(--color-text-strong);
     }
 
-    .tonalli-offer {
-      background: rgba(15, 21, 21, 0.6);
-      border: 1px solid rgba(240, 199, 83, 0.25);
-      border-radius: 14px;
-      padding: 14px 14px 16px;
+    .card-actions {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
       text-align: left;
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
     }
 
-    .tonalli-offer__eyebrow {
-      margin: 0;
-      font-size: 0.9rem;
+    .price-rmz {
       color: var(--color-highlight-strong);
-      letter-spacing: 0.02em;
       font-weight: 700;
     }
 
-    .tonalli-offer__description {
-      margin: 0;
-      font-size: 0.98rem;
-      color: var(--color-text-muted);
-    }
-
-    .tonalli-offer__amount {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.95rem;
-      color: var(--color-text-strong);
-      background: rgba(240, 199, 83, 0.06);
-      border: 1px solid rgba(240, 199, 83, 0.26);
-      border-radius: 10px;
-      padding: 6px 10px;
-      margin: 0;
-      width: fit-content;
-    }
-
-    .tonalli-offer__code-row {
+    .offer-id-box {
       display: flex;
-      gap: 10px;
-      align-items: stretch;
+      align-items: center;
+      gap: 12px;
       flex-wrap: wrap;
+      background: rgba(15, 21, 21, 0.6);
+      border: 1px solid rgba(240, 199, 83, 0.25);
+      border-radius: 14px;
+      padding: 12px;
     }
 
-    .tonalli-offer__code {
-      flex: 1;
-      min-width: 220px;
-      background: #0b0f0f;
-      color: var(--color-highlight-strong);
-      border: 1px solid rgba(13, 127, 114, 0.4);
-      border-radius: 12px;
-      padding: 10px 12px;
+    .offer-id {
       font-family: 'Courier New', monospace;
-      font-size: 0.95rem;
+      color: var(--color-highlight-strong);
       word-break: break-all;
+      flex: 1;
+      min-width: 240px;
     }
 
-    .tonalli-offer__copy-btn {
+    .copy-offer-btn {
       background: var(--color-primary);
       color: var(--color-text-strong);
       border: 1px solid rgba(13, 127, 114, 0.6);
@@ -357,128 +327,98 @@
       min-width: 148px;
     }
 
-    .tonalli-offer__copy-btn:hover,
-    .tonalli-offer__copy-btn:focus-visible {
+    .copy-offer-btn:hover,
+    .copy-offer-btn:focus-visible {
       transform: translateY(-1px);
       background: var(--color-primary-strong);
       box-shadow: 0 10px 22px rgba(13, 127, 114, 0.35);
     }
 
-    .tonalli-offer__links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .tonalli-offer__link,
-    .tonalli-offer__cta {
+    .tonalli-guide {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 10px 14px;
       border-radius: 12px;
-      text-decoration: none;
-      font-weight: 700;
       border: 1px solid rgba(240, 199, 83, 0.3);
-      color: var(--color-text-strong);
       background: rgba(240, 199, 83, 0.12);
+      color: var(--color-text-strong);
       cursor: pointer;
+      text-decoration: none;
+      width: fit-content;
       transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
 
-    .tonalli-offer__cta,
-    .tonalli-offer__cta:visited {
-      color: var(--color-text-strong);
-    }
-
-    .tonalli-offer__link:hover,
-    .tonalli-offer__link:focus-visible,
-    .tonalli-offer__cta:hover,
-    .tonalli-offer__cta:focus-visible {
+    .tonalli-guide:hover,
+    .tonalli-guide:focus-visible {
       transform: translateY(-1px);
       box-shadow: 0 10px 22px rgba(240, 199, 83, 0.25);
       background: rgba(240, 199, 83, 0.18);
     }
 
-    .tonalli-offer__link--ghost {
-      background: rgba(13, 127, 114, 0.1);
-      border-color: rgba(13, 127, 114, 0.35);
+    .txid-toggle {
+      background: transparent;
+      color: var(--color-highlight-strong);
+      border: 1px solid rgba(240, 199, 83, 0.35);
+      border-radius: 12px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      width: fit-content;
     }
 
-    .tonalli-offer__form {
-      display: flex;
+    .txid-toggle:hover,
+    .txid-toggle:focus-visible {
+      transform: translateY(-1px);
+      background: rgba(240, 199, 83, 0.1);
+      box-shadow: 0 10px 22px rgba(240, 199, 83, 0.18);
+    }
+
+    .txid-form {
+      display: none;
       flex-direction: column;
       gap: 8px;
-      margin-top: 6px;
+      background: rgba(15, 21, 21, 0.6);
+      border: 1px solid rgba(13, 127, 114, 0.35);
+      border-radius: 12px;
+      padding: 12px;
     }
 
-    .tonalli-offer__form label {
-      font-size: 0.95rem;
-      color: var(--color-text-muted);
-    }
-
-    .tonalli-offer__form-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: stretch;
-    }
-
-    .tonalli-offer__input {
-      flex: 1;
-      min-width: 200px;
+    .txid-form input {
       background: #0b0f0f;
       color: var(--color-text-strong);
       border: 1px solid rgba(13, 127, 114, 0.4);
-      border-radius: 12px;
+      border-radius: 10px;
       padding: 10px 12px;
     }
 
-    .tonalli-offer__submit {
+    .txid-form button {
+      align-self: flex-start;
       background: var(--color-primary);
       color: var(--color-text-strong);
       border: 1px solid rgba(13, 127, 114, 0.6);
-      border-radius: 12px;
+      border-radius: 10px;
       padding: 10px 14px;
       font-weight: 700;
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-      min-width: 170px;
     }
 
-    .tonalli-offer__submit:hover,
-    .tonalli-offer__submit:focus-visible {
+    .txid-form button:hover,
+    .txid-form button:focus-visible {
       transform: translateY(-1px);
       background: var(--color-primary-strong);
       box-shadow: 0 10px 22px rgba(13, 127, 114, 0.35);
     }
 
-    .tonalli-offer__feedback {
-      margin: 0;
-      font-size: 0.94rem;
-      color: var(--color-highlight-strong);
-      min-height: 1.2em;
-    }
-
-    .tonalli-offer__helper {
-      margin: 0;
-      font-size: 0.9rem;
-      color: var(--color-text-muted);
-    }
-
-    .tonalli-offer__contact {
-      font-size: 0.94rem;
-      color: var(--color-highlight-strong);
-    }
-
     @media (max-width: 640px) {
-      .tonalli-offer__code-row,
-      .tonalli-offer__form-row {
+      .offer-id-box {
         flex-direction: column;
       }
 
-      .tonalli-offer__copy-btn,
-      .tonalli-offer__submit {
+      .copy-offer-btn,
+      .txid-form button {
         width: 100%;
       }
     }
@@ -1172,10 +1112,10 @@
     /* Botones: tamaño táctil mínimo y espaciado */
     a.btn,
     button,
-    .tonalli-offer__copy-btn,
-    .tonalli-offer__link,
-    .tonalli-offer__cta,
-    .tonalli-offer__submit,
+    .copy-offer-btn,
+    .tonalli-guide,
+    .txid-toggle,
+    .txid-form button,
     .whatsapp-buy,
     .sticky-buy__action {
       min-height: 48px;
@@ -1502,7 +1442,7 @@
     <div class="grid">
 
     <!-- Producto 1 -->
-    <div class="card animate-on-scroll" data-sku="xolo-001">
+    <div class="card animate-on-scroll" data-sku="xolo-unguento">
       <div class="product-media">
         <img
           src="https://i.imgur.com/J8mc04B.png"
@@ -1516,30 +1456,16 @@
         <p><strong>≈ $522 MXN</strong> Forjado con savia de árbol de té bajo la tutela de Xólotl, este bálsamo repara la piel del compañero de guerra como si sellara códices de obsidiana, para que siga guiando almas a través del Mictlán sin que el tiempo marque su pelaje.</p>
       </div>
       <div class="card-actions">
-        <div class="tonalli-offer" data-sku="xolo-001">
-          <p class="tonalli-offer__eyebrow">Pagar con RMZ (Tonalli DEX)</p>
-          <p class="tonalli-offer__description">Copia el Offer ID, pégalo en Tonalli &gt; DEX y compra RMZ con XEC. Los RMZ representan tu pago.</p>
-          <p class="tonalli-offer__amount"><span aria-hidden="true">💠</span><span><strong data-rmz-amount>— RMZ</strong> (referencial)</span></p>
-          <div class="tonalli-offer__code-row">
-            <code class="tonalli-offer__code" data-offer-code>Offer ID no disponible</code>
-            <button type="button" class="tonalli-offer__copy-btn" data-copy-offer>Copiar Offer ID</button>
-          </div>
-          <div class="tonalli-offer__links">
-            <a class="tonalli-offer__cta" href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer" data-open-tonalli>
-              Abrir RMZWallet Tonalli
-            </a>
-            <button type="button" class="tonalli-offer__link tonalli-offer__link--ghost" data-open-tonalli-modal>¿Cómo pagar?</button>
-          </div>
-          <form class="tonalli-offer__form" data-txid-form>
-            <label for="txid-xolo-001">Pega aquí tu TXID de compra (taker tx)</label>
-            <div class="tonalli-offer__form-row">
-              <input id="txid-xolo-001" class="tonalli-offer__input" name="txid" placeholder="Ej. abcd1234..." data-txid-input />
-              <button type="submit" class="tonalli-offer__submit">Enviar comprobante</button>
-            </div>
-          </form>
-          <p class="tonalli-offer__feedback" data-feedback aria-live="polite"></p>
-          <p class="tonalli-offer__helper">También puedes <a class="tonalli-offer__contact" href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C%20compr%C3%A9%20el%20producto%20SKU%20xolo-001.%20TXID:%20" target="_blank" rel="noopener noreferrer" data-contact-link>contactarnos por WhatsApp</a>.</p>
+        <p><strong>RMZ = comprobante digital de compra</strong></p>
+        <p>Precio: <span class="price-rmz">3.8</span> RMZ</p>
+        <div class="offer-id-box">
+          <span class="offer-id">REPLACE_WITH_TXID:1</span>
+          <button class="copy-offer-btn" type="button">Copiar Offer ID</button>
         </div>
+        <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">
+          Abrir RMZWallet Tonalli
+        </a>
+        <button class="tonalli-guide" type="button" data-open-tonalli-modal>¿Cómo pagar con Tonalli?</button>
         <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Bálsamo+Arbol+de+té"
            class="whatsapp-buy" target="_blank" rel="noopener noreferrer"
            data-ga-event="whatsapp_lead"
@@ -1548,11 +1474,16 @@
           <span aria-hidden="true">🟢</span>
           <span>Comprar por WhatsApp (Transferencia bancaria)</span>
         </a>
+        <button class="txid-toggle" type="button">Ya compré, pegar TXID</button>
+        <form class="txid-form" onsubmit="return false;">
+          <input type="text" name="txid" placeholder="Pega tu TXID aquí" required>
+          <button type="submit">Confirmar TXID</button>
+        </form>
       </div>
     </div>
 
     <!-- Producto 2 -->
-    <div class="card animate-on-scroll" data-sku="xolo-002">
+    <div class="card animate-on-scroll" data-sku="xolo-nectar">
       <div class="product-media">
         <img
           src="https://i.imgur.com/hosQNaj.png"
@@ -1566,30 +1497,16 @@
         <p><strong>≈ $522 MXN</strong> Al caer la noche, Tlazōlteōtl susurra lavanda y vitamina E sobre la piel del Xoloitzcuintle, acunando sus sueños de guerrero con neblinas moradas que lo preparan para custodiar los portales entre la tierra y el firmamento.</p>
       </div>
       <div class="card-actions">
-        <div class="tonalli-offer" data-sku="xolo-002">
-          <p class="tonalli-offer__eyebrow">Pagar con RMZ (Tonalli DEX)</p>
-          <p class="tonalli-offer__description">Copia el Offer ID, pégalo en Tonalli &gt; DEX y compra RMZ con XEC. Los RMZ representan tu pago.</p>
-          <p class="tonalli-offer__amount"><span aria-hidden="true">💠</span><span><strong data-rmz-amount>— RMZ</strong> (referencial)</span></p>
-          <div class="tonalli-offer__code-row">
-            <code class="tonalli-offer__code" data-offer-code>Offer ID no disponible</code>
-            <button type="button" class="tonalli-offer__copy-btn" data-copy-offer>Copiar Offer ID</button>
-          </div>
-          <div class="tonalli-offer__links">
-            <a class="tonalli-offer__cta" href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer" data-open-tonalli>
-              Abrir RMZWallet Tonalli
-            </a>
-            <button type="button" class="tonalli-offer__link tonalli-offer__link--ghost" data-open-tonalli-modal>¿Cómo pagar?</button>
-          </div>
-          <form class="tonalli-offer__form" data-txid-form>
-            <label for="txid-xolo-002">Pega aquí tu TXID de compra (taker tx)</label>
-            <div class="tonalli-offer__form-row">
-              <input id="txid-xolo-002" class="tonalli-offer__input" name="txid" placeholder="Ej. abcd1234..." data-txid-input />
-              <button type="submit" class="tonalli-offer__submit">Enviar comprobante</button>
-            </div>
-          </form>
-          <p class="tonalli-offer__feedback" data-feedback aria-live="polite"></p>
-          <p class="tonalli-offer__helper">También puedes <a class="tonalli-offer__contact" href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C%20compr%C3%A9%20el%20producto%20SKU%20xolo-002.%20TXID:%20" target="_blank" rel="noopener noreferrer" data-contact-link>contactarnos por WhatsApp</a>.</p>
+        <p><strong>RMZ = comprobante digital de compra</strong></p>
+        <p>Precio: <span class="price-rmz">3.8</span> RMZ</p>
+        <div class="offer-id-box">
+          <span class="offer-id">REPLACE_WITH_TXID:1</span>
+          <button class="copy-offer-btn" type="button">Copiar Offer ID</button>
         </div>
+        <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">
+          Abrir RMZWallet Tonalli
+        </a>
+        <button class="tonalli-guide" type="button" data-open-tonalli-modal>¿Cómo pagar con Tonalli?</button>
         <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Bálsamo+Lavanda"
            class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
            data-item="Néctar Onírico de Tlazōlteōtl"
@@ -1597,11 +1514,16 @@
           <span aria-hidden="true">🟢</span>
           <span>Comprar por WhatsApp (Transferencia bancaria)</span>
         </a>
+        <button class="txid-toggle" type="button">Ya compré, pegar TXID</button>
+        <form class="txid-form" onsubmit="return false;">
+          <input type="text" name="txid" placeholder="Pega tu TXID aquí" required>
+          <button type="submit">Confirmar TXID</button>
+        </form>
       </div>
     </div>
 
     <!-- Producto 3 -->
-    <div class="card animate-on-scroll" data-sku="xolo-003">
+    <div class="card animate-on-scroll" data-sku="xolo-amanecer">
       <div class="product-media">
         <img
           src="https://i.imgur.com/PloLYl4.png"
@@ -1615,30 +1537,16 @@
         <p><strong>≈ $522 MXN</strong> Cada aurora, los sacerdotes exprimen limones sagrados para trazar sobre el Xoloitzcuintle un círculo de luz que purifica heridas y despierta la valentía, como si Tonatiuh mismo lo ungiera antes de una batalla cósmica.</p>
       </div>
       <div class="card-actions">
-        <div class="tonalli-offer" data-sku="xolo-003">
-          <p class="tonalli-offer__eyebrow">Pagar con RMZ (Tonalli DEX)</p>
-          <p class="tonalli-offer__description">Copia el Offer ID, pégalo en Tonalli &gt; DEX y compra RMZ con XEC. Los RMZ representan tu pago.</p>
-          <p class="tonalli-offer__amount"><span aria-hidden="true">💠</span><span><strong data-rmz-amount>— RMZ</strong> (referencial)</span></p>
-          <div class="tonalli-offer__code-row">
-            <code class="tonalli-offer__code" data-offer-code>Offer ID no disponible</code>
-            <button type="button" class="tonalli-offer__copy-btn" data-copy-offer>Copiar Offer ID</button>
-          </div>
-          <div class="tonalli-offer__links">
-            <a class="tonalli-offer__cta" href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer" data-open-tonalli>
-              Abrir RMZWallet Tonalli
-            </a>
-            <button type="button" class="tonalli-offer__link tonalli-offer__link--ghost" data-open-tonalli-modal>¿Cómo pagar?</button>
-          </div>
-          <form class="tonalli-offer__form" data-txid-form>
-            <label for="txid-xolo-003">Pega aquí tu TXID de compra (taker tx)</label>
-            <div class="tonalli-offer__form-row">
-              <input id="txid-xolo-003" class="tonalli-offer__input" name="txid" placeholder="Ej. abcd1234..." data-txid-input />
-              <button type="submit" class="tonalli-offer__submit">Enviar comprobante</button>
-            </div>
-          </form>
-          <p class="tonalli-offer__feedback" data-feedback aria-live="polite"></p>
-          <p class="tonalli-offer__helper">También puedes <a class="tonalli-offer__contact" href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C%20compr%C3%A9%20el%20producto%20SKU%20xolo-003.%20TXID:%20" target="_blank" rel="noopener noreferrer" data-contact-link>contactarnos por WhatsApp</a>.</p>
+        <p><strong>RMZ = comprobante digital de compra</strong></p>
+        <p>Precio: <span class="price-rmz">3.8</span> RMZ</p>
+        <div class="offer-id-box">
+          <span class="offer-id">REPLACE_WITH_TXID:1</span>
+          <button class="copy-offer-btn" type="button">Copiar Offer ID</button>
         </div>
+        <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">
+          Abrir RMZWallet Tonalli
+        </a>
+        <button class="tonalli-guide" type="button" data-open-tonalli-modal>¿Cómo pagar con Tonalli?</button>
         <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Bálsamo+Limón"
            class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
            data-item="Esencia Citlalinahuatl del Amanecer"
@@ -1646,11 +1554,16 @@
           <span aria-hidden="true">🟢</span>
           <span>Comprar por WhatsApp (Transferencia bancaria)</span>
         </a>
+        <button class="txid-toggle" type="button">Ya compré, pegar TXID</button>
+        <form class="txid-form" onsubmit="return false;">
+          <input type="text" name="txid" placeholder="Pega tu TXID aquí" required>
+          <button type="submit">Confirmar TXID</button>
+        </form>
       </div>
     </div>
 
     <!-- Producto 4 -->
-    <div class="card animate-on-scroll" data-sku="xolo-004">
+    <div class="card animate-on-scroll" data-sku="xolo-escudo">
       <div class="product-media">
         <img
           src="https://i.imgur.com/EQqSZqA.jpeg"
@@ -1664,30 +1577,16 @@
         <p><strong>≈ $522 MXN</strong> Una nube ritual de cítricos y hojas guardianas envuelve al can mestizo del inframundo, convirtiéndose en armadura sutil que Quetzalcóatl extiende para rechazar a los insectos como si fueran flechas perdidas en el viento nocturno.</p>
       </div>
       <div class="card-actions">
-        <div class="tonalli-offer" data-sku="xolo-004">
-          <p class="tonalli-offer__eyebrow">Pagar con RMZ (Tonalli DEX)</p>
-          <p class="tonalli-offer__description">Copia el Offer ID, pégalo en Tonalli &gt; DEX y compra RMZ con XEC. Los RMZ representan tu pago.</p>
-          <p class="tonalli-offer__amount"><span aria-hidden="true">💠</span><span><strong data-rmz-amount>— RMZ</strong> (referencial)</span></p>
-          <div class="tonalli-offer__code-row">
-            <code class="tonalli-offer__code" data-offer-code>Offer ID no disponible</code>
-            <button type="button" class="tonalli-offer__copy-btn" data-copy-offer>Copiar Offer ID</button>
-          </div>
-          <div class="tonalli-offer__links">
-            <a class="tonalli-offer__cta" href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer" data-open-tonalli>
-              Abrir RMZWallet Tonalli
-            </a>
-            <button type="button" class="tonalli-offer__link tonalli-offer__link--ghost" data-open-tonalli-modal>¿Cómo pagar?</button>
-          </div>
-          <form class="tonalli-offer__form" data-txid-form>
-            <label for="txid-xolo-004">Pega aquí tu TXID de compra (taker tx)</label>
-            <div class="tonalli-offer__form-row">
-              <input id="txid-xolo-004" class="tonalli-offer__input" name="txid" placeholder="Ej. abcd1234..." data-txid-input />
-              <button type="submit" class="tonalli-offer__submit">Enviar comprobante</button>
-            </div>
-          </form>
-          <p class="tonalli-offer__feedback" data-feedback aria-live="polite"></p>
-          <p class="tonalli-offer__helper">También puedes <a class="tonalli-offer__contact" href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C%20compr%C3%A9%20el%20producto%20SKU%20xolo-004.%20TXID:%20" target="_blank" rel="noopener noreferrer" data-contact-link>contactarnos por WhatsApp</a>.</p>
+        <p><strong>RMZ = comprobante digital de compra</strong></p>
+        <p>Precio: <span class="price-rmz">3.8</span> RMZ</p>
+        <div class="offer-id-box">
+          <span class="offer-id">REPLACE_WITH_TXID:1</span>
+          <button class="copy-offer-btn" type="button">Copiar Offer ID</button>
         </div>
+        <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">
+          Abrir RMZWallet Tonalli
+        </a>
+        <button class="tonalli-guide" type="button" data-open-tonalli-modal>¿Cómo pagar con Tonalli?</button>
         <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Repelente+Limón"
            class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
            data-item="Escudo de Bruma de Quetzalcóatl"
@@ -1695,11 +1594,16 @@
           <span aria-hidden="true">🟢</span>
           <span>Comprar por WhatsApp (Transferencia bancaria)</span>
         </a>
+        <button class="txid-toggle" type="button">Ya compré, pegar TXID</button>
+        <form class="txid-form" onsubmit="return false;">
+          <input type="text" name="txid" placeholder="Pega tu TXID aquí" required>
+          <button type="submit">Confirmar TXID</button>
+        </form>
       </div>
     </div>
 
     <!-- Producto 5 -->
-    <div class="card animate-on-scroll" data-sku="xolo-005">
+    <div class="card animate-on-scroll" data-sku="xolo-duo">
       <div class="product-media">
         <img
           src="https://i.imgur.com/b9GOJK6.jpeg"
@@ -1718,30 +1622,16 @@
         </ul>
       </div>
       <div class="card-actions">
-        <div class="tonalli-offer" data-sku="xolo-005">
-          <p class="tonalli-offer__eyebrow">Pagar con RMZ (Tonalli DEX)</p>
-          <p class="tonalli-offer__description">Copia el Offer ID, pégalo en Tonalli &gt; DEX y compra RMZ con XEC. Los RMZ representan tu pago.</p>
-          <p class="tonalli-offer__amount"><span aria-hidden="true">💠</span><span><strong data-rmz-amount>— RMZ</strong> (referencial)</span></p>
-          <div class="tonalli-offer__code-row">
-            <code class="tonalli-offer__code" data-offer-code>Offer ID no disponible</code>
-            <button type="button" class="tonalli-offer__copy-btn" data-copy-offer>Copiar Offer ID</button>
-          </div>
-          <div class="tonalli-offer__links">
-            <a class="tonalli-offer__cta" href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer" data-open-tonalli>
-              Abrir RMZWallet Tonalli
-            </a>
-            <button type="button" class="tonalli-offer__link tonalli-offer__link--ghost" data-open-tonalli-modal>¿Cómo pagar?</button>
-          </div>
-          <form class="tonalli-offer__form" data-txid-form>
-            <label for="txid-xolo-005">Pega aquí tu TXID de compra (taker tx)</label>
-            <div class="tonalli-offer__form-row">
-              <input id="txid-xolo-005" class="tonalli-offer__input" name="txid" placeholder="Ej. abcd1234..." data-txid-input />
-              <button type="submit" class="tonalli-offer__submit">Enviar comprobante</button>
-            </div>
-          </form>
-          <p class="tonalli-offer__feedback" data-feedback aria-live="polite"></p>
-          <p class="tonalli-offer__helper">También puedes <a class="tonalli-offer__contact" href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C%20compr%C3%A9%20el%20producto%20SKU%20xolo-005.%20TXID:%20" target="_blank" rel="noopener noreferrer" data-contact-link>contactarnos por WhatsApp</a>.</p>
+        <p><strong>RMZ = comprobante digital de compra</strong></p>
+        <p>Precio: <span class="price-rmz">3.8</span> RMZ</p>
+        <div class="offer-id-box">
+          <span class="offer-id">REPLACE_WITH_TXID:1</span>
+          <button class="copy-offer-btn" type="button">Copiar Offer ID</button>
         </div>
+        <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">
+          Abrir RMZWallet Tonalli
+        </a>
+        <button class="tonalli-guide" type="button" data-open-tonalli-modal>¿Cómo pagar con Tonalli?</button>
         <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+jabon+exfoliante"
            class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
            data-item="Dúo Ritual de Espuma del Mictlán"
@@ -1749,12 +1639,17 @@
           <span aria-hidden="true">🟢</span>
           <span>Comprar por WhatsApp (Transferencia bancaria)</span>
         </a>
+        <button class="txid-toggle" type="button">Ya compré, pegar TXID</button>
+        <form class="txid-form" onsubmit="return false;">
+          <input type="text" name="txid" placeholder="Pega tu TXID aquí" required>
+          <button type="submit">Confirmar TXID</button>
+        </form>
       </div>
     </div>
 
     
     <!-- Producto 6 -->
-    <div class="card animate-on-scroll" data-sku="xolo-006">
+    <div class="card animate-on-scroll" data-sku="xolo-bienestar">
       <div class="product-media">
         <img
           src="https://i.imgur.com/dAHwm7a.png"
@@ -1773,30 +1668,16 @@
         </ul>
       </div>
       <div class="card-actions">
-        <div class="tonalli-offer" data-sku="xolo-006">
-          <p class="tonalli-offer__eyebrow">Pagar con RMZ (Tonalli DEX)</p>
-          <p class="tonalli-offer__description">Copia el Offer ID, pégalo en Tonalli &gt; DEX y compra RMZ con XEC. Los RMZ representan tu pago.</p>
-          <p class="tonalli-offer__amount"><span aria-hidden="true">💠</span><span><strong data-rmz-amount>— RMZ</strong> (referencial)</span></p>
-          <div class="tonalli-offer__code-row">
-            <code class="tonalli-offer__code" data-offer-code>Offer ID no disponible</code>
-            <button type="button" class="tonalli-offer__copy-btn" data-copy-offer>Copiar Offer ID</button>
-          </div>
-          <div class="tonalli-offer__links">
-            <a class="tonalli-offer__cta" href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer" data-open-tonalli>
-              Abrir RMZWallet Tonalli
-            </a>
-            <button type="button" class="tonalli-offer__link tonalli-offer__link--ghost" data-open-tonalli-modal>¿Cómo pagar?</button>
-          </div>
-          <form class="tonalli-offer__form" data-txid-form>
-            <label for="txid-xolo-006">Pega aquí tu TXID de compra (taker tx)</label>
-            <div class="tonalli-offer__form-row">
-              <input id="txid-xolo-006" class="tonalli-offer__input" name="txid" placeholder="Ej. abcd1234..." data-txid-input />
-              <button type="submit" class="tonalli-offer__submit">Enviar comprobante</button>
-            </div>
-          </form>
-          <p class="tonalli-offer__feedback" data-feedback aria-live="polite"></p>
-          <p class="tonalli-offer__helper">También puedes <a class="tonalli-offer__contact" href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C%20compr%C3%A9%20el%20producto%20SKU%20xolo-006.%20TXID:%20" target="_blank" rel="noopener noreferrer" data-contact-link>contactarnos por WhatsApp</a>.</p>
+        <p><strong>RMZ = comprobante digital de compra</strong></p>
+        <p>Precio: <span class="price-rmz">13.8</span> RMZ</p>
+        <div class="offer-id-box">
+          <span class="offer-id">REPLACE_WITH_TXID:1</span>
+          <button class="copy-offer-btn" type="button">Copiar Offer ID</button>
         </div>
+        <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">
+          Abrir RMZWallet Tonalli
+        </a>
+        <button class="tonalli-guide" type="button" data-open-tonalli-modal>¿Cómo pagar con Tonalli?</button>
         <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Paquete+Bienestar+Integral+Xoloitzcuintle"
            class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
            data-item="Paquete Bienestar Integral Xoloitzcuintle"
@@ -1804,6 +1685,11 @@
           <span aria-hidden="true">🟢</span>
           <span>Comprar por WhatsApp (Transferencia bancaria)</span>
         </a>
+        <button class="txid-toggle" type="button">Ya compré, pegar TXID</button>
+        <form class="txid-form" onsubmit="return false;">
+          <input type="text" name="txid" placeholder="Pega tu TXID aquí" required>
+          <button type="submit">Confirmar TXID</button>
+        </form>
       </div>
     </div>
 
@@ -1912,17 +1798,16 @@
       <button class="xec-modal__close" id="closeTonalliModal" type="button" aria-label="Cerrar guía Tonalli DEX">
         <i class="fa-solid fa-xmark" aria-hidden="true"></i>
       </button>
-      <h2 class="xec-modal__title" id="tonalliModalTitle">¿Cómo pagar con RMZ (Tonalli DEX)?</h2>
+      <h2 class="xec-modal__title" id="tonalliModalTitle">¿Cómo pagar con Tonalli (Offer ID)?</h2>
       <ol class="xec-modal__list">
-        <li>Paso 1) Abre <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">https://cartera.xolosarmy.xyz</a> y entra a tu RMZWallet Tonalli.</li>
-        <li>Paso 2) Ve a DEX, pega el Offer ID y pulsa “Cargar oferta”.</li>
-        <li>Paso 3) Confirma “Comprar RMZ”. Copia el TXID de compra y pégalo aquí para validar tu pedido.</li>
+        <li>Abre tu cartera Tonalli y ve a la sección DEX.</li>
+        <li>Selecciona la opción para pagar con Offer ID.</li>
+        <li>Pega el Offer ID que copiaste en el campo correspondiente.</li>
+        <li>Ingresa el monto exacto de <strong>RMZ</strong> y confirma la transacción.</li>
+        <li>Espera la confirmación y copia tu TXID de la transacción.</li>
       </ol>
       <div class="xec-payment-info">
-        <p>Tip: Ten tu Offer ID copiado antes de abrir Tonalli para agilizar el flujo.</p>
-        <div class="xec-buttons">
-          <a class="open-wallet" href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">Abrir RMZWallet Tonalli</a>
-        </div>
+        <p>⚠️ Recuerda verificar siempre la dirección y la red antes de enviar.</p>
       </div>
     </div>
   </div>
@@ -1943,20 +1828,12 @@ document.addEventListener('click', function(e){
     document.addEventListener('DOMContentLoaded', () => {
       const isMobile = window.matchMedia('(max-width: 768px)').matches;
       const PRODUCT_OFFERS = {
-        'xolo-001': { name: 'Ungüento Solar del Guardián Xólotl', rmzAmount: 80, offerId: 'REPLACE_ME_TXID:1' }, // TODO: Actualizar Offer ID real
-        'xolo-002': { name: 'Néctar Onírico de Tlazōlteōtl', rmzAmount: 80, offerId: 'REPLACE_ME_TXID:1' }, // TODO: Actualizar Offer ID real
-        'xolo-003': { name: 'Esencia Citlalinahuatl del Amanecer', rmzAmount: 80, offerId: 'REPLACE_ME_TXID:1' }, // TODO: Actualizar Offer ID real
-        'xolo-004': { name: 'Escudo de Bruma de Quetzalcóatl', rmzAmount: 80, offerId: 'REPLACE_ME_TXID:1' }, // TODO: Actualizar Offer ID real
-        'xolo-005': { name: 'Dúo Ritual de Espuma del Mictlán', rmzAmount: 90, offerId: 'REPLACE_ME_TXID:1' }, // TODO: Actualizar Offer ID real
-        'xolo-006': { name: 'Paquete Bienestar Integral Xoloitzcuintle', rmzAmount: 300, offerId: 'REPLACE_ME_TXID:1' }, // TODO: Actualizar Offer ID real
-      };
-      const CONTACT_WHATSAPP_BASE = 'https://wa.me/message/435RTKGJLTX2J1';
-      const TONALLI_STORAGE_KEY = 'tonalliDexTxids';
-
-      const safeTrack = (eventName, sku) => {
-        if (window.gtag) {
-          gtag('event', eventName, { item_name: sku || 'desconocido' });
-        }
+        'xolo-unguento': { priceXEC: 1900000, rmz: 3.8, offerId: 'REPLACE_WITH_TXID:1' },
+        'xolo-nectar': { priceXEC: 1900000, rmz: 3.8, offerId: 'REPLACE_WITH_TXID:1' },
+        'xolo-amanecer': { priceXEC: 1900000, rmz: 3.8, offerId: 'REPLACE_WITH_TXID:1' },
+        'xolo-escudo': { priceXEC: 1900000, rmz: 3.8, offerId: 'REPLACE_WITH_TXID:1' },
+        'xolo-duo': { priceXEC: 1900000, rmz: 3.8, offerId: 'REPLACE_WITH_TXID:1' },
+        'xolo-bienestar': { priceXEC: 6900000, rmz: 13.8, offerId: 'REPLACE_WITH_TXID:1' },
       };
 
       const copyTextWithFallback = async (text) => {
@@ -1976,84 +1853,45 @@ document.addEventListener('click', function(e){
         return success;
       };
 
-      const updateContactLinkHref = (linkEl, sku, txid = '') => {
-        if (!linkEl) return;
-        const message = `Hola, compré el producto SKU ${sku}. TXID: ${txid || 'pendiente'}`;
-        linkEl.href = `${CONTACT_WHATSAPP_BASE}?text=${encodeURIComponent(message)}`;
-      };
-
-      const hydrateTonalliOffers = () => {
-        const offers = document.querySelectorAll('.tonalli-offer');
-        offers.forEach((offerCard) => {
-          const sku = offerCard.dataset.sku;
+      const updateOfferBlocks = () => {
+        document.querySelectorAll('.card[data-sku]').forEach((card) => {
+          const sku = card.dataset.sku;
           const config = PRODUCT_OFFERS[sku];
-          const codeEl = offerCard.querySelector('[data-offer-code]');
-          const rmzEl = offerCard.querySelector('[data-rmz-amount]');
-          const copyBtn = offerCard.querySelector('[data-copy-offer]');
-          const tonalliLink = offerCard.querySelector('[data-open-tonalli]');
-          const form = offerCard.querySelector('[data-txid-form]');
-          const input = offerCard.querySelector('[data-txid-input]');
-          const feedback = offerCard.querySelector('[data-feedback]');
-          const contactLink = offerCard.querySelector('[data-contact-link]');
+          const priceEl = card.querySelector('.price-rmz');
+          const offerEl = card.querySelector('.offer-id');
+          const copyBtn = card.querySelector('.copy-offer-btn');
+          const txToggle = card.querySelector('.txid-toggle');
+          const txForm = card.querySelector('.txid-form');
+          const txInput = txForm?.querySelector('input[name="txid"]');
 
-          const offerId = config?.offerId || 'REPLACE_ME_TXID:1';
-          const rmzAmount = config?.rmzAmount ? `${config.rmzAmount} RMZ` : 'RMZ por definir';
-
-          if (codeEl) {
-            codeEl.textContent = config ? offerId : 'Offer ID no disponible (configúralo).';
+          if (config) {
+            if (priceEl) priceEl.textContent = config.rmz;
+            if (offerEl) offerEl.textContent = config.offerId;
           }
-          if (rmzEl) {
-            rmzEl.textContent = rmzAmount;
-          }
-
-          updateContactLinkHref(contactLink, sku, '');
 
           copyBtn?.addEventListener('click', async () => {
-            await copyTextWithFallback(offerId);
-            if (feedback) {
-              feedback.textContent = '¡Copiado! Pega el Offer ID en Tonalli > DEX.';
-              feedback.style.color = 'var(--color-highlight-strong)';
-            }
-            if (copyBtn) {
-              const originalText = copyBtn.textContent;
-              copyBtn.textContent = '¡Copiado!';
-              setTimeout(() => {
-                copyBtn.textContent = originalText || 'Copiar Offer ID';
-                if (feedback) feedback.textContent = '';
-              }, 2600);
-            }
-            safeTrack('copy_offer_id', sku);
+            const toCopy = config?.offerId || offerEl?.textContent || '';
+            if (!toCopy) return;
+            await copyTextWithFallback(toCopy);
+            copyBtn.textContent = '¡Copiado!';
+            setTimeout(() => {
+              copyBtn.textContent = 'Copiar Offer ID';
+            }, 1500);
           });
 
-          tonalliLink?.addEventListener('click', () => safeTrack('open_tonalli', sku));
+          txToggle?.addEventListener('click', () => {
+            if (!txForm) return;
+            txForm.style.display = txForm.style.display === 'block' ? 'none' : 'block';
+          });
 
-          form?.addEventListener('submit', (event) => {
+          txForm?.addEventListener('submit', (event) => {
             event.preventDefault();
-            const txid = (input?.value || '').trim();
-            if (!txid) {
-              if (feedback) {
-                feedback.textContent = 'Ingresa un TXID de compra válido.';
-                feedback.style.color = 'var(--color-highlight)';
-              }
-              return;
+            const txid = txInput?.value.trim();
+            if (txid) {
+              alert('TXID recibido: ' + txid);
+              txForm.reset();
+              txForm.style.display = 'none';
             }
-
-            const record = { sku, txid, timestamp: new Date().toISOString() };
-            try {
-              const current = JSON.parse(localStorage.getItem(TONALLI_STORAGE_KEY) || '[]');
-              current.push(record);
-              localStorage.setItem(TONALLI_STORAGE_KEY, JSON.stringify(current));
-            } catch (err) {
-              console.error('No se pudo guardar el TXID en localStorage', err);
-            }
-
-            if (feedback) {
-              feedback.textContent = 'Recibido. Te contactaremos/validaremos tu pago.';
-              feedback.style.color = 'var(--color-highlight-strong)';
-            }
-            updateContactLinkHref(contactLink, sku, txid);
-            if (input) input.value = '';
-            safeTrack('submit_txid', sku);
           });
         });
       };
@@ -2220,8 +2058,6 @@ document.addEventListener('click', function(e){
       tonalliOpenButtons.forEach((button) => {
         button.addEventListener('click', (event) => {
           event.preventDefault();
-          const sku = button.closest('.tonalli-offer')?.dataset.sku;
-          safeTrack('open_tonalli', sku);
           openTonalliModal();
         });
       });
@@ -2254,7 +2090,7 @@ document.addEventListener('click', function(e){
         }
       });
 
-      hydrateTonalliOffers();
+      updateOfferBlocks();
 
       // Animaciones al hacer scroll
       const revealObserver = new IntersectionObserver(
