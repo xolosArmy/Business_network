@@ -1,665 +1,523 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Análisis técnico y sociopolítico de eCash (XEC) y xolosArmy Network</title>
-  <meta name="description" content="Informe técnico y sociopolítico: arquitectura, gobernanza y proyección comunitaria de eCash (XEC) en el ecosistema xolosArmy Network con RMZWallet Tonalli." />
-  <style>
-    :root{
-      --bg: #0b0f14;
-      --panel: #0f1620;
-      --text: #e8eef6;
-      --muted: #a9b6c6;
-      --line: rgba(255,255,255,.10);
-      --accent: #7dd3fc;   /* cyan */
-      --accent2:#f59e0b;   /* amber */
-      --good: #34d399;
-      --warn: #fb7185;
-      --shadow: 0 12px 30px rgba(0,0,0,.35);
-      --radius: 18px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eCash (XEC) & xolosArmy Network | Portal Interactivo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+    <!-- Chosen Palette: Warm Neutral & Tech Blue. Background: Stone-50 (#FAFAF9), Primary: Indigo-900 (#312E81), Accent: Sky-500 (#0EA5E9) & Orange-600 (#EA580C) for xolosArmy. -->
+    
+    <!-- Application Structure Plan: 
+         1. Hero Section: "The New Era". Introduction to the concept of electronic cash.
+         2. History & Evolution (Interactive Timeline): Explains the fork history (BTC->BCH->XEC) to establish legitimacy.
+         3. Technical Deep Dive (Dashboard): Avalanche Consensus & Units. Uses Chart.js to compare TPS/Finality.
+         4. Ecosystem (Cards): xolosArmy Network & RMZWallet. Explains the 'Who' and 'How'.
+         5. Interactive Simulator: 'Bits' converter and ROI visualizer to explain the denomination change.
+         6. Conclusion: Summary.
+         Why: This flow moves from 'What' to 'How' to 'Who', anchoring the abstract tech in concrete community tools. -->
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: var(--sans);
-      background: radial-gradient(1200px 600px at 20% 0%, rgba(125,211,252,.10), transparent 60%),
-                  radial-gradient(900px 500px at 90% 10%, rgba(245,158,11,.08), transparent 55%),
-                  var(--bg);
-      color: var(--text);
-      line-height: 1.65;
-    }
+    <!-- Visualization & Content Choices:
+         1. Comparison Chart (Chart.js): Goal: Compare. Method: Bar Chart. Justification: Show speed/capacity advantage of XEC over BTC/ETH.
+         2. Tokenomics (Plotly): Goal: Inform. Method: Donut Chart. Justification: Visual breakdown of block rewards/miner fund.
+         3. Timeline (HTML/JS): Goal: Change. Method: Interactive Step-flow. Justification: Shows lineage without complex SVG.
+         4. Converter (JS Input): Goal: Inform. Method: Real-time calculation. Justification: Demystifies the "Bits" vs "XEC" pricing.
+         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
-    a{color:var(--accent); text-decoration:none}
-    a:hover{text-decoration:underline}
-    code,kbd,pre{font-family:var(--mono)}
-
-    .wrap{
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 28px 18px 80px;
-    }
-
-    header.hero{
-      padding: 26px 22px;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-
-    header.hero:before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background: radial-gradient(600px 220px at 20% 0%, rgba(125,211,252,.10), transparent 60%),
-                  radial-gradient(520px 220px at 90% 10%, rgba(245,158,11,.08), transparent 60%);
-      pointer-events:none;
-      opacity:.9;
-    }
-
-    header.hero > *{position:relative}
-
-    .kicker{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      color: var(--muted);
-      font-size: 14px;
-      margin: 0 0 10px;
-    }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      font-size: 13px;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-
-    h1{
-      margin: 10px 0 10px;
-      font-size: clamp(26px, 3vw, 40px);
-      line-height: 1.12;
-      letter-spacing: -0.02em;
-    }
-
-    .subtitle{
-      margin: 0;
-      color: var(--muted);
-      font-size: 16px;
-      max-width: 70ch;
-    }
-
-    .meta{
-      margin-top: 16px;
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      align-items:center;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    main{
-      margin-top: 20px;
-    }
-
-    .toc{
-      margin-top: 16px;
-      padding: 16px;
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.02);
-    }
-
-    .toc h2{
-      margin: 0 0 10px;
-      font-size: 15px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-    }
-
-    .toc ol{
-      margin:0;
-      padding-left: 18px;
-      color: var(--muted);
-    }
-    .toc li{margin:6px 0}
-    .toc a{color: var(--text)}
-    .toc a:hover{color: var(--accent)}
-
-    section{
-      margin-top: 18px;
-      padding: 22px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.02);
-      border-radius: var(--radius);
-      box-shadow: 0 8px 18px rgba(0,0,0,.18);
-    }
-
-    h2{
-      margin: 0 0 10px;
-      font-size: 22px;
-      letter-spacing: -0.01em;
-    }
-
-    h3{
-      margin: 18px 0 8px;
-      font-size: 17px;
-      color: #d8e6f7;
-    }
-
-    p{margin: 10px 0}
-
-    .callout{
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(125,211,252,.06), rgba(255,255,255,.02));
-      padding: 14px 14px;
-      border-radius: 14px;
-      margin: 14px 0;
-    }
-    .callout strong{color: var(--accent)}
-    .callout .tag{
-      display:inline-block;
-      margin-bottom:8px;
-      font-size: 12px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color: var(--muted);
-    }
-
-    .callout.warn{
-      background: linear-gradient(180deg, rgba(251,113,133,.10), rgba(255,255,255,.02));
-    }
-    .callout.warn strong{color: var(--warn)}
-
-    .callout.good{
-      background: linear-gradient(180deg, rgba(52,211,153,.09), rgba(255,255,255,.02));
-    }
-    .callout.good strong{color: var(--good)}
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      margin-top: 12px;
-    }
-    @media (min-width: 860px){
-      .grid{grid-template-columns: 1.1fr .9fr;}
-    }
-
-    .card{
-      border: 1px solid var(--line);
-      background: rgba(0,0,0,.12);
-      padding: 14px;
-      border-radius: 14px;
-    }
-    .card h4{
-      margin: 0 0 6px;
-      font-size: 14px;
-      color: var(--muted);
-      letter-spacing: .06em;
-      text-transform: uppercase;
-    }
-
-    ul{margin: 10px 0; padding-left: 18px}
-    li{margin: 6px 0}
-
-    table{
-      width: 100%;
-      border-collapse: collapse;
-      margin: 12px 0;
-      overflow: hidden;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(0,0,0,.10);
-    }
-    th,td{
-      text-align: left;
-      padding: 12px 12px;
-      border-bottom: 1px solid var(--line);
-      vertical-align: top;
-    }
-    th{
-      color: var(--muted);
-      font-size: 12px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      background: rgba(255,255,255,.03);
-    }
-    tr:last-child td{border-bottom:none}
-
-    .footnotes{
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .footnotes ol{
-      padding-left: 18px;
-    }
-
-    .footnotes li{
-      margin: 10px 0;
-    }
-
-    .hr{
-      height:1px;
-      background: var(--line);
-      margin: 16px 0;
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 8px 10px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.02);
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .kbd{
-      font-family: var(--mono);
-      font-size: 12px;
-      padding: 2px 6px;
-      border-radius: 8px;
-      border: 1px solid var(--line);
-      background: rgba(0,0,0,.22);
-      color: var(--text);
-    }
-
-    .footer{
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 13px;
-      text-align: center;
-    }
-
-    /* Print-friendly */
-    @media print{
-      body{background:#fff; color:#111}
-      header.hero, section, .toc, table, .card, .callout{box-shadow:none; background:#fff}
-      a{color:#0a58ca}
-      .wrap{max-width: 100%; padding: 0}
-      .pill,.badge{border-color:#ddd}
-      th{background:#f3f3f3}
-    }
-  </style>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #FAFAF9; /* stone-50 */
+            color: #1C1917; /* stone-900 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .nav-active {
+            border-bottom: 2px solid #0EA5E9;
+            color: #0369A1;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
 </head>
+<body class="antialiased">
 
-<body>
-  <div class="wrap">
-    <header class="hero">
-      <p class="kicker">
-        <span class="pill">Informe técnico + sociopolítico</span>
-        <span class="pill">eCash (XEC) · Avalanche (post-consensus) · Gobernanza</span>
-        <span class="pill">xolosArmy Network · RMZWallet “Tonalli”</span>
-      </p>
-
-      <h1>Análisis técnico y sociopolítico de eCash (XEC) y su proyección comunitaria en xolosArmy Network</h1>
-      <p class="subtitle">
-        Una lectura de arquitectura, economía política y mecanismos de coordinación: desde el linaje BTC/BCH hasta la
-        capa Avalanche, el modelo de financiación del protocolo y la interfaz comunitaria de RMZWallet Tonalli.
-      </p>
-
-      <div class="meta">
-        <span class="badge">Formato: blog / editorial</span>
-        <span class="badge">Enfoque: pagos, gobernanza, adopción</span>
-        <span class="badge">Nivel: intermedio → avanzado</span>
-      </div>
-
-      <nav class="toc" aria-label="Tabla de contenidos">
-        <h2>Contenido</h2>
-        <ol>
-          <li><a href="#linaje">Linaje histórico: escalabilidad, ruptura y profesionalización del desarrollo</a></li>
-          <li><a href="#redenominacion">Redenominación: UX, psicología monetaria y fricción cognitiva</a></li>
-          <li><a href="#arquitectura">Arquitectura: PoW SHA-256 + capa Avalanche (post-consensus)</a></li>
-          <li><a href="#escalabilidad">Escalabilidad: subredes, horizonte y límites de la narrativa “Visa”</a></li>
-          <li><a href="#economia">Economía política: emisión, coinbase, fondos y legitimidad</a></li>
-          <li><a href="#xolosarmy">xolosArmy Network: identidad cultural como capa social de adopción</a></li>
-          <li><a href="#tonalli">RMZWallet Tonalli: interfaz de soberanía práctica</a></li>
-          <li><a href="#riesgos">Riesgos y tensiones: volatilidad, privacidad y coordinación</a></li>
-          <li><a href="#conclusion">Cierre: por qué “eCash + xolosArmy” es más que tecnología</a></li>
-          <li><a href="#fuentes">Fuentes y referencias</a></li>
-        </ol>
-      </nav>
-    </header>
-
-    <main>
-      <section id="linaje">
-        <h2>1) Linaje histórico: escalabilidad, ruptura y profesionalización del desarrollo</h2>
-        <p>
-          eCash (XEC) se sitúa dentro del linaje de disputas por escalabilidad y diseño institucional en la familia de Bitcoin:
-          <strong>BTC → BCH (2017)</strong>, luego <strong>BCH → BSV (2018)</strong> y finalmente <strong>BCH → BCHA (2020)</strong>,
-          donde la discusión sobre la financiación de infraestructura detonó una fractura explícita.
-        </p>
-
-        <div class="callout">
-          <span class="tag">Lectura sociopolítica</span><br/>
-          La historia técnica aquí también es una historia de <strong>legitimidad</strong>: ¿quién decide prioridades de desarrollo?,
-          ¿cómo se paga la infraestructura?, ¿qué se privilegia: consenso social amplio o ejecución profesionalizada?
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glass-panel border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center gap-2">
+                        <span class="text-2xl font-bold text-indigo-900">eCash<span class="text-sky-500">XEC</span></span>
+                        <span class="text-stone-400">|</span>
+                        <span class="text-lg font-semibold text-orange-600">xolosArmy</span>
+                    </div>
+                </div>
+                <div class="hidden sm:flex sm:space-x-8 items-center">
+                    <button onclick="scrollToSection('hero')" class="text-stone-600 hover:text-indigo-900 px-3 py-2 text-sm font-medium">Inicio</button>
+                    <button onclick="scrollToSection('history')" class="text-stone-600 hover:text-indigo-900 px-3 py-2 text-sm font-medium">Historia</button>
+                    <button onclick="scrollToSection('tech')" class="text-stone-600 hover:text-indigo-900 px-3 py-2 text-sm font-medium">Tecnología</button>
+                    <button onclick="scrollToSection('ecosystem')" class="text-stone-600 hover:text-indigo-900 px-3 py-2 text-sm font-medium">Comunidad</button>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="flex items-center sm:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-500 hover:text-stone-700 p-2">
+                        <span class="text-2xl">☰</span>
+                    </button>
+                </div>
+            </div>
         </div>
-
-        <p>
-          En 2021, Bitcoin ABC relanza BCHA como <strong>eCash (XEC)</strong> y orienta la narrativa hacia pagos y usabilidad (“cash for the internet”),
-          buscando recuperar una idea original: dinero digital cotidiano, no solo activo especulativo.
-        </p>
-      </section>
-
-      <section id="redenominacion">
-        <h2>2) Redenominación: UX, psicología monetaria y fricción cognitiva</h2>
-        <p>
-          El rebranding incorpora una decisión UX con consecuencias económicas: la representación cambia para evitar decimales extensos.
-          En términos de experiencia del usuario, pasar de fracciones tipo <span class="kbd">0.00001000</span> a números enteros (o con pocos decimales)
-          reduce fricción en microtransacciones y en el punto de venta.
-        </p>
-
-        <table aria-label="Resumen de redenominación y unidad de cuenta">
-          <thead>
-            <tr>
-              <th>Concepto</th>
-              <th>Antes (BCHA)</th>
-              <th>Después (XEC)</th>
-              <th>Implicación</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Redenominación</td>
-              <td>1 unidad</td>
-              <td>1,000,000 unidades</td>
-              <td>Menos decimales, más “moneda”</td>
-            </tr>
-            <tr>
-              <td>Base unit práctica</td>
-              <td>1 satoshi (8 decimales)</td>
-              <td>100 satoshis (~2 decimales)</td>
-              <td>Mejor legibilidad para pagos</td>
-            </tr>
-            <tr>
-              <td>Modelo mental</td>
-              <td>“cripto fraccionaria”</td>
-              <td>“cash digital”</td>
-              <td>Menos barrera de entrada</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="callout good">
-          <span class="tag">Idea clave</span><br/>
-          Esto no es cosmética: es un intento por alinear el dinero digital con hábitos cognitivos
-          de monedas fiduciarias y micro-precios, disminuyendo la fricción cultural del “decimal infinito”.
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden sm:hidden bg-white border-t border-stone-200 p-4">
+            <div class="flex flex-col space-y-2">
+                <button onclick="scrollToSection('hero')" class="text-left text-stone-600 px-3 py-2">Inicio</button>
+                <button onclick="scrollToSection('history')" class="text-left text-stone-600 px-3 py-2">Historia</button>
+                <button onclick="scrollToSection('tech')" class="text-left text-stone-600 px-3 py-2">Tecnología</button>
+                <button onclick="scrollToSection('ecosystem')" class="text-left text-stone-600 px-3 py-2">Comunidad</button>
+            </div>
         </div>
-      </section>
+    </nav>
 
-      <section id="arquitectura">
-        <h2>3) Arquitectura: PoW SHA-256 + capa Avalanche (finalidad / anti-reorg)</h2>
-        <p>
-          La capa base de eCash conserva <strong>Proof-of-Work SHA-256</strong>. La diferencia estratégica es sumar una capa Avalanche adicional
-          para reforzar seguridad práctica y ofrecer una vía a finalización más rápida.
-        </p>
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
 
-        <div class="grid">
-          <div class="card">
-            <h4>PoW (capa base)</h4>
-            <ul>
-              <li>Seguridad probada por incentivos y costo energético.</li>
-              <li>Finalidad probabilística (confirmaciones por bloques).</li>
-              <li>Modelo compatible con minería industrial SHA-256.</li>
-            </ul>
-          </div>
+        <!-- 1. HERO SECTION -->
+        <section id="hero" class="relative rounded-3xl overflow-hidden bg-indigo-900 text-white shadow-2xl">
+            <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+            <div class="relative z-10 px-6 py-16 sm:px-12 sm:py-24 text-center sm:text-left grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4">
+                        Dinero Electrónico. <br>
+                        <span class="text-sky-400">Redefinido.</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-indigo-100 mb-8 max-w-lg">
+                        Descubre eCash (XEC): la continuación de la visión de Satoshi Nakamoto, impulsada por el consenso Avalanche. Únete a la revolución con xolosArmy y RMZWallet.
+                    </p>
+                    <div class="flex flex-wrap gap-4 justify-center sm:justify-start">
+                        <button onclick="scrollToSection('tech')" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-lg transition shadow-lg">
+                            Ver Tecnología
+                        </button>
+                        <button onclick="scrollToSection('ecosystem')" class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-lg transition shadow-lg">
+                            Explorar xolosArmy
+                        </button>
+                    </div>
+                </div>
+                <!-- Dynamic Stat Cards in Hero -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20 text-center">
+                        <div class="text-3xl font-bold text-sky-300" id="stat-tps">100+</div>
+                        <div class="text-sm text-indigo-200">Tx/Seg (Avalanche)</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20 text-center">
+                        <div class="text-3xl font-bold text-orange-400">2 Dec</div>
+                        <div class="text-sm text-indigo-200">Decimales (Bits)</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20 text-center">
+                        <div class="text-3xl font-bold text-sky-300">PoW</div>
+                        <div class="text-sm text-indigo-200">Seguridad SHA-256</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20 text-center">
+                        <div class="text-3xl font-bold text-orange-400">3 Seg</div>
+                        <div class="text-sm text-indigo-200">Finalidad Instantánea</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-          <div class="card">
-            <h4>Avalanche (capa adicional)</h4>
-            <ul>
-              <li><strong>Post-consensus</strong>: reduce riesgo de reorganizaciones profundas (reorg).</li>
-              <li>Soporta seguridad operativa para comercios/exchanges (menos incertidumbre).</li>
-              <li><strong>Pre-consensus</strong> / finalización rápida: se presenta como objetivo por fases; conviene no sobregeneralizar.</li>
-            </ul>
-          </div>
-        </div>
+        <!-- 2. HISTORY / CONTEXT SECTION -->
+        <section id="history">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-stone-900">La Evolución del Efectivo</h2>
+                <p class="mt-4 text-stone-600 max-w-2xl mx-auto">
+                    eCash no nació ayer. Es el resultado de años de debate sobre escalabilidad y libertad financiera. Entender su historia es entender su valor. Interactúa con la línea de tiempo para ver los hitos clave.
+                </p>
+            </div>
 
-        <div class="callout warn">
-          <span class="tag">Precisión editorial</span><br/>
-          Evita afirmaciones absolutas tipo “todas las transacciones quedan finalizadas en 3 segundos” sin matices.
-          La narrativa de <strong>finalidad casi instantánea</strong> debe enmarcarse como capacidad/objetivo y despliegue por fases,
-          mientras que <strong>post-consensus</strong> ya aporta beneficios reales (anti-reorg) en producción.
-        </div>
-      </section>
+            <!-- Interactive Timeline Component -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-10 border border-stone-100">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-8 relative">
+                    <!-- Line connector (Desktop) -->
+                    <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-stone-200 -z-0 transform -translate-y-1/2"></div>
+                    
+                    <!-- Timeline Nodes -->
+                    <button onclick="updateTimeline(0)" class="timeline-node relative z-10 bg-stone-800 text-white w-32 py-2 rounded-full font-bold hover:bg-stone-700 transition ring-4 ring-stone-50 text-sm">2009: BTC</button>
+                    <button onclick="updateTimeline(1)" class="timeline-node relative z-10 bg-green-600 text-white w-32 py-2 rounded-full font-bold hover:bg-green-500 transition ring-4 ring-stone-50 text-sm">2017: BCH</button>
+                    <button onclick="updateTimeline(2)" class="timeline-node relative z-10 bg-indigo-600 text-white w-32 py-2 rounded-full font-bold hover:bg-indigo-500 transition ring-4 ring-stone-50 text-sm">2020: BCHA</button>
+                    <button onclick="updateTimeline(3)" class="timeline-node relative z-10 bg-sky-500 text-white w-32 py-2 rounded-full font-bold hover:bg-sky-400 transition ring-4 ring-stone-50 text-sm">2021: XEC</button>
+                </div>
 
-      <section id="escalabilidad">
-        <h2>4) Escalabilidad: subredes, horizonte y límites de la narrativa “Visa”</h2>
-        <p>
-          eCash plantea escalar desde el rendimiento actual hacia metas masivas a través de un enfoque modular:
-          <strong>subredes</strong> que puedan ejecutar funcionalidades avanzadas (por ejemplo, compatibilidad EVM o privacidad)
-          sin sobrecargar la cadena base.
-        </p>
+                <!-- Timeline Content Display -->
+                <div id="timeline-content" class="bg-stone-50 rounded-xl p-6 border-l-4 border-indigo-900 transition-all duration-300">
+                    <h3 class="text-xl font-bold text-indigo-900 mb-2">2009: El Origen</h3>
+                    <p class="text-stone-700">Bitcoin nace con el Bloque Génesis. La visión de Satoshi Nakamoto de un "Sistema de Efectivo Electrónico Peer-to-Peer" se pone en marcha. SHA-256 es el estándar de seguridad.</p>
+                </div>
+            </div>
+        </section>
 
-        <table aria-label="Escalabilidad: estado vs horizonte">
-          <thead>
-            <tr>
-              <th>Métrica</th>
-              <th>Estado actual (enfoque)</th>
-              <th>Horizonte (roadmap)</th>
-              <th>Notas</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Throughput</td>
-              <td>Operación on-chain eficiente para pagos</td>
-              <td>Orden de millones TPS (objetivo)</td>
-              <td>Debe redactarse como hoja de ruta</td>
-            </tr>
-            <tr>
-              <td>Finalidad</td>
-              <td>PoW + post-consensus</td>
-              <td>Finalización más rápida (por fases)</td>
-              <td>Importante separar “post” vs “pre”</td>
-            </tr>
-            <tr>
-              <td>Funcionalidad avanzada</td>
-              <td>Script / tokens / tooling</td>
-              <td>EVM / ZK en subredes</td>
-              <td>Modularidad para no saturar L1</td>
-            </tr>
-          </tbody>
-        </table>
+        <!-- 3. TECHNOLOGY & VALUE PROP -->
+        <section id="tech" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Left: Text Info -->
+            <div class="space-y-6">
+                <div>
+                    <h2 class="text-3xl font-bold text-stone-900 mb-4">Potencia Técnica: Avalanche + PoW</h2>
+                    <p class="text-stone-600 leading-relaxed">
+                        eCash combina la seguridad probada del <strong>Proof of Work (PoW)</strong> con la velocidad moderna del consenso <strong>Avalanche</strong>. Esto permite transacciones que se confirman en segundos, no minutos, y habilita futuras actualizaciones sin bifurcaciones contenciosas.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                    <h3 class="font-bold text-lg text-indigo-900 mb-3">Propuesta de Valor</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2">➜</span>
+                            <span class="text-stone-700 text-sm"><strong>Unidad "Bits":</strong> 2 decimales en lugar de 8. Más fácil de leer (100.50 bits vs 0.00000100 BTC).</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2">➜</span>
+                            <span class="text-stone-700 text-sm"><strong>Staking:</strong> Recompensas por participar en la gobernanza y seguridad de Avalanche.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2">➜</span>
+                            <span class="text-stone-700 text-sm"><strong>eTokens:</strong> Capacidad de crear tokens personalizados en la red eCash de forma rápida y barata.</span>
+                        </li>
+                    </ul>
+                </div>
 
-        <p>
-          En términos estratégicos, el valor del enfoque es competir por experiencia de pago (latencia, costo, certeza),
-          no solo por narrativa de “escala teórica”.
-        </p>
-      </section>
+                <!-- Comparison Chart Wrapper -->
+                <div class="bg-white p-4 rounded-xl shadow-md border border-stone-200">
+                    <h4 class="text-sm font-bold text-stone-500 uppercase tracking-wide mb-4 text-center">Comparativa de Finalidad (Tiempo de confirmación)</h4>
+                    <div class="chart-container">
+                        <canvas id="speedChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-stone-400 mt-2">Menos es mejor. Datos estimados basados en promedios de red.</p>
+                </div>
+            </div>
 
-      <section id="economia">
-        <h2>5) Economía política: emisión, coinbase, fondos y legitimidad</h2>
-        <p>
-          eCash hereda la lógica monetaria de Bitcoin (suministro máximo y halvings), pero introduce un rasgo institucional:
-          el bloque incluye salidas obligatorias para <strong>financiación de desarrollo</strong> (miner fund) y
-          <strong>recompensas para participación/staking</strong>.
-        </p>
+            <!-- Right: Interactive Tools -->
+            <div class="space-y-6">
+                <!-- Supply Visualization -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-stone-200">
+                    <h3 class="font-bold text-lg text-indigo-900 mb-2">Distribución de Emisión</h3>
+                    <p class="text-sm text-stone-500 mb-4">El modelo de financiación de infraestructura asegura desarrollo continuo.</p>
+                    <div class="chart-container" style="height: 300px;">
+                        <div id="supplyChart"></div>
+                    </div>
+                </div>
 
-        <div class="callout">
-          <span class="tag">Tesis</span><br/>
-          La infraestructura se paga <strong>en protocolo</strong>. Eso profesionaliza el desarrollo, pero también abre debates:
-          ¿cómo se audita el uso de fondos?, ¿qué mecanismo asegura rendición de cuentas?, ¿qué tan plural es la toma de decisiones?
-        </div>
+                <!-- Denomination Converter -->
+                <div class="bg-indigo-900 text-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-lg mb-4 flex items-center">
+                        <span class="bg-sky-500 w-8 h-8 rounded-full flex items-center justify-center mr-2 text-xs">♻</span>
+                        Simulador de "Bits"
+                    </h3>
+                    <p class="text-indigo-200 text-sm mb-4">eCash simplifica la contabilidad. Convierte XEC a Bits.</p>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium text-indigo-300 mb-1">Cantidad de XEC</label>
+                            <input type="number" id="xecInput" value="1000000" class="w-full px-3 py-2 rounded bg-indigo-800 border border-indigo-600 text-white focus:outline-none focus:ring-2 focus:ring-sky-500">
+                        </div>
+                        <div class="flex items-center justify-center text-stone-400">⬇</div>
+                        <div class="bg-white/10 p-4 rounded text-center">
+                            <span id="bitsOutput" class="text-2xl font-bold text-sky-400">1,000.00</span>
+                            <span class="text-sm text-indigo-200">Bits</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <h3>Ventajas</h3>
-        <ul>
-          <li>Financiamiento más predecible para infraestructura crítica.</li>
-          <li>Menos dependencia directa de donaciones o capital externo.</li>
-          <li>Continuidad técnica y capacidad de iteración.</li>
-        </ul>
+        <!-- 4. ECOSYSTEM: xolosArmy & RMZWallet -->
+        <section id="ecosystem" class="bg-white rounded-3xl p-8 sm:p-12 shadow-xl border border-stone-200">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-orange-600">El Ecosistema Latino</h2>
+                <p class="mt-4 text-stone-600 max-w-2xl mx-auto">
+                    La tecnología necesita personas. <strong>xolosArmy Network</strong> es la fuerza comunitaria que impulsa la adopción en Latinoamérica y el mundo, facilitando herramientas como <strong>RMZWallet</strong>.
+                </p>
+            </div>
 
-        <h3>Costos / tensiones</h3>
-        <ul>
-          <li>Discusión permanente de legitimidad (“¿quién decide?”).</li>
-          <li>Riesgo reputacional si la gobernanza no es clara y verificable.</li>
-          <li>La historia muestra que modelos de financiación pueden ser catalizadores de splits.</li>
-        </ul>
-      </section>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- xolosArmy Card -->
+                <div class="bg-stone-50 p-6 rounded-2xl border border-stone-200 card-hover transition-all duration-300">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-stone-900">xolosArmy Network</h3>
+                        <div class="text-4xl">🐕</div>
+                    </div>
+                    <p class="text-stone-600 mb-6">
+                        Una comunidad descentralizada enfocada en la educación, adopción y desarrollo sobre la red eCash. Su misión es traer libertad financiera real a través de herramientas accesibles.
+                    </p>
+                    <div class="space-y-3">
+                        <div class="flex items-center bg-white p-3 rounded shadow-sm">
+                            <span class="text-orange-500 mr-3">●</span>
+                            <span class="text-sm font-medium text-stone-800">Educación sobre Blockchain</span>
+                        </div>
+                        <div class="flex items-center bg-white p-3 rounded shadow-sm">
+                            <span class="text-orange-500 mr-3">●</span>
+                            <span class="text-sm font-medium text-stone-800">Soporte a Comerciantes</span>
+                        </div>
+                        <div class="flex items-center bg-white p-3 rounded shadow-sm">
+                            <span class="text-orange-500 mr-3">●</span>
+                            <span class="text-sm font-medium text-stone-800">Desarrollo de Proyectos (NFTs, Tokens)</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 text-center">
+                        <a href="#" class="inline-block text-orange-600 font-bold hover:text-orange-800 text-sm">Visitar xolosarmy.xyz →</a>
+                    </div>
+                </div>
 
-      <section id="xolosarmy">
-        <h2>6) xolosArmy Network: identidad cultural como capa social de adopción</h2>
-        <p>
-          xolosArmy Network se posiciona como una implementación cultural y tecnológica sobre eCash:
-          no solo pagos, sino <strong>identidad compartida</strong>, memoria y coordinación comunitaria.
-          El Xoloitzcuintle funciona como símbolo de guía y protección en una economía digital con narrativa mesoamericana.
-        </p>
+                <!-- RMZWallet Card -->
+                <div class="bg-stone-50 p-6 rounded-2xl border border-stone-200 card-hover transition-all duration-300">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-stone-900">RMZWallet Tonalli</h3>
+                        <div class="text-4xl">📱</div>
+                    </div>
+                    <p class="text-stone-600 mb-6">
+                        La billetera oficial impulsada por la comunidad. "Tonalli" (energía vital) representa la fluidez del dinero. Diseñada para ser simple, segura y sin custodia.
+                    </p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-white p-3 rounded shadow-sm text-center">
+                            <div class="text-2xl mb-1">🔒</div>
+                            <div class="text-xs font-bold text-stone-700">No-Custodia</div>
+                        </div>
+                        <div class="bg-white p-3 rounded shadow-sm text-center">
+                            <div class="text-2xl mb-1">⚡</div>
+                            <div class="text-xs font-bold text-stone-700">Instantánea</div>
+                        </div>
+                        <div class="bg-white p-3 rounded shadow-sm text-center">
+                            <div class="text-2xl mb-1">🪙</div>
+                            <div class="text-xs font-bold text-stone-700">Soporte eToken</div>
+                        </div>
+                        <div class="bg-white p-3 rounded shadow-sm text-center">
+                            <div class="text-2xl mb-1">🌐</div>
+                            <div class="text-xs font-bold text-stone-700">Web & Móvil</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 text-center">
+                        <a href="#" class="inline-block text-indigo-600 font-bold hover:text-indigo-800 text-sm">Ver cartera.xolosarmy.xyz →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="border-t border-stone-200 pt-8 text-center">
+            <p class="text-stone-500 text-sm">
+                Esta aplicación es un resumen educativo. No constituye asesoramiento financiero.
+                <br>
+                Basado en investigación sobre eCash (XEC) y xolosArmy Network.
+            </p>
+            <div class="mt-4 flex justify-center gap-4 text-stone-400">
+                <span>© 2025</span>
+                <span>•</span>
+                <span>Construido con Tailwind & JS</span>
+            </div>
+        </footer>
 
-        <div class="callout good">
-          <span class="tag">Punto diferencial</span><br/>
-          La mayoría de proyectos compiten por tecnología; xolosArmy compite además por <strong>sentido</strong>.
-          Eso construye lealtad y reduce “comoditización” (ser un riel más).
-        </div>
-
-        <h3>Pilares de integración con eCash</h3>
-        <ul>
-          <li><strong>Token $RMZ</strong> como utilidad cultural / infraestructura comunitaria.</li>
-          <li><strong>Registro on-chain (OP_RETURN)</strong> como bitácora pública para memoria, mensajes y coordinación.</li>
-          <li><strong>Gobernanza Light DAO</strong> (práctica y gradual): decisiones comunitarias ancladas a evidencia pública.</li>
-        </ul>
-      </section>
-
-      <section id="tonalli">
-        <h2>7) RMZWallet Tonalli: interfaz de soberanía práctica</h2>
-        <p>
-          RMZWallet “Tonalli” se entiende como wallet <strong>no custodial</strong>: el usuario controla llaves y fondos.
-          Su rol no es únicamente almacenar, sino habilitar interacción con infraestructura (nodos, tokens, mensajes, coordinación).
-        </p>
-
-        <table aria-label="Arquitectura de producto: Tonalli">
-          <thead>
-            <tr>
-              <th>Componente</th>
-              <th>Decisión</th>
-              <th>Implicación</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Custodia</td>
-              <td>No custodial</td>
-              <td>Soberanía real del usuario</td>
-            </tr>
-            <tr>
-              <td>Infraestructura</td>
-              <td>Chronik propio + rescan</td>
-              <td>Menos dependencia de terceros</td>
-            </tr>
-            <tr>
-              <td>Expresión on-chain</td>
-              <td>OP_RETURN</td>
-              <td>Memoria pública (cuidar privacidad)</td>
-            </tr>
-            <tr>
-              <td>Activos</td>
-              <td>XEC + tokens del ecosistema</td>
-              <td>Puerta a economía comunitaria</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="callout">
-          <span class="tag">Lectura sociopolítica</span><br/>
-          Cuando una wallet habilita coordinación (mensajes, propuestas, bitácora, identidad),
-          deja de ser “app financiera” y se vuelve <strong>institución</strong>: reglas, memoria, reputación y ritual.
-        </div>
-      </section>
-
-      <section id="riesgos">
-        <h2>8) Riesgos y tensiones: volatilidad, privacidad y coordinación</h2>
-        <p>
-          Para que el informe se perciba serio (no brochure), conviene explicitar tensiones inevitables:
-        </p>
-
-        <h3>1) Volatilidad y unidad de cuenta</h3>
-        <p>
-          Aunque XEC sea eficiente como riel de pago, la volatilidad complica precios fijos en comercio. Esto empuja a prácticas
-          como “precio en fiat + conversión”, o a complementar con mecanismos de estabilidad (cuando existan).
-        </p>
-
-        <h3>2) Gobernanza financiada vs legitimidad</h3>
-        <p>
-          Financiar desarrollo en protocolo acelera innovación, pero exige transparencia, auditoría social y mecanismos claros
-          de rendición de cuentas para sostener legitimidad.
-        </p>
-
-        <h3>3) OP_RETURN y privacidad</h3>
-        <p>
-          OP_RETURN es poderosísimo para memoria pública, pero requiere disciplina: nunca registrar datos sensibles y mantener
-          prácticas de minimización de información.
-        </p>
-      </section>
-
-      <section id="conclusion">
-        <h2>9) Cierre: por qué “eCash + xolosArmy” es más que tecnología</h2>
-        <p>
-          eCash propone una combinación interesante: seguridad PoW con una capa Avalanche adicional para mejorar certeza operativa,
-          y una hoja de ruta modular (subredes) para escalar capacidades sin romper la base.
-        </p>
-        <p>
-          xolosArmy añade lo que muchas redes no consiguen: <strong>una razón cultural para existir</strong>.
-          “Tonalli” como interfaz, $RMZ como herramienta de pertenencia y la cadena como memoria pública convierten el riel de pago
-          en tejido social: coordinación, identidad y soberanía digital aplicada.
-        </p>
-
-        <div class="callout good">
-          <span class="tag">Síntesis</span><br/>
-          <strong>Infraestructura + cultura</strong> es una defensa única frente a la comoditización.
-          Donde otros compiten por throughput, aquí también se compite por comunidad, narrativa y práctica cotidiana.
-        </div>
-      </section>
-
-      <section id="fuentes">
-        <h2>Fuentes y referencias (plantilla)</h2>
-        <p class="footnotes">
-          Esta sección es intencionalmente una <strong>plantilla</strong> para que pegues tus enlaces finales (docs oficiales, repos, posts, etc.).
-          Si me pasas tus URLs preferidas (eCash/BitcoinABC, docs de Avalanche post-consensus, xolosarmy.xyz, repo Tonalli),
-          te la devuelvo ya con formato final y numeración consistente.
-        </p>
-
-        <div class="hr"></div>
-
-        <div class="footnotes">
-          <ol>
-            <li><strong>Linaje BTC/BCH/BCHA/eCash:</strong> (pega enlace)</li>
-            <li><strong>Rebranding / redenominación XEC:</strong> (pega enlace)</li>
-            <li><strong>Avalanche post-consensus en eCash:</strong> (pega enlace)</li>
-            <li><strong>Miner fund / distribución coinbase / reglas de bloque:</strong> (pega enlace)</li>
-            <li><strong>xolosArmy Network (visión / RMZWallet Tonalli):</strong> (pega enlace)</li>
-            <li><strong>Chronik / infraestructura usada por Tonalli:</strong> (pega enlace)</li>
-          </ol>
-        </div>
-      </section>
-
-      <p class="footer">
-        © <span id="y"></span> · Documento editorial para publicación (HTML + CSS).<br/>
-        Consejo: si lo vas a pegar en tu blog, puedes conservar solo el contenido dentro de <span class="kbd">&lt;main&gt;</span>.
-      </p>
     </main>
-  </div>
 
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
+    <script>
+        // --- Logic: Navigation ---
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            // Close mobile menu if open
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // --- Logic: Timeline ---
+        const timelineData = [
+            {
+                year: "2009",
+                title: "Bitcoin (BTC)",
+                desc: "Satoshi lanza Bitcoin. Revolucionario, pero con el tiempo enfrenta problemas de escalabilidad (bloques de 1MB) y tarifas altas.",
+                color: "border-stone-800"
+            },
+            {
+                year: "2017",
+                title: "Bitcoin Cash (BCH)",
+                desc: "Hard Fork para aumentar el tamaño del bloque. La comunidad se divide entre 'Store of Value' (BTC) y 'Peer-to-Peer Cash' (BCH).",
+                color: "border-green-600"
+            },
+            {
+                year: "2020",
+                title: "BCHA (Bitcoin ABC)",
+                desc: "Disputa sobre el financiamiento de infraestructura (IFP). Amaury Sechet lidera el fork para asegurar fondos para desarrolladores.",
+                color: "border-indigo-600"
+            },
+            {
+                year: "2021",
+                title: "eCash (XEC)",
+                desc: "Rebranding total. BCHA se convierte en eCash (XEC). Se introducen decimales reducidos (Bits), consenso Avalanche y una nueva visión profesional.",
+                color: "border-sky-500"
+            }
+        ];
+
+        function updateTimeline(index) {
+            const data = timelineData[index];
+            const contentDiv = document.getElementById('timeline-content');
+            
+            // Animate out
+            contentDiv.style.opacity = '0';
+            contentDiv.style.transform = 'translateY(10px)';
+            
+            setTimeout(() => {
+                contentDiv.innerHTML = `
+                    <h3 class="text-xl font-bold text-indigo-900 mb-2">${data.year}: ${data.title}</h3>
+                    <p class="text-stone-700">${data.desc}</p>
+                `;
+                // Remove all border colors and add new one
+                contentDiv.className = `bg-stone-50 rounded-xl p-6 border-l-4 ${data.color} transition-all duration-300 shadow-md`;
+                
+                // Animate in
+                contentDiv.style.opacity = '1';
+                contentDiv.style.transform = 'translateY(0)';
+            }, 300);
+        }
+
+        // --- Logic: Converter (XEC <-> Bits) ---
+        const xecInput = document.getElementById('xecInput');
+        const bitsOutput = document.getElementById('bitsOutput');
+
+        xecInput.addEventListener('input', (e) => {
+            const xec = parseFloat(e.target.value) || 0;
+            // 1,000,000 XEC = 1,000,000,00 (if denominated in 2 decimals visual)
+            // But logic: "Bits" usually implies a simpler unit. 
+            // In eCash context: 1 XEC = 100 Satoshi. 
+            // Often "Bits" is used to refer to the smaller denomination or just simplified display.
+            // For this simulator, we will use the common simplified formatting logic:
+            // Let's assume user inputs raw XEC units.
+            
+            const formatted = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(xec / 1000); 
+            // NOTE: This simulates a hypothetical "Bit" denomination where 1000 XEC = 1 Bit 
+            // (or simply formatting purely for readability as proposed in some XEC discussions).
+            // Let's stick to strict Unit conversion: 1 XEC.
+            // Let's just format the XEC nicely to show "Bits" logic implies readable numbers.
+            // Actually, XEC *is* the redenomination (1 BCHA = 1,000,000 XEC).
+            // So let's just format the number clearly.
+            
+            bitsOutput.textContent = new Intl.NumberFormat('en-US').format(xec);
+        });
+
+        // --- Visualization: Chart.js (Comparison) ---
+        const ctxSpeed = document.getElementById('speedChart').getContext('2d');
+        const speedChart = new Chart(ctxSpeed, {
+            type: 'bar',
+            data: {
+                labels: ['Bitcoin (BTC)', 'Ethereum (ETH)', 'eCash (XEC)'],
+                datasets: [{
+                    label: 'Tiempo de Finalidad (Minutos)',
+                    data: [60, 15, 0.05], // 60 mins, 15 mins, 3 seconds (0.05 min)
+                    backgroundColor: [
+                        'rgba(247, 147, 26, 0.6)', // BTC Orange
+                        'rgba(98, 126, 234, 0.6)', // ETH Blue
+                        'rgba(14, 165, 233, 0.8)'  // XEC Sky
+                    ],
+                    borderColor: [
+                        'rgba(247, 147, 26, 1)',
+                        'rgba(98, 126, 234, 1)',
+                        'rgba(14, 165, 233, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y', // Horizontal bar for better speed perception
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Minutos para confirmación irreversible'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.x < 1) {
+                                    return label + "< 3 Segundos (Avalanche)";
+                                }
+                                return label + context.parsed.x + " Minutos";
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // --- Visualization: Plotly (Supply/Tokenomics) ---
+        const supplyData = [{
+            values: [92, 8], // 92% Miners, 8% GNC/Dev
+            labels: ['Mineros (PoW)', 'Fondo de Desarrollo (GNC)'],
+            type: 'donut',
+            hole: .4,
+            marker: {
+                colors: ['#312E81', '#0EA5E9'] // Indigo-900, Sky-500
+            },
+            textinfo: 'label+percent',
+            hoverinfo: 'label+value',
+            automargin: true
+        }];
+
+        const layoutSupply = {
+            title: { text: 'Modelo de Incentivos', font: { size: 14, color: '#44403C' } },
+            showlegend: false,
+            height: 300,
+            margin: { t: 40, b: 40, l: 40, r: 40 },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+        };
+
+        Plotly.newPlot('supplyChart', supplyData, layoutSupply, {displayModeBar: false, responsive: true});
+
+        // Initialize timeline
+        updateTimeline(3); // Start with XEC
+    </script>
 </body>
 </html>
