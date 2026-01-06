@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eCash Governance & Network Insight</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Chosen Palette: "Sovereign Stone" -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAFAF9;
+            color: #1C1917;
+        }
+        
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #E7E5E4; /* Stone-200 */
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Chart Container Styling - Critical for Responsiveness */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Base height */
+            max-height: 400px;
+        }
+        
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        .interactive-btn {
+            transition: all 0.2s;
+        }
+        
+        .interactive-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Custom Range Slider */
+        input[type=range] {
+            -webkit-appearance: none; 
+            width: 100%; 
+            background: transparent; 
+        }
+        
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #0074C2;
+            cursor: pointer;
+            margin-top: -8px; 
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+        
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #E7E5E4;
+            border-radius: 2px;
+        }
+
+        .nav-link.active {
+            color: #0074C2;
+            border-bottom: 2px solid #0074C2;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-stone-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-[#0074C2] rounded-lg flex items-center justify-center text-white font-bold text-lg">Ξ</div>
+                    <span class="font-heading font-bold text-xl tracking-tight">Governance<span class="text-[#0074C2]">Hub</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <button onclick="scrollToSection('hero')" class="nav-link active py-2 text-sm font-medium text-stone-500 hover:text-[#0074C2] transition">Overview</button>
+                    <button onclick="scrollToSection('mechanism')" class="nav-link py-2 text-sm font-medium text-stone-500 hover:text-[#0074C2] transition">The Mechanism</button>
+                    <button onclick="scrollToSection('xolos')" class="nav-link py-2 text-sm font-medium text-stone-500 hover:text-[#0074C2] transition">xolosArmy View</button>
+                    <button onclick="scrollToSection('wallet')" class="nav-link py-2 text-sm font-medium text-stone-500 hover:text-[#0074C2] transition">RMZWallet</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow w-full max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-16">
+
+        <!-- 1. Hero Section -->
+        <section id="hero" class="text-center space-y-6 pt-8 animate-fade-in">
+            <span class="inline-block py-1 px-3 rounded-full bg-blue-50 text-[#0074C2] text-xs font-bold tracking-wider uppercase border border-blue-100">Research Report</span>
+            <h1 class="text-4xl md:text-6xl font-heading font-bold text-stone-900 tracking-tight">
+                Who Controls the <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#0074C2] to-[#2563EB]">Treasury</span>?
+            </h1>
+            <p class="max-w-2xl mx-auto text-lg text-stone-600 leading-relaxed">
+                An interactive analysis of eCash (XEC) governance, the Global Network Council (GNC), and the community forces shaping the future of digital cash.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 text-left">
+                <div class="card p-6 border-t-4 border-t-[#0074C2]">
+                    <div class="h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-[#0074C2] text-xl">🏛️</div>
+                    <h3 class="font-heading font-bold text-lg mb-2">The GNC</h3>
+                    <p class="text-sm text-stone-500">A council of stakeholders managing 16% of the IFP revenue to fund ecosystem growth.</p>
+                </div>
+                <div class="card p-6 border-t-4 border-t-stone-800">
+                    <div class="h-10 w-10 bg-stone-100 rounded-full flex items-center justify-center mb-4 text-stone-800 text-xl">⚔️</div>
+                    <h3 class="font-heading font-bold text-lg mb-2">xolosArmy</h3>
+                    <p class="text-sm text-stone-500">A vocal community network advocating for transparency, builder tools, and adoption.</p>
+                </div>
+                <div class="card p-6 border-t-4 border-t-green-500">
+                    <div class="h-10 w-10 bg-green-100 rounded-full flex items-center justify-center mb-4 text-green-600 text-xl">📱</div>
+                    <h3 class="font-heading font-bold text-lg mb-2">RMZWallet</h3>
+                    <p class="text-sm text-stone-500">A tangible result of community effort. Non-custodial, web-based, and user-centric.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. The Mechanism: Interactive Charts -->
+        <section id="mechanism" class="space-y-8 scroll-mt-24">
+            <div class="flex flex-col md:flex-row items-start justify-between gap-4">
+                <div class="max-w-2xl">
+                    <h2 class="text-3xl font-heading font-bold mb-3">The Engine: IFP Distribution</h2>
+                    <p class="text-stone-600">
+                        eCash diverts a portion of the block reward to fund development and staking. This is the <strong>Infrastructure Funding Plan (IFP)</strong>. 
+                        Understanding this split is crucial to understanding the GNC's power.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Chart Col -->
+                <div class="lg:col-span-1 card p-6 flex flex-col items-center justify-center">
+                    <h4 class="font-heading font-bold text-stone-400 uppercase text-xs tracking-wider mb-4">Coinbase Reward Split</h4>
+                    <div class="chart-container">
+                        <canvas id="splitChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Interactive Explanation Col -->
+                <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <button class="interactive-btn card p-5 text-left hover:border-[#0074C2] group focus:ring-2 ring-[#0074C2]" onclick="updateMechDetail('miners')">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="font-bold text-stone-800">Miners</span>
+                            <span class="text-xs bg-stone-100 px-2 py-1 rounded text-stone-600 font-mono">58%</span>
+                        </div>
+                        <p class="text-sm text-stone-500 group-hover:text-stone-700">The majority of the reward incentivizes SHA-256 hash power to secure the network.</p>
+                    </button>
+
+                    <button class="interactive-btn card p-5 text-left hover:border-[#EA580C] group focus:ring-2 ring-[#EA580C]" onclick="updateMechDetail('abc')">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="font-bold text-stone-800">Protocol Dev</span>
+                            <span class="text-xs bg-orange-100 px-2 py-1 rounded text-orange-700 font-mono">16%</span>
+                        </div>
+                        <p class="text-sm text-stone-500 group-hover:text-stone-700">Funds Bitcoin ABC to ensure professional maintenance of the node software.</p>
+                    </button>
+
+                    <button class="interactive-btn card p-5 text-left hover:border-[#0074C2] group focus:ring-2 ring-[#0074C2]" onclick="updateMechDetail('gnc')">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="font-bold text-stone-800">GNC</span>
+                            <span class="text-xs bg-blue-100 px-2 py-1 rounded text-blue-700 font-mono">16%</span>
+                        </div>
+                        <p class="text-sm text-stone-500 group-hover:text-stone-700">Discretionary spending for ecosystem projects like RMZWallet and marketing.</p>
+                    </button>
+
+                    <button class="interactive-btn card p-5 text-left hover:border-[#BE185D] group focus:ring-2 ring-[#BE185D]" onclick="updateMechDetail('staking')">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="font-bold text-stone-800">Avalanche Staking</span>
+                            <span class="text-xs bg-pink-100 px-2 py-1 rounded text-pink-700 font-mono">10%</span>
+                        </div>
+                        <p class="text-sm text-stone-500 group-hover:text-stone-700">Rewards for stakers who secure instant finality and pre-consensus.</p>
+                    </button>
+
+                    <div class="card p-5 bg-stone-900 text-white flex flex-col justify-center md:col-span-2">
+                        <div id="mech-detail-title" class="font-bold text-[#0074C2] mb-2 text-sm uppercase">Select a sector</div>
+                        <p id="mech-detail-text" class="text-sm text-stone-300">Click on the cards to explore how the eCash coinbase reward powers different parts of the ecosystem.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. xolosArmy Insight Section -->
+        <section id="xolos" class="bg-white rounded-3xl p-8 border border-stone-200 shadow-sm scroll-mt-24">
+            <div class="max-w-3xl mx-auto text-center mb-10">
+                <div class="inline-flex items-center gap-2 mb-4">
+                    <span class="h-2 w-2 rounded-full bg-red-500 animate-pulse"></span>
+                    <span class="text-xs font-bold text-stone-400 uppercase tracking-widest">Community Intelligence</span>
+                </div>
+                <h2 class="text-3xl font-heading font-bold text-stone-900">The xolosArmy Perspective</h2>
+                <p class="mt-4 text-stone-600">
+                    The <strong>xolosArmy</strong> network is a critical voice in the ecosystem. Their analysis of governance highlights the gap between "having funds" and "using them effectively."
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Navigation Tabs -->
+                <div class="md:col-span-1 space-y-2">
+                    <button onclick="setTab('transparency')" id="tab-transparency" class="w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition bg-stone-100 text-stone-600 hover:bg-stone-200">
+                        Transparency
+                    </button>
+                    <button onclick="setTab('adoption')" id="tab-adoption" class="w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition bg-white text-stone-500 hover:bg-stone-50 border border-transparent hover:border-stone-200">
+                        Adoption Strategy
+                    </button>
+                    <button onclick="setTab('builders')" id="tab-builders" class="w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition bg-white text-stone-500 hover:bg-stone-50 border border-transparent hover:border-stone-200">
+                        Builders First
+                    </button>
+                </div>
+
+                <!-- Content Area -->
+                <div class="md:col-span-3 bg-stone-50 rounded-2xl p-8 border border-stone-100 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-8 opacity-5 text-9xl font-heading font-bold select-none">"</div>
+                    
+                    <div id="content-transparency" class="tab-content transition-opacity duration-300">
+                        <h3 class="text-2xl font-bold text-stone-900 mb-4">The Need for Auditability</h3>
+                        <p class="text-stone-700 leading-relaxed mb-4">
+                            xolosArmy emphasizes that governance without transparency is merely centralization. They argue that every Satoshi spent by the GNC should be tracked on-chain and justified publicly. 
+                        </p>
+                        <div class="flex gap-3 mt-6">
+                            <div class="bg-white px-3 py-1 rounded border border-stone-200 text-xs font-mono text-stone-500">Public Reports</div>
+                            <div class="bg-white px-3 py-1 rounded border border-stone-200 text-xs font-mono text-stone-500">On-Chain Proof</div>
+                        </div>
+                    </div>
+
+                    <div id="content-adoption" class="tab-content hidden transition-opacity duration-300">
+                        <h3 class="text-2xl font-bold text-stone-900 mb-4">Grassroots over Corporate</h3>
+                        <p class="text-stone-700 leading-relaxed mb-4">
+                            Corporate partnerships are flashy, but xolosArmy argues that real adoption comes from the ground up. They champion funding local merchants, educational meetups in LatAm, and tools that solve real problems for everyday users.
+                        </p>
+                        <blockquote class="border-l-4 border-[#0074C2] pl-4 italic text-stone-600 my-4">
+                            "Adoption isn't bought, it's built."
+                        </blockquote>
+                    </div>
+
+                    <div id="content-builders" class="tab-content hidden transition-opacity duration-300">
+                        <h3 class="text-2xl font-bold text-stone-900 mb-4">Fund the Tools</h3>
+                        <p class="text-stone-700 leading-relaxed mb-4">
+                            The strongest critique is resource allocation. xolosArmy believes the GNC's primary mandate should be funding open-source infrastructure—wallets, explorers, and SDKs—that empower others to build. RMZWallet is their proof of concept for this philosophy.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. RMZWallet Showcase -->
+        <section id="wallet" class="pt-8 scroll-mt-24">
+            <div class="bg-stone-900 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden">
+                <!-- Background Pattern -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-[#0074C2] rounded-full blur-[100px] opacity-20"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
+                    <div class="space-y-6">
+                        <div class="inline-block bg-white/10 backdrop-blur px-3 py-1 rounded-full text-xs font-bold tracking-wide border border-white/20">
+                            LIVE PRODUCT
+                        </div>
+                        <h2 class="text-4xl font-heading font-bold">RMZWallet</h2>
+                        <p class="text-stone-300 text-lg leading-relaxed">
+                            A browser-based, non-custodial wallet designed for speed and simplicity. 
+                            Built by the community, for the community.
+                        </p>
+                        <ul class="space-y-3 mt-4">
+                            <li class="flex items-center gap-3 text-stone-300">
+                                <span class="h-5 w-5 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center text-xs">✓</span>
+                                No downloads required (PWA)
+                            </li>
+                            <li class="flex items-center gap-3 text-stone-300">
+                                <span class="h-5 w-5 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center text-xs">✓</span>
+                                Instant eToken support
+                            </li>
+                            <li class="flex items-center gap-3 text-stone-300">
+                                <span class="h-5 w-5 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center text-xs">✓</span>
+                                Client-side key generation
+                            </li>
+                        </ul>
+                        <div class="pt-4">
+                            <a href="#" class="inline-block bg-[#0074C2] hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-xl transition shadow-lg shadow-blue-500/30">
+                                Launch Cartera
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- CSS-Only Phone Mockup -->
+                    <div class="flex justify-center">
+                        <div class="relative w-[280px] h-[580px] bg-stone-800 rounded-[40px] border-[8px] border-stone-700 shadow-2xl">
+                            <!-- Notch -->
+                            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-stone-700 rounded-b-xl z-20"></div>
+                            
+                            <!-- Screen Content -->
+                            <div class="w-full h-full bg-white rounded-[32px] overflow-hidden flex flex-col relative z-10">
+                                <!-- App Header -->
+                                <div class="bg-[#0074C2] p-6 pt-12 pb-8 text-white">
+                                    <div class="flex justify-between items-center mb-6">
+                                        <div class="w-8 h-8 rounded-full bg-white/20"></div>
+                                        <div class="w-8 h-8 rounded-full bg-white/20"></div>
+                                    </div>
+                                    <p class="text-blue-100 text-xs mb-1">Total Balance</p>
+                                    <h3 class="text-3xl font-bold">12,500 XEC</h3>
+                                </div>
+                                
+                                <!-- App Actions -->
+                                <div class="flex justify-around -mt-6 px-4">
+                                    <div class="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-[#0074C2] text-xl font-bold">↑</div>
+                                    <div class="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-[#0074C2] text-xl font-bold">↓</div>
+                                </div>
+
+                                <!-- App List -->
+                                <div class="p-4 space-y-3 mt-2">
+                                    <div class="p-3 bg-stone-50 rounded-xl flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold">X</div>
+                                        <div class="flex-1">
+                                            <div class="text-sm font-bold">eCash</div>
+                                            <div class="text-xs text-stone-400">XEC</div>
+                                        </div>
+                                        <div class="text-sm font-bold text-stone-900">42.50 USD</div>
+                                    </div>
+                                    <div class="p-3 bg-stone-50 rounded-xl flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold">R</div>
+                                        <div class="flex-1">
+                                            <div class="text-sm font-bold">RMZ Token</div>
+                                            <div class="text-xs text-stone-400">RMZ</div>
+                                        </div>
+                                        <div class="text-sm font-bold text-stone-900">12.00 USD</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- App Footer -->
+                                <div class="mt-auto bg-stone-50 p-4 border-t flex justify-around">
+                                    <div class="w-6 h-6 rounded bg-stone-300"></div>
+                                    <div class="w-6 h-6 rounded bg-stone-300"></div>
+                                    <div class="w-6 h-6 rounded bg-stone-300"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Treasury Simulator -->
+        <section class="border-t border-stone-200 pt-12 pb-12">
+            <div class="max-w-4xl mx-auto text-center space-y-4 mb-8">
+                <h2 class="text-3xl font-heading font-bold">Treasury Simulator</h2>
+                <p class="text-stone-600">
+                    How much funding can the GNC deploy? It depends on the price of XEC. 
+                    Use the slider to simulate different market conditions and see the impact on annual development budgets.
+                </p>
+            </div>
+
+            <div class="card p-8 max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                    <!-- Controls -->
+                    <div class="space-y-6">
+                        <div>
+                            <label class="flex justify-between text-sm font-bold text-stone-700 mb-2">
+                                <span>XEC Price Projection</span>
+                                <span id="sim-price-label" class="text-[#0074C2]">$0.000030</span>
+                            </label>
+                            <input type="range" id="price-slider" min="10" max="200" value="30" class="w-full">
+                            <div class="flex justify-between text-xs text-stone-400 mt-2">
+                                <span>Bear Market</span>
+                                <span>Current</span>
+                                <span>Bull Market</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                            <div class="text-sm text-blue-800 font-medium mb-1">Annual GNC Budget</div>
+                            <div id="sim-budget-label" class="text-3xl font-bold text-[#0074C2]">$2.5M</div>
+                            <div class="text-xs text-blue-600 mt-1">Based on ~16% of issuance</div>
+                        </div>
+                    </div>
+
+                    <!-- Chart -->
+                    <div>
+                        <div class="chart-container" style="height: 250px;">
+                            <canvas id="simChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-stone-200 py-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-stone-400 text-sm">
+                Generated for educational purposes. <br>
+                Content based on publicly available data about eCash, GNC, and the xolosArmy network.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // --- State ---
+        const state = {
+            currentTab: 'transparency',
+            price: 30 // represented as integer (e.g. 30 -> 0.000030)
+        };
+
+        // --- Navigation Logic ---
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+            // Update active state simplified
+            document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active', 'text-[#0074C2]'));
+            if(event) event.target.classList.add('active', 'text-[#0074C2]');
+        }
+
+        // --- Chart 1: The Split (Doughnut) ---
+        // Ensure DOM is ready before init
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctxSplit = document.getElementById('splitChart').getContext('2d');
+            const splitChart = new Chart(ctxSplit, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Miners (58%)', 'Protocol Dev (16%)', 'GNC (16%)', 'Avalanche Staking (10%)'],
+                    datasets: [{
+                        data: [58, 16, 16, 10],
+                        backgroundColor: ['#E5E5E5', '#EA580C', '#0074C2', '#BE185D'],
+                        borderWidth: 0,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '65%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1C1917',
+                            padding: 12,
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: (ctx) => ` ${ctx.label}: ${ctx.raw}%`
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Make splitChart accessible for interaction logic
+            window.splitChart = splitChart;
+        });
+
+        // --- Mechanism Interaction ---
+        function updateMechDetail(type) {
+            const title = document.getElementById('mech-detail-title');
+            const text = document.getElementById('mech-detail-text');
+            
+            const content = {
+                miners: {
+                    title: "Network Security (58%)",
+                    text: "Miners provide the SHA-256 hashpower that secures the ledger. While they receive the majority share, the ratio has adjusted to better fund development."
+                },
+                abc: {
+                    title: "Protocol Development (16%)",
+                    text: "Funds Bitcoin ABC directly. This 16% ensures the core protocol team has the resources to maintain the network without relying on corporate donations."
+                },
+                gnc: {
+                    title: "Ecosystem Growth (16%)",
+                    text: "The GNC now manages a larger 16% share. These discretionary funds are voted on for marketing, integration bounties, and community tools."
+                },
+                staking: {
+                    title: "Avalanche Staking (10%)",
+                    text: "Rewards for running Avalanche nodes. This layer provides instant transaction finality (Pre-Consensus) and protects against 51% attacks."
+                }
+            };
+
+            // Animate transition
+            text.style.opacity = 0;
+            setTimeout(() => {
+                title.textContent = content[type].title;
+                text.textContent = content[type].text;
+                text.style.opacity = 1;
+            }, 200);
+
+            // Highlight Chart Segment if loaded
+            if(window.splitChart) {
+                const indexMap = { miners: 0, abc: 1, gnc: 2, staking: 3 };
+                window.splitChart.setActiveElements([{datasetIndex: 0, index: indexMap[type]}]);
+                window.splitChart.update();
+            }
+        }
+
+        // --- Tabs Logic ---
+        function setTab(tabId) {
+            state.currentTab = tabId;
+            
+            // Update Buttons
+            const buttons = ['transparency', 'adoption', 'builders'];
+            buttons.forEach(btn => {
+                const el = document.getElementById(`tab-${btn}`);
+                if (btn === tabId) {
+                    el.classList.remove('bg-white', 'text-stone-500', 'border-transparent');
+                    el.classList.add('bg-stone-100', 'text-stone-600');
+                } else {
+                    el.classList.add('bg-white', 'text-stone-500', 'border-transparent');
+                    el.classList.remove('bg-stone-100', 'text-stone-600');
+                }
+            });
+
+            // Update Content
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            const activeContent = document.getElementById(`content-${tabId}`);
+            activeContent.classList.remove('hidden');
+            // Small opacity fade for smoothness
+            activeContent.style.opacity = 0;
+            setTimeout(() => activeContent.style.opacity = 1, 50);
+        }
+
+        // --- Simulator Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const slider = document.getElementById('price-slider');
+            const priceLabel = document.getElementById('sim-price-label');
+            const budgetLabel = document.getElementById('sim-budget-label');
+            
+            // Sim Chart
+            const ctxSim = document.getElementById('simChart').getContext('2d');
+            const simChart = new Chart(ctxSim, {
+                type: 'bar',
+                data: {
+                    labels: ['Current', 'Projected'],
+                    datasets: [{
+                        label: 'Annual GNC Budget (USD)',
+                        data: [2500000, 2500000],
+                        backgroundColor: ['#E5E5E5', '#0074C2'],
+                        borderRadius: 6,
+                        barThickness: 40
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, grid: { display: false } },
+                        x: { grid: { display: false } }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            // 16% of issuance for GNC now (approx 52.5B annual total issuance * 0.16)
+            // Total Annual Issuance approx 328B XEC -> 16% is ~52.5B XEC
+            const ANNUAL_GNC_SHARE_BILLIONS = 52.5; 
+
+            slider.addEventListener('input', (e) => {
+                const val = parseInt(e.target.value);
+                const price = val / 1000000; // 30 -> 0.000030
+                
+                // Update Text
+                priceLabel.textContent = `$${price.toFixed(6)}`;
+                const annualBudget = ANNUAL_GNC_SHARE_BILLIONS * 1000000000 * price;
+                
+                const formatter = new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    maximumFractionDigits: 0
+                });
+                
+                budgetLabel.textContent = formatter.format(annualBudget);
+
+                // Update Chart
+                simChart.data.datasets[0].data[1] = annualBudget;
+                
+                // Color shift based on bullishness
+                if (val > 100) simChart.data.datasets[0].backgroundColor[1] = '#10B981'; // Green
+                else simChart.data.datasets[0].backgroundColor[1] = '#0074C2'; // Blue
+                
+                simChart.update();
+            });
+            
+            // Trigger initial calculation
+            slider.dispatchEvent(new Event('input'));
+        });
+
+    </script>
+</body>
+</html>
