@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,19 +17,8 @@
 </head>
 <body class="bg-stone-50 text-stone-800 antialiased selection:bg-orange-200 selection:text-orange-900">
 
-    <!-- Chosen Palette: Warm Neutrals with Orange Accents (Stone/Orange) -->
-    <!-- Application Structure Plan: Dashboard layout. Top section introduces the core "Parent Token" concept. Middle section splits into two key interactive columns: "Mint Mechanics" (Simulation) and "Atomic Swaps" (Walkthrough). Bottom section covers Security and Infrastructure. This structure prioritizes the user's understanding of the unique "Mint Pass" economy first, then the trading mechanism, then the technical backbone. -->
-    <!-- Visualization & Content Choices: 
-        1. Supply Chart (Chart.js): Goal: Inform about scarcity. Method: Doughnut chart. Interaction: Hover for stats. Justification: Clearly shows the finite nature of the genesis tokens.
-        2. Mint Simulator (JS/HTML): Goal: Change/Demonstrate. Method: Interactive counter and visual bar. Interaction: Button click to 'mint'. Justification: Physically demonstrates the "1 Pass = 1 NFT" burn mechanic.
-        3. Atomic Swap Stepper (JS/HTML): Goal: Process explanation. Method: Interactive vertical list. Interaction: Clicking steps updates details. Justification: Breaks down the complex "Oneshot" DEX logic into digestible phases.
-        4. Infra Grid (HTML/CSS): Goal: Organize. Method: Card grid. Interaction: None/Static. Justification: Quick reference for technical specs.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        <!-- Header -->
         <header class="mb-10 text-center sm:text-left border-b border-stone-200 pb-6">
             <h1 class="text-3xl sm:text-4xl font-bold text-stone-900 tracking-tight">Tonalli Wallet <span class="text-orange-600">Milestone Report</span></h1>
             <p class="mt-2 text-lg text-stone-600 max-w-3xl">
@@ -38,13 +26,30 @@
             </p>
         </header>
 
-        <!-- Main Dashboard Grid -->
+        <section class="mb-12 bg-stone-900 rounded-2xl overflow-hidden shadow-2xl border border-stone-800">
+            <div class="p-4 bg-stone-800 border-b border-stone-700 flex justify-between items-center">
+                <span class="text-orange-500 font-bold text-xs uppercase tracking-widest flex items-center">
+                    <span class="flex h-2 w-2 rounded-full bg-orange-500 mr-2 animate-pulse"></span>
+                    xolosArmy Podcast: Latest Episode
+                </span>
+                <span class="text-stone-400 text-xs font-mono">ID: LRURmCjBQ3c</span>
+            </div>
+            <div class="aspect-video w-full">
+                <iframe 
+                    class="w-full h-full"
+                    src="https://www.youtube.com/embed/LRURmCjBQ3c?si=d9OyXVWDTa1hN0Tc&autoplay=1&mute=1&rel=0" 
+                    title="xolosArmy Podcast" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
-            <!-- COLUMN 1: Genesis & Tokenomics (Left - 4 cols) -->
             <div class="lg:col-span-4 flex flex-col gap-8">
                 
-                <!-- Card: Parent Token Info -->
                 <section class="bg-white rounded-xl shadow-sm border border-stone-200 p-6">
                     <h2 class="text-xl font-bold text-stone-800 mb-2">1. Official NFT1 Group</h2>
                     <p class="text-sm text-stone-500 mb-4">
@@ -66,7 +71,6 @@
                         </div>
                     </div>
 
-                    <!-- Chart Container -->
                     <div class="mt-6">
                         <h3 class="text-xs font-semibold uppercase tracking-wider text-stone-400 mb-2 text-center">Supply Allocation</h3>
                         <div class="chart-container">
@@ -76,7 +80,6 @@
                     </div>
                 </section>
 
-                <!-- Card: Infrastructure -->
                 <section class="bg-white rounded-xl shadow-sm border border-stone-200 p-6">
                     <h2 class="text-xl font-bold text-stone-800 mb-4">4. Infrastructure & Sovereignty</h2>
                     <p class="text-sm text-stone-500 mb-4">
@@ -101,10 +104,8 @@
                 </section>
             </div>
 
-            <!-- COLUMN 2: Mechanics & Interactions (Right - 8 cols) -->
             <div class="lg:col-span-8 flex flex-col gap-8">
 
-                <!-- Interactive Section: Mint Pass Mechanics -->
                 <section class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 sm:p-8">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
                         <div>
@@ -121,7 +122,6 @@
                             <strong>Logic:</strong> To create a new Child NFT, exactly <strong>1 Parent Token</strong> must be consumed. If a UTXO contains >1 token, a "Fanout" transaction splits it first.
                         </p>
 
-                        <!-- Simulation UI -->
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center mb-6">
                             <div class="bg-white p-4 rounded-lg shadow-sm border border-stone-100">
                                 <div class="text-xs text-stone-400 uppercase font-semibold">Wallet Balance</div>
@@ -138,25 +138,13 @@
                             </div>
                         </div>
 
-                        <!-- Visualization of UTXOs -->
                         <div class="mb-4">
                             <div class="flex justify-between text-xs text-stone-400 mb-1">
                                 <span>UTXO Pool Visualization</span>
                                 <span id="fanout-status" class="hidden text-orange-500 font-bold">⚠️ Fanout Split Required...</span>
                             </div>
                             <div id="utxo-container" class="h-16 bg-stone-200 rounded-lg flex items-center px-2 gap-1 overflow-hidden relative">
-                                <!-- JS will populate these blocks -->
-                                <div class="utxo-box w-8 h-10 bg-stone-800 rounded shadow-sm"></div>
-                                <div class="utxo-box w-8 h-10 bg-stone-800 rounded shadow-sm"></div>
-                                <div class="utxo-box w-8 h-10 bg-stone-800 rounded shadow-sm"></div>
-                                <div class="utxo-box w-8 h-10 bg-stone-800 rounded shadow-sm"></div>
-                                <div class="utxo-box w-8 h-10 bg-stone-800 rounded shadow-sm"></div>
-                                <div class="utxo-box w-8 h-10 bg-stone-800 rounded shadow-sm"></div>
-                                <div class="utxo-box w-8 h-10 bg-stone-800 rounded shadow-sm"></div>
-                                <div class="utxo-box w-8 h-10 bg-stone-800 rounded shadow-sm"></div>
-                                <div class="utxo-box w-8 h-10 bg-stone-800 rounded shadow-sm"></div>
-                                <div class="utxo-box w-8 h-10 bg-stone-800 rounded shadow-sm"></div>
-                            </div>
+                                </div>
                         </div>
 
                         <div class="flex justify-center">
@@ -171,7 +159,6 @@
                     </div>
                 </section>
 
-                <!-- Atomic Swaps Section -->
                 <section class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 sm:p-8">
                     <div class="mb-6">
                         <h2 class="text-2xl font-bold text-stone-800">3. Atomic NFT Swaps</h2>
@@ -181,7 +168,6 @@
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <!-- Step Visualizer -->
                         <div class="space-y-4">
                             <h3 class="font-semibold text-stone-700 text-sm uppercase tracking-wide">The Swap Flow</h3>
                             
@@ -206,7 +192,6 @@
                             </div>
                         </div>
 
-                        <!-- Dynamic Explanation Panel -->
                         <div class="bg-stone-900 rounded-xl p-6 text-stone-300 flex flex-col justify-center relative overflow-hidden">
                             <div class="absolute top-0 right-0 p-4 opacity-10">
                                 <span class="text-6xl">⇄</span>
@@ -227,42 +212,10 @@
                     </div>
                 </section>
 
-                <!-- Mint Baton Security -->
-                <section class="bg-white rounded-xl shadow-sm border border-stone-200 p-6">
-                    <h2 class="text-xl font-bold text-stone-800 mb-3">5. On-Chain Mint Baton Management</h2>
-                    <div class="flex flex-col sm:flex-row gap-6">
-                        <div class="flex-1">
-                            <p class="text-sm text-stone-600 mb-3">
-                                The <strong>Mint Baton</strong> is the "Key to the Kingdom". It allows creating <em>more</em> Parent Tokens. The codebase implements strict safeguards to prevent accidental burning or misuse.
-                            </p>
-                            <ul class="space-y-2">
-                                <li class="flex items-center text-sm text-stone-500">
-                                    <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                                    <span>Initialized at Genesis (Index 2)</span>
-                                </li>
-                                <li class="flex items-center text-sm text-stone-500">
-                                    <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                                    <span>Chronik Verification of existence</span>
-                                </li>
-                                <li class="flex items-center text-sm text-stone-500">
-                                    <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                                    <span>Explicit "Do Not Spend" Warnings</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="sm:w-1/3 bg-orange-50 rounded-lg border border-orange-100 p-4 flex flex-col items-center justify-center text-center">
-                            <div class="text-3xl mb-2">🗝️</div>
-                            <div class="text-xs font-bold text-orange-800 uppercase">Sovereign Control</div>
-                            <p class="text-xs text-orange-600 mt-1">Only the baton holder can expand the collection.</p>
-                        </div>
-                    </div>
-                </section>
-
             </div>
         </div>
     </div>
 
-    <!-- JavaScript Implementation -->
     <script>
         // --- 1. Supply Chart (Chart.js) ---
         document.addEventListener('DOMContentLoaded', function() {
@@ -273,8 +226,8 @@
                 data: {
                     labels: ['Reserved/Distributed', 'Mintable Supply'],
                     datasets: [{
-                        data: [150, 850], // Simulated initial state
-                        backgroundColor: ['#d6d3d1', '#ea580c'], // stone-300, orange-600
+                        data: [150, 850],
+                        backgroundColor: ['#d6d3d1', '#ea580c'],
                         borderWidth: 0,
                         hoverOffset: 4
                     }]
@@ -307,9 +260,7 @@
             const balanceEl = document.getElementById('sim-balance');
             const mintedEl = document.getElementById('sim-minted');
             const logEl = document.getElementById('sim-log');
-            const fanoutStatus = document.getElementById('fanout-status');
 
-            // Render initial UTXO blocks
             function renderUTXOs() {
                 utxoContainer.innerHTML = '';
                 for (let i = 0; i < parentTokens; i++) {
@@ -322,24 +273,17 @@
 
             document.getElementById('btn-mint').addEventListener('click', () => {
                 if (parentTokens > 0) {
-                    // Simulate logic
                     logEl.textContent = "Selecting 1 Parent Token Input...";
-                    
-                    // Visual effect: remove one block
                     const lastToken = utxoContainer.lastElementChild;
                     if(lastToken) {
                         lastToken.classList.remove('bg-stone-800');
-                        lastToken.classList.add('bg-red-500', 'scale-0'); // Burn effect
-                        
+                        lastToken.classList.add('bg-red-500', 'scale-0');
                         setTimeout(() => {
                             parentTokens--;
                             mintedChildren++;
-                            
-                            // Update DOM
                             balanceEl.textContent = parentTokens;
                             mintedEl.textContent = mintedChildren;
                             renderUTXOs();
-                            
                             logEl.textContent = "Transaction Confirmed: 1 Parent Burned, 1 Child Minted.";
                             logEl.className = "mt-4 text-xs font-mono text-green-600 text-center h-4 font-bold";
                         }, 400);
@@ -360,7 +304,6 @@
                 renderUTXOs();
             });
 
-            // Initial Render
             renderUTXOs();
         });
 
@@ -389,7 +332,6 @@
         ];
 
         function setSwapStep(stepNum) {
-            // Update Visuals
             for (let i = 1; i <= 4; i++) {
                 const el = document.getElementById(`step-${i}`);
                 if (i === stepNum) {
@@ -400,12 +342,8 @@
                     el.classList.remove('step-active');
                 }
             }
-
-            // Update Content
             const content = swapDetails[stepNum - 1];
             const detailPanel = document.getElementById('swap-detail-content');
-            
-            // Simple fade effect
             detailPanel.style.opacity = '0';
             setTimeout(() => {
                 detailPanel.innerHTML = `
@@ -421,5 +359,3 @@
     </script>
 </body>
 </html>
-
-```
