@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>xolosArmy Network — Manifesto</title>
+  <meta name="description" content="A short manifesto for xolosArmy Network / Tonalli: belonging first, token second." />
+  <style>
+    :root{
+      --bg0:#070A0F;
+      --bg1:#0A111B;
+      --card:rgba(255,255,255,.06);
+      --card2:rgba(255,255,255,.08);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.70);
+      --faint:rgba(255,255,255,.55);
+      --line:rgba(255,255,255,.12);
+
+      --ember:#FF7A1A;
+      --gold:#E8C36A;
+      --jade:#3AF0C9;
+
+      --shadow: 0 30px 80px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 26px;
+
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% 15%, rgba(255,122,26,.18), transparent 55%),
+        radial-gradient(900px 600px at 80% 25%, rgba(58,240,201,.14), transparent 55%),
+        radial-gradient(900px 700px at 55% 85%, rgba(232,195,106,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    .wrap{
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 56px 20px 80px;
+    }
+
+    header{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      margin-bottom: 28px;
+    }
+
+    .badgeRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+    }
+
+    .badge{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding: 10px 12px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border-radius: 999px;
+      font-size: 12px;
+      letter-spacing:.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
+    }
+    .dot{
+      width:8px; height:8px; border-radius:999px;
+      background: var(--ember);
+      box-shadow: 0 0 18px rgba(255,122,26,.55);
+    }
+    h1{
+      margin:0;
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+    .sub{
+      margin:0;
+      max-width: 72ch;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 15.5px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+      margin-top: 22px;
+    }
+    @media (max-width: 940px){
+      .grid{grid-template-columns: 1fr; }
+    }
+
+    .card{
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      backdrop-filter: blur(14px);
+    }
+    .cardInner{
+      padding: 22px 22px 18px;
+    }
+
+    .titleRow{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 14px;
+    }
+
+    .lang{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.20);
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing:.12em;
+      text-transform: uppercase;
+      font-family: var(--mono);
+      white-space:nowrap;
+    }
+    .lang .pill{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: var(--jade);
+      box-shadow: 0 0 18px rgba(58,240,201,.45);
+    }
+
+    .manifest{
+      display:flex;
+      flex-direction:column;
+      gap: 14px;
+    }
+
+    .lead{
+      margin:0;
+      font-size: 18px;
+      line-height: 1.45;
+      color: var(--text);
+    }
+
+    .bullets{
+      margin: 0;
+      padding: 0;
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+
+    .bullets li{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      padding: 12px 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      border-radius: var(--radius);
+    }
+    .mark{
+      flex: 0 0 auto;
+      width: 10px; height: 10px;
+      border-radius: 3px;
+      margin-top: 5px;
+      background: linear-gradient(180deg, var(--gold), rgba(232,195,106,.55));
+      box-shadow: 0 0 22px rgba(232,195,106,.25);
+    }
+    .bullets p{
+      margin:0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14.5px;
+    }
+    .bullets strong{
+      color: var(--text);
+      font-weight: 650;
+    }
+
+    .quote{
+      margin: 16px 0 0;
+      padding: 14px 14px;
+      border-left: 3px solid rgba(255,122,26,.85);
+      background: rgba(255,122,26,.08);
+      border-radius: 12px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .quote small{
+      display:block;
+      margin-top: 6px;
+      color: var(--faint);
+      font-family: var(--mono);
+      letter-spacing:.02em;
+    }
+
+    .side{
+      display:flex;
+      flex-direction:column;
+      gap: 18px;
+    }
+
+    .mini{
+      padding: 18px;
+      border-radius: var(--radius2);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+      backdrop-filter: blur(14px);
+    }
+    .mini h3{
+      margin: 0 0 10px;
+      font-size: 13px;
+      letter-spacing:.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-family: var(--mono);
+    }
+
+    .equation{
+      margin:0;
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.22);
+      font-family: var(--mono);
+      color: rgba(255,255,255,.88);
+      line-height: 1.6;
+      font-size: 13px;
+    }
+    .eqLine{
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px dashed rgba(255,255,255,.10);
+    }
+    .eqLine:last-child{border-bottom:none}
+    .k{color: var(--faint)}
+    .v{color: var(--text)}
+
+    .cta{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .cta a{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,122,26,.55);
+      background: linear-gradient(180deg, rgba(255,122,26,.22), rgba(255,122,26,.10));
+      color: var(--text);
+      font-weight: 650;
+      letter-spacing:.01em;
+      box-shadow: 0 20px 55px rgba(255,122,26,.10);
+      transition: transform .12s ease, background .12s ease;
+    }
+    .cta a:hover{ transform: translateY(-1px); background: linear-gradient(180deg, rgba(255,122,26,.28), rgba(255,122,26,.12)); }
+    .cta small{
+      color: var(--faint);
+      line-height: 1.5;
+    }
+
+    footer{
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--faint);
+      display:flex;
+      gap: 12px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      font-size: 12.5px;
+    }
+    .sig{
+      font-family: var(--mono);
+      letter-spacing:.03em;
+    }
+    .sep{opacity:.45}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="badgeRow">
+        <div class="badge"><span class="dot"></span> xolosArmy Network State</div>
+        <div class="badge">Tonalli Wallet • NFTs • eCash</div>
+      </div>
+      <h1>Belonging first. Token second.</h1>
+      <p class="sub">
+        This is not “NFT access.” This is a cryptographic reflection of a real bond:
+        the Xoloitzcuintle is the living key, and Tonalli simply records the proof.
+      </p>
+    </header>
+
+    <section class="grid">
+      <!-- EN -->
+      <article class="card">
+        <div class="cardInner">
+          <div class="titleRow">
+            <div>
+              <div class="lang"><span class="pill"></span> EN • Manifesto</div>
+            </div>
+          </div>
+
+          <div class="manifest">
+            <p class="lead">
+              We do not sell membership. We recognize <strong>belonging</strong>.
+            </p>
+
+            <ul class="bullets">
+              <li>
+                <span class="mark"></span>
+                <p><strong>The Xolo comes first.</strong> The token does not create the bond — the bond creates the token.</p>
+              </li>
+              <li>
+                <span class="mark"></span>
+                <p><strong>A Mint Pass is not a product.</strong> It’s a right derived from a living relationship and a shared story.</p>
+              </li>
+              <li>
+                <span class="mark"></span>
+                <p><strong>Tonalli is a temple, not a casino.</strong> Our NFTs are testimonies, not tickets.</p>
+              </li>
+              <li>
+                <span class="mark"></span>
+                <p><strong>Scarcity is not the point.</strong> Authenticity is. We design for truth, not hype.</p>
+              </li>
+              <li>
+                <span class="mark"></span>
+                <p><strong>Sybil resistance through humanity.</strong> Real life is our firewall.</p>
+              </li>
+            </ul>
+
+            <div class="quote">
+              “The mint happens when the Xolo exists.”
+              <small>xolosArmy Network State</small>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SIDE -->
+      <aside class="side">
+        <div class="mini">
+          <h3>Canonical mapping</h3>
+          <div class="equation" role="note" aria-label="Concept mapping">
+            <div class="eqLine"><span class="k">Xoloitzcuintle</span><span class="v">Root identity</span></div>
+            <div class="eqLine"><span class="k">Mint Pass</span><span class="v">Belonging proof</span></div>
+            <div class="eqLine"><span class="k">Tonalli</span><span class="v">Custody + ritual UI</span></div>
+            <div class="eqLine"><span class="k">NFT</span><span class="v">Witness / testimony</span></div>
+          </div>
+        </div>
+
+        <div class="mini cta">
+          <h3>Short doctrine</h3>
+          <a href="#" onclick="return false;">The bond is the key • The chain is the mirror</a>
+          <small>
+            Keep this sentence consistent across Twitter, Telegram, the website, and inside the app.
+            Repetition turns it into law.
+          </small>
+        </div>
+      </aside>
+
+      <!-- ES -->
+      <article class="card">
+        <div class="cardInner">
+          <div class="titleRow">
+            <div>
+              <div class="lang"><span class="pill"></span> ES • Manifiesto</div>
+            </div>
+          </div>
+
+          <div class="manifest">
+            <p class="lead">
+              No vendemos membresía. Reconocemos <strong>pertenencia</strong>.
+            </p>
+
+            <ul class="bullets">
+              <li>
+                <span class="mark"></span>
+                <p><strong>Primero existe el Xolo.</strong> El token no crea el vínculo — el vínculo crea el token.</p>
+              </li>
+              <li>
+                <span class="mark"></span>
+                <p><strong>Un Mint Pass no es un producto.</strong> Es un derecho que nace de una relación viva y una historia compartida.</p>
+              </li>
+              <li>
+                <span class="mark"></span>
+                <p><strong>Tonalli es un templo, no un casino.</strong> Nuestros NFTs son testimonio, no boleto.</p>
+              </li>
+              <li>
+                <span class="mark"></span>
+                <p><strong>La escasez no es el punto.</strong> La autenticidad sí. Diseñamos para la verdad, no para el hype.</p>
+              </li>
+              <li>
+                <span class="mark"></span>
+                <p><strong>Resistencia Sybil con humanidad.</strong> La vida real es nuestro firewall.</p>
+              </li>
+            </ul>
+
+            <div class="quote">
+              “El mint sucede cuando existe el Xolo.”
+              <small>xolosArmy Network State</small>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <aside class="side">
+        <div class="mini">
+          <h3>Nota operativa</h3>
+          <p style="margin:0;color:var(--muted);line-height:1.6;font-size:14.5px;">
+            Si alguien pregunta “¿cómo obtengo un Mint Pass?”, la respuesta es simple:
+            <strong>un Xoloitzcuintle Ramírez es la llave de entrada</strong>. Tonalli solo lo registra.
+          </p>
+        </div>
+
+        <div class="mini">
+          <h3>Signature</h3>
+          <p class="equation" style="margin:0">
+            <span class="k">Network State</span> → <span class="v">lived belonging</span><br />
+            <span class="k">Blockchain</span> → <span class="v">immutable witness</span><br />
+            <span class="k">Tonalli</span> → <span class="v">the temple interface</span>
+          </p>
+        </div>
+      </aside>
+    </section>
+
+    <footer>
+      <div class="sig">xolosArmy Network • Tonalli</div>
+      <div class="sep">—</div>
+      <div>“Real life first. Cryptography second.”</div>
+    </footer>
+  </div>
+</body>
+</html>
+```0
