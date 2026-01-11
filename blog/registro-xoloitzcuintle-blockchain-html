@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>El Códice Digital de Mictlán — Reporte</title>
+  <style>
+    :root{
+      --bg: #07080b;
+      --panel: rgba(255,255,255,.04);
+      --panel2: rgba(255,255,255,.06);
+      --text: rgba(255,255,255,.88);
+      --muted: rgba(255,255,255,.68);
+      --faint: rgba(255,255,255,.50);
+      --line: rgba(255,255,255,.14);
+      --accent: #f9d777;     /* xolo-gold */
+      --accent2:#8fe0d5;     /* jade */
+      --danger:#ff6b6b;
+      --ok:#6ee7a8;
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 980px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Garamond, Georgia, serif;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(1200px 900px at 15% -10%, rgba(249,215,119,.14), transparent 50%),
+        radial-gradient(1000px 800px at 95% 10%, rgba(143,224,213,.10), transparent 55%),
+        radial-gradient(900px 600px at 50% 110%, rgba(255,255,255,.07), transparent 60%),
+        linear-gradient(180deg, #05060a, #07080b 40%, #05060a);
+      line-height: 1.65;
+      letter-spacing: .2px;
+    }
+
+    a{color: var(--accent2); text-decoration: none}
+    a:hover{text-decoration: underline}
+
+    /* Layout */
+    .wrap{
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      padding: 28px 0 80px;
+    }
+
+    header.hero{
+      position: relative;
+      padding: 28px 26px 22px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    header.hero::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(520px 220px at 18% 18%, rgba(249,215,119,.22), transparent 65%),
+        radial-gradient(520px 220px at 82% 24%, rgba(143,224,213,.14), transparent 70%),
+        linear-gradient(90deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+      filter: blur(0px);
+      opacity:.9;
+      pointer-events:none;
+    }
+    header.hero > *{position: relative; z-index:1}
+
+    .kicker{
+      font-family: var(--mono);
+      color: var(--faint);
+      font-size: 12px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      margin: 0 0 10px;
+    }
+    h1{
+      font-family: var(--serif);
+      font-weight: 650;
+      margin: 0 0 8px;
+      font-size: clamp(26px, 4vw, 44px);
+      line-height: 1.12;
+      letter-spacing: .3px;
+    }
+    .subtitle{
+      margin: 0 0 16px;
+      color: var(--muted);
+      max-width: 78ch;
+      font-size: 15.5px;
+    }
+
+    .meta{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top: 16px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.18);
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .chip b{color: var(--text); font-weight: 700}
+    .chip .dot{
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(249,215,119,.12);
+    }
+
+    nav.toc{
+      margin-top: 18px;
+      padding: 16px 16px 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.03);
+    }
+    nav.toc h2{
+      margin: 0 0 10px;
+      font-size: 13px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-family: var(--mono);
+      color: var(--faint);
+    }
+    nav.toc ol{
+      margin: 0;
+      padding-left: 18px;
+      columns: 2;
+      column-gap: 20px;
+    }
+    nav.toc li{break-inside: avoid; margin: 6px 0}
+    nav.toc a{color: var(--muted)}
+    nav.toc a:hover{color: var(--text)}
+
+    main{
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    section.card{
+      border: 1px solid var(--line);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.03);
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+      overflow: hidden;
+    }
+    section.card .inner{
+      padding: 22px 22px 18px;
+    }
+
+    h2{
+      margin: 0 0 10px;
+      font-size: 20px;
+      letter-spacing: .2px;
+    }
+    h3{
+      margin: 16px 0 8px;
+      font-size: 16px;
+      color: rgba(255,255,255,.92);
+    }
+    p{margin: 10px 0; color: var(--text)}
+    .muted{color: var(--muted)}
+    .faint{color: var(--faint)}
+
+    .quote{
+      margin: 14px 0;
+      padding: 14px 14px 14px 16px;
+      border-left: 3px solid var(--accent);
+      background: linear-gradient(90deg, rgba(249,215,119,.12), rgba(255,255,255,.02));
+      border-radius: 12px;
+      color: rgba(255,255,255,.86);
+    }
+    .quote .sig{
+      margin-top: 8px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--faint);
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+    @media (max-width: 860px){
+      .grid2{grid-template-columns: 1fr}
+      nav.toc ol{columns:1}
+    }
+
+    .box{
+      padding: 14px 14px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(0,0,0,.18);
+    }
+    .box h4{
+      margin: 0 0 8px;
+      font-size: 13px;
+      font-family: var(--mono);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+    ul,ol{margin: 8px 0 10px; padding-left: 18px}
+    li{margin: 6px 0; color: rgba(255,255,255,.85)}
+    code,kbd,pre{
+      font-family: var(--mono);
+    }
+    code{
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.10);
+      padding: 2px 6px;
+      border-radius: 8px;
+      color: rgba(255,255,255,.90);
+    }
+
+    .callout{
+      display:flex; gap: 12px; align-items:flex-start;
+      margin: 14px 0;
+      padding: 12px 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+    }
+    .badge{
+      min-width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display:grid;
+      place-items:center;
+      background: rgba(249,215,119,.14);
+      border: 1px solid rgba(249,215,119,.22);
+      color: var(--accent);
+      font-weight: 900;
+      font-family: var(--mono);
+    }
+
+    /* Table */
+    .tablewrap{
+      overflow:auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(0,0,0,.18);
+      margin-top: 12px;
+    }
+    table{
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 820px;
+    }
+    th,td{
+      padding: 12px 12px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      vertical-align: top;
+      text-align: left;
+    }
+    th{
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--faint);
+      background: rgba(255,255,255,.03);
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(8px);
+    }
+    td{
+      color: rgba(255,255,255,.84);
+    }
+    tr:last-child td{border-bottom: none}
+
+    footer{
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-radius: var(--radius2);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+    .hr{
+      height: 1px;
+      background: rgba(255,255,255,.12);
+      margin: 18px 0;
+    }
+
+    .smallprint{
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(255,255,255,.55);
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="hero" id="top">
+      <p class="kicker">Códice / Reporte de Investigación</p>
+      <h1>El Códice Digital de Mictlán</h1>
+      <p class="subtitle">
+        <b>Soberanía Tecnológica</b>, <b>Zootecnia Ancestral</b> y la <b>Arquitectura de la Tonalli Wallet</b>:
+        un análisis multidimensional del modelo XolosArmy + Xolos Ramírez para certificar identidad y linaje
+        del Xoloitzcuintle mediante infraestructura soberana en eCash (XEC).
+      </p>
+
+      <div class="meta">
+        <span class="chip"><span class="dot"></span><b>Caso de estudio:</b> entrega de Otún Ir Ramírez + envío NFT</span>
+        <span class="chip"><b>Stack:</b> eCash (XEC) · ALP/eTokens · Chronik · UTXO</span>
+        <span class="chip"><b>Enfoque:</b> identidad verificable · resistencia a censura · no-custodial</span>
+      </div>
+
+      <nav class="toc" aria-label="Tabla de contenidos">
+        <h2>Tabla de contenidos</h2>
+        <ol>
+          <li><a href="#s1">Resumen Ejecutivo</a></li>
+          <li><a href="#s2">Substrato Biocultural</a></li>
+          <li><a href="#s3">Arquitectura Metafísica: Tonalli</a></li>
+          <li><a href="#s4">Infraestructura Tecnológica: eCash</a></li>
+          <li><a href="#s5">Ingeniería de Software: Tonalli Wallet</a></li>
+          <li><a href="#s6">Activos Digitales en eCash: ALP + Chronik</a></li>
+          <li><a href="#s7">Caso de Estudio: Otún Ir Ramírez</a></li>
+          <li><a href="#s8">Implicaciones Sociopolíticas: Estado Red</a></li>
+          <li><a href="#s9">Análisis Estratégico de Comunicación</a></li>
+          <li><a href="#s10">Análisis Comparativo</a></li>
+          <li><a href="#s11">Conclusión</a></li>
+        </ol>
+      </nav>
+    </header>
+
+    <main>
+
+      <!-- 1 -->
+      <section class="card" id="s1">
+        <div class="inner">
+          <h2>1. Resumen Ejecutivo: La Convergencia de Dos Linajes</h2>
+          <p>
+            La intersección entre la preservación del patrimonio biocultural y las tecnologías de registro distribuido
+            representa uno de los campos de estudio más relevantes en la antropología digital contemporánea. Este informe
+            presenta una investigación exhaustiva sobre la iniciativa del colectivo <b>XolosArmy</b> y el criadero
+            <b>Xolos Ramírez</b>, centrada en la implementación de una infraestructura soberana para la certificación de
+            ejemplares de Xoloitzcuintle.
+          </p>
+
+          <p>
+            El análisis se detona a partir de un evento singular: la entrega de la cachorra <b>“Otún Ir Ramírez”</b> a sus
+            nuevos guardianes, Kiepe y su pareja, y la simultánea transferencia de un <b>activo digital no fungible (NFT)</b>
+            a la <b>Tonalli Wallet</b>. Este documento no se limita a describir una transacción comercial; disecciona la
+            construcción de un <b>Estado Red</b> (Network State) que busca emancipar la gestión de la identidad canina de
+            instituciones centralizadas tradicionales.
+          </p>
+
+          <div class="quote">
+            La Tonalli Wallet emerge no solo como un contenedor de moneda, sino como un receptáculo del <i>Tonalli</i> —
+            fuerza anímica y calórica descrita en la cosmología nahua— transportando identidad verificable al dominio digital.
+            <div class="sig">— Tesis central del reporte</div>
+          </div>
+
+          <p class="muted">
+            A lo largo de este reporte, se examinan componentes técnicos (ALP/eTokens, Chronik, OP_RETURN como cápsulas de
+            datos cuando aplica), implicaciones filosóficas de soberanía de datos y la viabilidad estratégica frente a
+            infraestructuras Web2 convencionales. La entrega de Otún Ir Ramírez sirve como caso de estudio para validar la
+            tesis de que la cultura, para sobrevivir en el siglo XXI, debe codificarse en sistemas resistentes a la censura
+            y al olvido.
+          </p>
+        </div>
+      </section>
+
+      <!-- 2 -->
+      <section class="card" id="s2">
+        <div class="inner">
+          <h2>2. El Substrato Biocultural: El Xoloitzcuintle como Tecnología Viva</h2>
+          <p>
+            Para comprender la magnitud de la innovación tecnológica propuesta por la Tonalli Wallet, es imperativo
+            establecer primero la naturaleza del activo biológico que busca proteger: el Xoloitzcuintle. Esta raza no es
+            simplemente un perro; es una tecnología biológica desarrollada por civilizaciones mesoamericanas con propósitos
+            específicos: termorregulación, compañía espiritual y guía escatológica.
+          </p>
+
+          <h3>2.1 La Genética de la Ausencia y la Presencia</h3>
+          <p>
+            El Xoloitzcuintle se define por una mutación asociada a displasia ectodérmica canina (ausencia de pelo y
+            dentición incompleta). En el contexto de XolosArmy, esta “ausencia” se reinterpreta como una pureza esencial:
+            una biología sin ocultamiento. Al igual que una blockchain busca transparencia verificable, el xolo expone su
+            identidad a través de la piel.
+          </p>
+
+          <div class="callout">
+            <div class="badge">⟡</div>
+            <div>
+              <p style="margin:0">
+                En el caso específico de <b>Otún Ir Ramírez</b>, descrita como una cachorra <b>miniatura</b>, se prioriza una
+                variante venerada por su capacidad de condensar calor corporal (<i>tona</i>) y vínculo cercano: compañía,
+                terapia térmica y presencia afectiva intensa.
+              </p>
+              <p class="smallprint" style="margin-bottom:0">
+                Nota: la miniatura aquí se trata como continuidad funcional (compañía íntima/terapéutica), no como moda.
+              </p>
+            </div>
+          </div>
+
+          <h3>2.2 El Xoloitzcuintle como Psicopompo: Paralelismo Criptográfico</h3>
+          <p>
+            En la mitología mexica, el xolo guía al alma a través de los niveles del Mictlán. Este rol de “guía/llave”
+            establece un isomorfismo conceptual con la criptografía de clave pública:
+          </p>
+
+          <div class="grid2">
+            <div class="box">
+              <h4>Mapa simbólico</h4>
+              <ul>
+                <li><b>Mictlán</b>: el olvido digital (servidores caídos, censura, pérdida de archivos).</li>
+                <li><b>Xolo</b>: la llave (custodia) que permite navegar con certeza.</li>
+                <li><b>Travesía</b>: del evento humano a registro verificable.</li>
+              </ul>
+            </div>
+            <div class="box">
+              <h4>Mapa técnico</h4>
+              <ul>
+                <li><b>Clave privada</b>: firma transacciones y prueba control del activo.</li>
+                <li><b>Mempool</b>: sala de espera de transacciones antes del bloque.</li>
+                <li><b>Confirmación</b>: paso hacia inmutabilidad práctica.</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="muted">
+            La decisión de XolosArmy de usar esta raza como eje del ecosistema no es estética: es simbología operativa.
+            Entregar a Otún Ir no es solo entregar un animal; es entregar una herramienta de navegación cultural y afectiva.
+          </p>
+        </div>
+      </section>
+
+      <!-- 3 -->
+      <section class="card" id="s3">
+        <div class="inner">
+          <h2>3. Arquitectura Metafísica: El Concepto de Tonalli</h2>
+
+          <h3>3.1 Etimología y Termodinámica Espiritual</h3>
+          <p>
+            <b>Tonalli</b> proviene de la raíz <i>tona</i> (“hacer calor” / “hacer sol”). En la cosmovisión nahua,
+            el Tonalli es la porción de calor solar que anima. Desde una perspectiva de sistemas, esta noción resuena con
+            la termodinámica de redes PoW: seguridad como energía convertida en certeza.
+          </p>
+
+          <h3>3.2 La Volatilidad del Alma y la Custodia Digital</h3>
+          <p>
+            El Tonalli se describe como volátil: puede desplazarse (sueño, susto) y su pérdida implica debilitamiento.
+            En el plano digital, la analogía es directa: si se pierde la clave privada (seed phrase), se pierde el acceso a
+            activos e identidad.
+          </p>
+
+          <ul>
+            <li><b>Tonalli Wallet como recipiente</b>: contenedor no-custodial que resguarda la custodia del usuario.</li>
+            <li><b>NFT como fijación</b>: ancla identidad y prueba de ownership al registro distribuido (UTXO + historial).</li>
+          </ul>
+
+          <h3>3.3 Destino y Marca de Tiempo</h3>
+          <p class="muted">
+            En el Tonalpohualli, el día de nacimiento marca destino. En este sistema, la marca de tiempo del bloque y el
+            TXID funcionan como el nuevo sello: un hito verificable que ubica al ejemplar en la cronología de la red.
+          </p>
+        </div>
+      </section>
+
+      <!-- 4 -->
+      <section class="card" id="s4">
+        <div class="inner">
+          <h2>4. Infraestructura Tecnológica: La Elección de eCash (XEC)</h2>
+
+          <h3>4.1 Genealogía de la Soberanía</h3>
+          <p>
+            eCash (XEC) hereda el linaje de Bitcoin y Bitcoin Cash con un enfoque en usabilidad: tarifas muy bajas, modelo
+            UTXO y un ecosistema orientado a pagos y tokenización. El objetivo no es “usar la chain de moda”, sino sostener
+            un registro global de bajo costo para identidad y pertenencia.
+          </p>
+
+          <h3>4.2 Experiencia de usuario: latencia emocional</h3>
+          <p>
+            Un evento cara a cara (entrega física) exige que la transferencia digital no tenga fricción ni ansiedad.
+            El sistema está diseñado para que el NFT aparezca y se verifique en el flujo natural del encuentro, no como una
+            espera burocrática.
+          </p>
+
+          <div class="callout">
+            <div class="badge">⚑</div>
+            <div>
+              <p style="margin:0">
+                La tesis UX del proyecto: <b>la tecnología debe ocurrir al ritmo de la emoción humana</b>.
+                La blockchain no es espectáculo: es infraestructura invisible.
+              </p>
+            </div>
+          </div>
+
+          <h3>4.3 Escalabilidad y longevidad</h3>
+          <p class="muted">
+            XolosArmy no busca registrar un solo perro; busca sostener un sistema replicable. La selección de eCash prioriza
+            costos y una trayectoria de escalabilidad que permita expansión sin colapsar el registro identitario.
+          </p>
+        </div>
+      </section>
+
+      <!-- 5 -->
+      <section class="card" id="s5">
+        <div class="inner">
+          <h2>5. Ingeniería de Software: La Tonalli Wallet (RMZWallet)</h2>
+          <p>
+            La Tonalli Wallet (RMZWallet) funciona como interfaz humana para operaciones criptográficas complejas: generación
+            de claves, firma, manejo UTXO y visualización de activos. La premisa: el usuario no debe “entender blockchain”
+            para poseer y verificar identidad.
+          </p>
+
+          <h3>5.1 Principio no-custodial</h3>
+          <p>
+            La arquitectura sugiere un enfoque <b>no-custodial</b>: las claves privadas se generan y permanecen en el
+            dispositivo del usuario. Esto otorga propiedad absoluta y evita la posibilidad de revocación centralizada.
+          </p>
+
+          <h3>5.2 Conexión a la red: indexación soberana</h3>
+          <p class="muted">
+            Un móvil no almacena una blockchain completa. Por ello se utiliza un indexador: la wallet consulta balances,
+            historial y activos mediante API, sin ceder custodia. Esta capa puede ser auto-hosteada por el propio colectivo.
+          </p>
+
+          <div class="grid2">
+            <div class="box">
+              <h4>Capas mínimas</h4>
+              <ul>
+                <li><b>Wallet</b>: claves, firma, UI.</li>
+                <li><b>Indexer</b>: lectura rápida del estado (API).</li>
+                <li><b>Red</b>: consenso + bloques + UTXO.</li>
+              </ul>
+            </div>
+            <div class="box">
+              <h4>Riesgos y mitigación</h4>
+              <ul>
+                <li><b>Pérdida seed</b>: educación + backups seguros.</li>
+                <li><b>Dependencia de servidor</b>: self-host + replicación.</li>
+                <li><b>Metadatos</b>: hashes y referencias verificables.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6 -->
+      <section class="card" id="s6">
+        <div class="inner">
+          <h2>6. La Nueva Funcionalidad NFT: ALP, Chronik y Cápsulas de Datos</h2>
+
+          <h3>6.1 OP_RETURN: cápsulas de tiempo (cuando aplica)</h3>
+          <p>
+            Históricamente, proyectos tipo Bitcoin han usado <code>OP_RETURN</code> para incrustar datos pequeños en cadena:
+            mensajes, hashes, referencias y pruebas mínimas. Esta técnica aporta inmutabilidad, pero por sí sola no modela
+            un activo transferible; funciona como <i>cápsula</i> de evidencia.
+          </p>
+
+          <h3>6.2 eTokens / ALP: activos transferibles en eCash</h3>
+          <p>
+            En eCash, los NFTs se implementan como activos dentro del ecosistema de <b>eTokens</b>, con soporte moderno vía
+            <b>ALP (Advanced Ledger Protocol)</b>. La identidad del NFT se define por su <b>Token ID</b>, su historial UTXO y
+            la lógica de colección/parent (según la convención del proyecto).
+          </p>
+
+          <div class="callout">
+            <div class="badge">◎</div>
+            <div>
+              <p style="margin:0">
+                <b>Provenance práctica</b>: nadie puede “emitir” un NFT de tu criadero sin poseer la clave del emisor.
+                El antifraude emerge de la custodia, no de una autoridad burocrática.
+              </p>
+            </div>
+          </div>
+
+          <h3>6.3 Chronik: verdad operativa (lectura, no custodia)</h3>
+          <p class="muted">
+            Chronik actúa como indexador: permite a la wallet consultar de forma eficiente qué activos posee una dirección,
+            su historial y sus estados. Chronik no es un custodio; es una capa de lectura reproducible y auto-hosteable.
+            La verdad sigue viviendo en la cadena.
+          </p>
+
+          <h3>6.4 Metadatos: separación consciente entre identidad y representación</h3>
+          <p>
+            El sistema separa:
+          </p>
+          <ul>
+            <li><b>Identidad mínima</b>: Token ID, ownership, txid/historial (on-chain/UTXO).</li>
+            <li><b>Representación extendida</b>: fotos, textos, documentos (referenciados y verificados por hash, cuando aplica).</li>
+          </ul>
+          <p class="muted">
+            Esta separación evita el síndrome “NFT apunta a un JPG en un servidor que muere”. La imagen puede cambiar de
+            host, pero el <i>vínculo verificable</i> (hash/referencia) sostiene la continuidad.
+          </p>
+        </div>
+      </section>
+
+      <!-- 7 -->
+      <section class="card" id="s7">
+        <div class="inner">
+          <h2>7. Caso de Estudio: La Entrega de Otún Ir Ramírez</h2>
+
+          <h3>7.1 El activo digital como “Cápsula del Tiempo”</h3>
+          <p>
+            En el momento de entrega, el NFT funciona como una cápsula del tiempo: no solo prueba propiedad, sino que puede
+            anclar evidencia asociada al evento. Contenido probable del registro:
+          </p>
+          <ul>
+            <li><b>Prueba de origen</b>: colección/emisión desde el criadero.</li>
+            <li><b>Prueba de transferencia</b>: envío al nuevo guardián (TXID verificable).</li>
+            <li><b>Evidencia</b>: hash/referencia de foto, acta, certificado o documento asociado.</li>
+          </ul>
+
+          <h3>7.2 Experiencia del usuario (Kiepe)</h3>
+          <p>
+            Para Kiepe y su pareja, la recepción del NFT en Tonalli Wallet opera como rito de paso moderno:
+          </p>
+          <ul>
+            <li><b>Posesión</b>: asumen responsabilidad criptográfica (custodia real).</li>
+            <li><b>Verificabilidad</b>: pueden probar procedencia sin pedir permiso a un tercero.</li>
+            <li><b>Continuidad</b>: la wallet deviene álbum familiar verificable y evolutivo.</li>
+          </ul>
+
+          <div class="quote">
+            La entrega física es afecto. La entrega digital es memoria verificable. Juntas, crean pertenencia.
+            <div class="sig">— Síntesis del caso Otún Ir</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8 -->
+      <section class="card" id="s8">
+        <div class="inner">
+          <h2>8. Implicaciones Sociopolíticas: Hacia un Estado Red (Network State)</h2>
+
+          <h3>8.1 Soberanía vs intermediarios</h3>
+          <p>
+            Los pedigrís tradicionales dependen de instituciones centralizadas: registros burocráticos, silos de datos y
+            validación por autoridad. El sistema Tonalli propone un desplazamiento:
+          </p>
+          <ul>
+            <li><b>Del permiso</b> a la <b>prueba</b>.</li>
+            <li><b>Del archivo institucional</b> a la <b>verificación distribuida</b>.</li>
+            <li><b>De la dependencia</b> a la <b>autogestión</b>.</li>
+          </ul>
+
+          <h3>8.2 Economía circular con XEC</h3>
+          <p class="muted">
+            Al operar sobre XEC, el ecosistema puede habilitar pagos, incentivos y recompensas comunitarias: servicios,
+            beneficios, eventos y gamificación de tenencia responsable. El token se vuelve infraestructura social.
+          </p>
+        </div>
+      </section>
+
+      <!-- 9 -->
+      <section class="card" id="s9">
+        <div class="inner">
+          <h2>9. Análisis Estratégico de la Comunicación (Post de Reddit)</h2>
+
+          <h3>9.1 Fortalezas</h3>
+          <ul>
+            <li><b>Narrativa emocional</b>: “primeros besos” + transferencia verificable.</li>
+            <li><b>Claridad de propósito</b>: el NFT como certificado antifraude, no como especulación.</li>
+            <li><b>Invitación al debate</b>: tradición + Web3 con un caso real.</li>
+          </ul>
+
+          <h3>9.2 Áreas de mejora (credibilidad técnica)</h3>
+          <p>
+            Para audiencias técnicas, conviene anclar el mensaje en los conceptos correctos del stack eCash:
+          </p>
+          <ul>
+            <li>Mencionar <b>ALP/eTokens</b> como base de NFTs en eCash.</li>
+            <li>Mencionar <b>Chronik</b> como indexador (lectura, no custodia).</li>
+            <li>Explicar <b>metadatos verificables</b> (hash/referencias), evitando dependencia de marketplace.</li>
+          </ul>
+
+          <div class="callout">
+            <div class="badge">✶</div>
+            <div>
+              <p style="margin:0">
+                Línea sugerida para Reddit:
+                <span class="muted">“No estamos vendiendo hype. Estamos fijando identidad verificable:
+                ALP/eTokens + Chronik + pruebas (hash/referencias) para que el linaje no dependa de una base de datos.”</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10 -->
+      <section class="card" id="s10">
+        <div class="inner">
+          <h2>10. Análisis Comparativo de Tecnologías de Registro</h2>
+          <p class="muted">
+            Comparación entre registro tradicional, registro Web2 y el modelo Tonalli (eCash + ALP/eTokens + Chronik + pruebas verificables).
+          </p>
+
+          <div class="tablewrap" role="region" aria-label="Tabla comparativa" tabindex="0">
+            <table>
+              <thead>
+                <tr>
+                  <th>Característica</th>
+                  <th>Registro Tradicional (Papel / Institución)</th>
+                  <th>Registro Web2 (SQL / Cloud)</th>
+                  <th>Registro Tonalli (eCash NFT + ALP + Chronik)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Soporte</td>
+                  <td>Papel, archivos físicos, procesos manuales</td>
+                  <td>Servidores centralizados (AWS/Azure), cuentas y roles</td>
+                  <td>Blockchain distribuida (UTXO) + indexación (Chronik)</td>
+                </tr>
+                <tr>
+                  <td>Durabilidad</td>
+                  <td>Baja (pérdida, daño, burocracia)</td>
+                  <td>Media (depende de pagos, permisos, continuidad de la empresa)</td>
+                  <td>Alta (identidad mínima en cadena; pruebas verificables)</td>
+                </tr>
+                <tr>
+                  <td>Verificabilidad</td>
+                  <td>Baja (falsificable, depende de autoridad)</td>
+                  <td>Media (confianza en administrador)</td>
+                  <td>Máxima (prueba criptográfica: txid/historial/ownership)</td>
+                </tr>
+                <tr>
+                  <td>Costo de emisión</td>
+                  <td>Alto (trámites, envíos, tiempos)</td>
+                  <td>Bajo (marginal en DB)</td>
+                  <td>Muy bajo (transacciones de bajo costo en XEC)</td>
+                </tr>
+                <tr>
+                  <td>Propiedad de datos</td>
+                  <td>La institución</td>
+                  <td>La empresa/administrador del servidor</td>
+                  <td>El usuario (custodia de claves) + comunidad (verificación)</td>
+                </tr>
+                <tr>
+                  <td>Interoperabilidad</td>
+                  <td>Nula (silos)</td>
+                  <td>Limitada (APIs cerradas)</td>
+                  <td>Alta (estándares abiertos, cualquier cliente puede leer)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="muted">
+            Esta tabla muestra por qué la migración hacia Tonalli es una mejora sustancial en seguridad y soberanía:
+            el registro deja de ser “un archivo” y se convierte en “un hecho verificable”.
+          </p>
+        </div>
+      </section>
+
+      <!-- 11 -->
+      <section class="card" id="s11">
+        <div class="inner">
+          <h2>11. Conclusión: El Futuro Digital es Ancestral</h2>
+          <p>
+            La entrega de Otún Ir Ramírez marca un hito: tradición biocultural cruzando el umbral hacia una memoria
+            verificable. La Tonalli Wallet no es simplemente software; es un artefacto cultural que integra identidad,
+            soberanía y pertenencia.
+          </p>
+
+          <p>
+            Al operar sobre eCash (XEC) y su stack de NFTs basado en <b>ALP/eTokens</b> con soporte de <b>Chronik</b>,
+            XolosArmy construye una infraestructura que respeta la naturaleza “caliente” del Tonalli: energía, vínculo,
+            continuidad. No depende de autoridades centrales para afirmar el linaje; lo prueba.
+          </p>
+
+          <div class="quote">
+            En este Códice Digital, cada bloque es una página nueva y cada transacción un paso más en la travesía del xolo
+            por el Mictlán contemporáneo: la red.
+            <div class="sig">— Cierre del reporte</div>
+          </div>
+
+          <div class="hr"></div>
+
+          <p class="faint">
+            (Fin del Reporte de Investigación)
+          </p>
+
+          <p class="smallprint">
+            Documento generado para publicación web. Puedes copiar este archivo como <code>reporte-codice-mictlan.html</code>
+            y servirlo estático (GitHub Pages, Vercel, Netlify) sin dependencias.
+          </p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <b>Notas de consistencia técnica (eCash):</b>
+      <ul>
+        <li>Este reporte <b>no</b> usa CashTokens ni BCMR (contexto BCH). Está alineado a <b>eCash</b> usando <b>ALP/eTokens</b> y <b>Chronik</b>.</li>
+        <li><code>OP_RETURN</code> se menciona solo como técnica opcional para cápsulas de evidencia (hash/referencias) cuando aplique al flujo del proyecto.</li>
+        <li>Enfoque central: <b>identidad mínima verificable</b> + <b>representación desacoplada</b> (metadatos referenciados y verificables).</li>
+      </ul>
+      <div class="smallprint">
+        Volver arriba: <a href="#top">#top</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
