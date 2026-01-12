@@ -67,7 +67,6 @@
         radial-gradient(520px 220px at 18% 18%, rgba(249,215,119,.22), transparent 65%),
         radial-gradient(520px 220px at 82% 24%, rgba(143,224,213,.14), transparent 70%),
         linear-gradient(90deg, rgba(255,255,255,.04), rgba(255,255,255,0));
-      filter: blur(0px);
       opacity:.9;
       pointer-events:none;
     }
@@ -219,9 +218,7 @@
     }
     ul,ol{margin: 8px 0 10px; padding-left: 18px}
     li{margin: 6px 0; color: rgba(255,255,255,.85)}
-    code,kbd,pre{
-      font-family: var(--mono);
-    }
+    code,kbd,pre{ font-family: var(--mono); }
     code{
       background: rgba(255,255,255,.07);
       border: 1px solid rgba(255,255,255,.10);
@@ -281,9 +278,7 @@
       top: 0;
       backdrop-filter: blur(8px);
     }
-    td{
-      color: rgba(255,255,255,.84);
-    }
+    td{ color: rgba(255,255,255,.84); }
     tr:last-child td{border-bottom: none}
 
     footer{
@@ -300,12 +295,151 @@
       background: rgba(255,255,255,.12);
       margin: 18px 0;
     }
-
     .smallprint{
       font-family: var(--mono);
       font-size: 12px;
       color: rgba(255,255,255,.55);
       margin-top: 10px;
+    }
+
+    /* NEW: Podcast + Banner */
+    .promoRow{
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+    @media (max-width: 920px){
+      .promoRow{grid-template-columns: 1fr}
+    }
+
+    .videoCard{
+      border: 1px solid var(--line);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.03);
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    }
+    .videoHead{
+      padding: 12px 14px 10px;
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    }
+    .videoHead h2{
+      margin: 0;
+      font-size: 14px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-family: var(--mono);
+      color: rgba(255,255,255,.72);
+    }
+    .videoHead .hint{
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(255,255,255,.55);
+      white-space: nowrap;
+    }
+    .videoFrame{
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+    .videoFrame iframe{
+      position:absolute; inset:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    .banner{
+      border: 1px solid var(--line);
+      border-radius: var(--radius2);
+      background:
+        radial-gradient(420px 220px at 25% 20%, rgba(249,215,119,.22), transparent 70%),
+        radial-gradient(520px 280px at 80% 30%, rgba(143,224,213,.14), transparent 70%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+      padding: 16px 16px 14px;
+      overflow:hidden;
+      position: relative;
+    }
+    .banner::after{
+      content:"";
+      position:absolute; inset:-2px;
+      background: repeating-linear-gradient(
+        135deg,
+        rgba(255,255,255,.05) 0px,
+        rgba(255,255,255,.05) 8px,
+        rgba(255,255,255,0) 8px,
+        rgba(255,255,255,0) 16px
+      );
+      opacity:.28;
+      pointer-events:none;
+    }
+    .banner > *{position:relative; z-index:1}
+    .banner .topline{
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.65);
+      margin: 0 0 10px;
+    }
+    .banner h3{
+      margin: 0 0 8px;
+      font-size: 18px;
+      letter-spacing: .2px;
+    }
+    .banner p{
+      margin: 0 0 12px;
+      color: rgba(255,255,255,.78);
+      font-size: 14px;
+    }
+    .ctaRow{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.22);
+      color: rgba(255,255,255,.88);
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      cursor: pointer;
+      user-select: none;
+    }
+    .btn:hover{
+      border-color: rgba(249,215,119,.30);
+      box-shadow: 0 14px 34px rgba(0,0,0,.32);
+      text-decoration: none;
+    }
+    .btn.primary{
+      background: rgba(249,215,119,.12);
+      border-color: rgba(249,215,119,.26);
+      color: rgba(255,255,255,.92);
+    }
+    .banner .tiny{
+      margin-top: 12px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(255,255,255,.55);
+      line-height: 1.5;
     }
   </style>
 </head>
@@ -325,6 +459,44 @@
         <span class="chip"><span class="dot"></span><b>Caso de estudio:</b> entrega de Otún Ir Ramírez + envío NFT</span>
         <span class="chip"><b>Stack:</b> eCash (XEC) · ALP/eTokens · Chronik · UTXO</span>
         <span class="chip"><b>Enfoque:</b> identidad verificable · resistencia a censura · no-custodial</span>
+      </div>
+
+      <!-- NEW: Podcast autoplay + Tonalli banner -->
+      <div class="promoRow" aria-label="Podcast y promoción Tonalli Wallet">
+        <section class="videoCard" aria-label="xolosArmy Podcast">
+          <div class="videoHead">
+            <h2>xolosArmy Podcast</h2>
+            <span class="hint">Autoplay (mute) · 16:9</span>
+          </div>
+          <div class="videoFrame">
+            <!-- Autoplay en la mayoría de navegadores requiere muted -->
+            <iframe
+              src="https://www.youtube.com/embed/OCyGZs6OQZM?si=0wUre7SoTsQXkCE0&autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1"
+              title="xolosArmy Podcast — El Códice Digital de Mictlán"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+        </section>
+
+        <aside class="banner" aria-label="Banner Tonalli Wallet">
+          <p class="topline">Tonalli Wallet · RMZWallet</p>
+          <h3>Tu identidad soberana en eCash</h3>
+          <p>
+            Recibe NFTs, custodia tu Tonalli (seed), y verifica procedencia.
+            <span class="muted">ALP/eTokens + Chronik · sin intermediarios.</span>
+          </p>
+          <div class="ctaRow">
+            <a class="btn primary" href="https://tonalli.cash" target="_blank" rel="noopener">Abrir Tonalli Wallet</a>
+            <a class="btn" href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener">Crear tu RMZWallet</a>
+            <a class="btn" href="#s6">Ver stack técnico</a>
+          </div>
+          <div class="tiny">
+            Consejo: si el navegador bloquea autoplay, toca “play” una vez. El video inicia en mute por política
+            de reproducción automática.
+          </div>
+        </aside>
       </div>
 
       <nav class="toc" aria-label="Tabla de contenidos">
