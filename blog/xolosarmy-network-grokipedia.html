@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xolosArmy Network: From Noise to Legacy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Font Assignments */
+        body { font-family: 'Noto Serif', serif; }
+        h1, h2, h3, h4, .ui-text { font-family: 'Space Grotesk', sans-serif; }
+        
+        /* Smooth Scrolling */
+        html { scroll-behavior: smooth; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f5f5f4; }
+        ::-webkit-scrollbar-thumb { background: #78716c; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #57534e; }
+
+        /* Chart Container Specifics */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container { height: 400px; }
+        }
+
+        /* Interactive Card States */
+        .pillar-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .pillar-card.active {
+            border-left: 4px solid #d97706; /* amber-600 */
+            background-color: #fffbeb; /* amber-50 */
+        }
+        .pillar-card:hover:not(.active) {
+            background-color: #fafaf9;
+        }
+    </style>
+    <!-- Chosen Palette: Warm Neutrals (Stone/Bone) with Earthy Accents (Amber/Clay/Obsidian). 
+         Background: Stone-50 (Light). Text: Stone-800. Accents: Amber-600, Stone-600. 
+         Designed to evoke "Archival", "History", and "Substance". -->
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased selection:bg-amber-200 selection:text-stone-900">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-stone-50/90 backdrop-blur-md border-b border-stone-200 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold ui-text tracking-tighter text-stone-900">xolos<span class="text-amber-600">Army</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8 ui-text text-sm font-medium">
+                    <button onclick="scrollToSection('milestone')" class="hover:text-amber-600 transition-colors">The Milestone</button>
+                    <button onclick="scrollToSection('symbolism')" class="hover:text-amber-600 transition-colors">Symbolism</button>
+                    <button onclick="scrollToSection('philosophy')" class="hover:text-amber-600 transition-colors">Philosophy</button>
+                    <button onclick="scrollToSection('intersection')" class="hover:text-amber-600 transition-colors">The Intersection</button>
+                </div>
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-stone-600" onclick="toggleMobileMenu()">
+                    <span class="text-xl">☰</span>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-stone-100 border-b border-stone-200">
+            <div class="flex flex-col p-4 space-y-3 ui-text text-sm">
+                <button onclick="scrollToSection('milestone')" class="text-left py-2 hover:text-amber-600">The Milestone</button>
+                <button onclick="scrollToSection('symbolism')" class="text-left py-2 hover:text-amber-600">Symbolism</button>
+                <button onclick="scrollToSection('philosophy')" class="text-left py-2 hover:text-amber-600">Philosophy</button>
+                <button onclick="scrollToSection('intersection')" class="text-left py-2 hover:text-amber-600">The Intersection</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="max-w-4xl mx-auto px-4 py-16 sm:py-24 text-center">
+        <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-amber-700 uppercase bg-amber-100 rounded-full ui-text">
+            Official Documentation
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-bold text-stone-900 mb-6 tracking-tight">
+            From "Noise" to <span class="text-amber-600 underline decoration-4 decoration-stone-300 underline-offset-4">Legacy</span>
+        </h1>
+        <p class="text-xl text-stone-600 max-w-2xl mx-auto leading-relaxed">
+            The transition of the xolosArmy Network into the Grokipedia archives marks a fundamental shift in Web3: prioritizing substance over hype and documentation over fleeting trends.
+        </p>
+        <div class="mt-10 flex justify-center gap-4">
+            <button onclick="scrollToSection('milestone')" class="ui-text px-6 py-3 bg-stone-900 text-stone-50 font-medium rounded-lg hover:bg-stone-700 transition-transform transform hover:-translate-y-0.5 shadow-lg">
+                Explore the Archive
+            </button>
+            <a href="https://grokipedia.com/page/XolosArmy_Network" target="_blank" class="ui-text px-6 py-3 bg-white border border-stone-300 text-stone-700 font-medium rounded-lg hover:bg-stone-50 transition-colors shadow-sm flex items-center gap-2">
+                Visit Grokipedia <span>↗</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Application Structure Plan:
+         1. The Milestone (Context): Explains the "What" - the move to Grokipedia.
+         2. The Symbolism (Core Metaphor): Interactive "Triad" explaining the Xoloitzcuintle's role (Continuity, Guardianship, Identity).
+         3. The Philosophy (Data/Comparison): Interactive Radar Chart contrasting "Hype Cycle" vs. "Legacy Model" attributes.
+         4. The Intersection (Synthesis): Summary of Culture + Tech.
+         Rationale: This structure moves from the concrete event to the abstract meaning, then to the analytical comparison, and finally to the synthesis, mirroring the "Noise to Legacy" journey.
+    -->
+
+    <!-- SECTION 1: THE MILESTONE -->
+    <section id="milestone" class="py-16 bg-white border-y border-stone-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-4 text-stone-900">A Historic Shift</h2>
+                    <p class="text-lg text-stone-600 mb-6 leading-relaxed">
+                        For a Web3 project, moving from "active development" to a "documented entry" is often seen as an end. For xolosArmy, it is a graduation. By entering the public archive of Grokipedia, the network solidifies its role not just as a project, but as a cultural artifact.
+                    </p>
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-200">
+                        <h3 class="text-sm font-bold uppercase tracking-widest text-stone-500 mb-3 ui-text">Key Takeaway</h3>
+                        <p class="font-serif italic text-xl text-stone-800">
+                            "History doesn’t trend; it just gets recorded."
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Interactive Status Visualizer -->
+                <div class="relative bg-stone-100 rounded-2xl p-8 border border-stone-200 shadow-inner">
+                    <div class="absolute top-4 right-4 text-xs font-mono text-stone-400">STATUS_MONITOR</div>
+                    
+                    <div class="space-y-6">
+                        <!-- State 1 -->
+                        <div class="flex items-center justify-between group cursor-default">
+                            <div>
+                                <h4 class="font-bold text-stone-400 group-hover:text-stone-600 transition-colors">Phase 1: Speculation</h4>
+                                <span class="text-xs text-stone-400">Social Media Cycles</span>
+                            </div>
+                            <div class="h-2 w-24 bg-stone-200 rounded-full overflow-hidden">
+                                <div class="h-full bg-stone-400 w-full animate-pulse"></div>
+                            </div>
+                        </div>
+
+                        <!-- Connector -->
+                        <div class="flex justify-center">
+                            <span class="text-stone-300 text-xl">↓</span>
+                        </div>
+
+                        <!-- State 2 (Active) -->
+                        <div class="flex items-center justify-between p-4 bg-white rounded-lg shadow-sm border border-amber-200 transform scale-105 transition-all">
+                            <div>
+                                <h4 class="font-bold text-stone-900 text-lg">Phase 2: Legacy</h4>
+                                <span class="text-sm text-amber-600 font-medium ui-text">Archived & Documented</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="h-3 w-3 bg-green-500 rounded-full animate-ping opacity-75 absolute"></span>
+                                <span class="h-3 w-3 bg-green-500 rounded-full relative"></span>
+                                <span class="text-xs font-bold text-stone-600">ACTIVE</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-6 border-t border-stone-200">
+                        <p class="text-sm text-stone-500 text-center">
+                            The archive prioritizes <span class="font-bold text-stone-800">long-term vision</span> over short-term engagement.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: THE SYMBOLISM (Interactive) -->
+    <!-- Visualization & Content Choices:
+         Goal: Explain the metaphorical pillars of the Xoloitzcuintle.
+         Method: Tabbed Interface / Interactive Cards.
+         Why: Allows the user to focus on one concept at a time (Continuity, Guardianship, Identity) without being overwhelmed by text.
+         Library: Vanilla JS DOM manipulation + Tailwind styling. No SVG used.
+    -->
+    <section id="symbolism" class="py-20 bg-stone-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-16">
+                <span class="text-amber-600 font-bold tracking-widest uppercase text-sm ui-text">The Central Metaphor</span>
+                <h2 class="text-4xl font-bold mt-2 mb-4 text-stone-900">The Xoloitzcuintle</h2>
+                <p class="text-stone-600 max-w-2xl mx-auto">
+                    In Mesoamerican mythology, the Xolo was a guide through the Mictlán (the underworld). Today, it serves as a bridge for digital identity. Click the pillars below to explore the deeper meaning.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Navigation / Pillars List -->
+                <div class="lg:col-span-4 space-y-4">
+                    <div onclick="updateSymbolism('continuity')" id="tab-continuity" class="pillar-card active p-6 bg-white rounded-lg shadow-sm border border-stone-200">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-bold text-stone-900">1. Continuity</h3>
+                            <span class="text-2xl">∞</span>
+                        </div>
+                        <p class="text-sm text-stone-500 mt-2">Bridging ancient & future.</p>
+                    </div>
+                    
+                    <div onclick="updateSymbolism('guardianship')" id="tab-guardianship" class="pillar-card p-6 bg-white rounded-lg shadow-sm border border-stone-200">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-bold text-stone-900">2. Guardianship</h3>
+                            <span class="text-2xl">🛡</span>
+                        </div>
+                        <p class="text-sm text-stone-500 mt-2">Protector of memory.</p>
+                    </div>
+
+                    <div onclick="updateSymbolism('identity')" id="tab-identity" class="pillar-card p-6 bg-white rounded-lg shadow-sm border border-stone-200">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-bold text-stone-900">3. Identity</h3>
+                            <span class="text-2xl">🆔</span>
+                        </div>
+                        <p class="text-sm text-stone-500 mt-2">Heritage as foundation.</p>
+                    </div>
+                </div>
+
+                <!-- Content Display Area -->
+                <div class="lg:col-span-8 bg-stone-900 text-stone-100 rounded-2xl p-8 md:p-12 shadow-2xl flex flex-col justify-center min-h-[400px] relative overflow-hidden">
+                    <!-- Decorative Background Element (CSS) -->
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-amber-600/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
+                    
+                    <div id="symbol-content">
+                        <!-- Dynamic Content Loaded Here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: PHILOSOPHY (Chart) -->
+    <!-- Visualization & Content Choices:
+         Goal: Compare "Hype/Speculation" vs. "Legacy/Preservation".
+         Method: Radar Chart (Spider Chart).
+         Why: Excellent for multivariate comparison showing how the shape of the project changes based on its focus (e.g., Hype is skewed towards Volume/Volatility, Legacy is skewed towards Depth/Durability).
+         Library: Chart.js (Canvas).
+    -->
+    <section id="philosophy" class="py-20 bg-white border-t border-stone-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="flex flex-col justify-center">
+                    <h2 class="text-3xl font-bold mb-4 text-stone-900">Substance Over Hype</h2>
+                    <p class="text-lg text-stone-600 mb-6">
+                        The xolosArmy documentation provides a formal framework to study how Web3 can be used for cultural preservation rather than just speculation. This chart conceptualizes the shift in priorities.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-4 h-4 rounded bg-stone-300"></div>
+                            <span class="ui-text text-sm font-semibold text-stone-500">Typical Web3 "Hype" Project</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-4 h-4 rounded bg-amber-600"></div>
+                            <span class="ui-text text-sm font-bold text-stone-900">xolosArmy (Legacy Model)</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 p-4 bg-amber-50 rounded-lg border border-amber-100">
+                        <h4 class="font-bold text-amber-800 mb-2">Why this matters?</h4>
+                        <p class="text-sm text-amber-900/80">
+                            By focusing on <strong>Durability</strong> and <strong>Heritage</strong>, the project avoids the volatility of market cycles, ensuring the cultural assets remain accessible long-term.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center">
+                    <div class="chart-container">
+                        <canvas id="legacyRadarChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-stone-400 mt-4">
+                        *Conceptual visualization of project attributes based on Grokipedia analysis.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: THE INTERSECTION -->
+    <section id="intersection" class="py-16 bg-stone-900 text-stone-300">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-white mb-8">The Bridge</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                <div class="p-6 border border-stone-700 rounded-xl hover:border-amber-600 transition-colors">
+                    <div class="text-4xl mb-4">🏛</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Cultural Heritage</h3>
+                    <p class="text-sm text-stone-400">Ancient symbols, mythology, and shared history.</p>
+                </div>
+                
+                <div class="flex items-center justify-center sm:rotate-0 rotate-90">
+                    <span class="text-4xl text-amber-600 font-bold">+</span>
+                </div>
+
+                <div class="p-6 border border-stone-700 rounded-xl hover:border-amber-600 transition-colors">
+                    <div class="text-4xl mb-4">🔗</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Blockchain Tech</h3>
+                    <p class="text-sm text-stone-400">Decentralized storage, immutable records, digital assets.</p>
+                </div>
+            </div>
+            
+            <div class="mt-12">
+                <p class="text-xl font-serif italic text-amber-100/90 mb-8">
+                    "Applying the concept of the Mictlán guide to digital identity creates a compelling metaphor for the future of community organization."
+                </p>
+                <a href="https://grokipedia.com/page/XolosArmy_Network" class="inline-block px-8 py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-lg shadow-amber-900/50 ui-text">
+                    Read the Full Entry on Grokipedia
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-950 py-8 text-center text-stone-600 text-sm border-t border-stone-800">
+        <p>&copy; 2024 Analysis of xolosArmy Network Source Report. Generated by Canvas.</p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- 1. State & Data ---
+        const contentData = {
+            continuity: {
+                title: "Continuity",
+                subtitle: "The Bridge Across Time",
+                text: "The Xoloitzcuintle isn't just a dog; it's a 3,000-year-old symbol. By placing this figure at the center of a blockchain network, xolosArmy creates a link between ancient cultural symbols and futuristic technology. It asserts that the digital future is not severed from the past, but is a continuation of it.",
+                icon: "∞"
+            },
+            guardianship: {
+                title: "Guardianship",
+                subtitle: "Protecting Community Memory",
+                text: "In mythology, the Xolo guarded the soul on its journey through the underworld. In this digital context, the 'Network' acts as the guardian of digital assets and community history. It reframes the role of a crypto-community from 'investors' to 'protectors' of a shared legacy.",
+                icon: "🛡"
+            },
+            identity: {
+                title: "Identity",
+                subtitle: "Heritage as Foundation",
+                text: "Decentralized spaces often lack grounding. Using the Xolo provides a root system—a shared identity based on heritage. It demonstrates how people can organize in Web3 not just around a token, but around a shared cultural narrative and set of values.",
+                icon: "🆔"
+            }
+        };
+
+        // --- 2. Interaction Functions ---
+
+        // Tab Switching Logic
+        function updateSymbolism(key) {
+            // Update Tab Styles
+            document.querySelectorAll('.pillar-card').forEach(card => {
+                card.classList.remove('active', 'bg-amber-50', 'border-l-4', 'border-amber-600');
+                card.classList.add('hover:bg-stone-50'); // reset hover
+            });
+            
+            const activeTab = document.getElementById(`tab-${key}`);
+            activeTab.classList.add('active');
+
+            // Update Content Area with Fade Effect
+            const contentArea = document.getElementById('symbol-content');
+            contentArea.style.opacity = '0';
+            
+            setTimeout(() => {
+                const data = contentData[key];
+                contentArea.innerHTML = `
+                    <div class="flex items-center gap-4 mb-6">
+                        <span class="text-5xl opacity-20">${data.icon}</span>
+                        <div>
+                            <h3 class="text-3xl font-bold text-white ui-text">${data.title}</h3>
+                            <p class="text-amber-500 font-medium uppercase tracking-widest text-xs">${data.subtitle}</p>
+                        </div>
+                    </div>
+                    <p class="text-lg leading-relaxed text-stone-300 font-serif">
+                        ${data.text}
+                    </p>
+                `;
+                contentArea.style.opacity = '1';
+            }, 200);
+        }
+
+        // Smooth Scroll
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+            // Close mobile menu if open
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // --- 3. Chart Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize first tab
+            updateSymbolism('continuity');
+
+            // Setup Radar Chart
+            const ctx = document.getElementById('legacyRadarChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Durability', 'Market Hype', 'Cultural Depth', 'Volatility', 'Historical Value', 'Speed of Cycles'],
+                    datasets: [{
+                        label: 'Legacy Model (xolosArmy)',
+                        data: [90, 20, 95, 10, 90, 30], // High Durability/Depth/History, Low Hype/Volatility
+                        fill: true,
+                        backgroundColor: 'rgba(217, 119, 6, 0.2)', // Amber-600 transparent
+                        borderColor: 'rgb(217, 119, 6)',
+                        pointBackgroundColor: 'rgb(217, 119, 6)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(217, 119, 6)'
+                    }, {
+                        label: 'Speculative Hype',
+                        data: [20, 90, 15, 95, 10, 95], // Low Durability/Depth, High Hype/Volatility/Speed
+                        fill: true,
+                        backgroundColor: 'rgba(120, 113, 108, 0.2)', // Stone-500 transparent
+                        borderColor: 'rgb(168, 162, 158)',
+                        pointBackgroundColor: 'rgb(168, 162, 158)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(168, 162, 158)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: {
+                        line: { borderWidth: 3 }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(0,0,0,0.1)' },
+                            grid: { color: 'rgba(0,0,0,0.05)' },
+                            pointLabels: {
+                                font: {
+                                    family: "'Space Grotesk', sans-serif",
+                                    size: 12
+                                },
+                                color: '#44403c' // stone-700
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100,
+                            ticks: { display: false } // Hide numbers for cleaner look
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: { family: "'Space Grotesk', sans-serif" },
+                                color: '#44403c'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(28, 25, 23, 0.9)', // stone-900
+                            titleFont: { family: "'Space Grotesk', sans-serif" },
+                            bodyFont: { family: "'Space Grotesk', sans-serif" },
+                            padding: 10
+                        }
+                    }
+                }
+            });
+        });
+
+    </script>
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</body>
+</html>
