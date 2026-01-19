@@ -7,11 +7,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Paleta extraída directamente de src/index.css */
       --bg: #05070c;
       --panel: rgba(255, 255, 255, 0.03);
       --border: rgba(255, 255, 255, 0.08);
-      --accent: #ff7a1a; /* Naranja Tonalli */
+      --accent: #ff7a1a; 
       --accent-2: #ffa157;
       --teal: #39d0c2;
       --text: #f5f5f5;
@@ -28,7 +27,6 @@
       font-family: 'Montserrat', sans-serif;
       color: var(--text);
       background-color: var(--bg);
-      /* Gradientes de fondo de la App */
       background: 
         radial-gradient(circle at 15% 20%, rgba(247, 148, 77, 0.14), transparent 30%),
         radial-gradient(circle at 80% 0%, rgba(57, 208, 194, 0.14), transparent 25%),
@@ -39,7 +37,6 @@
 
     .wrap { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
 
-    /* TopBar Estilo App */
     .topbar {
       display: flex; align-items: center; justify-content: space-between;
       padding: 14px 20px;
@@ -54,13 +51,11 @@
     .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 14px; letter-spacing: 1px; }
     .dot-live { width: 8px; height: 8px; background: var(--teal); border-radius: 50%; box-shadow: 0 0 10px var(--teal); }
 
-    /* Hero Section */
     .hero {
       padding: 40px;
       border-radius: var(--radius-lg);
       background: linear-gradient(160deg, rgba(215, 104, 35, 0.1), rgba(11, 17, 32, 0.95));
       border: 1px solid rgba(255, 122, 26, 0.2);
-      position: relative; overflow: hidden;
       margin-bottom: 20px;
     }
 
@@ -68,7 +63,6 @@
     .accent-text { color: var(--accent); }
     .sub { color: var(--muted); font-size: 17px; max-width: 700px; }
 
-    /* Cards Estilo App */
     .card {
       background: var(--panel);
       border: 1px solid var(--border);
@@ -84,7 +78,6 @@
       color: var(--accent); font-weight: 700; margin-bottom: 10px; display: block;
     }
 
-    /* Datos Reales del Proyecto */
     .address-box {
       font-family: var(--mono);
       background: rgba(255, 255, 255, 0.04);
@@ -94,31 +87,34 @@
       margin: 10px 0; position: relative;
     }
 
-    .btn-copy {
-      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
-      background: var(--accent); color: #000; border: none;
-      padding: 5px 10px; border-radius: 8px; font-size: 10px; font-weight: 700; cursor: pointer;
+    .btn-cta {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px; padding: 12px 24px; border-radius: 99px;
+      font-weight: 700; text-decoration: none; transition: 0.3s;
+      cursor: pointer; border: 1px solid transparent;
     }
 
-    /* Tabs e Interactividad */
-    .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+    .btn-primary { background: var(--accent); color: #000; }
+    .btn-primary:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(255, 122, 26, 0.4); }
+    
+    .btn-outline { border: 1px solid var(--teal); color: var(--teal); background: transparent; }
+    .btn-outline:hover { background: rgba(57, 208, 194, 0.1); }
+
+    .tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
     .tab {
       background: transparent; border: 1px solid var(--border);
       color: var(--muted); padding: 10px 20px; border-radius: 99px;
-      cursor: pointer; font-weight: 700; transition: 0.3s;
+      cursor: pointer; font-weight: 700;
     }
     .tab.active { background: var(--accent); color: #000; border-color: var(--accent); }
 
-    .step-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-    .step { padding: 15px; border-left: 3px solid var(--teal); background: rgba(57, 208, 194, 0.03); }
-    .step b { color: var(--teal); display: block; margin-bottom: 5px; }
+    .marketplace-banner {
+      background: linear-gradient(90deg, rgba(57, 208, 194, 0.1), transparent);
+      border-left: 4px solid var(--teal);
+      padding: 20px; margin-top: 20px; border-radius: 0 12px 12px 0;
+    }
 
     .footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 50px; }
-
-    @media (max-width: 600px) {
-      h1 { font-size: 28px; }
-      .hero { padding: 20px; }
-    }
   </style>
 </head>
 <body>
@@ -127,88 +123,72 @@
   <nav class="topbar">
     <div class="brand">
       <div class="dot-live"></div>
-      XOLOSARMY NETWORK <span style="color:var(--muted); font-weight:400; margin-left:10px;">| BLOG TÉCNICO</span>
+      XOLOSARMY NETWORK <span style="color:var(--muted); font-weight:400; margin-left:10px;">| TUTORIAL</span>
     </div>
-    <a href="https://github.com/xolosArmy/RMZWallet" target="_blank" style="font-size:11px; font-weight:700; color:var(--accent);">CÓDIGO FUENTE ↗</a>
+    <a href="https://xololegend.xyz" target="_blank" class="btn-cta btn-outline" style="padding: 8px 16px; font-size: 11px;">MARKETPLACE ↗</a>
   </nav>
 
   <header class="hero">
-    <span class="card-title">Guardianía Digital</span>
-    <h1>El <span class="accent-text">Mint Pass</span> en Tonalli Wallet</h1>
+    <span class="card-title">Acceso al Ecosistema</span>
+    <h1>Adquiere tu <span class="accent-text">Mint Pass</span></h1>
     <p class="sub">
-      Un Mint Pass (Parent Token) es la llave maestra que autoriza la creación de un nuevo guardián en la red eCash. 
-      Sin este permiso on-chain, el templo no puede forjar el NFT.
+      El DEX de Tonalli funciona de forma atómica (oneshot) mediante <b>Offer IDs</b>. 
+      Para encontrar las ofertas públicas de la comunidad, visita el centro de mando oficial.
     </p>
+    <div style="margin-top: 25px;">
+      <a href="https://xololegend.xyz" target="_blank" class="btn-cta btn-primary">EXPLORAR OFERTAS EN XOLOLEGEND.XYZ</a>
+    </div>
   </header>
 
   <main>
     <section class="card">
-      <span class="card-title">Identificador de Colección (Parent ID)</span>
-      <p style="margin-bottom:5px;">Este es el Token ID oficial para mintear NFTs de la colección xolosArmy:</p>
-      <div class="address-box" id="parentId">
-        bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c
-        <button class="btn-copy" onclick="copyToClipboard('bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c')">COPIAR</button>
+      <span class="card-title">Ubicación de Ofertas</span>
+      <p>Debido a que no existe un <i>orderbook</i> centralizado en la blockchain, las ofertas se comparten directamente.</p>
+      <div class="marketplace-banner">
+        <h3 style="margin:0 0 10px 0; color:var(--teal);">Marketplace Público</h3>
+        <p style="margin:0; font-size:14px;">
+          En <b><a href="https://xololegend.xyz" target="_blank" style="color:var(--teal); text-decoration:underline;">xololegend.xyz</a></b> podrás visualizar los listings activos, 
+          ver los precios en XEC y obtener el <b>Offer ID</b> necesario para tu Tonalli Wallet.
+        </p>
       </div>
-      <p style="font-size:12px; color:var(--muted);">
-        <b>Nota:</b> Al mintear un NFT "hijo", se quema automáticamente 1 unidad de este token padre.
-      </p>
     </section>
 
     <section class="card">
-      <span class="card-title">Tutorial Interactivo</span>
+      <span class="card-title">Proceso de Compra</span>
       <div class="tabs">
-        <button class="tab active" onclick="showTab('tab-buy')">1. Obtención</button>
-        <button class="tab" onclick="showTab('tab-mint')">2. Minteo</button>
-        <button class="tab" onclick="showTab('tab-fees')">3. Comisiones</button>
+        <button class="tab active" onclick="showTab('tab-find')">1. Localizar</button>
+        <button class="tab" onclick="showTab('tab-import')">2. Importar</button>
+        <button class="tab" onclick="showTab('tab-confirm')">3. Validar</button>
       </div>
 
-      <div id="tab-buy" class="tab-content">
-        <div class="step-grid">
-          <div class="step">
-            <b>Paso A</b>
-            Encuentra una oferta en el DEX usando el Offer ID compartido en la comunidad.
-          </div>
-          <div class="step">
-            <b>Paso B</b>
-            Usa la pestaña "Mint Pass" en el DEX de tu Tonalli Wallet para cargar el ID.
-          </div>
-          <div class="step">
-            <b>Paso C</b>
-            Una vez comprado, el balance aparecerá en la sección "NFTs > Colección".
-          </div>
-        </div>
+      <div id="tab-find" class="tab-content">
+        <p>Entra a <b>XoloLegend</b> y selecciona el Mint Pass que deseas. Copia el identificador con formato <code style="color:var(--accent);">txid:vout</code>.</p>
       </div>
 
-      <div id="tab-mint" class="tab-content" style="display:none;">
-        <p>Dentro de la App, ve a la pestaña <b>Mintear NFT</b>:</p>
-        <ul style="color:var(--muted); font-size:14px;">
-          <li>Sube una imagen (se guardará en Pinata/IPFS).</li>
-          <li>Define nombre y relato (metadatos del guardián).</li>
-          <li>Presiona "Subir a IPFS + Mintear". El sistema consumirá tu Mint Pass.</li>
-        </ul>
+      <div id="tab-import" class="tab-content" style="display:none;">
+        <p>Abre tu <b>Tonalli Wallet</b>, ve a la sección <b>DEX</b> y selecciona la pestaña <b>Mint Pass</b>. Pega el Offer ID en el campo correspondiente.</p>
       </div>
 
-      <div id="tab-fees" class="tab-content" style="display:none;">
-        <div class="address-box">
-          <b>Comisión de Plataforma:</b> 5500 XEC <br>
-          <b>Dirección de Tesorería:</b> ecash:qq7qn90ev23ecastqmn8as00u8mcp4tzsspvt5dtlk
-        </div>
-        <p style="font-size:13px;">Esta comisión se destina al mantenimiento de la infraestructura de guardianía.</p>
+      <div id="tab-confirm" class="tab-content" style="display:none;">
+        <p>Presiona <b>"Cargar oferta"</b> para ver el preview. Si los datos son correctos, firma la transacción. El Mint Pass se añadirá a tu guardianía tras la confirmación de la red.</p>
       </div>
     </section>
 
-    <section class="card" style="border-color: var(--teal);">
-      <span class="card-title" style="color:var(--teal);">Validador de Formatos</span>
-      <p class="sub" style="font-size:14px;">Verifica si el identificador de una oferta (Offer ID) es válido para la red Agora Phase 1:</p>
-      <input type="text" id="validatorInput" placeholder="txid:vout (ej: 52b9ce...:1)" 
-             style="width:100%; background:rgba(0,0,0,0.3); border:1px solid var(--border); padding:12px; color:#fff; border-radius:10px; font-family:var(--mono);">
-      <button onclick="validateFormat()" class="tab active" style="margin-top:15px; width:100%;">VALIDAR ESTRUCTURA</button>
-      <div id="validatorResult" style="margin-top:10px; font-weight:700; text-align:center;"></div>
+    <section class="card">
+      <span class="card-title">Datos Técnicos de la Colección</span>
+      <div class="address-box">
+        <b>Parent Token ID:</b><br>
+        bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c
+      </div>
+      <div class="address-box" style="border-style: solid; border-color: rgba(57, 208, 194, 0.2);">
+        <b>Fee de Minteo (NFT Child):</b> 5500 XEC<br>
+        <b>Destino:</b> ecash:qq7qn90ev23ecastqmn8as00u8mcp4tzsspvt5dtlk
+      </div>
     </section>
   </main>
 
   <footer class="footer">
-    XolosArmy Network &copy; 2025 • Tonalli RMZWallet • Construido sobre eCash (XEC)
+    Tutorial para la comunidad XolosArmy • Tonalli RMZWallet v0.0.0
   </footer>
 </div>
 
@@ -218,26 +198,6 @@
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.getElementById(id).style.display = 'block';
     event.currentTarget.classList.add('active');
-  }
-
-  function copyToClipboard(text) {
-    navigator.clipboard.writeText(text);
-    alert("Copiado al templo digital (portapapeles)");
-  }
-
-  function validateFormat() {
-    const input = document.getElementById('validatorInput').value.trim();
-    const result = document.getElementById('validatorResult');
-    // Regex para 64 hex + : + dígito
-    const re = /^[0-9a-fA-F]{64}:[0-9]+$/;
-    
-    if (re.test(input)) {
-      result.style.color = "var(--teal)";
-      result.innerText = "✓ Formato correcto para Agora Phase 1";
-    } else {
-      result.style.color = "#ff5c7a";
-      result.innerText = "✗ Formato inválido. Debe ser txid:vout";
-    }
   }
 </script>
 
