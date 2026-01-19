@@ -3,448 +3,243 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mint Pass — Tutorial Interactivo | XolosArmy Network</title>
+  <title>Mint Pass — Tutorial de Guardianía | XolosArmy Network</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#070A0C;
-      --panel:#0B1216;
-      --panel2:#0A0F12;
-      --text:#E8F0F2;
-      --muted:#A7B6BD;
-      --line:#183039;
-      --teal:#18E0C7;
-      --teal2:#0FA99A;
-      --gold:#D7B46A;
-      --danger:#FF5C7A;
-      --ok:#36D39A;
-      --shadow: 0 12px 40px rgba(0,0,0,.45);
-      --radius: 18px;
-      --radius2: 14px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:var(--sans);
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 20% 10%, rgba(24,224,199,.15), transparent 60%),
-        radial-gradient(900px 500px at 85% 30%, rgba(215,180,106,.10), transparent 55%),
-        radial-gradient(900px 700px at 50% 110%, rgba(15,169,154,.12), transparent 65%),
-        linear-gradient(180deg, #050708 0%, #070A0C 40%, #050708 100%);
-      min-height:100vh;
-      overflow-x:hidden;
-    }
-    a{color:var(--teal); text-decoration:none}
-    a:hover{color:#6ff3e6}
-    .wrap{max-width:1100px; margin:0 auto; padding:28px 18px 60px}
-    .topbar{
-      display:flex; gap:12px; align-items:center; justify-content:space-between;
-      padding:10px 12px; border:1px solid rgba(24,224,199,.25);
-      border-radius:999px; background:rgba(7,10,12,.5); backdrop-filter: blur(8px);
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      letter-spacing:.16em; text-transform:uppercase; font-weight:700; font-size:12px;
-      color:rgba(232,240,242,.9);
-      user-select:none;
-    }
-    .sigil{
-      width:28px; height:28px; border-radius:10px;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(24,224,199,.45), transparent 55%),
-        radial-gradient(circle at 70% 70%, rgba(215,180,106,.25), transparent 55%),
-        linear-gradient(135deg, rgba(24,224,199,.35), rgba(11,18,22,.1));
-      border:1px solid rgba(24,224,199,.35);
-      box-shadow: 0 0 0 6px rgba(24,224,199,.06);
-      position:relative;
-    }
-    .sigil:after{
-      content:"";
-      position:absolute; inset:7px;
-      border-radius:9px;
-      border:1px solid rgba(24,224,199,.35);
-      transform: rotate(12deg);
-    }
-    .actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
-    .btn{
-      appearance:none; border:1px solid rgba(24,224,199,.35);
-      background:rgba(11,18,22,.7);
-      color:var(--text);
-      padding:10px 12px;
-      border-radius:999px;
-      font-weight:600; font-size:13px;
-      cursor:pointer;
-      box-shadow: 0 10px 24px rgba(0,0,0,.22);
-      transition: transform .15s ease, border-color .15s ease, background .15s ease;
-      display:inline-flex; gap:8px; align-items:center;
-    }
-    .btn:hover{transform: translateY(-1px); border-color: rgba(24,224,199,.6); background: rgba(11,18,22,.9)}
-    .btn:active{transform: translateY(0px)}
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(24,224,199,.22), rgba(15,169,154,.10));
-      border-color: rgba(24,224,199,.55);
-    }
-    .btn.gold{
-      border-color: rgba(215,180,106,.5);
-      background: linear-gradient(135deg, rgba(215,180,106,.16), rgba(11,18,22,.6));
+    :root {
+      /* Paleta extraída directamente de src/index.css */
+      --bg: #05070c;
+      --panel: rgba(255, 255, 255, 0.03);
+      --border: rgba(255, 255, 255, 0.08);
+      --accent: #ff7a1a; /* Naranja Tonalli */
+      --accent-2: #ffa157;
+      --teal: #39d0c2;
+      --text: #f5f5f5;
+      --muted: #9fa6b2;
+      --radius-lg: 20px;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+      --mono: 'Source Code Pro', 'SFMono-Regular', monospace;
     }
 
-    header.hero{
-      margin-top:18px;
-      border:1px solid rgba(24,224,199,.22);
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(11,18,22,.85), rgba(10,15,18,.60));
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      /* Gradientes de fondo de la App */
+      background: 
+        radial-gradient(circle at 15% 20%, rgba(247, 148, 77, 0.14), transparent 30%),
+        radial-gradient(circle at 80% 0%, rgba(57, 208, 194, 0.14), transparent 25%),
+        linear-gradient(135deg, var(--bg), #050608 45%, #0b1120);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+
+    /* TopBar Estilo App */
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px;
+      background: linear-gradient(135deg, rgba(5, 7, 12, 0.95), rgba(5, 8, 18, 0.9));
+      border: 1px solid rgba(255, 122, 26, 0.25);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(8px);
       box-shadow: var(--shadow);
-      position:relative;
-      overflow:hidden;
+      margin-bottom: 30px;
     }
-    .glyph{
-      position:absolute; inset:-60px -60px auto auto;
-      width:240px; height:240px; opacity:.10;
-      background:
-        radial-gradient(circle at 40% 40%, rgba(24,224,199,.7), transparent 55%),
-        conic-gradient(from 90deg, rgba(24,224,199,.7), rgba(215,180,106,.55), rgba(24,224,199,.2));
-      filter: blur(1px);
-      border-radius: 60px;
-      transform: rotate(18deg);
+
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 14px; letter-spacing: 1px; }
+    .dot-live { width: 8px; height: 8px; background: var(--teal); border-radius: 50%; box-shadow: 0 0 10px var(--teal); }
+
+    /* Hero Section */
+    .hero {
+      padding: 40px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(160deg, rgba(215, 104, 35, 0.1), rgba(11, 17, 32, 0.95));
+      border: 1px solid rgba(255, 122, 26, 0.2);
+      position: relative; overflow: hidden;
+      margin-bottom: 20px;
     }
-    .hero-inner{padding:26px 22px 20px; display:grid; grid-template-columns: 1.15fr .85fr; gap:18px}
-    @media (max-width: 900px){ .hero-inner{grid-template-columns:1fr} }
-    h1{
-      margin:0 0 10px;
-      font-size: clamp(24px, 3.2vw, 40px);
-      line-height:1.08;
-      letter-spacing:-.02em;
-    }
-    .sub{
-      color:var(--muted);
-      font-size: 15px;
-      line-height:1.5;
-      margin:0 0 14px;
-      max-width:70ch;
-    }
-    .badges{display:flex; gap:10px; flex-wrap:wrap; margin:12px 0 0}
-    .pill{
-      border:1px solid rgba(24,224,199,.25);
-      background: rgba(7,10,12,.35);
-      padding:7px 10px;
-      border-radius:999px;
-      font-size:12px;
-      color:rgba(232,240,242,.9);
-      display:inline-flex; gap:8px; align-items:center;
-      user-select:none;
-    }
-    .pill i{
-      width:8px; height:8px; border-radius:99px; display:inline-block;
-      background: var(--teal);
-      box-shadow: 0 0 0 5px rgba(24,224,199,.10);
-    }
-    .hero-card{
-      border:1px solid rgba(24,224,199,.22);
-      border-radius: var(--radius2);
-      background: rgba(7,10,12,.35);
-      padding:16px;
-      box-shadow: 0 14px 30px rgba(0,0,0,.25);
-    }
-    .hero-card h3{margin:0 0 8px; font-size:14px; color: rgba(232,240,242,.95); letter-spacing:.02em}
-    .mini{
-      font-size:13px; color:var(--muted); line-height:1.45; margin:0 0 12px;
-    }
-    .codebox{
-      border:1px solid rgba(24,224,199,.20);
-      background: rgba(0,0,0,.28);
-      border-radius: 12px;
-      padding:12px;
-      font-family: var(--mono);
-      font-size: 12px;
-      line-height:1.4;
-      color: rgba(232,240,242,.92);
-      overflow:auto;
-      position:relative;
-    }
-    .copy{
-      position:absolute; top:10px; right:10px;
-      border:1px solid rgba(24,224,199,.35);
-      background: rgba(11,18,22,.75);
-      color:var(--text);
-      border-radius: 10px;
-      padding:6px 8px;
-      font-weight:700;
-      font-size:11px;
-      cursor:pointer;
-    }
-    .copy:hover{border-color: rgba(24,224,199,.6)}
-    .toast{
-      position: fixed;
-      bottom: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(11,18,22,.92);
-      border: 1px solid rgba(24,224,199,.35);
-      border-radius: 999px;
-      padding: 10px 12px;
+
+    h1 { font-size: 36px; margin: 0 0 15px; font-weight: 900; }
+    .accent-text { color: var(--accent); }
+    .sub { color: var(--muted); font-size: 17px; max-width: 700px; }
+
+    /* Cards Estilo App */
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      backdrop-filter: blur(12px);
       box-shadow: var(--shadow);
-      color: rgba(232,240,242,.92);
-      font-weight: 700;
-      font-size: 12px;
-      opacity: 0;
-      pointer-events:none;
-      transition: opacity .18s ease, transform .18s ease;
-      z-index: 50;
-      display:flex; gap:8px; align-items:center;
+      margin-bottom: 20px;
     }
-    .toast.show{opacity:1; transform: translateX(-50%) translateY(-4px)}
 
-    main{margin-top:18px; display:grid; grid-template-columns: 1fr; gap:16px}
-    .grid{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:16px;
+    .card-title {
+      font-size: 12px; text-transform: uppercase; letter-spacing: 2px;
+      color: var(--accent); font-weight: 700; margin-bottom: 10px; display: block;
     }
-    @media (max-width: 980px){ .grid{grid-template-columns:1fr} }
 
-    section.card{
-      border:1px solid rgba(24,224,199,.18);
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(11,18,22,.82), rgba(10,15,18,.62));
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .card .hd{
-      padding:16px 18px;
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      border-bottom: 1px solid rgba(24,224,199,.12);
-      background: rgba(7,10,12,.22);
-    }
-    .card .hd h2{
-      margin:0;
-      font-size: 16px;
-      letter-spacing:.01em;
-    }
-    .card .bd{padding:16px 18px}
-    .muted{color:var(--muted)}
-    .kvs{display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:12px}
-    @media (max-width: 620px){ .kvs{grid-template-columns:1fr} }
-    .kv{
-      border:1px solid rgba(24,224,199,.14);
-      background: rgba(7,10,12,.25);
-      border-radius: 14px;
-      padding:12px;
-    }
-    .kv .k{font-size:12px; color:rgba(167,182,189,.95); margin-bottom:6px}
-    .kv .v{font-size:13px; color:rgba(232,240,242,.92); line-height:1.4}
-    .tag{
-      display:inline-flex; gap:8px; align-items:center;
-      padding:5px 10px; border-radius:999px;
-      border:1px solid rgba(215,180,106,.35);
-      background: rgba(215,180,106,.08);
-      color: rgba(232,240,242,.95);
-      font-size:12px; font-weight:700;
-    }
-    .tag .dot{width:8px;height:8px;border-radius:99px;background:var(--gold); box-shadow:0 0 0 5px rgba(215,180,106,.10)}
-    .hr{height:1px; background: rgba(24,224,199,.12); margin:14px 0}
-
-    /* Tabs */
-    .tabs{display:flex; gap:10px; flex-wrap:wrap}
-    .tab{
-      border:1px solid rgba(24,224,199,.25);
-      background: rgba(7,10,12,.25);
-      color: rgba(232,240,242,.92);
-      padding:8px 10px;
-      border-radius: 999px;
-      font-weight:800;
-      font-size:12px;
-      cursor:pointer;
-      user-select:none;
-    }
-    .tab[aria-selected="true"]{
-      border-color: rgba(24,224,199,.65);
-      background: rgba(24,224,199,.10);
-    }
-    .tabpanel{display:none; margin-top:12px}
-    .tabpanel.active{display:block}
-
-    /* Stepper */
-    .stepper{display:grid; gap:10px; margin-top:10px}
-    .step{
-      border:1px solid rgba(24,224,199,.14);
-      border-radius: 14px;
-      background: rgba(7,10,12,.25);
-      padding:12px;
-      display:grid;
-      grid-template-columns: 34px 1fr;
-      gap:10px;
-      align-items:flex-start;
-    }
-    .num{
-      width:34px; height:34px; border-radius: 12px;
-      display:grid; place-items:center;
-      font-weight:900;
-      border:1px solid rgba(24,224,199,.25);
-      background: rgba(11,18,22,.6);
-      color: rgba(232,240,242,.92);
-    }
-    .step h4{margin:0 0 6px; font-size:13px}
-    .step p{margin:0; color:var(--muted); font-size:13px; line-height:1.45}
-    .inline{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:10px;
-    }
-    .input{
-      flex:1 1 280px;
-      border:1px solid rgba(24,224,199,.22);
-      background: rgba(0,0,0,.25);
-      color: rgba(232,240,242,.92);
-      padding:10px 12px;
-      border-radius: 12px;
-      outline:none;
+    /* Datos Reales del Proyecto */
+    .address-box {
       font-family: var(--mono);
-      font-size: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 15px; border-radius: 12px;
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      word-break: break-all; font-size: 13px;
+      margin: 10px 0; position: relative;
     }
-    .hint{font-size:12px; color:rgba(167,182,189,.95); margin-top:8px}
-    .status{
-      border:1px solid rgba(24,224,199,.14);
-      background: rgba(7,10,12,.22);
-      border-radius: 14px;
-      padding:12px;
-      display:flex; gap:10px; align-items:flex-start;
-      margin-top:12px;
-    }
-    .led{
-      width:10px; height:10px; border-radius:99px;
-      background: rgba(167,182,189,.6);
-      margin-top:5px;
-      box-shadow: 0 0 0 6px rgba(167,182,189,.06);
-      flex:0 0 auto;
-    }
-    .status.ok .led{background: var(--ok); box-shadow:0 0 0 6px rgba(54,211,154,.10)}
-    .status.bad .led{background: var(--danger); box-shadow:0 0 0 6px rgba(255,92,122,.10)}
-    .status .msg{font-size:13px; color:rgba(232,240,242,.92); line-height:1.45}
-    .status .msg b{color: rgba(232,240,242,.98)}
-    .status .msg small{display:block; margin-top:6px; color:var(--muted)}
 
-    /* Accordion */
-    details{
-      border:1px solid rgba(24,224,199,.14);
-      background: rgba(7,10,12,.20);
-      border-radius: 14px;
-      padding:10px 12px;
-      margin:10px 0;
+    .btn-copy {
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      background: var(--accent); color: #000; border: none;
+      padding: 5px 10px; border-radius: 8px; font-size: 10px; font-weight: 700; cursor: pointer;
     }
-    summary{
-      cursor:pointer;
-      font-weight:900;
-      font-size:13px;
-      color: rgba(232,240,242,.95);
-      list-style:none;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
+
+    /* Tabs e Interactividad */
+    .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+    .tab {
+      background: transparent; border: 1px solid var(--border);
+      color: var(--muted); padding: 10px 20px; border-radius: 99px;
+      cursor: pointer; font-weight: 700; transition: 0.3s;
     }
-    summary::-webkit-details-marker{display:none}
-    summary .chev{
-      width:10px;height:10px; border-right:2px solid rgba(24,224,199,.65); border-bottom:2px solid rgba(24,224,199,.65);
-      transform: rotate(-45deg);
-      transition: transform .15s ease;
-      opacity:.9;
-    }
-    details[open] summary .chev{transform: rotate(45deg)}
-    details .content{margin-top:10px; color:var(--muted); font-size:13px; line-height:1.5}
-    .callout{
-      border:1px solid rgba(215,180,106,.28);
-      background: rgba(215,180,106,.06);
-      border-radius: 14px;
-      padding:12px;
-      color: rgba(232,240,242,.92);
-      font-size: 13px;
-      line-height: 1.5;
-    }
-    .callout b{color: rgba(232,240,242,.98)}
-    .footer{
-      margin-top:18px;
-      color: rgba(167,182,189,.9);
-      font-size:12px;
-      text-align:center;
-    }
-    .kbd{
-      font-family: var(--mono);
-      font-size: 11px;
-      padding: 2px 6px;
-      border-radius: 8px;
-      border:1px solid rgba(24,224,199,.20);
-      background: rgba(7,10,12,.25);
-      color: rgba(232,240,242,.92);
+    .tab.active { background: var(--accent); color: #000; border-color: var(--accent); }
+
+    .step-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    .step { padding: 15px; border-left: 3px solid var(--teal); background: rgba(57, 208, 194, 0.03); }
+    .step b { color: var(--teal); display: block; margin-bottom: 5px; }
+
+    .footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 50px; }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 28px; }
+      .hero { padding: 20px; }
     }
   </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <div class="brand">
-        <div class="sigil" aria-hidden="true"></div>
-        <span>XOLOSARMY NETWORK • BLOG</span>
-      </div>
-      <div class="actions">
-        <button class="btn primary" id="btnExpandAll" type="button">Abrir FAQ</button>
-        <button class="btn gold" id="btnCopySummary" type="button">Copiar resumen</button>
-        <button class="btn" id="btnToggleMode" type="button" aria-pressed="false">Modo “Ritual”</button>
-      </div>
+
+<div class="wrap">
+  <nav class="topbar">
+    <div class="brand">
+      <div class="dot-live"></div>
+      XOLOSARMY NETWORK <span style="color:var(--muted); font-weight:400; margin-left:10px;">| BLOG TÉCNICO</span>
     </div>
+    <a href="https://github.com/xolosArmy/RMZWallet" target="_blank" style="font-size:11px; font-weight:700; color:var(--accent);">CÓDIGO FUENTE ↗</a>
+  </nav>
 
-    <header class="hero">
-      <div class="glyph" aria-hidden="true"></div>
-      <div class="hero-inner">
-        <div>
-          <h1>¿Qué es el <span style="color:var(--teal)">Mint Pass</span> en XoloLegend?</h1>
-          <p class="sub">
-            Un <b>Mint Pass</b> no es un NFT “bonito” para presumir: es un <b>permiso on-chain</b> que autoriza
-            <b>mintear</b> (crear) <b>1 NFT</b> dentro del ecosistema <b>XoloLegend</b>.
-            Piensa en él como una <b>llave digital</b>: soberana, verificable y ligada a un <b>Offer ID</b>.
-          </p>
-          <div class="badges">
-            <span class="pill"><i></i> Verificable on-chain</span>
-            <span class="pill"><i></i> 1 permiso = 1 mint</span>
-            <span class="pill"><i></i> Integración con Tonalli Wallet</span>
-            <span class="pill"><i></i> Flujo “buy → verify → redeem”</span>
-          </div>
-        </div>
+  <header class="hero">
+    <span class="card-title">Guardianía Digital</span>
+    <h1>El <span class="accent-text">Mint Pass</span> en Tonalli Wallet</h1>
+    <p class="sub">
+      Un Mint Pass (Parent Token) es la llave maestra que autoriza la creación de un nuevo guardián en la red eCash. 
+      Sin este permiso on-chain, el templo no puede forjar el NFT.
+    </p>
+  </header>
 
-        <aside class="hero-card">
-          <h3>Formato clave</h3>
-          <p class="mini">
-            En XoloLegend, cada listing se ancla a un <b>Offer ID</b> con formato <span class="kbd">txid:vout</span>.
-            Ese identificador permite verificar que el outpoint existe y que el offer es real.
-          </p>
-          <div class="codebox" id="formatBox">
-            <button class="copy" type="button" data-copy="#formatText">COPY</button>
-            <div id="formatText">
-Offer ID = &lt;txid&gt;:&lt;vout&gt;
-
-Ejemplo:
-52b9ce...43ef2c3:1
-            </div>
-          </div>
-          <div class="hint">Tip: <b>txid</b> es un hash de 64 chars hex. <b>vout</b> es un índice (0,1,2…).</div>
-        </aside>
+  <main>
+    <section class="card">
+      <span class="card-title">Identificador de Colección (Parent ID)</span>
+      <p style="margin-bottom:5px;">Este es el Token ID oficial para mintear NFTs de la colección xolosArmy:</p>
+      <div class="address-box" id="parentId">
+        bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c
+        <button class="btn-copy" onclick="copyToClipboard('bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c')">COPIAR</button>
       </div>
-    </header>
+      <p style="font-size:12px; color:var(--muted);">
+        <b>Nota:</b> Al mintear un NFT "hijo", se quema automáticamente 1 unidad de este token padre.
+      </p>
+    </section>
 
-    <main class="grid">
-      <section class="card">
-        <div class="hd">
-          <h2>Mint Pass en 30 segundos</h2>
-          <span class="tag"><span class="dot"></span>Concepto</span>
+    <section class="card">
+      <span class="card-title">Tutorial Interactivo</span>
+      <div class="tabs">
+        <button class="tab active" onclick="showTab('tab-buy')">1. Obtención</button>
+        <button class="tab" onclick="showTab('tab-mint')">2. Minteo</button>
+        <button class="tab" onclick="showTab('tab-fees')">3. Comisiones</button>
+      </div>
+
+      <div id="tab-buy" class="tab-content">
+        <div class="step-grid">
+          <div class="step">
+            <b>Paso A</b>
+            Encuentra una oferta en el DEX usando el Offer ID compartido en la comunidad.
+          </div>
+          <div class="step">
+            <b>Paso B</b>
+            Usa la pestaña "Mint Pass" en el DEX de tu Tonalli Wallet para cargar el ID.
+          </div>
+          <div class="step">
+            <b>Paso C</b>
+            Una vez comprado, el balance aparecerá en la sección "NFTs > Colección".
+          </div>
         </div>
-        <div class="bd">
-          <p class="muted" style="margin:0">
-            El Mint Pass es un <b>derecho de creación</b>. No “representa” arte: <b>autoriza</b> el acto de mintear.
-            Cuando lo usas, su propósito se cumple (en términos prácticos, se considera <b>consumido</b> o “usado”).
-          </p>
+      </div>
 
-          <div class="kvs">
-            <div class="kv">
-              <div
+      <div id="tab-mint" class="tab-content" style="display:none;">
+        <p>Dentro de la App, ve a la pestaña <b>Mintear NFT</b>:</p>
+        <ul style="color:var(--muted); font-size:14px;">
+          <li>Sube una imagen (se guardará en Pinata/IPFS).</li>
+          <li>Define nombre y relato (metadatos del guardián).</li>
+          <li>Presiona "Subir a IPFS + Mintear". El sistema consumirá tu Mint Pass.</li>
+        </ul>
+      </div>
+
+      <div id="tab-fees" class="tab-content" style="display:none;">
+        <div class="address-box">
+          <b>Comisión de Plataforma:</b> 5500 XEC <br>
+          <b>Dirección de Tesorería:</b> ecash:qq7qn90ev23ecastqmn8as00u8mcp4tzsspvt5dtlk
+        </div>
+        <p style="font-size:13px;">Esta comisión se destina al mantenimiento de la infraestructura de guardianía.</p>
+      </div>
+    </section>
+
+    <section class="card" style="border-color: var(--teal);">
+      <span class="card-title" style="color:var(--teal);">Validador de Formatos</span>
+      <p class="sub" style="font-size:14px;">Verifica si el identificador de una oferta (Offer ID) es válido para la red Agora Phase 1:</p>
+      <input type="text" id="validatorInput" placeholder="txid:vout (ej: 52b9ce...:1)" 
+             style="width:100%; background:rgba(0,0,0,0.3); border:1px solid var(--border); padding:12px; color:#fff; border-radius:10px; font-family:var(--mono);">
+      <button onclick="validateFormat()" class="tab active" style="margin-top:15px; width:100%;">VALIDAR ESTRUCTURA</button>
+      <div id="validatorResult" style="margin-top:10px; font-weight:700; text-align:center;"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    XolosArmy Network &copy; 2025 • Tonalli RMZWallet • Construido sobre eCash (XEC)
+  </footer>
+</div>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).style.display = 'block';
+    event.currentTarget.classList.add('active');
+  }
+
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text);
+    alert("Copiado al templo digital (portapapeles)");
+  }
+
+  function validateFormat() {
+    const input = document.getElementById('validatorInput').value.trim();
+    const result = document.getElementById('validatorResult');
+    // Regex para 64 hex + : + dígito
+    const re = /^[0-9a-fA-F]{64}:[0-9]+$/;
+    
+    if (re.test(input)) {
+      result.style.color = "var(--teal)";
+      result.innerText = "✓ Formato correcto para Agora Phase 1";
+    } else {
+      result.style.color = "#ff5c7a";
+      result.innerText = "✗ Formato inválido. Debe ser txid:vout";
+    }
+  }
+</script>
+
+</body>
+</html>
