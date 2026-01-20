@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>XolosArmy Network — Opinion Column</title>
+  <meta name="description" content="Why Network Sovereignty Requires Independent Wallets — an opinion column for XolosArmy Network." />
+  <style>
+    :root{
+      --bg:#07090d;
+      --panel:#0c1018;
+      --panel2:#0a0d14;
+      --text:#e9eef7;
+      --muted:#b7c0d4;
+      --line:#1a2234;
+      --gold:#e0b24a;
+      --jade:#33d1a0;
+      --ember:#ff6a3d;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius:18px;
+      --radius2:26px;
+      --max: 920px;
+      --serif: ui-serif, Georgia, "Times New Roman", Times, serif;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% 10%, rgba(224,178,74,.12), transparent 55%),
+        radial-gradient(900px 600px at 80% 20%, rgba(51,209,160,.10), transparent 55%),
+        radial-gradient(1000px 800px at 60% 90%, rgba(255,106,61,.10), transparent 60%),
+        linear-gradient(180deg, #05070b, #07090d 40%, #060812);
+      line-height:1.6;
+    }
+
+    a{ color: inherit; }
+    .wrap{
+      width:100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 28px 18px 60px;
+    }
+
+    /* Top header */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      padding: 10px 0 22px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      text-decoration:none;
+    }
+    .mark{
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(224,178,74,.55), transparent 55%),
+        radial-gradient(circle at 70% 60%, rgba(51,209,160,.35), transparent 60%),
+        linear-gradient(180deg, #0b1220, #070a12);
+      border:1px solid rgba(224,178,74,.22);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      position:relative;
+      overflow:hidden;
+    }
+    .mark:before{
+      content:"";
+      position:absolute;
+      inset:-30%;
+      background: conic-gradient(from 180deg, rgba(224,178,74,.28), rgba(51,209,160,.18), rgba(255,106,61,.18), rgba(224,178,74,.28));
+      filter: blur(12px);
+      opacity:.8;
+    }
+    .brandtext{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .brandtext strong{
+      font-size: 14px;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      color: rgba(233,238,247,.92);
+    }
+    .brandtext span{
+      font-size: 12px;
+      color: rgba(183,192,212,.85);
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(26,34,52,.9);
+      background: rgba(10,13,20,.55);
+      backdrop-filter: blur(8px);
+      color: rgba(183,192,212,.95);
+      font-size: 12px;
+      letter-spacing: .02em;
+      white-space:nowrap;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:50%;
+      background: var(--jade);
+      box-shadow: 0 0 0 3px rgba(51,209,160,.14);
+    }
+
+    /* Promo banner */
+    .promo{
+      border-radius: var(--radius2);
+      overflow:hidden;
+      border: 1px solid rgba(224,178,74,.22);
+      background:
+        radial-gradient(900px 360px at 20% 30%, rgba(224,178,74,.18), transparent 60%),
+        radial-gradient(700px 320px at 80% 60%, rgba(51,209,160,.14), transparent 55%),
+        linear-gradient(180deg, rgba(12,16,24,.95), rgba(7,9,13,.95));
+      box-shadow: var(--shadow);
+      position:relative;
+      margin: 10px 0 22px;
+    }
+    .promo:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(224,178,74,.10), transparent 30%, transparent 70%, rgba(51,209,160,.08));
+      pointer-events:none;
+      mix-blend-mode: screen;
+      opacity:.7;
+    }
+    .promo-inner{
+      position:relative;
+      z-index:1;
+      padding: 22px 20px;
+      display:grid;
+      gap: 16px;
+      grid-template-columns: 1.4fr .9fr;
+      align-items:center;
+    }
+    @media (max-width: 760px){
+      .promo-inner{ grid-template-columns: 1fr; }
+    }
+
+    .promo h2{
+      margin:0 0 8px;
+      font-size: 18px;
+      letter-spacing: .02em;
+    }
+    .promo p{
+      margin:0 0 14px;
+      color: rgba(183,192,212,.92);
+      max-width: 60ch;
+    }
+    .promo-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration:none;
+      font-weight: 650;
+      font-size: 13px;
+      letter-spacing: .01em;
+      border: 1px solid rgba(26,34,52,.9);
+      background: rgba(10,13,20,.6);
+      color: rgba(233,238,247,.95);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(224,178,74,.35);
+      background: rgba(12,16,24,.72);
+    }
+    .btn-primary{
+      border-color: rgba(224,178,74,.35);
+      background: linear-gradient(180deg, rgba(224,178,74,.18), rgba(12,16,24,.65));
+    }
+    .btn-primary:hover{
+      border-color: rgba(224,178,74,.55);
+    }
+    .mini{
+      font-size: 12px;
+      color: rgba(183,192,212,.9);
+    }
+
+    .promo-card{
+      border-radius: 18px;
+      border:1px solid rgba(26,34,52,.9);
+      background: rgba(7,9,13,.55);
+      padding: 16px;
+    }
+    .icon{
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(224,178,74,.55), transparent 55%),
+        radial-gradient(circle at 70% 70%, rgba(51,209,160,.35), transparent 60%),
+        linear-gradient(180deg, #0b1220, #070a12);
+      border:1px solid rgba(224,178,74,.22);
+      box-shadow: 0 12px 35px rgba(0,0,0,.35);
+      display:inline-block;
+      margin-bottom: 10px;
+    }
+    .promo-card h3{
+      margin:0 0 6px;
+      font-size: 14px;
+      letter-spacing:.08em;
+      text-transform: uppercase;
+      color: rgba(233,238,247,.9);
+    }
+    .bullets{
+      margin: 0;
+      padding-left: 18px;
+      color: rgba(183,192,212,.92);
+      font-size: 13px;
+    }
+    .bullets li{ margin: 6px 0; }
+    .tagrow{
+      display:flex;
+      gap: 8px;
+      flex-wrap:wrap;
+      margin-top: 12px;
+    }
+    .tag{
+      font-size: 11px;
+      color: rgba(233,238,247,.85);
+      border:1px solid rgba(26,34,52,.9);
+      background: rgba(10,13,20,.55);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+    .tag.gold{ border-color: rgba(224,178,74,.3); }
+    .tag.jade{ border-color: rgba(51,209,160,.28); }
+    .tag.ember{ border-color: rgba(255,106,61,.24); }
+
+    /* Article */
+    .article{
+      border-radius: var(--radius2);
+      border:1px solid rgba(26,34,52,.9);
+      background: rgba(10,13,20,.55);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .article-head{
+      padding: 26px 22px 10px;
+      border-bottom: 1px solid rgba(26,34,52,.9);
+      background:
+        radial-gradient(900px 240px at 10% 0%, rgba(224,178,74,.10), transparent 55%),
+        linear-gradient(180deg, rgba(12,16,24,.75), rgba(10,13,20,.35));
+    }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-size: 12px;
+      letter-spacing:.14em;
+      text-transform: uppercase;
+      color: rgba(183,192,212,.9);
+    }
+    .kicker .bar{
+      width: 22px;
+      height: 1px;
+      background: rgba(224,178,74,.55);
+      box-shadow: 0 0 0 3px rgba(224,178,74,.08);
+    }
+    h1{
+      font-family: var(--serif);
+      margin: 10px 0 8px;
+      font-size: 34px;
+      line-height:1.15;
+      letter-spacing: .01em;
+    }
+    .sub{
+      margin: 0 0 10px;
+      color: rgba(183,192,212,.95);
+      max-width: 75ch;
+      font-size: 15px;
+    }
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      margin-top: 12px;
+      color: rgba(183,192,212,.85);
+      font-size: 12px;
+    }
+    .meta span{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(26,34,52,.9);
+      background: rgba(7,9,13,.35);
+    }
+
+    .article-body{
+      padding: 18px 22px 26px;
+    }
+    .article-body h2{
+      margin: 22px 0 10px;
+      font-size: 18px;
+      letter-spacing: .01em;
+    }
+    .article-body p{
+      margin: 0 0 14px;
+      color: rgba(233,238,247,.94);
+      font-size: 15px;
+    }
+    .article-body ul{
+      margin: 0 0 14px;
+      padding-left: 18px;
+      color: rgba(233,238,247,.92);
+    }
+    .article-body li{
+      margin: 6px 0;
+      color: rgba(183,192,212,.95);
+      font-size: 14px;
+    }
+    .callout{
+      margin: 18px 0;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(224,178,74,.22);
+      background: rgba(12,16,24,.55);
+      color: rgba(233,238,247,.92);
+    }
+    .callout strong{
+      color: rgba(233,238,247,.98);
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 18px;
+      color: rgba(183,192,212,.78);
+      font-size: 12px;
+      text-align:center;
+      padding: 10px 0 0;
+    }
+    .fineprint{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 18px 28px;
+      color: rgba(183,192,212,.72);
+      font-size: 12px;
+      text-align:center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="XolosArmy Network">
+        <span class="mark" aria-hidden="true"></span>
+        <span class="brandtext">
+          <strong>XolosArmy Network</strong>
+          <span>Culture • Crypto • Sovereignty</span>
+        </span>
+      </a>
+
+      <div class="pill" title="Status">
+        <span class="dot" aria-hidden="true"></span>
+        Editorial / Opinion
+      </div>
+    </header>
+
+    <!-- Tonalli Wallet Promo Banner -->
+    <section class="promo" aria-label="Tonalli Wallet banner">
+      <div class="promo-inner">
+        <div>
+          <h2>Tonalli Wallet — A Sovereign Wallet for a Network That Must Survive</h2>
+          <p>
+            If decentralization is real, access can’t depend on a single team’s uptime.
+            Tonalli Wallet is built to keep the network usable—keys in your hands, continuity by design.
+          </p>
+          <div class="promo-actions">
+            <!-- Replace # with your real URL(s) -->
+            <a class="btn btn-primary" href="#" rel="noopener">Explore Tonalli Wallet</a>
+            <a class="btn" href="#" rel="noopener">Read the Docs</a>
+            <span class="mini">Independent • Protocol-aligned • Built for resilience</span>
+          </div>
+        </div>
+
+        <aside class="promo-card" aria-label="Tonalli Wallet highlights">
+          <span class="icon" aria-hidden="true"></span>
+          <h3>Why Tonalli?</h3>
+          <ul class="bullets">
+            <li>Continuity when core services pause</li>
+            <li>Redundancy at the tooling layer</li>
+            <li>Network access without permission</li>
+          </ul>
+          <div class="tagrow">
+            <span class="tag gold">Sovereign UX</span>
+            <span class="tag jade">Resilient by design</span>
+            <span class="tag ember">Independent wallet</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Article -->
+    <article class="article">
+      <div class="article-head">
+        <div class="kicker"><span class="bar" aria-hidden="true"></span> Opinion Column</div>
+        <h1>Why Network Sovereignty Requires Independent Wallets</h1>
+        <p class="sub">
+          In decentralized networks, independence is not a slogan—it’s a survival mechanism.
+          If core developers suspend services, the network must still breathe.
+        </p>
+        <div class="meta">
+          <span>By XolosArmy Network</span>
+          <span>Category: Network Sovereignty</span>
+          <span>Format: Editorial</span>
+        </div>
+      </div>
+
+      <div class="article-body">
+        <p>
+          In every decentralized network, there is a quiet assumption that often goes unchallenged:
+          that the tools we use to access the network will always be there. Wallets, APIs, explorers, SDKs—these are treated
+          as permanent fixtures, almost like laws of nature. But history shows us otherwise. Services are paused.
+          Companies pivot. Core developers burn out, change priorities, or shut infrastructure down.
+          When that happens, the real question emerges: <strong>does the network still live, or does it stall?</strong>
+        </p>
+
+        <p>
+          This is where the importance of an <strong>independent wallet</strong> becomes impossible to ignore.
+        </p>
+
+        <p>
+          A blockchain is not defined by its core developers. It is defined by its
+          <strong>rules, its ledger, and the people who continue to transact, verify, and communicate through it</strong>.
+          Core developers are critical stewards—but they are not the network itself.
+          When access to the network is mediated exclusively by tools controlled or maintained by a small group,
+          decentralization becomes theoretical rather than practical.
+        </p>
+
+        <div class="callout">
+          <strong>An independent wallet is not merely a piece of software.</strong> It is a guarantee of continuity.
+        </div>
+
+        <h2>The Single Point of Failure Problem</h2>
+        <p>
+          Most networks unconsciously drift toward centralization at the tooling layer. Even when consensus is distributed,
+          users often depend on:
+        </p>
+        <ul>
+          <li>a small set of official wallets</li>
+          <li>centralized API endpoints</li>
+          <li>proprietary backends</li>
+          <li>closed-source or semi-closed infrastructure</li>
+        </ul>
+
+        <p>
+          If those services are suspended—whether for legal, financial, political, or human reasons—the network does not break
+          cryptographically, but it <strong>breaks socially</strong>. Users can no longer easily sign transactions,
+          broadcast messages, or interact with the ledger. Activity slows. Confidence erodes. The perception of failure spreads
+          faster than any technical failure ever could.
+        </p>
+
+        <h2>Wallets as Network Organs, Not Accessories</h2>
+        <p>
+          A wallet is often described as a “user interface.” That framing is dangerously reductive.
+        </p>
+
+        <p>
+          In reality, a wallet is a <strong>network organ</strong>:
+        </p>
+        <ul>
+          <li>It generates and guards identity (keys).</li>
+          <li>It constructs transactions.</li>
+          <li>It defines how messages, value, and intent flow.</li>
+          <li>It shapes how humans understand the network.</li>
+        </ul>
+
+        <p>
+          If all wallets are downstream from the same core infrastructure, the network has a fragile anatomy.
+          An independent wallet introduces <strong>redundancy</strong>, and redundancy is the foundation of resilience.
+        </p>
+
+        <p>
+          Just as the internet survived because no single server mattered, a blockchain survives when
+          <strong>no single wallet matters</strong>.
+        </p>
+
+        <h2>Independence Is Not Opposition</h2>
+        <p>
+          There is a common misunderstanding that independent tooling is a form of rebellion against core developers.
+          It is not.
+        </p>
+
+        <p>
+          True independence is <strong>alignment without dependency</strong>.
+        </p>
+
+        <p>
+          An independent wallet:
+        </p>
+        <ul>
+          <li>follows the protocol rules</li>
+          <li>respects consensus</li>
+          <li>interoperates cleanly</li>
+          <li>does not fork ideology unnecessarily</li>
+        </ul>
+
+        <p>
+          But it does <strong>not</strong> require permission to exist, operate, or evolve.
+        </p>
+
+        <p>
+          This distinction matters. When wallets are architected to stand on their own—capable of indexing, signing,
+          broadcasting, and recovering without privileged access—the network gains antifragility.
+          Core developers can step back, and the system continues breathing.
+        </p>
+
+        <p>
+          That is not a threat. That is success.
+        </p>
+
+        <h2>Network Survival Beyond Human Cycles</h2>
+        <p>
+          People underestimate how much decentralization depends on <strong>time</strong>.
+        </p>
+
+        <p>
+          Developers age. Teams dissolve. Companies disappear. Political climates shift. Hosting providers change policies.
+          What survives is not the loudest roadmap, but the <strong>quiet persistence of usable tools</strong>.
+        </p>
+
+        <p>
+          An independent wallet ensures that:
+        </p>
+        <ul>
+          <li>keys remain usable decades later</li>
+          <li>messages can still be sent</li>
+          <li>value can still move</li>
+          <li>identity remains self-sovereign</li>
+        </ul>
+
+        <p>
+          This is especially critical for communities that think in <strong>generational terms</strong>, not quarterly updates.
+          A network that cannot survive the absence of its original developers is not decentralized—it is merely open-source SaaS.
+        </p>
+
+        <h2>The Cultural Layer of Sovereignty</h2>
+        <p>
+          There is also a cultural dimension.
+        </p>
+
+        <p>
+          When users know that their wallet is not contingent on a central team’s uptime, funding, or goodwill, behavior changes.
+          Confidence increases. Experimentation grows. Builders take risks. Communities form long-term bonds with the network rather
+          than with a company.
+        </p>
+
+        <p>
+          An independent wallet teaches users an important lesson:
+          <strong>the network belongs to those who use it, not those who manage it.</strong>
+        </p>
+
+        <p>
+          This shift is subtle, but profound.
+        </p>
+
+        <h2>Why This Matters for XolosArmy Network</h2>
+        <p>
+          XolosArmy Network is not just building software. It is articulating a philosophy of
+          <strong>network guardianship</strong>.
+        </p>
+
+        <p>
+          In that context, an independent wallet is an act of stewardship. It signals that the network is designed to outlive
+          individuals, teams, and even brands. It asserts that cultural memory, value exchange, and communication should not depend
+          on centralized choke points.
+        </p>
+
+        <p>
+          This is not maximalism. It is responsibility.
+        </p>
+
+        <h2>Conclusion: Decentralization Is Proven in Absence</h2>
+        <p>
+          Decentralization is easy when everyone is present.
+          It is only proven when key actors are gone.
+        </p>
+
+        <p>
+          A network that continues to function when core services pause has crossed an invisible threshold—from dependency to
+          sovereignty. Independent wallets are the instruments that make that transition possible.
+        </p>
+
+        <p>
+          They ensure that when the lights go out in one room, the city does not go dark.
+        </p>
+
+        <p>
+          And that is not just good engineering.
+          That is respect for the network itself.
+        </p>
+      </div>
+    </article>
+
+    <footer>
+      © <span id="year"></span> XolosArmy Network • Editorial
+    </footer>
+  </div>
+
+  <div class="fineprint">
+    Tip: Replace the Tonalli Wallet links in the banner (<code>href="#"</code>) with your real website, app, or docs URLs.
+  </div>
+
+  <script>
+    // Small nicety: auto year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
