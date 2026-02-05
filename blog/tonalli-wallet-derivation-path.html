@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>xolosArmy Network — Seed ≠ Wallet (Derivation Path)</title>
+  <style>
+    :root{
+      --bg:#07090c;
+      --card:#0b0f15;
+      --ink:#e9eef7;
+      --muted:#a9b3c7;
+      --line:#1a2330;
+      --jade:#41f2b2;
+      --amber:#ffbf6b;
+      --obsidian:#0a0b0f;
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --radius: 18px;
+      --max: 940px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      background:
+        radial-gradient(900px 420px at 20% -10%, rgba(65,242,178,.10), transparent 60%),
+        radial-gradient(820px 460px at 85% 0%, rgba(255,191,107,.10), transparent 55%),
+        linear-gradient(180deg, #05070a, var(--bg));
+      color:var(--ink);
+      min-height:100vh;
+      padding:32px 16px;
+    }
+
+    .wrap{max-width:var(--max); margin:0 auto;}
+    .column{
+      background:linear-gradient(180deg, rgba(11,15,21,.96), rgba(11,15,21,.86));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    header{
+      padding:26px 24px 18px;
+      border-bottom:1px solid var(--line);
+      position:relative;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:14px;
+      color:var(--muted);
+      font-size:14px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .sigil{
+      width:34px;height:34px;border-radius:10px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(65,242,178,.55), transparent 55%),
+        radial-gradient(circle at 70% 70%, rgba(255,191,107,.45), transparent 60%),
+        linear-gradient(180deg, #101826, #0a0f18);
+      border:1px solid rgba(255,255,255,.06);
+      box-shadow:0 10px 30px rgba(0,0,0,.4);
+    }
+
+    h1{
+      font-size:28px;
+      line-height:1.15;
+      margin:0 0 10px;
+      letter-spacing:-0.02em;
+    }
+
+    .dek{
+      margin:0;
+      color:var(--muted);
+      max-width:70ch;
+      line-height:1.6;
+      font-size:15.5px;
+    }
+
+    .meta{
+      margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+    }
+    .tag{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:8px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:12.5px;
+    }
+    .dot{
+      width:7px;height:7px;border-radius:99px;
+      background:var(--jade);
+      box-shadow:0 0 18px rgba(65,242,178,.35);
+    }
+    .dot.amber{background:var(--amber); box-shadow:0 0 18px rgba(255,191,107,.30);}
+
+    main{
+      padding:22px 24px 26px;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:18px;
+    }
+
+    @media (max-width: 880px){
+      main{grid-template-columns:1fr;}
+    }
+
+    .card{
+      background:rgba(255,255,255,.02);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:16px;
+      padding:16px;
+    }
+
+    h2{
+      margin:0 0 8px;
+      font-size:16px;
+      letter-spacing:.02em;
+      color:var(--ink);
+    }
+
+    p{
+      margin:0 0 12px;
+      line-height:1.7;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .lead{
+      color:var(--ink);
+      font-size:16px;
+    }
+
+    .divider{
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.10), transparent);
+      margin:14px 0;
+    }
+
+    .quote{
+      border-left:3px solid rgba(65,242,178,.55);
+      padding:10px 12px;
+      margin:12px 0 4px;
+      background:rgba(65,242,178,.06);
+      border-radius:12px;
+      color:var(--ink);
+      font-size:14.5px;
+      line-height:1.6;
+    }
+
+    .mono{
+      font-family:var(--mono);
+      font-size:13.5px;
+      color:#d8e2f5;
+      background:rgba(0,0,0,.22);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:12px;
+      padding:12px;
+      overflow:auto;
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 560px){
+      .grid2{grid-template-columns:1fr;}
+    }
+
+    .k{
+      font-family:var(--mono);
+      color:#dbe6fb;
+      font-size:12.5px;
+      opacity:.92;
+    }
+    .label{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      margin-bottom:6px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .callout{
+      border:1px solid rgba(255,191,107,.22);
+      background:rgba(255,191,107,.06);
+      border-radius:16px;
+      padding:14px;
+    }
+    .callout strong{color:var(--ink)}
+    .cta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    a.btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      color:var(--ink);
+      font-size:13.5px;
+      transition:transform .12s ease, background .12s ease;
+    }
+    a.btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.06);}
+    .btn.primary{
+      border-color:rgba(65,242,178,.30);
+      background:linear-gradient(180deg, rgba(65,242,178,.16), rgba(65,242,178,.08));
+    }
+
+    footer{
+      padding:16px 24px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:12.5px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .fine{
+      opacity:.9;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <article class="column" role="article" aria-label="xolosArmy Network column">
+      <header>
+        <div class="brand">
+          <div class="sigil" aria-hidden="true"></div>
+          <span>xolosArmy Network / Dev Column</span>
+        </div>
+
+        <h1>Seed ≠ Wallet: the Derivation Path Mistake That Looks Like “Missing Funds”</h1>
+        <p class="dek">
+          In eCash, a seed phrase is only half the story. The other half is the HD derivation path.
+          Mix products with different paths and you don’t get theft — you get a different address.
+        </p>
+
+        <div class="meta">
+          <span class="tag"><span class="dot"></span> eCash wallets</span>
+          <span class="tag"><span class="dot amber"></span> UX + security</span>
+          <span class="tag">xolosArmy: build for clarity</span>
+        </div>
+      </header>
+
+      <main>
+        <!-- LEFT: ARTICLE -->
+        <section class="card">
+          <h2>The Core Rule</h2>
+          <p class="lead">
+            A wallet is <strong>not</strong> “seed only.” A wallet is <strong>seed + derivation path</strong>.
+            Change the path, change the resulting addresses.
+          </p>
+
+          <div class="quote">
+            “A seed phrase without a derivation path is not a wallet.”
+          </div>
+
+          <div class="divider"></div>
+
+          <h2>Why people think tokens were stolen</h2>
+          <p>
+            A common failure mode: someone creates a wallet in one product, deposits funds, then imports the same seed
+            into another product and expects the same address. If the derivation paths differ, the address differs —
+            and the funds appear “gone.”
+          </p>
+          <p>
+            They’re not gone. They’re sitting exactly where they were deposited — on the original derived address.
+          </p>
+
+          <div class="divider"></div>
+
+          <h2>eCash paths in the wild</h2>
+          <div class="grid2">
+            <div class="mono">
+              <span class="label">eCash spec (original)</span>
+              <div class="k">m/44'/899'/0'/0/0</div>
+            </div>
+            <div class="mono">
+              <span class="label">CashTab (product choice)</span>
+              <div class="k">m/44'/1899'/0'/0/0</div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <h2>Tonalli’s position (xolosArmy)</h2>
+          <p>
+            Tonalli chooses a clear, sovereign standard:
+            <strong>we keep the original eCash path</strong> <span class="k">(m/44'/899'/0'/0/0)</span>.
+            That means Tonalli will not silently “match” CashTab addresses — and that’s intentional.
+          </p>
+
+          <div class="callout">
+            <p style="margin:0; color: var(--muted);">
+              <strong>Important:</strong> importing a CashTab seed into Tonalli will produce a different address.
+              This is not a bug. It’s deterministic math.
+            </p>
+            <div class="cta">
+              <a class="btn primary" href="#" aria-label="Read Tonalli docs button">Read Tonalli docs</a>
+              <a class="btn" href="#" aria-label="Share this post button">Share this column</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- RIGHT: SIDEBAR -->
+        <aside class="card">
+          <h2>Builder Checklist</h2>
+          <p>How to prevent this class of “missing funds” incidents:</p>
+
+          <div class="mono" style="margin-bottom:12px;">
+            <span class="label">1) Declare the path everywhere</span>
+            <div class="k">Show it in onboarding + docs + exports</div>
+          </div>
+
+          <div class="mono" style="margin-bottom:12px;">
+            <span class="label">2) Never change paths silently</span>
+            <div class="k">Path changes create new addresses</div>
+          </div>
+
+          <div class="mono" style="margin-bottom:12px;">
+            <span class="label">3) Add import warnings</span>
+            <div class="k">“CashTab seed → different address in Tonalli”</div>
+          </div>
+
+          <div class="mono">
+            <span class="label">4) Support flow (one-liner)</span>
+            <div class="k">“Funds aren’t gone — you’re on a different derived address.”</div>
+          </div>
+
+          <div class="divider"></div>
+
+          <h2>xolosArmy Take</h2>
+          <p>
+            Sovereignty requires precision. A wallet that is explicit about derivation is a wallet that protects users —
+            technically and psychologically.
+          </p>
+        </aside>
+      </main>
+
+      <footer>
+        <span class="fine">© xolosArmy Network — Dev Column</span>
+        <span class="fine">Topic: eCash HD derivation paths (seed + path = wallet)</span>
+      </footer>
+    </article>
+  </div>
+</body>
+</html>
