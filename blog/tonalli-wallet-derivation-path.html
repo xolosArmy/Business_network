@@ -3,373 +3,711 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>xolosArmy Network — Seed ≠ Wallet (Derivation Path)</title>
+  <title>xolosArmy Network Column — Seed vs Derivation Path (Tonalli Wallet)</title>
   <style>
     :root{
-      --bg:#07090c;
-      --card:#0b0f15;
-      --ink:#e9eef7;
-      --muted:#a9b3c7;
-      --line:#1a2330;
-      --jade:#41f2b2;
-      --amber:#ffbf6b;
-      --obsidian:#0a0b0f;
-      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --bg:#07080b;
+      --panel:#0d1018;
+      --panel2:#0b0d12;
+      --text:#e9eefc;
+      --muted:#aab3d6;
+      --jade:#33f1c8;
+      --amber:#ffcf6e;
+      --obs:#1a1f2d;
+      --line:rgba(233,238,252,.12);
+      --shadow: 0 22px 60px rgba(0,0,0,.55);
+      --radius:18px;
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      --radius: 18px;
-      --max: 940px;
     }
 
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family:var(--sans);
+      color:var(--text);
       background:
-        radial-gradient(900px 420px at 20% -10%, rgba(65,242,178,.10), transparent 60%),
-        radial-gradient(820px 460px at 85% 0%, rgba(255,191,107,.10), transparent 55%),
-        linear-gradient(180deg, #05070a, var(--bg));
-      color:var(--ink);
+        radial-gradient(900px 500px at 12% 15%, rgba(51,241,200,.14), transparent 60%),
+        radial-gradient(700px 420px at 90% 25%, rgba(255,207,110,.12), transparent 60%),
+        radial-gradient(900px 700px at 55% 120%, rgba(116,99,255,.10), transparent 65%),
+        linear-gradient(180deg, #05060a, #07080b 35%, #06070c);
       min-height:100vh;
-      padding:32px 16px;
+      padding:22px 14px 42px;
     }
 
-    .wrap{max-width:var(--max); margin:0 auto;}
-    .column{
-      background:linear-gradient(180deg, rgba(11,15,21,.96), rgba(11,15,21,.86));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
+    .wrap{
+      max-width:980px;
+      margin:0 auto;
+    }
+
+    /* Header */
+    .mast{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      justify-content:space-between;
+      margin:10px 0 18px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:14px;
+    }
+
+    .sigil{
+      width:54px; height:54px;
+      border-radius:16px;
+      background:
+        radial-gradient(14px 14px at 30% 32%, rgba(51,241,200,.95), rgba(51,241,200,.0) 70%),
+        radial-gradient(16px 16px at 70% 64%, rgba(255,207,110,.95), rgba(255,207,110,.0) 70%),
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      border:1px solid rgba(233,238,252,.14);
+      box-shadow: var(--shadow);
+      position:relative;
       overflow:hidden;
     }
-
-    header{
-      padding:26px 24px 18px;
-      border-bottom:1px solid var(--line);
-      position:relative;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      margin-bottom:14px;
-      color:var(--muted);
-      font-size:14px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-    }
-    .sigil{
-      width:34px;height:34px;border-radius:10px;
+    .sigil:before{
+      content:"";
+      position:absolute; inset:-30%;
       background:
-        radial-gradient(circle at 30% 30%, rgba(65,242,178,.55), transparent 55%),
-        radial-gradient(circle at 70% 70%, rgba(255,191,107,.45), transparent 60%),
-        linear-gradient(180deg, #101826, #0a0f18);
-      border:1px solid rgba(255,255,255,.06);
-      box-shadow:0 10px 30px rgba(0,0,0,.4);
+        conic-gradient(from 190deg,
+          rgba(51,241,200,.0),
+          rgba(51,241,200,.22),
+          rgba(255,207,110,.0),
+          rgba(116,99,255,.16),
+          rgba(51,241,200,.0));
+      animation: spin 6s linear infinite;
+      filter: blur(8px);
+      opacity:.85;
     }
+    @keyframes spin{ to{ transform:rotate(360deg);} }
 
-    h1{
-      font-size:28px;
-      line-height:1.15;
-      margin:0 0 10px;
-      letter-spacing:-0.02em;
-    }
-
-    .dek{
+    .title h1{
       margin:0;
+      font-size:18px;
+      letter-spacing:.2px;
+      line-height:1.15;
+    }
+    .title p{
+      margin:6px 0 0;
       color:var(--muted);
-      max-width:70ch;
-      line-height:1.6;
-      font-size:15.5px;
+      font-size:13px;
+      letter-spacing:.2px;
     }
 
-    .meta{
-      margin-top:14px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      align-items:center;
+    .pillRow{
+      display:flex; flex-wrap:wrap; gap:8px;
+      justify-content:flex-end;
     }
-    .tag{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      padding:8px 10px;
+    .pill{
+      font-size:12px;
+      padding:7px 10px;
       border-radius:999px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.06);
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(233,238,252,.12);
       color:var(--muted);
-      font-size:12.5px;
+      backdrop-filter: blur(6px);
+      white-space:nowrap;
     }
-    .dot{
-      width:7px;height:7px;border-radius:99px;
-      background:var(--jade);
-      box-shadow:0 0 18px rgba(65,242,178,.35);
-    }
-    .dot.amber{background:var(--amber); box-shadow:0 0 18px rgba(255,191,107,.30);}
+    .pill strong{ color:var(--text); font-weight:650; }
+    .pill.jade{ border-color: rgba(51,241,200,.22); }
+    .pill.amber{ border-color: rgba(255,207,110,.22); }
 
-    main{
-      padding:22px 24px 26px;
+    /* Main grid */
+    .grid{
       display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap:18px;
+      grid-template-columns: 1.1fr .9fr;
+      gap:16px;
     }
-
     @media (max-width: 880px){
-      main{grid-template-columns:1fr;}
+      .grid{ grid-template-columns:1fr; }
+      .pillRow{ justify-content:flex-start; }
+      .mast{ align-items:flex-start; flex-direction:column; }
     }
 
     .card{
-      background:rgba(255,255,255,.02);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:16px;
-      padding:16px;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid rgba(233,238,252,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
     }
 
-    h2{
-      margin:0 0 8px;
-      font-size:16px;
-      letter-spacing:.02em;
-      color:var(--ink);
+    .cardHeader{
+      padding:16px 18px 0;
     }
-
-    p{
-      margin:0 0 12px;
-      line-height:1.7;
+    .cardHeader h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:.2px;
+    }
+    .cardHeader p{
+      margin:8px 0 0;
       color:var(--muted);
-      font-size:15px;
+      font-size:13.5px;
+      line-height:1.55;
     }
 
-    .lead{
-      color:var(--ink);
-      font-size:16px;
+    .content{
+      padding:16px 18px 18px;
     }
 
     .divider{
       height:1px;
-      background:linear-gradient(90deg, transparent, rgba(255,255,255,.10), transparent);
+      background: var(--line);
       margin:14px 0;
     }
 
-    .quote{
-      border-left:3px solid rgba(65,242,178,.55);
-      padding:10px 12px;
-      margin:12px 0 4px;
-      background:rgba(65,242,178,.06);
-      border-radius:12px;
-      color:var(--ink);
-      font-size:14.5px;
+    /* “Animated tutorial” blocks */
+    .scene{
+      background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.10));
+      border:1px solid rgba(233,238,252,.10);
+      border-radius:16px;
+      padding:14px;
+      position:relative;
+      overflow:hidden;
+    }
+    .scene:before{
+      content:"";
+      position:absolute; inset:-40%;
+      background:
+        radial-gradient(closest-side, rgba(51,241,200,.14), transparent 70%),
+        radial-gradient(closest-side, rgba(255,207,110,.12), transparent 70%);
+      transform: translate3d(0,0,0);
+      animation: floatGlow 7.5s ease-in-out infinite;
+      opacity:.9;
+    }
+    @keyframes floatGlow{
+      0%,100%{ transform: translate(-2%, -1%) rotate(-3deg); }
+      50%{ transform: translate(2%, 1%) rotate(3deg); }
+    }
+
+    .sceneInner{
+      position:relative;
+      display:grid;
+      grid-template-columns: 120px 1fr;
+      gap:14px;
+      align-items:center;
+    }
+    @media (max-width:520px){
+      .sceneInner{ grid-template-columns:1fr; }
+    }
+
+    /* Xolo “character” (pure CSS) */
+    .xolo{
+      width:120px; height:120px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(233,238,252,.12);
+      position:relative;
+      overflow:hidden;
+      box-shadow: 0 18px 42px rgba(0,0,0,.45);
+      animation: bob 2.4s ease-in-out infinite;
+    }
+    @keyframes bob{
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-6px); }
+    }
+
+    .xolo .face{
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .xolo .muzzle{
+      width:78px; height:64px;
+      border-radius: 22px 22px 26px 26px;
+      background: linear-gradient(180deg, rgba(233,238,252,.10), rgba(233,238,252,.03));
+      border:1px solid rgba(233,238,252,.14);
+      position:relative;
+    }
+    .xolo .eye{
+      width:10px; height:10px; border-radius:999px;
+      background: rgba(233,238,252,.75);
+      position:absolute; top:20px;
+      box-shadow: 0 0 0 3px rgba(0,0,0,.22);
+      animation: blink 5.3s infinite;
+    }
+    .xolo .eye.left{ left:18px; }
+    .xolo .eye.right{ right:18px; }
+    @keyframes blink{
+      0%, 92%, 100%{ transform: scaleY(1); }
+      94%{ transform: scaleY(.15); }
+      96%{ transform: scaleY(1); }
+    }
+    .xolo .mouth{
+      position:absolute; left:50%; top:40px;
+      width:26px; height:16px;
+      transform: translateX(-50%);
+      border-bottom: 2px solid rgba(255,207,110,.75);
+      border-radius: 0 0 18px 18px;
+      opacity:.9;
+    }
+    .xolo .mark{
+      position:absolute; left:50%; top:-26px;
+      width:88px; height:88px;
+      transform: translateX(-50%) rotate(25deg);
+      border-radius: 26px;
+      background: radial-gradient(closest-side, rgba(51,241,200,.18), transparent 70%);
+      filter: blur(1px);
+    }
+    .xolo .badge{
+      position:absolute; left:10px; bottom:10px;
+      font-size:11px;
+      padding:5px 8px;
+      border-radius:999px;
+      background: rgba(0,0,0,.35);
+      border:1px solid rgba(233,238,252,.12);
+      color: rgba(233,238,252,.88);
+      letter-spacing:.2px;
+    }
+
+    .script h3{
+      margin:0 0 6px;
+      font-size:14px;
+      letter-spacing:.2px;
+    }
+    .script p{
+      margin:0;
+      color:var(--muted);
+      font-size:13.5px;
       line-height:1.6;
     }
 
-    .mono{
-      font-family:var(--mono);
-      font-size:13.5px;
-      color:#d8e2f5;
-      background:rgba(0,0,0,.22);
-      border:1px solid rgba(255,255,255,.07);
-      border-radius:12px;
-      padding:12px;
-      overflow:auto;
-    }
-
-    .grid2{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-    }
-    @media (max-width: 560px){
-      .grid2{grid-template-columns:1fr;}
-    }
-
-    .k{
-      font-family:var(--mono);
-      color:#dbe6fb;
-      font-size:12.5px;
-      opacity:.92;
-    }
-    .label{
-      display:block;
-      color:var(--muted);
-      font-size:12px;
-      margin-bottom:6px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-    }
-
     .callout{
-      border:1px solid rgba(255,191,107,.22);
-      background:rgba(255,191,107,.06);
-      border-radius:16px;
-      padding:14px;
-    }
-    .callout strong{color:var(--ink)}
-    .cta{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
       margin-top:12px;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(233,238,252,.12);
+      background: rgba(0,0,0,.22);
+      position:relative;
     }
-    a.btn{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      text-decoration:none;
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      color:var(--ink);
-      font-size:13.5px;
-      transition:transform .12s ease, background .12s ease;
-    }
-    a.btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.06);}
-    .btn.primary{
-      border-color:rgba(65,242,178,.30);
-      background:linear-gradient(180deg, rgba(65,242,178,.16), rgba(65,242,178,.08));
+    .callout strong{ color:var(--text); }
+    .callout .tag{
+      display:inline-block;
+      margin-left:8px;
+      font-size:11px;
+      padding:3px 8px;
+      border-radius:999px;
+      border:1px solid rgba(51,241,200,.22);
+      color: rgba(51,241,200,.95);
+      background: rgba(51,241,200,.06);
+      vertical-align:middle;
     }
 
-    footer{
-      padding:16px 24px;
-      border-top:1px solid var(--line);
-      color:var(--muted);
+    /* Code “ticker” */
+    .codeBox{
+      margin-top:12px;
+      background: rgba(6,7,12,.72);
+      border:1px solid rgba(233,238,252,.12);
+      border-radius:16px;
+      overflow:hidden;
+    }
+    .codeTop{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:10px 12px;
+      border-bottom: 1px solid rgba(233,238,252,.10);
+      background: rgba(255,255,255,.03);
+      font-size:12px;
+      color: var(--muted);
+    }
+    .dots{ display:flex; gap:6px; }
+    .dot{ width:10px; height:10px; border-radius:999px; background: rgba(233,238,252,.18); }
+    .dot:nth-child(1){ background: rgba(255,97,97,.42); }
+    .dot:nth-child(2){ background: rgba(255,207,110,.40); }
+    .dot:nth-child(3){ background: rgba(51,241,200,.40); }
+
+    pre{
+      margin:0;
+      padding:12px;
+      font-family: var(--mono);
       font-size:12.5px;
+      line-height:1.55;
+      color: rgba(233,238,252,.92);
+      white-space:pre;
+      overflow:auto;
+      max-height: 220px;
+    }
+
+    .hlJade{ color: rgba(51,241,200,.95); }
+    .hlAmber{ color: rgba(255,207,110,.95); }
+
+    /* Right column widgets */
+    .widget{
+      padding:16px 18px 18px;
+    }
+    .miniTitle{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    .miniTitle h3{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.2px;
+    }
+    .miniTitle span{
+      font-size:12px;
+      color: var(--muted);
+      border:1px solid rgba(233,238,252,.12);
+      padding:5px 9px;
+      border-radius:999px;
+      background: rgba(255,255,255,.03);
+      white-space:nowrap;
+    }
+
+    .steps{
+      display:grid;
+      gap:10px;
+    }
+    .step{
+      border:1px solid rgba(233,238,252,.12);
+      background: rgba(0,0,0,.18);
+      border-radius:16px;
+      padding:12px;
+      position:relative;
+      overflow:hidden;
+    }
+    .step:before{
+      content:"";
+      position:absolute; inset:-40%;
+      background: radial-gradient(closest-side, rgba(116,99,255,.10), transparent 70%);
+      animation: drift 9s ease-in-out infinite;
+      opacity:.85;
+    }
+    @keyframes drift{
+      0%,100%{ transform: translate(-1%, -1%) rotate(-2deg); }
+      50%{ transform: translate(1%, 1%) rotate(2deg); }
+    }
+    .stepInner{ position:relative; }
+    .step b{
+      display:flex; align-items:center; gap:8px;
+      font-size:13px;
+      letter-spacing:.15px;
+    }
+    .emoji{
+      width:26px; height:26px;
+      border-radius:10px;
+      border:1px solid rgba(233,238,252,.12);
+      background: rgba(255,255,255,.04);
+      display:inline-flex; align-items:center; justify-content:center;
+    }
+    .step p{
+      margin:8px 0 0;
+      color: var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    .warning{
+      margin-top:12px;
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,207,110,.25);
+      background: rgba(255,207,110,.06);
+      color: rgba(233,238,252,.92);
+    }
+    .warning b{ color: rgba(255,207,110,.95); }
+
+    .footer{
+      margin-top:16px;
+      padding:14px 18px 18px;
       display:flex;
       flex-wrap:wrap;
       gap:10px;
       align-items:center;
       justify-content:space-between;
+      color: var(--muted);
+      font-size:12.5px;
+      border-top:1px solid rgba(233,238,252,.10);
+      background: rgba(0,0,0,.15);
     }
+    .cta{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(51,241,200,.24);
+      background: rgba(51,241,200,.06);
+      color: rgba(51,241,200,.95);
+      font-weight:650;
+      letter-spacing:.2px;
+      text-decoration:none;
+    }
+    .cta:hover{ filter: brightness(1.05); }
 
-    .fine{
-      opacity:.9;
+    /* Tiny “typing” animation on a badge */
+    .typeBadge{
+      display:inline-block;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(233,238,252,.14);
+      background: rgba(255,255,255,.03);
+      color: rgba(233,238,252,.88);
+      position:relative;
+      overflow:hidden;
+      white-space:nowrap;
+    }
+    .typeBadge:after{
+      content:"";
+      display:inline-block;
+      width: 8px;
+      height: 14px;
+      margin-left:6px;
+      border-left: 2px solid rgba(51,241,200,.9);
+      transform: translateY(2px);
+      animation: caret 1.1s steps(1) infinite;
+    }
+    @keyframes caret{
+      0%,50%{ opacity:1; }
+      51%,100%{ opacity:0; }
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <article class="column" role="article" aria-label="xolosArmy Network column">
-      <header>
-        <div class="brand">
-          <div class="sigil" aria-hidden="true"></div>
-          <span>xolosArmy Network / Dev Column</span>
+    <div class="mast">
+      <div class="brand">
+        <div class="sigil" aria-hidden="true"></div>
+        <div class="title">
+          <h1>xolosArmy Network — Dev Column</h1>
+          <p>Animated mini-tutorial: what a <b>seed</b> is, what a <b>derivation path</b> is, and why it matters.</p>
+        </div>
+      </div>
+
+      <div class="pillRow">
+        <div class="pill jade"><strong>Topic:</strong> Wallet Basics</div>
+        <div class="pill amber"><strong>Style:</strong> Didactic + Fun</div>
+        <div class="pill"><strong>Audience:</strong> Builders + Newcomers</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- Left / Main article -->
+      <section class="card">
+        <div class="cardHeader">
+          <h2>Seed vs Derivation Path: “Same words, different wallet?!” 🧠🐕</h2>
+          <p>
+            Imagine your wallet is a sacred temple. The <b>seed phrase</b> is the master key… but the
+            <b>derivation path</b> is the corridor map inside the temple.
+            Same key + different corridor = you open a different door.
+          </p>
         </div>
 
-        <h1>Seed ≠ Wallet: the Derivation Path Mistake That Looks Like “Missing Funds”</h1>
-        <p class="dek">
-          In eCash, a seed phrase is only half the story. The other half is the HD derivation path.
-          Mix products with different paths and you don’t get theft — you get a different address.
-        </p>
+        <div class="content">
+          <div class="scene">
+            <div class="sceneInner">
+              <div class="xolo" aria-hidden="true">
+                <div class="face">
+                  <div class="muzzle">
+                    <div class="mark"></div>
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth"></div>
+                  </div>
+                </div>
+                <div class="badge">Xolo Tutor</div>
+              </div>
 
-        <div class="meta">
-          <span class="tag"><span class="dot"></span> eCash wallets</span>
-          <span class="tag"><span class="dot amber"></span> UX + security</span>
-          <span class="tag">xolosArmy: build for clarity</span>
+              <div class="script">
+                <h3>🎬 Scene 1 — “What is a seed?”</h3>
+                <p>
+                  A <b>seed phrase</b> (12/24 words) is the master secret that can generate your keys.
+                  It’s not your coins — it’s the <i>origin of your keys</i>. Treat it like your
+                  “do-not-leak” ancient spell.
+                </p>
+
+                <div class="callout">
+                  <strong>Seed =</strong> the source that can generate countless addresses.
+                  <span class="tag">NEVER share it</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="scene">
+            <div class="sceneInner">
+              <div class="xolo" aria-hidden="true" style="animation-delay:.15s">
+                <div class="face">
+                  <div class="muzzle">
+                    <div class="mark" style="background: radial-gradient(closest-side, rgba(255,207,110,.18), transparent 70%);"></div>
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth"></div>
+                  </div>
+                </div>
+                <div class="badge">Map Mode</div>
+              </div>
+
+              <div class="script">
+                <h3>🎬 Scene 2 — “What is a derivation path?”</h3>
+                <p>
+                  A <b>derivation path</b> is the recipe that tells the wallet
+                  <i>which branch</i> of keys to generate from the seed.
+                  Change the path, and the wallet walks a different branch — producing different addresses.
+                </p>
+
+                <div class="callout">
+                  <strong>Derivation Path =</strong> the route inside the “key tree”
+                  <span class="tag">A.K.A. HD path</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="codeBox" role="region" aria-label="Derivation path example">
+            <div class="codeTop">
+              <div class="dots" aria-hidden="true">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              </div>
+              <div class="typeBadge">wallet.keys(seed, path)</div>
+            </div>
+            <pre><span class="hlJade">// Same seed + different path = different addresses</span>
+
+seed = "twelve words ... twenty-four words"
+
+path A = <span class="hlAmber">m/44'/899'/0'/0/0</span>   // eCash-style branch
+path B = <span class="hlAmber">m/44'/1899'/0'/0/0</span>  // CashTab-style branch
+
+address(seed, path A) != address(seed, path B)</pre>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="scene">
+            <div class="sceneInner">
+              <div class="xolo" aria-hidden="true" style="animation-delay:.3s">
+                <div class="face">
+                  <div class="muzzle">
+                    <div class="mark" style="background: radial-gradient(closest-side, rgba(51,241,200,.22), transparent 70%);"></div>
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth"></div>
+                  </div>
+                </div>
+                <div class="badge">Tonalli Fact</div>
+              </div>
+
+              <div class="script">
+                <h3>🎬 Scene 3 — Tonalli Wallet’s official derivation path (English)</h3>
+                <p>
+                  <b>Tonalli Wallet uses this derivation path:</b>
+                  <span style="font-family:var(--mono); color:rgba(51,241,200,.95)">m/44'/899'/0'/0/0</span>
+                  <br />
+                  That means Tonalli derives addresses from the <b>eCash-style branch</b>.
+                </p>
+
+                <div class="callout">
+                  <strong>Tonalli Path:</strong> <span style="font-family:var(--mono)">m/44'/899'/0'/0/0</span>
+                  <span class="tag">stable</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="warning">
+            <b>Friendly warning:</b> If you import a seed from another wallet that uses a different path
+            (example: CashTab path <span style="font-family:var(--mono)">m/44'/1899'/0'/0/0</span>),
+            you may see a <b>different address</b>. That doesn’t mean funds were stolen — it usually means
+            you’re looking at a different branch of the same seed.
+          </div>
         </div>
-      </header>
 
-      <main>
-        <!-- LEFT: ARTICLE -->
-        <section class="card">
-          <h2>The Core Rule</h2>
-          <p class="lead">
-            A wallet is <strong>not</strong> “seed only.” A wallet is <strong>seed + derivation path</strong>.
-            Change the path, change the resulting addresses.
-          </p>
+        <div class="footer">
+          <div>
+            xolosArmy Network Column • “Seed & Path” Edition • Keep it sacred, keep it explicit.
+          </div>
+          <a class="cta" href="#" onclick="return false" aria-label="Call to action (placeholder)">
+            🪙 Learn more in Tonalli docs
+          </a>
+        </div>
+      </section>
 
-          <div class="quote">
-            “A seed phrase without a derivation path is not a wallet.”
+      <!-- Right / Sidebar -->
+      <aside class="card">
+        <div class="widget">
+          <div class="miniTitle">
+            <h3>Quick Animated Cheat Sheet</h3>
+            <span>60 seconds to clarity</span>
           </div>
 
-          <div class="divider"></div>
-
-          <h2>Why people think tokens were stolen</h2>
-          <p>
-            A common failure mode: someone creates a wallet in one product, deposits funds, then imports the same seed
-            into another product and expects the same address. If the derivation paths differ, the address differs —
-            and the funds appear “gone.”
-          </p>
-          <p>
-            They’re not gone. They’re sitting exactly where they were deposited — on the original derived address.
-          </p>
-
-          <div class="divider"></div>
-
-          <h2>eCash paths in the wild</h2>
-          <div class="grid2">
-            <div class="mono">
-              <span class="label">eCash spec (original)</span>
-              <div class="k">m/44'/899'/0'/0/0</div>
+          <div class="steps">
+            <div class="step">
+              <div class="stepInner">
+                <b><span class="emoji">🔑</span> Seed Phrase</b>
+                <p>
+                  Master secret that generates keys. If you lose it, you lose access.
+                  If you share it, you donate everything.
+                </p>
+              </div>
             </div>
-            <div class="mono">
-              <span class="label">CashTab (product choice)</span>
-              <div class="k">m/44'/1899'/0'/0/0</div>
+
+            <div class="step">
+              <div class="stepInner">
+                <b><span class="emoji">🧭</span> Derivation Path</b>
+                <p>
+                  The route that tells your wallet which keys to derive from your seed.
+                  Same seed, different route → different addresses.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="stepInner">
+                <b><span class="emoji">🧬</span> Why people get confused</b>
+                <p>
+                  They paste the same seed into a different wallet and expect the same address,
+                  but the wallet uses a different path.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="stepInner">
+                <b><span class="emoji">🐕</span> Tonalli’s path (official)</b>
+                <p>
+                  <span style="font-family:var(--mono); color:rgba(51,241,200,.95)">m/44'/899'/0'/0/0</span>
+                  <br/>Write it down in your docs and UI — clarity = fewer support tickets.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="stepInner">
+                <b><span class="emoji">🛡️</span> Pro tip for builders</b>
+                <p>
+                  Always display the derivation path during import/export.
+                  A seed without a path is an incomplete “wallet description”.
+                </p>
+              </div>
             </div>
           </div>
 
           <div class="divider"></div>
 
-          <h2>Tonalli’s position (xolosArmy)</h2>
-          <p>
-            Tonalli chooses a clear, sovereign standard:
-            <strong>we keep the original eCash path</strong> <span class="k">(m/44'/899'/0'/0/0)</span>.
-            That means Tonalli will not silently “match” CashTab addresses — and that’s intentional.
-          </p>
+          <div class="miniTitle">
+            <h3>Mini Script (Voiceover)</h3>
+            <span>Friendly + nerdy</span>
+          </div>
 
-          <div class="callout">
-            <p style="margin:0; color: var(--muted);">
-              <strong>Important:</strong> importing a CashTab seed into Tonalli will produce a different address.
-              This is not a bug. It’s deterministic math.
-            </p>
-            <div class="cta">
-              <a class="btn primary" href="#" aria-label="Read Tonalli docs button">Read Tonalli docs</a>
-              <a class="btn" href="#" aria-label="Share this post button">Share this column</a>
+          <div class="step">
+            <div class="stepInner">
+              <p style="margin:0; color:rgba(233,238,252,.9)">
+                “Your seed is the master key. Your derivation path is the map inside the temple.
+                Same key, different map… you open a different door. Tonalli uses
+                <span style="font-family:var(--mono); color:rgba(51,241,200,.95)">m/44'/899'/0'/0/0</span>.
+                Stay consistent, stay sovereign.”
+              </p>
             </div>
           </div>
-        </section>
-
-        <!-- RIGHT: SIDEBAR -->
-        <aside class="card">
-          <h2>Builder Checklist</h2>
-          <p>How to prevent this class of “missing funds” incidents:</p>
-
-          <div class="mono" style="margin-bottom:12px;">
-            <span class="label">1) Declare the path everywhere</span>
-            <div class="k">Show it in onboarding + docs + exports</div>
-          </div>
-
-          <div class="mono" style="margin-bottom:12px;">
-            <span class="label">2) Never change paths silently</span>
-            <div class="k">Path changes create new addresses</div>
-          </div>
-
-          <div class="mono" style="margin-bottom:12px;">
-            <span class="label">3) Add import warnings</span>
-            <div class="k">“CashTab seed → different address in Tonalli”</div>
-          </div>
-
-          <div class="mono">
-            <span class="label">4) Support flow (one-liner)</span>
-            <div class="k">“Funds aren’t gone — you’re on a different derived address.”</div>
-          </div>
-
-          <div class="divider"></div>
-
-          <h2>xolosArmy Take</h2>
-          <p>
-            Sovereignty requires precision. A wallet that is explicit about derivation is a wallet that protects users —
-            technically and psychologically.
-          </p>
-        </aside>
-      </main>
-
-      <footer>
-        <span class="fine">© xolosArmy Network — Dev Column</span>
-        <span class="fine">Topic: eCash HD derivation paths (seed + path = wallet)</span>
-      </footer>
-    </article>
+        </div>
+      </aside>
+    </div>
   </div>
 </body>
 </html>
