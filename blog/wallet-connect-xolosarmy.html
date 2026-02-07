@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WalletConnect v2 Infrastructure for xolosArmy: Technical Integration Between Xolo Legend and RMZWallet (Tonalli)</title>
+  <meta name="description" content="Canonical technical document describing WalletConnect v2 + CAIP-25 session negotiation between Xolo Legend (dApp) and RMZWallet/Tonalli (non-custodial controller) on eCash (XEC), including namespaces, errors, verification, and signing flow." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="WalletConnect v2 Infrastructure for xolosArmy" />
+  <meta property="og:description" content="Canonical technical integration document: Xolo Legend ↔ RMZWallet (Tonalli) via WalletConnect v2 on eCash (XEC)." />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Optional: MathJax for one small verification expression -->
+  <script>
+    window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <style>
+    :root{
+      --bg: #0b0c10;
+      --panel: #101218;
+      --panel2: #0f1116;
+      --text: #e9ecf1;
+      --muted: #b7c0cc;
+      --faint: #8e97a3;
+      --line: rgba(255,255,255,.10);
+      --accent: #21d4b3;   /* jade / turquoise */
+      --accent2:#7aa7ff;   /* electric blue */
+      --warn: #ffcc66;
+      --bad: #ff6b6b;
+      --ok: #3be38f;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 12px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+      --max: 980px;
+    }
+
+    *{ box-sizing: border-box; }
+    html,body{ height: 100%; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      background:
+        radial-gradient(900px 600px at 15% 10%, rgba(33,212,179,.13), transparent 60%),
+        radial-gradient(700px 500px at 85% 20%, rgba(122,167,255,.12), transparent 55%),
+        radial-gradient(900px 700px at 55% 85%, rgba(33,212,179,.08), transparent 60%),
+        linear-gradient(180deg, #07080c, var(--bg));
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    a{ color: var(--accent); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+
+    header.hero{
+      padding: 72px 18px 28px;
+    }
+    .wrap{ max-width: var(--max); margin: 0 auto; }
+
+    .kicker{
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 12px;
+      margin: 0 0 10px;
+    }
+
+    h1{
+      margin: 0 0 14px;
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle{
+      color: var(--muted);
+      max-width: 78ch;
+      font-size: 16px;
+      margin: 0 0 18px;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      color: var(--faint);
+      font-size: 13px;
+      align-items: center;
+      margin-top: 14px;
+    }
+    .pill{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    main{
+      padding: 0 18px 80px;
+    }
+
+    .grid{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    @media (min-width: 980px){
+      .grid{
+        grid-template-columns: 1.4fr .6fr;
+        align-items: start;
+      }
+      .sticky{
+        position: sticky;
+        top: 18px;
+      }
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card .inner{
+      padding: 20px 20px;
+    }
+
+    .toc h3{
+      margin: 0 0 12px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+    }
+
+    .toc ol{
+      margin: 0;
+      padding-left: 18px;
+    }
+    .toc li{
+      margin: 6px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .toc a{ color: var(--text); }
+    .toc a:hover{ color: var(--accent); }
+
+    article{
+      padding: 6px 0;
+    }
+
+    h2{
+      margin: 30px 0 10px;
+      font-size: 24px;
+      letter-spacing: -0.01em;
+    }
+    h3{
+      margin: 18px 0 8px;
+      font-size: 18px;
+      color: var(--text);
+    }
+    p{ margin: 10px 0; color: #dfe5ee; }
+
+    .lead{
+      font-size: 16.5px;
+      color: var(--text);
+    }
+
+    .note, .warn, .ok{
+      border-radius: var(--radius2);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding: 14px 14px;
+      margin: 14px 0;
+    }
+    .note{ border-left: 4px solid var(--accent2); }
+    .warn{ border-left: 4px solid var(--warn); }
+    .ok{ border-left: 4px solid var(--ok); }
+
+    .note strong, .warn strong, .ok strong{ color: var(--text); }
+
+    code, pre{
+      font-family: var(--mono);
+      font-size: 13px;
+    }
+
+    pre{
+      margin: 12px 0;
+      padding: 14px 14px;
+      border-radius: var(--radius2);
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.35);
+      overflow:auto;
+      line-height: 1.55;
+    }
+
+    .inline-code{
+      font-family: var(--mono);
+      font-size: 0.92em;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding: 2px 6px;
+      border-radius: 8px;
+      color: #eef3fb;
+      white-space: nowrap;
+    }
+
+    table{
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      overflow: hidden;
+      border-radius: var(--radius2);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.02);
+    }
+    th, td{
+      text-align: left;
+      padding: 10px 10px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    th{
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      background: rgba(255,255,255,.03);
+    }
+    td{
+      color: #dfe5ee;
+      font-size: 14px;
+    }
+    tr:last-child td{ border-bottom: none; }
+
+    hr{
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 22px 0;
+    }
+
+    footer{
+      margin-top: 40px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--faint);
+      font-size: 13px;
+    }
+
+    .badge-row{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 0;
+    }
+    .badge{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .callout-title{
+      font-size: 13px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 6px;
+    }
+
+    .mini{
+      font-size: 13px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <p class="kicker">xolosArmy — Canonical Technical Document</p>
+      <h1>WalletConnect v2 Infrastructure in the xolosArmy Ecosystem</h1>
+      <p class="subtitle">
+        A canonical engineering overview of the WalletConnect v2 (WCv2) integration between <strong>Xolo Legend</strong> (dApp)
+        and <strong>RMZWallet / Tonalli</strong> (non-custodial wallet controller) on <strong>eCash (XEC)</strong>, grounded in
+        chain-agnostic CAIP standards (CAIP-25 / CAIP-10) to deliver secure, sovereign, and durable session-based UX.
+      </p>
+
+      <div class="meta">
+        <span class="pill">Network: eCash (XEC)</span>
+        <span class="pill">Protocol: WalletConnect v2</span>
+        <span class="pill">Identity: CAIP-25 / CAIP-10</span>
+        <span class="pill">Wallet: RMZWallet (Tonalli)</span>
+        <span class="pill">dApp: Xolo Legend</span>
+      </div>
+
+      <div class="badge-row" aria-label="Tags">
+        <span class="badge">Non-custodial signing</span>
+        <span class="badge">Session negotiation</span>
+        <span class="badge">Namespaces & methods</span>
+        <span class="badge">Error handling</span>
+        <span class="badge">Origin verification</span>
+        <span class="badge">Tokens (ALP) & NFTs</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap grid">
+      <!-- Article -->
+      <div class="card">
+        <div class="inner">
+          <article>
+
+            <div class="note">
+              <div class="callout-title">Purpose</div>
+              <p class="lead">
+                This document describes <strong>how WalletConnect v2 is used as a secure interoperability layer</strong> in xolosArmy:
+                <strong>Xolo Legend</strong> builds intent and transactions, while <strong>RMZWallet (Tonalli)</strong> preserves custody,
+                enforces user consent, and produces cryptographic signatures locally.
+              </p>
+              <p class="mini">
+                Design principle: <em>the dApp constructs intent; the wallet owns keys.</em>
+              </p>
+            </div>
+
+            <h2 id="overview">1. Overview: Why WalletConnect v2 for xolosArmy</h2>
+            <p>
+              The xolosArmy ecosystem is built on <strong>eCash (XEC)</strong>, leveraging fast, low-fee transactions and
+              a modern token/NFT experience via eCash-compatible standards (including <strong>ALP eTokens</strong>).
+              To connect sovereign, non-custodial custody with rich dApp interactions, xolosArmy adopts
+              <strong>WalletConnect v2</strong> as the canonical transport and session layer between
+              <strong>Xolo Legend</strong> and <strong>RMZWallet / Tonalli</strong>.
+            </p>
+            <p>
+              WCv2 upgrades the interaction model from ad-hoc connections into a <strong>session-based protocol</strong> with robust
+              permission negotiation, persistence, granular capabilities, and a standards-driven identity model through
+              <strong>CAIP</strong> (Chain Agnostic Improvement Proposals). This enables a secure and chain-agnostic integration
+              without inheriting EVM-centric assumptions.
+            </p>
+
+            <h2 id="foundation">2. eCash Foundation and the Role of RMZWallet (Tonalli)</h2>
+            <p>
+              RMZWallet (Tonalli) is the <strong>custodial boundary</strong> for users in xolosArmy. It is a modern web wallet
+              (PWA-friendly) designed to keep the user’s seed phrase and private keys <strong>local</strong>, encrypted, and never exposed
+              to external applications or relays.
+            </p>
+
+            <div class="ok">
+              <div class="callout-title">Sovereignty Guarantee</div>
+              <p>
+                RMZWallet signs locally. Keys do not leave the device. WalletConnect transmits only
+                <strong>requests</strong> and <strong>responses</strong> through encrypted channels.
+              </p>
+            </div>
+
+            <h3 id="tokens">2.1 Tokens and NFTs</h3>
+            <p>
+              The ecosystem token <strong>$RMZ</strong> operates as an <strong>ALP eToken</strong>. RMZWallet also supports xolosArmy NFTs,
+              including metadata retrieval (e.g., via IPFS/Pinning infrastructure) and user-level asset visualization.
+              WalletConnect sessions can authorize dApps like Xolo Legend to request account visibility and transaction signing
+              for these assets without ever obtaining custody.
+            </p>
+
+            <h2 id="caip25">3. CAIP-25 Sessions: Namespace Negotiation as the Core Contract</h2>
+            <p>
+              The security contract between Xolo Legend and RMZWallet is expressed through <strong>CAIP-25</strong> session negotiation.
+              The dApp sends a <strong>session proposal</strong> describing required capabilities. The wallet validates that proposal,
+              prompts the user for consent, and returns the <strong>approved session namespaces</strong> with CAIP-10 formatted accounts.
+            </p>
+
+            <h3 id="proposal">3.1 Structure of a Session Proposal</h3>
+            <p>
+              WCv2 organizes permissions into <strong>namespaces</strong>. Each namespace specifies:
+              <span class="inline-code">chains</span>, <span class="inline-code">methods</span>, and <span class="inline-code">events</span>.
+              The proposal is split into:
+              <span class="inline-code">requiredNamespaces</span> and <span class="inline-code">optionalNamespaces</span>.
+            </p>
+
+            <table aria-label="Namespace proposal fields">
+              <thead>
+                <tr>
+                  <th>Field</th>
+                  <th>Technical function</th>
+                  <th>Importance</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>requiredNamespaces</strong></td>
+                  <td>Capabilities the wallet <em>must</em> support for the session to be created.</td>
+                  <td>Critical</td>
+                </tr>
+                <tr>
+                  <td><strong>optionalNamespaces</strong></td>
+                  <td>Capabilities the wallet may support if available, without blocking the session.</td>
+                  <td>High</td>
+                </tr>
+                <tr>
+                  <td><strong>chains</strong></td>
+                  <td>List of CAIP-2 chain identifiers requested by the dApp (e.g., an eCash CAIP-2 id).</td>
+                  <td>Mandatory</td>
+                </tr>
+                <tr>
+                  <td><strong>methods</strong></td>
+                  <td>JSON-RPC methods the dApp wants to call (e.g., signing, transaction requests).</td>
+                  <td>High</td>
+                </tr>
+                <tr>
+                  <td><strong>events</strong></td>
+                  <td>Real-time notifications expected by the dApp (e.g., account changes).</td>
+                  <td>Moderate</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="warn">
+              <div class="callout-title">Validation Rule</div>
+              <p>
+                If a <strong>required</strong> namespace has an empty or unsupported <span class="inline-code">chains</span> list,
+                RMZWallet must reject the proposal with an appropriate WCv2 error (commonly in the
+                <span class="inline-code">5100–5102</span> range).
+              </p>
+            </div>
+
+            <h3 id="approval">3.2 Approval and Session Creation</h3>
+            <p>
+              After validation and explicit user consent, RMZWallet returns the <strong>session namespaces</strong>
+              confirming exactly what is approved. Accounts are expressed using <strong>CAIP-10</strong>.
+            </p>
+
+            <pre><code>{
+  "namespaces": {
+    "ecash": {
+      "accounts": [
+        "ecash:&lt;chain-id&gt;:&lt;address-or-account-identifier&gt;"
+      ],
+      "methods": [
+        "ecash_signTransaction",
+        "ecash_signMessage"
+      ],
+      "events": [
+        "accountsChanged",
+        "chainChanged"
+      ]
+    }
+  }
+}</code></pre>
+
+            <p class="mini">
+              Note: chain identifiers and method naming should reflect the canonical choices in xolosArmy’s implementation.
+              The example above illustrates the structure, not a mandated naming convention.
+            </p>
+
+            <h3 id="wallet-prefixed">3.3 wallet_* Methods and Chain-Optional Requests</h3>
+            <p>
+              Some requests (notably methods prefixed with <span class="inline-code">wallet_</span>) can be defined as
+              <strong>chain-optional</strong> in WCv2. This enables future expansion—such as adding chains or environments—without
+              forcing a chain target at request time. For xolosArmy, this creates a forward-compatible path for additional layers
+              and ecosystem growth.
+            </p>
+
+            <h2 id="implementation-wallet">4. Implementation in RMZWallet (Tonalli)</h2>
+            <p>
+              RMZWallet is built with a modern web stack (TypeScript + Vite) and integrates WCv2 through dedicated components
+              responsible for pairing, session lifecycle, request routing, and user consent.
+            </p>
+
+            <h3 id="chronik-ecashlib">4.1 Chain Data: Chronik + ecash-lib</h3>
+            <p>
+              As a WalletConnect controller, RMZWallet must maintain reliable chain state visibility:
+              balances, UTXOs, token ownership, and transaction confirmation. This is achieved through:
+            </p>
+            <ul>
+              <li><strong>Chronik</strong> for index-backed chain queries and real-time balance/UTXO tracking.</li>
+              <li><strong>ecash-lib</strong> for local transaction construction and signing.</li>
+            </ul>
+
+            <div class="note">
+              <div class="callout-title">Rescan & UTXO Consistency</div>
+              <p>
+                A “rescan” capability (UTXO/balance refresh) is critical during active WC sessions to reduce risks of stale state,
+                invalid inputs, double-spend conflicts, or failed broadcasts.
+              </p>
+            </div>
+
+            <h3 id="core-components">4.2 Core Components: Lifecycle and Request Queueing</h3>
+            <p>
+              In a typical controller architecture, WCv2 responsibilities are split into:
+            </p>
+
+            <table aria-label="RMZWallet WCv2 components">
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Role in the integration</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>WcWallet.ts</strong></td>
+                  <td>WalletConnect v2 lifecycle: pairing, session proposals, approvals, request handling.</td>
+                  <td>TypeScript + WC SDK</td>
+                </tr>
+                <tr>
+                  <td><strong>offerQueue.ts</strong></td>
+                  <td>Asynchronous queue for inbound signing/transaction requests and user prompts.</td>
+                  <td>Prevents UX collisions</td>
+                </tr>
+                <tr>
+                  <td><strong>ChronikClient.ts</strong></td>
+                  <td>Chain index queries for XEC/ALP/NFT state; keeps app state consistent.</td>
+                  <td>Real-time reliability</td>
+                </tr>
+                <tr>
+                  <td><strong>PWA / Manifest</strong></td>
+                  <td>Offline-friendly wallet UX + controlled session reconnection patterns.</td>
+                  <td>Service workers</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2 id="implementation-dapp">5. Xolo Legend dApp: Bridge, Persistence, and Events</h2>
+            <p>
+              On the dApp side, Xolo Legend initiates pairing and manages session persistence via its WalletConnect bridge modules
+              (for example: <span class="inline-code">WcBridge.tsx</span> and <span class="inline-code">walletconnect.ts</span>).
+              The dApp typically generates a <strong>QR code</strong> or a <strong>deep link</strong> that the user opens with RMZWallet.
+            </p>
+
+            <h3 id="persistence">5.1 Session Persistence</h3>
+            <p>
+              One of WCv2’s strongest UX benefits is persistent sessions. Xolo Legend can reconnect using a session identifier
+              stored locally, reducing repeated QR scans while keeping the permission scope explicit and auditable.
+            </p>
+
+            <h3 id="events">5.2 Event Tunnels: Reactive UX</h3>
+            <p>
+              The dApp subscribes to wallet events (e.g., <span class="inline-code">accountsChanged</span>) so that account switching
+              within Tonalli is reflected instantly in Xolo Legend’s UI. This enables real-time reactivity without polling or
+              insecure custom transports.
+            </p>
+
+            <h2 id="signing-security">6. Signing Flow and Cryptographic Security</h2>
+            <p>
+              When a user triggers an on-chain action in Xolo Legend (e.g., purchasing an item, interacting with a token module,
+              or publishing a cultural on-chain message), the dApp sends a JSON-RPC request through WCv2. RMZWallet validates,
+              prompts the user, then signs locally and returns the signed transaction for broadcast.
+            </p>
+
+            <div class="ok">
+              <div class="callout-title">Security Model</div>
+              <p>
+                RMZWallet retains the private key. Only the signed artifact returns to the dApp. The verification concept can be modeled as:
+              </p>
+              <p class="mini">
+                $V(S, M) \rightarrow \{True, False\}$ where $S$ is the signature, $M$ is the message (transaction), and $V$ is the public key.
+              </p>
+            </div>
+
+            <h2 id="errors">7. Validation and Error Handling</h2>
+            <p>
+              WCv2 defines standardized error codes that both wallet and dApp should handle to preserve reliability and user trust.
+              Errors can originate from technical failures, malformed requests, unsupported capabilities, or explicit user rejection.
+            </p>
+
+            <table aria-label="WalletConnect error categories">
+              <thead>
+                <tr>
+                  <th>Error range / code</th>
+                  <th>Category</th>
+                  <th>Meaning</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>5001</strong></td>
+                  <td>User rejection</td>
+                  <td>User explicitly rejected the request or proposed permissions.</td>
+                </tr>
+                <tr>
+                  <td><strong>5100–5102</strong></td>
+                  <td>Unsupported capability</td>
+                  <td>Chains, methods, or events requested are not supported by the wallet.</td>
+                </tr>
+                <tr>
+                  <td><strong>5201–5302</strong></td>
+                  <td>Malformed request</td>
+                  <td>Invalid structure or payload error from the dApp side.</td>
+                </tr>
+                <tr>
+                  <td><strong>1006</strong></td>
+                  <td>Invalid namespace</td>
+                  <td>Namespace structure does not conform to SDK requirements.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="warn">
+              <div class="callout-title">Common Integration Pitfall</div>
+              <p>
+                <strong>Non-conforming namespaces</strong> typically occur when the dApp requests a chain identifier or method set
+                the wallet has not enabled. For eCash, ensuring that RMZWallet responds consistently to the chosen CAIP-2 chain id(s)
+                is essential for stable connectivity.
+              </p>
+            </div>
+
+            <h2 id="observability">8. Observability and Origin Verification</h2>
+            <h3 id="telemetry">8.1 Telemetry (Non-sensitive)</h3>
+            <p>
+              WCv2 SDKs can expose telemetry signals about runtime behavior and error codes. Properly configured, telemetry can help
+              identify bottlenecks in session approval flows without collecting sensitive user data such as balances, addresses, or holdings.
+            </p>
+
+            <h3 id="verifycontext">8.2 VerifyContext: Preventing Phishing</h3>
+            <p>
+              The <strong>VerifyContext</strong> feature allows RMZWallet to assess the origin of a session request and classify it as
+              <em>valid</em>, <em>invalid</em>, or <em>unknown</em>. This helps prevent phishing attempts where a malicious site imitates
+              Xolo Legend to capture permissions.
+            </p>
+
+            <div class="note">
+              <div class="callout-title">Recommended UX</div>
+              <p>
+                If origin is <strong>unknown</strong>, RMZWallet should clearly warn the user and require explicit confirmation.
+                If <strong>invalid</strong>, it should block by default.
+              </p>
+            </div>
+
+            <h2 id="assets">9. Tokens, NFTs, and On-Chain Culture via WalletConnect</h2>
+            <p>
+              The integration is not limited to XEC transfers. xolosArmy leverages on-chain primitives to support:
+            </p>
+            <ul>
+              <li><strong>ALP eTokens</strong> such as $RMZ for community economics and incentives.</li>
+              <li><strong>NFT collections</strong> that represent identity, access, culture, and digital artifacts.</li>
+              <li><strong>OP_RETURN</strong> messages to anchor proposals, events, and cultural signals on-chain.</li>
+            </ul>
+
+            <h3 id="nft-storage">9.1 Storage and Visualization</h3>
+            <p>
+              RMZWallet can integrate NFT metadata retrieval (e.g., IPFS + pinning), enabling Xolo Legend to request permission to
+              view and incorporate user-owned NFTs into gameplay, social layers, or access modules—without compromising custody.
+            </p>
+
+            <table aria-label="NFT capabilities">
+              <thead>
+                <tr>
+                  <th>NFT feature</th>
+                  <th>Implementation</th>
+                  <th>User impact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Custody</strong></td>
+                  <td>Local to RMZWallet (Tonalli)</td>
+                  <td>Total sovereignty over the asset</td>
+                </tr>
+                <tr>
+                  <td><strong>Metadata</strong></td>
+                  <td>IPFS + pinning infrastructure</td>
+                  <td>Durable, decentralized media</td>
+                </tr>
+                <tr>
+                  <td><strong>Visualization</strong></td>
+                  <td>Xolo Legend via WCv2 session permissions</td>
+                  <td>Unified user experience</td>
+                </tr>
+                <tr>
+                  <td><strong>Transfer</strong></td>
+                  <td>eCash transaction layer via ecash-lib</td>
+                  <td>Fast, low-cost movement</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2 id="roadmap">10. Evolution and Roadmap: Extensible Sessions</h2>
+            <p>
+              WalletConnect v2 is intentionally modular. This allows xolosArmy to expand supported namespaces, methods, and session
+              patterns as new modules arrive—without redesigning the communication layer.
+            </p>
+            <p>
+              Near-term growth areas may include crowdfunding modules, native payment flows for ecosystem services, and richer
+              transaction intents exposed as wallet-approved JSON-RPC methods—while keeping the wallet’s security boundary intact.
+            </p>
+
+            <h2 id="conclusion">11. Conclusion: Secure Interoperability as the Ecosystem Backbone</h2>
+            <p>
+              The WCv2 integration between Xolo Legend and RMZWallet (Tonalli) is a cornerstone of xolosArmy engineering:
+              it balances <strong>security</strong>, <strong>interoperability</strong>, and <strong>user sovereignty</strong>
+              through CAIP-based session negotiation and local signing.
+            </p>
+            <p>
+              With strict namespace validation, standardized error handling, origin verification, and a chain-aware state layer
+              (Chronik + ecash-lib), the ecosystem achieves a durable and scalable communication fabric—capable of supporting tokens,
+              NFTs, and the broader cultural/utility vision of xolosArmy on eCash.
+            </p>
+
+            <hr />
+
+            <footer>
+              <p>
+                <strong>Canonical note:</strong> This article describes the architectural contract and integration patterns.
+                Exact method names, chain identifiers, and module paths should reflect the current xolosArmy codebase conventions.
+              </p>
+              <p class="mini">
+                © xolosArmy — “Your keys never move. Your intent does.”
+              </p>
+            </footer>
+
+          </article>
+        </div>
+      </div>
+
+      <!-- TOC / Sidebar -->
+      <aside class="card sticky toc" aria-label="Table of contents">
+        <div class="inner">
+          <h3>Contents</h3>
+          <ol>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#foundation">eCash + RMZWallet role</a></li>
+            <li><a href="#caip25">CAIP-25 sessions</a></li>
+            <li><a href="#implementation-wallet">RMZWallet implementation</a></li>
+            <li><a href="#implementation-dapp">Xolo Legend bridge</a></li>
+            <li><a href="#signing-security">Signing & security</a></li>
+            <li><a href="#errors">Errors & validation</a></li>
+            <li><a href="#observability">Observability & verification</a></li>
+            <li><a href="#assets">Tokens, NFTs, OP_RETURN</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+          </ol>
+
+          <hr />
+
+          <p class="mini">
+            Tip: If your blog platform strips inline scripts and you don’t need the single math expression,
+            remove the two MathJax <span class="inline-code">&lt;script&gt;</span> tags in the header.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
