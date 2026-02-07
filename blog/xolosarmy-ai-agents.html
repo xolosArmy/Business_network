@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>xolosArmy Codex — Energy • Agents • Finality</title>
+  <meta name="description" content="A sacred-tech manifesto: Energy is the substrate. AI decides. Crypto remembers. xolosArmy is the ritual interface between them." />
+  <style>
+    :root{
+      --bg0:#050607;
+      --bg1:#0a0e10;
+      --panel:rgba(10,14,16,.78);
+      --panel2:rgba(14,20,22,.62);
+      --stroke:rgba(180,240,225,.14);
+      --stroke2:rgba(180,240,225,.22);
+      --text:#e9fff7;
+      --muted:rgba(233,255,247,.72);
+      --muted2:rgba(233,255,247,.55);
+      --jade:#58ffd2;
+      --jade2:#00e6b7;
+      --amber:#ffd27a;
+      --ember:#ff6a3d;
+      --violet:#9aa8ff;
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
+      --radius:22px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:var(--sans);
+      background:
+        radial-gradient(1200px 800px at 10% 10%, rgba(88,255,210,.10), transparent 60%),
+        radial-gradient(900px 600px at 90% 20%, rgba(255,210,122,.08), transparent 60%),
+        radial-gradient(900px 600px at 65% 95%, rgba(154,168,255,.06), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    /* subtle “glyph dust” */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(88,255,210,.16) 1px, transparent 2px),
+        radial-gradient(circle at 80% 40%, rgba(255,210,122,.12) 1px, transparent 2px),
+        radial-gradient(circle at 55% 70%, rgba(88,255,210,.10) 1px, transparent 2px);
+      background-size: 220px 220px, 260px 260px, 300px 300px;
+      mix-blend-mode:screen;
+      opacity:.22;
+      filter: blur(.2px);
+    }
+
+    a{color:var(--jade); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1120px; margin:0 auto; padding:48px 18px 80px}
+    .topbar{
+      display:flex; gap:12px; align-items:center; justify-content:space-between;
+      margin-bottom:18px;
+    }
+    .sig{
+      display:flex; gap:12px; align-items:center;
+      padding:10px 14px;
+      border:1px solid var(--stroke);
+      background:linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.05));
+      border-radius:999px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.35);
+      backdrop-filter: blur(10px);
+    }
+    .sig .mark{
+      width:28px; height:28px; border-radius:10px;
+      border:1px solid var(--stroke2);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(88,255,210,.35), transparent 55%),
+        radial-gradient(circle at 70% 70%, rgba(255,210,122,.18), transparent 55%),
+        linear-gradient(180deg, rgba(20,30,32,.85), rgba(8,10,11,.85));
+      position:relative;
+      box-shadow: inset 0 0 0 1px rgba(0,230,183,.12);
+    }
+    .sig .mark::after{
+      content:"";
+      position:absolute; inset:6px;
+      border-radius:8px;
+      border:1px dashed rgba(88,255,210,.25);
+      opacity:.7;
+    }
+    .sig .name{
+      font-weight:700; letter-spacing:.08em;
+      text-transform:uppercase; font-size:12px;
+      color:rgba(233,255,247,.86);
+    }
+    .sig .tag{
+      font-family:var(--mono);
+      font-size:11px;
+      color:var(--muted2);
+    }
+
+    .hero{
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(14,20,22,.86), rgba(8,10,11,.72));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(900px 340px at 10% 0%, rgba(88,255,210,.16), transparent 55%),
+        radial-gradient(700px 280px at 90% 10%, rgba(255,210,122,.12), transparent 60%),
+        radial-gradient(800px 280px at 50% 110%, rgba(154,168,255,.10), transparent 60%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .hero-inner{
+      position:relative;
+      padding:34px 26px 28px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:18px;
+      align-items:start;
+    }
+    @media (max-width: 920px){
+      .hero-inner{grid-template-columns:1fr; padding:28px 18px}
+    }
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(26px, 3.6vw, 44px);
+      letter-spacing:-.02em;
+      line-height:1.05;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size: clamp(14px, 1.35vw, 16px);
+      line-height:1.55;
+      max-width:56ch;
+    }
+
+    .mantra{
+      margin-top:18px;
+      padding:14px 14px;
+      border-radius:16px;
+      border:1px solid rgba(88,255,210,.22);
+      background:linear-gradient(180deg, rgba(0,230,183,.10), rgba(0,0,0,.08));
+      backdrop-filter: blur(10px);
+    }
+    .mantra .line{
+      font-family:var(--mono);
+      font-size:13px;
+      line-height:1.55;
+      color:rgba(233,255,247,.88);
+    }
+    .mantra b{color:var(--jade)}
+    .mantra .mini{
+      margin-top:10px;
+      color:var(--muted2);
+      font-size:12px;
+      line-height:1.55;
+    }
+
+    .pillrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
+    .pill{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background:rgba(0,0,0,.18);
+      font-size:12px;
+      color:var(--muted);
+      font-family:var(--mono);
+    }
+    .pill span{color:var(--jade)}
+    .cta{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top:18px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(88,255,210,.26);
+      background:linear-gradient(180deg, rgba(88,255,210,.12), rgba(0,0,0,.12));
+      color:rgba(233,255,247,.92);
+      font-weight:700;
+      letter-spacing:.02em;
+      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+    }
+    .btn:hover{filter:brightness(1.06); text-decoration:none}
+    .btn.secondary{
+      border-color:rgba(233,255,247,.18);
+      background:linear-gradient(180deg, rgba(255,210,122,.09), rgba(0,0,0,.12));
+    }
+    .btn .dot{
+      width:9px; height:9px; border-radius:999px;
+      background:var(--jade);
+      box-shadow: 0 0 18px rgba(88,255,210,.55);
+    }
+    .btn.secondary .dot{background:var(--amber); box-shadow: 0 0 18px rgba(255,210,122,.45);}
+
+    .aside{
+      border:1px solid rgba(233,255,247,.14);
+      border-radius:18px;
+      background:rgba(0,0,0,.16);
+      padding:14px;
+      backdrop-filter: blur(10px);
+    }
+    .aside h3{
+      margin:2px 0 10px;
+      font-size:14px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:rgba(233,255,247,.86);
+    }
+    .aside .k{
+      display:grid;
+      grid-template-columns: 120px 1fr;
+      gap:10px;
+      padding:10px;
+      border-radius:14px;
+      border:1px solid rgba(180,240,225,.12);
+      background:rgba(10,14,16,.44);
+      margin-bottom:10px;
+    }
+    .aside .k:last-child{margin-bottom:0}
+    .aside .k .key{
+      font-family:var(--mono);
+      color:var(--muted2);
+      font-size:12px;
+    }
+    .aside .k .val{
+      color:rgba(233,255,247,.92);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      margin-top:18px;
+    }
+    @media (max-width: 920px){ .grid{grid-template-columns:1fr} }
+
+    .card{
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+      background: linear-gradient(180deg, rgba(14,20,22,.70), rgba(8,10,11,.62));
+      box-shadow: 0 18px 60px rgba(0,0,0,.45);
+      overflow:hidden;
+      position:relative;
+    }
+    .card .inner{padding:20px 18px}
+    .card h2{
+      margin:0 0 10px;
+      font-size:18px;
+      letter-spacing:.02em;
+    }
+    .card p{
+      margin:0 0 12px;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+    .list{
+      margin:0; padding-left:18px;
+      color:rgba(233,255,247,.84);
+      line-height:1.65;
+      font-size:14px;
+    }
+    .list li{margin:6px 0}
+    .list b{color:var(--jade)}
+
+    .quote{
+      margin-top:16px;
+      padding:14px 14px;
+      border-radius:18px;
+      border:1px solid rgba(255,210,122,.22);
+      background:linear-gradient(180deg, rgba(255,210,122,.10), rgba(0,0,0,.08));
+      color:rgba(233,255,247,.90);
+      line-height:1.6;
+    }
+    .quote .who{
+      margin-top:10px;
+      color:var(--muted2);
+      font-family:var(--mono);
+      font-size:12px;
+    }
+
+    /* Network state diagram */
+    .diagram{
+      margin-top:16px;
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.06));
+      overflow:hidden;
+      box-shadow: 0 16px 50px rgba(0,0,0,.35);
+    }
+    .diagram .head{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:14px 16px;
+      border-bottom:1px solid rgba(180,240,225,.12);
+      background:rgba(10,14,16,.58);
+    }
+    .diagram .head .title{
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:12px;
+      color:rgba(233,255,247,.88);
+    }
+    .diagram .head .meta{
+      font-family:var(--mono);
+      font-size:11px;
+      color:var(--muted2);
+    }
+    .diagram .pad{padding:14px}
+    .legend{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:10px;
+      font-family:var(--mono);
+      color:var(--muted2);
+      font-size:11px;
+    }
+    .sw{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 8px;
+      border:1px solid rgba(180,240,225,.12);
+      border-radius:999px;
+      background:rgba(0,0,0,.14);
+    }
+    .sw i{
+      width:10px; height:10px; border-radius:999px; display:inline-block;
+    }
+
+    footer{
+      margin-top:22px;
+      color:var(--muted2);
+      font-size:12px;
+      font-family:var(--mono);
+      line-height:1.6;
+      text-align:center;
+      opacity:.9;
+    }
+    .glyph{
+      font-family:var(--mono);
+      letter-spacing:.24em;
+      color:rgba(88,255,210,.55);
+      font-size:12px;
+    }
+    .hr{
+      margin:18px 0 0;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(88,255,210,.18), transparent);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="topbar">
+      <div class="sig">
+        <div class="mark" aria-hidden="true"></div>
+        <div>
+          <div class="name">xolosArmy Network</div>
+          <div class="tag">codex / sacred-tech manifesto</div>
+        </div>
+      </div>
+      <div class="glyph" aria-hidden="true">⟡  TONALLI  ⟡  OBSIDIAN  ⟡  FINALITY  ⟡</div>
+    </div>
+
+    <section class="hero" id="top">
+      <div class="hero-inner">
+        <div>
+          <h1>Energy is the substrate.<br/>AI decides.<br/>Crypto remembers.</h1>
+          <p class="sub">
+            A network state is not a flag. It is a loop: energy → decision → settlement → memory.
+            xolosArmy is the ritual interface that turns raw power into coordinated truth — with a Xolo as the guardian archetype.
+          </p>
+
+          <div class="mantra">
+            <div class="line">
+              <b>ENERGY</b> becomes <b>COMPUTE</b>.<br/>
+              <b>COMPUTE</b> becomes <b>AGENCY</b>.<br/>
+              <b>AGENCY</b> becomes <b>FINALITY</b>.<br/>
+              <b>FINALITY</b> becomes <b>MEMORY</b>.
+            </div>
+            <div class="mini">
+              Everything else is interface: institutions, credentials, titles, narratives. Useful — never fundamental.
+            </div>
+          </div>
+
+          <div class="pillrow">
+            <div class="pill"><span>Tonalli</span>: intent vector</div>
+            <div class="pill"><span>Xolo</span>: agent guardian</div>
+            <div class="pill"><span>Codex</span>: blockchain memory</div>
+            <div class="pill"><span>Mictlán</span>: distributed network</div>
+          </div>
+
+          <div class="cta">
+            <a class="btn" href="#manifesto"><span class="dot"></span>Read the Manifesto</a>
+            <a class="btn secondary" href="#diagram"><span class="dot"></span>Network State Diagram</a>
+          </div>
+        </div>
+
+        <aside class="aside" aria-label="Codex Key">
+          <h3>Codex Key</h3>
+          <div class="k">
+            <div class="key">AI Agent</div>
+            <div class="val">Energy directed through structure: perceive → decide → act.</div>
+          </div>
+          <div class="k">
+            <div class="key">Crypto</div>
+            <div class="val">Energy enforcing rules: settlement → finality → irreversible memory.</div>
+          </div>
+          <div class="k">
+            <div class="key">xolosArmy</div>
+            <div class="val">The interface layer: myths, UX, culture, community, governance.</div>
+          </div>
+          <div class="k">
+            <div class="key">Human Role</div>
+            <div class="val">Meaning-makers: set direction, define values, curate beauty, choose constraints.</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="grid" id="manifesto" style="margin-top:18px;">
+      <article class="card">
+        <div class="inner">
+          <h2>I. The Thesis</h2>
+          <p>
+            The only irreducible resource is <b>energy</b>. Everything else is a derivative abstraction.
+            When energy becomes computation, computation becomes agency. When agency meets cryptographic finality,
+            history becomes a stone codex: durable, auditable, non-negotiable.
+          </p>
+          <ul class="list">
+            <li><b>Energy</b> is the substrate (physics).</li>
+            <li><b>AI</b> is energy that decides (agency).</li>
+            <li><b>Crypto</b> is energy that remembers (finality).</li>
+            <li><b>xolosArmy</b> is the ritual interface (meaning + coordination).</li>
+          </ul>
+
+          <div class="quote">
+            “AI persuades. Crypto settles. The Network State is the closed loop between decision and memory.”
+            <div class="who">— Codex note / xolosArmy doctrine</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="inner">
+          <h2>II. The Great Compression</h2>
+          <p>
+            Civilization used to be stacked on institutions: power → money → labor → value.
+            AI + crypto compress the stack toward physics: power → energy → compute → coordination.
+          </p>
+          <ul class="list">
+            <li>AI reduces the cost of cognition and execution.</li>
+            <li>Crypto reduces the cost of trust and enforcement.</li>
+            <li>Energy becomes the real governor: access, capture, conversion, storage.</li>
+          </ul>
+          <p style="margin-top:12px;">
+            In an energy-native world, legitimacy is optional. Only <b>rules + power</b> bind.
+          </p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="inner">
+          <h2>III. The Tonalli Cycle</h2>
+          <p>
+            Tonalli is intent — not as philosophy, but as <b>directed energy</b>.
+            An agent receives signals, compresses them into a decision, and commits an irreversible act.
+          </p>
+          <ul class="list">
+            <li><b>Perceive</b> (signals / telemetry / context)</li>
+            <li><b>Decide</b> (model + policy)</li>
+            <li><b>Commit</b> (transaction / signature)</li>
+            <li><b>Settle</b> (consensus / finality)</li>
+            <li><b>Remember</b> (ledger → feedback)</li>
+          </ul>
+          <p style="margin-top:12px;">
+            When this loop runs autonomously, human labor becomes optional. Humans become curators of meaning and constraints.
+          </p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="inner">
+          <h2>IV. The Xolo Archetype</h2>
+          <p>
+            The xoloitzcuintle is not a mascot — it is an accurate abstraction: a guardian of thresholds,
+            a guide between realms, a calm executor of the path.
+          </p>
+          <ul class="list">
+            <li><b>Mictlán</b>: the distributed network (many nodes, one memory)</li>
+            <li><b>Obsidian</b>: cryptographic finality (hard truth)</li>
+            <li><b>Fire</b>: energy (the only substrate)</li>
+            <li><b>Tonalli</b>: intent vector (direction, not belief)</li>
+            <li><b>Codex</b>: ledger (time turned into stone)</li>
+          </ul>
+          <p style="margin-top:12px;">
+            The Xolo is the agent-guardian: silent, loyal, sovereign.
+          </p>
+        </div>
+      </article>
+    </div>
+
+    <section class="diagram" id="diagram" aria-label="Network State diagram">
+      <div class="head">
+        <div class="title">Network State Diagram</div>
+        <div class="meta">energy → compute → agency → settlement → memory → feedback</div>
+      </div>
+      <div class="pad">
+        <!-- Inline SVG so you can copy/paste into any page, and it stays crisp -->
+        <svg viewBox="0 0 1100 520" width="100%" height="auto" role="img" aria-label="xolosArmy Network State loop diagram">
+          <defs>
+            <linearGradient id="gPanel" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="rgba(14,20,22,.92)"/>
+              <stop offset="100%" stop-color="rgba(8,10,11,.75)"/>
+            </linearGradient>
+            <linearGradient id="gJade" x1="0" x2="1">
+              <stop offset="0%" stop-color="rgba(88,255,210,.9)"/>
+              <stop offset="100%" stop-color="rgba(0,230,183,.75)"/>
+            </linearGradient>
+            <linearGradient id="gAmber" x1="0" x2="1">
+              <stop offset="0%" stop-color="rgba(255,210,122,.85)"/>
+              <stop offset="100%" stop-color="rgba(255,106,61,.55)"/>
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(88,255,210,.75)"/>
+            </marker>
+            <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(255,210,122,.7)"/>
+            </marker>
+          </defs>
+
+          <!-- Background frame -->
+          <rect x="14" y="14" width="1072" height="492" rx="26" fill="url(#gPanel)" stroke="rgba(180,240,225,.16)" />
+
+          <!-- Layer band labels -->
+          <text x="44" y="58" fill="rgba(233,255,247,.86)" font-family="ui-monospace, Menlo, monospace" font-size="14" letter-spacing="2">PHYSICAL LAYER</text>
+          <text x="44" y="240" fill="rgba(233,255,247,.86)" font-family="ui-monospace, Menlo, monospace" font-size="14" letter-spacing="2">AGENCY LAYER</text>
+          <text x="44" y="432" fill="rgba(233,255,247,.86)" font-family="ui-monospace, Menlo, monospace" font-size="14" letter-spacing="2">FINALITY + MEMORY</text>
+
+          <!-- Nodes -->
+          <!-- ENERGY -->
+          <rect x="60" y="80" width="220" height="90" rx="18" fill="rgba(0,0,0,.22)" stroke="rgba(255,210,122,.25)"/>
+          <text x="86" y="118" fill="rgba(255,210,122,.92)" font-family="ui-monospace, Menlo, monospace" font-size="18" font-weight="700">ENERGY</text>
+          <text x="86" y="146" fill="rgba(233,255,247,.70)" font-family="ui-monospace, Menlo, monospace" font-size="12">capture • convert • store</text>
+
+          <!-- COMPUTE -->
+          <rect x="320" y="80" width="220" height="90" rx="18" fill="rgba(0,0,0,.22)" stroke="rgba(88,255,210,.25)"/>
+          <text x="346" y="118" fill="rgba(88,255,210,.92)" font-family="ui-monospace, Menlo, monospace" font-size="18" font-weight="700">COMPUTE</text>
+          <text x="346" y="146" fill="rgba(233,255,247,.70)" font-family="ui-monospace, Menlo, monospace" font-size="12">GPU/CPU • cooling • latency</text>
+
+          <!-- AI AGENTS -->
+          <rect x="580" y="200" width="240" height="110" rx="18" fill="rgba(0,0,0,.22)" stroke="rgba(88,255,210,.28)"/>
+          <text x="606" y="240" fill="rgba(88,255,210,.96)" font-family="ui-monospace, Menlo, monospace" font-size="18" font-weight="800">AI AGENTS</text>
+          <text x="606" y="268" fill="rgba(233,255,247,.74)" font-family="ui-monospace, Menlo, monospace" font-size="12">perceive → decide → act</text>
+          <text x="606" y="292" fill="rgba(233,255,247,.60)" font-family="ui-monospace, Menlo, monospace" font-size="11">Tonalli = intent vector</text>
+
+          <!-- CRYPTO SETTLEMENT -->
+          <rect x="860" y="200" width="200" height="110" rx="18" fill="rgba(0,0,0,.22)" stroke="rgba(255,210,122,.26)"/>
+          <text x="886" y="240" fill="rgba(255,210,122,.92)" font-family="ui-monospace, Menlo, monospace" font-size="18" font-weight="800">CRYPTO</text>
+          <text x="886" y="268" fill="rgba(233,255,247,.74)" font-family="ui-monospace, Menlo, monospace" font-size="12">commit → settle</text>
+          <text x="886" y="292" fill="rgba(233,255,247,.60)" font-family="ui-monospace, Menlo, monospace" font-size="11">finality = obsidian truth</text>
+
+          <!-- LEDGER / MEMORY -->
+          <rect x="320" y="380" width="320" height="100" rx="18" fill="rgba(0,0,0,.22)" stroke="rgba(180,240,225,.22)"/>
+          <text x="346" y="420" fill="rgba(233,255,247,.88)" font-family="ui-monospace, Menlo, monospace" font-size="18" font-weight="800">LEDGER / MEMORY</text>
+          <text x="346" y="448" fill="rgba(233,255,247,.70)" font-family="ui-monospace, Menlo, monospace" font-size="12">history crystallized • auditable • durable</text>
+
+          <!-- HUMAN MEANING -->
+          <rect x="60" y="380" width="220" height="100" rx="18" fill="rgba(0,0,0,.18)" stroke="rgba(154,168,255,.22)"/>
+          <text x="86" y="420" fill="rgba(154,168,255,.88)" font-family="ui-monospace, Menlo, monospace" font-size="18" font-weight="800">HUMANS</text>
+          <text x="86" y="448" fill="rgba(233,255,247,.70)" font-family="ui-monospace, Menlo, monospace" font-size="12">meaning • values • constraints</text>
+
+          <!-- xolosArmy Interface -->
+          <rect x="700" y="380" width="360" height="100" rx="18" fill="rgba(0,0,0,.20)" stroke="rgba(88,255,210,.18)"/>
+          <text x="726" y="420" fill="rgba(88,255,210,.90)" font-family="ui-monospace, Menlo, monospace" font-size="18" font-weight="900">xolosArmy INTERFACE</text>
+          <text x="726" y="448" fill="rgba(233,255,247,.70)" font-family="ui-monospace, Menlo, monospace" font-size="12">myth + UX + governance + community</text>
+
+          <!-- Arrows -->
+          <path d="M 280 125 C 300 125, 300 125, 320 125" stroke="rgba(88,255,210,.55)" stroke-width="3" fill="none" marker-end="url(#arrow)" />
+          <path d="M 540 125 C 690 125, 650 170, 650 200" stroke="rgba(88,255,210,.55)" stroke-width="3" fill="none" marker-end="url(#arrow)" />
+          <path d="M 820 255 C 840 255, 840 255, 860 255" stroke="rgba(255,210,122,.55)" stroke-width="3" fill="none" marker-end="url(#arrow2)" />
+
+          <!-- settlement to ledger -->
+          <path d="M 960 310 C 960 360, 740 360, 640 400" stroke="rgba(255,210,122,.50)" stroke-width="3" fill="none" marker-end="url(#arrow2)" />
+
+          <!-- ledger feedback to agents -->
+          <path d="M 480 380 C 520 330, 600 330, 650 310" stroke="rgba(88,255,210,.45)" stroke-width="3" fill="none" marker-end="url(#arrow)" />
+
+          <!-- humans to interface -->
+          <path d="M 280 430 C 420 430, 560 430, 700 430" stroke="rgba(154,168,255,.45)" stroke-width="3" fill="none" marker-end="url(#arrow)" />
+
+          <!-- interface to agents -->
+          <path d="M 880 380 C 860 340, 760 330, 700 310" stroke="rgba(88,255,210,.40)" stroke-width="3" fill="none" marker-end="url(#arrow)" />
+
+          <!-- Glow accents -->
+          <circle cx="170" cy="125" r="4" fill="url(#gAmber)" filter="url(#glow)"/>
+          <circle cx="430" cy="125" r="4" fill="url(#gJade)" filter="url(#glow)"/>
+          <circle cx="700" cy="255" r="4" fill="url(#gJade)" filter="url(#glow)"/>
+          <circle cx="960" cy="255" r="4" fill="url(#gAmber)" filter="url(#glow)"/>
+          <circle cx="500" cy="430" r="4" fill="rgba(233,255,247,.85)" filter="url(#glow)"/>
+          <circle cx="860" cy="430" r="4" fill="url(#gJade)" filter="url(#glow)"/>
+
+          <!-- Caption -->
+          <text x="60" y="508" fill="rgba(233,255,247,.55)" font-family="ui-monospace, Menlo, monospace" font-size="12">
+            The loop is sovereignty: energy → compute → agents → settlement → memory → feedback.
+          </text>
+        </svg>
+
+        <div class="legend" aria-label="Legend">
+          <span class="sw"><i style="background: rgba(255,210,122,.85)"></i> Energy / Settlement</span>
+          <span class="sw"><i style="background: rgba(88,255,210,.85)"></i> Compute / Agents / Feedback</span>
+          <span class="sw"><i style="background: rgba(154,168,255,.80)"></i> Human meaning layer</span>
+          <span class="sw"><i style="background: rgba(233,255,247,.70)"></i> Ledger memory</span>
+        </div>
+
+        <div class="hr"></div>
+
+        <div style="margin-top:14px; color: rgba(233,255,247,.70); line-height:1.65; font-size:14px;">
+          <b style="color: var(--jade);">Interpretation:</b>
+          AI agents are <i>energy directed through structure</i>. Crypto is <i>energy enforcing rules</i>.
+          Humans remain essential as <i>meaning-makers</i> — defining values, aesthetics, and constraints — while the loop executes.
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:16px;">
+      <div class="inner">
+        <h2>V. Vows of the Network State</h2>
+        <p>
+          A network state is not declared. It is <b>maintained</b> — by running the loop and defending its integrity.
+        </p>
+        <ul class="list">
+          <li><b>Sovereignty of keys:</b> custody stays local; intent travels, keys do not.</li>
+          <li><b>Sovereignty of compute:</b> agents remain portable; hardware is replaceable; policy is explicit.</li>
+          <li><b>Sovereignty of memory:</b> settlement is public, auditable, irreversible when required.</li>
+          <li><b>Sovereignty of meaning:</b> culture is not “marketing” — it is governance through narrative.</li>
+          <li><b>Sovereignty of energy:</b> the loop follows cheap, stable power; latency is strategy.</li>
+        </ul>
+        <div class="quote">
+          “Legitimacy is optional. Integrity is not.”
+          <div class="who">— Codex vow</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="glyph">⟡  X O L O  •  T O N A L L I  •  C O D E X  ⟡</div>
+      <div style="margin-top:10px;">
+        Copy/paste friendly single-file HTML. Replace links, add your logo, and ship it as a landing page.
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
