@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Técnico: Teyolia Flipstarter v2.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Slate 50 */
+            color: #1e293b; /* Slate 800 */
+        }
+
+        /* Chart Container Styling per requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Custom UI Elements */
+        .glass-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        .nav-btn.active {
+            background-color: #0d9488; /* Teal 600 */
+            color: white;
+        }
+
+        .step-connector {
+            flex-grow: 1;
+            height: 2px;
+            background-color: #cbd5e1;
+        }
+        
+        .step-connector.active {
+            background-color: #0d9488;
+        }
+
+        /* Hide scrollbar for clean UI in horizontal scroll areas if any */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <!-- Chosen Palette: Slate & Teal (Professional, Clean, Trust-inducing for Financial Tech) -->
+    <!-- Application Structure Plan: 
+        1. Hero Section: High-level verdict and core value proposition.
+        2. Interactive Architecture Explorer: A diagrammatic view of the Monorepo structure allowing users to click Frontend/Backend/Contracts to see specific tech details.
+        3. Core Strengths Grid: Breakdown of the 4 key pillars identified in the report (Security, UX, Integration, Covenants).
+        4. Covenant Logic Simulator: An interactive state machine that lets users 'pledge' funds to understand the UTXO INIT -> ACCUMULATION -> SUCCESS flow mentioned in the report.
+        5. Tech Stack Distribution: A chart visualizing the balance of technologies used.
+    -->
+    <!-- Visualization & Content Choices:
+        - Architecture Explorer (HTML/CSS/JS): Goal: Inform. Method: Interactive clickable diagram. Justification: Shows the relationship between components better than text.
+        - Covenant Simulator (JS State Machine): Goal: Change/Explain. Method: Interactive progress bar and status text. Justification: "Smart Contracts" are abstract; simulating one makes the logic concrete.
+        - Tech Stack Chart (Chart.js): Goal: Compare. Method: Doughnut Chart. Justification: Visualizes the composition of the stack (React vs Express vs Contracts).
+        - Strengths Cards (HTML Grid): Goal: Inform. Method: Icon-based cards. Justification: Quick scanning of key report findings.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col">
+
+    <!-- Navigation / Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl font-bold text-teal-600">xolosArmy</span>
+                <span class="text-lg text-slate-500 font-light">| Reporte Técnico Teyolia v2.0</span>
+            </div>
+            <nav class="hidden md:flex space-x-4">
+                <button onclick="scrollToSection('verdict')" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Veredicto</button>
+                <button onclick="scrollToSection('architecture')" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Arquitectura</button>
+                <button onclick="scrollToSection('simulation')" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Simulador de Pactos</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- Section 1: Introduction & Verdict -->
+        <section id="verdict" class="space-y-6">
+            <div class="glass-card p-8 bg-gradient-to-br from-teal-50 to-white border-teal-100">
+                <h1 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Análisis: Sistema de Crowdfunding No-Custodial</h1>
+                <p class="text-lg text-slate-700 leading-relaxed max-w-3xl">
+                    La investigación del proyecto <strong>Teyolia Flipstarter v2.0</strong> revela una implementación sólida y moderna sobre <strong>eCash (XEC)</strong>. 
+                    El sistema destaca por su enfoque absoluto en la seguridad <span class="text-teal-600 font-bold">non-custodial</span> y una experiencia de usuario (UX) pulida que abstrae la complejidad de la blockchain.
+                </p>
+                <div class="mt-6 flex flex-wrap gap-4">
+                    <span class="px-4 py-2 bg-teal-100 text-teal-800 rounded-full text-sm font-semibold">✅ Arquitectura Monorepo</span>
+                    <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">🛡️ 100% Sin Custodia</span>
+                    <span class="px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-semibold">⚡ Vite + React</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Interactive Architecture Explorer -->
+        <section id="architecture">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-900">1. Arquitectura y Stack Tecnológico</h2>
+                <p class="text-slate-600 mt-2">
+                    El proyecto utiliza una estructura de <strong>monorepo</strong> inteligente. Explora los tres componentes principales haciendo clic en las tarjetas a continuación para ver los detalles técnicos encontrados en la auditoría.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 relative">
+                <!-- Visual connector line for Desktop -->
+                <div class="hidden lg:block absolute top-1/2 left-0 w-full h-1 bg-slate-200 -z-10 transform -translate-y-1/2"></div>
+
+                <!-- Frontend Node -->
+                <div onclick="showArchDetail('frontend')" class="glass-card p-6 cursor-pointer hover:border-teal-400 relative group bg-white">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase border border-slate-200">Capa de Usuario</div>
+                    <div class="text-center mt-4">
+                        <div class="text-4xl mb-3">🖥️</div>
+                        <h3 class="text-xl font-bold text-slate-800">Frontend</h3>
+                        <p class="text-sm text-slate-500 mt-2">React + Vite + TypeScript</p>
+                    </div>
+                </div>
+
+                <!-- Backend Node -->
+                <div onclick="showArchDetail('backend')" class="glass-card p-6 cursor-pointer hover:border-teal-400 relative group bg-white">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase border border-slate-200">Orquestador</div>
+                    <div class="text-center mt-4">
+                        <div class="text-4xl mb-3">⚙️</div>
+                        <h3 class="text-xl font-bold text-slate-800">Backend</h3>
+                        <p class="text-sm text-slate-500 mt-2">Express + TypeScript</p>
+                    </div>
+                </div>
+
+                <!-- Contracts Node -->
+                <div onclick="showArchDetail('contracts')" class="glass-card p-6 cursor-pointer hover:border-teal-400 relative group bg-white">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase border border-slate-200">On-Chain</div>
+                    <div class="text-center mt-4">
+                        <div class="text-4xl mb-3">📜</div>
+                        <h3 class="text-xl font-bold text-slate-800">Contratos</h3>
+                        <p class="text-sm text-slate-500 mt-2">Covenants (Pactos de Gasto)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detail View Area -->
+            <div id="arch-detail-panel" class="mt-6 glass-card p-6 bg-slate-50 border-l-4 border-teal-500 hidden transition-all duration-300">
+                <h4 id="arch-title" class="text-lg font-bold text-slate-900">Selecciona un componente</h4>
+                <p id="arch-desc" class="text-slate-700 mt-2">Haz clic en los bloques de arriba para ver el análisis detallado.</p>
+                <div class="mt-4 pt-4 border-t border-slate-200">
+                    <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Hallazgo Clave:</span>
+                    <p id="arch-insight" class="text-sm font-medium text-teal-700 mt-1">...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Data Visualization (Strong Points & Stack) -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Left: Feature Breakdown -->
+            <div class="space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">2. Puntos Fuertes Identificados</h2>
+                    <p class="text-slate-600 mt-2">
+                        El análisis destaca cuatro áreas donde el proyecto sobresale técnicamente.
+                    </p>
+                </div>
+                
+                <div class="space-y-4">
+                    <!-- Feature 1 -->
+                    <div class="glass-card p-4 flex items-start space-x-4">
+                        <div class="bg-green-100 p-3 rounded-lg text-green-600 text-xl">🛡️</div>
+                        <div>
+                            <h3 class="font-bold text-slate-800">Seguridad Non-Custodial</h3>
+                            <p class="text-sm text-slate-600 mt-1">El backend nunca toca las llaves privadas. Solo construye el hexágono de la transacción; el usuario firma localmente.</p>
+                        </div>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div class="glass-card p-4 flex items-start space-x-4">
+                        <div class="bg-blue-100 p-3 rounded-lg text-blue-600 text-xl">🪄</div>
+                        <div>
+                            <h3 class="font-bold text-slate-800">UX del Mago (Wizard)</h3>
+                            <p class="text-sm text-slate-600 mt-1">Componente <code>CreateCampaignWizard.tsx</code> que simplifica el despliegue: Borrador → Activación → Publicación.</p>
+                        </div>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div class="glass-card p-4 flex items-start space-x-4">
+                        <div class="bg-purple-100 p-3 rounded-lg text-purple-600 text-xl">🔗</div>
+                        <div>
+                            <h3 class="font-bold text-slate-800">Integración Tonalli</h3>
+                            <p class="text-sm text-slate-600 mt-1">Flujo fluido mediante deep-links y WalletConnect para una experiencia Web3 robusta en móviles.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Chart Visualization -->
+            <div>
+                 <div class="mb-4">
+                    <h2 class="text-2xl font-bold text-slate-900">Distribución de Impacto</h2>
+                    <p class="text-slate-600 mt-2">
+                        Peso relativo de cada componente en la seguridad y funcionalidad del sistema.
+                    </p>
+                </div>
+                <div class="glass-card p-6 flex flex-col items-center justify-center">
+                    <div class="chart-container">
+                        <canvas id="techStackChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-slate-500 mt-4 max-w-sm">
+                        *Estimación basada en la responsabilidad crítica del código. Los contratos definen las reglas, el backend orquesta, y el frontend asegura la usabilidad.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Interactive Covenant Simulator -->
+        <section id="simulation" class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
+            <div class="max-w-3xl mx-auto text-center mb-8">
+                <h2 class="text-2xl font-bold text-slate-900">3. Lógica de Covenants (Simulador)</h2>
+                <p class="text-slate-600 mt-2">
+                    El sistema utiliza una máquina de estados de UTXO robusta. Interactúa con este simulador para entender cómo las donaciones (pledges) se comportan on-chain.
+                </p>
+            </div>
+
+            <!-- Simulation Dashboard -->
+            <div class="max-w-4xl mx-auto bg-slate-50 rounded-xl border border-slate-200 p-6">
+                <!-- Status Indicators -->
+                <div class="flex justify-between items-center mb-8">
+                    <div class="text-center">
+                        <div id="sim-state-badge" class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-200 text-slate-600 mb-2">Estado Actual</div>
+                        <div id="sim-state-text" class="text-2xl font-black text-slate-800">INIT</div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm text-slate-500">Meta</p>
+                        <p class="text-xl font-bold text-slate-900">1000 XEC</p>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="relative pt-1 mb-2">
+                    <div class="flex mb-2 items-center justify-between">
+                        <div>
+                            <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-teal-600 bg-teal-200">
+                                Recaudado
+                            </span>
+                        </div>
+                        <div class="text-right">
+                            <span id="sim-amount-text" class="text-xs font-semibold inline-block text-teal-600">
+                                0 / 1000 XEC
+                            </span>
+                        </div>
+                    </div>
+                    <div class="overflow-hidden h-4 mb-4 text-xs flex rounded bg-slate-200">
+                        <div id="sim-progress-bar" style="width:0%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-teal-500 transition-all duration-500"></div>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                    <button onclick="addPledge()" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2">
+                        <span>💰</span> Donar 250 XEC
+                    </button>
+                    <button onclick="expireCampaign()" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2">
+                        <span>⌛</span> Expirar Tiempo
+                    </button>
+                    <button onclick="resetSim()" class="w-full bg-slate-600 hover:bg-slate-700 text-white font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2">
+                        <span>🔄</span> Reiniciar
+                    </button>
+                </div>
+
+                <!-- Log / Context -->
+                <div class="mt-6 p-4 bg-white rounded-lg border border-slate-200 min-h-[100px]">
+                    <h4 class="text-sm font-bold text-slate-700 mb-2">Registro de la Blockchain (Simulado):</h4>
+                    <p id="sim-log" class="text-sm text-slate-600 font-mono">Esperando despliegue del contrato...</p>
+                </div>
+            </div>
+
+            <!-- Explanation of States -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                <div class="text-center p-4">
+                    <div class="font-bold text-slate-800 mb-2">1. INIT / ACCUMULATION</div>
+                    <p class="text-sm text-slate-500">El contrato acepta fondos. El dinero está bloqueado; nadie puede retirarlo a menos que se cumpla la meta o el tiempo.</p>
+                </div>
+                <div class="text-center p-4">
+                    <div class="font-bold text-green-700 mb-2">2. SUCCESS</div>
+                    <p class="text-sm text-slate-500">Meta alcanzada (Total >= Meta). El contrato permite que el creador de la campaña retire los fondos para ejecutar el proyecto.</p>
+                </div>
+                <div class="text-center p-4">
+                    <div class="font-bold text-red-700 mb-2">3. EXPIRED</div>
+                    <p class="text-sm text-slate-500">Tiempo agotado sin meta. El contrato cambia de estado para permitir que cada donante reclame (reembolse) sus fondos.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="mb-2">Análisis basado en el repositorio <a href="#" class="text-teal-400 hover:underline">xolosArmy/ecash-flipstarter</a>.</p>
+            <p class="text-sm opacity-60">Generado para visualización técnica.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Implementation -->
+    <script>
+        // --- State Management ---
+        const appState = {
+            covenant: {
+                goal: 1000,
+                current: 0,
+                state: 'INIT', // INIT, ACCUMULATION, SUCCESS, EXPIRED
+            }
+        };
+
+        // --- Data for Content ---
+        const archDetails = {
+            frontend: {
+                title: "Frontend (React + Vite)",
+                desc: "Construido para velocidad y agilidad. Utiliza TypeScript para seguridad de tipos. Su función principal es presentar la interfaz del 'Wizard' y conectar con Tonalli para firmas.",
+                insight: "Es ligero y desacoplado de la lógica crítica de seguridad."
+            },
+            backend: {
+                title: "Backend (Express API)",
+                desc: "Actúa como un constructor de transacciones inteligente. Prepara los datos crudos (inputs/outputs) pero NUNCA tiene acceso a las llaves privadas.",
+                insight: "Fundamental para la seguridad Non-Custodial. Solo orquesta, no firma."
+            },
+            contracts: {
+                title: "Smart Contracts (Covenants)",
+                desc: "Implementan la lógica dura del dinero. Definen las reglas de 'Pactos' (Pledges) asegurando que los fondos solo se muevan si se cumplen las condiciones matemáticas.",
+                insight: "La máquina de estados UTXO evita que los fondos queden atrapados injustamente."
+            }
+        };
+
+        // --- Architecture Explorer Logic ---
+        function showArchDetail(component) {
+            const panel = document.getElementById('arch-detail-panel');
+            const title = document.getElementById('arch-title');
+            const desc = document.getElementById('arch-desc');
+            const insight = document.getElementById('arch-insight');
+
+            // Update content
+            title.textContent = archDetails[component].title;
+            desc.textContent = archDetails[component].desc;
+            insight.textContent = archDetails[component].insight;
+
+            // Show panel with animation
+            panel.classList.remove('hidden');
+            // Small delay to allow display:block to apply before opacity transition
+            setTimeout(() => {
+                panel.classList.remove('opacity-0');
+            }, 10);
+
+            // Scroll to detail on mobile
+            if (window.innerWidth < 768) {
+                panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        // --- Covenant Simulator Logic ---
+        const simElements = {
+            stateText: document.getElementById('sim-state-text'),
+            stateBadge: document.getElementById('sim-state-badge'),
+            amountText: document.getElementById('sim-amount-text'),
+            progressBar: document.getElementById('sim-progress-bar'),
+            log: document.getElementById('sim-log')
+        };
+
+        function updateSimUI() {
+            const { current, goal, state } = appState.covenant;
+            const percentage = Math.min((current / goal) * 100, 100);
+
+            // Update Text & Bar
+            simElements.amountText.textContent = `${current} / ${goal} XEC`;
+            simElements.progressBar.style.width = `${percentage}%`;
+            simElements.stateText.textContent = state;
+
+            // Update Colors based on State
+            if (state === 'SUCCESS') {
+                simElements.progressBar.classList.remove('bg-teal-500', 'bg-red-500');
+                simElements.progressBar.classList.add('bg-green-500');
+                simElements.stateText.className = "text-2xl font-black text-green-600";
+                simElements.stateBadge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-green-100 text-green-800 mb-2";
+            } else if (state === 'EXPIRED') {
+                simElements.progressBar.classList.remove('bg-teal-500', 'bg-green-500');
+                simElements.progressBar.classList.add('bg-red-500');
+                simElements.stateText.className = "text-2xl font-black text-red-600";
+                simElements.stateBadge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-red-100 text-red-800 mb-2";
+            } else {
+                simElements.progressBar.classList.remove('bg-green-500', 'bg-red-500');
+                simElements.progressBar.classList.add('bg-teal-500');
+                simElements.stateText.className = "text-2xl font-black text-slate-800";
+                simElements.stateBadge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-200 text-slate-600 mb-2";
+            }
+        }
+
+        function addLog(msg) {
+            simElements.log.textContent = `> ${msg}`;
+        }
+
+        function addPledge() {
+            if (appState.covenant.state === 'SUCCESS' || appState.covenant.state === 'EXPIRED') return;
+
+            appState.covenant.current += 250;
+            
+            if (appState.covenant.current >= appState.covenant.goal) {
+                appState.covenant.state = 'SUCCESS';
+                addLog("¡Meta alcanzada! El contrato libera los fondos al creador.");
+            } else {
+                appState.covenant.state = 'ACCUMULATION';
+                addLog(`Nuevo aporte recibido (+250). Total en contrato: ${appState.covenant.current}`);
+            }
+            updateSimUI();
+        }
+
+        function expireCampaign() {
+            if (appState.covenant.state === 'SUCCESS') {
+                addLog("Error: No se puede expirar una campaña exitosa.");
+                return;
+            }
+            appState.covenant.state = 'EXPIRED';
+            addLog("Tiempo límite alcanzado. El contrato activa modo Reembolso.");
+            updateSimUI();
+        }
+
+        function resetSim() {
+            appState.covenant.current = 0;
+            appState.covenant.state = 'INIT';
+            // Reset colors
+            simElements.progressBar.classList.remove('bg-green-500', 'bg-red-500');
+            simElements.progressBar.classList.add('bg-teal-500');
+            addLog("Contrato reiniciado. Esperando aportes...");
+            updateSimUI();
+        }
+
+        // --- Chart.js Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('techStackChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Seguridad (Backend/Contracts)', 'Experiencia Usuario (Frontend)', 'Integración Wallet'],
+                    datasets: [{
+                        data: [50, 30, 20],
+                        backgroundColor: [
+                            '#0f766e', // Teal 700 (Security - heavy weight)
+                            '#2dd4bf', // Teal 400 (UX)
+                            '#94a3b8'  // Slate 400 (Integration)
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    family: "'Inter', sans-serif",
+                                    size: 12
+                                },
+                                usePointStyle: true,
+                                padding: 20
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Peso Funcional de Componentes',
+                            font: {
+                                size: 16,
+                                family: "'Inter', sans-serif",
+                                weight: '600'
+                            },
+                            padding: {
+                                bottom: 20
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ' ' + context.label + ': ' + context.raw + '% relevancia';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Initialize Architecture detail with Frontend default
+            // showArchDetail('frontend'); 
+        });
+
+        // --- Utility ---
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if(el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+    </script>
+</body>
+</html>
