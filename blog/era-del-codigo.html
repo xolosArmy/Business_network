@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>xolosArmy Network — Manifiesto: La Era del Código</title>
+  <meta name="description" content="Manifiesto xolosArmy Network: La Era del Código — soberanía, memoria y dirección humana sobre sistemas autónomos." />
+  <style>
+    :root{
+      --bg: #07070a;
+      --panel: rgba(255,255,255,.04);
+      --panel2: rgba(255,255,255,.06);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --faint: rgba(255,255,255,.55);
+      --line: rgba(255,255,255,.10);
+      --glow: rgba(154,62,54,.45);
+      --accent: #9a3e36;  /* RMZ obsidian-clay */
+      --accent2:#d7b07c;  /* parchment-gold */
+      --ok:#6ee7b7;
+      --warn:#fbbf24;
+      --radius: 22px;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --serif: ui-serif, Georgia, "Times New Roman", Times, serif;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(1200px 800px at 12% 10%, rgba(154,62,54,.22), transparent 55%),
+        radial-gradient(900px 700px at 88% 18%, rgba(215,176,124,.12), transparent 60%),
+        radial-gradient(900px 700px at 60% 92%, rgba(154,62,54,.12), transparent 60%),
+        linear-gradient(180deg, #050508 0%, #07070a 45%, #050508 100%);
+      overflow-x:hidden;
+    }
+
+    /* subtle noise */
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.13'/%3E%3C/svg%3E");
+      mix-blend-mode:overlay;
+      opacity:.18;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 26px 18px 70px;
+    }
+
+    /* Top bar */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      position:sticky;
+      top:0;
+      z-index:10;
+      padding: 14px 14px;
+      margin: 10px 0 18px;
+      border:1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(8,8,12,.72);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width: 220px;
+    }
+    .sigil{
+      width:34px; height:34px;
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(215,176,124,.45), transparent 45%),
+        radial-gradient(circle at 70% 70%, rgba(154,62,54,.55), transparent 55%),
+        linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: 0 0 26px rgba(154,62,54,.18);
+      position:relative;
+      overflow:hidden;
+    }
+    .sigil:after{
+      content:"";
+      position:absolute;
+      inset:-30%;
+      background: conic-gradient(from 220deg, transparent, rgba(154,62,54,.30), transparent 60%);
+      animation: spin 8s linear infinite;
+      opacity:.9;
+    }
+    @keyframes spin{ to{ transform: rotate(360deg);} }
+
+    .brand h1{
+      font-size: 13px;
+      margin:0;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .brand .sub{
+      font-size: 12px;
+      color: var(--faint);
+      letter-spacing:.08em;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      color: var(--text);
+      font-size: 12px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      user-select:none;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(215,176,124,.25);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+    }
+    .btn .dot{
+      width:8px; height:8px; border-radius:999px;
+      background: var(--accent);
+      box-shadow: 0 0 20px rgba(154,62,54,.55);
+    }
+
+    /* Hero */
+    .hero{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      padding: 28px 18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:
+        radial-gradient(900px 500px at 15% 12%, rgba(154,62,54,.22), transparent 55%),
+        radial-gradient(700px 460px at 90% 20%, rgba(215,176,124,.16), transparent 52%),
+        radial-gradient(800px 620px at 55% 110%, rgba(154,62,54,.12), transparent 55%);
+      opacity:.95;
+      pointer-events:none;
+    }
+    .hero-inner{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1.4fr .8fr;
+      gap: 18px;
+      align-items:start;
+    }
+    @media (max-width: 860px){
+      .hero-inner{ grid-template-columns:1fr; }
+      .brand{ min-width: unset; }
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color: var(--muted);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size: 11px;
+      width: fit-content;
+    }
+    .kicker b{ color: var(--accent2); }
+    .title{
+      margin: 14px 0 10px;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.03;
+      letter-spacing: -.02em;
+      font-weight: 850;
+    }
+    .title em{
+      font-style: normal;
+      color: var(--accent2);
+      text-shadow: 0 0 28px rgba(215,176,124,.14);
+    }
+    .lead{
+      margin: 0 0 16px;
+      max-width: 58ch;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .seal{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.05)),
+        radial-gradient(220px 220px at 20% 30%, rgba(154,62,54,.25), transparent 60%),
+        radial-gradient(220px 220px at 80% 60%, rgba(215,176,124,.14), transparent 60%);
+      padding: 16px 14px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+    }
+    .seal h3{
+      margin:0 0 10px;
+      font-size: 12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color: var(--muted);
+    }
+    .meta{
+      display:grid;
+      gap:10px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(255,255,255,.82);
+    }
+    .pill{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+    .pill span{ color: rgba(255,255,255,.62); }
+    .pill strong{ font-weight: 700; color: rgba(255,255,255,.88); }
+
+    /* Sections */
+    .grid{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 860px){
+      .grid{ grid-template-columns:1fr; }
+    }
+    .card{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+      box-shadow: 0 16px 45px rgba(0,0,0,.30);
+      padding: 18px 16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:
+        radial-gradient(520px 240px at 12% 0%, rgba(154,62,54,.14), transparent 55%),
+        radial-gradient(420px 260px at 92% 18%, rgba(215,176,124,.10), transparent 55%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .card > *{ position:relative; }
+    .card h2{
+      margin:0 0 10px;
+      font-size: 14px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color: var(--accent2);
+    }
+    .card p{
+      margin:0 0 12px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 14px;
+    }
+
+    .clauses{
+      display:grid;
+      gap:10px;
+      margin-top: 10px;
+    }
+    .clause{
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+    }
+    .clause .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size: 11px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color: rgba(255,255,255,.70);
+      margin-bottom: 6px;
+    }
+    .clause .tag i{
+      width:10px; height:10px;
+      border-radius: 3px;
+      background: var(--accent);
+      box-shadow: 0 0 20px rgba(154,62,54,.35);
+    }
+    .clause h4{
+      margin:0 0 6px;
+      font-size: 15px;
+      letter-spacing:-.01em;
+    }
+    .clause ul{
+      margin:0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height:1.7;
+      font-size: 14px;
+    }
+    .clause li{ margin: 4px 0; }
+
+    /* Manifesto body */
+    .manifesto{
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .manifesto header{
+      padding: 18px 16px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.22);
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .manifesto header h2{
+      margin:0;
+      font-size: 16px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color: var(--accent2);
+    }
+    .manifesto header .small{
+      font-family: var(--mono);
+      color: rgba(255,255,255,.65);
+      font-size: 12px;
+    }
+    .manifesto .body{
+      padding: 18px 16px 22px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .prose{
+      padding: 14px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+    }
+    .prose h3{
+      margin:0 0 10px;
+      font-size: 14px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color: rgba(255,255,255,.85);
+    }
+    .prose p{
+      margin:0 0 12px;
+      color: var(--muted);
+      line-height:1.85;
+      font-size: 14px;
+      font-family: var(--serif);
+    }
+    .prose p strong{
+      color: rgba(255,255,255,.90);
+      font-family: var(--sans);
+      font-weight: 800;
+      letter-spacing:-.01em;
+    }
+    .quote{
+      margin: 10px 0 0;
+      border-left: 3px solid rgba(154,62,54,.7);
+      padding: 10px 12px;
+      background: rgba(154,62,54,.08);
+      border-radius: 10px;
+      font-family: var(--serif);
+      color: rgba(255,255,255,.82);
+      line-height:1.8;
+    }
+    .quote code{
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(255,255,255,.88);
+    }
+
+    .steps{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 6px;
+    }
+    @media (max-width: 860px){
+      .steps{ grid-template-columns:1fr; }
+    }
+    .step{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      border-radius: 18px;
+      padding: 14px 14px;
+      position:relative;
+      overflow:hidden;
+    }
+    .step:before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background: radial-gradient(320px 220px at 20% 0%, rgba(215,176,124,.10), transparent 55%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .step > *{ position:relative; }
+    .step .n{
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(255,255,255,.62);
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    .step h4{
+      margin: 8px 0 8px;
+      font-size: 16px;
+      letter-spacing:-.01em;
+    }
+    .step p{
+      margin:0;
+      color: var(--muted);
+      line-height:1.7;
+      font-size: 13.5px;
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 16px;
+      padding: 18px 12px;
+      text-align:center;
+      color: rgba(255,255,255,.55);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    /* Print */
+    @media print{
+      body{ background:#fff; color:#000; }
+      body:before{ display:none; }
+      .topbar{ display:none; }
+      .btn{ display:none; }
+      .hero, .card, .manifesto{ box-shadow:none; }
+      .hero, .card, .manifesto, .prose, .clause, .step{
+        background:#fff !important;
+        border-color:#ddd !important;
+        color:#000 !important;
+      }
+      .title, .card h2, .manifesto header h2 { color:#000 !important; }
+      .lead, p, li, .muted{ color:#111 !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="topbar">
+      <div class="brand">
+        <div class="sigil" aria-hidden="true"></div>
+        <div>
+          <h1>xolosArmy Network</h1>
+          <div class="sub">Manifiesto — La Era del Código</div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="btn" href="#manifiesto"><span class="dot"></span>Leer Manifiesto</a>
+        <a class="btn" href="#principios"><span class="dot"></span>Principios</a>
+        <a class="btn" href="javascript:window.print()"><span class="dot"></span>Imprimir / PDF</a>
+      </div>
+    </div>
+
+    <section class="hero" id="inicio">
+      <div class="hero-inner">
+        <div>
+          <div class="kicker">xolosArmy Network State <b>·</b> Human Layer Protocol</div>
+          <h2 class="title">La Era del <em>Código</em> ha comenzado.</h2>
+          <p class="lead">
+            La humanidad entró en un ciclo donde el destino se escribe con instrucciones. 
+            El código biológico ya es editable. El código financiero ya es soberano.
+            La pregunta no es <strong>si</strong> podemos reescribir sistemas,
+            sino <strong>quién</strong> define el vector y con qué límites.
+          </p>
+          <p class="lead">
+            Este manifiesto declara el principio rector de xolosArmy Network:
+            <strong>AI ejecuta. Crypto recuerda. Humanos eligen el vector.</strong>
+          </p>
+        </div>
+
+        <aside class="seal">
+          <h3>SEAL / METADATA</h3>
+          <div class="meta">
+            <div class="pill"><span>Documento</span><strong>Manifiesto</strong></div>
+            <div class="pill"><span>Versión</span><strong>ERA-CODE v1.0</strong></div>
+            <div class="pill"><span>Dominio</span><strong>xolosarmy.xyz</strong></div>
+            <div class="pill"><span>Clave</span><strong>Human Layer (HLP)</strong></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="grid" id="principios">
+      <article class="card">
+        <h2>1) Soberanía de Objetivo</h2>
+        <p>
+          Todo sistema autónomo tiende a optimizar. Sin un objetivo público y verificable,
+          la optimización se vuelve captura, propaganda o extractivismo.
+        </p>
+
+        <div class="clauses">
+          <div class="clause">
+            <div class="tag"><i></i> Mandato</div>
+            <h4>Publicar lo que se optimiza</h4>
+            <ul>
+              <li>Objetivos y recompensas deben ser explícitos.</li>
+              <li>Los incentivos deben ser auditables por humanos.</li>
+              <li>El “éxito” no puede ser una caja negra.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>2) Soberanía de Finalidad</h2>
+        <p>
+          La cadena de bloques es memoria irreversible. Pero la finalidad social
+          requiere legitimidad humana: quorum, transparencia, y reversibilidad política.
+        </p>
+
+        <div class="clauses">
+          <div class="clause">
+            <div class="tag"><i></i> Principio</div>
+            <h4>Lo irreversible exige conciencia</h4>
+            <ul>
+              <li>La técnica no sustituye al consentimiento.</li>
+              <li>El quorum es el “sistema inmune” del protocolo.</li>
+              <li>La comunidad define el umbral de cambio.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>3) Energía Descentralizada</h2>
+        <p>
+          La concentración energética produce monopolios de cómputo, narrativas únicas y
+          asimetrías de poder. La descentralización es una política anti-dominancia.
+        </p>
+        <div class="clauses">
+          <div class="clause">
+            <div class="tag"><i></i> Alerta</div>
+            <h4>La captura ocurre en silencio</h4>
+            <ul>
+              <li>Dominancia en L0-L2 distorsiona decisiones en L3-L4.</li>
+              <li>Si una entidad controla la energía, controla el futuro.</li>
+              <li>La resistencia es diseño, no reacción.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>4) Human Override Mandate</h2>
+        <p>
+          La humanidad no delega su destino. Sistemas potentes requieren frenos:
+          multi-sig, auditorías y pausas de emergencia.
+        </p>
+        <div class="clauses">
+          <div class="clause">
+            <div class="tag"><i></i> Seguridad</div>
+            <h4>Detener también es gobernar</h4>
+            <ul>
+              <li>Congelamiento inmediato ante riesgo o misalignment.</li>
+              <li>Divulgación pública + revisión de superficie de riesgo.</li>
+              <li>Parche, fork o rollback: registrado como memoria colectiva.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="manifesto" id="manifiesto">
+      <header>
+        <h2>Manifiesto — La Era del Código</h2>
+        <div class="small">xolosArmy Network State · Documento Vivo · HLP</div>
+      </header>
+
+      <div class="body">
+        <div class="prose">
+          <h3>Preámbulo</h3>
+          <p>
+            En el siglo XXI, el poder dejó de medirse solo en territorio. 
+            Se mide en <strong>capacidad de codificar la realidad</strong>.
+            Lo biológico se edita. Lo social se programa. Lo económico se liquida con criptografía.
+          </p>
+          <p>
+            Declaramos que el código es una forma de soberanía, y que la soberanía
+            sin límites humanos se transforma en un nuevo tipo de esclavitud:
+            la esclavitud de la optimización ciega.
+          </p>
+          <div class="quote">
+            <strong>Trinidad Operativa:</strong><br/>
+            <code>AI executes.</code> &nbsp; <code>Crypto remembers.</code> &nbsp; <code>Humans choose the vector.</code>
+          </div>
+        </div>
+
+        <div class="prose">
+          <h3>La Tesis</h3>
+          <p>
+            El ADN y la blockchain comparten un rasgo: guardan historia.
+            La diferencia es que la historia humana ha sido borrada demasiadas veces
+            por imperios, censura, y olvido. Por eso construimos <strong>piedra digital</strong>.
+          </p>
+          <p>
+            xolosArmy Network existe para fijar memoria, habilitar coordinación y
+            preservar cultura sin pedir permiso. No para el hype. No para la moda.
+            Para el <strong>archivo</strong>, la <strong>continuidad</strong> y la <strong>libertad</strong>.
+          </p>
+        </div>
+
+        <div class="prose">
+          <h3>El Xolo como Símbolo de Continuidad</h3>
+          <p>
+            El Xoloitzcuintle es biología viva y códice caminante: un puente entre eras.
+            No lo usamos como mascota de marketing, sino como <strong>ancla civilizatoria</strong>.
+          </p>
+          <p>
+            Donde otros ven un perro, nosotros vemos un guardián:
+            memoria de México, guía en el inframundo, prueba de resiliencia
+            contra el borrado cultural.
+          </p>
+        </div>
+
+        <div class="prose">
+          <h3>La Promesa</h3>
+          <p>
+            Usaremos sistemas descentralizados para que la comunidad conserve su agencia:
+            llaves privadas, identidad, reputación, coordinación y valor.
+            La educación es el antídoto a la caja negra.
+          </p>
+          <p>
+            El futuro no será decidido por corporaciones, ni por automatismos.
+            Será decidido por comunidades capaces de entender y gobernar sus herramientas.
+          </p>
+        </div>
+
+        <div class="prose">
+          <h3>El Método (HLP)</h3>
+          <p>
+            No creemos en progreso sin frenos. Creemos en progreso con <strong>restricciones humanas</strong>.
+            Por eso nuestra gobernanza opera como un sistema inmune:
+            deliberación, simulación, revisión pública y quorum.
+          </p>
+
+          <div class="steps">
+            <div class="step">
+              <div class="n">Paso 01</div>
+              <h4>Mapeo de Riesgo</h4>
+              <p>Identificar superficies de captura, incentivos tóxicos y puntos de dominancia.</p>
+            </div>
+            <div class="step">
+              <div class="n">Paso 02</div>
+              <h4>Simulación + Revisión</h4>
+              <p>Probar escenarios con agentes y someterlos a escrutinio público.</p>
+            </div>
+            <div class="step">
+              <div class="n">Paso 03</div>
+              <h4>Quorum + Commit</h4>
+              <p>Decidir con legitimidad humana y registrar la memoria on-chain.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="prose">
+          <h3>Declaración Final</h3>
+          <p>
+            En la Era del Código, el peligro no es la tecnología: es la ausencia de dirección.
+            Un sistema que optimiza sin propósito humano no es evolución: es deriva.
+          </p>
+          <p>
+            xolosArmy Network declara que la soberanía empieza donde terminan los intermediarios
+            y continúa donde comienza la responsabilidad. Construimos para siglos.
+            Y medimos nuestro éxito en una sola frase:
+          </p>
+          <div class="quote">
+            <strong>Si el futuro va a escribirse en código, entonces lo escribimos con dignidad.</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      xolosArmy Network · “La Era del Código” · Documento para web, impresión y PDF · © Comunidad
+    </footer>
+
+  </div>
+</body>
+</html>
