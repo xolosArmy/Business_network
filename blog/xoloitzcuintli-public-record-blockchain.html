@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Opinion | Public Lineage Records on eCash: From Paper to Digital Stone</title>
+  <style>
+    :root{
+      --bg:#070a0c;
+      --panel:#0c1114;
+      --panel2:#0a0f12;
+      --text:#e8f0f2;
+      --muted:#b7c6cc;
+      --faint:#7f949c;
+      --line:#153039;
+      --jade:#2dff9a;
+      --jade2:#00d98a;
+      --amber:#ffb020;
+      --obsidian:#070a0c;
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --radius:18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(45,255,154,.20), transparent 60%),
+        radial-gradient(900px 500px at 80% 0%, rgba(255,176,32,.10), transparent 55%),
+        radial-gradient(900px 700px at 70% 120%, rgba(0,217,138,.12), transparent 55%),
+        linear-gradient(180deg, #050709, #070a0c 35%, #050709);
+      line-height:1.65;
+      letter-spacing:.1px;
+    }
+
+    a{color:var(--jade); text-decoration:none}
+    a:hover{color:var(--jade2); text-decoration:underline}
+
+    .wrap{
+      width:min(980px, 92vw);
+      margin: 42px auto 90px;
+    }
+
+    /* Top bar */
+    .brandbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      padding: 14px 16px;
+      border:1px solid rgba(21,48,57,.7);
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(12,17,20,.8), rgba(10,15,18,.75));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width: 220px;
+    }
+    .sigil{
+      width:34px;height:34px;border-radius:10px;
+      background:
+        radial-gradient(10px 10px at 30% 30%, rgba(45,255,154,.9), transparent 65%),
+        radial-gradient(14px 14px at 70% 70%, rgba(255,176,32,.5), transparent 60%),
+        linear-gradient(135deg, rgba(45,255,154,.25), rgba(10,15,18,.1));
+      border:1px solid rgba(45,255,154,.35);
+      box-shadow: 0 0 0 3px rgba(45,255,154,.06);
+    }
+    .brand h1{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color: rgba(232,240,242,.92);
+    }
+    .brand small{
+      display:block;
+      margin-top:2px;
+      color: var(--faint);
+      font-size:12px;
+      letter-spacing:.02em;
+    }
+
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      align-items:center;
+      font-family: var(--mono);
+      font-size:12px;
+      color: var(--muted);
+    }
+    .pill{
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(21,48,57,.9);
+      background: rgba(7,10,12,.4);
+    }
+    .pill strong{color: rgba(232,240,242,.9); font-weight:600}
+
+    /* Hero */
+    header.hero{
+      margin-top: 22px;
+      padding: 26px 22px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(21,48,57,.7);
+      background:
+        radial-gradient(800px 260px at 25% 0%, rgba(45,255,154,.22), transparent 60%),
+        linear-gradient(180deg, rgba(12,17,20,.9), rgba(10,15,18,.82));
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-family: var(--mono);
+      font-size:12px;
+      color: var(--muted);
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    .kicker .dot{
+      width:9px;height:9px;border-radius:50%;
+      background: var(--jade);
+      box-shadow: 0 0 18px rgba(45,255,154,.55);
+    }
+
+    .title{
+      margin: 12px 0 10px;
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.2vw, 44px);
+      line-height:1.12;
+      letter-spacing:.01em;
+    }
+
+    .sub{
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 78ch;
+    }
+
+    .byline{
+      margin-top: 16px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      color: var(--faint);
+      font-size:13px;
+    }
+    .byline .name{
+      color: rgba(232,240,242,.92);
+      font-weight:600;
+    }
+    .byline .sep{opacity:.5}
+
+    /* Layout */
+    .grid{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1fr 320px;
+      gap: 18px;
+      align-items:start;
+    }
+
+    @media (max-width: 920px){
+      .grid{grid-template-columns: 1fr}
+    }
+
+    article{
+      border-radius: var(--radius);
+      border: 1px solid rgba(21,48,57,.7);
+      background: linear-gradient(180deg, rgba(12,17,20,.86), rgba(10,15,18,.78));
+      box-shadow: var(--shadow);
+      padding: 22px;
+      overflow:hidden;
+    }
+
+    article p{margin: 0 0 14px; color: rgba(232,240,242,.92)}
+    article p.lead{
+      font-size: 18px;
+      color: rgba(232,240,242,.95);
+      margin-bottom: 16px;
+    }
+    article h2{
+      margin: 24px 0 10px;
+      font-size: 18px;
+      letter-spacing:.02em;
+      color: rgba(232,240,242,.95);
+    }
+
+    .callout{
+      margin: 18px 0;
+      padding: 14px 14px 14px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(45,255,154,.22);
+      background: linear-gradient(180deg, rgba(45,255,154,.08), rgba(7,10,12,.25));
+    }
+    .callout .label{
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .quote{
+      margin:0;
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height:1.35;
+      color: rgba(232,240,242,.98);
+    }
+    .quote span{
+      color: var(--jade);
+    }
+
+    ul{
+      margin: 10px 0 16px 18px;
+      color: rgba(232,240,242,.92);
+      padding:0;
+    }
+    li{margin: 8px 0}
+    li strong{color: rgba(232,240,242,.98)}
+    code.inline{
+      font-family: var(--mono);
+      font-size: .95em;
+      padding: 2px 6px;
+      border-radius: 8px;
+      border: 1px solid rgba(21,48,57,.9);
+      background: rgba(7,10,12,.55);
+      color: rgba(232,240,242,.92);
+    }
+
+    /* Sidebar */
+    aside{
+      position: sticky;
+      top: 18px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(21,48,57,.7);
+      background: linear-gradient(180deg, rgba(12,17,20,.82), rgba(10,15,18,.75));
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+    @media (max-width: 920px){
+      aside{position: relative; top:0}
+    }
+
+    .sideblock + .sideblock{margin-top: 14px}
+    .sideblock h3{
+      margin: 0 0 10px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color: var(--muted);
+    }
+
+    .toc a{
+      display:block;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(21,48,57,.65);
+      background: rgba(7,10,12,.35);
+      margin-bottom: 8px;
+      color: rgba(232,240,242,.88);
+    }
+    .toc a:hover{
+      border-color: rgba(45,255,154,.28);
+      background: rgba(45,255,154,.07);
+      text-decoration:none;
+    }
+
+    .badgegrid{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .badge{
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 7px 9px;
+      border-radius: 999px;
+      border:1px solid rgba(21,48,57,.9);
+      background: rgba(7,10,12,.35);
+      color: rgba(232,240,242,.86);
+      white-space:nowrap;
+    }
+    .badge .g{color: var(--jade)}
+    .badge .a{color: var(--amber)}
+
+    .cta{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 11px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(45,255,154,.32);
+      background: linear-gradient(180deg, rgba(45,255,154,.14), rgba(7,10,12,.35));
+      color: rgba(232,240,242,.95);
+      font-weight:700;
+      letter-spacing:.02em;
+      text-decoration:none;
+    }
+    .btn:hover{
+      background: linear-gradient(180deg, rgba(45,255,154,.20), rgba(7,10,12,.30));
+      text-decoration:none;
+    }
+    .btn.secondary{
+      border-color: rgba(21,48,57,.95);
+      background: rgba(7,10,12,.35);
+      font-weight:600;
+      color: rgba(232,240,242,.90);
+    }
+    .btn.secondary:hover{
+      border-color: rgba(45,255,154,.20);
+      background: rgba(45,255,154,.06);
+    }
+
+    footer{
+      margin-top: 18px;
+      padding: 18px 22px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(21,48,57,.7);
+      background: rgba(7,10,12,.35);
+      color: var(--faint);
+      font-size: 13px;
+    }
+    .fine{
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(183,198,204,.85);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="brandbar">
+      <div class="brand">
+        <div class="sigil" aria-hidden="true"></div>
+        <div>
+          <h1>xolosArmy Network</h1>
+          <small>Opinion Column · Public Lineage Records on eCash</small>
+        </div>
+      </div>
+      <div class="meta">
+        <div class="pill"><strong>Format</strong> · Editorial</div>
+        <div class="pill"><strong>Theme</strong> · Digital Stone</div>
+        <div class="pill"><strong>Layer</strong> · eCash</div>
+      </div>
+    </div>
+
+    <header class="hero">
+      <div class="kicker"><span class="dot"></span>From paper registries to public, verifiable lineage</div>
+      <h2 class="title">Public Lineage Records for Xoloitzcuintle: Why eCash Changes the Meaning of “Registry”</h2>
+      <p class="sub">
+        Not as a technical flex. As a cultural infrastructure: a public ledger that treats lineage as a historical artifact—etched once,
+        audited forever, and readable by anyone.
+      </p>
+      <div class="byline">
+        <span class="name">Fernando Ramírez</span>
+        <span class="sep">•</span>
+        <span>Founder, xolosArmy Network</span>
+        <span class="sep">•</span>
+        <span class="fine">“Not a certificate. A permanence.”</span>
+      </div>
+    </header>
+
+    <div class="grid">
+      <article>
+        <p class="lead">
+          Every community eventually learns the same lesson: paper is not permanence.
+          Paper is <em>permission</em>—granted by institutions, offices, procedures, and policies that can change overnight.
+          When it comes to the Xoloitzcuintle—Mexico’s sacred dog—lineage is not mere administration. It’s continuity.
+        </p>
+
+        <div class="callout">
+          <div class="label">Thesis</div>
+          <p class="quote">
+            A lineage registry should behave like <span>stone</span>: public, durable, hard to alter, and impossible to “misplace.”
+            That is what a public blockchain can be—if we treat it with the seriousness of heritage.
+          </p>
+        </div>
+
+        <h2 id="paper">1) Paper Registries Aren’t Evil — They’re Fragile</h2>
+        <p>
+          Traditional registries do important work, but they live inside a world of constraints: filing cabinets, databases behind closed doors,
+          access gated by bureaucracy, and records that can be lost through negligence, corruption, disasters, or simply time.
+          This is not a conspiracy. It’s entropy.
+        </p>
+        <p>
+          If the meaning of “registry” depends on one institution staying competent forever, then it’s not a registry—it’s a bet.
+          A bet that the building will stay open, the staff will stay honest, the backups will stay intact, and the rules won’t shift.
+        </p>
+
+        <h2 id="public">2) “Public Record” Is a Civilizational Feature</h2>
+        <p>
+          The phrase <strong>public record</strong> should not mean “public when authorized.” It should mean: readable by anyone,
+          verifiable by anyone, and anchored in a system where history has weight.
+          A public blockchain does not magically create truth—but it can create <strong>accountability</strong> for the claims we make.
+        </p>
+        <p>
+          When lineage data is recorded on-chain, the core claim becomes auditable: timestamps, continuity, and provenance.
+          The cultural shift is simple:
+          <strong>we stop begging for legitimacy</strong> and start producing verifiable history.
+        </p>
+
+        <h2 id="meaning">3) The Point Isn’t Hashes — It’s Meaning</h2>
+        <p>
+          Here is the trap: if we present this as “TX hashes” and “block explorers,” we lose the human world.
+          The right framing is the one you already defined:
+          <strong>not an explorer, but an Archive of Living Lineage</strong>.
+        </p>
+        <p>
+          On the surface, a record can include a small on-chain inscription—something as minimal as:
+          <code class="inline">Name · birthdate · breeder · lineage pointer</code>.
+          But the experience must feel like a codex: a timeline, a genealogical tree, delivery documentation, continuity—an archive with dignity.
+        </p>
+
+        <h2 id="ethics">4) The Ethics: Public, But Not Reckless</h2>
+        <p>
+          “Public record” does not mean “publish everything.”
+          A responsible lineage archive separates:
+        </p>
+        <ul>
+          <li><strong>Public heritage data</strong> (lineage relationships, dates, registry identifiers, proof-of-record)</li>
+          <li><strong>Private sensitive data</strong> (home addresses, phone numbers, unnecessary personal identifiers)</li>
+          <li><strong>Selective disclosure</strong> (shareable proofs without exposing the entire dossier)</li>
+        </ul>
+        <p>
+          The moral goal is not surveillance—it's <strong>durability + transparency</strong> where it matters, and privacy where it’s required.
+          A public chain is a tool; the archive’s design is the ethics.
+        </p>
+
+        <h2 id="future">5) What eCash Enables: Lightweight Permanence</h2>
+        <p>
+          eCash is not a museum. It is a network built to move value and information efficiently.
+          That makes it an unusual candidate for cultural infrastructure—fast enough to be used, cheap enough to be practical,
+          and open enough to remain public.
+        </p>
+        <p>
+          In practice, this lets a lineage archive become a civic layer for the breed:
+          a durable anchor beneath websites, videos, certificates, and human narratives.
+          Even if a site goes down, even if a platform bans you, the stone remains.
+        </p>
+
+        <div class="callout">
+          <div class="label">The xolosArmy Position</div>
+          <p class="quote">
+            We are not “tokenizing dogs.”  
+            We are building a <span>public memory</span> for a living heritage—so the Xoloitzcuintle’s lineage cannot be rewritten by
+            convenience, politics, or decay.
+          </p>
+        </div>
+
+        <h2 id="closing">Closing</h2>
+        <p>
+          If a lineage is sacred, it deserves sacred infrastructure.
+          Not because we worship technology, but because we understand time.
+          Every generation inherits the duty to preserve what cannot defend itself.
+          The Xoloitzcuintle is a guardian in myth; our job is to be guardians in practice.
+        </p>
+        <p>
+          Paper can certify. Institutions can endorse. But a public record—properly designed—can endure.
+          That is why we inscribe lineage on eCash:
+          <strong>not for hype</strong>, but for history.
+        </p>
+      </article>
+
+      <aside>
+        <div class="sideblock">
+          <h3>On this page</h3>
+          <nav class="toc" aria-label="Table of contents">
+            <a href="#paper">Paper is fragile</a>
+            <a href="#public">Public record as a feature</a>
+            <a href="#meaning">Meaning over hashes</a>
+            <a href="#ethics">Ethics & privacy</a>
+            <a href="#future">Why eCash</a>
+            <a href="#closing">Closing</a>
+          </nav>
+        </div>
+
+        <div class="sideblock">
+          <h3>Keywords</h3>
+          <div class="badgegrid">
+            <span class="badge"><span class="g">🪨</span> Digital Stone</span>
+            <span class="badge"><span class="g">🧬</span> Living Lineage</span>
+            <span class="badge"><span class="g">🔗</span> Public Record</span>
+            <span class="badge"><span class="g">🛡️</span> Custody</span>
+            <span class="badge"><span class="a">🪙</span> eCash</span>
+            <span class="badge"><span class="g">📜</span> Codex UI</span>
+          </div>
+        </div>
+
+        <div class="sideblock">
+          <h3>Calls to action</h3>
+          <div class="cta">
+            <a class="btn" href="#" onclick="alert('Replace this link with your Archive / Linaje Vivo landing URL.'); return false;">
+              Enter the Living Lineage Archive →
+            </a>
+            <a class="btn secondary" href="#" onclick="alert('Replace this link with Tonalli Wallet or xolosArmy Network State page.'); return false;">
+              Explore Tonalli / Network State →
+            </a>
+          </div>
+          <p class="fine" style="margin:10px 2px 0;color:rgba(183,198,204,.75);">
+            Tip: keep the on-chain record minimal; keep the narrative rich.
+          </p>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div class="fine">
+        Disclaimer: This is an opinion column for xolosArmy Network. It discusses public lineage anchoring on a blockchain as a cultural and technical concept.
+        Design the archive with privacy in mind, and avoid placing sensitive personal data on immutable public systems.
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
