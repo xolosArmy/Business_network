@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xolos Explorer - Análisis Interactivo</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Chosen Palette: Warm neutral light backgrounds (slate-50, white) with Cyber-Xolo vibrant cyan/teal accents (teal-500, cyan-600) for interactive elements and highlights. -->
+    
+    <!-- Application Structure Plan: 
+    The SPA is structured functionally to guide the user from the technical foundation to the user-facing features:
+    1. Hero/Intro: Establishes context and the shift from raw data to narrative.
+    2. Architecture & Search (Interactive Flow): Allows users to test the "Smart Search" input detection to understand the routing logic.
+    3. The Lineage Layer (Interactive Translator): The core innovation. Users click to "translate" a raw blockchain hash into a rich Xolo profile, mimicking the linajeIndex/linajeMeta integration.
+    4. Explorer Components (Radar Chart): Visualizes the data density and focus of the 4 main pages (Block, Tx, Address, Token).
+    5. Phase 3 (Conclusion): Outlines the next strategic step.
+    This structure prioritizes user interaction with the concepts (searching, translating) rather than just reading static text.
+    -->
+
+    <!-- Visualization & Content Choices: 
+    - Goal: Inform about Search Logic -> Viz: Interactive text/button simulator -> Interaction: User clicks input types, JS reveals routing cascade -> Justification: Active learning of the algorithm -> Method: HTML/Tailwind + JS.
+    - Goal: Demonstrate Lineage Layer -> Viz: "Translation" interface -> Interaction: Button triggers JS timeout (simulating lookup) then reveals a styled card -> Justification: Tangibly shows the value of linajeMeta.js -> Method: HTML/Tailwind + JS DOM manipulation.
+    - Goal: Compare Page Components -> Viz: Radar Chart -> Interaction: Hover tooltips -> Justification: Shows how different views handle different weights of data (tech vs UI) -> Method: Chart.js Canvas.
+    - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. Canvas and Unicode icons used exclusively.
+    -->
+
+    <style>
+        /* Chart Container Styling - Mandatory Requirement */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        
+        /* Cyber-Xolo Light Theme Accents */
+        .cyber-border { border-color: #0d9488; } /* teal-600 */
+        .cyber-text { color: #0d9488; }
+        .cyber-bg { background-color: #0d9488; }
+        .cyber-hover:hover { background-color: #0f766e; } /* teal-700 */
+        .cyber-shadow { box-shadow: 0 4px 14px 0 rgba(13, 148, 136, 0.39); }
+        
+        /* Smooth transitions */
+        .transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 300ms; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans leading-relaxed selection:bg-teal-200 selection:text-teal-900">
+
+    <!-- Navigation / Header -->
+    <nav class="bg-white border-b-2 cyber-border sticky top-0 z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="font-bold text-xl tracking-tight cyber-text flex items-center gap-2">
+                <span class="text-2xl">🐕</span> XolosArmy Network
+            </div>
+            <div class="text-sm font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
+                Estado: Listo para Fase 3
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-16">
+
+        <!-- Hero Section -->
+        <header class="text-center max-w-3xl mx-auto space-y-4 py-8">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+                El Explorador de Linaje <span class="cyber-text">Xoloitzcuintle</span>
+            </h1>
+            <p class="text-lg text-slate-600">
+                Un análisis interactivo del estado actual del <strong>Xolos Explorer</strong>. Descubre cómo esta Single Page Application (SPA) transiciona de ser un visor genérico de blockchain a una red con identidad propia, traduciendo datos crudos en historias vivas.
+            </p>
+        </header>
+
+        <!-- Section 1: Architecture & Smart Search -->
+        <section id="architecture" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-10">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2 mb-2">
+                    <span class="text-2xl">⚡</span> 1. Arquitectura y Motor de Búsqueda
+                </h2>
+                <p class="text-slate-600">
+                    Construido sobre <strong>Vite + React 19</strong> y <strong>React Router v7</strong>, el explorador garantiza velocidad y URLs únicas por bloque. Su núcleo técnico, el <strong>Chronik Client</strong>, conecta directamente al nodo soberano para máxima privacidad. Prueba el simulador del <em>Motor de Búsqueda Inteligente</em> a continuación para ver cómo procesa diferentes tipos de datos en tiempo real.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+                <!-- Interactive Simulator -->
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                    <h3 class="text-lg font-bold mb-4 text-slate-700">Simulador de Entrada de Usuario</h3>
+                    <p class="text-sm text-slate-500 mb-4">Haz clic en un tipo de entrada para ver cómo el explorador la clasifica y resuelve.</p>
+                    
+                    <div class="space-y-3">
+                        <button onclick="simulateSearch('altura')" class="w-full text-left px-4 py-3 bg-white border border-slate-300 rounded-lg hover:border-teal-500 hover:shadow-sm transition-all flex justify-between items-center group">
+                            <span class="font-mono text-slate-700 group-hover:cyber-text">9000</span>
+                            <span class="text-xs font-semibold bg-slate-100 text-slate-500 px-2 py-1 rounded">Números</span>
+                        </button>
+                        <button onclick="simulateSearch('direccion')" class="w-full text-left px-4 py-3 bg-white border border-slate-300 rounded-lg hover:border-teal-500 hover:shadow-sm transition-all flex justify-between items-center group">
+                            <span class="font-mono text-slate-700 group-hover:cyber-text text-sm">ecash:qpm2qsznhks...</span>
+                            <span class="text-xs font-semibold bg-slate-100 text-slate-500 px-2 py-1 rounded">Prefijos de Red</span>
+                        </button>
+                        <button onclick="simulateSearch('hash')" class="w-full text-left px-4 py-3 bg-white border border-slate-300 rounded-lg hover:border-teal-500 hover:shadow-sm transition-all flex justify-between items-center group">
+                            <span class="font-mono text-slate-700 group-hover:cyber-text text-sm truncate w-48">a5f7c9e0b1d2...</span>
+                            <span class="text-xs font-semibold bg-slate-100 text-slate-500 px-2 py-1 rounded">Cadena Hexadecimal</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results display -->
+                <div class="h-full flex flex-col justify-center">
+                    <div id="search-result-container" class="bg-slate-800 text-slate-100 p-6 rounded-xl border-l-4 border-slate-600 min-h-[200px] flex flex-col justify-center transition-all">
+                        <div class="text-center text-slate-400">
+                            <span class="text-4xl mb-2 block">🔍</span>
+                            <p>Esperando entrada del usuario...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: The Lineage Layer (Interactive Translator) -->
+        <section id="lineage" class="bg-teal-50 rounded-2xl shadow-sm border border-teal-100 p-6 md:p-10 relative overflow-hidden">
+            <!-- Decorative background element -->
+            <div class="absolute -right-20 -top-20 text-9xl opacity-5 select-none pointer-events-none">🧬</div>
+
+            <div class="mb-8 relative z-10">
+                <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2 mb-2">
+                    <span class="text-2xl">🧬</span> 2. La Capa de Linaje (Novedad Estratégica)
+                </h2>
+                <p class="text-slate-600">
+                    La adición más potente es la "capa de aplicación" sobre la blockchain. Los archivos <code class="bg-white px-1 py-0.5 rounded text-teal-700 text-sm">linajeIndex.js</code> (mapa de punteros) y <code class="bg-white px-1 py-0.5 rounded text-teal-700 text-sm">linajeMeta.js</code> (información rica) trabajan juntos para traducir hashes anónimos en identidades caninas reales.
+                </p>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-6 items-center justify-center relative z-10">
+                <!-- Raw Data -->
+                <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm w-full md:w-1/3 text-center">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Blockchain ID (Raw)</p>
+                    <p class="font-mono text-slate-700 break-all text-sm bg-slate-50 p-2 rounded border border-slate-100">
+                        a5f7c9e0b1d2f8a4...
+                    </p>
+                </div>
+
+                <!-- Translator Logic -->
+                <div class="flex flex-col items-center w-full md:w-auto">
+                    <button id="translate-btn" onclick="processLineage()" class="cyber-bg cyber-shadow text-white font-bold py-3 px-6 rounded-full cyber-hover flex items-center gap-2 mb-2">
+                        Olfatear Blockchain <span>🐕</span>
+                    </button>
+                    <p id="process-status" class="text-xs font-mono text-teal-600 h-4 opacity-0 transition-opacity">Consultando linajeIndex.js...</p>
+                </div>
+
+                <!-- Enriched Metadata -->
+                <div id="meta-card" class="bg-white p-0 rounded-lg border border-slate-200 shadow-lg w-full md:w-1/3 overflow-hidden opacity-50 grayscale transition-all duration-500">
+                    <div class="bg-slate-800 p-3 text-white">
+                        <p class="text-xs font-bold text-slate-300 uppercase tracking-wider">Perfil Xoloitzcuintle</p>
+                        <h3 class="text-xl font-bold text-teal-400 mt-1" id="xolo-name">Desconocido</h3>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <ul class="text-sm space-y-2 text-slate-600">
+                            <li class="flex justify-between border-b border-slate-100 pb-1">
+                                <span class="font-semibold">Nacimiento:</span> <span id="xolo-date">--/--/----</span>
+                            </li>
+                            <li class="flex justify-between border-b border-slate-100 pb-1">
+                                <span class="font-semibold">Variedad:</span> <span id="xolo-type">--</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="font-semibold">Estado:</span> <span id="xolo-status" class="px-2 py-0.5 rounded text-xs bg-slate-100">No verificado</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Visualization & UX -->
+        <section id="components" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-10">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2 mb-2">
+                    <span class="text-2xl">🖥️</span> 3. Componentes Específicos y UX
+                </h2>
+                <p class="text-slate-600">
+                    El explorador cuenta con vistas especializadas. Emplea utilidades como <code class="text-sm bg-slate-100 px-1 rounded">shortHex</code> y <code class="text-sm bg-slate-100 px-1 rounded">safeStringify</code> (para BigInt) garantizando una experiencia fluida. El siguiente gráfico ilustra la densidad de datos frente al enfoque narrativo de cada componente.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <ul class="space-y-4">
+                        <li class="p-4 bg-slate-50 border border-slate-200 rounded-lg border-l-4 cyber-border">
+                            <h4 class="font-bold text-slate-800">📦 BlockPage</h4>
+                            <p class="text-sm text-slate-600">Resumen táctico (Grid). Altura, hash, fecha formateada para México y número de transacciones antes del JSON crudo.</p>
+                        </li>
+                        <li class="p-4 bg-slate-50 border border-slate-200 rounded-lg border-l-4 cyber-border">
+                            <h4 class="font-bold text-slate-800">🔗 TxPage</h4>
+                            <p class="text-sm text-slate-600">Detalles individuales. Esencial para rastrear el "nacimiento" o creación de cada registro de Xolo.</p>
+                        </li>
+                        <li class="p-4 bg-slate-50 border border-slate-200 rounded-lg border-l-4 cyber-border">
+                            <h4 class="font-bold text-slate-800">🏦 AddressPage</h4>
+                            <p class="text-sm text-slate-600">Historial (últimas 10 txs) y UTXOs disponibles en cualquier dirección de la red soberana.</p>
+                        </li>
+                        <li class="p-4 bg-slate-50 border border-slate-200 rounded-lg border-l-4 cyber-border">
+                            <h4 class="font-bold text-slate-800">🪙 TokenPage</h4>
+                            <p class="text-sm text-slate-600">Integración ALP/SLP de Chronik. La base tecnológica de los NFTs de linaje.</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Chart Container -->
+                <div>
+                    <div class="chart-container">
+                        <canvas id="componentsChart"></canvas>
+                    </div>
+                    <p class="text-center text-xs text-slate-500 mt-2">Distribución conceptual del enfoque de los componentes.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Phase 3 -->
+        <section id="phase3" class="bg-slate-900 rounded-2xl shadow-xl p-6 md:p-10 text-center relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10" style="background-image: repeating-linear-gradient(45deg, #0d9488 25%, transparent 25%, transparent 75%, #0d9488 75%, #0d9488), repeating-linear-gradient(45deg, #0d9488 25%, bg-slate-900 25%, bg-slate-900 75%, #0d9488 75%, #0d9488); background-position: 0 0, 10px 10px; background-size: 20px 20px;"></div>
+            
+            <div class="relative z-10 max-w-2xl mx-auto space-y-4">
+                <span class="text-teal-400 font-mono text-sm tracking-widest uppercase">Opinión Técnica</span>
+                <h2 class="text-3xl font-bold text-white">Listo para la Fase 3</h2>
+                <p class="text-slate-300">
+                    La estructura de datos (<code class="text-teal-300">linajeMeta</code>) y la navegación están operativas. El siguiente paso lógico, y el más transformador, es la integración total:
+                </p>
+                <div class="bg-slate-800 p-4 rounded-lg border border-slate-700 text-left mt-6">
+                    <p class="text-slate-200 font-mono text-sm">
+                        <span class="text-teal-400">Objetivo:</span> Hacer que <strong>TxPage</strong> o <strong>TokenPage</strong> consulten <strong>linajeIndex</strong> en tiempo de ejecución para reemplazar automáticamente los metadatos técnicos por la ficha narrativa visual del Xolo correspondiente.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 mt-12 py-8 text-center text-slate-500 text-sm">
+        <p>Reporte interactivo generado a partir del análisis del repositorio xolosArmy/xolos-explorer.</p>
+        <p class="mt-2 font-mono text-xs">Desarrollado con HTML, Tailwind CSS y Vanilla JS. (No SVG / No Mermaid)</p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- 1. Smart Search Simulation Logic ---
+        const searchResultContainer = document.getElementById('search-result-container');
+        
+        const searchResponses = {
+            'altura': `
+                <div class="animate-pulse flex items-center gap-2 mb-2 text-teal-400">
+                    <span class="text-xl">⚙️</span> Procesando Altura...
+                </div>
+                <h4 class="text-lg font-bold text-white mb-2">Resolución: Bloque</h4>
+                <p class="text-sm text-slate-300">El motor detecta un número entero. Redirige inmediatamente a la vista <code class="bg-slate-700 px-1 rounded">/block/9000</code> para mostrar el resumen táctico del bloque.</p>
+            `,
+            'direccion': `
+                <div class="animate-pulse flex items-center gap-2 mb-2 text-teal-400">
+                    <span class="text-xl">🏦</span> Analizando Prefijo...
+                </div>
+                <h4 class="text-lg font-bold text-white mb-2">Resolución: AddressPage</h4>
+                <p class="text-sm text-slate-300">Se identifica <code class="text-teal-300">ecash:</code> o <code class="text-teal-300">bitcoincash:</code>. El explorador carga el historial (últimas 10 txs) y extrae los UTXOs disponibles para esta billetera de la red.</p>
+            `,
+            'hash': `
+                <div class="flex items-center gap-2 mb-2 text-teal-400">
+                    <span class="text-xl">🌊</span> Iniciando Cascada de Resolución...
+                </div>
+                <ol class="text-sm text-slate-300 space-y-2 border-l-2 border-slate-600 pl-4 ml-2">
+                    <li class="relative">
+                        <span class="absolute -left-[21px] top-1 h-2 w-2 rounded-full bg-slate-500"></span>
+                        1. Intenta resolver como <strong class="text-white">Transacción (TX)</strong>
+                    </li>
+                    <li class="relative">
+                        <span class="absolute -left-[21px] top-1 h-2 w-2 rounded-full bg-slate-500"></span>
+                        2. Si falla, intenta como <strong class="text-white">Bloque (Block Hash)</strong>
+                    </li>
+                    <li class="relative">
+                        <span class="absolute -left-[21px] top-1 h-2 w-2 rounded-full bg-teal-400 animate-pulse shadow-[0_0_8px_#2dd4bf]"></span>
+                        3. ¡Éxito! Identificado como <strong class="text-teal-300">Token ID (NFT)</strong>
+                    </li>
+                </ol>
+            `
+        };
+
+        function simulateSearch(type) {
+            // Update UI container with cyber border style
+            searchResultContainer.className = "bg-slate-800 text-slate-100 p-6 rounded-xl border-l-4 cyber-border min-h-[200px] flex flex-col justify-center transition-all";
+            
+            // Temporary loading state
+            searchResultContainer.innerHTML = `<div class="text-center text-teal-400 animate-pulse font-mono text-sm">> Olfateando la blockchain...</div>`;
+            
+            // Simulate network delay then show result
+            setTimeout(() => {
+                searchResultContainer.innerHTML = searchResponses[type];
+            }, 600);
+        }
+
+
+        // --- 2. Lineage Translation Logic ---
+        const metaDatabase = {
+            "a5f7c9e0b1d2f8a4": {
+                name: "Tika Ramírez",
+                birth: "12 Oct 2023",
+                type: "Estándar / Sin Pelo",
+                status: "Registrado On-Chain"
+            }
+        };
+
+        function processLineage() {
+            const btn = document.getElementById('translate-btn');
+            const status = document.getElementById('process-status');
+            const card = document.getElementById('meta-card');
+            
+            // 1. Loading state
+            btn.disabled = true;
+            btn.classList.add('opacity-75', 'cursor-not-allowed');
+            status.classList.remove('opacity-0');
+            status.innerText = "Consultando linajeIndex.js...";
+            
+            setTimeout(() => {
+                status.innerText = "Extrayendo linajeMeta.js...";
+                
+                setTimeout(() => {
+                    // 2. Success state
+                    status.classList.add('opacity-0');
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-75', 'cursor-not-allowed');
+                    
+                    // Update Card Data
+                    const data = metaDatabase["a5f7c9e0b1d2f8a4"];
+                    document.getElementById('xolo-name').innerText = data.name;
+                    document.getElementById('xolo-date').innerText = data.birth;
+                    document.getElementById('xolo-type').innerText = data.type;
+                    
+                    const statusEl = document.getElementById('xolo-status');
+                    statusEl.innerText = data.status;
+                    statusEl.className = "px-2 py-0.5 rounded text-xs bg-teal-100 text-teal-800 font-bold border border-teal-200";
+                    
+                    // Style Card (Remove grayscale, add pop)
+                    card.classList.remove('opacity-50', 'grayscale');
+                    card.classList.add('border-teal-400', 'shadow-[0_10px_25px_-5px_rgba(13,148,136,0.3)]');
+                    
+                }, 800);
+            }, 800);
+        }
+
+        // --- 3. Chart.js Implementation ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('componentsChart').getContext('2d');
+            
+            // Radar chart showing the balance of different metrics across the 4 main pages
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Densidad de Datos Crudos', 'Carga Visual (UI)', 'Interactividad', 'Vinculación a Linaje', 'Frecuencia de Uso'],
+                    datasets: [
+                        {
+                            label: 'BlockPage',
+                            data: [90, 40, 30, 10, 80],
+                            backgroundColor: 'rgba(100, 116, 139, 0.2)', // slate
+                            borderColor: 'rgba(100, 116, 139, 1)',
+                            pointBackgroundColor: 'rgba(100, 116, 139, 1)',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'TokenPage (Linaje)',
+                            data: [50, 90, 80, 100, 60],
+                            backgroundColor: 'rgba(13, 148, 136, 0.3)', // teal cyber
+                            borderColor: 'rgba(13, 148, 136, 1)',
+                            pointBackgroundColor: 'rgba(13, 148, 136, 1)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(13, 148, 136, 1)',
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, /* Crucial for container constraint */
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                            grid: { color: 'rgba(0, 0, 0, 0.05)' },
+                            pointLabels: {
+                                font: { size: 11, family: 'sans-serif' },
+                                color: '#475569' /* slate-600 */
+                            },
+                            ticks: { display: false, min: 0, max: 100 }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20,
+                                font: { family: 'sans-serif' }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)', /* slate-900 */
+                            titleFont: { size: 13 },
+                            bodyFont: { size: 12 },
+                            padding: 10,
+                            cornerRadius: 4,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) { label += ': '; }
+                                    if (context.parsed.y !== null) {
+                                        label += context.raw + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
