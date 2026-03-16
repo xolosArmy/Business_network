@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tonalli Wallet & WalletConnect v2 Integration in the xolosArmy Network</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family: "Inter", Arial, sans-serif;
+    background:#0a0a0a;
+    color:#e6e6e6;
+    line-height:1.7;
+}
+
+header{
+    background:linear-gradient(135deg,#0f172a,#111827);
+    padding:60px 20px;
+    text-align:center;
+}
+
+header h1{
+    font-size:2.5rem;
+    color:#facc15;
+}
+
+header p{
+    max-width:800px;
+    margin:auto;
+    opacity:0.8;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:40px 20px;
+}
+
+h2{
+    margin-top:40px;
+    color:#38bdf8;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th,td{
+    padding:12px;
+    border-bottom:1px solid #222;
+}
+
+th{
+    background:#111827;
+    color:#facc15;
+}
+
+.code{
+    background:#111;
+    padding:15px;
+    border-radius:6px;
+    font-family:monospace;
+    overflow:auto;
+}
+
+footer{
+    text-align:center;
+    padding:40px;
+    opacity:0.6;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>xolosArmy Network Architecture</h1>
+
+<p>
+Integrating Tonalli Wallet with WalletConnect v2 in the eCash ecosystem
+</p>
+
+</header>
+
+<div class="container">
+
+<h2>Introduction</h2>
+
+<p>
+
+The evolution of decentralized financial infrastructure has transformed blockchains from simple value-transfer protocols into complex digital ecosystems known as <b>network states</b>.  
+
+Within this frontier, the <b>xolosArmy Network</b> emerges as an initiative that merges Mexican cultural identity, digital sovereignty and the high-performance infrastructure of the <b>eCash blockchain (XEC)</b>.
+
+At the operational center of this ecosystem lies the integration between decentralized applications (dApps) and the <b>Tonalli Wallet</b>, formerly known as RMZWallet.
+
+This connection is implemented through <b>WalletConnect v2</b>, a protocol that enables encrypted communication between wallets and decentralized applications while preserving full user custody of private keys.
+
+</p>
+
+<h2>The eCash Infrastructure</h2>
+
+<p>
+
+To understand the significance of Tonalli Wallet within the xolosArmy ecosystem, one must first analyze the technological substrate on which it operates: the <b>eCash blockchain</b>.
+
+eCash is a Layer-1 network designed for fast digital cash transactions while preserving the security guarantees of Bitcoin's Proof-of-Work model.
+
+</p>
+
+<table>
+
+<tr>
+<th>Technical Attribute</th>
+<th>eCash Specification</th>
+<th>Impact on xolosArmy</th>
+</tr>
+
+<tr>
+<td>Primary Consensus</td>
+<td>Nakamoto Proof-of-Work</td>
+<td>Immutable security and decentralized issuance</td>
+</tr>
+
+<tr>
+<td>Secondary Consensus</td>
+<td>Avalanche pre-consensus</td>
+<td>Transaction finality in ~3 seconds</td>
+</tr>
+
+<tr>
+<td>Indexer</td>
+<td>Chronik</td>
+<td>Fast blockchain queries for Tonalli Wallet</td>
+</tr>
+
+<tr>
+<td>Token Layer</td>
+<td>eTokens / ALP</td>
+<td>Enables the $RMZ community token</td>
+</tr>
+
+</table>
+
+<p>
+
+This architecture allows the xolosArmy Network to operate not merely as a financial layer but as an emerging <b>digital society built on sovereign infrastructure</b>.
+
+</p>
+
+<h2>WalletConnect v2 Integration</h2>
+
+<p>
+
+WalletConnect v2 enables secure communication between decentralized applications and self-custody wallets through encrypted messaging relays.
+
+Unlike earlier browser-based integrations, WalletConnect establishes persistent sessions between applications and wallets.
+
+This allows Tonalli Wallet to interact seamlessly with dApps such as:
+
+</p>
+
+<ul>
+
+<li>Xolo Legend NFT Marketplace</li>
+<li>Teyolia Flipstarter crowdfunding campaigns</li>
+<li>Future decentralized applications within the xolosArmy ecosystem</li>
+
+</ul>
+
+<p>
+
+The communication layer uses JSON-RPC messaging routed through relay servers.
+
+Sessions are initiated through QR codes or deep links that allow users to securely connect their wallet without exposing private keys.
+
+</p>
+
+<table>
+
+<tr>
+<th>WalletConnect Component</th>
+<th>Function</th>
+<th>Role in Tonalli</th>
+</tr>
+
+<tr>
+<td>Sign API</td>
+<td>Remote transaction signing</td>
+<td>Allows dApps to request transaction authorization</td>
+</tr>
+
+<tr>
+<td>Auth API</td>
+<td>Wallet authentication</td>
+<td>Passwordless login into dApps</td>
+</tr>
+
+<tr>
+<td>Relay Network</td>
+<td>Encrypted message routing</td>
+<td>Maintains persistent communication sessions</td>
+</tr>
+
+<tr>
+<td>Namespaces</td>
+<td>Defines chain methods</td>
+<td>Restricts allowed wallet actions</td>
+</tr>
+
+</table>
+
+<h2>Tonalli Wallet Architecture</h2>
+
+<p>
+
+Tonalli Wallet is primarily developed in <b>TypeScript</b> and operates as a self-custody wallet capable of interacting with the eCash network through Chronik APIs.
+
+Unlike browser-extension wallets, Tonalli is designed as an independent wallet environment that maintains its own encrypted key store.
+
+</p>
+
+<p>
+
+When a dApp requests a transaction signature through WalletConnect, Tonalli performs the following validation flow:
+
+</p>
+
+<ul>
+
+<li>Receives the WalletConnect session request</li>
+
+<li>Validates the requested blockchain namespace</li>
+
+<li>Fetches relevant UTXO data through Chronik</li>
+
+<li>Presents a readable transaction confirmation to the user</li>
+
+<li>Signs and broadcasts the transaction to the eCash network</li>
+
+<li>Returns the resulting transaction ID to the dApp</li>
+
+</ul>
+
+<h2>Example WalletConnect Request</h2>
+
+<div class="code">
+
+ecash_signAndBroadcastTransaction({
+  offerId: "12345",
+  chain: "ecash:mainnet"
+})
+
+</div>
+
+<p>
+
+This architecture ensures that private keys remain under user control while allowing decentralized applications to perform complex financial interactions.
+
+</p>
+
+<h2>Xolo Legend Integration</h2>
+
+<p>
+
+The <b>Xolo Legend</b> application represents the first large-scale implementation of Tonalli Wallet connectivity.
+
+Within this system, the WalletConnect bridge component manages the communication between the game interface and the user's wallet.
+
+</p>
+
+<p>
+
+Through WalletConnect event subscriptions, Xolo Legend can update its interface dynamically when blockchain events occur.
+
+</p>
+
+<table>
+
+<tr>
+<th>Event</th>
+<th>Origin</th>
+<th>Action</th>
+</tr>
+
+<tr>
+<td>xolos_offer_published</td>
+<td>Tonalli Wallet</td>
+<td>Updates marketplace offers</td>
+</tr>
+
+<tr>
+<td>xolos_offer_consumed</td>
+<td>Tonalli Wallet</td>
+<td>Removes completed offers</td>
+</tr>
+
+<tr>
+<td>session_delete</td>
+<td>WalletConnect</td>
+<td>Resets connection state</td>
+</tr>
+
+</table>
+
+<h2>Flipstarter Integration</h2>
+
+<p>
+
+The integration of WalletConnect into <b>Teyolia Flipstarter</b> dramatically improves the donation process compared to legacy callback methods.
+
+Instead of redirecting users between browser tabs, WalletConnect allows Flipstarter to maintain a persistent session with Tonalli Wallet.
+
+</p>
+
+<p>
+
+The resulting workflow becomes significantly more seamless:
+
+</p>
+
+<ol>
+
+<li>User connects Tonalli Wallet</li>
+
+<li>Flipstarter requests wallet address</li>
+
+<li>Backend generates pledge transaction</li>
+
+<li>Wallet prompts user for confirmation</li>
+
+<li>Transaction is signed and broadcast</li>
+
+<li>Flipstarter updates campaign progress instantly</li>
+
+</ol>
+
+<h2>The Network State Vision</h2>
+
+<p>
+
+The xolosArmy Network represents an implementation of the <b>network state concept</b>.
+
+Within this framework, digital communities organize themselves around shared infrastructure, culture and economic systems before achieving formal recognition.
+
+</p>
+
+<p>
+
+The <b>$RMZ token</b> functions as the economic unit of this ecosystem, linking physical commerce — such as XolosArmy Naturals products — with blockchain-based digital utility.
+
+</p>
+
+<p>
+
+Tonalli Wallet acts as the sovereign vault and identity layer of the network, enabling members to interact with decentralized applications while maintaining full custody of their digital assets.
+
+</p>
+
+<h2>Conclusion</h2>
+
+<p>
+
+The integration of Tonalli Wallet with WalletConnect v2 establishes the technological foundation for the xolosArmy Network.
+
+By combining the fast and scalable infrastructure of eCash with secure wallet-dApp communication, this architecture enables a new generation of decentralized applications centered around sovereignty, culture and community.
+
+</p>
+
+<p>
+
+Tonalli Wallet serves not only as a financial tool but as the gateway to a new digital civilization built upon the symbolic continuity of the Xoloitzcuintle and the technological frontier of blockchain infrastructure.
+
+</p>
+
+</div>
+
+<footer>
+
+xolosArmy Network · Sovereign Infrastructure for the Digital Age
+
+</footer>
+
+</body>
+</html>
