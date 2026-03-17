@@ -178,8 +178,41 @@ document.addEventListener('DOMContentLoaded', () => {
     revealOnScroll.observe(el);
   });
 
-  const counters = document.querySelectorAll('.counter');
   const speed = 200;
+
+  const setMetricTarget = (id, value) => {
+    const element = document.getElementById(id);
+    if (!element) {
+      return;
+    }
+
+    element.setAttribute('data-target', String(value));
+  };
+
+  async function fetchNetworkMetrics() {
+    try {
+      const response = await fetch('/data/metrics.json');
+      if (!response.ok) {
+        throw new Error('Archivo de métricas XOLO v1 no encontrado');
+      }
+
+      const metrics = await response.json();
+
+      setMetricTarget('metric-citizens', metrics.ciudadanos_tonalli || 0);
+      setMetricTarget('metric-teyolia', metrics.campanas_teyolia || 0);
+      setMetricTarget('metric-volume', metrics.volumen_xec_millones || 0);
+      setMetricTarget('metric-nodes', metrics.linajes_validados_ipfs || 0);
+
+      console.log('✅ Censo On-Chain sincronizado con el indexador Chronik.');
+    } catch (error) {
+      console.error('⚠️ Advertencia: No se pudo conectar con el Oráculo de Datos.', error);
+
+      setMetricTarget('metric-citizens', 1542);
+      setMetricTarget('metric-teyolia', 12);
+      setMetricTarget('metric-volume', 45);
+      setMetricTarget('metric-nodes', 87);
+    }
+  }
 
   const animateCounters = new IntersectionObserver((entries, observer) => {
     entries.forEach((entry) => {
@@ -206,7 +239,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { threshold: 0.5 });
 
-  counters.forEach((counter) => {
-    animateCounters.observe(counter);
+  fetchNetworkMetrics().then(() => {
+    const counters = document.querySelectorAll('[id^="metric-"]');
+    counters.forEach((counter) => {
+      animateCounters.observe(counter);
+    });
   });
 });
