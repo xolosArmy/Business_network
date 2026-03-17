@@ -52,18 +52,19 @@
         <a class="brand" href="/">XolosArmy · Tonalli</a>
         <nav aria-label="Navegación principal" class="nav-links">
           <a href="/civilizacion-tonalli/">Civilización</a>
+          <a href="/tonalli.html">Tonalli</a>
           <a href="/human-layer/">Human Layer</a>
           <a href="/network-constitution/">Constitución</a>
           <a href="/business-network/">Business Network</a>
           <a href="/ecosystem/">Ecosistema</a>
           <a href="/architecture/">Arquitectura</a>
+          <a href="#network-dashboard">Dashboard</a>
           <a class="btn btn-primary nav-highlight" href="https://wallet.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">Tonalli Wallet ↗</a>
         </nav>
       </div>
     </header>
 
     <main id="contenido">
-      <!-- SECTION: HERO -->
       <section class="hero">
         <div class="container">
           <p class="muted">Portal Constitucional y Arquitectónico</p>
@@ -76,7 +77,6 @@
         </div>
       </section>
 
-      <!-- SECTION: THE PROBLEM -->
       <section class="section">
         <div class="container grid grid-3">
           <article class="card"><h2>Identidad fragmentada</h2><p class="muted">Las comunidades digitales carecen de una narrativa unificadora de pertenencia y continuidad civilizatoria.</p></article>
@@ -85,7 +85,6 @@
         </div>
       </section>
 
-      <!-- SECTION: THE PROPOSAL -->
       <section class="section">
         <div class="container">
           <h2>La Propuesta</h2>
@@ -98,7 +97,6 @@
         </div>
       </section>
 
-      <!-- SECTION: ECOSYSTEM MAP -->
       <section class="section" id="ecosystem-map">
         <div class="container">
           <h2>Mapa del Ecosistema</h2>
@@ -113,7 +111,30 @@
         </div>
       </section>
 
-      <!-- SECTION: SYSTEM DIAGRAM -->
+      <section class="section" id="network-dashboard">
+        <div class="container">
+          <h2>Estado de la Red xolosArmy</h2>
+          <div class="grid grid-4 metrics-container">
+            <article class="metric-card">
+              <span class="metric-value" id="citizen-count">0</span>
+              <span class="metric-label">Ciudadanos Tonalli</span>
+            </article>
+            <article class="metric-card">
+              <span class="metric-value" id="active-projects">0</span>
+              <span class="metric-label">Proyectos Teyolia</span>
+            </article>
+            <article class="metric-card">
+              <span class="metric-value" id="ecash-volume">0</span>
+              <span class="metric-label">Volumen XEC (24h)</span>
+            </article>
+            <article class="metric-card">
+              <span class="metric-value" id="nodes-active">0</span>
+              <span class="metric-label">Nodos de Linaje</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section class="section">
         <div class="container">
           <h2>Diagrama del Sistema</h2>
@@ -125,7 +146,6 @@
         </div>
       </section>
 
-      <!-- SECTION: FINAL CTA -->
       <section class="section">
         <div class="container">
           <h2>Entrar al Ecosistema</h2>
@@ -134,7 +154,6 @@
       </section>
     </main>
 
-    <!-- COMPONENT: GLOBAL FOOTER -->
     <footer class="site-footer" role="contentinfo">
       <div class="container">
         <p><strong>XolosArmy.xyz</strong> — Portal Constitucional y Arquitectónico de la Civilización Tonalli.</p>
@@ -149,5 +168,15 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      function loadMetrics() {
+        document.getElementById('citizen-count').textContent = '1,542';
+        document.getElementById('active-projects').textContent = '12';
+        document.getElementById('ecash-volume').textContent = '45.2M';
+        document.getElementById('nodes-active').textContent = '87';
+      }
+      window.addEventListener('DOMContentLoaded', loadMetrics);
+    </script>
   </body>
 </html>
