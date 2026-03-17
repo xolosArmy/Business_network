@@ -1,6 +1,7 @@
 {
-  "ciudadanos_tonalli": 1542,
-  "campanas_teyolia": 12,
-  "volumen_xec_millones": 45,
-  "linajes_validados_ipfs": 87
+  "linajes_registrados": 87,
+  "linajes_validados_ipfs": 87,
+  "registros_con_padre_y_madre": 82,
+  "txs_xolo_detectadas": 124,
+  "ultima_actualizacion": "2026-03-17T00:00:00.000Z"
 }

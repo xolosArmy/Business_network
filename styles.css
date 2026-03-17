@@ -640,3 +640,133 @@ footer {
   background: #1a8ea0;
 }
 
+
+.metrics-status-line {
+  margin-bottom: 2rem;
+  color: rgba(255,255,255,0.75);
+  font-size: 0.95rem;
+}
+
+.metrics-separator {
+  margin: 0 0.5rem;
+  opacity: 0.6;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.06);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+html[data-metrics-status="live"] .status-badge {
+  color: #7df9c1;
+  border-color: rgba(125,249,193,0.35);
+  background: rgba(125,249,193,0.08);
+}
+
+html[data-metrics-status="fallback"] .status-badge {
+  color: #ffd27d;
+  border-color: rgba(255,210,125,0.35);
+  background: rgba(255,210,125,0.08);
+}
+
+.recent-lineages-grid {
+  gap: 1.5rem;
+}
+
+.lineage-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
+    rgba(10,10,14,0.92);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.28);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.lineage-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(100, 220, 255, 0.28);
+  box-shadow: 0 28px 70px rgba(0,0,0,0.34);
+}
+
+.lineage-card-content {
+  padding: 1.4rem;
+}
+
+.lineage-status-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.lineage-status {
+  display: inline-block;
+  padding: 0.22rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.82);
+}
+
+.lineage-status.ok {
+  color: #7df9c1;
+  border-color: rgba(125,249,193,0.28);
+  background: rgba(125,249,193,0.07);
+}
+
+.lineage-status.warn {
+  color: #ffd27d;
+  border-color: rgba(255,210,125,0.28);
+  background: rgba(255,210,125,0.07);
+}
+
+.lineage-name {
+  margin: 0 0 0.8rem;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.lineage-meta {
+  display: grid;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+  color: rgba(255,255,255,0.76);
+  font-size: 0.95rem;
+}
+
+.lineage-meta strong {
+  color: rgba(255,255,255,0.96);
+}
+
+.lineage-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.lineage-link {
+  text-decoration: none;
+  color: #8fdcff;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.lineage-link:hover {
+  text-decoration: underline;
+}
+
+.lineage-card-loading {
+  opacity: 0.82;
+}
