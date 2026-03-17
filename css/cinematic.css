@@ -232,98 +232,124 @@ html[data-metrics-status="fallback"] .status-badge {
   background: rgba(255,210,125,0.08);
 }
 
+/* =========================================================
+   TARJETAS DE LINAJES RECIENTES (OBSIDIANA + ORO)
+   ========================================================= */
+
 .recent-lineages-grid {
-  gap: 1.5rem;
+  gap: 2rem;
+  margin-top: 3rem;
 }
 
 .lineage-card {
   position: relative;
   overflow: hidden;
-  border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
-    rgba(10,10,14,0.92);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.28);
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  border-radius: 16px;
+  border: 1px solid rgba(212, 175, 55, 0.1); /* Borde dorado muy sutil */
+  background: linear-gradient(145deg, rgba(15, 15, 18, 0.9) 0%, rgba(5, 5, 5, 0.95) 100%);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .lineage-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(100, 220, 255, 0.28);
-  box-shadow: 0 28px 70px rgba(0,0,0,0.34);
+  transform: translateY(-8px);
+  border-color: rgba(212, 175, 55, 0.5); /* Brillo dorado al pasar el mouse */
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 175, 55, 0.15);
 }
 
 .lineage-card-content {
-  padding: 1.4rem;
+  padding: 2rem;
 }
 
+/* Badges de Estado (IPFS / Genealogía) */
 .lineage-status-row {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.8rem;
   flex-wrap: wrap;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .lineage-status {
   display: inline-block;
-  padding: 0.22rem 0.6rem;
-  border-radius: 999px;
-  font-size: 0.76rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.04);
-  color: rgba(255,255,255,0.82);
+  letter-spacing: 1px;
+  font-weight: 600;
+  border: 1px solid transparent;
 }
 
+/* Estado OK: Dorado Tonalli */
 .lineage-status.ok {
-  color: #7df9c1;
-  border-color: rgba(125,249,193,0.28);
-  background: rgba(125,249,193,0.07);
+  color: #d4af37;
+  border-color: rgba(212, 175, 55, 0.4);
+  background: rgba(212, 175, 55, 0.05);
 }
 
+/* Estado Warn: Gris apagado (Obsidiana clara) */
 .lineage-status.warn {
-  color: #ffd27d;
-  border-color: rgba(255,210,125,0.28);
-  background: rgba(255,210,125,0.07);
+  color: #888894;
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
 }
 
+/* Tipografía de la Tarjeta */
 .lineage-name {
-  margin: 0 0 0.8rem;
-  font-size: 1.25rem;
-  line-height: 1.2;
+  margin: 0 0 1rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.5px;
 }
 
 .lineage-meta {
   display: grid;
-  gap: 0.45rem;
-  margin-bottom: 1rem;
-  color: rgba(255,255,255,0.76);
-  font-size: 0.95rem;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  color: #a0a0ab;
+  font-size: 0.9rem;
 }
 
 .lineage-meta strong {
-  color: rgba(255,255,255,0.96);
+  color: #d4af37; /* Labels en dorado */
+  font-weight: 600;
 }
 
+/* Enlaces (Botones Fantasma) */
 .lineage-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .lineage-link {
   text-decoration: none;
-  color: #8fdcff;
-  font-weight: 600;
-  font-size: 0.92rem;
+  color: #ffffff;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
 .lineage-link:hover {
-  text-decoration: underline;
+  color: #d4af37;
 }
 
 .lineage-card-loading {
-  opacity: 0.82;
+  opacity: 0.6;
+  animation: pulse-loading 2s infinite ease-in-out;
+}
+
+@keyframes pulse-loading {
+  0% { opacity: 0.6; }
+  50% { opacity: 0.3; }
+  100% { opacity: 0.6; }
 }
