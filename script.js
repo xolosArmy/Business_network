@@ -157,70 +157,90 @@ setTimeout(function() {
 
 document.addEventListener('DOMContentLoaded', () => {
   const revealElements = document.querySelectorAll('.reveal');
-
-  const revealOptions = {
-    threshold: 0.15,
-    rootMargin: '0px 0px -50px 0px'
-  };
+  const revealOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
 
   const revealOnScroll = new IntersectionObserver((entries, observer) => {
     entries.forEach((entry) => {
-      if (!entry.isIntersecting) {
-        return;
-      }
-
+      if (!entry.isIntersecting) return;
       entry.target.classList.add('active');
       observer.unobserve(entry.target);
     });
   }, revealOptions);
 
-  revealElements.forEach((el) => {
-    revealOnScroll.observe(el);
-  });
+  revealElements.forEach((el) => revealOnScroll.observe(el));
 
   const speed = 200;
 
   const setMetricTarget = (id, value) => {
-    const element = document.getElementById(id);
-    if (!element) {
-      return;
-    }
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.setAttribute('data-target', String(value));
+  };
 
-    element.setAttribute('data-target', String(value));
+  const setMetricsStatus = (mode, label) => {
+    document.documentElement.setAttribute('data-metrics-status', mode);
+    const badge = document.getElementById('metrics-status-badge');
+    if (badge) badge.textContent = label;
+  };
+
+  const formatIsoDate = (value) => {
+    if (!value) return '—';
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return String(value);
+    return date.toLocaleString('es-MX');
+  };
+
+  const formatUnixDate = (value) => {
+    if (!value) return '—';
+    const date = new Date(Number(value) * 1000);
+    if (Number.isNaN(date.getTime())) return '—';
+    return date.toLocaleString('es-MX');
   };
 
   async function fetchNetworkMetrics() {
     try {
-      const response = await fetch('/data/metrics.json');
+      const response = await fetch('/data/metrics.json', { cache: 'no-store' });
       if (!response.ok) {
-        throw new Error('Archivo de métricas XOLO v1 no encontrado');
+        throw new Error('metrics.json no encontrado');
       }
 
       const metrics = await response.json();
 
-      setMetricTarget('metric-citizens', metrics.ciudadanos_tonalli || 0);
-      setMetricTarget('metric-teyolia', metrics.campanas_teyolia || 0);
-      setMetricTarget('metric-volume', metrics.volumen_xec_millones || 0);
-      setMetricTarget('metric-nodes', metrics.linajes_validados_ipfs || 0);
+      setMetricTarget('metric-lineages', metrics.linajes_registrados || 0);
+      setMetricTarget('metric-ipfs', metrics.linajes_validados_ipfs || 0);
+      setMetricTarget('metric-links', metrics.registros_con_padre_y_madre || 0);
+      setMetricTarget('metric-events', metrics.txs_xolo_detectadas || 0);
 
-      console.log('✅ Censo On-Chain sincronizado con el indexador Chronik.');
+      const lastUpdateEl = document.getElementById('metrics-last-update');
+      if (lastUpdateEl) {
+        lastUpdateEl.textContent = formatIsoDate(metrics.ultima_actualizacion);
+      }
+
+      setMetricsStatus('live', 'Live On-Chain');
+      console.log('✅ Métricas XOLO cargadas.');
     } catch (error) {
-      console.error('⚠️ Advertencia: No se pudo conectar con el Oráculo de Datos.', error);
+      console.error('⚠️ No se pudieron cargar las métricas.', error);
 
-      setMetricTarget('metric-citizens', 1542);
-      setMetricTarget('metric-teyolia', 12);
-      setMetricTarget('metric-volume', 45);
-      setMetricTarget('metric-nodes', 87);
+      setMetricTarget('metric-lineages', 0);
+      setMetricTarget('metric-ipfs', 0);
+      setMetricTarget('metric-links', 0);
+      setMetricTarget('metric-events', 0);
+
+      const lastUpdateEl = document.getElementById('metrics-last-update');
+      if (lastUpdateEl) {
+        lastUpdateEl.textContent = 'Modo inicial';
+      }
+
+      setMetricsStatus('fallback', 'Fallback');
     }
   }
 
   const animateCounters = new IntersectionObserver((entries, observer) => {
     entries.forEach((entry) => {
-      if (!entry.isIntersecting) {
-        return;
-      }
+      if (!entry.isIntersecting) return;
 
       const counter = entry.target;
+
       const updateCount = () => {
         const target = Number(counter.getAttribute('data-target'));
         const count = Number(counter.innerText);
@@ -239,10 +259,96 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { threshold: 0.5 });
 
-  fetchNetworkMetrics().then(() => {
+  function buildLineageCard(item) {
+    const article = document.createElement('article');
+    article.className = 'lineage-card reveal slide-up';
+
+    const explorerUrl = item.slug
+      ? `https://explorer.xolosarmy.xyz/linaje/${encodeURIComponent(item.slug)}`
+      : null;
+
+    const txUrl = item.txid
+      ? `https://explorer.e.cash/tx/${encodeURIComponent(item.txid)}`
+      : null;
+
+    article.innerHTML = `
+      <div class="lineage-card-content">
+        <div class="lineage-status-row">
+          <span class="lineage-status ${item.ipfsOk ? 'ok' : 'warn'}">
+            ${item.ipfsOk ? 'IPFS OK' : 'IPFS pendiente'}
+          </span>
+          <span class="lineage-status ${item.hasParents ? 'ok' : 'warn'}">
+            ${item.hasParents ? 'Genealogía enlazada' : 'Sin padres completos'}
+          </span>
+        </div>
+
+        <h3 class="lineage-name">${item.nombre || item.slug || 'Registro XOLO'}</h3>
+
+        <div class="lineage-meta">
+          <div><strong>Slug:</strong> ${item.slug || '—'}</div>
+          <div><strong>Bloque:</strong> ${item.blockHeight ?? 'Mempool / —'}</div>
+          <div><strong>Fecha:</strong> ${formatUnixDate(item.timestamp)}</div>
+        </div>
+
+        <div class="lineage-links">
+          ${explorerUrl ? `<a class="lineage-link" href="${explorerUrl}" target="_blank" rel="noopener noreferrer">Ver linaje</a>` : ''}
+          ${txUrl ? `<a class="lineage-link" href="${txUrl}" target="_blank" rel="noopener noreferrer">Ver TX</a>` : ''}
+        </div>
+      </div>
+    `;
+
+    return article;
+  }
+
+  async function fetchRecentLineages() {
+    const grid = document.getElementById('recent-lineages-grid');
+    if (!grid) return;
+
+    try {
+      const response = await fetch('/data/recent-registrations.json', { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error('recent-registrations.json no encontrado');
+      }
+
+      const items = await response.json();
+      grid.innerHTML = '';
+
+      if (!Array.isArray(items) || items.length === 0) {
+        grid.innerHTML = `
+          <article class="lineage-card">
+            <div class="lineage-card-content">
+              <span class="lineage-status warn">Sin registros</span>
+              <h3 class="lineage-name">Aún no hay linajes recientes</h3>
+              <p class="text-muted">El indexador no ha generado eventos XOLO visibles todavía.</p>
+            </div>
+          </article>
+        `;
+        return;
+      }
+
+      items.slice(0, 6).forEach((item) => {
+        const card = buildLineageCard(item);
+        grid.appendChild(card);
+        revealOnScroll.observe(card);
+      });
+
+      console.log('✅ Linajes recientes cargados.');
+    } catch (error) {
+      console.error('⚠️ No se pudieron cargar los linajes recientes.', error);
+      grid.innerHTML = `
+        <article class="lineage-card">
+          <div class="lineage-card-content">
+            <span class="lineage-status warn">Sin conexión</span>
+            <h3 class="lineage-name">No se pudo consultar el censo reciente</h3>
+            <p class="text-muted">Verifica recent-registrations.json o el pipeline del xolo-metrics-service.</p>
+          </div>
+        </article>
+      `;
+    }
+  }
+
+  Promise.all([fetchNetworkMetrics(), fetchRecentLineages()]).then(() => {
     const counters = document.querySelectorAll('[id^="metric-"]');
-    counters.forEach((counter) => {
-      animateCounters.observe(counter);
-    });
+    counters.forEach((counter) => animateCounters.observe(counter));
   });
 });

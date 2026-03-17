@@ -77,25 +77,53 @@
       <section class="cinematic-section bg-obsidian-deep" id="censo-onchain">
         <div class="container text-center reveal">
           <h2 class="section-title">El Pulso del Estado-Red</h2>
-          <p class="text-muted mb-4">Censo en tiempo real de la vitalidad de nuestra civilización.</p>
+          <p class="text-muted mb-4">
+            Censo on-chain del Archivo del Linaje Vivo.
+          </p>
+          <p class="metrics-status-line">
+            Estado: <span id="metrics-status-badge" class="status-badge">Cargando...</span>
+            <span class="metrics-separator">•</span>
+            Última actualización: <span id="metrics-last-update">—</span>
+          </p>
 
           <div class="grid grid-4 metrics-dashboard">
             <div class="metric-node">
-              <span id="metric-citizens" class="counter glow-text" data-target="1542">0</span>
-              <span class="metric-label">Ciudadanos Activos</span>
-            </div>
-            <div class="metric-node">
-              <span id="metric-teyolia" class="counter glow-text" data-target="12">0</span>
-              <span class="metric-label">Nodos Teyolia</span>
-            </div>
-            <div class="metric-node">
-              <span id="metric-volume" class="counter glow-text" data-target="45">0</span><span class="glow-text">M</span>
-              <span class="metric-label">Volumen XEC (24h)</span>
-            </div>
-            <div class="metric-node">
-              <span id="metric-nodes" class="counter glow-text" data-target="87">0</span>
+              <span id="metric-lineages" class="counter glow-text" data-target="0">0</span>
               <span class="metric-label">Linajes Registrados</span>
             </div>
+            <div class="metric-node">
+              <span id="metric-ipfs" class="counter glow-text" data-target="0">0</span>
+              <span class="metric-label">Validados en IPFS</span>
+            </div>
+            <div class="metric-node">
+              <span id="metric-links" class="counter glow-text" data-target="0">0</span>
+              <span class="metric-label">Con Padre y Madre</span>
+            </div>
+            <div class="metric-node">
+              <span id="metric-events" class="counter glow-text" data-target="0">0</span>
+              <span class="metric-label">Eventos XOLO</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cinematic-section bg-dark parallax-bg" id="linajes-recientes">
+        <div class="container reveal">
+          <div class="text-center mb-4">
+            <h2 class="section-title">Linajes Recientes</h2>
+            <p class="body-text text-muted">
+              Registros detectados por el Oráculo XOLO v1 desde la blockchain de eCash.
+            </p>
+          </div>
+
+          <div id="recent-lineages-grid" class="grid grid-3 recent-lineages-grid">
+            <article class="lineage-card lineage-card-loading">
+              <div class="lineage-card-content">
+                <span class="lineage-status">Cargando...</span>
+                <h3>Esperando registros</h3>
+                <p class="text-muted">El indexador está consultando Chronik e IPFS.</p>
+              </div>
+            </article>
           </div>
         </div>
       </section>
