@@ -154,3 +154,59 @@ setTimeout(function() {
     popup.style.display = 'block';
   }
 }, 8000);
+
+document.addEventListener('DOMContentLoaded', () => {
+  const revealElements = document.querySelectorAll('.reveal');
+
+  const revealOptions = {
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const revealOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) {
+        return;
+      }
+
+      entry.target.classList.add('active');
+      observer.unobserve(entry.target);
+    });
+  }, revealOptions);
+
+  revealElements.forEach((el) => {
+    revealOnScroll.observe(el);
+  });
+
+  const counters = document.querySelectorAll('.counter');
+  const speed = 200;
+
+  const animateCounters = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) {
+        return;
+      }
+
+      const counter = entry.target;
+      const updateCount = () => {
+        const target = Number(counter.getAttribute('data-target'));
+        const count = Number(counter.innerText);
+        const inc = target / speed;
+
+        if (count < target) {
+          counter.innerText = String(Math.ceil(count + inc));
+          setTimeout(updateCount, 15);
+        } else {
+          counter.innerText = String(target);
+        }
+      };
+
+      updateCount();
+      observer.unobserve(counter);
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach((counter) => {
+    animateCounters.observe(counter);
+  });
+});
