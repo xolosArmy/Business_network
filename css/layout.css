@@ -121,3 +121,33 @@
     margin-left: 0;
   }
 }
+
+.grid-4 {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.metrics-container {
+  gap: 1.2rem;
+}
+
+.metric-card {
+  background: #ffffff;
+  color: #111;
+  border-radius: 0.6rem;
+  padding: 1.6rem 1rem;
+  text-align: center;
+}
+
+.metric-value {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.metric-label {
+  font-size: 0.9rem;
+  color: #444;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
