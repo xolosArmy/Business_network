@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
       : null;
 
     const txUrl = item.txid
-      ? `https://explorer.e.cash/tx/${encodeURIComponent(item.txid)}`
+      ? `https://explorer.xolosarmy.xyz/tx/${encodeURIComponent(item.txid)}`
       : null;
 
     article.innerHTML = `
