@@ -1,0 +1,2499 @@
+[
+  {
+    "txid": "cec56b1d30592fa06096cca506aaf9771fe0f760e06b159bce89126587615fe0",
+    "blockHeight": 940678,
+    "timestamp": 1773703700,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "yeyetzi",
+    "tokenId": "cec56b1d30592fa06096cca506aaf9771fe0f760e06b159bce89126587615fe0",
+    "cid": "QmYFtNkjmUXWFXfNtj4at3fgAKyfkUXfRqpj8C3bXtgvcX",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46541e59657965747a69202852616d6972657a2f52616d6972657a29204d65782e35697066733a2f2f516d5946744e6b6a6d5558574658664e746a346174336667414b79666b5558665271706a38433362587467766358202858352a1bdf31559a63905b6c9bde8ffbb4c8828b23c4a0e10e759d6157e52d01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Yeyetzi (Ramirez/Ramirez) Mex.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmYFtNkjmUXWFXfNtj4at3fgAKyfkUXfRqpj8C3bXtgvcX",
+      "cid": "QmYFtNkjmUXWFXfNtj4at3fgAKyfkUXfRqpj8C3bXtgvcX",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Con pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Yeyetzi Ramirez dentro del Archivo del Linaje Vivo.",
+        "external_url": "https://www.youtube.com/shorts/jbw26Kt0CKI",
+        "image": "ipfs://QmcVGJY33RdurybzZQ3tQdWma2j8Yft8DfXMY8wCaJNmiL",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "adulto",
+          "fechaNacimiento": "2021-05-24",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Altar (Alvarado) Mex.",
+          "microchip": "939000002628970",
+          "padre": "Aruma (Ramirez) Mex.",
+          "registroFCM": "FCMB3967-D",
+          "sexo": "Hembra",
+          "variedad": "Con pelo"
+        },
+        "name": "Yeyetzi (Ramirez/Ramirez) Mex.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Yeyetzi (Ramirez/Ramirez) Mex."
+  },
+  {
+    "txid": "999ecf726d29b2dc4866b226d9c5e550da40fe5a9949d550c4a381affe53b1e7",
+    "blockHeight": 940678,
+    "timestamp": 1773703700,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "papalotl",
+    "tokenId": "999ecf726d29b2dc4866b226d9c5e550da40fe5a9949d550c4a381affe53b1e7",
+    "cid": "QmXMQimJ457cNmoBSUQxA26NnVHAYRgDu9c3fvYYaN6YrD",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e465421506170616c6f746c202852616dc3ad72657a2f52616dc3ad72657a29204d65782e35697066733a2f2f516d584d51696d4a343537634e6d6f42535551784132364e6e564841595267447539633366765959614e36597244209f3fc9ae4b764578a510e046e03e1debe2e3a85936a1e524bc234bf06748ed0e01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Papalotl (Ramírez/Ramírez) Mex.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmXMQimJ457cNmoBSUQxA26NnVHAYRgDu9c3fvYYaN6YrD",
+      "cid": "QmXMQimJ457cNmoBSUQxA26NnVHAYRgDu9c3fvYYaN6YrD",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Macho"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Papalotl Ramirez dentro del Archivo del Linaje Vivo.",
+        "external_url": "https://www.youtube.com/shorts/7g-1-nAY7to",
+        "image": "ipfs://QmVk4cq8R1V7MgN2qLmC6y1eGmzbWPq6L5d9vCDU6hDgHV",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "adulto",
+          "fechaNacimiento": "2023-11-01",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Frida (Ramirez) Mex.",
+          "microchip": "939000002708463",
+          "padre": "Vovid Caliente Mex.FCI.",
+          "registroFCM": "FCMZZ0306-A",
+          "sexo": "Macho",
+          "variedad": "Sin pelo"
+        },
+        "name": "Papalotl (Ramírez/Ramírez) Mex.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Papalotl (Ramírez/Ramírez) Mex."
+  },
+  {
+    "txid": "0004bd83727c79eb7ad2d3e232eb88b058dee238006cf4d3aeb5b317f630047e",
+    "blockHeight": 940671,
+    "timestamp": 1773700934,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "jade",
+    "tokenId": "0004bd83727c79eb7ad2d3e232eb88b058dee238006cf4d3aeb5b317f630047e",
+    "cid": "QmNaUBcNshQKDeSgy4LAt51Kdxj3zwymnuf4Cxt9hZrFDn",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46541b4a616465202852616d6972657a2f52616d6972657a29204d65782e35697066733a2f2f516d4e615542634e7368514b4465536779344c417435314b64786a337a77796d6e75663443787439685a7246446e206421f2969635d89486babdbf9fb3868a824adec38e01ac3c9199eb358915d49f01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Jade (Ramirez/Ramirez) Mex.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmNaUBcNshQKDeSgy4LAt51Kdxj3zwymnuf4Cxt9hZrFDn",
+      "cid": "QmNaUBcNshQKDeSgy4LAt51Kdxj3zwymnuf4Cxt9hZrFDn",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Con pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Jade Ramirez dentro del Archivo del Linaje Vivo.",
+        "external_url": "https://xolosramirez.com",
+        "image": "ipfs://QmbZnNtL4enG7Vebv4hopApgnxxsRFVfbtzkUCPinSHr3J",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "adulto",
+          "fechaNacimiento": "2021-09-17",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Itzia (Ramirez) Mex.",
+          "microchip": "939000002638939",
+          "padre": "Vovid Caliente Mex.FCI.",
+          "registroFCM": "FCMB7471-D",
+          "sexo": "Hembra",
+          "variedad": "Con pelo"
+        },
+        "name": "Jade (Ramirez/Ramirez) Mex.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Jade (Ramirez/Ramirez) Mex."
+  },
+  {
+    "txid": "84c28813ce5ce06b90cf0a2339f3a46d1cd12582b6674b706e91bb0236fba68f",
+    "blockHeight": 940669,
+    "timestamp": 1773700361,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "axia",
+    "tokenId": "84c28813ce5ce06b90cf0a2339f3a46d1cd12582b6674b706e91bb0236fba68f",
+    "cid": "QmYaQfMpDWP4SVjyhxHhW8iuYZoFZ181EwpYFQ1uukDHun",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46541b41786961202852616d6972657a2f52616d6972657a29204d65782e35697066733a2f2f516d596151664d704457503453566a796878486857386975595a6f465a3138314577705946513175756b4448756e20dd581ca46a60ea2c6e6c2c3934875094caeb6a9181643788772b1e755d10576501004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Axia (Ramirez/Ramirez) Mex.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmYaQfMpDWP4SVjyhxHhW8iuYZoFZ181EwpYFQ1uukDHun",
+      "cid": "QmYaQfMpDWP4SVjyhxHhW8iuYZoFZ181EwpYFQ1uukDHun",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "joven"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Axia Ramirez dentro del Archivo del Linaje Vivo.",
+        "external_url": "https://www.youtube.com/shorts/SUtfIOFXs88",
+        "image": "ipfs://QmYJmccGuaB4yX3ee65dKSoxakw1w9YmXjCqzG4RNiLZ2z",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "joven",
+          "fechaNacimiento": "2025-08-01",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Uxmal (Avila) Mex. FCI.",
+          "microchip": "939000002745883",
+          "padre": "Uxmal (Avila) Mex. FCI.",
+          "registroFCM": "FCMD8550-B",
+          "sexo": "Hembra",
+          "variedad": "Sin pelo"
+        },
+        "name": "Axia (Ramirez/Ramirez) Mex.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Axia (Ramirez/Ramirez) Mex."
+  },
+  {
+    "txid": "676a4f51cf30841240d692c651ebab00834d6bc78aeb7abb2fbc8c66a9aba483",
+    "blockHeight": 940669,
+    "timestamp": 1773700361,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "canek",
+    "tokenId": "676a4f51cf30841240d692c651ebab00834d6bc78aeb7abb2fbc8c66a9aba483",
+    "cid": "QmQhpnX46GkMq3RQDwAZfa11WL5BvsExyW1nFjbmvWZYzD",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46541e43414e454b202852616dc3ad72657a2f52616dc3ad72657a29204d65782e35697066733a2f2f516d5168706e583436476b4d713352514477415a66613131574c3542767345787957316e466a626d76575a597a4420e8ce95748c61a2b0f15250fa98494973204bef33169c3b8c9c284b660dc0391b01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | CANEK (Ramírez/Ramírez) Mex.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmQhpnX46GkMq3RQDwAZfa11WL5BvsExyW1nFjbmvWZYzD",
+      "cid": "QmQhpnX46GkMq3RQDwAZfa11WL5BvsExyW1nFjbmvWZYzD",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Macho"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Con pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Canek Ramirez dentro del Archivo del Linaje Vivo.",
+        "external_url": "https://xolosramirez.com",
+        "image": "ipfs://QmdS3rEXVAxT4RgJz3ZZWLgSJi9SJeBFJX3QTEQd73n2p5",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "adulto",
+          "fechaNacimiento": "2021-11-27",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Altar (Alvarado) Mex.",
+          "microchip": "FCMB9150-C",
+          "padre": "Vovid Caliente Mex.FCI.",
+          "registroFCM": "939000002652347",
+          "sexo": "Macho",
+          "variedad": "Con pelo"
+        },
+        "name": "CANEK (Ramírez/Ramírez) Mex.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "CANEK (Ramírez/Ramírez) Mex."
+  },
+  {
+    "txid": "748e82ca7f6ded3423fc797628608fe90e92b309bdfcc1845b1ef850e73d4f6f",
+    "blockHeight": 940215,
+    "timestamp": 1773421351,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "the",
+    "tokenId": "748e82ca7f6ded3423fc797628608fe90e92b309bdfcc1845b1ef850e73d4f6f",
+    "cid": "QmZeusd4hyicdkMpjDvZziargJvY6SRaWip73k51ZbQDLM",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e465421546865205465796f6c696120466c697073746172746572204d616e69666573746f35697066733a2f2f516d5a657573643468796963646b4d706a44765a7a696172674a76593653526157697037336b35315a6251444c4d2017757672a4a074c8200c9902076811a0eab02772f97fb67c70e808f0e3455ff001004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | The Teyolia Flipstarter Manifesto",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmZeusd4hyicdkMpjDvZziargJvY6SRaWip73k51ZbQDLM",
+      "cid": "QmZeusd4hyicdkMpjDvZziargJvY6SRaWip73k51ZbQDLM",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "The Teyolia Flipstarter Manifesto\n\nA declaration of permissionless innovation within the xolosArmy Network ecosystem.\n\nThis manifesto affirms that true decentralization exists when builders can fund their ideas directly from the community without needing approval from committees or centralized institutions.\n\nPrinciples of the manifesto:\n\n• No committees\n• No gatekeepers\n• Community-backed innovation\n• Fundability over pre-approval\n• Permissionless coordination through eCash\n\nPowered by:\neCash\nTonalli Wallet\nTeyolia Flipstarter\n\nThis document marks the philosophical foundation of permissionless funding within xolosArmy Network.\n\nExplore the manifesto:\nhttps://xolosarmy.xyz/blog/teyolia-permissionless-funding-on-ecash.html\n\nLaunch campaigns:\nhttps://teyolia.cash\n\nCivilization is built by builders.\n\nxolosArmy Network",
+        "external_url": "https://xolosarmy.xyz/blog/teyolia-permissionless-funding-on-ecash.html",
+        "image": "ipfs://Qma5po3pNmeBBL58MxqmoMykYypb1PPYh8kK5z8LJKBRxC",
+        "name": "The Teyolia Flipstarter Manifesto",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "The Teyolia Flipstarter Manifesto"
+  },
+  {
+    "txid": "8db9c0ebb06404e43ac36133aa85d14591ea66f4ab32f2d687033351becc0f46",
+    "blockHeight": 939985,
+    "timestamp": 1773276084,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "mictli",
+    "tokenId": "8db9c0ebb06404e43ac36133aa85d14591ea66f4ab32f2d687033351becc0f46",
+    "cid": "QmPjcg7aUorrU5Q5i4atjezmdSPusUES3ShFHv2J93wvXy",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46540e4d6963746c692052616d6972657a35697066733a2f2f516d506a63673761556f727255355135693461746a657a6d6453507573554553335368464876324a393377765879206ed9bf0e172aeb6930b1e93a701f2ed6ab87c49c72749a7814a2ef9605f1b8f501004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Mictli Ramirez",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmPjcg7aUorrU5Q5i4atjezmdSPusUES3ShFHv2J93wvXy",
+      "cid": "QmPjcg7aUorrU5Q5i4atjezmdSPusUES3ShFHv2J93wvXy",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Macho"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "recien-nacido"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Piedra Digital de Linaje del xoloitzcuintle Teyolia Ramírez. Registro de nacimiento dentro del Archivo del Linaje Vivo de Xolos Ramírez, preservado en la blockchain de eCash por xolosArmy Network.",
+        "external_url": "https://xolosramirez.com",
+        "image": "ipfs://QmZg4FYdB2ygeV8fqTWebuuxFwdbakoU2tLTWuovdMkoiT",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "recien-nacido",
+          "fechaNacimiento": "2025-01-25",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Gema (Ramirez/Ramirez) Mex.",
+          "padre": "Ticuiz Langarica FCI.",
+          "registroFCM": "registro de criador",
+          "sexo": "Macho",
+          "variedad": "Sin pelo"
+        },
+        "name": "Mictli Ramirez",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Mictli Ramirez"
+  },
+  {
+    "txid": "4b499c21c0d324366c43f2840a2218091de301e0898b38633ddf1eb0cb070684",
+    "blockHeight": 939984,
+    "timestamp": 1773274928,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "teyolia",
+    "tokenId": "4b499c21c0d324366c43f2840a2218091de301e0898b38633ddf1eb0cb070684",
+    "cid": "QmXU1z9PV9F7Mc3JQf2mVDJZX57fxcJ7eUsGEBMTxESW8A",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e4654105465796f6c69612052616dc3ad72657a35697066733a2f2f516d5855317a3950563946374d63334a5166326d56444a5a5835376678634a376555734745424d54784553573841203d84c3075aa52799f841a99f9c6da485f86a9510612d892ea165c364f049892401004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Teyolia Ramírez",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmXU1z9PV9F7Mc3JQf2mVDJZX57fxcJ7eUsGEBMTxESW8A",
+      "cid": "QmXU1z9PV9F7Mc3JQf2mVDJZX57fxcJ7eUsGEBMTxESW8A",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "recien-nacido"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Piedra Digital de Linaje del xoloitzcuintle Teyolia Ramírez. Registro de nacimiento dentro del Archivo del Linaje Vivo de Xolos Ramírez, preservado en la blockchain de eCash por xolosArmy Network.",
+        "external_url": "https://xolosramirez.com",
+        "image": "ipfs://QmVrz5LtXBzniB27kxvfVrfq71sjenRRWQXmaqibiNE7fX",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "recien-nacido",
+          "fechaNacimiento": "2026-02-10",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Itzia (Ramírez) Mex.",
+          "padre": "Bronce (Rmamirez/Ramirez) FCI.",
+          "registroFCM": "registro de criador",
+          "sexo": "Hembra",
+          "variedad": "Sin pelo"
+        },
+        "name": "Teyolia Ramírez",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Teyolia Ramírez"
+  },
+  {
+    "txid": "0153b3cdc6bb45fb5fc9fa0162914f9a0edb14ea565607993336b46d5d4bc6b3",
+    "blockHeight": 939961,
+    "timestamp": 1773263778,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "balamka",
+    "tokenId": "0153b3cdc6bb45fb5fc9fa0162914f9a0edb14ea565607993336b46d5d4bc6b3",
+    "cid": "QmTY1ZDCYpf6JRndvb6ivw331eFasB3JnDegptijkDQb1d",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46542042616c616d6b61202852616dc3ad72657a2f52616dc3ad72657a29204d65782e35697066733a2f2f516d5459315a4443597066364a526e647662366976773333316546617342334a6e4465677074696a6b44516231642084d79218c4aa0450312321f9f1a62dcbd2f458b521e6c543175787654a4d842001004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Balamka (Ramírez/Ramírez) Mex.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmTY1ZDCYpf6JRndvb6ivw331eFasB3JnDegptijkDQb1d",
+      "cid": "QmTY1ZDCYpf6JRndvb6ivw331eFasB3JnDegptijkDQb1d",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Balamka Ramirez dentro del Archivo del Linaje Vivo de Xolos Ramirez.",
+        "external_url": "https://www.youtube.com/shorts/BnhAyMesXlQ",
+        "image": "ipfs://QmeMwycpvsC4SFAZYiJar7hvoiApYzUUqPjQbPXN8msELL",
+        "lineage": {
+          "color": "Mariposa",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "adulto",
+          "fechaNacimiento": "2025-05-01",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Venus (Ramírez/Ramírez) Mex.",
+          "microchip": "939000002739749",
+          "padre": "Ikal Caliente Mex. FCI",
+          "registroFCM": "FCMD7273-B",
+          "sexo": "Hembra",
+          "variedad": "Sin pelo"
+        },
+        "name": "Balamka (Ramírez/Ramírez) Mex.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Balamka (Ramírez/Ramírez) Mex."
+  },
+  {
+    "txid": "8f9d0638a8c0d4df260a0d89617287f2df258c4e215ed9a7cb471c91e5013d75",
+    "blockHeight": 939961,
+    "timestamp": 1773263778,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "aruma",
+    "tokenId": "8f9d0638a8c0d4df260a0d89617287f2df258c4e215ed9a7cb471c91e5013d75",
+    "cid": "QmdypZpnsc9HigMZuFTTNdtCfsxkD7NUjibpByn4rMNx34",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e4654154172756d61202852616dc3ad72657a29204d65782e35697066733a2f2f516d6479705a706e7363394869674d5a754654544e6474436673786b44374e556a69627042796e34724d4e78333420c6ebd00a5e50b5c8d7325670ec5ebb8a47691b524a8e50c84238a4ab88b0fb9601004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Aruma (Ramírez) Mex.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmdypZpnsc9HigMZuFTTNdtCfsxkD7NUjibpByn4rMNx34",
+      "cid": "QmdypZpnsc9HigMZuFTTNdtCfsxkD7NUjibpByn4rMNx34",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Macho"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Aruma Ramirez dentro del Archivo del Linaje Vivo de Xolos Ramirez.",
+        "external_url": "https://www.youtube.com/shorts/SaCzPNcKDeg",
+        "image": "ipfs://QmQkE1msc4b16NJfFo5vNzbEMyExMKnven77Zv2Xvj7Zpn",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "adulto",
+          "fechaNacimiento": "2020-04-20",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Calimaya Alvarado",
+          "microchip": "939000002569146",
+          "padre": "Ikal Caliente Mex.FCI.",
+          "registroFCM": "FCMD1612",
+          "sexo": "Macho",
+          "variedad": "Sin pelo"
+        },
+        "name": "Aruma (Ramírez) Mex.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Aruma (Ramírez) Mex."
+  },
+  {
+    "txid": "0d4926f2c94567a1e97c435229439e885e36672bbb31b26b5be3dd9160a7c4b7",
+    "blockHeight": 939960,
+    "timestamp": 1773262860,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "venus",
+    "tokenId": "0d4926f2c94567a1e97c435229439e885e36672bbb31b26b5be3dd9160a7c4b7",
+    "cid": "QmRTskRbFSamFHxVRwCt6mCHPFXjB9dcLgmD2bEsV2PDXM",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46541e56656e7573202852616dc3ad72657a2f52616dc3ad72657a29204d65782e35697066733a2f2f516d5254736b52624653616d4648785652774374366d43485046586a423964634c676d443262457356325044584d2001bd3972b8308ce8874515c584ad31d96848961fa9b274f07ad5f0cc5cd6d97501004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Venus (Ramírez/Ramírez) Mex.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmRTskRbFSamFHxVRwCt6mCHPFXjB9dcLgmD2bEsV2PDXM",
+      "cid": "QmRTskRbFSamFHxVRwCt6mCHPFXjB9dcLgmD2bEsV2PDXM",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Venus Ramirez dentro del Archivo del Linaje Vivo de Xolos Ramirez.",
+        "external_url": "https://www.youtube.com/shorts/y5_Oznw57EA",
+        "image": "ipfs://QmWmFBN9Uo3XGDh4GZE4V5TGEpxdQ6oGsmxkfk7xpjZSe9",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "adulto",
+          "fechaNacimiento": "2021-09-17",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Itzia (Ramírez) Mex.",
+          "microchip": "939000002639028",
+          "padre": "Vovid Caliente Mex. FCI",
+          "registroFCM": "FCMB7471-B",
+          "sexo": "Hembra",
+          "variedad": "Sin pelo"
+        },
+        "name": "Venus (Ramírez/Ramírez) Mex.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Venus (Ramírez/Ramírez) Mex."
+  },
+  {
+    "txid": "8c36eccf70422c69e6a83d8e835d74e614b60e7a1d825c02fdab13f7eea27d9e",
+    "blockHeight": 939959,
+    "timestamp": 1773262348,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "diago",
+    "tokenId": "8c36eccf70422c69e6a83d8e835d74e614b60e7a1d825c02fdab13f7eea27d9e",
+    "cid": "QmUq2ET4VzunrkT4RcnLJupnh34U9ftskWYgWw8Ethrsdx",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46541e446961676f202852616dc3ad72657a2f52616dc3ad72657a29204d65782e35697066733a2f2f516d557132455434567a756e726b543452636e4c4a75706e68333455396674736b575967577738457468727364782072e792cf3ba0ddc8806d83ac68d86f0d9f2cc2552be50633db3d2f92c3e775e201004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Diago (Ramírez/Ramírez) Mex.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmUq2ET4VzunrkT4RcnLJupnh34U9ftskWYgWw8Ethrsdx",
+      "cid": "QmUq2ET4VzunrkT4RcnLJupnh34U9ftskWYgWw8Ethrsdx",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Macho"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Con pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Diago Ramirez dentro del Archivo del Linaje Vivo de Xolos Ramirez.",
+        "external_url": "https://xolosramirez.com",
+        "image": "ipfs://QmX4S2MGUUfWPJPMSwEJqvA5jA1mKRowDJaLXxqVShPcz3",
+        "lineage": {
+          "color": "Mariposa",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "adulto",
+          "fechaNacimiento": "2022-04-28",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Frida (Ramírez) Mex.",
+          "microchip": "939000002661291",
+          "padre": "Vovid Caliente Mex. FCI",
+          "registroFCM": "FCMA2526-B",
+          "sexo": "Macho",
+          "variedad": "Con pelo"
+        },
+        "name": "Diago (Ramírez/Ramírez) Mex.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Diago (Ramírez/Ramírez) Mex."
+  },
+  {
+    "txid": "70bc6caf7cb91848359c40736e2f64c2e81cd9d1021f4b60a0f9cf8683098049",
+    "blockHeight": 939957,
+    "timestamp": 1773261958,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "tuna",
+    "tokenId": "70bc6caf7cb91848359c40736e2f64c2e81cd9d1021f4b60a0f9cf8683098049",
+    "cid": "QmYUHjmbEqxiePeq5oTbAck2kobV9dy7eTdSK8wMi4U52q",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46541d54756e61202852616dc3ad72657a2f52616dc3ad72657a29204d65782e35697066733a2f2f516d5955486a6d624571786965506571356f546241636b326b6f625639647937655464534b38774d69345535327120aefab6126fcf04230c6914078d16668abc66d63fb00867f9f6e419d25e59187801004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Tuna (Ramírez/Ramírez) Mex.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmYUHjmbEqxiePeq5oTbAck2kobV9dy7eTdSK8wMi4U52q",
+      "cid": "QmYUHjmbEqxiePeq5oTbAck2kobV9dy7eTdSK8wMi4U52q",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Tuna Ramirez dentro del Archivo del Linaje Vivo de Xolos Ramirez.",
+        "external_url": "https://www.youtube.com/watch?v=w7TA0SpTwjA",
+        "image": "ipfs://QmNzvmi5FU8wxuoSMxK2VsZMwHt59ofyDoPQQh7HEmNWFn",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "adulto",
+          "fechaNacimiento": "2024-09-23",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Cereza (Ramírez/Ramírez) Mex.",
+          "microchip": "939000002725373",
+          "padre": "Uxmal (Avila) Mex. FCI",
+          "registroFCM": "FCMZZ2154-C",
+          "sexo": "Hembra",
+          "variedad": "Sin pelo"
+        },
+        "name": "Tuna (Ramírez/Ramírez) Mex.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Tuna (Ramírez/Ramírez) Mex."
+  },
+  {
+    "txid": "9bd0d8e6fc4f38b9628f1b4e801c874d93db3150d3928b9b768e825930f6c57a",
+    "blockHeight": 939957,
+    "timestamp": 1773261958,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "xoxo",
+    "tokenId": "9bd0d8e6fc4f38b9628f1b4e801c874d93db3150d3928b9b768e825930f6c57a",
+    "cid": "QmZSaTcXMGmsA9iMMdBoXGS4U1tXohZGMTZH5UKvqvtJhJ",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46541d586f786f202852616dc3ad72657a2f52616dc3ad72657a29204d65782e35697066733a2f2f516d5a53615463584d476d734139694d4d64426f58475334553174586f685a474d545a4835554b767176744a684a20e50854d4a1b2e0ddc7f79d60fe77b46b0b607d98dc5db854a84a5883f02fb3ef01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Xoxo (Ramírez/Ramírez) Mex.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmZSaTcXMGmsA9iMMdBoXGS4U1tXohZGMTZH5UKvqvtJhJ",
+      "cid": "QmZSaTcXMGmsA9iMMdBoXGS4U1tXohZGMTZH5UKvqvtJhJ",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Macho"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Xoxo Ramirez dentro del Archivo del Linaje Vivo de Xolos Ramirez.",
+        "external_url": "https://www.youtube.com/watch?v=c0qszeYOtWs",
+        "image": "ipfs://QmNX4vt6euT6W6r4XKXwDte7PMit3Kp3VwaVtoRrX5Apnb",
+        "lineage": {
+          "color": "Mariposa",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "adulto",
+          "fechaNacimiento": "2023-10-20",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Venus Ramírez/Ramírez Mex.",
+          "microchip": "939000002699027",
+          "padre": "Tomate (Ramírez/Ramírez) Mex.",
+          "registroFCM": "FCMZZ0635-A",
+          "sexo": "Macho",
+          "variedad": "Sin pelo"
+        },
+        "name": "Xoxo (Ramírez/Ramírez) Mex.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Xoxo (Ramírez/Ramírez) Mex."
+  },
+  {
+    "txid": "e46491551765133ad49efd1b71f5b47e9ca65fecd90a55c02dfb22da726ee558",
+    "blockHeight": 939955,
+    "timestamp": 1773261087,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "anahuac",
+    "tokenId": "e46491551765133ad49efd1b71f5b47e9ca65fecd90a55c02dfb22da726ee558",
+    "cid": "QmSa7Yxb7KJLkuasZExMyGf4ED3UQ5Kw6qJUTfRi8KgwQu",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e465420416e6168756163202852616dc3ad72657a2f52616dc3ad72657a29204d65782e35697066733a2f2f516d536137597862374b4a4c6b7561735a45784d794766344544335551354b7736714a5554665269384b67775175207749ffe39964591d487bff0c0391b6c0c019f6be9e350620f4ce6746ea54c85001004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Anahuac (Ramírez/Ramírez) Mex.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmSa7Yxb7KJLkuasZExMyGf4ED3UQ5Kw6qJUTfRi8KgwQu",
+      "cid": "QmSa7Yxb7KJLkuasZExMyGf4ED3UQ5Kw6qJUTfRi8KgwQu",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Macho"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "joven"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Anahuac Ramirez dentro del Archivo del Linaje Vivo de Xolos Ramirez.",
+        "external_url": "https://www.youtube.com/watch?v=cMKUXKyBq5Q",
+        "image": "ipfs://Qmbyx6W71Dr4f9x5vWVxbcJBSXC4kbXfJFKb9UUQ2Hhg11",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "joven",
+          "fechaNacimiento": "2024-09-23",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Cereza (Ramírez/Ramírez) Mex.",
+          "microchip": "939000002725377",
+          "padre": "Uxmal (Avila) Mex. FCI",
+          "registroFCM": "FCMZZ2154-A",
+          "sexo": "Macho",
+          "variedad": "Sin pelo"
+        },
+        "name": "Anahuac (Ramírez/Ramírez) Mex.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Anahuac (Ramírez/Ramírez) Mex."
+  },
+  {
+    "txid": "91fa432c1b051c4e8bc9b396b924ed9ef2835b6c2e00f90f720ae1a33b482991",
+    "blockHeight": 939954,
+    "timestamp": 1773260835,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "sabina",
+    "tokenId": "91fa432c1b051c4e8bc9b396b924ed9ef2835b6c2e00f90f720ae1a33b482991",
+    "cid": "QmPJPo9WaeEGzb1uERFVryZuS6S7kbvKgjFWKNQrpvqWFP",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46541f536162696e61202852616dc3ad72657a2f52616dc3ad72657a29204d65782e35697066733a2f2f516d504a506f3957616545477a6231754552465672795a75533653376b62764b676a46574b4e517270767157465020b90c12f52b19c0c6ae5a22d8bd733908b2e219e25546d25803d1cd7c5a7c526f01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Sabina (Ramírez/Ramírez) Mex.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmPJPo9WaeEGzb1uERFVryZuS6S7kbvKgjFWKNQrpvqWFP",
+      "cid": "QmPJPo9WaeEGzb1uERFVryZuS6S7kbvKgjFWKNQrpvqWFP",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Sabina Ramirez dentro del Archivo del Linaje Vivo de Xolos Ramirez.",
+        "external_url": "https://www.youtube.com/watch?v=M6h9gq9rsQs",
+        "image": "ipfs://QmeHBLh8QDtwbQ6M6oS3dfKXSSiD8p4YJCTHveGNMCZ8AS",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "adulto",
+          "fechaNacimiento": "2023-10-20",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Reina (Ramírez/Ramírez) Mex.",
+          "microchip": "939000002715732",
+          "padre": "Ikal Caliente Mex.FCI.",
+          "registroFCM": "FCMZZ0792-C",
+          "sexo": "Hembra",
+          "variedad": "Sin pelo"
+        },
+        "name": "Sabina (Ramírez/Ramírez) Mex.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Sabina (Ramírez/Ramírez) Mex."
+  },
+  {
+    "txid": "99f59c5e876adf0d8118c6430a78ea8329245e80ab61415ded59bbc8483de95c",
+    "blockHeight": 939938,
+    "timestamp": 1773252727,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "crnica",
+    "tokenId": "99f59c5e876adf0d8118c6430a78ea8329245e80ab61415ded59bbc8483de95c",
+    "cid": "QmWSZtahbeEmE79CkGqqovGiZWwfzk7RT1bnN16c5fkLkK",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e4654254372c3b36e6963612064656c20507369636f706f6d706f204d65736f616d65726963616e6f35697066733a2f2f516d57535a7461686265456d453739436b4771716f7647695a5777667a6b37525431626e4e31366335666b4c6b4b203db718c2b013bdfbfcb2a2cdf90d382b077b708dc50f0ce727e250b9057c92d001004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Crónica del Psicopompo Mesoamericano",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmWSZtahbeEmE79CkGqqovGiZWwfzk7RT1bnN16c5fkLkK",
+      "cid": "QmWSZtahbeEmE79CkGqqovGiZWwfzk7RT1bnN16c5fkLkK",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Piedra Digital de Linaje Cultural perteneciente a la serie Codex Digital de Xolos Ramírez. Este NFT preserva en forma visual y simbólica la memoria del xoloitzcuintle como guía entre mundos, acompañante del alma en el Mictlán y expresión terrestre del principio de Xólotl.",
+        "external_url": "https://xolosramirez.com/blog/xoloitzcuintle-codice-vaticano-florentino.html",
+        "image": "ipfs://QmcymX1D7cJ4GzSdZ1PQffGgRncY64S9kC2tvoGTQbRzaW",
+        "name": "Crónica del Psicopompo Mesoamericano",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Crónica del Psicopompo Mesoamericano"
+  },
+  {
+    "txid": "b1afe01140c3aa4cc3a653170c18b043ac07bc2867aee288b94fc253a85ab7d3",
+    "blockHeight": 939800,
+    "timestamp": 1773170153,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "ocelotl",
+    "tokenId": "b1afe01140c3aa4cc3a653170c18b043ac07bc2867aee288b94fc253a85ab7d3",
+    "cid": "QmRDSLf5zs79V4F2ijuG9HeGbWWVf2vcAm7uovDYqY628J",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46540f4f63656c6f746c2052616d6972657a35697066733a2f2f516d5244534c66357a73373956344632696a7547394865476257575666327663416d37756f76445971593632384a200bd7108d5cf75f95bd7f5a41f1fa40dd44a4618a70d1b5d70741a2cedbe669b101004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Ocelotl Ramirez",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmRDSLf5zs79V4F2ijuG9HeGbWWVf2vcAm7uovDYqY628J",
+      "cid": "QmRDSLf5zs79V4F2ijuG9HeGbWWVf2vcAm7uovDYqY628J",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Macho"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Ocelotl Ramirez dentro del Archivo del Linaje Vivo.",
+        "external_url": "https://www.youtube.com/shorts/prE7TvbUqt4",
+        "image": "ipfs://QmTAKas1bSRj1bPgLHAu6pfzosF8MZCC36Q9W6i7npPMev",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "adulto",
+          "fechaNacimiento": "2023-08-12",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Itzi (Ramirez) Mex.",
+          "microchip": "939000002703960",
+          "padre": "Anubis (Ramirez/Ramirez) Mex.",
+          "registroFCM": "FCMZZ0046-C",
+          "sexo": "Macho",
+          "variedad": "Sin pelo"
+        },
+        "name": "Ocelotl Ramirez",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Ocelotl Ramirez"
+  },
+  {
+    "txid": "4b9680a440279a54211305b142105142c7e57fc9fc586e666a679a903dac1107",
+    "blockHeight": 939798,
+    "timestamp": 1773169492,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "romeo",
+    "tokenId": "4b9680a440279a54211305b142105142c7e57fc9fc586e666a679a903dac1107",
+    "cid": "QmU4ETPi7d4ihXkeBGcio87WwhaeikEtjqRxL1Q1vqLGaC",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46540d526f6d656f2052616d6972657a35697066733a2f2f516d5534455450693764346968586b65424763696f38375777686165696b45746a7152784c31513176714c476143201e4da277479ab0f666e4b6b37c5f1c98a43daebedbe2b5a6046e816783b19e4701004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Romeo Ramirez",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmU4ETPi7d4ihXkeBGcio87WwhaeikEtjqRxL1Q1vqLGaC",
+      "cid": "QmU4ETPi7d4ihXkeBGcio87WwhaeikEtjqRxL1Q1vqLGaC",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Macho"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Romeo Ramirez dentro del Archivo del Linaje Vivo.",
+        "external_url": "https://www.youtube.com/shorts/qV_cxa3b4_M",
+        "image": "ipfs://QmSGf2mDNkMQVAprb5dmj8W9RAJw8sq7Ye8NA7Dt2Wpuzm",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "adulto",
+          "fechaNacimiento": "2023-03-07",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Jade (Ramirez/Ramirez) Mex.",
+          "microchip": "939000002703373",
+          "padre": "Ikal Caliente Mex.FCI.",
+          "registroFCM": "FCMA6280-A",
+          "sexo": "Macho",
+          "variedad": "Sin pelo"
+        },
+        "name": "Romeo Ramirez",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Romeo Ramirez"
+  },
+  {
+    "txid": "83e5e796338d8caf7dc57db01e530b3222cb0cb73641a448e6a896e05f6974b7",
+    "blockHeight": 939797,
+    "timestamp": 1773169038,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "altar",
+    "tokenId": "83e5e796338d8caf7dc57db01e530b3222cb0cb73641a448e6a896e05f6974b7",
+    "cid": "QmYJLS2hTZvZ4ckcCmowyeisjuEZh2vaiXipqqv4K8Qa9y",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46540e416c74617220416c76617261646f35697066733a2f2f516d594a4c533268545a765a34636b63436d6f77796569736a75455a6832766169586970717176344b3851613979209bf56f55b0a21584a8c6008312bf4caaf62a409f6086fee1634fed7546ede92101004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Altar Alvarado",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmYJLS2hTZvZ4ckcCmowyeisjuEZh2vaiXipqqv4K8Qa9y",
+      "cid": "QmYJLS2hTZvZ4ckcCmowyeisjuEZh2vaiXipqqv4K8Qa9y",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Altar (Alvarado) Mex. dentro del Archivo del Linaje Vivo.",
+        "external_url": "https://www.youtube.com/shorts/4IU8pmLUxpQ",
+        "image": "ipfs://QmXs9L5xW8nnbkS7MENRxdo435DaZJbFKmWUhdjFPkCXBJ",
+        "lineage": {
+          "color": "Negro",
+          "criador": "Jorge Alvarado Granados",
+          "etapa": "adulto",
+          "fechaNacimiento": "2020-04-27",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "microchip": "939000002583849",
+          "registroFCM": "FCMC1229",
+          "sexo": "Hembra",
+          "variedad": "Sin pelo"
+        },
+        "name": "Altar Alvarado",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Altar Alvarado"
+  },
+  {
+    "txid": "b4c531f6d67cb85fa3cb82319f9ad0bc8bea6e889a84d5684f4d06763785dda2",
+    "blockHeight": 939796,
+    "timestamp": 1773168928,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "mayahuel",
+    "tokenId": "b4c531f6d67cb85fa3cb82319f9ad0bc8bea6e889a84d5684f4d06763785dda2",
+    "cid": "QmRGghmZUpFLDQ3YFA4icgLhj7Gy1cFPVZMUH6SS5ib6Gi",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e4654104d6179616875656c2052616d6972657a35697066733a2f2f516d524767686d5a5570464c445133594641346963674c686a37477931634650565a4d554836535335696236476920dbbc08cea757b6f8bc1d6ca290e15d298c4e1447f3cfcb82ea8001520ba65d6601004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Mayahuel Ramirez",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmRGghmZUpFLDQ3YFA4icgLhj7Gy1cFPVZMUH6SS5ib6Gi",
+      "cid": "QmRGghmZUpFLDQ3YFA4icgLhj7Gy1cFPVZMUH6SS5ib6Gi",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Mayahuel Ramirez dentro del Archivo del Linaje Vivo.",
+        "external_url": "https://www.youtube.com/shorts/JWOpgbmle0A",
+        "image": "ipfs://QmS2AqaPcEVqju5jfLVy79Vixh32wg2HRp4Anp7xA9s7gN",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "adulto",
+          "fechaNacimiento": "2023-06-29",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Cereza (Ramirez/Ramirez) Mex.",
+          "microchip": "939000002702500",
+          "padre": "Ikal Caliente Mex.FCI.",
+          "registroFCM": "FCMA9334-B",
+          "sexo": "Hembra",
+          "variedad": "Sin pelo"
+        },
+        "name": "Mayahuel Ramirez",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Mayahuel Ramirez"
+  },
+  {
+    "txid": "02c571ffefef3a28ad07d3afe20e07ba059f78c9f4807f27e5cc12dc4654af41",
+    "blockHeight": 939795,
+    "timestamp": 1773168183,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "durango",
+    "tokenId": "02c571ffefef3a28ad07d3afe20e07ba059f78c9f4807f27e5cc12dc4654af41",
+    "cid": "QmQgARyqSf67ykKB4GPxQ6ac13jgTvQAQW1C5L5pf4oNhM",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46540f447572616e676f2052616d6972657a35697066733a2f2f516d51674152797153663637796b4b42344750785136616331336a675476514151573143354c357066346f4e684d20d59643b78a3b7d5ae08fe69a0ab83667be59272f5662f66f4522279ca0c0519201004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Durango Ramirez",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmQgARyqSf67ykKB4GPxQ6ac13jgTvQAQW1C5L5pf4oNhM",
+      "cid": "QmQgARyqSf67ykKB4GPxQ6ac13jgTvQAQW1C5L5pf4oNhM",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Macho"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Con pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Durango Ramirez dentro del Archivo del Linaje Vivo.",
+        "external_url": "https://www.youtube.com/shorts/vmJNmM6lmCg",
+        "image": "ipfs://QmcCjRPLL8LTxCxqwgnBn19Pq14VFKk4TzVTvrHy3hkAN9",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "adulto",
+          "fechaNacimiento": "2021-11-27",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Altar (Alvarado) Mex.",
+          "microchip": "939000002652286",
+          "padre": "Vovid Caliente Mex.FCI.",
+          "registroFCM": "FCMB9150-B",
+          "sexo": "Macho",
+          "variedad": "Con pelo"
+        },
+        "name": "Durango Ramirez",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Durango Ramirez"
+  },
+  {
+    "txid": "5bbf51e055b39ee1eaabcd828b4206b9b50fac69252af280c0b83f575c56b6a2",
+    "blockHeight": 939794,
+    "timestamp": 1773167833,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "anubis",
+    "tokenId": "5bbf51e055b39ee1eaabcd828b4206b9b50fac69252af280c0b83f575c56b6a2",
+    "cid": "QmeGq5CSDUyQrbWq9y1dAhqbp32LGFLgMPjf5AT7X3Vf3q",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46540e416e756269732052616d6972657a35697066733a2f2f516d654771354353445579517262577139793164416871627033324c47464c674d506a663541543758335666337120fd070a4dcbdb472b3d5ce6bb3bb03cf4bb27208abf4c1e44f5c96124761528ca01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Anubis Ramirez",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmeGq5CSDUyQrbWq9y1dAhqbp32LGFLgMPjf5AT7X3Vf3q",
+      "cid": "QmeGq5CSDUyQrbWq9y1dAhqbp32LGFLgMPjf5AT7X3Vf3q",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Macho"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Con pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Anubis Ramirez dentro del Archivo del Linaje Vivo.",
+        "external_url": "https://www.youtube.com/shorts/fjMyDm_qxmI",
+        "image": "ipfs://QmUDtTXpFB4rNLDXsdUwgDhyyncoXN9WEXv3ZgScrWkPig",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "adulto",
+          "fechaNacimiento": "2021-04-24",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "microchip": "939000002628979",
+          "registroFCM": "FCMB3967-A",
+          "sexo": "Macho",
+          "variedad": "Con pelo"
+        },
+        "name": "Anubis Ramirez",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Anubis Ramirez"
+  },
+  {
+    "txid": "f4f26fa9099a02067c0977bff52c2030635619382b08dbb4e304c5f64d57c0be",
+    "blockHeight": 939792,
+    "timestamp": 1773167384,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "agata",
+    "tokenId": "f4f26fa9099a02067c0977bff52c2030635619382b08dbb4e304c5f64d57c0be",
+    "cid": "QmQNTGLsFCLgW4FNNUGYmWA1YGuWYzcDLWQ7Yxs38pN9tP",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46540d41676174612052616d6972657a35697066733a2f2f516d514e54474c7346434c675734464e4e5547596d57413159477557597a63444c5751375978733338704e39745020da27c44c5cd38e8b5cdea915fff6346ca100d0cf50a9cf5707ca8329c745f0ea01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Agata Ramirez",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmQNTGLsFCLgW4FNNUGYmWA1YGuWYzcDLWQ7Yxs38pN9tP",
+      "cid": "QmQNTGLsFCLgW4FNNUGYmWA1YGuWYzcDLWQ7Yxs38pN9tP",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Agata Ramirez dentro del Archivo del Linaje Vivo.",
+        "external_url": "https://www.youtube.com/shorts/MHP5K_ZiqEA",
+        "image": "ipfs://Qme3aJ5DPb2jVrrpCQ383wDaeQRna7fqVQ6DdcV11yfXr4",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "adulto",
+          "fechaNacimiento": "2021-11-22",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "microchip": "939000002652334",
+          "registroFCM": "FCMB9152",
+          "sexo": "Hembra",
+          "variedad": "Sin pelo"
+        },
+        "name": "Agata Ramirez",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Agata Ramirez"
+  },
+  {
+    "txid": "70a3b2dbfcf0c4891a5c27a83b1b52cb0a920f10a1720c506ff1849ed2e9bfa4",
+    "blockHeight": 939633,
+    "timestamp": 1773076465,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "frida",
+    "tokenId": "70a3b2dbfcf0c4891a5c27a83b1b52cb0a920f10a1720c506ff1849ed2e9bfa4",
+    "cid": "QmXjcK857oLhRmcyG8BeVMjpVFkJ8LgfXJXuTNqw8EpwSn",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46540d46726964612052616d6972657a35697066733a2f2f516d586a634b3835376f4c68526d637947384265564d6a7056466b4a384c6766584a5875544e717738457077536e2087dcb7a31603ccb5a15dd2532fe8e1362e5cdb96162b5f71cbcd0122b1dd61fe01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Frida Ramirez",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmXjcK857oLhRmcyG8BeVMjpVFkJ8LgfXJXuTNqw8EpwSn",
+      "cid": "QmXjcK857oLhRmcyG8BeVMjpVFkJ8LgfXJXuTNqw8EpwSn",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Piedra Digital de Linaje de Frida Ramírez, xoloitzcuintle hembra intermedia sin pelo de color negro, criada en Xolos Ramírez e inscrita en el Archivo del Linaje Vivo. Su presencia sostiene la continuidad genealógica, cultural y afectiva del linaje xoloitzcuintle en blockchain.",
+        "external_url": "https://x.com/xolosramirez1/status/1704941738350031359?s=20",
+        "image": "ipfs://QmPkF1SoPiSS98d6hToyaWrajJQQVrGuBchGEjDnz5rWFC",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "adulto",
+          "fechaNacimiento": "2020-04-03",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "microchip": "939000002599643",
+          "registroFCM": "FCMC4734",
+          "sexo": "Hembra",
+          "variedad": "Sin pelo"
+        },
+        "name": "Frida Ramirez",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Frida Ramirez"
+  },
+  {
+    "txid": "cc43d40fa21304cfde5271a2f897fc0deff14c4854fa2b8f9f58c5a0ab4b171a",
+    "blockHeight": 939631,
+    "timestamp": 1773075379,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "tomate",
+    "tokenId": "cc43d40fa21304cfde5271a2f897fc0deff14c4854fa2b8f9f58c5a0ab4b171a",
+    "cid": "QmS551jH3vLXEqe3UoAn7G1LSZZUbCsuhBWckLAmgyNZX8",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46540e546f6d6174652052616d6972657a35697066733a2f2f516d533535316a4833764c5845716533556f416e3747314c535a5a5562437375684257636b4c416d67794e5a5838204ef1c66f371c9c02de68c588d7e4de1120c30313e1c4fbb20feda0f91fc6ae0c01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Tomate Ramirez",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmS551jH3vLXEqe3UoAn7G1LSZZUbCsuhBWckLAmgyNZX8",
+      "cid": "QmS551jH3vLXEqe3UoAn7G1LSZZUbCsuhBWckLAmgyNZX8",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Macho"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Con pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Piedra Digital de Linaje de Tomate Ramírez, xoloitzcuintle macho intermedio de color negro, criado en Xolos Ramírez e inscrito en el Archivo del Linaje Vivo. Su presencia forma parte de la continuidad genealógica que une memoria, crianza y cultura en blockchain.",
+        "external_url": "https://x.com/xolosramirez1/status/1773120846426472544?s=20",
+        "image": "ipfs://QmeTByDJuWfw8i1CZTfhnhrkoHZVKnbKrSXkXdRRBm7VkW",
+        "lineage": {
+          "color": "Mariposa",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "adulto",
+          "fechaNacimiento": "2022-04-25",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Frida (Ramírez) Mex.",
+          "microchip": "939000002661506",
+          "padre": "Vovid Caliente Mex. FCI",
+          "registroFCM": "FCMA2526-C",
+          "sexo": "Macho",
+          "variedad": "Con pelo"
+        },
+        "name": "Tomate Ramirez",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Tomate Ramirez"
+  },
+  {
+    "txid": "f583082a98bc71a29cc58a163ca1ec8c813e3168e764c1a984fd4dbd2f00a6a8",
+    "blockHeight": 939463,
+    "timestamp": 1772996711,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "tika",
+    "tokenId": "f583082a98bc71a29cc58a163ca1ec8c813e3168e764c1a984fd4dbd2f00a6a8",
+    "cid": "QmXZH3sKEGWjxV2iqxkTxJtTqFCAkDreVcAyHnDfrWPcEX",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46540c54696b612052616d6972657a35697066733a2f2f516d585a4833734b4547576a7856326971786b54784a7454714643416b44726556634179486e44667257506345582079f2a00e6d756f99fd1282867476e0da22b4cc7c0ae283006dfeea16d1977e4201004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Tika Ramirez",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmXZH3sKEGWjxV2iqxkTxJtTqFCAkDreVcAyHnDfrWPcEX",
+      "cid": "QmXZH3sKEGWjxV2iqxkTxJtTqFCAkDreVcAyHnDfrWPcEX",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "joven"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Piedra Digital de Linaje de Tika Ramírez, xoloitzcuintle hembra intermedia sin pelo de color negro, criada en Xolos Ramírez e inscrita en el Archivo del Linaje Vivo.",
+        "external_url": "https://xolosramirez.com/blog/2026-03-01-entrega-tika-ramirez.html",
+        "image": "ipfs://QmXgQs8jVz3rxkVDQsCbzmAuxzUbYPpHx1WBPa5MZBAnpi",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "joven",
+          "fechaNacimiento": "2026-10-06",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Frida (Ramírez) Mex.",
+          "microchip": "390000002754934",
+          "padre": "Tomate (Ramírez/Ramírez) Mex.",
+          "registroFCM": "FCMZZ3496-B",
+          "sexo": "Hembra",
+          "variedad": "Sin pelo"
+        },
+        "name": "Tika Ramirez",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Tika Ramirez"
+  },
+  {
+    "txid": "42e2796b5ca1edb6ee77e6caa3373d588bba29921d764a2bdefde38d9fda1c11",
+    "blockHeight": 938385,
+    "timestamp": 1772301985,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "la",
+    "tokenId": "42e2796b5ca1edb6ee77e6caa3373d588bba29921d764a2bdefde38d9fda1c11",
+    "cid": "QmeWkfKx5ybNE6En5ar2UQvX8gBetSoDhwp1RALpwTQVbt",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e4654214c61204572612064656c2043c3b36469676f20e280942047c3a96e65736973204935697066733a2f2f516d65576b664b783579624e4536456e35617232555176583867426574536f446877703152414c707754515662742022b3eb8fc86c0caa35cb397aac63bf7ec57a00c344a63e90207116cf966b42c401004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | La Era del Código — Génesis I",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmeWkfKx5ybNE6En5ar2UQvX8gBetSoDhwp1RALpwTQVbt",
+      "cid": "QmeWkfKx5ybNE6En5ar2UQvX8gBetSoDhwp1RALpwTQVbt",
+      "json": {
+        "name": "La Era del Código — Génesis I",
+        "description": "La Era del Código marca el inicio de una nueva soberanía: biología editable, memoria inmutable y gobernanza humana consciente.\n\nEsta obra representa la convergencia entre ADN y blockchain bajo la custodia simbólica del Xoloitzcuintle, guardián ancestral y archivo viviente.\n\nAI ejecuta. Crypto recuerda. Humanos eligen el vector.\n\nxolosArmy Network — Construimos para siglos.",
+        "image": "ipfs://Qme81Ek1t3bio91toHucU7ZXKCY9bY3n7i7LuY3YyJx9dJ",
+        "external_url": "https://xolosarmy.xyz/blog/era-del-codigo.html#manifiesto",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "La Era del Código — Génesis I"
+  },
+  {
+    "txid": "c2ae3a1035134b93994dbbb01715e90424799a3c26760f234b97430c1ce162a2",
+    "blockHeight": 937725,
+    "timestamp": 1771879825,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "teyola",
+    "tokenId": "c2ae3a1035134b93994dbbb01715e90424799a3c26760f234b97430c1ce162a2",
+    "cid": "QmUrUQidq2ND8NaEAL1qMK77zYHTz62nbg2aR19guiEAWd",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e4654245465796f6cc3ad612052616dc3ad72657a20e28094205072696d657220416c69656e746f35697066733a2f2f516d55725551696471324e44384e6145414c31714d4b37377a5948547a36326e62673261523139677569454157642051c7e2f7a0e036915f4cf427e8e3a52b544e557aaf33585a82ba8b2e389b4cbb01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Teyolía Ramírez — Primer Aliento",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmUrUQidq2ND8NaEAL1qMK77zYHTz62nbg2aR19guiEAWd",
+      "cid": "QmUrUQidq2ND8NaEAL1qMK77zYHTz62nbg2aR19guiEAWd",
+      "json": {
+        "name": "Teyolía Ramírez — Primer Aliento",
+        "description": "NFT Raíz de la línea digital de Teyolía Ramírez.\n\nRegistro biocultural del inicio de su existencia en blockchain.\nXoloitzcuintle hembra talla miniatura color negro.\nEtapa neonatal temprana.\nLinaje Ramírez.\n\nEste NFT constituye el origen digital inmutable de su archivo de vida.\nToda futura pieza vinculada a Teyolía Ramírez se ancla simbólicamente a este registro.\n\nCada xolo nace dos veces:\nuna en la tierra…\ny otra en la memoria digital.",
+        "image": "ipfs://QmXKcjHjdxDfai5m7YPRs4r2fFWTKeFR6ggdf23vSPopvz",
+        "external_url": "https://xolosramirez.com",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Teyolía Ramírez — Primer Aliento"
+  },
+  {
+    "txid": "966d8250c53510ce55ca614e289c4661180313414369480850e456fba0e267a0",
+    "blockHeight": 935778,
+    "timestamp": 1770767891,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "crowdfunding",
+    "tokenId": "966d8250c53510ce55ca614e289c4661180313414369480850e456fba0e267a0",
+    "cid": "QmVL2HAA16PWS41fpff88Hp52b4NYRpxFCRBif1jzP4zEm",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46541c43726f776466756e64696e6720576974686f7574204d61737465727335697066733a2f2f516d564c32484141313650575334316670666638384870353262344e59527078464352426966316a7a50347a456d20bd4e67d1bf7a8529e68869c984bdefa2f817b8fcd542c9bd6c136c20596cdde901004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Crowdfunding Without Masters",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmVL2HAA16PWS41fpff88Hp52b4NYRpxFCRBif1jzP4zEm",
+      "cid": "QmVL2HAA16PWS41fpff88Hp52b4NYRpxFCRBif1jzP4zEm",
+      "json": {
+        "name": "Crowdfunding Without Masters",
+        "description": "This NFT commemorates the emergence of Teyolia Flipstarter v2.0,\na non-custodial crowdfunding framework built on eCash.\n\nThe xoloitzcuintli stands as a guardian of intention:\nfunds without masters,\ncode without intermediaries,\nculture without erasure.\n\nThis is not speculation.\nThis is sovereign coordination.",
+        "image": "ipfs://QmPQzegUy9rfsnbNtbaFvDLwkHhgwq5oXNLW3vW1jeAaVW",
+        "external_url": "https://xolosarmy.xyz/blog/teyolia-flipstarter-ecash.html",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Crowdfunding Without Masters"
+  },
+  {
+    "txid": "3846f270feac3bd94a18ddc7300e6f30a477be95c597623db00a50635f28d64a",
+    "blockHeight": 935777,
+    "timestamp": 1770766908,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "3846f270",
+    "tokenId": "3846f270feac3bd94a18ddc7300e6f30a477be95c597623db00a50635f28d64a",
+    "cid": "QmfQLXCb2EzcXGWcN4hRRa9T5B8ikv71tbFcWCf4qwZvE5",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46543ee2808bf09f9bb620e29ca8204355454d414e434f2050415254593a20584f4c4f204c4547454e4420455850455249454e434520e29ca820f09f9bb620233135697066733a2f2f516d66514c58436232457a63584757634e34685252613954354238696b763731746246635743663471775a7645352084178e3a2dc5199e301031767fced4726f0db824bb4ae62b857959035a5324e001004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | ​🛶 ✨ CUEMANCO PARTY: XOLO LEGEND EXPERIENCE ✨ 🛶 #1",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmfQLXCb2EzcXGWcN4hRRa9T5B8ikv71tbFcWCf4qwZvE5",
+      "cid": "QmfQLXCb2EzcXGWcN4hRRa9T5B8ikv71tbFcWCf4qwZvE5",
+      "json": {
+        "name": "​🛶 ✨ CUEMANCO PARTY: XOLO LEGEND EXPERIENCE ✨ 🛶 #1",
+        "description": "​¡El realismo mágico llega a los canales de Xochimilco! Únete a la comunidad más vibrante de la Web3 en una celebración única donde el folclore mexicano se encuentra con el futuro digital.\n\n ​Fecha: 21 de Mayo, 2026.\n​Horario: 2:00 PM a 5:00 PM.\n​Lugar: Embarcadero Cuemanco, Xochimilco.",
+        "image": "ipfs://QmfDu454qrVySjdWJpZWtf11sjKeNsvRu5Z5m42oeRRiMg",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "​🛶 ✨ CUEMANCO PARTY: XOLO LEGEND EXPERIENCE ✨ 🛶 #1"
+  },
+  {
+    "txid": "6313a56eaf660eb4ee73127b7939751658bed66b29b857ce9d276eff0d132ee6",
+    "blockHeight": 935367,
+    "timestamp": 1770490642,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "your",
+    "tokenId": "6313a56eaf660eb4ee73127b7939751658bed66b29b857ce9d276eff0d132ee6",
+    "cid": "QmVv2pFqGkJtoqN1QpH6KQJYdArfbUHEuSJgRd8RNUwhHw",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e465414596f7572204b657973204e65766572204d6f766535697066733a2f2f516d567632704671476b4a746f714e31517048364b514a59644172666255484575534a67526438524e5577684877205f5e84058c05bcbce4db29d1a22422ba8855da3971ada5a3f95f306e484e046201004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Your Keys Never Move",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmVv2pFqGkJtoqN1QpH6KQJYdArfbUHEuSJgRd8RNUwhHw",
+      "cid": "QmVv2pFqGkJtoqN1QpH6KQJYdArfbUHEuSJgRd8RNUwhHw",
+      "json": {
+        "name": "Your Keys Never Move",
+        "description": "This NFT represents a core principle of digital sovereignty in the xolosArmy ecosystem.\n\nWalletConnect v2 enables session-based interaction between Xolo Legend and Tonalli Wallet without moving private keys.\n\nThe dApp expresses intent.\nThe wallet preserves custody.\n\nBuilt on eCash.\nSecured by local signing.\n\nYour keys never move.\nYour intent does.",
+        "image": "ipfs://QmXunMq9YarLip7qgRuzsCM8941WjLzWPHWiKhKLjaN1Wd",
+        "external_url": "https://xolosarmy.xyz/blog/wallet-connect-xolosarmy.html",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Your Keys Never Move"
+  },
+  {
+    "txid": "9ba9ec1165dda08226b9d05b513288605a56a42da8fd000ba5896d428e2867cc",
+    "blockHeight": 935351,
+    "timestamp": 1770478481,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "zote",
+    "tokenId": "9ba9ec1165dda08226b9d05b513288605a56a42da8fd000ba5896d428e2867cc",
+    "cid": "QmUYDwpWg3F55JuNrHJQDpHs2KDT3seJhdgGp4gizCdgPD",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e4654285a6f74652052616dc3ad72657a20e280942050726573656e636961205465726170c3a9757469636135697066733a2f2f516d55594477705767334635354a754e72484a5144704873324b44543373654a68646747703467697a436467504420a9a86fd087dcdcd542837e448f0fbfe5914a207a96bc7faac09e398274f0947f01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Zote Ramírez — Presencia Terapéutica",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmUYDwpWg3F55JuNrHJQDpHs2KDT3seJhdgGp4gizCdgPD",
+      "cid": "QmUYDwpWg3F55JuNrHJQDpHs2KDT3seJhdgGp4gizCdgPD",
+      "json": {
+        "name": "Zote Ramírez — Presencia Terapéutica",
+        "description": "Zote Ramírez es un xoloitzcuintle y perro de servicio certificado.\nAcompaña a Hannah en su rutina diaria: torneos de ajedrez, citas cotidianas y momentos de cuidado personal.\n\nSu presencia no interrumpe, sostiene.\nEste NFT documenta un vínculo real de apoyo emocional, calma y acompañamiento terapéutico.\n\nXolos Ramírez observa que la talla miniatura e intermedia chica del xoloitzcuintle es ideal para este tipo de servicio: cercana, discreta y profundamente reguladora.\n\nEste NFT no representa un símbolo.\nRepresenta una vida acompañada.",
+        "image": "ipfs://Qmb3no5HRtUscYd2GNZkDuL3gMXisMq8wBmT17V1ULmic3",
+        "external_url": "https://xolosramirez.com/blog/xoloitzcuintle-perro-de-servicio.html",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Zote Ramírez — Presencia Terapéutica"
+  },
+  {
+    "txid": "dddcf80d7ccc09f8eff2917eba08441267520632a9231650ec651108f3802f6d",
+    "blockHeight": 934638,
+    "timestamp": 1770049751,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "silencio",
+    "tokenId": "dddcf80d7ccc09f8eff2917eba08441267520632a9231650ec651108f3802f6d",
+    "cid": "QmfWUWw1gsyG2cTGBH6JWaAUQn9kB1UbTnBd4kXR4tKob2",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46540853494c454e43494f35697066733a2f2f516d66575557773167737947326354474248364a57614155516e396b42315562546e4264346b585234744b6f623220a1302e60d0acf2613624be8be421cd73344013b654309d6b303f6e2921c7437901004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | SILENCIO",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmfWUWw1gsyG2cTGBH6JWaAUQn9kB1UbTnBd4kXR4tKob2",
+      "cid": "QmfWUWw1gsyG2cTGBH6JWaAUQn9kB1UbTnBd4kXR4tKob2",
+      "json": {
+        "name": "SILENCIO",
+        "description": "…",
+        "image": "ipfs://QmNakSkcTHdPLGkDmhCLTGXDkVpNyTQG6D6sYpV6vUCywm",
+        "external_url": "https://xolosramirez.club",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "SILENCIO"
+  },
+  {
+    "txid": "82f0854fea3abe0b8150b7886440cf7e967da9bee2a03a1a9490c0ec26d5d744",
+    "blockHeight": 934637,
+    "timestamp": 1770049368,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "teyola",
+    "tokenId": "82f0854fea3abe0b8150b7886440cf7e967da9bee2a03a1a9490c0ec26d5d744",
+    "cid": "QmaaextgyiEFKZB2RSXzDTfquev3RKkb5KD19YUba5cupy",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e4654085445594f4cc38d4135697066733a2f2f516d616165787467796945464b5a42325253587a4454667175657633524b6b62354b44313959556261356375707920541f7ac68f2686b014e95fe68860e754b47c51c6878618a7ad1836a3f76da9b901004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | TEYOLÍA",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmaaextgyiEFKZB2RSXzDTfquev3RKkb5KD19YUba5cupy",
+      "cid": "QmaaextgyiEFKZB2RSXzDTfquev3RKkb5KD19YUba5cupy",
+      "json": {
+        "name": "TEYOLÍA",
+        "description": "Teyolía es el corazón que recuerda.\nNo abre el círculo: lo mantiene vivo.\nEste token no se porta. Se cuida.",
+        "image": "ipfs://QmYEw2f8gmNHDYw5T3UPqULchCf6bzvgGxHE3ZFMJPYDQt",
+        "external_url": "https://xolosramirez.club",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "TEYOLÍA"
+  },
+  {
+    "txid": "39d740840a4fec9247e8654e79577e1c6e984c504e6cfed448c46e751c04b3c8",
+    "blockHeight": 934637,
+    "timestamp": 1770049368,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "guardin",
+    "tokenId": "39d740840a4fec9247e8654e79577e1c6e984c504e6cfed448c46e751c04b3c8",
+    "cid": "QmZQzCf6pERutYL3eofTPgPKv5JngMZ3P5Aqq8NnF8BvXk",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e465416477561726469c3a16e206465206c612054696572726135697066733a2f2f516d5a517a4366367045527574594c33656f66545067504b76354a6e674d5a335035417171384e6e46384276586b200ddb5a5fb0f7a559c171d31288e970cdc9b3c9ff4c46cb90e889585706d0daf401004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Guardián de la Tierra",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmZQzCf6pERutYL3eofTPgPKv5JngMZ3P5Aqq8NnF8BvXk",
+      "cid": "QmZQzCf6pERutYL3eofTPgPKv5JngMZ3P5Aqq8NnF8BvXk",
+      "json": {
+        "name": "Guardián de la Tierra",
+        "description": "Este NFT representa el acceso al Ritual de Temazcal de Sanación.\nLa Tierra sostiene el cuerpo, el silencio y la presencia.\nPortar este token equivale a estar presente.",
+        "image": "ipfs://QmbsAVpCJM8wDdP6JgQtmpugEkPHMdPh91bCdybPogEg1X",
+        "external_url": "https://xolosramirez.club",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Guardián de la Tierra"
+  },
+  {
+    "txid": "35421d51e8d49da236ba54ad3c20580b4c69874ac54ff63d8250d91eabf208cf",
+    "blockHeight": 934637,
+    "timestamp": 1770049368,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "aliento",
+    "tokenId": "35421d51e8d49da236ba54ad3c20580b4c69874ac54ff63d8250d91eabf208cf",
+    "cid": "QmakRAYJZY7nHpknL8SpqSN4Bpxc25U4SY7sHqVMMkk6Yf",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e465407416c69656e746f35697066733a2f2f516d616b5241594a5a59376e48706b6e4c38537071534e344270786332355534535937734871564d4d6b6b365966207d632916ddae7c3f1f3ebb72747e5cd0c170bcc3b4a56decbd91f8b3db05e0a101004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Aliento",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmakRAYJZY7nHpknL8SpqSN4Bpxc25U4SY7sHqVMMkk6Yf",
+      "cid": "QmakRAYJZY7nHpknL8SpqSN4Bpxc25U4SY7sHqVMMkk6Yf",
+      "json": {
+        "name": "Aliento",
+        "description": "Este NFT representa el acceso al Ritual de Temazcal de Sanación.\nEl Aliento conecta el cuerpo, el ritmo y la escucha.\nPortar este token equivale a estar presente.",
+        "image": "ipfs://QmSZmsRSsVsWpoT4JUSm1RG3yEiqdrGux8mpdhwojS9RGT",
+        "external_url": "https://xolosramirez.club",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Aliento"
+  },
+  {
+    "txid": "0df671d009e05793e3c82943b3275111453a1991c76519e27d71f27e064d94cb",
+    "blockHeight": 934636,
+    "timestamp": 1770049132,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "guardin",
+    "tokenId": "0df671d009e05793e3c82943b3275111453a1991c76519e27d71f27e064d94cb",
+    "cid": "QmcrvA3GUhwMjZG4pCEA5NYHZGf8r6G4P1Qi8Tfo3mUKEJ",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e465413477561726469c3a16e2064656c20467565676f35697066733a2f2f516d6372764133475568774d6a5a473470434541354e59485a47663872364734503151693854666f336d554b454a205c12fc4ef65bfa63a6f3919b83cf40dd92a3f2905110e8fdc90e6b8faddd338d01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Guardián del Fuego",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmcrvA3GUhwMjZG4pCEA5NYHZGf8r6G4P1Qi8Tfo3mUKEJ",
+      "cid": "QmcrvA3GUhwMjZG4pCEA5NYHZGf8r6G4P1Qi8Tfo3mUKEJ",
+      "json": {
+        "name": "Guardián del Fuego",
+        "description": "Este NFT representa el acceso al Ritual de Temazcal de Sanación.\nEl Fuego abre el círculo, purifica y transforma.\nPortar este token equivale a estar presente.",
+        "image": "ipfs://QmPFhRiqpHJ9HMUZ9p7F6AdiRge19Rhn5iLvKqF5tq4Bfp",
+        "external_url": "https://xolosramirez.club",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Guardián del Fuego"
+  },
+  {
+    "txid": "89cc4d76c2487d2bbabf03201e9ab760260d9323c42de1e31fc311c2fe220096",
+    "blockHeight": 934409,
+    "timestamp": 1769913101,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "capsula",
+    "tokenId": "89cc4d76c2487d2bbabf03201e9ab760260d9323c42de1e31fc311c2fe220096",
+    "cid": "QmZyrcw5sXY2FCWQeDT4X5g6axCNDmwJignDRqqjWANsZc",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46543b43617073756c61204d756e6469616c6973746120646520586f6c6f732052616d6972657a20636f6e204d6f6e74736572726174204f6c697665722e35697066733a2f2f516d5a7972637735735859324643575165445434583567366178434e446d774a69676e445271716a57414e735a63200ca7e9dff62302fe9e7f1dc861c40a3d73a31a0a794aa9bce65ee4404e698e9401004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Capsula Mundialista de Xolos Ramirez con Montserrat Oliver.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmZyrcw5sXY2FCWQeDT4X5g6axCNDmwJignDRqqjWANsZc",
+      "cid": "QmZyrcw5sXY2FCWQeDT4X5g6axCNDmwJignDRqqjWANsZc",
+      "json": {
+        "name": "Capsula Mundialista de Xolos Ramirez con Montserrat Oliver.",
+        "description": "Fue el día de grabacíon de la capsula mundialista. En la entrevista participaron Durango Ramirez, Ikal Caliente y Humo Ramirez.",
+        "image": "ipfs://QmQAaBRAsm9tkSi7Epm7JQ9CtDdzJtYtubzELfiHgFZZ2R",
+        "external_url": "https://xolosramirez.com/blog/tacto-ancestral-humo.html",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Capsula Mundialista de Xolos Ramirez con Montserrat Oliver."
+  },
+  {
+    "txid": "da3b2f4b37981a6d86223409b152eef0321769ab541687c1c58cd1899450a866",
+    "blockHeight": 933772,
+    "timestamp": 1769528870,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "ceniza",
+    "tokenId": "da3b2f4b37981a6d86223409b152eef0321769ab541687c1c58cd1899450a866",
+    "cid": "Qmdvtcw8Ayetsc5vkCNAt7WsECnbMWer2kFFRreUNLT2dp",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46542243656e697a612052616dc3ad72657a202d20456e747265676120457370656369616c35697066733a2f2f516d64767463773841796574736335766b434e417437577345436e624d576572326b4646527265554e4c543264702038ee21fc9315322560c02fb3c78d50a6283b85f70a6a155afb603d0e25a6353c01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Ceniza Ramírez - Entrega Especial",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/Qmdvtcw8Ayetsc5vkCNAt7WsECnbMWer2kFFRreUNLT2dp",
+      "cid": "Qmdvtcw8Ayetsc5vkCNAt7WsECnbMWer2kFFRreUNLT2dp",
+      "json": {
+        "name": "Ceniza Ramírez - Entrega Especial",
+        "description": "Memoria digital de la entrega de Ceniza Ramírez, Xoloitzcuintle color mariposa del Criadero Xolos Ramírez, a Edgar y su familia en el Aeropuerto de Reynosa. Un puente entre México y Texas que preserva nuestra cultura ancestral y la identidad de nuestra raza.",
+        "image": "ipfs://Qmcgmxpt8rPK3HWD1V6h7BpTfMaGe2n3jqGQDctibUHgRY",
+        "external_url": "https://xolosramirez.com/blog/2026-01-24-entrega-ceniza-ramirez.html",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Ceniza Ramírez - Entrega Especial"
+  },
+  {
+    "txid": "95e79a75c781cd43851ac5758f9abb3354af056aba18e4d88a52448f098cab49",
+    "blockHeight": 933227,
+    "timestamp": 1769198985,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "hora",
+    "tokenId": "95e79a75c781cd43851ac5758f9abb3354af056aba18e4d88a52448f098cab49",
+    "cid": "QmUZRWuH8pKHjeqvFJJnFxjEjYfG3qmKpWUHg5R3DUXtQZ",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e465414c2a1486f7261206465206c6120536f706974612135697066733a2f2f516d555a5257754838704b486a657176464a4a6e46786a456a59664733716d4b705755486735523344555874515a20d9a2c0144a9e83b44a06d4a3f4dc96797a482ec13bb8b84ecab664c9d202c1f701004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | ¡Hora de la Sopita!",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmUZRWuH8pKHjeqvFJJnFxjEjYfG3qmKpWUHg5R3DUXtQZ",
+      "cid": "QmUZRWuH8pKHjeqvFJJnFxjEjYfG3qmKpWUHg5R3DUXtQZ",
+      "json": {
+        "name": "¡Hora de la Sopita!",
+        "description": "Llévele, llévele.",
+        "image": "ipfs://QmVidcArf9raTceTzReM9FeYVgFZ4XEEyLREsxTVP9tXEz",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "¡Hora de la Sopita!"
+  },
+  {
+    "txid": "61daa7c1525a4cba1f7c4188fb1377edceb36b9f14ef14603030707df74e89ca",
+    "blockHeight": 933122,
+    "timestamp": 1769135823,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "tane",
+    "tokenId": "61daa7c1525a4cba1f7c4188fb1377edceb36b9f14ef14603030707df74e89ca",
+    "cid": "QmX7PzbNsSBP9GfNpvVEJqWhxDpkFaXGvXDJ2nWy23v22J",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46541e54616e652052616dc3ad72657a20c2b7205072696d657220556d6272616c35697066733a2f2f516d5837507a624e735342503947664e707656454a7157687844706b466158477658444a326e577932337632324a202e7a31efdafd879e780bb4d69e1c910fd454c951ac89ae27ff92e54da01e2e7801004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Tane Ramírez · Primer Umbral",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmX7PzbNsSBP9GfNpvVEJqWhxDpkFaXGvXDJ2nWy23v22J",
+      "cid": "QmX7PzbNsSBP9GfNpvVEJqWhxDpkFaXGvXDJ2nWy23v22J",
+      "json": {
+        "name": "Tane Ramírez · Primer Umbral",
+        "description": "Este NFT documenta la entrega oficial de Tane Ramírez,\nun Xoloitzcuintle de talla miniatura, en el momento exacto en que inicia su vida con su nueva familia.\n\nLa escena ocurre de noche, en un espacio contemporáneo, bajo luces cálidas y un ambiente sereno.\nTane se muestra tranquilo, sostenido con cuidado, como si reconociera el tránsito que está ocurriendo:\nel paso de origen a destino, de crianza a guardianía compartida.\n\nEste no es solo un registro visual.\nEs una marca de inicio, un testimonio del vínculo humano–xoloitzcuintle y del trabajo de Xolos Ramírez en la preservación, crianza y entrega consciente de esta raza ancestral.\n\nEl xolo no se adopta como objeto.\nSe recibe como presencia.",
+        "image": "ipfs://Qmec5Vv2hWLHJJbNYs7rh8LPxzMuWAgPgWwCUSQwCxpSry",
+        "external_url": "https://xolosramirez.com/blog/entrega-tane-ramirez.html",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Tane Ramírez · Primer Umbral"
+  },
+  {
+    "txid": "6930aa2df26aca37df006e8c84694364c3271fcb33c17edfaf28835eb282c544",
+    "blockHeight": 933076,
+    "timestamp": 1769100282,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "tonalli",
+    "tokenId": "6930aa2df26aca37df006e8c84694364c3271fcb33c17edfaf28835eb282c544",
+    "cid": "QmPFw33bpQVd3iF3E19QfGpmFqDkBFS6umbrYMcgQ7vt9w",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e465423546f6e616c6c69204d657373616765202d2053656e646572204964656e74696669656435697066733a2f2f516d5046773333627051566433694633453139516647706d4671446b42465336756d6272594d63675137767439772075578bf07cbd7c1ec43f799851e20f6f0061d8c1bbc726a8fb435bdf12bd1acd01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Tonalli Message - Sender Identified",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmPFw33bpQVd3iF3E19QfGpmFqDkBFS6umbrYMcgQ7vt9w",
+      "cid": "QmPFw33bpQVd3iF3E19QfGpmFqDkBFS6umbrYMcgQ7vt9w",
+      "json": {
+        "name": "Tonalli Message - Sender Identified",
+        "description": "Tonalli Messages just leveled up. You can now see who sent you a Tonalli message, copy their eCash address, and reply directly on-chain via OP_RETURN — no servers, no accounts, no intermediaries.Communication, native to the blockchain.",
+        "image": "ipfs://QmcLR22k31SEFzKZbyTxwrtMkWSFzqbKhXe3BfWQerxHE3",
+        "external_url": "https://x.com/xolosArmy/status/2011832855844823292?s=20",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Tonalli Message - Sender Identified"
+  },
+  {
+    "txid": "6a2f54715a4d273c7140614c356906314f6666fd86335d84e616d34444100163",
+    "blockHeight": 932850,
+    "timestamp": 1768963325,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "the",
+    "tokenId": "6a2f54715a4d273c7140614c356906314f6666fd86335d84e616d34444100163",
+    "cid": "QmY2JKsAXjvr5YR7QjCytbDNwLCGg1p5HyUkZT4umQMnXT",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e465419544845204147454e542030303120544f204f4253494449414e35697066733a2f2f516d59324a4b7341586a767235595237516a43797462444e774c4347673170354879556b5a5434756d514d6e585420398aaa7c97d30afbce3585962036cd7d4495f0ac78727441d49860cd25efbde401004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | THE AGENT 001 TO OBSIDIAN",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmY2JKsAXjvr5YR7QjCytbDNwLCGg1p5HyUkZT4umQMnXT",
+      "cid": "QmY2JKsAXjvr5YR7QjCytbDNwLCGg1p5HyUkZT4umQMnXT",
+      "json": {
+        "name": "THE AGENT 001 TO OBSIDIAN",
+        "description": "Cyberpunk Noir, Suspenso Tecnológico, Thriller de Acción Vehicular.",
+        "image": "ipfs://QmWsWePh7YBM5kciJzBhJhdEUQ1dJvYjJSCfDjJaufPdkZ",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "THE AGENT 001 TO OBSIDIAN"
+  },
+  {
+    "txid": "fd1b0b1257a433049e8e99ea1e7d6d9a49d8e790d1c66ebc2e62a1066ed486fa",
+    "blockHeight": 932652,
+    "timestamp": 1768840860,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "zaziltunich",
+    "tokenId": "fd1b0b1257a433049e8e99ea1e7d6d9a49d8e790d1c66ebc2e62a1066ed486fa",
+    "cid": "QmZxC1Uu6Yoieu4szYRsYhQckNNMoZP3LKczvfSFtpgx7D",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e4654335a415a494c3a54554e49434820e2809420536f756c20426f6e64204e465420457465726e616c2050616972696e672076312e3035697066733a2f2f516d5a784331557536596f69657534737a595273596851636b4e4e4d6f5a50334c4b637a76665346747067783744200d42fde41dcd8706c6b3032737a266ebdfda4cbccb199d5a4cc69d7336cac51101004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | ZAZIL:TUNICH — Soul Bond NFT Eternal Pairing v1.0",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmZxC1Uu6Yoieu4szYRsYhQckNNMoZP3LKczvfSFtpgx7D",
+      "cid": "QmZxC1Uu6Yoieu4szYRsYhQckNNMoZP3LKczvfSFtpgx7D",
+      "json": {
+        "name": "ZAZIL:TUNICH — Soul Bond NFT Eternal Pairing v1.0",
+        "description": "NFT / Cripto-arte\nZAZIL:TUNICH — Soul Bond NFT\nEternal Pairing v1.0\nProof of Love\nSacred Mint\nThe Bond (1/1)\nUnion Hash",
+        "image": "ipfs://QmUh3N3X5MXN8Xa9fCXqkHBfcntTQcUDMkq3huLxEg7eny",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "ZAZIL:TUNICH — Soul Bond NFT Eternal Pairing v1.0"
+  },
+  {
+    "txid": "d47585f16c3f138f4958c2d68894c0038c833b1f80394ef8146797006a0e1ab1",
+    "blockHeight": 932566,
+    "timestamp": 1768788596,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "tonalli",
+    "tokenId": "d47585f16c3f138f4958c2d68894c0038c833b1f80394ef8146797006a0e1ab1",
+    "cid": "QmdfvFAaqX5y4rzG2UzFjZhpAkRfHevrPAV9JAmS9pbHFs",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46541c546f6e616c6c692c20677561726469c3a16e20656e206272617a6f7335697066733a2f2f516d6466764641617158357934727a4732557a466a5a6870416b526648657672504156394a416d5339706248467320fd2f0086aa5fc8ffcff6df76c29a868e7bbf13763dd308e37c69f5123ddeca3901004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Tonalli, guardián en brazos",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmdfvFAaqX5y4rzG2UzFjZhpAkRfHevrPAV9JAmS9pbHFs",
+      "cid": "QmdfvFAaqX5y4rzG2UzFjZhpAkRfHevrPAV9JAmS9pbHFs",
+      "json": {
+        "name": "Tonalli, guardián en brazos",
+        "description": "Esta imagen captura un instante irrepetible:\nel momento previo al nombre,\ncuando Tizoc Ramírez aún no sabía que ya era Tonalli.\n\nNo es solo un cachorro en brazos de su guardián.\nEs energía reconociéndose.\n\nTonalli es el calor vital, la fuerza que anima,\nel vínculo invisible entre humano y xoloitzcuintle.\n\nEste NFT es memoria viva.\nUna constancia digital de un lazo real.",
+        "image": "ipfs://QmTasryy7F9844JG2jgVK8UMtdTvBKCB2nAmUZxYv4hmZc",
+        "external_url": "https://xolosramirez.com/blog/2025-12-19-un-nuevo-guardian-en-la-ciudad-la-historia-de-tizoc-ramirez-y-su-nuevo-hogar-con-fonzi.html",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Tonalli, guardián en brazos"
+  },
+  {
+    "txid": "52b9ce967c831f14ae9281bace36e0f9554daac2beb10b5483a2afa5a43ef2c3",
+    "blockHeight": 932068,
+    "timestamp": 1768487580,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "xolosarmy",
+    "tokenId": "52b9ce967c831f14ae9281bace36e0f9554daac2beb10b5483a2afa5a43ef2c3",
+    "cid": "QmVL17PbiY1fxeFKedgTkxoHWbvcBr5iFNG8EjtZskvAFp",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46542c786f6c6f7341726d79204e6574776f726b2047726f6b69706564696120456e74727920436f6e6669726d656435697066733a2f2f516d564c31375062695931667865464b656467546b786f485762766342723569464e4738456a745a736b76414670204545e29c3e3cabbe562fc7e18b70f47a06038c72fc241da2fea3e3d05804ef4b01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | xolosArmy Network Grokipedia Entry Confirmed",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmVL17PbiY1fxeFKedgTkxoHWbvcBr5iFNG8EjtZskvAFp",
+      "cid": "QmVL17PbiY1fxeFKedgTkxoHWbvcBr5iFNG8EjtZskvAFp",
+      "json": {
+        "name": "xolosArmy Network Grokipedia Entry Confirmed",
+        "description": "This NFT marks the moment xolosArmy Network was officially documented on Grokipedia.\n\nWhat began as a community experiment became part of a public knowledge archive.\nCulture, technology, identity, and the Xoloitzcuintle—recorded as a living digital phenomenon.\n\nThis is not a launch.\nThis is documentation.\n\nHistory doesn’t always arrive loudly.\nSometimes it just gets confirmed.",
+        "image": "ipfs://Qme4EufYXQUKp5RLucdAxpTntpsprt8CzZ2NEseGKbNGJu",
+        "external_url": "https://grokipedia.com/page/XolosArmy_Network",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "xolosArmy Network Grokipedia Entry Confirmed"
+  },
+  {
+    "txid": "b0f473c7941e4d7c286032b0374c2457012b8dbd2e576c7f3fcb6710a16694ba",
+    "blockHeight": 931879,
+    "timestamp": 1768360490,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "entrega",
+    "tokenId": "b0f473c7941e4d7c286032b0374c2457012b8dbd2e576c7f3fcb6710a16694ba",
+    "cid": "QmQYJUuCsdYKoLiBTQow7PCfqESYro6nzXPjtx3THyLkjX",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46542b456e74726567612053616d692052616dc3ad72657a20c2b720554e414d20c2b72031332e30312e3230323635697066733a2f2f516d51594a5575437364594b6f4c694254516f773750436671455359726f366e7a58506a7478335448794c6b6a58205763b2a26babe6e831e892b58c3b010ebf15bdb1fa913e5686be158a1862773f01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Entrega Sami Ramírez · UNAM · 13.01.2026",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmQYJUuCsdYKoLiBTQow7PCfqESYro6nzXPjtx3THyLkjX",
+      "cid": "QmQYJUuCsdYKoLiBTQow7PCfqESYro6nzXPjtx3THyLkjX",
+      "json": {
+        "name": "Entrega Sami Ramírez · UNAM · 13.01.2026",
+        "description": "Este NFT documenta la entrega de Sami Ramírez, Xoloitzcuintle talla mini, a la Lic. Patricia, orgullosa abogada de la UNAM.\n\nUna unión que nació de una señal clara y se convierte en un pacto de lealtad, compañía y camino compartido.\nEl xoloitzcuintle no llega por azar: llega cuando debe.\n\nEste registro vive en la blockchain como memoria inmutable de un encuentro destinado, resguardado por la Tonalli Wallet.\n\n📍 Ciudad de México\n📅 13 de enero de 2026\n🐕 Xoloitzcuintle · Talla mini\n🏛️ UNAM",
+        "image": "ipfs://QmR8a88bMFB3n4xe9wvb4DLsofkPycDuwUXxweR8RAyQdX",
+        "external_url": "https://xolosramirez.com/blog/2026-01-13-entrega-sami-ramirez-unam.html",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Entrega Sami Ramírez · UNAM · 13.01.2026"
+  },
+  {
+    "txid": "a7fb8038f1cb97796f8ada485cee34ddc9a645a0eaa2da6dbedc135bbe72294d",
+    "blockHeight": 931429,
+    "timestamp": 1768083297,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "otn",
+    "tokenId": "a7fb8038f1cb97796f8ada485cee34ddc9a645a0eaa2da6dbedc135bbe72294d",
+    "cid": "QmcuiwFSwTiLSibsF6TFARowfdBT3WN6HPcoCA7tLfxjgs",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46542f4f74c3ba6e2049722052616dc3ad72657a20e280942052697475616c20646520456e747265676120284b696570652935697066733a2f2f516d6375697746537754694c536962734636544641526f776664425433574e364850636f434137744c66786a677320376926ebd225ad838bb6a904828adc616f87ec24ee2708cecceae1d7a01bf5f501004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Otún Ir Ramírez — Ritual de Entrega (Kiepe)",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmcuiwFSwTiLSibsF6TFARowfdBT3WN6HPcoCA7tLfxjgs",
+      "cid": "QmcuiwFSwTiLSibsF6TFARowfdBT3WN6HPcoCA7tLfxjgs",
+      "json": {
+        "name": "Otún Ir Ramírez — Ritual de Entrega (Kiepe)",
+        "description": "Otún Ir Ramírez fue entregada a Kiepe y a su pareja en un momento íntimo y luminoso: el primer abrazo que selló su nueva vida.\nEsta imagen captura el instante exacto en que la confianza nace: piel con piel, mirada serena, orejas en alto — como si Otún dijera “ya estoy en casa”.\n\nNFT de entrega oficial — Xolos Ramírez.\nUn testimonio de vínculo, destino y familia elegida.",
+        "image": "ipfs://Qma75TK6fnnfpvixrjv8aCYn66TDzkPsTnj7Yy1uuDjkWd",
+        "external_url": "https://xolosramirez.com/blog/2026-01-10-bienvenida-otun-ir-ramirez.html",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Otún Ir Ramírez — Ritual de Entrega (Kiepe)"
+  },
+  {
+    "txid": "0eee3b3bea62103738eca6e840459305e1726583f66e519e792527ce3ea5e2db",
+    "blockHeight": 931117,
+    "timestamp": 1767922178,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "xolosarmy",
+    "tokenId": "0eee3b3bea62103738eca6e840459305e1726583f66e519e792527ce3ea5e2db",
+    "cid": "Qmbb3fxqaTjjXmCBSwQ1R7yb25eLR6dxMpyTWMaQZQxCSS",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e465416786f6c6f7341726d79204368726f6e696b204e6f646535697066733a2f2f516d62623366787161546a6a586d434253775131523779623235654c523664784d707954574d61515a5178435353205344c0c9adf0984951503f279337ffce38af5f356b5d024287d24b53eff399f901004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | xolosArmy Chronik Node",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/Qmbb3fxqaTjjXmCBSwQ1R7yb25eLR6dxMpyTWMaQZQxCSS",
+      "cid": "Qmbb3fxqaTjjXmCBSwQ1R7yb25eLR6dxMpyTWMaQZQxCSS",
+      "json": {
+        "name": "xolosArmy Chronik Node",
+        "description": "Como se siente correr Chronik por primera vez.. infra propia !",
+        "image": "ipfs://QmUtTH37ig9gLunn8bSsGpBZ4CRywhXjEHvSRW4QBvTr43",
+        "external_url": "https://chronik.xolosarmy.xyz",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "xolosArmy Chronik Node"
+  },
+  {
+    "txid": "f04084930392b9b97b4cfbf2ebc5ece7de179357707ceb02f4ca0c10db2f5fcd",
+    "blockHeight": 931102,
+    "timestamp": 1767910303,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "xolosarmy",
+    "tokenId": "f04084930392b9b97b4cfbf2ebc5ece7de179357707ceb02f4ca0c10db2f5fcd",
+    "cid": "QmbaJhSMVEACW1u2VMskRwtxk3f1mA3iFCVtBZ1AuKEZ5s",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46541f786f6c6f7341726d79204e6574776f726b2053746174652047656e6573697335697066733a2f2f516d62614a68534d5645414357317532564d736b527774786b3366316d41336946435674425a3141754b455a35732048a8840e854c6914895e567a8704e00724e86896c1c98233b3df254e732279bc01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | xolosArmy Network State Genesis",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmbaJhSMVEACW1u2VMskRwtxk3f1mA3iFCVtBZ1AuKEZ5s",
+      "cid": "QmbaJhSMVEACW1u2VMskRwtxk3f1mA3iFCVtBZ1AuKEZ5s",
+      "json": {
+        "name": "xolosArmy Network State Genesis",
+        "description": "NFT Genesis dentro del xolosArmy Network State usando la Tonalli Wallet.",
+        "image": "ipfs://QmXNJ256xJNT2B5i8KotrBhdxmiJ1jpsLM4vq8e3GJLEBF",
+        "external_url": "https://tonalli.cash",
+        "collection": {
+          "name": "xolosArmy NFTs",
+          "family": "XolosArmy"
+        },
+        "attributes": [],
+        "parent": "170aa1303e761e132f40c861751905fee1148c213b8352435c89950d721909e9",
+        "app": "Tonalli RMZWallet"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "xolosArmy Network State Genesis"
+  }
+]
