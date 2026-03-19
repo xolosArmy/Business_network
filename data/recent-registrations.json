@@ -1,5 +1,16 @@
 [
   {
+    "txid": "95c1dc3330ef04af95a33b0d3be2ef66f5d4c050195c88983fa00f2dc51f0aa2",
+    "slug": "muna",
+    "tokenId": "95c1dc3330ef04af95a33b0d3be2ef66f5d4c050195c88983fa00f2dc51f0aa2",
+    "cid": "QmWunHhwwpkueQJNFrdhWpwmGcgiSqNzLdF8z1EfXQk6Wr",
+    "nombre": "Muna (Ramírez/Ramírez) Mex.",
+    "timestamp": 1773930948,
+    "blockHeight": 941059,
+    "hasParents": false,
+    "ipfsOk": true
+  },
+  {
     "txid": "cec56b1d30592fa06096cca506aaf9771fe0f760e06b159bce89126587615fe0",
     "slug": "yeyetzi",
     "tokenId": "cec56b1d30592fa06096cca506aaf9771fe0f760e06b159bce89126587615fe0",
@@ -117,17 +128,6 @@
     "nombre": "Venus (Ramírez/Ramírez) Mex.",
     "timestamp": 1773262860,
     "blockHeight": 939960,
-    "hasParents": false,
-    "ipfsOk": true
-  },
-  {
-    "txid": "8c36eccf70422c69e6a83d8e835d74e614b60e7a1d825c02fdab13f7eea27d9e",
-    "slug": "diago",
-    "tokenId": "8c36eccf70422c69e6a83d8e835d74e614b60e7a1d825c02fdab13f7eea27d9e",
-    "cid": "QmUq2ET4VzunrkT4RcnLJupnh34U9ftskWYgWw8Ethrsdx",
-    "nombre": "Diago (Ramírez/Ramírez) Mex.",
-    "timestamp": 1773262348,
-    "blockHeight": 939959,
     "hasParents": false,
     "ipfsOk": true
   }

@@ -1,5 +1,68 @@
 [
   {
+    "txid": "95c1dc3330ef04af95a33b0d3be2ef66f5d4c050195c88983fa00f2dc51f0aa2",
+    "blockHeight": 941059,
+    "timestamp": 1773930948,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "muna",
+    "tokenId": "95c1dc3330ef04af95a33b0d3be2ef66f5d4c050195c88983fa00f2dc51f0aa2",
+    "cid": "QmWunHhwwpkueQJNFrdhWpwmGcgiSqNzLdF8z1EfXQk6Wr",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46541d4d756e61202852616dc3ad72657a2f52616dc3ad72657a29204d65782e35697066733a2f2f516d57756e48687777706b7565514a4e467264685770776d4763676953714e7a4c6446387a31456658516b365772202c134600fde567e6edb4de0efb239a6427ce711ddd4cf292a71202700735b89901004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Muna (Ramírez/Ramírez) Mex.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmWunHhwwpkueQJNFrdhWpwmGcgiSqNzLdF8z1EfXQk6Wr",
+      "cid": "QmWunHhwwpkueQJNFrdhWpwmGcgiSqNzLdF8z1EfXQk6Wr",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "joven"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Momento oficial de la entrega de Muna Ramírez a Aldo Heriberto en la Ciudad de México. Este NFT documenta el primer encuentro entre humano y xoloitzcuintle, marcando el inicio de una nueva historia rumbo a Coahuila dentro del Archivo del Linaje Vivo de Xolos Ramírez.",
+        "external_url": "https://xolosramirez.com/blog/2026-03-17-entrega-muna-ramirez.html",
+        "image": "ipfs://QmcB3AYMcFHW1zEkkWyWxjmaJpmfPSA4iaFjXNdBq8zRPd",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "joven",
+          "fechaNacimiento": "2025-10-06",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Yeyeytzi (Ramírez/Ramírez) Mex.",
+          "microchip": "939000002754935",
+          "padre": "Xoxo (Ramírez/Ramírez) Mex.",
+          "registroFCM": "FCMZZ3496-A",
+          "sexo": "Hembra",
+          "variedad": "Sin pelo"
+        },
+        "name": "Muna (Ramírez/Ramírez) Mex.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Muna (Ramírez/Ramírez) Mex."
+  },
+  {
     "txid": "cec56b1d30592fa06096cca506aaf9771fe0f760e06b159bce89126587615fe0",
     "blockHeight": 940678,
     "timestamp": 1773703700,

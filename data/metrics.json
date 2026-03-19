@@ -1,12 +1,12 @@
 {
-  "linajes_registrados": 51,
-  "linajes_validados_ipfs": 51,
+  "linajes_registrados": 52,
+  "linajes_validados_ipfs": 52,
   "registros_con_padre_y_madre": 0,
-  "txs_xolo_detectadas": 51,
-  "ipfs_disponibles": 51,
+  "txs_xolo_detectadas": 52,
+  "ipfs_disponibles": 52,
   "ipfs_fallidos": 0,
-  "nfts_con_slug_resuelto": 51,
-  "ult_registro_txid": "cec56b1d30592fa06096cca506aaf9771fe0f760e06b159bce89126587615fe0",
-  "ult_registro_slug": "yeyetzi",
-  "ultima_actualizacion": "2026-03-18T17:06:10.029Z"
+  "nfts_con_slug_resuelto": 52,
+  "ult_registro_txid": "95c1dc3330ef04af95a33b0d3be2ef66f5d4c050195c88983fa00f2dc51f0aa2",
+  "ult_registro_slug": "muna",
+  "ultima_actualizacion": "2026-03-19T15:10:51.285Z"
 }
