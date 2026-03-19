@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arquitectura y Evolución de la Infraestructura Crítica del Estado-Red | xolosArmy Network</title>
+  <meta name="description" content="Análisis técnico sobre la renovación de la infraestructura crítica de xolosArmy Network, el Oráculo XOLO, Chronik, WireGuard, IPFS y la Civilización Tonalli como base operativa de un Estado-Red." />
+  <meta name="theme-color" content="#07131a" />
+
+  <style>
+    :root {
+      --bg: #061017;
+      --bg-soft: #0b1821;
+      --panel: rgba(10, 24, 33, 0.82);
+      --panel-strong: rgba(8, 18, 26, 0.95);
+      --text: #e8f4f3;
+      --muted: #9fc0bf;
+      --line: rgba(107, 227, 208, 0.18);
+      --line-strong: rgba(107, 227, 208, 0.34);
+      --accent: #47e6cf;
+      --accent-2: #f6b84c;
+      --accent-3: #90fff2;
+      --danger: #ff8a8a;
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.38);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --max: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(71, 230, 207, 0.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(246, 184, 76, 0.10), transparent 24%),
+        linear-gradient(180deg, #040b10 0%, #07131a 40%, #091821 100%);
+      line-height: 1.72;
+    }
+
+    a {
+      color: var(--accent-3);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 88px 0 56px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(71, 230, 207, 0.08), transparent 35%),
+        linear-gradient(225deg, rgba(246, 184, 76, 0.06), transparent 30%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: rgba(71, 230, 207, 0.06);
+      color: var(--accent-3);
+      font-size: 0.86rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      backdrop-filter: blur(10px);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 18px rgba(71, 230, 207, 0.8);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 28px;
+      align-items: end;
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.35rem, 5vw, 4.35rem);
+      line-height: 1.03;
+      letter-spacing: -0.04em;
+      max-width: 14ch;
+    }
+
+    .hero p.lead {
+      margin: 0;
+      max-width: 76ch;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .hero-card {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(7, 19, 26, 0.88), rgba(11, 24, 33, 0.92));
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero-card h3 {
+      margin: 0 0 14px;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-3);
+    }
+
+    .hero-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .hero-card li + li {
+      margin-top: 10px;
+    }
+
+    .main {
+      padding: 42px 0 80px;
+    }
+
+    .article-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 24px;
+    }
+
+    .toc,
+    .side-card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .toc + .side-card {
+      margin-top: 18px;
+    }
+
+    .toc h3,
+    .side-card h3 {
+      margin: 0 0 14px;
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-3);
+    }
+
+    .toc ol {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .toc li + li {
+      margin-top: 10px;
+    }
+
+    .toc a {
+      color: var(--muted);
+    }
+
+    .toc a:hover {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .section {
+      margin-bottom: 26px;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, rgba(9, 22, 30, 0.95), rgba(9, 19, 27, 0.88));
+      box-shadow: var(--shadow);
+    }
+
+    .section h2 {
+      margin: 0 0 16px;
+      font-size: clamp(1.45rem, 2.4vw, 2rem);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+
+    .section h3 {
+      margin: 24px 0 12px;
+      font-size: 1.08rem;
+      color: var(--accent-3);
+      letter-spacing: -0.02em;
+    }
+
+    .section p {
+      margin: 0 0 16px;
+      color: var(--text);
+    }
+
+    .section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .callout {
+      margin: 18px 0 22px;
+      padding: 18px 18px 18px 20px;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      background: rgba(71, 230, 207, 0.08);
+      color: var(--muted);
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.7rem;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+      color: var(--accent-3);
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .list-clean {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .list-clean li + li {
+      margin-top: 10px;
+    }
+
+    .steps {
+      counter-reset: item;
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 14px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .step::before {
+      counter-increment: item;
+      content: counter(item);
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(71, 230, 207, 0.22), rgba(246, 184, 76, 0.12));
+      border: 1px solid var(--line-strong);
+      color: var(--accent-3);
+      font-weight: 700;
+    }
+
+    .step h4 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0 10px;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    th,
+    td {
+      padding: 14px 14px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+    }
+
+    th {
+      color: var(--accent-3);
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(71, 230, 207, 0.05);
+    }
+
+    td {
+      color: var(--muted);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .quote {
+      padding: 22px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(180deg, rgba(71, 230, 207, 0.06), rgba(255, 255, 255, 0.015));
+      margin: 22px 0 6px;
+    }
+
+    .quote p {
+      margin: 0;
+      font-size: 1.08rem;
+      color: var(--text);
+    }
+
+    .quote small {
+      display: block;
+      margin-top: 10px;
+      color: var(--muted);
+    }
+
+    .recommendations {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .rec {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .rec h4 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      color: var(--accent-3);
+    }
+
+    .rec p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .footer-box {
+      margin-top: 30px;
+      padding: 26px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line-strong);
+      background: linear-gradient(180deg, rgba(71, 230, 207, 0.07), rgba(246, 184, 76, 0.04));
+    }
+
+    .footer-box h3 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+      color: var(--text);
+    }
+
+    .footer-box p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .tag {
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .side-card p,
+    .side-card li {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .side-card ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .side-card li + li {
+      margin-top: 8px;
+    }
+
+    .divider {
+      height: 1px;
+      margin: 20px 0;
+      background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .article-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .metrics,
+      .recommendations {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(var(--max), calc(100% - 20px));
+      }
+
+      .hero {
+        padding: 64px 0 40px;
+      }
+
+      .section {
+        padding: 22px;
+      }
+
+      .metrics,
+      .recommendations {
+        grid-template-columns: 1fr;
+      }
+
+      .step {
+        grid-template-columns: 1fr;
+      }
+
+      .step::before {
+        width: 40px;
+        height: 40px;
+      }
+
+      table,
+      thead,
+      tbody,
+      th,
+      td,
+      tr {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tr {
+        border-bottom: 1px solid var(--line);
+      }
+
+      td {
+        border: none;
+        padding: 10px 12px;
+      }
+
+      td::before {
+        content: attr(data-label);
+        display: block;
+        font-size: 0.78rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--accent-3);
+        margin-bottom: 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="container">
+      <div class="eyebrow">xolosArmy Network · Infraestructura crítica · Civilización Tonalli</div>
+
+      <div class="hero-grid">
+        <div>
+          <h1>Arquitectura y Evolución de la Infraestructura Crítica del Estado-Red</h1>
+          <p class="lead">
+            El caso de <strong>xolosArmy Network</strong> y la <strong>Civilización Tonalli</strong> demuestra cómo una comunidad digital puede comenzar a construir soberanía operativa a través de infraestructura propia, automatización verificable y registros biológicos blindados por blockchain, IPFS y criptografía autoral.
+          </p>
+
+          <div class="meta-row">
+            <span class="tag">Estado-Red</span>
+            <span class="tag">WireGuard</span>
+            <span class="tag">Chronik</span>
+            <span class="tag">IPFS</span>
+            <span class="tag">eCash</span>
+            <span class="tag">Oráculo XOLO</span>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <h3>Resumen ejecutivo</h3>
+          <ul>
+            <li>Conectividad soberana entre VPS y nodo residencial mediante túnel WireGuard.</li>
+            <li>Lectura directa del registro distribuido eCash a través de Chronik.</li>
+            <li>Motor autónomo de censo y linajes: <strong>Oráculo XOLO</strong>.</li>
+            <li>Pipeline automatizado cada 15 minutos con publicación firmada.</li>
+            <li>Integración total del ecosistema web con explorador propio y dashboard dinámico.</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <div class="article-layout">
+
+        <article class="content">
+          <section class="section" id="intro">
+            <h2>Introducción</h2>
+            <p>
+              La transición de una comunidad digital hacia una entidad soberana de tipo Estado-Red exige mucho más que presencia en redes, branding o actividad en foros. Requiere una infraestructura capaz de producir verdad verificable, custodiar memoria institucional y operar sin dependencia estructural de terceros. En el caso de <strong>xolosArmy Network</strong>, la reciente renovación de su stack no representa una simple modernización visual del sitio web, sino una reingeniería profunda de su base tecnológica.
+            </p>
+            <p>
+              Esta transformación ha permitido que el proyecto deje de vivir únicamente en el terreno de la visión y comience a funcionar como una arquitectura operativa donde la memoria biológica y genealógica de ejemplares Xoloitzcuintle ya puede anclarse a sistemas de validación on-chain. La combinación de <strong>eCash</strong>, <strong>Chronik</strong>, <strong>IPFS</strong>, <strong>WireGuard</strong>, automatización vía scripts y publicación firmada por Git convierte a la Civilización Tonalli en un experimento real de soberanía digital aplicada.
+            </p>
+            <div class="callout">
+              xolosArmy ya no depende únicamente de plataformas externas para narrar su identidad. Comienza a producir, validar y publicar su propia fuente de verdad.
+            </div>
+
+            <div class="metrics">
+              <div class="metric">
+                <strong>24/7</strong>
+                <span>Operación continua del VPS y del pipeline de publicación</span>
+              </div>
+              <div class="metric">
+                <strong>15m</strong>
+                <span>Frecuencia de actualización del censo y las métricas</span>
+              </div>
+              <div class="metric">
+                <strong>51</strong>
+                <span>Registros históricos XOLO v1 procesados correctamente</span>
+              </div>
+              <div class="metric">
+                <strong>100%</strong>
+                <span>Fuente de datos consultada desde nodo propio eCash</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="estado-red">
+            <h2>1. Fundamentos del Estado-Red y la soberanía tecnológica</h2>
+            <p>
+              El concepto de <strong>Estado-Red</strong>, difundido por Balaji Srinivasan, describe comunidades digitales altamente alineadas que desarrollan economía, identidad y capacidad organizativa suficiente para constituirse como instituciones de nuevo tipo. Bajo esta lógica, la secuencia es clara: <em>nube primero, tierra después</em>.
+            </p>
+            <p>
+              En este marco, la soberanía tecnológica es el prerrequisito absoluto. Una comunidad que depende de APIs ajenas, exploradores de terceros y servicios centralizados no posee una fuente propia de verdad. Sin esa fuente, no puede sostener memoria verificable, ni construir legitimidad, ni blindar su archivo civilizatorio.
+            </p>
+            <p>
+              xolosArmy Network comienza a resolver ese problema mediante una arquitectura híbrida en la que la blockchain funciona como libro mayor, IPFS como capa de persistencia distribuida y el nodo propio como autoridad primaria de consulta. El resultado es un cambio radical: el sistema ya no se limita a comunicar una identidad, sino que empieza a operar una institucionalidad técnica.
+            </p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Característica</th>
+                  <th>Modelo centralizado (Web2)</th>
+                  <th>Modelo Estado-Red (xolosArmy)</th>
+                  <th>Implicación</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Característica">Fuente de verdad</td>
+                  <td data-label="Modelo centralizado (Web2)">APIs y exploradores de terceros</td>
+                  <td data-label="Modelo Estado-Red (xolosArmy)">Nodo propio eCash + Chronik</td>
+                  <td data-label="Implicación">Se elimina dependencia de intermediarios</td>
+                </tr>
+                <tr>
+                  <td data-label="Característica">Validación de autoría</td>
+                  <td data-label="Modelo centralizado (Web2)">Autoridades externas y plataformas</td>
+                  <td data-label="Modelo Estado-Red (xolosArmy)">Firmas criptográficas y commits firmados</td>
+                  <td data-label="Implicación">Autenticidad verificable por el propio sistema</td>
+                </tr>
+                <tr>
+                  <td data-label="Característica">Almacenamiento</td>
+                  <td data-label="Modelo centralizado (Web2)">Nube cerrada y bases de datos tradicionales</td>
+                  <td data-label="Modelo Estado-Red (xolosArmy)">On-chain + IPFS</td>
+                  <td data-label="Implicación">Resistencia a censura, pérdida y alteración</td>
+                </tr>
+                <tr>
+                  <td data-label="Característica">Actualización de censo</td>
+                  <td data-label="Modelo centralizado (Web2)">Manual o administrativa</td>
+                  <td data-label="Modelo Estado-Red (xolosArmy)">Oráculo autónomo cada 15 minutos</td>
+                  <td data-label="Implicación">Transparencia operativa en tiempo casi real</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="section" id="wireguard">
+            <h2>2. Conectividad soberana: el túnel WireGuard</h2>
+            <p>
+              Uno de los hitos estructurales de la renovación fue el establecimiento de un canal cifrado entre el <strong>VPS público</strong> y el <strong>nodo residencial de eCash</strong>. Esta capa de conectividad permite separar dos funciones críticas: la disponibilidad pública del sistema y la custodia física del dato.
+            </p>
+            <p>
+              El uso de <strong>WireGuard</strong> fue una decisión estratégica. Frente a alternativas más pesadas o históricamente más complejas, WireGuard ofrece una base criptográfica más limpia, menor superficie de ataque y un desempeño excelente para mantener una comunicación constante entre ambos extremos de la infraestructura.
+            </p>
+            <p>
+              Gracias a este túnel, el servidor web consulta el nodo interno como si estuviera conectado a una red local privada. La lectura de datos ya no pasa por endpoints públicos ni por exploradores que puedan aplicar límites, retrasos o interpretaciones parciales del estado de la red.
+            </p>
+
+            <div class="quote">
+              <p>
+                La soberanía de datos comienza cuando el sistema consulta su propia copia verificable del registro distribuido, en lugar de pedir permiso a un intermediario.
+              </p>
+              <small>Principio operativo de la infraestructura Tonalli</small>
+            </div>
+          </section>
+
+          <section class="section" id="chronik">
+            <h2>3. Chronik como capa de indexación soberana</h2>
+            <p>
+              En el ecosistema de eCash, <strong>Chronik</strong> cumple un papel decisivo. Más que una simple API, funciona como un indexador de alto rendimiento integrado directamente al nodo. Esto permite búsquedas eficientes sobre transacciones, direcciones, UTXOs y metadatos de tokens con una latencia mínima.
+            </p>
+            <p>
+              Para la Civilización Tonalli, Chronik es la herramienta que vuelve legible la memoria on-chain. Sin una capa como esta, el flujo de transacciones seguiría siendo una masa cruda de datos. Con Chronik, la red puede interpretar esa actividad como genealogía, propiedad, continuidad y trazabilidad.
+            </p>
+            <h3>Capacidades clave dentro del sistema</h3>
+            <ul class="list-clean">
+              <li>Consulta directa y rápida de UTXOs asociados a identidades y activos específicos.</li>
+              <li>Mapeo de ownership de NFTs que representan ejemplares únicos.</li>
+              <li>Extracción eficiente de referencias a OP_RETURN y metadatos vinculados.</li>
+              <li>Conversión del registro distribuido en una capa legible para dashboards y exploradores.</li>
+            </ul>
+          </section>
+
+          <section class="section" id="oraculo">
+            <h2>4. El Oráculo XOLO: motor de censo y linajes</h2>
+            <p>
+              El corazón operativo de esta evolución es el <strong>Oráculo XOLO</strong>, un servicio desarrollado en <strong>Node.js + TypeScript</strong> que monitorea la blockchain, interpreta transacciones relevantes, valida metadatos y genera el estado público del sistema.
+            </p>
+            <p>
+              Su función va más allá de leer datos. El Oráculo observa, selecciona, valida y publica. En la práctica, cumple una función similar a la de un registro civil automatizado, pero anclado sobre infraestructura descentralizada.
+            </p>
+
+            <div class="steps">
+              <div class="step">
+                <div>
+                  <h4>Escaneo de blockchain</h4>
+                  <p>Consulta Chronik para identificar actividad reciente vinculada al universo XOLO dentro de la red eCash.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div>
+                  <h4>Detección de NFTs SLP NFT1</h4>
+                  <p>Filtra transacciones compatibles con el protocolo NFT1 donde cada activo representa un ejemplar único del linaje.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div>
+                  <h4>Extracción de metadatos</h4>
+                  <p>Localiza referencias contenidas en OP_RETURN y obtiene vínculos asociados al archivo persistido en IPFS.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div>
+                  <h4>Validación de registros</h4>
+                  <p>Descarga el JSON correspondiente y verifica consistencia biológica, estructural y autoral según los estándares de la Civilización Tonalli.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div>
+                  <h4>Generación de estado público</h4>
+                  <p>Compila la información en archivos estructurados como <code>metrics.json</code> y <code>lineages.json</code> para alimentar el frontend.</p>
+                </div>
+              </div>
+            </div>
+
+            <h3>Resultado de la fase inicial</h3>
+            <p>
+              En su primera etapa operativa, el sistema procesó correctamente <strong>51 registros históricos de XOLO v1</strong>. Este resultado valida que la migración de infraestructura mantiene intacta la memoria fundacional del archivo genealógico, sin necesidad de reconstrucción manual ni dependencia externa.
+            </p>
+            <p>
+              El contador de linajes del sitio principal dejó de ser una cifra estática para convertirse en una métrica viva, sincronizada con el estado real de la red.
+            </p>
+          </section>
+
+          <section class="section" id="pipeline">
+            <h2>5. Automatización de producción y pipeline de publicación</h2>
+            <p>
+              Un Estado-Red no puede sostener su legitimidad operativa si depende de intervención manual para actualizar su memoria básica. Por ello, uno de los avances más relevantes fue la construcción de un pipeline automatizado que permite que el sistema se sincronice, valide y publique su estado de forma periódica.
+            </p>
+            <p>
+              El script <strong>publish-metrics.sh</strong> actúa como coordinador de esta cadena de eventos. Su diseño incorpora mecanismos de protección como <strong>flock</strong>, evitando que dos ejecuciones simultáneas dañen la consistencia de los archivos o generen conflictos de publicación.
+            </p>
+
+            <h3>Secuencia automatizada</h3>
+            <ul class="list-clean">
+              <li>Sincronización del repositorio local con la última versión disponible.</li>
+              <li>Ejecución del Oráculo XOLO para detectar y procesar nuevas transacciones.</li>
+              <li>Actualización de archivos estructurados como <code>metrics.json</code> y <code>lineages.json</code>.</li>
+              <li>Commit automático de cambios detectados.</li>
+              <li>Push al repositorio remoto y despliegue vía GitHub Pages.</li>
+            </ul>
+
+            <div class="callout">
+              La automatización cada 15 minutos convierte al sistema en una infraestructura que respira sola: observa la cadena, actualiza el censo y publica la nueva verdad institucional.
+            </div>
+          </section>
+
+          <section class="section" id="autoridad">
+            <h2>6. Autoría criptográfica e identidad institucional</h2>
+            <p>
+              La validez de una actualización no depende únicamente de su existencia, sino de la posibilidad de probar quién la emitió. La configuración de Git con firma oficial asociada a <strong>fernando@xolosramirez.com</strong> añade una capa explícita de autoría verificable a cada actualización del sistema.
+            </p>
+            <p>
+              En términos institucionales, esto convierte el repositorio y sus publicaciones periódicas en algo más que una bitácora técnica. Se transforman en el equivalente digital de un diario oficial: cada actualización del censo, cada sincronización del archivo y cada cambio validado llevan consigo un sello autoral.
+            </p>
+            <p>
+              Para una red que busca consolidarse como núcleo civilizatorio y no solo como comunidad temática, este detalle es fundamental. La infraestructura no solo debe funcionar; debe dejar constancia verificable de quién habla cuando publica verdad.
+            </p>
+          </section>
+
+          <section class="section" id="ecosistema">
+            <h2>7. Ecosistema web integrado y explorador soberano</h2>
+            <p>
+              La soberanía técnica pierde fuerza cuando la experiencia del usuario termina rompiéndose en herramientas ajenas. Por eso, la renovación de xolosArmy no se limitó a backend e indexación: también incluyó la consolidación de un ecosistema web propio con dashboard, explorador y wallet como puertas de entrada coherentes a la Civilización Tonalli.
+            </p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Componente web</th>
+                  <th>Función</th>
+                  <th>Estado post-renovación</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Componente web">xolosarmy.xyz</td>
+                  <td data-label="Función">Dashboard, visualización de métricas y censo</td>
+                  <td data-label="Estado post-renovación">Dinámico, alimentado por el Oráculo cada 15 minutos</td>
+                </tr>
+                <tr>
+                  <td data-label="Componente web">explorer.xolosarmy.xyz</td>
+                  <td data-label="Función">Auditoría pública de transacciones y memoria on-chain</td>
+                  <td data-label="Estado post-renovación">Desplegado e integrado al ecosistema propio</td>
+                </tr>
+                <tr>
+                  <td data-label="Componente web">Tonalli Wallet</td>
+                  <td data-label="Función">Custodia de identidad y activos</td>
+                  <td data-label="Estado post-renovación">Puerta de acceso a la Civilización Tonalli</td>
+                </tr>
+                <tr>
+                  <td data-label="Componente web">Xolos Ramírez Portal</td>
+                  <td data-label="Función">Nodo matriz cultural y criadero físico</td>
+                  <td data-label="Estado post-renovación">Guardia del linaje biológico y la memoria cultural</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p>
+              La existencia de un explorador propio resuelve un problema de inmersión y confianza. Antes, verificar una transacción implicaba salir del dominio xolosArmy y delegar la experiencia de auditoría a una interfaz externa. Ahora, la red puede exponer su propia memoria desde su propia superficie.
+            </p>
+          </section>
+
+          <section class="section" id="civilizacion">
+            <h2>8. Implicaciones socio-técnicas: la Civilización Tonalli</h2>
+            <p>
+              La infraestructura construida no es un fin en sí mismo. Su razón de ser es proteger la genética, la memoria y la continuidad cultural del Xoloitzcuintle dentro de un paradigma donde la alteración arbitraria del registro ya no sea posible.
+            </p>
+            <p>
+              La <strong>Civilización Tonalli</strong> plantea una arquitectura cultural-digital en la que cada ejemplar puede anclarse a un archivo verificable e inmutable. El resultado es un <strong>Archivo del Linaje Vivo</strong>: una memoria híbrida donde biología y criptografía dejan de ser dominios separados.
+            </p>
+
+            <h3>Doble preservación</h3>
+            <ul class="list-clean">
+              <li><strong>Preservación biológica:</strong> genealogía, atributos, continuidad y autenticidad del ejemplar.</li>
+              <li><strong>Preservación digital:</strong> anclaje on-chain, metadatos distribuidos y auditoría pública.</li>
+            </ul>
+
+            <p>
+              Con la incorporación de <strong>Tonalli Wallet</strong> y herramientas asociadas, los miembros del ecosistema ya no solo observan la red: participan en ella mediante identidad, propiedad, mensajes on-chain y futuras capas de gobernanza. Esa participación es lo que permite que la comunidad empiece a desarrollar una verdadera conciencia interna como civilización digital.
+            </p>
+          </section>
+
+          <section class="section" id="desafios">
+            <h2>9. Límites y desafíos de soberanía</h2>
+            <p>
+              Aunque los avances son reales, la arquitectura todavía convive con un límite evidente: la diferencia entre soberanía digital y reconocimiento jurídico externo. Un certificado blockchain puede ser plenamente válido dentro del ecosistema Tonalli, pero aún debe interactuar con marcos regulatorios tradicionales cuando se trata de exportación animal, documentación veterinaria y validación transfronteriza.
+            </p>
+            <p>
+              En ese sentido, xolosArmy puede aspirar a consolidarse como una <strong>autoridad descentralizada de linaje</strong>, pero todavía necesita interfaces con el sistema estatal clásico para operar en el mundo físico.
+            </p>
+            <p>
+              A ello se suma la dimensión económica. La integración de <strong>eCash (XEC)</strong> como capa monetaria nativa ofrece velocidad y coherencia interna, pero la volatilidad general del mercado cripto sigue siendo una variable importante. La estabilidad a largo plazo dependerá de crear valor real dentro de la red: reputación, servicios, acceso, archivo, comunidad y utilidad cultural.
+            </p>
+          </section>
+
+          <section class="section" id="estado-actual">
+            <h2>10. Estado actual del sistema</h2>
+            <p>
+              Al cierre de esta fase, la infraestructura opera con un nivel alto de coherencia interna. El flujo completo —desde el nodo residencial hasta la publicación del dashboard— funciona ya como una arquitectura integrada de observación, validación y exposición pública.
+            </p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Componente</th>
+                  <th>Estado actual</th>
+                  <th>Especificación técnica</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Componente">Servidor</td>
+                  <td data-label="Estado actual">Operativo 24/7</td>
+                  <td data-label="Especificación técnica">VPS con logs, control de bloqueos y publicación automatizada</td>
+                </tr>
+                <tr>
+                  <td data-label="Componente">Base de datos</td>
+                  <td data-label="Estado actual">Híbrida / On-chain</td>
+                  <td data-label="Especificación técnica">eCash como registro + IPFS para metadatos biológicos</td>
+                </tr>
+                <tr>
+                  <td data-label="Componente">Sincronización</td>
+                  <td data-label="Estado actual">Automatizada</td>
+                  <td data-label="Especificación técnica">Cron Job cada 15 minutos con despliegue vía GitHub Pages</td>
+                </tr>
+                <tr>
+                  <td data-label="Componente">Seguridad</td>
+                  <td data-label="Estado actual">Cifrado punto a punto</td>
+                  <td data-label="Especificación técnica">WireGuard entre VPS y nodo local</td>
+                </tr>
+                <tr>
+                  <td data-label="Componente">Identidad</td>
+                  <td data-label="Estado actual">Firmada</td>
+                  <td data-label="Especificación técnica">Git con sello oficial del autor</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="section" id="recomendaciones">
+            <h2>11. Recomendaciones técnicas para la siguiente fase</h2>
+            <p>
+              Para fortalecer la siguiente etapa del Estado-Red Tonalli, la prioridad ya no es únicamente construir, sino aumentar resiliencia, escalabilidad y capacidad institucional. Estas son las líneas de evolución más claras:
+            </p>
+
+            <div class="recommendations">
+              <div class="rec">
+                <h4>Redundancia de nodo</h4>
+                <p>Desplegar un segundo nodo eCash en otra ubicación geográfica para evitar puntos únicos de fallo en la obtención de datos.</p>
+              </div>
+              <div class="rec">
+                <h4>Expansión del Oráculo</h4>
+                <p>Soportar nuevas generaciones de linaje como v2 y v3, con validaciones más ricas y estructuras más robustas.</p>
+              </div>
+              <div class="rec">
+                <h4>Gobernanza on-chain</h4>
+                <p>Diseñar mecanismos de votación, señalización y participación comunitaria integrados con Tonalli Wallet.</p>
+              </div>
+              <div class="rec">
+                <h4>Identidad soberana</h4>
+                <p>Incorporar DIDs o sistemas reputacionales verificables para propietarios, guardianes y miembros del ecosistema.</p>
+              </div>
+              <div class="rec">
+                <h4>Observabilidad</h4>
+                <p>Añadir alertas, dashboards de salud, monitoreo de errores y pruebas automáticas para reforzar la estabilidad del pipeline.</p>
+              </div>
+              <div class="rec">
+                <h4>Resiliencia del frontend</h4>
+                <p>Evaluar espejos adicionales, snapshots firmados y copias redundantes de métricas críticas para continuidad operativa.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="conclusion">
+            <h2>12. Conclusión</h2>
+            <p>
+              La renovación de xolosArmy Network demuestra que es posible construir infraestructura soberana con herramientas abiertas, automatización disciplinada y protocolos descentralizados. Lo logrado en esta fase no es simplemente una mejora de sitio: es la aparición de una institucionalidad técnica propia.
+            </p>
+            <p>
+              El túnel WireGuard, la lectura soberana por Chronik, el Oráculo XOLO, la publicación automática firmada y la integración del ecosistema web convierten al proyecto en algo distinto a una comunidad digital convencional. xolosArmy comienza a sostener una memoria operativa que no depende de plataformas ajenas para existir.
+            </p>
+            <p>
+              El resultado más importante es este: la memoria del linaje ya no descansa solo en confianza humana o en archivos aislados. Comienza a habitar una arquitectura donde tradición biológica, identidad cultural y criptografía convergen en una misma capa de permanencia.
+            </p>
+
+            <div class="footer-box">
+              <h3>La memoria del linaje entra en la era de la soberanía verificable</h3>
+              <p>
+                El Oráculo XOLO ya no es una metáfora. Es una pieza viva de infraestructura que observa, valida y publica el estado de la Civilización Tonalli para las generaciones futuras.
+              </p>
+            </div>
+          </section>
+        </article>
+
+        <aside class="sidebar">
+          <nav class="toc">
+            <h3>Índice</h3>
+            <ol>
+              <li><a href="#intro">Introducción</a></li>
+              <li><a href="#estado-red">Fundamentos del Estado-Red</a></li>
+              <li><a href="#wireguard">Conectividad soberana</a></li>
+              <li><a href="#chronik">Chronik</a></li>
+              <li><a href="#oraculo">Oráculo XOLO</a></li>
+              <li><a href="#pipeline">Automatización</a></li>
+              <li><a href="#autoridad">Autoría criptográfica</a></li>
+              <li><a href="#ecosistema">Ecosistema web</a></li>
+              <li><a href="#civilizacion">Civilización Tonalli</a></li>
+              <li><a href="#desafios">Desafíos</a></li>
+              <li><a href="#estado-actual">Estado actual</a></li>
+              <li><a href="#recomendaciones">Recomendaciones</a></li>
+              <li><a href="#conclusion">Conclusión</a></li>
+            </ol>
+          </nav>
+
+          <div class="side-card">
+            <h3>Puntos clave</h3>
+            <ul>
+              <li>Infraestructura de datos basada en soberanía real de lectura.</li>
+              <li>Registro biológico transformado en memoria on-chain.</li>
+              <li>Automatización institucional con cadencia estable.</li>
+              <li>Explorador propio para auditoría pública de la red.</li>
+              <li>Base tecnológica para una futura gobernanza Tonalli.</li>
+            </ul>
+          </div>
+
+          <div class="side-card">
+            <h3>Stack crítico</h3>
+            <ul>
+              <li>eCash</li>
+              <li>Chronik</li>
+              <li>WireGuard</li>
+              <li>Node.js + TypeScript</li>
+              <li>IPFS</li>
+              <li>GitHub Pages</li>
+              <li>Git firmado</li>
+            </ul>
+            <div class="divider"></div>
+            <p>
+              Esta combinación convierte a xolosArmy en una red con capacidad de producir su propia verdad institucional.
+            </p>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
