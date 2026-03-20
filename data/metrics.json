@@ -1,12 +1,12 @@
 {
-  "linajes_registrados": 52,
-  "linajes_validados_ipfs": 52,
+  "linajes_registrados": 64,
+  "linajes_validados_ipfs": 64,
   "registros_con_padre_y_madre": 0,
-  "txs_xolo_detectadas": 52,
-  "ipfs_disponibles": 52,
+  "txs_xolo_detectadas": 64,
+  "ipfs_disponibles": 64,
   "ipfs_fallidos": 0,
-  "nfts_con_slug_resuelto": 52,
-  "ult_registro_txid": "95c1dc3330ef04af95a33b0d3be2ef66f5d4c050195c88983fa00f2dc51f0aa2",
-  "ult_registro_slug": "muna",
-  "ultima_actualizacion": "2026-03-19T15:10:51.285Z"
+  "nfts_con_slug_resuelto": 64,
+  "ult_registro_txid": "94fc64e3bea9ae9d333ff22cdf84925552d6922919958c86c9651fde64b0c4cb",
+  "ult_registro_slug": "aztlan",
+  "ultima_actualizacion": "2026-03-20T17:42:34.277Z"
 }
