@@ -1,12 +1,12 @@
 {
-  "linajes_registrados": 64,
-  "linajes_validados_ipfs": 64,
+  "linajes_registrados": 75,
+  "linajes_validados_ipfs": 75,
   "registros_con_padre_y_madre": 0,
-  "txs_xolo_detectadas": 64,
-  "ipfs_disponibles": 64,
+  "txs_xolo_detectadas": 75,
+  "ipfs_disponibles": 75,
   "ipfs_fallidos": 0,
-  "nfts_con_slug_resuelto": 64,
-  "ult_registro_txid": "94fc64e3bea9ae9d333ff22cdf84925552d6922919958c86c9651fde64b0c4cb",
-  "ult_registro_slug": "aztlan",
-  "ultima_actualizacion": "2026-03-20T17:42:34.277Z"
+  "nfts_con_slug_resuelto": 75,
+  "ult_registro_txid": "a4c358ca51058e3b893a3579c0d558bec17a5854d2fd7200aa0d42b8c0ea76ca",
+  "ult_registro_slug": "rima",
+  "ultima_actualizacion": "2026-03-22T23:37:10.557Z"
 }
