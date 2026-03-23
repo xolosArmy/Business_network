@@ -1,5 +1,320 @@
 [
   {
+    "txid": "1dc6943cc081e410646c1466653a1c6937815ce6a05253f0e541620e47bb3d7f",
+    "blockHeight": 941637,
+    "timestamp": 1774293474,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "uxmal",
+    "tokenId": "1dc6943cc081e410646c1466653a1c6937815ce6a05253f0e541620e47bb3d7f",
+    "cid": "Qmau9MYxWmsL9wnDs8z2x1oaR68rNXRS14UWsstKHq3jgF",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46541755786d616c20284176696c6129204d65782e204643492e35697066733a2f2f516d6175394d5978576d734c39776e4473387a3278316f61523638724e585253313455577373744b4871336a67462001a4f2eec11de55b79cd970e76b51ff0f41e09dffb540551768e0ee41686e08b01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Uxmal (Avila) Mex. FCI.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/Qmau9MYxWmsL9wnDs8z2x1oaR68rNXRS14UWsstKHq3jgF",
+      "cid": "Qmau9MYxWmsL9wnDs8z2x1oaR68rNXRS14UWsstKHq3jgF",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Macho"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "¡Un día monumental para el Archivo del Linaje Vivo! 🏆 Damos la bienvenida al semental fundador UXMAL (AVILA) MEX. FCI. con su pedigrí FCM inmutable y verificado.",
+        "external_url": "https://www.youtube.com/shorts/m-E5W5mcS1Y",
+        "image": "ipfs://QmcvzxCPup9Lr9UWYAofuM7ZETzwpbawbpGffyLt4cymqJ",
+        "lineage": {
+          "color": "Mariposa",
+          "criador": "Jorge Humberto Avila Lopez",
+          "etapa": "adulto",
+          "fechaNacimiento": "2021-10-26",
+          "lugarNacimiento": "Morelos",
+          "madre": "QUETZALLI (ESPINOZA) MEX. FCI.",
+          "microchip": "93900002644408",
+          "padre": "TYZOC (AVILA) MEX. FCI.",
+          "registroFCM": "FCMB8012-B",
+          "sexo": "Macho",
+          "variedad": "Sin pelo"
+        },
+        "name": "Uxmal (Avila) Mex. FCI.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Uxmal (Avila) Mex. FCI."
+  },
+  {
+    "txid": "fb0f49f9b6c5b701c637afbe6c10088fe11b4689bdf7a3800e62ba1a192499ab",
+    "blockHeight": 941635,
+    "timestamp": 1774292417,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "chontal",
+    "tokenId": "fb0f49f9b6c5b701c637afbe6c10088fe11b4689bdf7a3800e62ba1a192499ab",
+    "cid": "QmbJWuXdomrEELs59XhHKrZuPufwdLJLV6V6dr75oGWQkK",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46542343484f4e54414c202852414d4952455a2f52414d4952455a29204d45582e204643492e35697066733a2f2f516d624a577558646f6d7245454c7335395868484b725a7550756677644c4a4c56365636647237356f4757516b4b2012c7178fee0536842ad9fcfa746591a24e0d12497796ee34f8e87b51092a1a3901004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | CHONTAL (RAMIREZ/RAMIREZ) MEX. FCI.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmbJWuXdomrEELs59XhHKrZuPufwdLJLV6V6dr75oGWQkK",
+      "cid": "QmbJWuXdomrEELs59XhHKrZuPufwdLJLV6V6dr75oGWQkK",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "joven"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro inmutable on-chain del xoloitzcuintle Estándar Sin Pelo Negro. Linaje 100% verificado: Jicamo Lopez x Tabasqueña Alatorre.",
+        "external_url": "https://www.youtube.com/shorts/RF0R0UnG1jg",
+        "image": "ipfs://QmWyHrK7LBovHAUtXmYKPncjrXGRMaxfWCbUKA4baBb265",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "joven",
+          "fechaNacimiento": "2023-06-07",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "TABASQUEÑA (ALATORRE) MEX.FCI.",
+          "microchip": "93900002700593",
+          "padre": "Jicamo (Lopez) Mex. FCI.",
+          "registroFCM": "FCMA5764-E",
+          "sexo": "Hembra",
+          "variedad": "Sin pelo"
+        },
+        "name": "CHONTAL (RAMIREZ/RAMIREZ) MEX. FCI.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "CHONTAL (RAMIREZ/RAMIREZ) MEX. FCI."
+  },
+  {
+    "txid": "731213c084ab76901592478583331a24cc9591d0aac079ec26afb2be65778505",
+    "blockHeight": 941627,
+    "timestamp": 1774288492,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "bolero",
+    "tokenId": "731213c084ab76901592478583331a24cc9591d0aac079ec26afb2be65778505",
+    "cid": "Qmc6DmfzdtAEnHeZ9ZBY5r4XKz6V4kbhYQ6iHWC7tajipQ",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e465422424f4c45524f202852414d4952455a2f52414d4952455a29204d45582e204643492e35697066733a2f2f516d6336446d667a647441456e48655a395a4259357234584b7a3656346b6268595136694857433774616a69705120e9fbe94b7ccbb79ec4b0bc7aade84c43026fed854a82141a0dd4d267a6bc2b9801004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | BOLERO (RAMIREZ/RAMIREZ) MEX. FCI.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/Qmc6DmfzdtAEnHeZ9ZBY5r4XKz6V4kbhYQ6iHWC7tajipQ",
+      "cid": "Qmc6DmfzdtAEnHeZ9ZBY5r4XKz6V4kbhYQ6iHWC7tajipQ",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Macho"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "joven"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain verificado de Bolero (Ramirez/Ramirez) Mex. FCI. Macho Intermedio con distintivos ojos azules y fenotipo pinto.",
+        "external_url": "https://www.youtube.com/shorts/pjw-8Qb4aRQ",
+        "image": "ipfs://QmRXmh1wMFQeQ5n97HupptbUEioosmCSFcdBKmDTUtTkJJ",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "joven",
+          "fechaNacimiento": "2024-05-07",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "MIMOSA (RAMIREZ/RAMIREZ) MEX.",
+          "microchip": "93900002718849",
+          "padre": "Uxmal (Avila) Mex. FCI",
+          "registroFCM": "FCMZZ1560-A",
+          "sexo": "Macho",
+          "variedad": "Sin pelo"
+        },
+        "name": "BOLERO (RAMIREZ/RAMIREZ) MEX. FCI.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "BOLERO (RAMIREZ/RAMIREZ) MEX. FCI."
+  },
+  {
+    "txid": "a4c6f91bc781ae03d82b71345715b9590a5cbea5ccccd4a9d505fef1da5b7bc3",
+    "blockHeight": 941626,
+    "timestamp": 1774288179,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "ticuiz",
+    "tokenId": "a4c6f91bc781ae03d82b71345715b9590a5cbea5ccccd4a9d505fef1da5b7bc3",
+    "cid": "QmXExoek4rTfAVh7RtT6PSoYScevco4tDR4iSk2Ta9iWJa",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46541c54696375697a20284c616e67617269636129204d65782e204643492e35697066733a2f2f516d5845786f656b34725466415668375274543650536f5953636576636f347444523469536b3254613969574a6120140463624276c2727d27b2490cc7be943c1ae626783d96667cf00d81ac3232e001004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Ticuiz (Langarica) Mex. FCI.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmXExoek4rTfAVh7RtT6PSoYScevco4tDR4iSk2Ta9iWJa",
+      "cid": "QmXExoek4rTfAVh7RtT6PSoYScevco4tDR4iSk2Ta9iWJa",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Macho"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro inmutable on-chain del xoloitzcuintle Miniatura Sin Pelo Bronce, Ticuiz (Langarica) Mex. FCI., un semental joven de linaje Puro Langarica.",
+        "external_url": "https://www.youtube.com/shorts/X3w0Cd-1ZE0",
+        "image": "ipfs://QmRM4FU2tEW6pWEuywqqkXYftCSALJr8bNdHpnqjNojYqk",
+        "lineage": {
+          "color": "Negro",
+          "criador": "Julio Cesar Langarica Dávila",
+          "etapa": "adulto",
+          "fechaNacimiento": "2022-09-20",
+          "lugarNacimiento": "Colima, Colima",
+          "madre": "MICTLA (LANGARICA) MEX.FCI.",
+          "microchip": "93900002685971",
+          "padre": "MIZTLI (LANGARICA) MEX.FCI.",
+          "registroFCM": "FCMA5830-B",
+          "sexo": "Macho",
+          "variedad": "Sin pelo"
+        },
+        "name": "Ticuiz (Langarica) Mex. FCI.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Ticuiz (Langarica) Mex. FCI."
+  },
+  {
+    "txid": "44b35bf6dfb472b982bf6964f9eeb6783b5eea5ab71e7adb84246b61ff4371f5",
+    "blockHeight": 941625,
+    "timestamp": 1774287889,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "jicamo",
+    "tokenId": "44b35bf6dfb472b982bf6964f9eeb6783b5eea5ab71e7adb84246b61ff4371f5",
+    "cid": "QmVX5JrRPsuSfqnDnrRQDr9npHVEjiWj8CXbr3ACAchym6",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e4654174a6963616d6f20284c6f70657a29204d65782e4643492e35697066733a2f2f516d5658354a72525073755366716e446e7252514472396e704856456a69576a3843586272334143416368796d362008580d5fc15cfebe65b2e7b14a78c6f32a87da8d960ddea7639a12f5dd2e7dde01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Jicamo (Lopez) Mex.FCI.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmVX5JrRPsuSfqnDnrRQDr9npHVEjiWj8CXbr3ACAchym6",
+      "cid": "QmVX5JrRPsuSfqnDnrRQDr9npHVEjiWj8CXbr3ACAchym6",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Macho"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "adulto"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro inmutable on-chain del xoloitzcuintle Standard Sin Pelo, Jicamo (Lopez) Mex.FCI., un semental consolidado.",
+        "external_url": "https://www.youtube.com/shorts/F609QslxZlQ",
+        "image": "ipfs://QmcHTon7LEdU2ovTuKE1SyBiXQketry3N4XY1rrLXhQd8G",
+        "lineage": {
+          "color": "Mariposa",
+          "criador": "Adriana Lopez Vazquez",
+          "etapa": "adulto",
+          "fechaNacimiento": "2021-12-24",
+          "lugarNacimiento": "Colima, Colima",
+          "madre": "ONIX (LOPEZ) MEX.FCI.",
+          "microchip": "93900002632099",
+          "padre": "MATUTE (LANGARICA) MEX.FCI.",
+          "registroFCM": "FCMB9671-B",
+          "sexo": "Macho",
+          "variedad": "Sin pelo"
+        },
+        "name": "Jicamo (Lopez) Mex.FCI.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Jicamo (Lopez) Mex.FCI."
+  },
+  {
     "txid": "a4c358ca51058e3b893a3579c0d558bec17a5854d2fd7200aa0d42b8c0ea76ca",
     "blockHeight": 941514,
     "timestamp": 1774222289,

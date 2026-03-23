@@ -1,5 +1,60 @@
 [
   {
+    "txid": "1dc6943cc081e410646c1466653a1c6937815ce6a05253f0e541620e47bb3d7f",
+    "slug": "uxmal",
+    "tokenId": "1dc6943cc081e410646c1466653a1c6937815ce6a05253f0e541620e47bb3d7f",
+    "cid": "Qmau9MYxWmsL9wnDs8z2x1oaR68rNXRS14UWsstKHq3jgF",
+    "nombre": "Uxmal (Avila) Mex. FCI.",
+    "timestamp": 1774293474,
+    "blockHeight": 941637,
+    "hasParents": false,
+    "ipfsOk": true
+  },
+  {
+    "txid": "fb0f49f9b6c5b701c637afbe6c10088fe11b4689bdf7a3800e62ba1a192499ab",
+    "slug": "chontal",
+    "tokenId": "fb0f49f9b6c5b701c637afbe6c10088fe11b4689bdf7a3800e62ba1a192499ab",
+    "cid": "QmbJWuXdomrEELs59XhHKrZuPufwdLJLV6V6dr75oGWQkK",
+    "nombre": "CHONTAL (RAMIREZ/RAMIREZ) MEX. FCI.",
+    "timestamp": 1774292417,
+    "blockHeight": 941635,
+    "hasParents": false,
+    "ipfsOk": true
+  },
+  {
+    "txid": "731213c084ab76901592478583331a24cc9591d0aac079ec26afb2be65778505",
+    "slug": "bolero",
+    "tokenId": "731213c084ab76901592478583331a24cc9591d0aac079ec26afb2be65778505",
+    "cid": "Qmc6DmfzdtAEnHeZ9ZBY5r4XKz6V4kbhYQ6iHWC7tajipQ",
+    "nombre": "BOLERO (RAMIREZ/RAMIREZ) MEX. FCI.",
+    "timestamp": 1774288492,
+    "blockHeight": 941627,
+    "hasParents": false,
+    "ipfsOk": true
+  },
+  {
+    "txid": "a4c6f91bc781ae03d82b71345715b9590a5cbea5ccccd4a9d505fef1da5b7bc3",
+    "slug": "ticuiz",
+    "tokenId": "a4c6f91bc781ae03d82b71345715b9590a5cbea5ccccd4a9d505fef1da5b7bc3",
+    "cid": "QmXExoek4rTfAVh7RtT6PSoYScevco4tDR4iSk2Ta9iWJa",
+    "nombre": "Ticuiz (Langarica) Mex. FCI.",
+    "timestamp": 1774288179,
+    "blockHeight": 941626,
+    "hasParents": false,
+    "ipfsOk": true
+  },
+  {
+    "txid": "44b35bf6dfb472b982bf6964f9eeb6783b5eea5ab71e7adb84246b61ff4371f5",
+    "slug": "jicamo",
+    "tokenId": "44b35bf6dfb472b982bf6964f9eeb6783b5eea5ab71e7adb84246b61ff4371f5",
+    "cid": "QmVX5JrRPsuSfqnDnrRQDr9npHVEjiWj8CXbr3ACAchym6",
+    "nombre": "Jicamo (Lopez) Mex.FCI.",
+    "timestamp": 1774287889,
+    "blockHeight": 941625,
+    "hasParents": false,
+    "ipfsOk": true
+  },
+  {
     "txid": "a4c358ca51058e3b893a3579c0d558bec17a5854d2fd7200aa0d42b8c0ea76ca",
     "slug": "rima",
     "tokenId": "a4c358ca51058e3b893a3579c0d558bec17a5854d2fd7200aa0d42b8c0ea76ca",
@@ -73,61 +128,6 @@
     "nombre": "HUAPANGO (RAMIREZ/RAMIREZ) MEX. FCI.",
     "timestamp": 1774110127,
     "blockHeight": 941331,
-    "hasParents": false,
-    "ipfsOk": true
-  },
-  {
-    "txid": "4df6ec8a9c51578d79b8b43886cec0930520a0179748f055da52cad0fdd75434",
-    "slug": "tabasquea",
-    "tokenId": "4df6ec8a9c51578d79b8b43886cec0930520a0179748f055da52cad0fdd75434",
-    "cid": "QmZrtMeK6HKwBkGP5H6DhuM3Kak6raVrXXVEKht2yEWmYf",
-    "nombre": "TABASQUEÑA (ALATORRE) MEX. FCI.",
-    "timestamp": 1774109969,
-    "blockHeight": 941330,
-    "hasParents": false,
-    "ipfsOk": true
-  },
-  {
-    "txid": "2c9d00116ea445ad05f450dbe8e7b79ba192cab58b8e64ded60a1a5fd418c5db",
-    "slug": "moka",
-    "tokenId": "2c9d00116ea445ad05f450dbe8e7b79ba192cab58b8e64ded60a1a5fd418c5db",
-    "cid": "QmYDTeUB5qm7ibYqg2HHvNhLXzhSqqF4dy7PF7cKwvvpXP",
-    "nombre": "Moka (Ramirez/Ramirez) Mex.FCI.",
-    "timestamp": 1774109969,
-    "blockHeight": 941330,
-    "hasParents": false,
-    "ipfsOk": true
-  },
-  {
-    "txid": "7f0004c748fd06f4a7770b8d48c27b1f3492b81be8fe02df1a8bc9b96f91e9b3",
-    "slug": "pandero",
-    "tokenId": "7f0004c748fd06f4a7770b8d48c27b1f3492b81be8fe02df1a8bc9b96f91e9b3",
-    "cid": "QmQsigpHL2eoNwGHPF4m9U3NjXPLv37namyKkL6utBwW1M",
-    "nombre": "PANDERO (RAMIREZ/RAMIREZ) MEX. FCI.",
-    "timestamp": 1774108950,
-    "blockHeight": 941329,
-    "hasParents": false,
-    "ipfsOk": true
-  },
-  {
-    "txid": "28a5c3ad2f792e6ed747512f2170590690c5c02e0a67dc59fbbad0222400e4c8",
-    "slug": "bronce",
-    "tokenId": "28a5c3ad2f792e6ed747512f2170590690c5c02e0a67dc59fbbad0222400e4c8",
-    "cid": "QmeSNxGNw1Kr5VRksoUkKvUec7a1cbe1zNzeCiJmkvqp3k",
-    "nombre": "BRONCE (RAMIREZ/RAMIREZ) MEX. FCI.",
-    "timestamp": 1774108282,
-    "blockHeight": 941327,
-    "hasParents": false,
-    "ipfsOk": true
-  },
-  {
-    "txid": "94fc64e3bea9ae9d333ff22cdf84925552d6922919958c86c9651fde64b0c4cb",
-    "slug": "aztlan",
-    "tokenId": "94fc64e3bea9ae9d333ff22cdf84925552d6922919958c86c9651fde64b0c4cb",
-    "cid": "QmcRB8L58yGvhNqgEirHmijQBbfs4bqC7XXmERg6WZYCTX",
-    "nombre": "AZTLAN (RAMIREZ/RAMIREZ) MEX. FCI.",
-    "timestamp": 1774027404,
-    "blockHeight": 941226,
     "hasParents": false,
     "ipfsOk": true
   }
