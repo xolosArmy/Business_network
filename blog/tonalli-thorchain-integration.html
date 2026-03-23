@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploring eCash (XEC) Interoperability with THORChain via Tonalli Wallet</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --text-color: #e2e8f0;
+            --accent-color: #00e7df; /* Tonalli/eCash vibe */
+            --secondary-bg: #1e293b;
+            --border-color: #334155;
+            --warning-color: #fbbf24;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--accent-color);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #94a3b8;
+        }
+
+        h2 {
+            color: #fff;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            color: #cbd5e1;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .alert-box {
+            background-color: rgba(251, 191, 36, 0.1);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .alert-box strong {
+            color: var(--warning-color);
+        }
+
+        .code-block {
+            background-color: var(--secondary-bg);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            color: #a5b4fc;
+        }
+
+        ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: var(--secondary-bg);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-right: 5px;
+            border: 1px solid var(--border-color);
+        }
+
+        .image-caption {
+            text-align: center;
+            font-size: 0.9em;
+            color: #94a3b8;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #64748b;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Bridging the Gap: eCash &amp; THORChain</h1>
+            <p class="subtitle">A technical dive into Tonalli Wallet's Proof of Concept for XEC interoperability</p>
+            <div>
+                <span class="tag">Research</span>
+                <span class="tag">Tonalli Wallet</span>
+                <span class="tag">THORChain</span>
+                <span class="tag">XEC</span>
+            </div>
+        </header>
+
+        <article>
+            <p>The XolosArmy Network is excited to share the latest research from the Tonalli Wallet team. We have been actively exploring how eCash (XEC) could potentially interface with the THORChain ecosystem. To test these waters, our team has developed a wallet-side Proof of Concept (PoC) repository designed to map out the user experience, transaction flows, and architectural requirements for a future integration.</p>
+
+            <div class="alert-box">
+                <strong>Important Scope Boundary:</strong> This PoC focuses purely on wallet-side architecture and UX. It <em>does not</em> imply that native XEC support currently exists within the THORChain state machine, nor does it include a live production bridge for XEC.
+            </div>
+
+            <h2>What Does the Wallet-Side PoC Accomplish?</h2>
+            <p>Building a seamless cross-chain experience requires robust wallet architecture before the protocol-level bridge is even finalized. Our PoC tackles several crucial workstreams:</p>
+            
+            <ul>
+                <li><strong>Dynamic Vault Discovery:</strong> A critical wallet rule in THORChain integrations is that inbound vault addresses must never be static. The PoC includes a client that dynamically resolves inbound addresses from THORChain endpoints.</li>
+                <li><strong>Swap Quote Retrieval & Inspection:</strong> We've built a <code>QuoteInspector</code> module that fetches live protocol data. It processes expected outputs, fee data, and slippage.</li>
+                <li><strong>UTXO & Memo Compatibility:</strong> For UTXO chains like eCash, swap instructions must be securely carried in the transaction. This research explores constructing the necessary <code>OP_RETURN</code> memos required by THORChain nodes to observe and process swaps.</li>
+            </ul>
+
+            <h2>User Safety First: The QuoteInspector</h2>
+            <p>Cross-chain swaps can be complex, and protecting users from failed transactions or network rejections is a top priority for Tonalli Wallet. The <code>QuoteInspector</code> normalizes THORChain's complex data into a digestible format and applies strict pre-sign validations.</p>
+            
+            <p>Before a transaction is ever built, the wallet automatically checks for:</p>
+            <ul>
+                <li>Halted chains or paused global trading.</li>
+                <li>Quote expirations to prevent stale swap execution.</li>
+                <li>Input amounts falling below network dust thresholds or recommended minimums.</li>
+            </ul>
+
+            <div class="code-block">
+// Example output from Tonalli's Normalized Quote
+"isViable": true,
+"targetVaultAddress": "bc1q...",
+"opReturnMemo": "=:e:0x86d5...:0/1/0",
+"recommendedGasRate": "6"
+            </div>
+
+            <h2>Conceptualizing the User Experience</h2>
+            <p>Once protocol-level support is achieved, the user experience needs to be intuitive. The PoC outlines a conceptual UI mockup for Tonalli Wallet where users can easily select their source asset, view available balances, and see the estimated output and destination address before executing a swap.</p>
+
+            <h2>Reaching Out to the THORChain Community</h2>
+            <p>Open-source development thrives on collaboration. To ensure our architecture aligns with THORChain's best practices, the Tonalli Wallet team has officially reached out to core THORChain contributors.</p>
+            
+            <p>Recently, we contacted Chad Barraford (@CBarraford) from the THORChain ecosystem to share our wallet-side PoC repository. We are seeking technical feedback on our initial UTXO/OP_RETURN gap analysis and routing paths as we prepare for the next step: exploring the chain-level requirements for a Bifrost client implementation.</p>
+
+            <h2>Looking Ahead: Workstream B</h2>
+            <p>While Workstream A (the wallet PoC) proves the UX and data flow is viable, Workstream B is where the heavy lifting happens. This involves chain-level research, including an eCash chain-client requirements analysis, UTXO compatibility verification, and a gap analysis for a future Bifrost integration.</p>
+
+            <p>Stay tuned to the XolosArmy Network as we continue to push the boundaries of what eCash can do in the decentralized finance space!</p>
+        </article>
+
+        <div class="footer">
+            <p>Published by RMZ TECHNOLOGIES / XolosArmy Network</p>
+        </div>
+    </div>
+
+</body>
+</html>
