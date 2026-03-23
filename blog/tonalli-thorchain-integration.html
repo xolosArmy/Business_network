@@ -119,6 +119,24 @@
             border-top: 1px solid var(--border-color);
             padding-top: 20px;
         }
+        .landing-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 14px 22px;
+    background: linear-gradient(135deg, #00e7df, #0ea5e9);
+    color: #0b0f19;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    box-shadow: 0 8px 24px rgba(0, 231, 223, 0.25);
+}
+
+.landing-button:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+    box-shadow: 0 12px 28px rgba(0, 231, 223, 0.35);
+}
     </style>
 </head>
 <body>
@@ -181,6 +199,9 @@
             <p>While Workstream A (the wallet PoC) proves the UX and data flow is viable, Workstream B is where the heavy lifting happens. This involves chain-level research, including an eCash chain-client requirements analysis, UTXO compatibility verification, and a gap analysis for a future Bifrost integration.</p>
 
             <p>Stay tuned to the XolosArmy Network as we continue to push the boundaries of what eCash can do in the decentralized finance space!</p>
+            <a href="https://xolosarmy.xyz" class="landing-button" target="_blank" rel="noopener noreferrer">
+  ← Go to xolosArmy Network
+</a>
         </article>
 
         <div class="footer">
