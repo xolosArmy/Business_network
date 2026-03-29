@@ -1,12 +1,12 @@
 {
-  "linajes_registrados": 80,
-  "linajes_validados_ipfs": 80,
+  "linajes_registrados": 81,
+  "linajes_validados_ipfs": 81,
   "registros_con_padre_y_madre": 0,
-  "txs_xolo_detectadas": 80,
-  "ipfs_disponibles": 80,
+  "txs_xolo_detectadas": 81,
+  "ipfs_disponibles": 81,
   "ipfs_fallidos": 0,
-  "nfts_con_slug_resuelto": 80,
-  "ult_registro_txid": "1dc6943cc081e410646c1466653a1c6937815ce6a05253f0e541620e47bb3d7f",
-  "ult_registro_slug": "uxmal",
-  "ultima_actualizacion": "2026-03-23T21:39:01.945Z"
+  "nfts_con_slug_resuelto": 81,
+  "ult_registro_txid": "13a2fd97493e2c15ec1077465da11dd602e86fbf4e200b9c4bb72dab78c199ea",
+  "ult_registro_slug": "humo",
+  "ultima_actualizacion": "2026-03-29T20:00:10.061Z"
 }

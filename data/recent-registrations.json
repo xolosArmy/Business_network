@@ -1,5 +1,16 @@
 [
   {
+    "txid": "13a2fd97493e2c15ec1077465da11dd602e86fbf4e200b9c4bb72dab78c199ea",
+    "slug": "humo",
+    "tokenId": "13a2fd97493e2c15ec1077465da11dd602e86fbf4e200b9c4bb72dab78c199ea",
+    "cid": "QmYLesiz2CXGY1Cdg7M6Pm5oqzP14RvKYQNKBQ3Jkmch5a",
+    "nombre": "Humo Ramirez",
+    "timestamp": 1774634025,
+    "blockHeight": 942195,
+    "hasParents": false,
+    "ipfsOk": true
+  },
+  {
     "txid": "1dc6943cc081e410646c1466653a1c6937815ce6a05253f0e541620e47bb3d7f",
     "slug": "uxmal",
     "tokenId": "1dc6943cc081e410646c1466653a1c6937815ce6a05253f0e541620e47bb3d7f",
@@ -117,17 +128,6 @@
     "nombre": "XIUH (RAMIREZ/RAMIREZ) MEX. FCI.",
     "timestamp": 1774219551,
     "blockHeight": 941509,
-    "hasParents": false,
-    "ipfsOk": true
-  },
-  {
-    "txid": "8f56dd69c664a4edd9c950126a0940ef2517d948639e6995cf54ce7ed658cf50",
-    "slug": "huapango",
-    "tokenId": "8f56dd69c664a4edd9c950126a0940ef2517d948639e6995cf54ce7ed658cf50",
-    "cid": "QmRriKXvRN2WX8PHB1hsfK2xb6dSmHLHw5zyJXsL7taBrV",
-    "nombre": "HUAPANGO (RAMIREZ/RAMIREZ) MEX. FCI.",
-    "timestamp": 1774110127,
-    "blockHeight": 941331,
     "hasParents": false,
     "ipfsOk": true
   }
