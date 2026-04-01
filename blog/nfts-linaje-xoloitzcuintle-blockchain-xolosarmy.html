@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xoloitzcuintle: del códice al NFT de linaje | Reportaje de investigación</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --bg-soft:#11172b;
+      --paper:#f7f3ea;
+      --ink:#161616;
+      --muted:#5d6470;
+      --gold:#c79a3b;
+      --jade:#2aa79b;
+      --line:#d8d1c2;
+      --card:#ffffff;
+      --shadow:0 18px 45px rgba(0,0,0,.12);
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background:linear-gradient(180deg,#efe7d5 0%, #f8f5ef 100%);
+      line-height:1.72;
+    }
+    img{max-width:100%;display:block}
+    a{color:#0c5f87}
+    .hero{
+      position:relative;
+      min-height:78vh;
+      color:#fff;
+      overflow:hidden;
+      background:
+        linear-gradient(115deg, rgba(7,11,22,.92) 0%, rgba(7,11,22,.72) 46%, rgba(7,11,22,.48) 100%),
+        url("https://upload.wikimedia.org/wikipedia/commons/5/5e/Perro_Xoloitzcuintle%2C_Mexico_%2829048770523%29.jpg") center/cover no-repeat;
+    }
+    .hero::after{
+      content:"";
+      position:absolute; inset:auto -10% -140px -10%;
+      height:240px;
+      background:radial-gradient(circle at center, rgba(199,154,59,.34), transparent 65%);
+      filter:blur(14px);
+      pointer-events:none;
+    }
+    .hero-inner{
+      max-width:var(--max);
+      margin:auto;
+      padding:90px 24px 72px;
+      position:relative;
+      z-index:2;
+    }
+    .eyebrow{
+      display:inline-block;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:.76rem;
+      padding:8px 12px;
+      border:1px solid rgba(255,255,255,.22);
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      backdrop-filter: blur(6px);
+    }
+    h1,h2,h3{
+      font-family: Georgia, "Times New Roman", serif;
+      line-height:1.08;
+      letter-spacing:-.02em;
+      margin:0 0 16px;
+    }
+    h1{
+      font-size:clamp(2.4rem,6vw,5.3rem);
+      max-width:980px;
+      margin-top:22px;
+    }
+    .lead{
+      max-width:800px;
+      font-size:1.12rem;
+      color:rgba(255,255,255,.88);
+    }
+    .hero-meta{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      margin-top:28px;
+      color:rgba(255,255,255,.82);
+      font-size:.98rem;
+    }
+    .wrap{max-width:var(--max); margin:auto; padding:0 24px}
+    .intro-grid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:28px;
+      margin-top:-56px;
+      position:relative;
+      z-index:4;
+    }
+    .panel{
+      background:rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border:1px solid rgba(255,255,255,.65);
+      border-radius:26px;
+      box-shadow:var(--shadow);
+    }
+    .panel.pad{padding:30px}
+    .kicker{
+      color:var(--gold);
+      text-transform:uppercase;
+      font-weight:700;
+      letter-spacing:.14em;
+      font-size:.75rem;
+      margin-bottom:12px;
+    }
+    .deck{
+      color:var(--muted);
+      font-size:1.02rem;
+    }
+    .facts{
+      display:grid;
+      gap:14px;
+      margin:0;
+      padding:0;
+      list-style:none;
+    }
+    .facts li{
+      padding:14px 0;
+      border-bottom:1px solid #ece7da;
+    }
+    .facts li:last-child{border-bottom:none}
+    .facts strong{
+      display:block;
+      font-size:1.05rem;
+      color:#111827;
+      margin-bottom:4px;
+    }
+    .section{
+      padding:68px 0 12px;
+    }
+    .section h2{
+      font-size:clamp(2rem,4.2vw,3.2rem);
+      margin-bottom:10px;
+    }
+    .section-intro{
+      color:var(--muted);
+      max-width:860px;
+      font-size:1.05rem;
+      margin-bottom:28px;
+    }
+    .two-col{
+      display:grid;
+      grid-template-columns: minmax(0,1.15fr) minmax(280px,.85fr);
+      gap:34px;
+      align-items:start;
+    }
+    .story{
+      background:var(--card);
+      border:1px solid #ece6d8;
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:30px;
+    }
+    .story p{margin:0 0 16px}
+    .pullquote{
+      margin:20px 0;
+      padding:24px;
+      border-left:4px solid var(--gold);
+      background:#fbf7ef;
+      border-radius:18px;
+      font-size:1.08rem;
+      color:#3f3b34;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+    .sidecard{
+      background:#fff;
+      border:1px solid #ece6d8;
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .sidecard .body{padding:18px 20px 22px}
+    .sidecard h3{
+      font-size:1.35rem;
+      margin-bottom:10px;
+    }
+    figure{
+      margin:0;
+      overflow:hidden;
+      background:#fff;
+      border:1px solid #ece6d8;
+      border-radius:22px;
+      box-shadow:var(--shadow);
+    }
+    figcaption{
+      padding:14px 16px 18px;
+      font-size:.92rem;
+      color:var(--muted);
+      border-top:1px solid #eee8dc;
+      background:#fffdfa;
+    }
+    .image-grid{
+      display:grid;
+      grid-template-columns: repeat(3,1fr);
+      gap:20px;
+      margin-top:20px;
+    }
+    .timeline{
+      position:relative;
+      padding-left:22px;
+      margin:0;
+    }
+    .timeline::before{
+      content:"";
+      position:absolute;
+      left:5px; top:6px; bottom:6px;
+      width:2px;
+      background:linear-gradient(var(--gold), rgba(42,167,155,.45));
+    }
+    .timeline li{
+      list-style:none;
+      position:relative;
+      padding:0 0 24px 22px;
+    }
+    .timeline li::before{
+      content:"";
+      position:absolute;
+      left:-1px; top:6px;
+      width:12px; height:12px; border-radius:50%;
+      background:var(--jade);
+      box-shadow:0 0 0 4px rgba(42,167,155,.14);
+    }
+    .timeline time{
+      display:block;
+      color:var(--gold);
+      font-weight:700;
+      font-size:.9rem;
+      margin-bottom:4px;
+    }
+    .data-band{
+      margin:42px 0 10px;
+      background:linear-gradient(135deg,#0f1528,#16203d);
+      color:#fff;
+      border-radius:28px;
+      padding:28px;
+      box-shadow:var(--shadow);
+    }
+    .data-grid{
+      display:grid;
+      grid-template-columns: repeat(4,1fr);
+      gap:16px;
+    }
+    .metric{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;
+      padding:20px;
+    }
+    .metric .n{
+      font-size:2rem;
+      font-weight:800;
+      display:block;
+      line-height:1;
+      margin-bottom:8px;
+    }
+    .metric .t{
+      color:rgba(255,255,255,.75);
+      font-size:.95rem;
+    }
+    .note{
+      font-size:.92rem;
+      color:#6b7280;
+      margin-top:10px;
+    }
+    .compare{
+      display:grid;
+      grid-template-columns: repeat(4,1fr);
+      gap:18px;
+      margin-top:20px;
+    }
+    .compare .c{
+      background:#fff;
+      border:1px solid #ece6d8;
+      box-shadow:var(--shadow);
+      border-radius:22px;
+      padding:22px;
+    }
+    .compare h3{font-size:1.2rem}
+    .compare ul{padding-left:18px; margin:0}
+    .compare li{margin:0 0 10px}
+    .refs{
+      background:#11172b;
+      color:#edf1fa;
+      border-radius:28px;
+      padding:30px;
+      margin:32px 0 70px;
+      box-shadow:var(--shadow);
+    }
+    .refs h2{margin-bottom:18px}
+    .refs ol{margin:0; padding-left:20px}
+    .refs li{margin-bottom:14px}
+    .refs a{color:#87d7ff}
+    .footer{
+      padding:0 0 60px;
+      color:#6b7280;
+      font-size:.95rem;
+    }
+    .tag{
+      display:inline-block;
+      margin:8px 10px 0 0;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#f3ecde;
+      color:#5d4a22;
+      font-size:.88rem;
+      border:1px solid #ead7ab;
+    }
+    @media (max-width: 980px){
+      .intro-grid,.two-col,.compare,.image-grid,.data-grid{grid-template-columns:1fr}
+      .hero{min-height:66vh}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Reportaje de investigación · versión académica</span>
+      <h1>Xoloitzcuintle: del códice al NFT de linaje</h1>
+      <p class="lead">
+        Una investigación sobre la evolución de los sistemas de registro del linaje xoloitzcuintle:
+        desde la memoria ritual mesoamericana y la crónica virreinal, hasta el pedigrí institucional,
+        la genética moderna y la propuesta contemporánea de soberanía digital sobre eCash, IPFS y xolosArmy Network.
+      </p>
+      <div class="hero-meta">
+        <span>Autoría editorial asistida por IA</span>
+        <span>Idioma: español</span>
+        <span>Formato: HTML + CSS</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="intro-grid">
+      <article class="panel pad">
+        <div class="kicker">Hipótesis central</div>
+        <h2 style="font-size:2.2rem;margin-bottom:12px;">La historia del xolo también es la historia de cómo una civilización intenta no perder su memoria</h2>
+        <p class="deck">
+          El xoloitzcuintle no solo sobrevivió como raza: sobrevivió como símbolo. A lo largo de siglos,
+          sus formas de identificación cambiaron de soporte —códice, crónica, archivo, microchip, base de datos,
+          blockchain— pero la pregunta de fondo siguió siendo la misma: <strong>¿cómo probar continuidad, identidad y pertenencia?</strong>
+        </p>
+        <p class="deck">
+          Este reportaje examina esa trayectoria con una mirada histórica y técnica. Toma como base la literatura pública
+          sobre el xoloitzcuintle, la documentación oficial de la FCI y la FCM, estudios genéticos sobre el gen <em>FOXI3</em>,
+          infraestructura descentralizada como IPFS, así como el texto base provisto por el autor sobre el caso contemporáneo de
+          <strong>xolosArmy Network</strong> y el <strong>NFT de linaje</strong>.
+        </p>
+      </article>
+
+      <aside class="panel pad">
+        <div class="kicker">Hallazgos clave</div>
+        <ul class="facts">
+          <li><strong>Persistencia simbólica</strong>El xolo aparece asociado al imaginario ritual mexica y al corpus sahagunense.</li>
+          <li><strong>Institucionalización moderna</strong>La FCM y la FCI consolidaron el estándar racial y el pedigrí formal.</li>
+          <li><strong>Huella genética</strong>La ausencia de pelo y ciertas anomalías dentales se asocian a mutaciones en <em>FOXI3</em>.</li>
+          <li><strong>Nueva capa tecnológica</strong>Blockchain e IPFS permiten proponer registros verificables y resistentes a censura.</li>
+          <li><strong>Caso de estudio</strong>xolosArmy Network plantea un modelo de “NFT de linaje” como extensión del archivo genealógico.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="section">
+      <h2>1. Antes del pedigrí: memoria ritual, imagen y permanencia</h2>
+      <p class="section-intro">
+        En el mundo mesoamericano, la identidad no operaba con la lógica burocrática del registro civil moderno. El valor del
+        xoloitzcuintle estaba anclado a la cosmología, al sacrificio, al tránsito funerario y a la imagen ritual. Los códices y
+        objetos arqueológicos no son “pedigríes” en sentido técnico, pero sí funcionan como sistemas de memoria.
+      </p>
+
+      <div class="two-col">
+        <article class="story">
+          <p>
+            El <strong>Códice Florentino</strong>, compilado por Bernardino de Sahagún con la colaboración de autores y artistas nahuas,
+            sigue siendo una de las fuentes más importantes para estudiar la cultura mexica. Su edición digital contemporánea,
+            publicada por el Getty Research Institute, permite revisar textos e imágenes de forma paralela, subrayando que el conocimiento
+            indígena fue preservado, aunque mediado por la estructura colonial.
+          </p>
+          <p>
+            En ese marco, el perro aparece como parte de un universo donde fauna, ritual, medicina y vida cotidiana estaban conectados.
+            La dimensión del xoloitzcuintle como acompañante de los muertos y criatura vinculada a Xólotl ha persistido mucho más en el
+            imaginario histórico que en la taxonomía administrativa.
+          </p>
+          <div class="pullquote">
+            “El paso del xolo desde la iconografía sagrada hasta el estándar racial moderno no elimina su carga simbólica;
+            la encapsula en nuevos lenguajes de archivo.”
+          </div>
+          <p>
+            Las esculturas de Colima y otras representaciones prehispánicas refuerzan esa continuidad visual. Aunque no documentan
+            genealogías individuales, sí fijan rasgos físicos y un lugar cultural estable para el perro mesoamericano. En términos de historia
+            del registro, esto equivale a un primer archivo: no legal, pero sí civilizatorio.
+          </p>
+        </article>
+
+        <aside class="sidecard">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Colima_-_Dog_Effigy_-_Walters_20092051_-_Three_Quarter_Left.jpg" alt="Escultura prehispánica de perro de Colima" loading="lazy">
+          <div class="body">
+            <h3>Documento material</h3>
+            <p>
+              Las efigies cerámicas de perro procedentes de Colima sirven como evidencia de continuidad cultural y de observación anatómica.
+              No son un registro genealógico, pero sí un registro de presencia.
+            </p>
+          </div>
+        </aside>
+      </div>
+
+      <div class="image-grid">
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Perro_Xoloitzcuintle%2C_Mexico_%2829048770523%29.jpg" alt="Xoloitzcuintle contemporáneo" loading="lazy">
+          <figcaption>Figura 1. Xoloitzcuintle contemporáneo en México. Imagen de Wikimedia Commons.</figcaption>
+        </figure>
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Colima_-_Dog_Effigy_-_Walters_20092051_-_Three_Quarter_Left.jpg" alt="Efigie cerámica de perro de Colima" loading="lazy">
+          <figcaption>Figura 2. Efigie cerámica de perro de Colima. Walters Art Museum / Wikimedia Commons.</figcaption>
+        </figure>
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Mexico.Xoloitzcuintle.01.jpg" alt="Grupo de xoloitzcuintles en México" loading="lazy">
+          <figcaption>Figura 3. Grupo de xoloitzcuintles en México. Wikimedia Commons.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>2. El giro virreinal: clasificación, traducción y pérdida</h2>
+      <p class="section-intro">
+        La colonia no solo transformó la vida social indígena; transformó también el régimen de visibilidad del xoloitzcuintle.
+        Los códices fueron perseguidos, traducidos o destruidos. El conocimiento pasó por el filtro del observador europeo.
+      </p>
+
+      <div class="two-col">
+        <article class="story">
+          <p>
+            En el <strong>Libro XI del Códice Florentino</strong>, Sahagún intenta registrar la fauna novohispana dentro de una lógica
+            enciclopédica. Ese gesto produce conocimiento, pero también lo reordena. Lo que antes estaba inserto en un marco ritual y comunitario
+            queda reconfigurado como “historia natural”.
+          </p>
+          <p>
+            Esa mediación es crucial. El registro colonial no equivale a transparencia absoluta: es traducción, clasificación y, en muchos casos,
+            reinterpretación. Aun así, constituye un punto decisivo porque convierte al perro mesoamericano en objeto de descripción sistemática.
+          </p>
+          <p>
+            El resultado fue ambivalente: por un lado, se preservó información de enorme valor histórico; por otro, se rompieron muchas cadenas de
+            transmisión originarias. La historia del linaje se volvió, desde entonces, una historia de fragmentos.
+          </p>
+        </article>
+
+        <aside class="panel pad">
+          <div class="kicker">Lectura crítica</div>
+          <p>
+            El paso del archivo ritual al archivo colonial marca una transición de soberanía epistemológica:
+            de la comunidad que registra su mundo a la institución que lo describe desde fuera.
+          </p>
+          <span class="tag">Códice</span>
+          <span class="tag">Virreinato</span>
+          <span class="tag">Historia natural</span>
+          <span class="tag">Mediación colonial</span>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>3. Del rescate cultural al expediente canófilo</h2>
+      <p class="section-intro">
+        En el siglo XX, el problema ya no fue solo simbólico. Hubo que evitar la desaparición funcional de la raza y construir
+        mecanismos modernos de certificación, reproducción y trazabilidad.
+      </p>
+
+      <div class="two-col">
+        <article class="story">
+          <p>
+            La <strong>Federación Canófila Mexicana (FCM)</strong> y la <strong>Fédération Cynologique Internationale (FCI)</strong>
+            desempeñaron un papel decisivo en la estandarización moderna del xoloitzcuintle. El estándar racial de la FCI reconoce
+            explícitamente la importancia histórica de la raza en México y el papel de la FCM en su rescate institucional.
+          </p>
+          <p>
+            A nivel operativo, el pedigrí moderno depende de documentos, requisitos formales, firmas, registros de camada, validación
+            de parentesco y, cada vez más, soporte de ADN o identificación complementaria. La propia FCM publica trámites para alta de
+            pedigrí, transferencia, duplicados, ADN y reglamentos de registro.
+          </p>
+          <p>
+            Esta institucionalización resolvió un problema histórico: cómo fijar parentescos y líneas de crianza con reconocimiento formal.
+            Pero también introdujo vulnerabilidades conocidas de los sistemas centralizados: dependencia de oficinas, archivos, operadores
+            humanos, reposición documental y procesos burocráticos.
+          </p>
+        </article>
+
+        <aside class="sidecard">
+          <div class="body">
+            <h3>Qué sí resolvió el pedigrí</h3>
+            <ul>
+              <li>Normalización del estándar racial.</li>
+              <li>Continuidad documental entre camadas.</li>
+              <li>Reconocimiento nacional e internacional.</li>
+              <li>Base para concursos, transferencias y crianza formal.</li>
+            </ul>
+            <h3 style="margin-top:20px;">Qué no resuelve del todo</h3>
+            <ul>
+              <li>Acceso público universal a la trazabilidad.</li>
+              <li>Inmutabilidad frente a pérdida o alteración externa.</li>
+              <li>Actualización distribuida y verificable en tiempo real.</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+
+      <div class="data-band">
+        <h3 style="font-size:1.7rem;margin-top:0;">Cuatro capas de la identificación moderna</h3>
+        <div class="data-grid">
+          <div class="metric"><span class="n">1</span><span class="t">Estándar racial y validación institucional</span></div>
+          <div class="metric"><span class="n">2</span><span class="t">Registro de camada y documentación de propiedad</span></div>
+          <div class="metric"><span class="n">3</span><span class="t">Identificación física o complementaria</span></div>
+          <div class="metric"><span class="n">4</span><span class="t">Historial de reproducción, transferencias y salud</span></div>
+        </div>
+        <p class="note">
+          Síntesis editorial a partir de documentación pública de la FCM y el estándar oficial de la FCI.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>4. La prueba biológica: genética, dentición y la marca de FOXI3</h2>
+      <p class="section-intro">
+        La ciencia genética agrega otra capa a la discusión: ya no solo importa quién afirma el linaje,
+        sino qué rasgos del cuerpo permiten corroborar continuidad de forma biológica.
+      </p>
+
+      <div class="two-col">
+        <article class="story">
+          <p>
+            Diversos estudios han vinculado la condición hairless en razas como el xoloitzcuintle con mutaciones en el gen
+            <strong>FOXI3</strong>. La literatura también asocia esta mutación con ciertas particularidades dentales, lo cual ayuda a
+            explicar por qué la ausencia de pelo y la configuración dental aparecen históricamente conectadas.
+          </p>
+          <p>
+            Esto no significa que la genética sustituya al pedigrí, pero sí que introduce una dimensión más robusta para comprender
+            la identidad racial. El linaje deja de ser solo archivo y se vuelve también lectura del cuerpo.
+          </p>
+          <p>
+            En términos de reportaje, esta es una inflexión decisiva: la historia del xolo no se sostiene únicamente en la tradición
+            o el papel, sino también en la biología molecular.
+          </p>
+        </article>
+
+        <aside class="panel pad">
+          <div class="kicker">Clave científica</div>
+          <p>
+            El consenso de la literatura revisada sitúa a <em>FOXI3</em> como un gen central para entender la falta de pelo y
+            anomalías dentales en perros hairless, incluido el xoloitzcuintle.
+          </p>
+          <span class="tag">Genética</span>
+          <span class="tag">FOXI3</span>
+          <span class="tag">Dentición</span>
+          <span class="tag">Fenotipo</span>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>5. Del archivo centralizado al registro verificable</h2>
+      <p class="section-intro">
+        Cuando una comunidad desea preservar identidad, memoria y trazabilidad sin depender por completo de una base de datos central,
+        aparecen tecnologías como blockchain e IPFS. Ahí entra el caso contemporáneo.
+      </p>
+
+      <div class="two-col">
+        <article class="story">
+          <p>
+            Según la documentación oficial de <strong>IPFS</strong>, este sistema utiliza direccionamiento por contenido y redes
+            peer-to-peer para hacer verificables los datos. En términos simples: el identificador de un archivo depende de su contenido,
+            no solo de una ubicación en un servidor.
+          </p>
+          <p>
+            En paralelo, el ecosistema de <strong>eCash</strong> describe su integración de Avalanche para ofrecer transacciones rápidas
+            y seguras. Esta combinación —registro en cadena para el evento, almacenamiento distribuido para metadatos— resulta
+            particularmente sugerente para un archivo genealógico.
+          </p>
+          <p>
+            El atractivo del modelo no está únicamente en la novedad tecnológica. Está en la posibilidad de construir una forma de memoria
+            resistente a pérdida de servidor, opacidad administrativa o censura puntual. En el lenguaje de esta investigación:
+            <strong>una nueva “piedra digital”</strong>.
+          </p>
+        </article>
+
+        <aside class="sidecard">
+          <div class="body">
+            <h3>Arquitectura conceptual</h3>
+            <ol style="padding-left:18px;margin:0;">
+              <li>Evento de registro en blockchain.</li>
+              <li>Metadatos y evidencia en IPFS.</li>
+              <li>Explorador o interfaz pública para consulta.</li>
+              <li>Cartera o llave del usuario para custodia y transferencia.</li>
+            </ol>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>6. Caso de estudio: xolosArmy Network y el “NFT de linaje”</h2>
+      <p class="section-intro">
+        El texto base aportado por el autor describe a xolosArmy Network como un proyecto que busca unir herencia cultural,
+        crianza responsable y soberanía digital mediante un registro on-chain para ejemplares de Xolos Ramírez.
+      </p>
+
+      <div class="two-col">
+        <article class="story">
+          <p>
+            Bajo esa lógica, el <strong>NFT de linaje</strong> no se presenta como arte especulativo, sino como una escritura
+            digital de identidad: una pieza que vincula ejemplar, crianza, archivo y comunidad. La propuesta combina al menos
+            cuatro dimensiones: documentación genealógica, trazabilidad, pertenencia cultural y acceso comunitario.
+          </p>
+          <p>
+            En términos periodísticos, lo más relevante es el cambio de enfoque. El registro deja de estar pensado exclusivamente
+            para un circuito administrativo y pasa a concebirse también como un bien cultural verificable, visible y transferible.
+          </p>
+          <p>
+            Esa transformación importa especialmente en un animal cargado de memoria civilizatoria. Para una comunidad como
+            Xolos Ramírez, el linaje ya no es solamente una nota al pie del expediente; es parte del relato central del proyecto.
+          </p>
+          <div class="pullquote">
+            El NFT de linaje funciona aquí como una convergencia de archivo, identidad, patrimonio y tecnología.
+          </div>
+          <p>
+            Desde una óptica académica, conviene subrayar que este modelo todavía debe leerse como una propuesta en desarrollo
+            y como un caso de experimentación cultural-tecnológica. Su interés radica precisamente en eso: en que intenta mover
+            el registro genealógico desde la burocracia hacia la soberanía verificable.
+          </p>
+        </article>
+
+        <aside class="panel pad">
+          <div class="kicker">Fuente base del caso</div>
+          <p>
+            Esta sección se elaboró a partir del texto proporcionado por el autor sobre xolosArmy Network, Teyolia Ramírez,
+            Humo Ramírez y la idea de una “piedra digital” de linaje.
+          </p>
+          <span class="tag">xolosArmy Network</span>
+          <span class="tag">eCash</span>
+          <span class="tag">IPFS</span>
+          <span class="tag">NFT de linaje</span>
+        </aside>
+      </div>
+
+      <ol class="timeline">
+        <li>
+          <time>Etapa 1</time>
+          <strong>Memoria ritual</strong><br>
+          La identidad del xolo se preserva en cosmología, entierro, iconografía y tradición.
+        </li>
+        <li>
+          <time>Etapa 2</time>
+          <strong>Crónica colonial</strong><br>
+          El animal entra al archivo escrito, pero bajo mediación europea.
+        </li>
+        <li>
+          <time>Etapa 3</time>
+          <strong>Pedigrí institucional</strong><br>
+          Surgen estándares, expedientes, transferencias y circuitos de validación formal.
+        </li>
+        <li>
+          <time>Etapa 4</time>
+          <strong>Registro soberano digital</strong><br>
+          La identidad se concibe como dato verificable, público y resiliente.
+        </li>
+      </ol>
+    </section>
+
+    <section class="section">
+      <h2>7. Comparación de modelos de registro</h2>
+      <p class="section-intro">
+        No todos los sistemas hacen lo mismo. Cada época resolvió un problema distinto. Lo importante no es romantizar un modelo
+        contra otro, sino entender qué conserva, qué pierde y qué vulnerabilidades introduce.
+      </p>
+
+      <div class="compare">
+        <div class="c">
+          <h3>Ritual / prehispánico</h3>
+          <ul>
+            <li>Alta densidad simbólica.</li>
+            <li>Preserva sentido cultural profundo.</li>
+            <li>No ofrece genealogía individual formal.</li>
+          </ul>
+        </div>
+        <div class="c">
+          <h3>Colonial / cronístico</h3>
+          <ul>
+            <li>Hace visible al xolo en el archivo escrito.</li>
+            <li>Traduce y clasifica.</li>
+            <li>Introduce sesgo de observación externa.</li>
+          </ul>
+        </div>
+        <div class="c">
+          <h3>Canófilo / institucional</h3>
+          <ul>
+            <li>Estandariza y certifica.</li>
+            <li>Facilita concursos y reproducción formal.</li>
+            <li>Depende de estructuras centralizadas.</li>
+          </ul>
+        </div>
+        <div class="c">
+          <h3>Blockchain / distribuido</h3>
+          <ul>
+            <li>Ofrece verificabilidad y resiliencia.</li>
+            <li>Abre acceso global al historial.</li>
+            <li>Requiere buena implementación y gobernanza.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Conclusión</h2>
+      <p class="section-intro">
+        La evolución del registro del xoloitzcuintle no es una simple historia técnica. Es la historia de cómo México,
+        sus instituciones, su ciencia y ahora sus comunidades digitales buscan responder a una misma necesidad:
+        no dejar que el linaje se pierda.
+      </p>
+
+      <article class="story">
+        <p>
+          En los códices, el xolo fue figura liminal. En la colonia, fue descrito y parcialmente traducido. En la canofilia moderna,
+          fue normalizado y certificado. En la genética, fue leído desde el genoma. Y en proyectos como xolosArmy Network,
+          se ensaya una nueva fase: la del archivo verificable como patrimonio vivo.
+        </p>
+        <p>
+          La tesis final de este reportaje es clara: <strong>el soporte cambia, pero la lucha por la permanencia permanece</strong>.
+          Hoy esa lucha puede expresarse en una cadena de bloques, un CID de IPFS o una wallet. Ayer se expresaba en barro, pigmento,
+          crónica y ceremonia. En todos los casos, el xoloitzcuintle aparece como algo más que un perro: como una tecnología cultural
+          de continuidad.
+        </p>
+      </article>
+    </section>
+
+    <section class="refs">
+      <h2>Referencias y fuentes</h2>
+      <ol>
+        <li>Getty Research Institute. <em>Digital Florentine Codex</em>. <a href="https://florentinecodex.getty.edu/es" target="_blank" rel="noopener">https://florentinecodex.getty.edu/es</a></li>
+        <li>Library of Congress. <em>The Florentine Codex. Book XI: Natural Things</em>. <a href="https://www.loc.gov/item/2021667856/" target="_blank" rel="noopener">https://www.loc.gov/item/2021667856/</a></li>
+        <li>Fédération Cynologique Internationale. <em>Xoloitzcuintle, Standard No. 234</em>. <a href="https://www.fci.be/Nomenclature/Standards/234g05-en.pdf" target="_blank" rel="noopener">https://www.fci.be/Nomenclature/Standards/234g05-en.pdf</a></li>
+        <li>Federación Canófila Mexicana. <em>Alta de Pedigrí</em>. <a href="https://fcm.mx/alta-pedigri/" target="_blank" rel="noopener">https://fcm.mx/alta-pedigri/</a></li>
+        <li>Federación Canófila Mexicana. <em>Trámites</em>. <a href="https://fcm.mx/tramites/" target="_blank" rel="noopener">https://fcm.mx/tramites/</a></li>
+        <li>Parker, H. G. et al. (2017). <em>The bald and the beautiful: hairlessness in domestic dog breeds</em>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5182420/" target="_blank" rel="noopener">https://pmc.ncbi.nlm.nih.gov/articles/PMC5182420/</a></li>
+        <li>Kupczik, K. et al. (2017). <em>The dental phenotype of hairless dogs with FOXI3 haploinsufficiency</em>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5511229/" target="_blank" rel="noopener">https://pmc.ncbi.nlm.nih.gov/articles/PMC5511229/</a></li>
+        <li>Núñez Cortés, Y. et al. (2022). <em>The ritual and domestic role of canis lupus familiaris in ancient Maya society</em>. <a href="https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S2448-62212022000200073" target="_blank" rel="noopener">https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S2448-62212022000200073</a></li>
+        <li>IPFS Docs. <em>IPFS Documentation</em>. <a href="https://docs.ipfs.tech/" target="_blank" rel="noopener">https://docs.ipfs.tech/</a></li>
+        <li>eCash. <em>Pre-Consensus Launch Announced</em>. <a href="https://e.cash/blog/preconsensus-pr" target="_blank" rel="noopener">https://e.cash/blog/preconsensus-pr</a></li>
+        <li>Texto base proporcionado por el autor: <em>Evolución del Registro de Linaje del Xoloitzcuintle: De la Simbología en los Códices y Crónicas Virreinales a la Inmutabilidad de la Red eCash y xolosArmy Network</em>.</li>
+        <li>Imágenes:
+          Wikimedia Commons, archivos de xoloitzcuintles y efigies de perro de Colima utilizados en este montaje editorial.
+        </li>
+      </ol>
+    </section>
+
+    <div class="footer">
+      Este reportaje fue diseñado para publicación web editorial. Puede adaptarse fácilmente al blog de Xolos Ramírez
+      añadiendo navegación del sitio, CTA, módulo de autor y datos estructurados SEO.
+    </div>
+  </main>
+</body>
+</html>
