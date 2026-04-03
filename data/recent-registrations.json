@@ -1,5 +1,16 @@
 [
   {
+    "txid": "196f4f5cb3f0016dd62715d7e1768e465c8a1db8c65a1afc58861845265dcd9c",
+    "slug": "amoxtli",
+    "tokenId": "196f4f5cb3f0016dd62715d7e1768e465c8a1db8c65a1afc58861845265dcd9c",
+    "cid": "QmWyV9scQsKT68SWFjnu66GzDHnz3BZaQdBXYfZt5RTVQd",
+    "nombre": "AMOXTLI (RAMIREZ/RAMIREZ) MEX. FCI.",
+    "timestamp": 1775242713,
+    "blockHeight": 943236,
+    "hasParents": false,
+    "ipfsOk": true
+  },
+  {
     "txid": "13a2fd97493e2c15ec1077465da11dd602e86fbf4e200b9c4bb72dab78c199ea",
     "slug": "humo",
     "tokenId": "13a2fd97493e2c15ec1077465da11dd602e86fbf4e200b9c4bb72dab78c199ea",
@@ -117,17 +128,6 @@
     "nombre": "VOVID CALIENTE MEX. FCI.",
     "timestamp": 1774220345,
     "blockHeight": 941510,
-    "hasParents": false,
-    "ipfsOk": true
-  },
-  {
-    "txid": "e2384d8728fc958c459b4859619938ddda4b1dd0e4ca47aac0779a26496eb9db",
-    "slug": "xiuh",
-    "tokenId": "e2384d8728fc958c459b4859619938ddda4b1dd0e4ca47aac0779a26496eb9db",
-    "cid": "QmYc5n4RzW1B33NfSPsthmfnSFQqstptPrSgb1tYeCzbjv",
-    "nombre": "XIUH (RAMIREZ/RAMIREZ) MEX. FCI.",
-    "timestamp": 1774219551,
-    "blockHeight": 941509,
     "hasParents": false,
     "ipfsOk": true
   }

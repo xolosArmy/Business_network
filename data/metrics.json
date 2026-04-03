@@ -1,12 +1,12 @@
 {
-  "linajes_registrados": 81,
-  "linajes_validados_ipfs": 81,
+  "linajes_registrados": 82,
+  "linajes_validados_ipfs": 82,
   "registros_con_padre_y_madre": 0,
-  "txs_xolo_detectadas": 81,
-  "ipfs_disponibles": 81,
+  "txs_xolo_detectadas": 82,
+  "ipfs_disponibles": 82,
   "ipfs_fallidos": 0,
-  "nfts_con_slug_resuelto": 81,
-  "ult_registro_txid": "13a2fd97493e2c15ec1077465da11dd602e86fbf4e200b9c4bb72dab78c199ea",
-  "ult_registro_slug": "humo",
-  "ultima_actualizacion": "2026-03-29T20:00:10.061Z"
+  "nfts_con_slug_resuelto": 82,
+  "ult_registro_txid": "196f4f5cb3f0016dd62715d7e1768e465c8a1db8c65a1afc58861845265dcd9c",
+  "ult_registro_slug": "amoxtli",
+  "ultima_actualizacion": "2026-04-03T19:06:17.127Z"
 }

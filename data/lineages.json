@@ -1,5 +1,68 @@
 [
   {
+    "txid": "196f4f5cb3f0016dd62715d7e1768e465c8a1db8c65a1afc58861845265dcd9c",
+    "blockHeight": 943236,
+    "timestamp": 1775242713,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "amoxtli",
+    "tokenId": "196f4f5cb3f0016dd62715d7e1768e465c8a1db8c65a1afc58861845265dcd9c",
+    "cid": "QmWyV9scQsKT68SWFjnu66GzDHnz3BZaQdBXYfZt5RTVQd",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e465423414d4f58544c49202852414d4952455a2f52414d4952455a29204d45582e204643492e35697066733a2f2f516d57795639736351734b5436385357466a6e753636477a44486e7a33425a615164425859665a74355254565164200de057d7f3b21847236f356847c71fba7efa3682fb8734b3cc47ebb5618bd1b501004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | AMOXTLI (RAMIREZ/RAMIREZ) MEX. FCI.",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmWyV9scQsKT68SWFjnu66GzDHnz3BZaQdBXYfZt5RTVQd",
+      "cid": "QmWyV9scQsKT68SWFjnu66GzDHnz3BZaQdBXYfZt5RTVQd",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "joven"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro on-chain de Amoxtli (Ramirez/Ramirez) Mex. FCI. Cachorra Intermedia Sin Pelo, nieta del semental on-chain Uxmal Avila.",
+        "external_url": "https://www.youtube.com/shorts/QT2K02t70_M",
+        "image": "ipfs://QmdV9rSuZxDjjrx3S7F9SCD6QEn7NdtuacePnF7wUhsT3u",
+        "lineage": {
+          "color": "Negro",
+          "criador": "\"Xolos Ramirez\" (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "joven",
+          "fechaNacimiento": "2026-01-18",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "COPAL (RAMIREZ/RAMIREZ) MEX. FCI.",
+          "microchip": "939000002748326",
+          "padre": "AZTLAN (RAMIREZ/RAMIREZ) MEX. FCI.",
+          "registroFCM": "FCMZZ4032-B",
+          "sexo": "Hembra",
+          "variedad": "Sin pelo"
+        },
+        "name": "AMOXTLI (RAMIREZ/RAMIREZ) MEX. FCI.",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "AMOXTLI (RAMIREZ/RAMIREZ) MEX. FCI."
+  },
+  {
     "txid": "13a2fd97493e2c15ec1077465da11dd602e86fbf4e200b9c4bb72dab78c199ea",
     "blockHeight": 942195,
     "timestamp": 1774634025,
