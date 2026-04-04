@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'roadmap-item-1': '<span>✅</span> Lanzamiento de <strong>RMZWallet v1.0</strong>: envío y recepción de XEC y $RMZ, PWA con modo sin conexión y custodia local de claves.',
       'roadmap-item-2': '<span>💱</span> Integración de <strong>Atomic Swap DEX XEC ⇄ $RMZ</strong> directamente en la billetera (sin salir a otras interfaces).',
       'roadmap-item-3': '<span>💡</span> <strong>Campaña Flipstarter</strong>: recaudación de fondos para las próximas mejoras del RMZWallet.',
-      'roadmap-item-4': '<span>🖼️</span> Soporte nativo para <strong>almacenar y visualizar NFTs de XolosArmy</strong> (galería integrada para colecciones culturales del Xoloitzcuintle).',
+      'roadmap-item-4': '<span>🖼️</span> Soporte nativo para <strong>almacenar y visualizar NFTs de XolosArmy</strong> (galería integrada en marketplace.xolosarmy.xyz).',
       'roadmap-item-5': '<span>🧠</span> Módulo de <strong>pagos con eToken para adopciones</strong>: flujo simplificado para reservar y adoptar xoloitzcuintles usando $RMZ.',
       'roadmap-item-6': '<span>🚀</span> Evolución a <strong>Tonalli Wallet</strong>: mejoras de UX, multi-idioma (ES/EN) y herramientas avanzadas para la comunidad XolosArmy.',
       'roadmap-note': 'Este roadmap es vivo: se ajusta junto con la manada y las necesidades reales de quienes usan el Xoloitzcuintle como puente entre cultura y blockchain.'
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'roadmap-item-1': '<span>✅</span> Launch of <strong>RMZWallet v1.0</strong>: send and receive XEC and $RMZ, PWA with offline mode, and local key custody.',
       'roadmap-item-2': '<span>💱</span> Integration of <strong>Atomic Swap DEX XEC ⇄ $RMZ</strong> directly in the wallet (no need to leave the interface).',
       'roadmap-item-3': '<span>💡</span> <strong>Flipstarter Campaign</strong>: fundraising for upcoming RMZWallet improvements.',
-      'roadmap-item-4': '<span>🖼️</span> Native support to <strong>store and view XolosArmy NFTs</strong> (integrated gallery for Xoloitzcuintle cultural collections).',
+      'roadmap-item-4': '<span>🖼️</span> Native support to <strong>store and view XolosArmy NFTs</strong> (integrated gallery on marketplace.xolosarmy.xyz).',
       'roadmap-item-5': '<span>🧠</span> <strong>eToken payments module for adoptions</strong>: simplified flow to reserve and adopt Xoloitzcuintles using $RMZ.',
       'roadmap-item-6': '<span>🚀</span> Evolution to <strong>Tonalli Wallet</strong>: UX upgrades, multi-language (ES/EN), and advanced tools for the XolosArmy community.',
       'roadmap-note': 'This roadmap is alive: it evolves with the pack and the real needs of those who use the Xoloitzcuintle as a bridge between culture and blockchain.'
