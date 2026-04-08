@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architectural Report: eCash (XEC) Integration on THORChain</title>
+    <style>
+        /* xolosArmy Network Blog Theme */
+        :root {
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --heading-color: #58a6ff;
+            --accent-color: #ff7b72;
+            --code-bg: #161b22;
+            --border-color: #30363d;
+            --link-color: #79c0ff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--heading-color);
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--heading-color);
+            font-size: 1.8em;
+            margin-top: 40px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #8b949e;
+            font-size: 1.4em;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        strong {
+            color: #ffffff;
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 0.2em 0.4em;
+            border-radius: 6px;
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+            font-size: 0.9em;
+            color: var(--accent-color);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .image-caption {
+            text-align: center;
+            font-size: 0.9em;
+            color: #8b949e;
+            margin-top: -20px;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background-color: var(--code-bg);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #21262d;
+            color: var(--heading-color);
+            font-weight: 600;
+        }
+
+        ul {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .sources {
+            margin-top: 60px;
+            background-color: var(--code-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .sources h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Architectural Report and Integration of eCash (XEC) on THORChain</h1>
+        <p><strong>Specifications for the Tonalli Network</strong> | <em>xolosArmy Network Engineering Blog</em></p>
+    </header>
+
+    <article>
+        <h2>Executive Summary</h2>
+        <p>Cross-chain liquidity orchestration in truly decentralized architectures demands an extraordinary degree of fault tolerance, rigorous state determinism, and flawless synchronization of asynchronous events originating from external networks. The integration of new Layer 1 (L1) networks into the THORChain protocol relies on routing native transactions through the Bifrost subsystem. This subsystem acts as a bidirectional connectivity layer, bridging the local state machines of the various supported chains with THORChain's global state machine, which is built on Cosmos SDK infrastructure.</p>
+        
+        <p>This document constitutes a comprehensive architectural study dissecting the technical, cryptographic, and operational requirements for the native integration of eCash (XEC) into the THORChain ecosystem. The analysis uses Merge Request (MR) !4696—corresponding to the integration of the Monero (XMR) network with FROST threshold signatures—as the primary reference and unavoidable standard dictating the current expectations of THORNode's core developers.</p>
+
+        <p>For the xolosArmy network development environment and the deployment of the Tonalli Wallet ecosystem, integrating eCash (XEC) offers a much more architecturally direct and predictable implementation path. Since eCash inherits the Unspent Transaction Output (UTXO) model structure from its direct predecessors (Bitcoin and Bitcoin Cash), the engineering effort does not require building a client from scratch. Instead, the technical strategy lies in extending and customizing the existing shared implementation found in the <code>/bifrost/pkg/chainclients/utxo/</code> directory.</p>
+
+        <p>Critical vectors resolved by this research include: algorithmic adaptation for block finality handling under eCash's hybrid Avalanche consensus, deterministic validation of addresses with specific prefixes, fragmented orchestration of <code>OP_RETURN</code> fields for metadata (memos) exceeding standard network limits, and the integration of readiness queries and halt states. This study precisely aligns the Tonalli wallet Proof of Concept (PoC) with the rigorous demands of Bifrost's production environment.</p>
+
+        <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=1200&q=80" alt="Decentralized Blockchain Nodes Architecture" class="blog-image">
+        <p class="image-caption">Figure 1: Abstract representation of cross-chain liquidity and node infrastructure.</p>
+
+        <h2>THORChain's Interoperability Architecture and the Bifrost Subsystem</h2>
+        <p>To contextualize the engineering effort required by the xolosArmy network, it is imperative to understand THORChain's underlying mechanics. Unlike traditional bridges that rely on centralized validators or fragmented wrapped tokens, THORChain facilitates the exchange of native assets through a network of distributed vaults (Asgard Vaults). These vaults operate via a Threshold Signature Scheme (TSS), where protocol validator nodes collaboratively control assets without any individual participant holding the full private key.</p>
+
+        <p>The trust and connectivity boundary of this network is managed by <strong>Bifrost</strong>, the sentinel component of THORNode. Bifrost is designed under a dual, concurrent process paradigm: the <strong>Observer</strong> and the <strong>Signer</strong>.</p>
+        
+        <ul>
+            <li><strong>The Observer:</strong> A read daemon that continuously scans newly mined blocks across all supported L1 chains. It inspects every transaction looking for movements directed toward active or retiring THORChain vault addresses. Once it validates inputs, extracts the user ID (typically from <code>VIN0</code>), and decodes the intent via the embedded memo, it broadcasts a witness transaction to the validator network. Once 67% of nodes attest to the event, the transaction reaches ingress consensus.</li>
+            <li><strong>The Signer:</strong> Triggers when the THORChain state machine issues an egress directive (e.g., swapping or withdrawing liquidity). It assembles an unsigned outbound transaction, coordinates a TSS cryptographic ceremony using Secure Multiparty Computation (MPC), and once the signature threshold is met, broadcasts the raw transaction to the external network.</li>
+        </ul>
+
+        <h2>Dissecting Merge Request !4696: The Monero Standard as a Baseline</h2>
+        <p>Merge Request !4696, documented in the THORNode repository, establishes a historical precedent regarding community acceptance standards for new integrations. Titled <em>"Add Monero (XMR) chain support with FROST threshold signing"</em>, it encapsulates months of deep cryptographic design.</p>
+        
+        <p>THORChain core developers dictate that a comprehensive integration must cover the following domains within the Bifrost code:</p>
+        <ul>
+            <li><strong>Scanner (Block & Mempool Scanner):</strong> Infallible chain-reading routines with robust exception handling for deep re-orgs.</li>
+            <li><strong>Broadcaster:</strong> Asynchronous logic to inject signed transactions into the L1 network.</li>
+            <li><strong>Consolidation (UTXO Housekeeping):</strong> Automatic algorithms to group dust and prevent cryptographic signing bottlenecks.</li>
+            <li><strong>Solvency Reporting:</strong> Daemons that continuously cross-reference the L1 vault's mathematical balance against THORChain's internal ledger.</li>
+            <li><strong>Readiness Queries:</strong> Exposure of operational states to allow frontends (like Tonalli Wallet) to dynamically determine network availability.</li>
+            <li><strong>Address Derivation:</strong> Centralized functions in the <code>common/</code> directory to validate and encode native chain addresses.</li>
+            <li><strong>Simulation & Regression (Mocknet Fixtures & CI):</strong> A complete simulated network environment representing all edge cases, fluidly integrated into CI pipelines.</li>
+        </ul>
+
+        <h2>The Shared UTXO Client: Extending Base Logic for eCash</h2>
+        <p>Unlike the absolute architectural isolation required by Monero, the eCash (XEC) integration masterfully capitalizes on the object-oriented structure of Golang. L1 networks sharing analogous data architectures and underlying consensus do not require building clients from scratch. The existing robust core library natively processes complex flows for Bitcoin (BTC), Litecoin (LTC), Bitcoin Cash (BCH), and Dogecoin (DOGE).</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Architectural Attribute</th>
+                    <th>Base UTXO Client (Standard Bitcoin)</th>
+                    <th>Specific Adaptation for eCash Client (XEC)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Entity Generation (Tx)</strong></td>
+                    <td>Based on standard <code>btcutil</code> libraries.</td>
+                    <td>Adaptation of <code>bchutil</code> forks or native derivation for eCash network topology.</td>
+                </tr>
+                <tr>
+                    <td><strong>Address Structure</strong></td>
+                    <td>Legacy P2PKH, P2SH, SegWit (Bech32) formats.</td>
+                    <td>CashAddr format with the strict <code>ecash:</code> prefix.</td>
+                </tr>
+                <tr>
+                    <td><strong>Core Consensus Algorithm</strong></td>
+                    <td>Pure Nakamoto Proof-of-Work (SHA-256).</td>
+                    <td>Hybrid PoW (SHA-256) dynamically complemented by Avalanche Post and Pre-Consensus layers.</td>
+                </tr>
+                <tr>
+                    <td><strong>Mempool Evaluation</strong></td>
+                    <td>Sequential scanning, requires multiple on-chain confirmations (1-6 blocks).</td>
+                    <td>Extension of RPC APIs to intercept sub-3-second finality via the <code>getfinaltransactions</code> command.</td>
+                </tr>
+                <tr>
+                    <td><strong>Fee & Dust Handling</strong></td>
+                    <td>High thresholds calculated in satoshis/byte (peaks of $2-$3).</td>
+                    <td>Thresholds drastically adjusted for eCash's sub-cent microeconomy.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Avalanche Consensus and the Redefinition of Block Finality</h2>
+        <p>The most profound differential vector in integrating eCash is the management of network consensus and asynchronous transaction settlement. Historically, the primary friction in cross-chain liquidity has been the waiting time for probabilistic finality.</p>
+
+        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80" alt="Server Data and Fast Synchronization Concept" class="blog-image">
+        <p class="image-caption">Figure 2: Avalanche consensus enables real-time transaction finalization, bypassing traditional mempool delays.</p>
+
+        <p>eCash resolves this bottleneck natively via its hybrid consensus architecture, superimposing an Avalanche-based structure over the traditional Proof-of-Work infrastructure:</p>
+
+        <h3>Stage 1: Avalanche Post-Consensus</h3>
+        <p>Activated in September 2022, Post-Consensus altered the semantics of mined block finality. Sub-sampled validator nodes instantly vote on a newly mined block header. Once quorum is reached, the block is deterministically locked as the canonical tip. This mechanism confers absolute <strong>1-block finality</strong>, practically eliminating the deep re-orgs that plague traditional UTXO clients.</p>
+
+        <h3>Stage 2: Avalanche Pre-Consensus</h3>
+        <p>Activated at block height 923,347 (Nov 2025), Pre-Consensus transforms the mempool's temporal nature. Avalanche nodes execute real-time polling on raw transactions the moment they propagate. This resolves double-spend attempts in milliseconds, granting transactions irreversible <strong>sub-3-second finality</strong> before they are even mined.</p>
+
+        <h2>Mempool Scanner Integration and Adaptations in Bitcoin ABC RPCs</h2>
+        <p>To capitalize on this, Tonalli and xolosArmy developers must override the asynchronous state inspection sequences in Bifrost's Observer module.</p>
+        
+        <p><strong>Leveraging the <code>getfinaltransactions</code> Endpoint:</strong><br>
+        A conditional statement must be injected into the <code>OnObservedTxIn</code> and <code>GetMemPool</code> logical flows. The eCash client will query the new <code>getfinaltransactions</code> RPC command. When the Observer intercepts a TxID in this list, the bridge algorithmically assumes absolute finality, injecting it immediately as a <code>MsgObservedTxIn</code> message. This cuts user wait times from hours to mere seconds.</p>
+
+        <p><strong>Advanced Verbosity in <code>getblock</code>:</strong><br>
+        The standard <code>getblock</code> command in Bitcoin ABC now supports <em>verbosity level 3</em>, embedding exhaustive <code>prevout</code> information directly within the <code>vin</code> data matrix. Parsing this nested JSON will severely decrease the node's I/O overhead.</p>
+
+        <h2>OP_RETURN Memo Structuring and Metadata Pagination</h2>
+        <p>Routing intent within THORChain relies on metadata attached via the <code>OP_RETURN</code> opcode. Bitcoin and eCash nodes enforce a strict 80-byte hard limit on standard <code>OP_RETURN</code> payloads.</p>
+
+        <p>Because the Tonalli ecosystem requires lengthy memos for full UX flows (target assets, slippage limits, affiliate fees), bypassing the 80-byte barrier is mathematically inevitable.</p>
+
+        <h3>Multi-Script Extension Mitigation (> 80 Characters):</h3>
+        <p>When the intent string exceeds 80 characters, Tonalli Wallet's logic must slice the message:</p>
+        <ol>
+            <li>Extract the first 79 logical characters, adding the special delimiter <code>^</code> at the end. Register this as a standard <code>OP_RETURN</code> in <code>VOUT2</code>.</li>
+            <li>Convert the remaining string to hexadecimal encoding.</li>
+            <li>Fracture this hex body into exact 40-character sub-blocks (padding with <code>00</code> if needed).</li>
+            <li>Transmute each 40-character block into pseudo-valid script pub keys, emulating a P2WPKH structure (adding the <code>0014</code> prefix). Assign these dummy outputs the absolute minimum network dust limit to pass validation.</li>
+        </ol>
+
+        <h2>Solvency Reporting, Vault Consolidations, and Halt States</h2>
+        <p><strong>The Automatic Consolidation Protocol (<code>ConsolidateUTXOs</code>):</strong><br>
+        To prevent severe UTXO fragmentation, the ChainClient framework demands automatic routines. Whenever the sum of unspent outputs breaches a limit (usually 15), the Signer autonomously models and signs an internal transaction to unify the fragments. Because eCash features infinitely scalable block capacities and micro-cent fees, this routine operates with infinitesimal economic impact compared to Bitcoin mainnet.</p>
+
+        <p><strong>Dynamic Readiness Queries:</strong><br>
+        The Tonalli Wallet frontend will utilize its QuoteInspector v2 architecture to poll readiness queries. Fortunately, the anti-mutation shield provided by the Avalanche engine massively mitigates the systemic fears of deep re-orgs that typically force PoW networks into prolonged halt states.</p>
+
+        <h2>Conclusions on Architectural Synergy and Roadmap</h2>
+        <p>The design to integrate eCash into THORChain's decentralized functional layers stands as a cross-chain optimization achievement. While the Cosmos SDK provides a global shield against centralized dependencies, eCash's microscopic network design eliminates the primary deficit of UTXO-based bridges: the suffocating latency imposed by stochastic finality.</p>
+
+        <p>By taming the mathematical variations of the <code>ecash:</code> prefix, parsing sub-routines for <code>OP_RETURN</code> metadata pagination, and leveraging sub-3-second Avalanche Pre-Consensus, xolosArmy developers will forge an industrial-grade L1 node. This establishes a new paradigm of speed and efficiency for the next iteration of immutable decentralized finance.</p>
+
+    </article>
+
+    <div class="sources">
+        <h3>Sources Used</h3>
+        <ul>
+            <li><strong>THORNode Repository (GitLab):</strong> Reference implementation of Merge Request !4696 ("Add Monero XMR chain support with FROST threshold signing").</li>
+            <li><strong>Bitcoin ABC Documentation:</strong> RPC documentation for <code>getfinaltransactions</code> and <code>getblock</code> (verbosity level 3).</li>
+            <li><strong>eCash Protocol Specifications:</strong> Avalanche Pre-Consensus and Post-Consensus activation milestones and technical mechanics.</li>
+            <li><strong>Cosmos SDK Documentation:</strong> State machine synchronization and event messaging architecture.</li>
+            <li><strong>Tonalli Wallet Internal Documentation:</strong> Architecture drafts for QuoteInspector v2 and multi-script OP_RETURN pagination specifications.</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
