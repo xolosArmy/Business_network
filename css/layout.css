@@ -151,3 +151,38 @@
   letter-spacing: 0.03em;
   text-transform: uppercase;
 }
+
+/* Animación para la Radio Pública */
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #1d9bf0;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 0 rgba(29, 155, 240, 0.7);
+  animation: pulse-blue 2s infinite;
+}
+
+@keyframes pulse-blue {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(29, 155, 240, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(29, 155, 240, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(29, 155, 240, 0);
+  }
+}
+
+.space-radio-highlight {
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.space-radio-highlight:hover {
+  transform: translateY(-5px);
+  border-color: #1d9bf0 !important;
+}
