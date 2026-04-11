@@ -10,6 +10,64 @@
     <link rel="stylesheet" href="/css/cinematic.css" />
   </head>
   <body class="cinematic-theme">
+    <style>
+      .teyolia-top-banner {
+        background: linear-gradient(90deg, #0a0a0a 0%, #0d1f2d 50%, #0a0a0a 100%);
+        border-bottom: 1px solid rgba(88, 166, 255, 0.3);
+        color: #e6edf3;
+        text-align: center;
+        padding: 10px 20px;
+        font-family: system-ui, -apple-system, sans-serif;
+        font-size: 0.9rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        position: relative;
+        z-index: 1000;
+      }
+
+      .teyolia-top-banner .highlight {
+        color: #58a6ff;
+        font-weight: bold;
+        text-shadow: 0 0 10px rgba(88, 166, 255, 0.5);
+        letter-spacing: 0.5px;
+      }
+
+      .teyolia-top-banner .btn-banner {
+        background: rgba(88, 166, 255, 0.1);
+        color: #58a6ff;
+        text-decoration: none;
+        padding: 4px 14px;
+        border-radius: 4px;
+        border: 1px solid #58a6ff;
+        font-weight: 600;
+        font-size: 0.85rem;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+      }
+
+      .teyolia-top-banner .btn-banner:hover {
+        background: #58a6ff;
+        color: #000000;
+        box-shadow: 0 0 15px rgba(88, 166, 255, 0.8);
+      }
+
+      @media (max-width: 768px) {
+        .teyolia-top-banner {
+          flex-direction: column;
+          gap: 8px;
+          padding: 12px 15px;
+          font-size: 0.85rem;
+        }
+      }
+    </style>
+
+    <div class="teyolia-top-banner">
+      <span>⚡️ <span class="highlight">NUEVA CAMPAÑA:</span> Integración Nativa de eCash en THORChain para Tonalli Wallet.</span>
+      <a href="https://www.teyolia.cash/campaigns/campaign-1775831790436" class="btn-banner" target="_blank" rel="noopener noreferrer">Fondea en Teyolia ↗</a>
+    </div>
+
     <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
 
     <div id="nav-placeholder"></div>
