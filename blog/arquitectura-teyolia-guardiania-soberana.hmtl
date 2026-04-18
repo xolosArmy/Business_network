@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teyolia y la Arquitectura de la Guardianía Soberana | Xolos Ramírez</title>
+  <meta
+    name="description"
+    content="Un análisis exhaustivo del ecosistema xolosArmy, la Teyolia y la preservación del xoloitzcuintle mediante guardianía curada, blockchain, linaje y comunidad."
+  />
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #0b0a09;
+      --bg-soft: #151210;
+      --card: #181412;
+      --card-2: #211a17;
+      --text: #f5efe7;
+      --muted: #c8b7a4;
+      --gold: #d9a85f;
+      --gold-soft: #f0c98d;
+      --terracotta: #9f4f31;
+      --line: rgba(240, 201, 141, 0.16);
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top, rgba(159, 79, 49, 0.22), transparent 32%),
+        linear-gradient(180deg, #0a0908 0%, #100d0b 50%, #0b0a09 100%);
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      line-height: 1.75;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 2rem));
+      margin-inline: auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.45rem 0.95rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(240, 201, 141, 0.05);
+      color: var(--gold-soft);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--gold), var(--terracotta));
+      box-shadow: 0 0 20px rgba(217, 168, 95, 0.55);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 88vh;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.78)),
+        url('/assets/blog/teyolia/hero-teyolia-xolo.jpg') center/cover no-repeat;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(11, 10, 9, 0.92) 0%, rgba(11, 10, 9, 0.72) 42%, rgba(11, 10, 9, 0.35) 100%);
+      pointer-events: none;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      padding: 6rem 0 4rem;
+      max-width: 820px;
+    }
+
+    .hero h1 {
+      margin: 1rem 0 1.1rem;
+      font-family: "Cinzel", serif;
+      font-size: clamp(2.4rem, 5vw, 5rem);
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+    }
+
+    .hero__lead {
+      margin: 0;
+      max-width: 760px;
+      color: #f1dfca;
+      font-size: clamp(1.02rem, 1.8vw, 1.22rem);
+    }
+
+    .hero__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1rem;
+      margin-top: 1.6rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .hero__meta span {
+      padding: 0.42rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .section {
+      padding: 5rem 0;
+    }
+
+    .grid-intro {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .card--padded {
+      padding: 2rem;
+    }
+
+    .intro-copy h2,
+    .content-block h2,
+    .content-block h3,
+    .feature-box h3,
+    .timeline h3,
+    .table-wrap h3 {
+      font-family: "Cinzel", serif;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-top: 0;
+    }
+
+    .intro-copy h2 {
+      font-size: clamp(1.8rem, 3.3vw, 2.8rem);
+      margin-bottom: 1rem;
+    }
+
+    .intro-copy p,
+    .content-block p,
+    .content-block li,
+    .feature-box p,
+    .timeline p,
+    .decision-box p {
+      color: #eadfd2;
+    }
+
+    .intro-side {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .stat-box {
+      padding: 1.4rem 1.25rem;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(217, 168, 95, 0.08), rgba(159, 79, 49, 0.06));
+      border: 1px solid var(--line);
+    }
+
+    .stat-box strong {
+      display: block;
+      font-size: 1.9rem;
+      color: var(--gold-soft);
+      line-height: 1;
+      margin-bottom: 0.55rem;
+      font-weight: 800;
+    }
+
+    .quote-banner {
+      margin-top: 1.2rem;
+      padding: 1.25rem 1.4rem;
+      border-left: 4px solid var(--gold);
+      border-radius: 0 18px 18px 0;
+      background: rgba(217, 168, 95, 0.06);
+      color: #f2e4d0;
+      font-size: 1.03rem;
+    }
+
+    .image-band {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .media-card {
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: var(--card);
+      min-height: 260px;
+    }
+
+    .media-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .media-note {
+      padding: 1rem 1.1rem;
+      color: var(--muted);
+      font-size: 0.94rem;
+      background: rgba(255,255,255,0.02);
+      border-top: 1px solid var(--line);
+    }
+
+    .content-layout {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .content-block {
+      padding: 2rem;
+    }
+
+    .content-block h2 {
+      font-size: clamp(1.7rem, 3vw, 2.45rem);
+      margin-bottom: 1rem;
+    }
+
+    .content-block h3 {
+      font-size: 1.4rem;
+      margin: 1.5rem 0 0.75rem;
+      color: var(--gold-soft);
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    .feature-box {
+      padding: 1.25rem 1.2rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+    }
+
+    .feature-box h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1.12rem;
+      color: var(--gold-soft);
+      font-family: "Inter", sans-serif;
+      letter-spacing: 0;
+    }
+
+    .table-wrap {
+      margin-top: 2rem;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .table-wrap h3 {
+      margin: 0;
+      padding: 1.4rem 1.4rem 0.5rem;
+      font-size: 1.35rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+
+    th,
+    td {
+      padding: 1rem 1rem;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    th {
+      color: var(--gold-soft);
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: rgba(255,255,255,0.03);
+    }
+
+    td {
+      color: #efe4d7;
+      font-size: 0.98rem;
+    }
+
+    .timeline {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 1.35rem 1.35rem 1.35rem 4rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    }
+
+    .timeline-item::before {
+      content: attr(data-step);
+      position: absolute;
+      left: 1rem;
+      top: 1.15rem;
+      width: 2.15rem;
+      height: 2.15rem;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--gold), var(--terracotta));
+      color: #1a120d;
+      font-weight: 800;
+      box-shadow: 0 0 20px rgba(217, 168, 95, 0.3);
+    }
+
+    .timeline-item h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.2rem;
+      color: var(--gold-soft);
+      font-family: "Inter", sans-serif;
+    }
+
+    .dual-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .decision-box {
+      margin-top: 1.6rem;
+      padding: 1.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(159, 79, 49, 0.12), rgba(217, 168, 95, 0.06));
+    }
+
+    .decision-box strong {
+      color: var(--gold-soft);
+    }
+
+    .conclusion {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .conclusion::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% -35% auto;
+      width: 420px;
+      height: 420px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(217,168,95,0.12), transparent 65%);
+      pointer-events: none;
+    }
+
+    .checklist {
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 1.2rem;
+    }
+
+    .checklist li {
+      list-style: none;
+      position: relative;
+      padding-left: 1.75rem;
+    }
+
+    .checklist li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--gold);
+    }
+
+    .cta-box {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .cta-box p {
+      margin: 0;
+      color: #f2e8db;
+      font-weight: 500;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.95rem 1.35rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--gold), #b36a45);
+      color: #1d130c;
+      font-weight: 800;
+      transition: transform 0.25s ease, filter 0.25s ease;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+    }
+
+    .footer-note {
+      padding: 2rem 0 4rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    .separator {
+      width: 120px;
+      height: 1px;
+      margin: 0 auto 2rem;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    @media (max-width: 980px) {
+      .grid-intro,
+      .content-layout,
+      .image-band,
+      .dual-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: 78vh;
+        background-position: center center;
+      }
+
+      .hero__content {
+        padding-top: 7rem;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .section {
+        padding: 4rem 0;
+      }
+
+      .card--padded,
+      .content-block {
+        padding: 1.35rem;
+      }
+
+      .timeline-item {
+        padding: 1.1rem 1rem 1.1rem 3.5rem;
+      }
+
+      .hero__meta {
+        font-size: 0.88rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="container hero__content">
+      <span class="eyebrow">Xolos Ramírez · Blog Editorial</span>
+      <h1>Teyolia y la Arquitectura de la Guardianía Soberana</h1>
+      <p class="hero__lead">
+        Un análisis profundo del ecosistema xolosArmy, la Civilización Tonalli y la preservación
+        del xoloitzcuintle mediante un modelo de guardianía curada que une linaje, comunidad,
+        blockchain y memoria cultural.
+      </p>
+
+      <div class="hero__meta">
+        <span>Preservación del xoloitzcuintle</span>
+        <span>Teyolia Flipstarter</span>
+        <span>Guardianía soberana</span>
+        <span>XolosArmy Network</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="grid-intro">
+          <article class="card card--padded intro-copy">
+            <span class="eyebrow">Introducción</span>
+            <h2>Cuando un xoloitzcuintle deja de ser mercancía y vuelve a ser legado</h2>
+            <p>
+              La preservación de una raza ancestral como el xoloitzcuintle exige algo más que
+              compraventa, algo más que un simple trámite de adopción. Exige un sistema capaz de
+              proteger el linaje, documentar la historia, sostener el bienestar del cachorro y
+              vincular a su futuro guardián con una comunidad real.
+            </p>
+            <p>
+              En ese contexto surge <strong>Teyolia</strong>: un proceso de
+              <strong>guardianía curada</strong> desarrollado por <strong>Xolos Ramírez</strong> y
+              fortalecido por la infraestructura digital de <strong>xolosArmy Network</strong>. No
+              se trata solamente de llevar un perro a casa. Se trata de integrarse a una red de
+              responsabilidad, memoria, transparencia y respeto por un ser vivo que forma parte de
+              la historia profunda de México.
+            </p>
+
+            <div class="quote-banner">
+              “La Teyolia no es una venta. Es un camino de validación humana, técnica y comunitaria
+              para que el xoloitzcuintle llegue al hogar correcto.”
+            </div>
+          </article>
+
+          <aside class="intro-side">
+            <div class="stat-box">
+              <strong>3,000+</strong>
+              <span>Años de memoria cultural acompañando a la figura del xoloitzcuintle.</span>
+            </div>
+            <div class="stat-box">
+              <strong>5 fases</strong>
+              <span>Conforman el Camino de la Teyolia, desde la postulación hasta la decisión final.</span>
+            </div>
+            <div class="stat-box">
+              <strong>NFT + comunidad</strong>
+              <span>Linaje, historial y respaldo social unidos en una arquitectura soberana.</span>
+            </div>
+          </aside>
+        </div>
+
+        <div class="image-band">
+          <figure class="media-card">
+            <img src="/assets/blog/teyolia/xoloitzcuintle-ancestral.jpg" alt="Xoloitzcuintle en retrato editorial con atmósfera ancestral" />
+            <figcaption class="media-note">
+              Imagen sugerida: retrato editorial del xoloitzcuintle como símbolo vivo de herencia cultural.
+            </figcaption>
+          </figure>
+
+          <figure class="media-card">
+            <img src="/assets/blog/teyolia/tonalli-wallet-ui.jpg" alt="Visual del ecosistema Tonalli Wallet y guardianía digital" />
+            <figcaption class="media-note">
+              Imagen sugerida: interfaz de Tonalli Wallet o visual del ecosistema digital de guardianía.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container content-layout">
+        <article class="card content-block">
+          <span class="eyebrow">Capítulo I</span>
+          <h2>El xoloitzcuintle como artefacto cultural y pirámide viviente</h2>
+          <p>
+            El xoloitzcuintle no puede entenderse únicamente como una raza canina. Su presencia en
+            la historia mesoamericana lo convierte en un símbolo vivo de continuidad cultural. Es
+            memoria genética, testimonio arqueológico y compañía espiritual. Es, en muchos
+            sentidos, una <strong>pirámide viviente</strong>.
+          </p>
+          <p>
+            Durante siglos, el xoloitzcuintle fue asociado con el tránsito entre mundos. En la
+            cosmovisión mexica aparece como guía de las almas, acompañando a los difuntos a través
+            del Mictlán. Esa dimensión sagrada no desaparece en la modernidad: sobrevive en la
+            sensibilidad con la que muchas familias perciben su calor, su presencia y su conexión
+            emocional profunda con las personas.
+          </p>
+          <p>
+            Que esta raza haya atravesado periodos de casi extinción demuestra algo crucial: el
+            legado ancestral necesita guardianes conscientes. La documentación frágil y la lógica
+            comercial del mercado de mascotas no bastan para custodiar una herencia así. Hace falta
+            una infraestructura viva, actualizable y soberana.
+          </p>
+        </article>
+
+        <aside class="card content-block">
+          <span class="eyebrow">Lectura central</span>
+          <h2>Del papel a la memoria inmutable</h2>
+          <p>
+            Allí es donde el modelo de Teyolia adquiere su verdadera importancia. El objetivo no es
+            solo cuidar al cachorro en sus primeros meses, sino proyectar su historia hacia el
+            futuro con herramientas capaces de resistir el olvido, la pérdida documental y la
+            mercantilización banal.
+          </p>
+
+          <div class="feature-list">
+            <div class="feature-box">
+              <h3>Linaje documentado</h3>
+              <p>El registro deja de depender exclusivamente del papel y se transforma en memoria digital verificable.</p>
+            </div>
+            <div class="feature-box">
+              <h3>Bienestar como prioridad</h3>
+              <p>La elección del hogar correcto pesa más que la simple capacidad de pago inmediata.</p>
+            </div>
+            <div class="feature-box">
+              <h3>Integración cultural</h3>
+              <p>El guardián entra en una narrativa mayor: comunidad, preservación y responsabilidad histórica.</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="container">
+        <div class="table-wrap">
+          <h3>Comparativa de modelos de relación humano-canino</h3>
+          <div style="overflow-x:auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Dimensión</th>
+                  <th>Tienda de mascotas</th>
+                  <th>Adopción tradicional</th>
+                  <th>Guardianía Teyolia</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Naturaleza del vínculo</td>
+                  <td>Transacción comercial centrada en mercancía.</td>
+                  <td>Acto de rescate o caridad.</td>
+                  <td>Compromiso con el linaje, la cultura y el bienestar integral.</td>
+                </tr>
+                <tr>
+                  <td>Criterio de selección</td>
+                  <td>Pago inmediato.</td>
+                  <td>Evaluación institucional básica.</td>
+                  <td>Validación técnica, humana, social y comunitaria.</td>
+                </tr>
+                <tr>
+                  <td>Documentación</td>
+                  <td>Factura o registro limitado.</td>
+                  <td>Contrato físico de adopción.</td>
+                  <td>NFT de linaje, historial digital y trazabilidad soberana.</td>
+                </tr>
+                <tr>
+                  <td>Rol de la persona</td>
+                  <td>Propietario.</td>
+                  <td>Tutor o adoptante.</td>
+                  <td>Guardián soberano del linaje ancestral.</td>
+                </tr>
+                <tr>
+                  <td>Seguimiento</td>
+                  <td>Escaso o inexistente.</td>
+                  <td>Ocasional.</td>
+                  <td>Integración continua a la xolosArmy Network.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container content-layout">
+        <article class="card content-block">
+          <span class="eyebrow">Capítulo II</span>
+          <h2>La infraestructura tecnológica de la Civilización Tonalli</h2>
+          <p>
+            Teyolia descansa sobre una arquitectura digital que busca soberanía, transparencia y
+            continuidad. Esa base recibe el nombre de <strong>Civilización Tonalli</strong> y está
+            organizada alrededor de la <strong>xolosArmy Network</strong>. Su propósito no es
+            convertir la experiencia en algo frío o técnico, sino construir el soporte necesario
+            para que la memoria del xoloitzcuintle pueda preservarse con la misma seriedad con la
+            que se protege una obra de arte o un archivo histórico.
+          </p>
+
+          <h3>eCash (XEC) como capa operativa</h3>
+          <p>
+            El ecosistema utiliza eCash como medio de interacción digital por su rapidez,
+            comisiones mínimas y orientación práctica. Esto permite procesos fluidos para campañas,
+            aportaciones, mensajes comunitarios y registros asociados al linaje.
+          </p>
+
+          <h3>Tonalli Wallet como interfaz soberana</h3>
+          <p>
+            La Tonalli Wallet actúa como la llave del guardián dentro de esta infraestructura. Es la
+            herramienta que permite conectarse, firmar, participar y mantener el control directo
+            sobre los propios activos sin entregar la custodia a terceros.
+          </p>
+        </article>
+
+        <aside class="card content-block">
+          <span class="eyebrow">Componentes</span>
+          <h2>Especificaciones funcionales dentro de Teyolia</h2>
+
+          <div class="feature-list">
+            <div class="feature-box">
+              <h3>Vite + React</h3>
+              <p>Una interfaz veloz, moderna y adaptable para una experiencia clara del guardián.</p>
+            </div>
+            <div class="feature-box">
+              <h3>WalletConnect v2</h3>
+              <p>Conexión segura con dApps sin exponer llaves privadas y manteniendo soberanía local.</p>
+            </div>
+            <div class="feature-box">
+              <h3>OP_RETURN</h3>
+              <p>Mensajes públicos on-chain que permiten registrar respaldo comunitario y testimonios.</p>
+            </div>
+            <div class="feature-box">
+              <h3>NFTs de linaje</h3>
+              <p>Visualización y transferencia del pedigrí digital como contenedor de historia viva.</p>
+            </div>
+            <div class="feature-box">
+              <h3>IPFS / Pinata</h3>
+              <p>Soporte para metadatos e imágenes con vocación descentralizada y continuidad documental.</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="container dual-gallery">
+        <figure class="media-card">
+          <img src="/assets/blog/teyolia/flipstarter-campaign.jpg" alt="Visual conceptual de una campaña Teyolia Flipstarter" />
+          <figcaption class="media-note">
+            Imagen sugerida: dashboard o representación visual de una campaña Teyolia Flipstarter.
+          </figcaption>
+        </figure>
+
+        <figure class="media-card">
+          <img src="/assets/blog/teyolia/lineage-nft.jpg" alt="Representación visual de un NFT de linaje para xoloitzcuintle" />
+          <figcaption class="media-note">
+            Imagen sugerida: pieza gráfica del NFT de linaje con árbol genealógico y datos del ejemplar.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <article class="card content-block">
+          <span class="eyebrow">Capítulo III</span>
+          <h2>El Camino de la Teyolia</h2>
+          <p>
+            El proceso de Teyolia no es lineal en el sentido comercial tradicional; es un sistema de
+            filtros de integridad. Cada fase existe para asegurar que el cachorro no llegue al hogar
+            con mayor impulso económico, sino al hogar que ofrezca mejores condiciones humanas,
+            sociales y culturales para su desarrollo.
+          </p>
+
+          <div class="timeline">
+            <div class="timeline-item" data-step="1">
+              <h3>El Llamado</h3>
+              <p>
+                El aspirante conoce el perfil del cachorro, su contexto, su linaje y el sentido de
+                la campaña. La postulación exige honestidad: motivos, estilo de vida, entorno y
+                visión de largo plazo como guardián.
+              </p>
+            </div>
+
+            <div class="timeline-item" data-step="2">
+              <h3>La Preparación</h3>
+              <p>
+                El futuro guardián se familiariza con Tonalli Wallet y con la infraestructura
+                básica de eCash. Más que una barrera técnica, es una preparación para integrarse a
+                una red soberana y transparente.
+              </p>
+            </div>
+
+            <div class="timeline-item" data-step="3">
+              <h3>El Compromiso</h3>
+              <p>
+                El pledge demuestra seriedad. No es una compra impulsiva, sino una señal concreta de
+                participación. El sistema no custodio da claridad a las reglas y reduce la
+                incertidumbre de todas las partes.
+              </p>
+            </div>
+
+            <div class="timeline-item" data-step="4">
+              <h3>La Tribu</h3>
+              <p>
+                Aquí aparece la innovación social más poderosa del modelo: el respaldo público de la
+                comunidad. Familiares, amigos y miembros de la tribu pueden apoyar la candidatura
+                con mensajes y aportaciones simbólicas que dejan huella verificable.
+              </p>
+            </div>
+
+            <div class="timeline-item" data-step="5">
+              <h3>La Decisión</h3>
+              <p>
+                La tecnología organiza la evidencia, pero la decisión final sigue siendo humana.
+                Xolos Ramírez evalúa la totalidad del contexto y elige el hogar más digno para el
+                cachorro y su linaje.
+              </p>
+            </div>
+          </div>
+
+          <div class="decision-box">
+            <p>
+              <strong>La clave:</strong> Teyolia no reemplaza el criterio humano con código. Lo que
+              hace es rodear ese criterio de transparencia, trazabilidad y comunidad, para que la
+              decisión final tenga un fundamento más sólido y ético.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container content-layout">
+        <article class="card content-block">
+          <span class="eyebrow">Capítulo IV</span>
+          <h2>NFT de linaje: el pedigrí del futuro</h2>
+          <p>
+            Uno de los elementos más potentes del acompañamiento de Xolos Ramírez es la idea del
+            <strong>registro de linaje en formato NFT</strong>. No como adorno digital, sino como
+            contenedor evolutivo de identidad, salud, genealogía y trazabilidad.
+          </p>
+          <p>
+            Mientras el documento físico puede perderse, dañarse o falsificarse, un registro bien
+            diseñado en una infraestructura abierta permite preservar y consultar la historia del
+            ejemplar a lo largo del tiempo.
+          </p>
+
+          <h3>Qué puede contener este registro</h3>
+          <ul class="checklist">
+            <li>Identificación única vinculada al ejemplar.</li>
+            <li>Historial de vacunas, desparasitaciones y seguimiento de salud.</li>
+            <li>Árbol genealógico conectado a padres y abuelos.</li>
+            <li>Metadatos de comportamiento y observaciones tempranas.</li>
+            <li>Continuidad documental en caso de futuros cambios de guardianía.</li>
+          </ul>
+        </article>
+
+        <aside class="card content-block">
+          <span class="eyebrow">Impacto</span>
+          <h2>Ética de crianza y reputación viva</h2>
+          <p>
+            La reputación de Xolos Ramírez no se sostiene solo en palabras, sino en acompañamiento,
+            documentación y continuidad. La guardianía soberana fortalece esa reputación porque
+            alinea el proceso con principios verificables.
+          </p>
+
+          <div class="feature-list">
+            <div class="feature-box">
+              <h3>Salud genética</h3>
+              <p>Selección responsable y documentación de la conformación racial del ejemplar.</p>
+            </div>
+            <div class="feature-box">
+              <h3>Seguridad digital</h3>
+              <p>Uso de herramientas no custodias y trazabilidad transparente para todos los participantes.</p>
+            </div>
+            <div class="feature-box">
+              <h3>Logística global</h3>
+              <p>Capacidad de sostener procesos nacionales e internacionales con estructura documental rigurosa.</p>
+            </div>
+            <div class="feature-box">
+              <h3>Soporte continuo</h3>
+              <p>El vínculo con la comunidad no termina con la entrega; apenas comienza una nueva etapa.</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <article class="card content-block conclusion">
+          <span class="eyebrow">Conclusión</span>
+          <h2>Cultura como consenso, tecnología como resguardo</h2>
+          <p>
+            La visión de Teyolia no se limita a facilitar un nuevo tipo de adopción. Lo que propone
+            es una relación distinta entre tradición e innovación. El xoloitzcuintle, como figura
+            ancestral de México, no necesita únicamente hogares: necesita una estructura cultural,
+            humana y tecnológica capaz de reconocer su valor profundo.
+          </p>
+          <p>
+            En esa visión, la blockchain no sustituye la sensibilidad ni el criterio; los fortalece.
+            La comunidad no sustituye la responsabilidad individual; la hace visible. Y la
+            guardianía no sustituye el amor por el animal; lo eleva a una forma más consciente de
+            custodia histórica.
+          </p>
+
+          <div class="separator"></div>
+
+          <h3 style="font-family:'Cinzel',serif; color: var(--gold-soft); font-size:1.5rem; margin-bottom:0.75rem;">
+            Recomendaciones para futuros guardianes
+          </h3>
+
+          <ul class="checklist">
+            <li>Ver la tecnología como garantía de justicia y no como una complicación innecesaria.</li>
+            <li>Comprender que el respaldo de la tribu importa porque revela contexto humano real.</li>
+            <li>Asumir que recibir un xoloitzcuintle es custodiar más de tres mil años de memoria viva.</li>
+            <li>Valorar la trazabilidad, la salud y el linaje como parte integral del bienestar del ejemplar.</li>
+            <li>Entrar al proceso con visión de largo plazo, responsabilidad y apertura a la comunidad.</li>
+          </ul>
+
+          <div class="cta-box">
+            <p>
+              En última instancia, Teyolia demuestra que sí es posible armonizar la herencia
+              milenaria del xoloitzcuintle con una infraestructura moderna, soberana y transparente.
+            </p>
+            <a class="cta-button" href="/teyolia.html">Conocer Teyolia</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer-note">
+    Artículo editorial para Xolos Ramírez · Preservación del xoloitzcuintle · xolosArmy Network
+  </footer>
+
+</body>
+</html>
