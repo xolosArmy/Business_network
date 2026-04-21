@@ -1,5 +1,27 @@
 [
   {
+    "txid": "ce37133f74d42ee1e5b4574a7b9bde9623200a61172f350b3e47f746fdf5cbad",
+    "slug": "mitla",
+    "tokenId": "ce37133f74d42ee1e5b4574a7b9bde9623200a61172f350b3e47f746fdf5cbad",
+    "cid": "QmVnUf6bfozexRa8k6uZpgkxMVfisGcWW67P4YNCkNfhYt",
+    "nombre": "MITLA (RAMIREZ/RAMIREZ) MEX.FCI.",
+    "timestamp": 1776639296,
+    "blockHeight": 945530,
+    "hasParents": false,
+    "ipfsOk": true
+  },
+  {
+    "txid": "407bf5b92211cd2c77c6b8ca95d9cdc7e5d40f201b2348a0c886ed3f52c5f12e",
+    "slug": "tejocote",
+    "tokenId": "407bf5b92211cd2c77c6b8ca95d9cdc7e5d40f201b2348a0c886ed3f52c5f12e",
+    "cid": "QmU6J9FwWLWzeLhJRhVvDhGBuNqKNggXFRHevKK8VELMCG",
+    "nombre": "TEJOCOTE (RAMIREZ/RAMIREZ) MEX. FCI.",
+    "timestamp": 1776286081,
+    "blockHeight": 944953,
+    "hasParents": false,
+    "ipfsOk": true
+  },
+  {
     "txid": "196f4f5cb3f0016dd62715d7e1768e465c8a1db8c65a1afc58861845265dcd9c",
     "slug": "amoxtli",
     "tokenId": "196f4f5cb3f0016dd62715d7e1768e465c8a1db8c65a1afc58861845265dcd9c",
@@ -106,28 +128,6 @@
     "nombre": "KIWI (RAMIREZ/RAMIREZ) MEX. FCI.",
     "timestamp": 1774221380,
     "blockHeight": 941512,
-    "hasParents": false,
-    "ipfsOk": true
-  },
-  {
-    "txid": "415b0d971d78ccf465c8a0b99b74edee950e0bdbacc6a941cb8f44b1874867f4",
-    "slug": "ikal",
-    "tokenId": "415b0d971d78ccf465c8a0b99b74edee950e0bdbacc6a941cb8f44b1874867f4",
-    "cid": "QmRVBz14hK8KoMNbRphfM4VCgiAvfk2R1zV42DzNJ2XBax",
-    "nombre": "Ikal Caliente Mex. FCI",
-    "timestamp": 1774220345,
-    "blockHeight": 941510,
-    "hasParents": false,
-    "ipfsOk": true
-  },
-  {
-    "txid": "40a8d3b6cf35dc3d8db8e0d70f57f45ae158659de9364d5c591b55dfe555ba70",
-    "slug": "vovid",
-    "tokenId": "40a8d3b6cf35dc3d8db8e0d70f57f45ae158659de9364d5c591b55dfe555ba70",
-    "cid": "QmNasTYAkJoL5iEkXmriJ6HGE7TRFLxbGE2hRrRfgMzgML",
-    "nombre": "VOVID CALIENTE MEX. FCI.",
-    "timestamp": 1774220345,
-    "blockHeight": 941510,
     "hasParents": false,
     "ipfsOk": true
   }

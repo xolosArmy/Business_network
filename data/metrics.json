@@ -1,12 +1,12 @@
 {
-  "linajes_registrados": 82,
-  "linajes_validados_ipfs": 82,
+  "linajes_registrados": 84,
+  "linajes_validados_ipfs": 84,
   "registros_con_padre_y_madre": 0,
-  "txs_xolo_detectadas": 82,
-  "ipfs_disponibles": 82,
+  "txs_xolo_detectadas": 84,
+  "ipfs_disponibles": 84,
   "ipfs_fallidos": 0,
-  "nfts_con_slug_resuelto": 82,
-  "ult_registro_txid": "196f4f5cb3f0016dd62715d7e1768e465c8a1db8c65a1afc58861845265dcd9c",
-  "ult_registro_slug": "amoxtli",
-  "ultima_actualizacion": "2026-04-03T19:06:17.127Z"
+  "nfts_con_slug_resuelto": 84,
+  "ult_registro_txid": "ce37133f74d42ee1e5b4574a7b9bde9623200a61172f350b3e47f746fdf5cbad",
+  "ult_registro_slug": "mitla",
+  "ultima_actualizacion": "2026-04-21T01:22:12.346Z"
 }
