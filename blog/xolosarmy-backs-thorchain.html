@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Opinion Column: Permissionless by Design — Why xolosArmy Network backs THORChain’s no-intervention ethos and is shipping native eCash anyway.">
+    <title>Permissionless by Design — Why xolosArmy Backs THORChain’s No-Intervention Ethos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --tw-color-primary: #00ff9d;
+        }
+        
+        * {
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        
+        .blog-container {
+            max-width: 780px;
+            margin: 0 auto;
+        }
+        
+        .article-header {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .prose a {
+            color: #00ff9d;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            font-weight: 500;
+        }
+        
+        .prose a:hover {
+            color: #00cc7a;
+        }
+        
+        .highlight {
+            background: rgba(0, 255, 157, 0.1);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-white">
+    <div class="blog-container px-6 py-12 md:py-16">
+        
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-12">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-emerald-500 rounded-2xl flex items-center justify-center text-xl">⚡</div>
+                <div>
+                    <span class="text-2xl font-semibold tracking-tighter">xolosArmy Network</span>
+                </div>
+            </div>
+            <div class="text-sm uppercase tracking-[1px] text-zinc-400">Opinion • April 21, 2026</div>
+        </div>
+
+        <!-- Title -->
+        <h1 class="article-header text-5xl md:text-6xl leading-none font-semibold tracking-tighter mb-6">
+            Permissionless by Design —<br>
+            Why xolosArmy Backs THORChain’s No-Intervention Ethos and Is Shipping Native eCash Anyway
+        </h1>
+
+        <!-- Byline -->
+        <div class="flex items-center gap-4 mb-12">
+            <div class="flex -space-x-4">
+                <div class="w-8 h-8 bg-orange-500 rounded-2xl border-2 border-zinc-950 flex items-center justify-center text-xs">🇲🇽</div>
+            </div>
+            <div>
+                <p class="font-medium">by xolosArmy Network</p>
+                <p class="text-sm text-zinc-400">Community-driven builders of Tonalli Wallet, Teyolia, and native XEC on THORChain</p>
+            </div>
+        </div>
+
+        <!-- Article Body -->
+        <div class="prose prose-invert prose-lg max-w-none leading-relaxed text-zinc-200">
+            
+            <p class="text-xl md:text-2xl font-medium text-zinc-100 mb-10">
+                In the last 48 hours, crypto Twitter has been loud for a reason.
+            </p>
+
+            <p>
+                A hacker drains tens of millions from KelpDAO. Arbitrum’s Security Council — a small, elected group with emergency powers — steps in, freezes the stolen ETH on Arbitrum One, and parks it in a “frozen” wallet that only future governance votes can touch. They call it protecting the community. Many cheered.
+            </p>
+
+            <p>
+                At the same time, the same stolen funds start routing through THORChain toward Bitcoin. THORChain builders, led by voices like @jpthor, make it crystal clear: the nodes won’t vote to freeze or censor anything. No emergency council. No “just this once.” The protocol does what it was built to do — permissionless cross-chain swaps — even when the optics are terrible.
+            </p>
+
+            <p class="font-semibold text-emerald-400 text-2xl my-8">
+                This is not a bug. This is the feature.
+            </p>
+
+            <p>
+                At <strong>xolosArmy Network</strong> we don’t sit on the sidelines of this debate. We are actively choosing the THORChain side of the fork in the road. That’s why we just wired eCash (XEC) as a native UTXO chain in our THORNode fork, why we published the draft Merge Request, and why we launched the Teyolia campaign to fund the next steps: official MR, audits, and live swaps.
+            </p>
+
+            <h2 class="text-3xl font-semibold mt-14 mb-6">Permissionless Isn’t Pretty — That’s the Point</h2>
+            
+            <p>
+                Arbitrum’s move was understandable on the surface. “We recovered user funds!” But it revealed something deeper: when push comes to shove, even Layer-2s with “decentralized” branding still keep a council with god-mode keys. One vote, one freeze, one precedent. Tomorrow it could be your funds, your app, or your politics that get labeled “risky.”
+            </p>
+
+            <p>
+                THORChain’s stance is the opposite. It says: the protocol doesn’t play judge. Nodes run the code. Swaps happen. If the chain is permissionless, it stays permissionless — full stop. That philosophy is uncomfortable when bad actors use it, but it is the only philosophy that survives long-term. History shows us that every “temporary” emergency power becomes permanent infrastructure.
+            </p>
+
+            <p>
+                We support that culture because we live it.
+            </p>
+
+            <h2 class="text-3xl font-semibold mt-14 mb-6">Building the Tools, Not Asking for Permission</h2>
+            
+            <p>
+                Our GitLab MR — 
+                <a href="https://gitlab.com/XolosRMZ/thornode/-/merge_requests/2" 
+                   target="_blank" 
+                   class="highlight underline font-medium">
+                    Draft: Add initial eCash chain support via shared UTXO client
+                </a> — 
+                is not a polite request to the THORChain core team. It is a working fork that already treats XEC like Bitcoin, Litecoin, or Doge — CashAddr addresses, satoshi precision, full Bifrost compatibility. We didn’t wait for a grant, a foundation vote, or a VC roadmap. We shipped the code because that’s how permissionless development works.
+            </p>
+
+            <p>
+                Funding it the same way: <strong>Teyolia</strong>.
+            </p>
+
+            <p>
+                Teyolia is our own Flipstarter 2.0 built on eCash — non-custodial, permissionless, on-chain crowdfunding that anyone in the world can support with a single XEC transaction. No KYC. No middleman holding the keys. No “if we raise enough we’ll think about it.” You donate, the campaign hits the goal, the work ships. That is exactly the same spirit THORChain demands from its liquidity providers and node operators.
+            </p>
+
+            <p>
+                We are not “adding eCash to THORChain because it’s trendy.” We are doing it because eCash is one of the purest expressions of sound digital cash left in the industry — 100+ TPS, sub-penny fees, no inflation games, and a community that actually uses it for real payments. Giving that asset native, uncensorable access to THORChain’s liquidity pools is how we expand the permissionless economy, not shrink it.
+            </p>
+
+            <h2 class="text-3xl font-semibold mt-14 mb-6">Decentralization Is a Culture, Not a Marketing Slogan</h2>
+            
+            <p>
+                The replies to both the Arbitrum announcement and @jpthor’s post prove the split in our industry:
+            </p>
+            
+            <ul class="list-none pl-0 space-y-4 my-8">
+                <li class="flex gap-3">
+                    <span class="text-emerald-400 text-2xl">→</span>
+                    <span>One camp wants safety nets and councils “for the greater good.”</span>
+                </li>
+                <li class="flex gap-3">
+                    <span class="text-emerald-400 text-2xl">→</span>
+                    <span>The other camp wants code that runs exactly as written, no matter who is on the other side of the trade.</span>
+                </li>
+            </ul>
+
+            <p>
+                xolosArmy Network stands with the second camp — not because we are naive, but because we have seen what happens when the first camp wins. Every centralized backdoor eventually gets used against the very people it was supposed to protect.
+            </p>
+
+            <p>
+                That is why our roadmap — Tonalli Wallet, RMZ token, native XEC on THORChain, Teyolia itself — is built entirely on permissionless rails. No one can freeze our campaign. No one can pause our DEX phase. No one can tell Mexican or Latin American users (our strongest base) that their cheap, fast cash isn’t welcome on the biggest decentralized liquidity network.
+            </p>
+
+            <h2 class="text-3xl font-semibold mt-14 mb-6">The Invitation</h2>
+            
+            <p>
+                If you believe the future belongs to protocols that refuse to play judge, jury, and executioner, join us.
+            </p>
+            
+            <p class="bg-zinc-900 border border-emerald-500/30 rounded-3xl p-8 my-10 text-center text-xl">
+                Support the Teyolia campaign.<br>
+                Run our fork.<br>
+                Test the swaps when they go live.<br>
+                Help us turn this draft MR into the real thing.
+            </p>
+
+            <p class="font-medium">
+                Because in the end, decentralization isn’t about never having bad actors. It’s about building systems so robust that even when they exist, the network keeps running for everyone else.
+            </p>
+
+            <p class="font-medium">
+                We choose that future.<br>
+                We are already shipping it.
+            </p>
+
+            <!-- Signature -->
+            <div class="mt-16 pt-8 border-t border-zinc-800 flex items-center justify-between text-sm">
+                <div>
+                    <p class="font-semibold text-emerald-400">— xolosArmy Network</p>
+                    <p class="text-zinc-400">April 21, 2026</p>
+                </div>
+                <div class="text-right">
+                    <a href="https://gitlab.com/XolosRMZ/thornode/-/merge_requests/2" 
+                       target="_blank"
+                       class="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 font-medium">
+                        <span>View our GitLab MR →</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer note -->
+        <div class="mt-20 text-center text-xs text-zinc-500">
+            Ready to publish. Copy and paste this entire file into your blog CMS.<br>
+            Tailwind CSS is loaded via CDN for instant beautiful styling.
+        </div>
+    </div>
+
+    <script>
+        // Tailwind script already loaded
+        function initializeTailwind() {
+            tailwind.config = {
+                content: [],
+                theme: {
+                    extend: {}
+                }
+            }
+        }
+        initializeTailwind();
+    </script>
+</body>
+</html>
