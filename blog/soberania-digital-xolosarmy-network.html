@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soberanía Digital: Tonalli Wallet y xolosArmy Network</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Subtle Accents (Emerald/Gold) for a clean, harmonious look -->
+    <!-- Application Structure Plan: The SPA is structured as a vertical scrolling narrative, typical of modern infographics, but broken into distinct interactive thematic sections. It starts with a strong Hero introducing the core concept. The navigation sticky bar allows jumping between key pillars: 'El Núcleo' (Core Philosophy), 'Arquitectura' (Technical Base), 'Ecosistema' (Features), and a concluding manifesto. This structure was chosen to guide the user from the high-level 'why' down to the specific 'how' and features, keeping them engaged with interactive elements in each section rather than presenting a wall of text. -->
+    <!-- Visualization & Content Choices: 
+         1. Core Philosophy -> Goal: Inform/Organize -> Presentation: Interactive Feature Cards -> Interaction: Hover effects to reveal details -> Justification: Breaks down abstract concepts (Non-custodial, censorship resistance) into digestible chunks.
+         2. Architecture -> Goal: Compare/Explain -> Presentation: Side-by-side Layout with Code Snippet Simulation & Interactive List -> Interaction: Clicking list items updates a contextual text area -> Justification: Explains technical concepts (UTXO, CAIP-25) without overwhelming the user, offering deeper dives on demand.
+         3. Ecosystem Pillars -> Goal: Organize/Inform -> Presentation: Grid of interactive panels -> Interaction: Hover states and subtle animations -> Justification: Categorizes the diverse features (Messaging, NFTs, Tokenomics) clearly.
+         Confirming NO SVG/Mermaid used. Layouts rely on HTML/CSS/Tailwind and FontAwesome icons. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAFAFA; /* Light warm neutral */
+            color: #333333;
+        }
+
+        .font-mono {
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* Custom Colors based on requested palette */
+        .bg-primary { background-color: #F0EFEB; } /* Warm neutral background for sections */
+        .text-accent-emerald { color: #10B981; }
+        .bg-accent-emerald { background-color: #10B981; }
+        .text-accent-gold { color: #F59E0B; }
+        
+        /* Smooth scrolling */
+        html { scroll-behavior: smooth; }
+
+        /* Interactive Card Styles */
+        .feature-card {
+            transition: all 0.3s ease;
+            background-color: #FFFFFF;
+            border: 1px solid #E5E7EB;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            border-color: #10B981;
+        }
+
+        /* Code block styling */
+        .code-block {
+            background-color: #1E293B; /* Dark slate for contrast */
+            color: #A7F3D0; /* Light emerald text */
+            border-radius: 0.5rem;
+            padding: 1rem;
+            overflow-x: auto;
+        }
+
+        /* Interactive List Item */
+        .arch-item {
+            cursor: pointer;
+            transition: background-color 0.2s;
+            border-left: 4px solid transparent;
+        }
+        .arch-item:hover, .arch-item.active {
+            background-color: #F3F4F6;
+            border-left-color: #10B981;
+        }
+        
+        /* Header fade in */
+        .fade-in { animation: fadeIn 1s ease-in forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="antialiased selection:bg-emerald-200 selection:text-emerald-900">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center font-bold text-xl text-gray-800">
+                    <i class="fa-solid fa-wallet text-accent-emerald mr-2"></i> Tonalli
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#nucleo" class="text-gray-600 hover:text-accent-emerald px-3 py-2 text-sm font-medium transition-colors">El Núcleo</a>
+                    <a href="#arquitectura" class="text-gray-600 hover:text-accent-emerald px-3 py-2 text-sm font-medium transition-colors">Arquitectura</a>
+                    <a href="#ecosistema" class="text-gray-600 hover:text-accent-emerald px-3 py-2 text-sm font-medium transition-colors">Pilares del Ecosistema</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-200">
+            <a href="#nucleo" class="block px-4 py-3 text-base font-medium text-gray-700 hover:text-accent-emerald hover:bg-gray-50">El Núcleo</a>
+            <a href="#arquitectura" class="block px-4 py-3 text-base font-medium text-gray-700 hover:text-accent-emerald hover:bg-gray-50">Arquitectura</a>
+            <a href="#ecosistema" class="block px-4 py-3 text-base font-medium text-gray-700 hover:text-accent-emerald hover:bg-gray-50">Pilares del Ecosistema</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-24 pb-32 overflow-hidden bg-primary">
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10 fade-in">
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 mb-6">
+                Anatomía de la <span class="text-accent-emerald">Soberanía Digital</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 mb-10 font-light max-w-3xl mx-auto">
+                Explorando Tonalli Wallet y el xolosArmy Network State
+            </p>
+            <div class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white border border-gray-300 text-gray-700 text-sm font-medium shadow-sm">
+                <i class="fa-solid fa-fire text-accent-gold"></i>
+                "La cultura también es consenso"
+            </div>
+        </div>
+        <!-- Background decorative elements -->
+        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-full overflow-hidden -z-10 pointer-events-none opacity-40">
+             <div class="absolute -top-24 -left-24 w-96 h-96 bg-emerald-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
+             <div class="absolute top-32 -right-24 w-72 h-72 bg-amber-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Sección 1: El Núcleo -->
+        <section id="nucleo" class="py-20 bg-white">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Más Allá de una Simple Billetera</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+                        Esta sección detalla por qué Tonalli no es un simple software para gestionar saldos cripto. Es la infraestructura criptográfica fundacional—la "Constitución"—del xolosArmy Network State (xNS). Entender estos principios es crucial para comprender la verdadera soberanía digital.
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="feature-card p-8 rounded-2xl text-center">
+                        <div class="w-16 h-16 mx-auto bg-emerald-50 rounded-full flex items-center justify-center mb-6">
+                            <i class="fa-solid fa-key text-2xl text-accent-emerald"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">100% No Custodial</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Las claves privadas nunca abandonan el dispositivo del usuario. Sin motores de riesgo corporativos, sin KYC, sin bases de datos centralizadas. Eres el único dueño de tu información.
+                        </p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="feature-card p-8 rounded-2xl text-center">
+                        <div class="w-16 h-16 mx-auto bg-amber-50 rounded-full flex items-center justify-center mb-6">
+                            <i class="fa-solid fa-shield-halved text-2xl text-accent-gold"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Resistencia a la Censura</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            A diferencia de super-apps centralizadas o billeteras ligadas a plataformas como Telegram, Tonalli depende puramente de las matemáticas y de nodos distribuidos, haciéndola imparable.
+                        </p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="feature-card p-8 rounded-2xl text-center">
+                        <div class="w-16 h-16 mx-auto bg-blue-50 rounded-full flex items-center justify-center mb-6">
+                            <i class="fa-solid fa-globe text-2xl text-blue-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">El Network State</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Empodera a una comunidad digital altamente alineada (el xolosArmy) para financiarse, organizarse y preservar su historia sin depender de intermediarios fiduciarios tradicionales.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 2: Arquitectura -->
+        <section id="arquitectura" class="py-20 bg-primary border-y border-gray-200">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Arquitectura Tecnológica Avanzada</h2>
+                    <p class="text-gray-600 max-w-3xl text-lg">
+                        Descubre las decisiones técnicas que hacen posible la visión de Tonalli. Aquí exploramos cómo la base UTXO de eCash se combina con estándares modernos para ofrecer una experiencia descentralizada y escalable. Haz clic en los elementos de la izquierda para ver los detalles técnicos.
+                    </p>
+                </div>
+
+                <div class="flex flex-col lg:flex-row gap-12 bg-white p-8 rounded-3xl shadow-sm border border-gray-200">
+                    <!-- Interactive List -->
+                    <div class="lg:w-1/2 space-y-2" id="arch-list">
+                        <div class="arch-item active p-4 rounded-lg" data-target="utxo">
+                            <div class="flex items-start">
+                                <i class="fa-solid fa-microchip mt-1 mr-4 text-gray-400"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 text-lg">Fundación eCash ($XEC) y UTXO</h4>
+                                    <p class="text-sm text-gray-500 mt-1">El modelo de efectivo digital puro.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="arch-item p-4 rounded-lg" data-target="walletconnect">
+                            <div class="flex items-start">
+                                <i class="fa-solid fa-link mt-1 mr-4 text-gray-400"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 text-lg">WalletConnect v2 & CAIP-25</h4>
+                                    <p class="text-sm text-gray-500 mt-1">Conectividad DApp pionera en eCash.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="arch-item p-4 rounded-lg" data-target="chronik">
+                            <div class="flex items-start">
+                                <i class="fa-solid fa-server mt-1 mr-4 text-gray-400"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 text-lg">Indexador Chronik</h4>
+                                    <p class="text-sm text-gray-500 mt-1">Consultas descentralizadas en tiempo real.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Content Area -->
+                    <div class="lg:w-1/2">
+                        <div id="arch-content" class="h-full flex flex-col justify-center">
+                            <!-- Content injected via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 3: Ecosistema -->
+        <section id="ecosistema" class="py-20 bg-white">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Pilares del Ecosistema xolosArmy</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+                        Tonalli integra características únicas que trascienden las finanzas, abarcando biología, comunicación inmutable y economías locales descentralizadas. Estos pilares construyen la identidad del Network State.
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Pilar 1 -->
+                    <div class="bg-primary p-8 rounded-2xl border border-gray-200 hover:border-purple-300 transition-colors group">
+                        <div class="mb-4">
+                            <i class="fa-solid fa-message text-3xl text-purple-600 bg-purple-100 p-3 rounded-xl group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Mensajería On-Chain (OP_RETURN)</h3>
+                        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                            Evadiendo la censura de las redes sociales corporativas. Tonalli permite a los usuarios adjuntar datos arbitrarios directamente a la blockchain de eCash usando el script OP_RETURN.
+                        </p>
+                        <div class="bg-white p-3 rounded border-l-4 border-purple-500 text-xs text-gray-500 italic">
+                            Una vez minado, reescribir esta pieza de historia es computacionalmente casi imposible.
+                        </div>
+                    </div>
+
+                    <!-- Pilar 2 -->
+                    <div class="bg-primary p-8 rounded-2xl border border-gray-200 hover:border-amber-300 transition-colors group">
+                        <div class="mb-4">
+                            <i class="fa-solid fa-dog text-3xl text-amber-600 bg-amber-100 p-3 rounded-xl group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Anclaje Biológico y NFTs de Linaje</h3>
+                        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                            Fusionando el ciberespacio con la biología orgánica. Certificando el linaje genético del antiguo perro <strong>Xoloitzcuintle</strong> mediante NFTs inmutables en eCash.
+                        </p>
+                        <div class="bg-white p-3 rounded border-l-4 border-amber-500 text-xs text-gray-500 italic">
+                            "El Pedigrí del Futuro" — combatiendo el fraude de linaje y preservando una especie milenaria.
+                        </div>
+                    </div>
+
+                    <!-- Pilar 3 -->
+                    <div class="bg-primary p-8 rounded-2xl border border-gray-200 hover:border-emerald-300 transition-colors group">
+                        <div class="mb-4">
+                            <i class="fa-solid fa-coins text-3xl text-emerald-600 bg-emerald-100 p-3 rounded-xl group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">eTokens ALP y Mercado XOLOLEGEND</h3>
+                        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                            A diferencia de los complejos contratos inteligentes ERC-20, los eTokens ALP (como $RMZ) están incrustados en el consenso UTXO de eCash, haciéndolos ligeros y seguros.
+                        </p>
+                        <div class="bg-white p-3 rounded border-l-4 border-emerald-500 text-xs text-gray-500 italic">
+                            Integración DEX nativa: Pega un Offer ID en Tonalli, y el intercambio atómico se ejecuta on-chain instantáneamente.
+                        </div>
+                    </div>
+
+                    <!-- Pilar 4 -->
+                    <div class="bg-primary p-8 rounded-2xl border border-gray-200 hover:border-blue-300 transition-colors group">
+                        <div class="mb-4">
+                            <i class="fa-solid fa-fingerprint text-3xl text-blue-600 bg-blue-100 p-3 rounded-xl group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Financiamiento Trustless (Sin Confianza)</h3>
+                        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                            Sin censura tipo GoFundMe. Utiliza <strong>Covenants</strong> (Flipstarter) para crowdfunding garantizado matemáticamente. Si no se alcanza la meta, los fondos regresan automáticamente.
+                        </p>
+                        <div class="bg-white p-3 rounded border-l-4 border-blue-500 text-xs text-gray-500 italic">
+                            Integración futura con THORChain para liquidez cross-chain sin permisos. "Código sobre consejos."
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusión -->
+        <section class="py-16 bg-gray-900 text-white">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <i class="fa-solid fa-flag text-4xl text-accent-emerald mb-6"></i>
+                <h2 class="text-3xl font-bold mb-6">Un Manifiesto Socio-Tecnológico Materializado</h2>
+                <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                    Tonalli es infinitamente más vital que una infraestructura virtual de almacenamiento de divisas. Es una declaración irrefutable de que, a través de la integración inquebrantable de criptografía dura, cultura resiliente y tecnología verdaderamente descentralizada, la soberanía digital absoluta es un derecho alcanzable hoy.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black py-8 text-center border-t border-gray-800">
+        <p class="text-gray-500 text-sm">
+            Interactive Infographic based on the "Tonalli Wallet & xolosArmy Network State" Report.
+        </p>
+    </footer>
+
+    <!-- JavaScript para interactividad -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Mobile Menu Toggle ---
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Cerrar menú al hacer clic en un enlace
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // --- Datos para la sección de Arquitectura ---
+            const architectureData = {
+                utxo: {
+                    title: "Construido sobre UTXO",
+                    description: "Tonalli aprovecha el modelo UTXO (Unspent Transaction Output) de eCash, similar al efectivo digital. Esto permite una alta validación paralela y tarifas infinitesimales, evitando los cuellos de botella de estado globales vistos en modelos basados en cuentas como EVM.",
+                    code: `// Validación simplificada UTXO
+const isValid = (inputs, outputs) => {
+  const sumInputs = inputs.reduce((acc, val) => acc + val, 0);
+  const sumOutputs = outputs.reduce((acc, val) => acc + val, 0);
+  
+  // La tarifa de red es la diferencia
+  return sumInputs >= sumOutputs; 
+};`,
+                    tagColor: "text-emerald-500",
+                    tagBg: "bg-emerald-100"
+                },
+                walletconnect: {
+                    title: "Integración CAIP-25",
+                    description: "Pioneros en la integración de WalletConnect v2 en el ecosistema eCash. Las DApps negocian espacios de nombres explícitos, otorgando al usuario un control granular completo sobre los permisos sin exponer nunca sus claves privadas.",
+                    code: `// Handshake de Sesión CAIP-25
+wallet.approveSession({
+  namespaces: {
+    bch: { 
+      accounts: ["ecash:q..."],
+      methods: [
+        "ecash_signTransaction",
+        "ecash_signMessage"
+      ] 
+    }
+  }
+});`,
+                    tagColor: "text-blue-500",
+                    tagBg: "bg-blue-100"
+                },
+                chronik: {
+                    title: "Poder del Indexador Chronik",
+                    description: "Chronik es un indexador nativo ultrarrápido integrado directamente en los nodos de eCash. Permite a Tonalli realizar consultas descentralizadas en tiempo real (historial, saldos) sin depender de servidores centrales corporativos masivos.",
+                    code: `// Consulta a Chronik (Ejemplo Conceptual)
+const fetchHistory = async (address) => {
+    const chronik = new ChronikClient('node_url');
+    // Consulta directa al nodo, sin intermediarios
+    const history = await chronik
+        .script('p2pkh', addressHash)
+        .history();
+    return history;
+};`,
+                    tagColor: "text-purple-500",
+                    tagBg: "bg-purple-100"
+                }
+            };
+
+            const archListItems = document.querySelectorAll('.arch-item');
+            const archContentArea = document.getElementById('arch-content');
+
+            // Función para renderizar el contenido dinámico
+            function renderArchContent(key) {
+                const data = architectureData[key];
+                if (!data) return;
+
+                const contentHTML = `
+                    <div class="fade-in">
+                        <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full ${data.tagBg} ${data.tagColor} mb-4 uppercase tracking-wide">Detalle Técnico</span>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">${data.title}</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            ${data.description}
+                        </p>
+                        <div class="code-block shadow-inner">
+                            <pre class="font-mono text-sm leading-relaxed whitespace-pre-wrap"><code>${data.code}</code></pre>
+                        </div>
+                    </div>
+                `;
+                archContentArea.innerHTML = contentHTML;
+            }
+
+            // Manejadores de eventos para la lista
+            archListItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remover active de todos
+                    archListItems.forEach(el => {
+                        el.classList.remove('active');
+                        el.querySelector('i').classList.remove('text-accent-emerald');
+                        el.querySelector('i').classList.add('text-gray-400');
+                    });
+                    
+                    // Añadir active al clickeado
+                    this.classList.add('active');
+                    this.querySelector('i').classList.remove('text-gray-400');
+                    this.querySelector('i').classList.add('text-accent-emerald');
+                    
+                    // Renderizar contenido
+                    const target = this.getAttribute('data-target');
+                    renderArchContent(target);
+                });
+            });
+
+            // Inicializar con el primer elemento activo y ajustar color del icono
+            const firstItem = document.querySelector('.arch-item.active');
+            if(firstItem) {
+                firstItem.querySelector('i').classList.remove('text-gray-400');
+                firstItem.querySelector('i').classList.add('text-accent-emerald');
+                renderArchContent(firstItem.getAttribute('data-target'));
+            }
+        });
+    </script>
+</body>
+</html>
