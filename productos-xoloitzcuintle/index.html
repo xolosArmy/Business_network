@@ -267,6 +267,14 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+      opacity: 1;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      border-color: var(--color-highlight);
     }
 
     .card h2 {
@@ -294,6 +302,71 @@
     .price-rmz {
       color: var(--color-highlight-strong);
       font-weight: 700;
+    }
+
+    .price-tag-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+    }
+
+    .price-mxn {
+      font-size: 1.4rem;
+      color: var(--color-text-strong);
+      font-weight: 700;
+    }
+
+    .price-rmz-tag {
+      font-size: 0.9rem;
+      color: var(--color-highlight);
+      background: rgba(240, 199, 83, 0.1);
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(240, 199, 83, 0.3);
+      white-space: nowrap;
+    }
+
+    .category-filter {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      padding: 8px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Cinzel Decorative', cursive;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+    }
+
+    .txid-success-msg {
+      display: none;
+      color: #7df9c1;
+      font-size: 0.9rem;
+      margin-top: 10px;
+      padding: 8px;
+      background: rgba(125, 249, 193, 0.1);
+      border-radius: 8px;
+      border: 1px solid rgba(125, 249, 193, 0.3);
+      text-align: left;
     }
 
     .offer-id-box {
@@ -1481,7 +1554,7 @@
       <p>Consulta los pasos completos en el modal “¿Cómo pagar con eCash (XEC)?” y usa el botón <strong>Copiar dirección</strong> antes de enviar.</p>
 
       <h3>Cómo usar Tonalli DEX (RMZ)</h3>
-      <p>Abre la guía desde los botones “¿Cómo pagar con Tonalli?” (o la barra de compra rápida), copia el Offer ID del producto y sigue el flujo dentro del modal.</p>
+      <p>Abre la guía desde los botones “Guía Tonalli (paso a paso)” (o la barra de compra rápida), copia el Offer ID del producto y sigue el flujo dentro del modal.</p>
     </div>
   </section>
 
@@ -1507,10 +1580,17 @@
       </a>
     </div>
 
+    <div class="category-filter" role="toolbar" aria-label="Filtrar productos por categoría">
+      <button class="filter-btn active" type="button" data-filter="all">Todos</button>
+      <button class="filter-btn" type="button" data-filter="balsamo">Bálsamos</button>
+      <button class="filter-btn" type="button" data-filter="jabon">Jabones</button>
+      <button class="filter-btn" type="button" data-filter="kit">Kits</button>
+    </div>
+
     <div class="grid">
 
     <!-- Producto 1 -->
-    <div class="card animate-on-scroll" data-sku="xolo-unguento">
+    <div class="card animate-on-scroll" data-sku="xolo-unguento" data-category="balsamo">
       <div class="product-media">
         <img
           src="https://i.imgur.com/J8mc04B.png"
@@ -1521,9 +1601,11 @@
       </div>
       <div class="card-body">
         <h2>Ungüento Solar del Guardián Xólotl</h2>
-        <p><strong>≈ $522 MXN</strong> Forjado con savia de árbol de té bajo la tutela de Xólotl, este bálsamo repara la piel del compañero de guerra como si sellara códices de obsidiana, para que siga guiando almas a través del Mictlán sin que el tiempo marque su pelaje.</p>
+        <div class="price-tag-container"><span class="price-mxn">$522 MXN</span><span class="price-rmz-tag"><i class="fa-solid fa-coins" aria-hidden="true"></i> 5752.32 RMZ</span></div>
+        <p>Forjado con savia de árbol de té bajo la tutela de Xólotl, este bálsamo repara la piel del compañero de guerra como si sellara códices de obsidiana, para que siga guiando almas a través del Mictlán sin que el tiempo marque su pelaje.</p>
       </div>
       <div class="card-actions">
+        <p><strong>Flujo rápido:</strong> 1) Copia Offer ID · 2) Abre wallet · 3) Pega y paga en Tonalli.</p>
         <p><strong>RMZ = comprobante digital de compra</strong></p>
         <p>Precio: <span class="price-rmz">5752.32</span> RMZ</p>
         <div class="offer-id-box">
@@ -1531,9 +1613,9 @@
           <button class="copy-offer-btn" type="button">Copiar Offer ID</button>
         </div>
         <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">
-          Abrir RMZWallet Tonalli
+          Abrir wallet Tonalli (paso 2)
         </a>
-        <button class="tonalli-guide" type="button" data-open-tonalli-modal>¿Cómo pagar con Tonalli?</button>
+        <button class="tonalli-guide" type="button" data-open-tonalli-modal>Guía Tonalli (paso a paso)</button>
         <a href="https://wa.me/qr/LNO2OMMH2ZKWF1?text=Hola%2C+quiero+comprar+el+Bálsamo+Arbol+de+té"
            class="whatsapp-buy" target="_blank" rel="noopener noreferrer"
            data-ga-event="whatsapp_lead"
@@ -1547,11 +1629,12 @@
           <input type="text" name="txid" placeholder="Pega tu TXID aquí" required>
           <button type="submit">Confirmar TXID</button>
         </form>
+        <p class="txid-success-msg" role="status" aria-live="polite"></p>
       </div>
     </div>
 
     <!-- Producto 2 -->
-    <div class="card animate-on-scroll" data-sku="xolo-nectar">
+    <div class="card animate-on-scroll" data-sku="xolo-nectar" data-category="balsamo">
       <div class="product-media">
         <img
           src="https://i.imgur.com/hosQNaj.png"
@@ -1562,9 +1645,11 @@
       </div>
       <div class="card-body">
         <h2>Néctar Onírico de Tlazōlteōtl</h2>
-        <p><strong>≈ $522 MXN</strong> Al caer la noche, Tlazōlteōtl susurra lavanda y vitamina E sobre la piel del Xoloitzcuintle, acunando sus sueños de guerrero con neblinas moradas que lo preparan para custodiar los portales entre la tierra y el firmamento.</p>
+        <div class="price-tag-container"><span class="price-mxn">$522 MXN</span><span class="price-rmz-tag"><i class="fa-solid fa-coins" aria-hidden="true"></i> 5752.32 RMZ</span></div>
+        <p>Al caer la noche, Tlazōlteōtl susurra lavanda y vitamina E sobre la piel del Xoloitzcuintle, acunando sus sueños de guerrero con neblinas moradas que lo preparan para custodiar los portales entre la tierra y el firmamento.</p>
       </div>
       <div class="card-actions">
+        <p><strong>Flujo rápido:</strong> 1) Copia Offer ID · 2) Abre wallet · 3) Pega y paga en Tonalli.</p>
         <p><strong>RMZ = comprobante digital de compra</strong></p>
         <p>Precio: <span class="price-rmz">5752.32</span> RMZ</p>
         <div class="offer-id-box">
@@ -1572,9 +1657,9 @@
           <button class="copy-offer-btn" type="button">Copiar Offer ID</button>
         </div>
         <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">
-          Abrir RMZWallet Tonalli
+          Abrir wallet Tonalli (paso 2)
         </a>
-        <button class="tonalli-guide" type="button" data-open-tonalli-modal>¿Cómo pagar con Tonalli?</button>
+        <button class="tonalli-guide" type="button" data-open-tonalli-modal>Guía Tonalli (paso a paso)</button>
         <a href="https://wa.me/qr/LNO2OMMH2ZKWF1?text=Hola%2C+quiero+comprar+el+Bálsamo+Lavanda"
            class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
            data-item="Néctar Onírico de Tlazōlteōtl"
@@ -1587,11 +1672,12 @@
           <input type="text" name="txid" placeholder="Pega tu TXID aquí" required>
           <button type="submit">Confirmar TXID</button>
         </form>
+        <p class="txid-success-msg" role="status" aria-live="polite"></p>
       </div>
     </div>
 
     <!-- Producto 3 -->
-    <div class="card animate-on-scroll" data-sku="xolo-amanecer">
+    <div class="card animate-on-scroll" data-sku="xolo-amanecer" data-category="balsamo">
       <div class="product-media">
         <img
           src="https://i.imgur.com/PloLYl4.png"
@@ -1602,9 +1688,11 @@
       </div>
       <div class="card-body">
         <h2>Esencia Citlalinahuatl del Amanecer</h2>
-        <p><strong>≈ $522 MXN</strong> Cada aurora, los sacerdotes exprimen limones sagrados para trazar sobre el Xoloitzcuintle un círculo de luz que purifica heridas y despierta la valentía, como si Tonatiuh mismo lo ungiera antes de una batalla cósmica.</p>
+        <div class="price-tag-container"><span class="price-mxn">$522 MXN</span><span class="price-rmz-tag"><i class="fa-solid fa-coins" aria-hidden="true"></i> 5752.32 RMZ</span></div>
+        <p>Cada aurora, los sacerdotes exprimen limones sagrados para trazar sobre el Xoloitzcuintle un círculo de luz que purifica heridas y despierta la valentía, como si Tonatiuh mismo lo ungiera antes de una batalla cósmica.</p>
       </div>
       <div class="card-actions">
+        <p><strong>Flujo rápido:</strong> 1) Copia Offer ID · 2) Abre wallet · 3) Pega y paga en Tonalli.</p>
         <p><strong>RMZ = comprobante digital de compra</strong></p>
         <p>Precio: <span class="price-rmz">5752.32</span> RMZ</p>
         <div class="offer-id-box">
@@ -1612,9 +1700,9 @@
           <button class="copy-offer-btn" type="button">Copiar Offer ID</button>
         </div>
         <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">
-          Abrir RMZWallet Tonalli
+          Abrir wallet Tonalli (paso 2)
         </a>
-        <button class="tonalli-guide" type="button" data-open-tonalli-modal>¿Cómo pagar con Tonalli?</button>
+        <button class="tonalli-guide" type="button" data-open-tonalli-modal>Guía Tonalli (paso a paso)</button>
         <a href="https://wa.me/qr/LNO2OMMH2ZKWF1?text=Hola%2C+quiero+comprar+el+Bálsamo+Limón"
            class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
            data-item="Esencia Citlalinahuatl del Amanecer"
@@ -1627,11 +1715,12 @@
           <input type="text" name="txid" placeholder="Pega tu TXID aquí" required>
           <button type="submit">Confirmar TXID</button>
         </form>
+        <p class="txid-success-msg" role="status" aria-live="polite"></p>
       </div>
     </div>
 
     <!-- Producto 4 -->
-    <div class="card animate-on-scroll" data-sku="xolo-escudo">
+    <div class="card animate-on-scroll" data-sku="xolo-escudo" data-category="balsamo">
       <div class="product-media">
         <img
           src="https://i.imgur.com/EQqSZqA.jpeg"
@@ -1642,9 +1731,11 @@
       </div>
       <div class="card-body">
         <h2>Escudo de Bruma de Quetzalcóatl</h2>
-        <p><strong>≈ $522 MXN</strong> Una nube ritual de cítricos y hojas guardianas envuelve al can mestizo del inframundo, convirtiéndose en armadura sutil que Quetzalcóatl extiende para rechazar a los insectos como si fueran flechas perdidas en el viento nocturno.</p>
+        <div class="price-tag-container"><span class="price-mxn">$522 MXN</span><span class="price-rmz-tag"><i class="fa-solid fa-coins" aria-hidden="true"></i> 5752.32 RMZ</span></div>
+        <p>Una nube ritual de cítricos y hojas guardianas envuelve al can mestizo del inframundo, convirtiéndose en armadura sutil que Quetzalcóatl extiende para rechazar a los insectos como si fueran flechas perdidas en el viento nocturno.</p>
       </div>
       <div class="card-actions">
+        <p><strong>Flujo rápido:</strong> 1) Copia Offer ID · 2) Abre wallet · 3) Pega y paga en Tonalli.</p>
         <p><strong>RMZ = comprobante digital de compra</strong></p>
         <p>Precio: <span class="price-rmz">5752.32</span> RMZ</p>
         <div class="offer-id-box">
@@ -1652,9 +1743,9 @@
           <button class="copy-offer-btn" type="button">Copiar Offer ID</button>
         </div>
         <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">
-          Abrir RMZWallet Tonalli
+          Abrir wallet Tonalli (paso 2)
         </a>
-        <button class="tonalli-guide" type="button" data-open-tonalli-modal>¿Cómo pagar con Tonalli?</button>
+        <button class="tonalli-guide" type="button" data-open-tonalli-modal>Guía Tonalli (paso a paso)</button>
         <a href="https://wa.me/qr/LNO2OMMH2ZKWF1?text=Hola%2C+quiero+comprar+el+Repelente+Limón"
            class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
            data-item="Escudo de Bruma de Quetzalcóatl"
@@ -1667,11 +1758,12 @@
           <input type="text" name="txid" placeholder="Pega tu TXID aquí" required>
           <button type="submit">Confirmar TXID</button>
         </form>
+        <p class="txid-success-msg" role="status" aria-live="polite"></p>
       </div>
     </div>
 
     <!-- Producto 5 -->
-    <div class="card animate-on-scroll" data-sku="xolo-duo">
+    <div class="card animate-on-scroll" data-sku="xolo-duo" data-category="jabon">
       <div class="product-media">
         <img
           src="https://i.imgur.com/b9GOJK6.jpeg"
@@ -1682,7 +1774,8 @@
       </div>
       <div class="card-body">
         <h2>Dúo Ritual de Espuma del Mictlán</h2>
-        <p><strong>≈ $522 MXN</strong> Dos barras gemelas invocan aguas termales ancestrales y arenas celestes para purificar al Xoloitzcuintle antes de cada travesía, envolviéndolo en una exfoliación sagrada que honra su misión de custodio entre mundos.</p>
+        <div class="price-tag-container"><span class="price-mxn">$522 MXN</span><span class="price-rmz-tag"><i class="fa-solid fa-coins" aria-hidden="true"></i> 5752.32 RMZ</span></div>
+        <p>Dos barras gemelas invocan aguas termales ancestrales y arenas celestes para purificar al Xoloitzcuintle antes de cada travesía, envolviéndolo en una exfoliación sagrada que honra su misión de custodio entre mundos.</p>
         <ul>
           <li>Glicerina vegetal</li>
           <li>Aceite de caléndula</li>
@@ -1690,6 +1783,7 @@
         </ul>
       </div>
       <div class="card-actions">
+        <p><strong>Flujo rápido:</strong> 1) Copia Offer ID · 2) Abre wallet · 3) Pega y paga en Tonalli.</p>
         <p><strong>RMZ = comprobante digital de compra</strong></p>
         <p>Precio: <span class="price-rmz">5752.32</span> RMZ</p>
         <div class="offer-id-box">
@@ -1697,9 +1791,9 @@
           <button class="copy-offer-btn" type="button">Copiar Offer ID</button>
         </div>
         <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">
-          Abrir RMZWallet Tonalli
+          Abrir wallet Tonalli (paso 2)
         </a>
-        <button class="tonalli-guide" type="button" data-open-tonalli-modal>¿Cómo pagar con Tonalli?</button>
+        <button class="tonalli-guide" type="button" data-open-tonalli-modal>Guía Tonalli (paso a paso)</button>
         <a href="https://wa.me/qr/LNO2OMMH2ZKWF1?text=Hola%2C+quiero+comprar+jabon+exfoliante"
            class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
            data-item="Dúo Ritual de Espuma del Mictlán"
@@ -1712,12 +1806,13 @@
           <input type="text" name="txid" placeholder="Pega tu TXID aquí" required>
           <button type="submit">Confirmar TXID</button>
         </form>
+        <p class="txid-success-msg" role="status" aria-live="polite"></p>
       </div>
     </div>
 
     
     <!-- Producto 6 -->
-    <div class="card animate-on-scroll" data-sku="xolo-bienestar">
+    <div class="card animate-on-scroll" data-sku="xolo-bienestar" data-category="kit">
       <div class="product-media">
         <img
           src="https://i.imgur.com/dAHwm7a.png"
@@ -1728,7 +1823,8 @@
       </div>
       <div class="card-body">
         <h2>Paquete Bienestar Integral Xoloitzcuintle</h2>
-        <p><strong>≈ $1950 MXN</strong> Cuidado completo de la piel y protección natural: incluye bálsamos de Árbol de Té, Limón y Lavanda, repelente con esencia de limón y dos jabones neutros exfoliantes.</p>
+        <div class="price-tag-container"><span class="price-mxn">$1950 MXN</span><span class="price-rmz-tag"><i class="fa-solid fa-coins" aria-hidden="true"></i> 20707.84 RMZ</span></div>
+        <p>Cuidado completo de la piel y protección natural: incluye bálsamos de Árbol de Té, Limón y Lavanda, repelente con esencia de limón y dos jabones neutros exfoliantes.</p>
         <ul>
           <li>Bálsamos calmantes y nutritivos: Árbol de Té, Limón y Lavanda.</li>
           <li>Repelente natural con esencia de limón: protege de insectos sin químicos agresivos.</li>
@@ -1736,6 +1832,7 @@
         </ul>
       </div>
       <div class="card-actions">
+        <p><strong>Flujo rápido:</strong> 1) Copia Offer ID · 2) Abre wallet · 3) Pega y paga en Tonalli.</p>
         <p><strong>RMZ = comprobante digital de compra</strong></p>
         <p>Precio: <span class="price-rmz">20707.84</span> RMZ</p>
         <div class="offer-id-box">
@@ -1743,9 +1840,9 @@
           <button class="copy-offer-btn" type="button">Copiar Offer ID</button>
         </div>
         <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">
-          Abrir RMZWallet Tonalli
+          Abrir wallet Tonalli (paso 2)
         </a>
-        <button class="tonalli-guide" type="button" data-open-tonalli-modal>¿Cómo pagar con Tonalli?</button>
+        <button class="tonalli-guide" type="button" data-open-tonalli-modal>Guía Tonalli (paso a paso)</button>
         <a href="https://wa.me/qr/LNO2OMMH2ZKWF1?text=Hola%2C+quiero+comprar+el+Paquete+Bienestar+Integral+Xoloitzcuintle"
            class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
            data-item="Paquete Bienestar Integral Xoloitzcuintle"
@@ -1758,6 +1855,7 @@
           <input type="text" name="txid" placeholder="Pega tu TXID aquí" required>
           <button type="submit">Confirmar TXID</button>
         </form>
+        <p class="txid-success-msg" role="status" aria-live="polite"></p>
       </div>
     </div>
 
@@ -1952,11 +2050,16 @@ document.addEventListener('click', function(e){
             txForm.style.display = txForm.style.display === 'block' ? 'none' : 'block';
           });
 
+          const txMsg = card.querySelector('.txid-success-msg');
+
           txForm?.addEventListener('submit', (event) => {
             event.preventDefault();
             const txid = txInput?.value.trim();
             if (txid) {
-              alert('TXID recibido: ' + txid);
+              if (txMsg) {
+                txMsg.textContent = `✅ TXID recibido: ${txid.slice(0, 12)}...${txid.slice(-6)}. Validaremos tu compra.`;
+                txMsg.style.display = 'block';
+              }
               txForm.reset();
               txForm.style.display = 'none';
             }
@@ -2159,6 +2262,35 @@ document.addEventListener('click', function(e){
       });
 
       updateOfferBlocks();
+
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const productCards = document.querySelectorAll('.card[data-category]');
+
+      filterButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filter = btn.dataset.filter;
+
+          productCards.forEach((card) => {
+            const show = filter === 'all' || card.dataset.category === filter;
+            if (show) {
+              card.style.display = 'flex';
+              requestAnimationFrame(() => {
+                card.style.opacity = '1';
+              });
+            } else {
+              card.style.opacity = '0';
+              setTimeout(() => {
+                if (card.style.opacity === '0') {
+                  card.style.display = 'none';
+                }
+              }, 280);
+            }
+          });
+        });
+      });
 
       // Animaciones al hacer scroll
       const revealObserver = new IntersectionObserver(
