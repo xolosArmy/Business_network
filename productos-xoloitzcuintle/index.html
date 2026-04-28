@@ -429,6 +429,46 @@
       background: rgba(240, 199, 83, 0.18);
     }
 
+    .btn-primary,
+    .btn-highlight {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      width: fit-content;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: var(--color-text-strong);
+      border-color: rgba(13, 127, 114, 0.5);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      transform: translateY(-1px);
+      background: var(--color-primary-strong);
+      box-shadow: 0 10px 22px rgba(13, 127, 114, 0.35);
+    }
+
+    .btn-highlight {
+      background: rgba(240, 199, 83, 0.15);
+      color: var(--color-text-strong);
+      border-color: rgba(240, 199, 83, 0.35);
+    }
+
+    .btn-highlight:hover,
+    .btn-highlight:focus-visible {
+      transform: translateY(-1px);
+      background: rgba(240, 199, 83, 0.22);
+      box-shadow: 0 10px 22px rgba(240, 199, 83, 0.25);
+    }
+
     .txid-toggle {
       background: transparent;
       color: var(--color-highlight-strong);
@@ -1659,6 +1699,28 @@
       </div>
     </div>
 
+    <!-- Producto 3.5 -->
+    <div class="card animate-on-scroll" data-sku="xolo-solar-ancestral" data-category="balsamo">
+      <div class="product-media">
+        <img
+          src="https://i.imgur.com/sEQqS7Z.png"
+          loading="lazy"
+          decoding="async"
+          alt="Bálsamo Protector Solar Ancestral para Xoloitzcuintle."
+        />
+      </div>
+      <div class="card-body">
+        <h2>Bálsamo Solar Ancestral</h2>
+        <div class="price-tag-container"><span class="price-mxn">Escudo Cutáneo Natural</span><span class="price-rmz-tag">Dermocosmética Preventiva</span></div>
+        <p>
+          Protección técnica para la piel del Xoloitzcuintle. Formulado con manteca de karité y aceite de coco virgen, actúa como una barrera lipídica contra la radiación UV. Enriquecido con Vitamina E para neutralizar radicales libres, es 100% libre de cítricos y óxido de zinc (Lick-Safe).
+        </p>
+      </div>
+      <div class="card-actions">
+        <button class="btn-primary" type="button">Añadir al Ritual</button>
+      </div>
+    </div>
+
     <!-- Producto 3 -->
     <div class="card animate-on-scroll" data-sku="xolo-amanecer" data-category="balsamo">
       <div class="product-media">
@@ -1805,14 +1867,17 @@
         />
       </div>
       <div class="card-body">
-        <h2>Paquete Bienestar Integral Xoloitzcuintle</h2>
+        <h2>Paquete Bienestar Xoloitzcuintle</h2>
         <div class="price-tag-container"><span class="price-mxn">$1950 MXN</span><span class="price-rmz-tag"><i class="fa-solid fa-coins" aria-hidden="true"></i> 20707.84 RMZ</span></div>
-        <p>Cuidado completo de la piel y protección natural: incluye bálsamos de Árbol de Té, Limón y Lavanda, repelente con esencia de limón y dos jabones neutros exfoliantes.</p>
-        <ul>
-          <li>Bálsamos calmantes y nutritivos: Árbol de Té, Limón y Lavanda.</li>
-          <li>Repelente natural con esencia de limón: protege de insectos sin químicos agresivos.</li>
-          <li>Jabones exfoliantes neutros: limpian suavemente mientras cuidan la piel.</li>
+        <ul class="package-details">
+          <li>Jabón Artesanal (Limpieza Profunda)</li>
+          <li>Loción Hidratante (Nutrición)</li>
+          <li>
+            <strong>Bálsamo Personalizable:</strong>
+            <span>Elige entre <em>Bálsamo de Limón</em> (Relajante) o <strong>Bálsamo Protector Solar</strong> (Protección UV Técnica).</span>
+          </li>
         </ul>
+        <p class="promo-text">Ideal para xolos que disfrutan de paseos diurnos o climas de alta radiación.</p>
       </div>
       <div class="card-actions">
         <p><strong>Flujo rápido:</strong> 1) Copia Offer ID · 2) Abre wallet · 3) Pega y paga en Tonalli.</p>
@@ -1825,7 +1890,7 @@
         <a href="https://cartera.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">
           Abrir wallet Tonalli (paso 2)
         </a>
-        <button class="tonalli-guide" type="button" data-open-tonalli-modal>Guía Tonalli (paso a paso)</button>
+        <button class="btn-highlight" type="button">Personalizar mi Paquete</button>
         <a href="https://wa.me/message/435RTKGJLTX2J1?text=Hola%2C+quiero+comprar+el+Paquete+Bienestar+Integral+Xoloitzcuintle"
            class="whatsapp-buy" target="_blank" rel="noopener noreferrer" data-ga-event="whatsapp_lead"
            data-item="Paquete Bienestar Integral Xoloitzcuintle"
