@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xNS: Explorador de Arquitectura</title>
+    
+    <!-- Chosen Palette: "Warm Neutral Harmony" (Stone-50 background, Slate-800 text, Rust/Sage/Ochre accents) -->
+    <!-- Application Structure Plan: Un diseño de "Dashboard Exploratorio Evolutivo". Utiliza una barra de navegación lateral para guiar al usuario a través de las 5 fases de evolución del Network State (desde la filosofía hasta el código). El área principal cambia dinámicamente para mostrar una mezcla de texto explicativo estructurado y representaciones visuales interactivas (tarjetas HTML, gráficos Chart.js, líneas de tiempo). Esta estructura permite desglosar un concepto técnico/filosófico denso en piezas digeribles y explorables a voluntad. -->
+    <!-- Visualization & Content Choices: 
+         - Filosofía -> Goal: Informar -> Tarjetas HTML interactivas -> Interacción: Hover/Click para detalles -> Justificación: Claridad conceptual sin sobrecargar -> Método: HTML/Tailwind.
+         - Codificación/CAE -> Goal: Comparar/Explicar -> Gráfico de Barras Chart.js -> Interacción: Tooltips -> Justificación: Visualizar los umbrales cuantitativos de los niveles de agentes -> Método: Chart.js.
+         - Gobernanza -> Goal: Procesos -> Línea de tiempo interactiva -> Interacción: Click para ver pasos -> Justificación: Muestra el flujo CI/CD claramente -> Método: HTML/Tailwind + JS.
+         - Sistema/Agentes -> Goal: Organizar -> Layout de Grid de Dashboard -> Interacción: Selección de agente -> Justificación: Simula el entorno operativo real -> Método: HTML/Tailwind.
+         - Memoria -> Goal: Relación -> Diagrama de flujo basado en bloques HTML -> Interacción: Animación CSS simple -> Justificación: Representa la inmutabilidad on-chain -> Método: HTML/Tailwind. 
+         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        xns: {
+                            bg: '#F7F7F5', // Warm off-white
+                            surface: '#FFFFFF',
+                            text: '#2D3748', // Slate 800
+                            muted: '#718096', // Slate 500
+                            fuego: '#E07A5F', // Rust orange (IA)
+                            alma: '#81B29A', // Sage green (Humano)
+                            guia: '#F2CC8F', // Ochre (Xolo)
+                            code: '#3D405B', // Navy (Sistema)
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Strict Chart Container Requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 450px;
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 250px;
+            }
+        }
+        
+        /* Custom Scrollbar for neatness */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F7F7F5; }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+        .fade-in { animation: fadeIn 0.4s ease-in-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-xns-bg text-xns-text min-h-screen flex flex-col font-sans selection:bg-xns-guia selection:text-black">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-10 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded bg-xns-code text-white flex items-center justify-center font-bold font-mono">xNS</div>
+                <h1 class="text-xl font-bold tracking-tight">xolosArmy Network State <span class="text-xns-muted text-sm font-normal hidden sm:inline">| Evolución y Arquitectura</span></h1>
+            </div>
+            <div class="text-sm font-mono text-xns-muted bg-gray-100 px-3 py-1 rounded">v1.0.0-rc</div>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="flex-1 max-w-7xl mx-auto w-full flex flex-col md:flex-row overflow-hidden">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-full md:w-64 bg-white border-r border-gray-200 md:min-h-[calc(100vh-4rem)] p-4 overflow-y-auto">
+            <nav class="space-y-1" id="nav-menu">
+                <!-- Nav items generated via JS -->
+            </nav>
+            <div class="mt-8 p-4 bg-gray-50 rounded-lg border border-gray-100">
+                <p class="text-xs text-xns-muted uppercase font-bold tracking-wider mb-2">Estado del Sistema</p>
+                <div class="flex items-center justify-between text-sm">
+                    <span>L1 Chronik</span>
+                    <span class="flex items-center gap-1 text-green-600"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Online</span>
+                </div>
+                <div class="flex items-center justify-between text-sm mt-1">
+                    <span>L2 CAE Motor</span>
+                    <span class="flex items-center gap-1 text-green-600"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Activo</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 p-4 sm:p-8 overflow-y-auto" id="content-area">
+            <!-- Content injected via JS -->
+        </main>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // --- 1. Data Source (Translating Report to App State) ---
+        const appData = [
+            {
+                id: 'filosofia',
+                icon: '🏛️',
+                title: 'La Filosofía Fundacional',
+                subtitle: 'El Manifiesto del xNS',
+                intro: 'Esta sección explora los cimientos filosóficos del Estado-Red. Define la identidad y el papel de cada actor en el ecosistema, estableciendo un marco moral claro antes de escribir cualquier línea de código. Aquí entenderá por qué el sistema está diseñado de la forma en que lo está.',
+                render: () => `
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                        <!-- IA Card -->
+                        <div class="bg-white p-6 rounded-xl border-t-4 border-xns-fuego shadow-sm hover:shadow-md transition-shadow cursor-pointer group" onclick="toggleDetails('det-ia')">
+                            <div class="text-4xl mb-4">🔥</div>
+                            <h3 class="text-lg font-bold mb-2">La IA es el Fuego</h3>
+                            <p class="text-sm text-gray-600 mb-4">Acelera la investigación, documentación y coordinación.</p>
+                            <div id="det-ia" class="hidden text-sm bg-gray-50 p-3 rounded text-gray-700 mt-2 border border-gray-100">
+                                Es un instrumento de <strong>Capacidad</strong>. No posee propósito intrínseco, requiere dirección.
+                            </div>
+                        </div>
+                        
+                        <!-- Humano Card -->
+                        <div class="bg-white p-6 rounded-xl border-t-4 border-xns-alma shadow-sm hover:shadow-md transition-shadow cursor-pointer group" onclick="toggleDetails('det-humano')">
+                            <div class="text-4xl mb-4">👁️</div>
+                            <h3 class="text-lg font-bold mb-2">El Humano es el Alma</h3>
+                            <p class="text-sm text-gray-600 mb-4">Da dirección moral y acarrea la responsabilidad final.</p>
+                            <div id="det-humano" class="hidden text-sm bg-gray-50 p-3 rounded text-gray-700 mt-2 border border-gray-100">
+                                Aporta el <strong>Significado</strong>. Decide qué construir y aprueba las decisiones de alto nivel.
+                            </div>
+                        </div>
+
+                        <!-- Xolo Card -->
+                        <div class="bg-white p-6 rounded-xl border-t-4 border-xns-guia shadow-sm hover:shadow-md transition-shadow cursor-pointer group" onclick="toggleDetails('det-xolo')">
+                            <div class="text-4xl mb-4">🐕</div>
+                            <h3 class="text-lg font-bold mb-2">El Xolo es el Guía</h3>
+                            <p class="text-sm text-gray-600 mb-4">Actúa como puente vivo entre cultura, memoria y código.</p>
+                            <div id="det-xolo" class="hidden text-sm bg-gray-50 p-3 rounded text-gray-700 mt-2 border border-gray-100">
+                                Marca la <strong>Dirección</strong>. Es la brújula moral codificada de la red.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 p-6 bg-xns-code text-white rounded-xl text-center italic font-serif text-lg">
+                        "AI is the fire. Humans are the meaning. The Xolo is the direction."
+                    </div>
+                `
+            },
+            {
+                id: 'codigo',
+                icon: '⚙️',
+                title: 'De la Prosa al Código',
+                subtitle: 'MRCL y Motor de Alineación (CAE)',
+                intro: 'En esta sección observamos cómo la filosofía se traduce en arquitectura computacional restrictiva. El gráfico interactivo a continuación detalla el Constitutional Alignment Engine (CAE) y cómo define los niveles de autonomía de los agentes (A0 a A3) basados en su alineación con el JSON constitucional.',
+                render: () => `
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
+                        <div class="space-y-6">
+                            <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
+                                <h4 class="font-bold text-xns-code flex items-center gap-2"><span class="bg-gray-200 text-xs px-2 py-1 rounded font-mono">1</span> MRCL (Machine-Readable Constitutional Layer)</h4>
+                                <p class="text-sm mt-2 text-gray-600">La Constitución escrita en Markdown se transforma en un grafo JSON (<code>main.json</code>). Esto permite que la IA pueda leer, evaluar y procesar las leyes de forma nativa.</p>
+                            </div>
+                            <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
+                                <h4 class="font-bold text-xns-code flex items-center gap-2"><span class="bg-gray-200 text-xs px-2 py-1 rounded font-mono">2</span> Policy Enforcer</h4>
+                                <p class="text-sm mt-2 text-gray-600">Un script CLI (<code>policy-enforcer.js</code>) que evalúa documentos Markdown de propuestas (RFCs). Emite un veredicto <span class="text-green-600 font-bold bg-green-50 px-1 rounded">PASS</span> o <span class="text-red-600 font-bold bg-red-50 px-1 rounded">FAIL</span> basado en el cumplimiento estricto.</p>
+                            </div>
+                            <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-sm border-l-4 border-l-xns-fuego">
+                                <h4 class="font-bold text-xns-code flex items-center gap-2"><span class="bg-gray-200 text-xs px-2 py-1 rounded font-mono">3</span> CAE (Constitutional Alignment Engine)</h4>
+                                <p class="text-sm mt-2 text-gray-600">Motor que revisa eventos contra el MRCL. Define niveles de agentes y aplica restricciones de gasto si se violan umbrales.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-center">
+                            <h4 class="text-center font-bold text-sm text-gray-500 mb-2 uppercase tracking-wide">Niveles de Agentes CAE y Umbrales de Alineación</h4>
+                            <div class="chart-container">
+                                <canvas id="caeChart"></canvas>
+                            </div>
+                            <p class="text-xs text-center text-gray-400 mt-2">Valores ilustrativos del nivel de cumplimiento requerido vs. autonomía de gasto.</p>
+                        </div>
+                    </div>
+                `,
+                afterRender: () => {
+                    initCaeChart();
+                }
+            },
+            {
+                id: 'flujo',
+                icon: '🔄',
+                title: 'El Flujo de Gobernanza',
+                subtitle: 'CI/CD como Tribunal Automático',
+                intro: 'Aquí exploramos el pipeline donde la gobernanza off-chain se automatiza mediante controles técnicos. Interactúe con las fases del flujo para entender cómo una propuesta pasa de la computadora de un colaborador hasta ser validada por la red y los humanos.',
+                render: () => `
+                    <div class="max-w-3xl mx-auto mt-10">
+                        <div class="relative border-l-4 border-gray-200 ml-4 space-y-12 pb-8">
+                            
+                            <!-- Step 1 -->
+                            <div class="relative group cursor-pointer" onclick="activateStep(1)">
+                                <div id="step-dot-1" class="absolute -left-[20px] bg-xns-fuego w-8 h-8 rounded-full border-4 border-white flex items-center justify-center text-white text-xs font-bold transition-colors">1</div>
+                                <div class="pl-8">
+                                    <h3 id="step-title-1" class="text-xl font-bold text-xns-code transition-colors">Pre-flight Local</h3>
+                                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100 mt-2">
+                                        <p class="text-sm text-gray-600">Los colaboradores usan el SDK y el CLI para validar sus RFCs estructurados contra el motor CAE localmente antes de proponerlos a la red.</p>
+                                        <div class="mt-3 bg-gray-900 text-green-400 font-mono text-xs p-2 rounded">
+                                            $ xns validate proposal.md<br>
+                                            > CAE Local: Pre-check passed.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="relative group cursor-pointer" onclick="activateStep(2)">
+                                <div id="step-dot-2" class="absolute -left-[20px] bg-gray-300 w-8 h-8 rounded-full border-4 border-white flex items-center justify-center text-white text-xs font-bold transition-colors">2</div>
+                                <div class="pl-8 opacity-70 transition-opacity" id="step-content-2">
+                                    <h3 id="step-title-2" class="text-xl font-bold text-gray-500 transition-colors">Tribunal en PRs (GitHub Actions)</h3>
+                                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100 mt-2">
+                                        <p class="text-sm text-gray-600">Cada Pull Request activa el <code>policy-enforcer</code>. El tribunal automático genera un reporte público de cumplimiento. Diseño "fail-close" (si falla, bloquea).</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="relative group cursor-pointer" onclick="activateStep(3)">
+                                <div id="step-dot-3" class="absolute -left-[20px] bg-gray-300 w-8 h-8 rounded-full border-4 border-white flex items-center justify-center text-white text-xs font-bold transition-colors">3</div>
+                                <div class="pl-8 opacity-70 transition-opacity" id="step-content-3">
+                                    <h3 id="step-title-3" class="text-xl font-bold text-gray-500 transition-colors">Human-in-the-loop (Capa HLP)</h3>
+                                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100 mt-2">
+                                        <p class="text-sm text-gray-600">Aunque la IA evalúa y bloquea técnicamente código no alineado, la decisión final (el "merge") requiere la firma criptográfica y validación humana.</p>
+                                        <div class="mt-2 flex items-center gap-2">
+                                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded font-bold">IA: PASS</span>
+                                            <span class="text-gray-400">+</span>
+                                            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded font-bold">Human: SIGNED</span>
+                                            <span class="text-gray-400">=</span>
+                                            <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded font-bold">MERGED</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 'sistema',
+                icon: '🌐',
+                title: 'Sistema Operativo Actual',
+                subtitle: 'Arquitectura End-to-End',
+                intro: 'Este panel simula el "Minimum Viable State" funcional. Seleccione los diferentes componentes del stack para ver cómo interactúan en tiempo real, desde la infraestructura soberana (Chronik) hasta los Agentes Autónomos.',
+                render: () => `
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mt-6 h-full">
+                        
+                        <!-- Stack Navigator -->
+                        <div class="md:col-span-4 flex flex-col gap-2">
+                            <button onclick="showSystemLayer('l0')" id="btn-l0" class="sys-btn w-full text-left p-4 rounded-lg border-2 border-transparent bg-white shadow-sm hover:border-xns-code transition-all font-bold text-xns-code">L0/L1: Infraestructura (Chronik)</button>
+                            <button onclick="showSystemLayer('l2')" id="btn-l2" class="sys-btn w-full text-left p-4 rounded-lg border-2 border-transparent bg-white shadow-sm hover:border-xns-code transition-all font-bold text-xns-code">L2: Validación (CAE / Tribunal)</button>
+                            <button onclick="showSystemLayer('ag')" id="btn-ag" class="sys-btn w-full text-left p-4 rounded-lg border-2 border-transparent bg-white shadow-sm hover:border-xns-code transition-all font-bold text-xns-code">Agentes Autónomos</button>
+                            <button onclick="showSystemLayer('db')" id="btn-db" class="sys-btn w-full text-left p-4 rounded-lg border-2 border-transparent bg-white shadow-sm hover:border-xns-code transition-all font-bold text-xns-code">Dashboard SPA</button>
+                        </div>
+
+                        <!-- System Detail Display -->
+                        <div class="md:col-span-8 bg-gray-900 rounded-xl p-6 text-gray-300 font-mono text-sm relative overflow-hidden shadow-inner min-h-[300px]">
+                            
+                            <!-- Initial View -->
+                            <div id="sys-view-default" class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+                                <div class="text-4xl mb-4">🖥️</div>
+                                <p>Seleccione una capa de la arquitectura a la izquierda para inspeccionar sus componentes y funciones operativas.</p>
+                            </div>
+
+                            <!-- L0/L1 View -->
+                            <div id="sys-view-l0" class="hidden h-full flex flex-col fade-in">
+                                <h3 class="text-green-400 text-lg mb-2 border-b border-gray-700 pb-2">L0/L1 (Chronik)</h3>
+                                <p class="text-gray-400 mb-4">Infraestructura soberana para consulta de estado de la red.</p>
+                                <div class="bg-black p-3 rounded text-xs mb-4">
+                                    <span class="text-pink-500">GET</span> <span class="text-blue-300">/script/p2pkh/&lt;hash160&gt;/utxos</span><br>
+                                    <span class="text-gray-500">// Retorna UTXOs correctamente parseados</span>
+                                </div>
+                                <div class="mt-auto flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                                    <span>Conectado a nodo eCash</span>
+                                </div>
+                            </div>
+
+                            <!-- L2 View -->
+                            <div id="sys-view-l2" class="hidden h-full flex flex-col fade-in">
+                                <h3 class="text-yellow-400 text-lg mb-2 border-b border-gray-700 pb-2">L2 (CAE / Tribunal)</h3>
+                                <p class="text-gray-400 mb-4">APIs de validación e implementación de seguridad fail-close.</p>
+                                <div class="bg-black p-3 rounded text-xs mb-4 border-l-2 border-red-500">
+                                    <span class="text-pink-500">POST</span> <span class="text-blue-300">/v1/preflight/sign</span><br>
+                                    <span class="text-gray-500">// Si policy_eval == FAIL -> transaction REJECTED</span>
+                                </div>
+                            </div>
+
+                            <!-- Agents View -->
+                            <div id="sys-view-ag" class="hidden h-full flex flex-col fade-in">
+                                <h3 class="text-purple-400 text-lg mb-2 border-b border-gray-700 pb-2">Agentes Autónomos</h3>
+                                <div class="space-y-4">
+                                    <div class="bg-black p-3 rounded border border-gray-800">
+                                        <span class="text-white font-bold">Treasury Agent (A1)</span><br>
+                                        <span class="text-gray-500 text-xs">Intenta gastar respetando estrictamente reglas del CAE.</span>
+                                    </div>
+                                    <div class="bg-black p-3 rounded border border-gray-800">
+                                        <span class="text-white font-bold">Teyolia (Funding Agent, A2)</span><br>
+                                        <span class="text-gray-500 text-xs">Monitorea fondos en Chronik. Redacta RFCs con guards anti-spam si hay escasez.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Dashboard View -->
+                            <div id="sys-view-db" class="hidden h-full flex flex-col fade-in">
+                                <h3 class="text-blue-400 text-lg mb-2 border-b border-gray-700 pb-2">Dashboard (SPA Oscura)</h3>
+                                <p class="text-gray-400 mb-2">Interfaz de observabilidad del sistema en tiempo real.</p>
+                                <ul class="list-disc pl-5 space-y-1 text-xs text-gray-400">
+                                    <li>Muestra estado de conexión L1.</li>
+                                    <li>Expone métricas del motor CAE.</li>
+                                    <li>Visualiza balances de tesorería.</li>
+                                    <li>Agrega alertas generadas por agentes en <code>/system</code>.</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 'memoria',
+                icon: '🔐',
+                title: 'Memoria Verificable',
+                subtitle: 'Finalidad Criptográfica y Siguientes Pasos',
+                intro: 'El diseño cumple la premisa: "IA ejecuta. Cripto recuerda. Humanos eligen el vector". Esta sección ilustra cómo las auditorías generadas por el sistema se anclan irreversiblemente en la blockchain, cristalizando la memoria de la red.',
+                render: () => `
+                    <div class="mt-8">
+                        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm mb-8">
+                            <h3 class="text-lg font-bold mb-3 flex items-center gap-2"><span class="text-2xl">📦</span> Auditorías Criptográficas (Estado Actual)</h3>
+                            <p class="text-gray-600 text-sm">El CAE ya genera bundles de evidencia detallados. Por cada decisión tomada, evento evaluado o RFC procesado, se genera un <code>audit_hash</code> único que actúa como huella digital de ese estado específico de la gobernanza.</p>
+                        </div>
+
+                        <div class="bg-gray-50 p-6 rounded-xl border border-dashed border-gray-400">
+                            <h3 class="text-lg font-bold mb-4 text-xns-code">Siguiente Paso Clave: Inmutabilidad On-Chain</h3>
+                            
+                            <!-- Diagram -->
+                            <div class="flex flex-col md:flex-row items-center justify-center gap-4 mt-6">
+                                
+                                <div class="bg-white p-4 rounded shadow text-center border-t-4 border-xns-fuego w-48 z-10">
+                                    <div class="text-xs text-gray-500 mb-1">Paso 1</div>
+                                    <div class="font-mono text-sm font-bold truncate">RFC_Doc + Evidencia</div>
+                                    <div class="text-xs bg-gray-100 p-1 mt-2 rounded">Genera audit_hash</div>
+                                </div>
+
+                                <div class="hidden md:block text-2xl text-gray-400 animate-pulse">➡️</div>
+                                <div class="md:hidden text-2xl text-gray-400 animate-pulse my-2">⬇️</div>
+
+                                <div class="bg-white p-4 rounded shadow text-center border-t-4 border-xns-alma w-48 z-10">
+                                    <div class="text-xs text-gray-500 mb-1">Paso 2</div>
+                                    <div class="font-bold text-sm">Transacción eCash</div>
+                                    <div class="text-xs bg-yellow-100 text-yellow-800 p-1 mt-2 rounded font-mono">OP_RETURN {hash}</div>
+                                </div>
+
+                                <div class="hidden md:block text-2xl text-gray-400 animate-pulse">➡️</div>
+                                <div class="md:hidden text-2xl text-gray-400 animate-pulse my-2">⬇️</div>
+
+                                <div class="bg-xns-code text-white p-4 rounded shadow text-center border-t-4 border-xns-guia w-48 z-10">
+                                    <div class="text-xs text-gray-300 mb-1">Paso 3</div>
+                                    <div class="font-bold text-sm">Cristalización</div>
+                                    <div class="text-xs text-green-400 mt-2">Memoria Inmutable de la Red</div>
+                                </div>
+
+                            </div>
+                            <p class="text-center text-sm text-gray-600 mt-8">El objetivo es hacer accesible el RFC completo desde el dashboard y anclar su prueba matemática on-chain, cerrando el ciclo de confianza.</p>
+                        </div>
+                    </div>
+                `
+            }
+        ];
+
+        let currentSectionId = 'filosofia';
+        let caeChartInstance = null;
+
+        // --- 2. UI Initialization & Navigation ---
+        function initApp() {
+            const navMenu = document.getElementById('nav-menu');
+            
+            // Build Navigation
+            appData.forEach((item, index) => {
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors duration-150 flex items-center gap-3 ${index === 0 ? 'bg-xns-code text-white shadow' : 'text-gray-600 hover:bg-gray-100'}`;
+                btn.id = `nav-${item.id}`;
+                btn.onclick = () => loadSection(item.id);
+                btn.innerHTML = `<span class="text-lg">${item.icon}</span> ${item.title}`;
+                navMenu.appendChild(btn);
+            });
+
+            // Load initial section
+            loadSection(currentSectionId);
+        }
+
+        function loadSection(id) {
+            currentSectionId = id;
+            const sectionData = appData.find(item => item.id === id);
+            if (!sectionData) return;
+
+            // Update Nav styling
+            appData.forEach(item => {
+                const btn = document.getElementById(`nav-${item.id}`);
+                if (item.id === id) {
+                    btn.className = `w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors duration-150 flex items-center gap-3 bg-white text-xns-code border-l-4 border-xns-code shadow-sm`;
+                } else {
+                    btn.className = `w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors duration-150 flex items-center gap-3 text-gray-600 hover:bg-gray-100 border-l-4 border-transparent`;
+                }
+            });
+
+            // Render Content Wrapper
+            const contentArea = document.getElementById('content-area');
+            contentArea.innerHTML = `
+                <div class="fade-in max-w-5xl mx-auto">
+                    <header class="mb-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-3xl">${sectionData.icon}</span>
+                            <h2 class="text-3xl font-bold text-xns-text tracking-tight">${sectionData.title}</h2>
+                        </div>
+                        <h3 class="text-xl text-xns-fuego font-medium">${sectionData.subtitle}</h3>
+                    </header>
+                    
+                    <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-sm mb-6 border-l-4 border-l-xns-guia">
+                        <p class="text-gray-700 leading-relaxed">${sectionData.intro}</p>
+                    </div>
+
+                    ${sectionData.render()}
+                </div>
+            `;
+
+            // Execute specific logic after render if needed
+            if (sectionData.afterRender) {
+                sectionData.afterRender();
+            }
+        }
+
+        // --- 3. Interactive Specific Functions ---
+
+        // Section 1: Toggle Details
+        function toggleDetails(id) {
+            const el = document.getElementById(id);
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+                el.classList.add('fade-in');
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+
+        // Section 2: Chart.js Initialization
+        function initCaeChart() {
+            const ctx = document.getElementById('caeChart').getContext('2d');
+            
+            if (caeChartInstance) {
+                caeChartInstance.destroy();
+            }
+
+            caeChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['A0 (Básico)', 'A1 (Tesorería)', 'A2 (Funding)', 'A3 (Root)'],
+                    datasets: [{
+                        label: 'Umbral de Alineación Requerido (%)',
+                        data: [40, 85, 95, 100],
+                        backgroundColor: [
+                            'rgba(148, 163, 184, 0.6)', // Slate
+                            'rgba(129, 178, 154, 0.6)', // Sage
+                            'rgba(242, 204, 143, 0.6)', // Ochre
+                            'rgba(224, 122, 95, 0.6)'   // Rust
+                        ],
+                        borderColor: [
+                            'rgba(148, 163, 184, 1)',
+                            'rgba(129, 178, 154, 1)',
+                            'rgba(242, 204, 143, 1)',
+                            'rgba(224, 122, 95, 1)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Alineación mínima: ${context.parsed.y}%`;
+                                },
+                                afterLabel: function(context) {
+                                    const desc = [
+                                        "Operaciones de bajo riesgo.",
+                                        "Manejo de fondos. Requiere alta alineación.",
+                                        "Emisión de propuestas. Control estricto anti-spam.",
+                                        "Modificación core. Exige cumplimiento perfecto."
+                                    ];
+                                    return desc[context.dataIndex];
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: { display: true, text: 'Alineación MRCL (%)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Section 3: Timeline Interaction
+        function activateStep(stepNum) {
+            // Reset all
+            for(let i=1; i<=3; i++) {
+                document.getElementById(`step-dot-${i}`).className = "absolute -left-[20px] bg-gray-200 w-8 h-8 rounded-full border-4 border-white flex items-center justify-center text-gray-500 text-xs font-bold transition-colors";
+                document.getElementById(`step-title-${i}`).className = "text-xl font-bold text-gray-400 transition-colors";
+                const content = document.getElementById(`step-content-${i}`);
+                if(content) content.className = "pl-8 opacity-40 transition-opacity pointer-events-none";
+            }
+
+            // Activate up to current step
+            for(let i=1; i<=stepNum; i++) {
+                document.getElementById(`step-dot-${i}`).className = "absolute -left-[20px] bg-xns-fuego w-8 h-8 rounded-full border-4 border-white flex items-center justify-center text-white text-xs font-bold transition-colors";
+                document.getElementById(`step-title-${i}`).className = "text-xl font-bold text-xns-code transition-colors";
+                const content = document.getElementById(`step-content-${i}`);
+                if(content) content.className = "pl-8 opacity-100 transition-opacity pointer-events-auto fade-in";
+            }
+        }
+
+        // Section 4: System Layout Interaction
+        function showSystemLayer(layer) {
+            // Hide all views
+            ['default', 'l0', 'l2', 'ag', 'db'].forEach(v => {
+                const el = document.getElementById(`sys-view-${v}`);
+                if(el) { el.classList.add('hidden'); el.classList.remove('fade-in'); }
+            });
+            
+            // Show selected view
+            const view = document.getElementById(`sys-view-${layer}`);
+            if(view) { view.classList.remove('hidden'); view.classList.add('fade-in'); }
+
+            // Update button styles
+            ['l0', 'l2', 'ag', 'db'].forEach(v => {
+                const btn = document.getElementById(`btn-${v}`);
+                if(btn) {
+                    if(v === layer) {
+                        btn.classList.add('border-xns-fuego', 'bg-gray-50');
+                        btn.classList.remove('border-transparent', 'bg-white');
+                    } else {
+                        btn.classList.remove('border-xns-fuego', 'bg-gray-50');
+                        btn.classList.add('border-transparent', 'bg-white');
+                    }
+                }
+            });
+        }
+
+        // Run Init
+        window.addEventListener('DOMContentLoaded', initApp);
+
+    </script>
+</body>
+</html>
