@@ -1,5 +1,315 @@
 [
   {
+    "txid": "c490864b0c4cd2cbe163a573e830c22d7e270207062903f9f2f0e08fca6a13f6",
+    "blockHeight": 946915,
+    "timestamp": 1777477267,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "chimalma",
+    "tokenId": "c490864b0c4cd2cbe163a573e830c22d7e270207062903f9f2f0e08fca6a13f6",
+    "cid": "QmQgzwkmWEue7iEB2qFXGywVCYY7dUngah6RitYs2aFb22",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e4654274368696d616c6d612052616dc3ad72657a20e28094204e4654206465204e6163696d69656e746f35697066733a2f2f516d51677a776b6d574575653769454232714658477977564359593764556e67616836526974597332614662323220d0a837c2d8e8ff1baf783abc019fa7a201fdc590349490ed115dc8295e1e0a2301004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Chimalma Ramírez — NFT de Nacimiento",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmQgzwkmWEue7iEB2qFXGywVCYY7dUngah6RitYs2aFb22",
+      "cid": "QmQgzwkmWEue7iEB2qFXGywVCYY7dUngah6RitYs2aFb22",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "recien-nacido"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Chimalma Ramírez es una xoloitzcuintle hembra color bermejo con copete blanco, nacida el 27 de abril de 2026 dentro del linaje de Xolos Ramírez. Su madre es Zia Ramírez y su padre es Koox Ramírez (variedad con pelo). Representa una nueva vida dentro del legado del xoloitzcuintle mexicano.",
+        "external_url": "https://www.youtube.com/watch?v=rBLJzN765SY",
+        "image": "ipfs://QmXjC2vfAtMoBUNAKd8VMULSVbYHpPPfAuzYHJ1p5CSSGz",
+        "lineage": {
+          "camada": "Camada del 27 de abril del 2026",
+          "color": "Bermejo",
+          "criador": "Xolos Ramirez (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "recien-nacido",
+          "fechaNacimiento": "2026-04-27",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Zia Ramirez",
+          "padre": "Koox Ramirez",
+          "sexo": "Hembra",
+          "variedad": "Sin pelo"
+        },
+        "name": "Chimalma Ramírez — NFT de Nacimiento",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Chimalma Ramírez — NFT de Nacimiento"
+  },
+  {
+    "txid": "efec4f67bad956de425122d0496071842832433d349209f6f201898dc737477b",
+    "blockHeight": 946633,
+    "timestamp": 1777311341,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "onix",
+    "tokenId": "efec4f67bad956de425122d0496071842832433d349209f6f201898dc737477b",
+    "cid": "QmaNfYghNuVp5jHuaqnuSu5rWS57cuLbhxfXviJ18kfLq3",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46540c4f6e69782052616d6972657a35697066733a2f2f516d614e665967684e755670356a487561716e75537535725753353763754c626878665876694a31386b664c713320217f6f402c4778d5e95d59bdaa55ba3a7b5c6c1e21276a8b7e86aa4fa87f81ee01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Onix Ramirez",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmaNfYghNuVp5jHuaqnuSu5rWS57cuLbhxfXviJ18kfLq3",
+      "cid": "QmaNfYghNuVp5jHuaqnuSu5rWS57cuLbhxfXviJ18kfLq3",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Macho"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "recien-nacido"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro digital oficial del nacimiento de Onix Ramírez, macho Xoloitzcuintle (variedad sin pelo). Hermano de camada de Mixa y Luna Ramírez, capturando sus primeros días de vida en Xolos Ramírez",
+        "external_url": "https://www.youtube.com/watch?v=yp0tAIOjBlA",
+        "image": "ipfs://QmVQyD7Q1GFqgxZBZDD4KFSYnqso1bU9xA8pu4wwWrAwxx",
+        "lineage": {
+          "camada": "Camada del 20 de abril de 2026",
+          "color": "Negro",
+          "criador": "Xolos Ramirez (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "recien-nacido",
+          "fechaNacimiento": "2026-04-20",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Gema (Ramirez/Ramirez) Mex.",
+          "padre": "Bolero (Ramirez/Ramirez) Mex.",
+          "sexo": "Macho",
+          "variedad": "Sin pelo"
+        },
+        "name": "Onix Ramirez",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Onix Ramirez"
+  },
+  {
+    "txid": "094639e668c24620ec9f2107f68b55eb4766c3fee41261fc624117d4fa805fd4",
+    "blockHeight": 946632,
+    "timestamp": 1777310500,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "luna",
+    "tokenId": "094639e668c24620ec9f2107f68b55eb4766c3fee41261fc624117d4fa805fd4",
+    "cid": "QmaLkQaqE2jsBQfjvehiFp3qub8vXHX2MM6jC7cdcHNkvQ",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46540c4c756e612052616d6972657a35697066733a2f2f516d614c6b51617145326a734251666a766568694670337175623876584858324d4d366a4337636463484e6b76512029a4e010d2e0606911337d2fa3abeeb5d4e974b6dde35174d326a18fb0271a4801004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Luna Ramirez",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmaLkQaqE2jsBQfjvehiFp3qub8vXHX2MM6jC7cdcHNkvQ",
+      "cid": "QmaLkQaqE2jsBQfjvehiFp3qub8vXHX2MM6jC7cdcHNkvQ",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "recien-nacido"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro digital oficial del nacimiento de Luna Ramírez, hembra Xoloitzcuintle (variedad sin pelo). Hermana de camada de Mixa Ramírez, capturando sus primeros días de vida en Xolos Ramírez.",
+        "external_url": "https://www.youtube.com/watch?v=5OvYnLW7aGE",
+        "image": "ipfs://QmRo7nA6UBiqnywrTxs6gPsZNHd4zjPD4gnGVmSVfL4xJy",
+        "lineage": {
+          "camada": "Camada del 20 de abril de 2026",
+          "color": "Negro",
+          "criador": "Xolos Ramirez (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "recien-nacido",
+          "fechaNacimiento": "2026-04-20",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Gema (Ramirez/Ramirez) Mex.",
+          "padre": "Bolero (Ramirez/Ramirez) Mex.",
+          "sexo": "Hembra",
+          "variedad": "Sin pelo"
+        },
+        "name": "Luna Ramirez",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Luna Ramirez"
+  },
+  {
+    "txid": "4628220c6bb119148f320fd943f3957a12367ade2282e5fcaaae18d92b8f9909",
+    "blockHeight": 946628,
+    "timestamp": 1777309260,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "misha",
+    "tokenId": "4628220c6bb119148f320fd943f3957a12367ade2282e5fcaaae18d92b8f9909",
+    "cid": "QmYLmjgpjiHpcmtscySuH5778cQtZQgfSgETh6FobB1rb8",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e4654174d69736861202852616d6972657a2f52616d6972657a2935697066733a2f2f516d594c6d6a67706a694870636d74736379537548353737386351745a516766536745546836466f62423172623820f8d7fa4e39878238b6d037d42b1c02bef1e4f745325c4dd45cdff53e517dd3f301004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Misha (Ramirez/Ramirez)",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmYLmjgpjiHpcmtscySuH5778cQtZQgfSgETh6FobB1rb8",
+      "cid": "QmYLmjgpjiHpcmtscySuH5778cQtZQgfSgETh6FobB1rb8",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Con pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "recien-nacido"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Registro digital oficial del nacimiento de Misha Ramírez, hembra Xoloitzcuintle miniatura (variedad con pelo). Capturando su esencia a los 13 días de nacida en Xolos Ramírez.",
+        "external_url": "https://www.youtube.com/watch?v=s5NH9-L_vlM",
+        "image": "ipfs://QmYqZbME46uTfEh142toiKj9o8RkpvA4Rz8U2VMoHeUP9S",
+        "lineage": {
+          "camada": "14 de abril del 2026 Rima",
+          "color": "Negro",
+          "criador": "Xolos Ramirez (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "recien-nacido",
+          "fechaNacimiento": "2026-04-14",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Rima (Langarica) Mex. FCI.",
+          "padre": "Ikal Caliente Mex.FCI.",
+          "sexo": "Hembra",
+          "variedad": "Con pelo"
+        },
+        "name": "Misha (Ramirez/Ramirez)",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Misha (Ramirez/Ramirez)"
+  },
+  {
+    "txid": "ae69f7111c9b733f9788d787b7e974ce9b053527ea4cbab8603ba2e9be3d2eda",
+    "blockHeight": 946026,
+    "timestamp": 1776956297,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "mixa",
+    "tokenId": "ae69f7111c9b733f9788d787b7e974ce9b053527ea4cbab8603ba2e9be3d2eda",
+    "cid": "QmSmoFrHoBQHuA5bw5ivVQnJwzArePby69emazMAyydutP",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46540d4d6978612052616dc3ad72657a35697066733a2f2f516d536d6f4672486f425148754135627735697656516e4a777a4172655062793639656d617a4d417979647574502058b7c7a9c8a5385303b31ac3b29248f4c7cf84ad796c1f44568ca97ee8f9fd5c01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Mixa Ramírez",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmSmoFrHoBQHuA5bw5ivVQnJwzArePby69emazMAyydutP",
+      "cid": "QmSmoFrHoBQHuA5bw5ivVQnJwzArePby69emazMAyydutP",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "recien-nacido"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Mixa Ramírez es una ejemplar única de la raza ancestral Xoloitzcuintle. Este activo digital representa su acta de nacimiento y pertenencia a la prestigiosa línea de Xolos Ramírez. Con su distintivo patrón 'mariposa', Mixa no es solo una mascota, sino un legado vivo de la cultura mexicana protegido en la red Tonalli.",
+        "external_url": "https://www.youtube.com/watch?v=kqcFJzHJZEU",
+        "image": "ipfs://Qmc8S1Xb3AqgpBnsorwrTmeGQAi1ZjfWUoX1kT373BemrZ",
+        "lineage": {
+          "camada": "Camada del 20 de abril de 2026",
+          "color": "Mariposa",
+          "criador": "Xolos Ramirez (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "recien-nacido",
+          "fechaNacimiento": "2026-04-20",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Gema (Ramirez/Ramirez) Mex.",
+          "padre": "Bolero (Ramirez/Ramirez) Mex.",
+          "sexo": "Hembra",
+          "variedad": "Sin pelo"
+        },
+        "name": "Mixa Ramírez",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Mixa Ramírez"
+  },
+  {
     "txid": "ce37133f74d42ee1e5b4574a7b9bde9623200a61172f350b3e47f746fdf5cbad",
     "blockHeight": 945530,
     "timestamp": 1776639296,

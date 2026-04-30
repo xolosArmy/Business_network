@@ -1,12 +1,12 @@
 {
-  "linajes_registrados": 84,
-  "linajes_validados_ipfs": 84,
+  "linajes_registrados": 89,
+  "linajes_validados_ipfs": 89,
   "registros_con_padre_y_madre": 0,
-  "txs_xolo_detectadas": 84,
-  "ipfs_disponibles": 84,
+  "txs_xolo_detectadas": 89,
+  "ipfs_disponibles": 89,
   "ipfs_fallidos": 0,
-  "nfts_con_slug_resuelto": 84,
-  "ult_registro_txid": "ce37133f74d42ee1e5b4574a7b9bde9623200a61172f350b3e47f746fdf5cbad",
-  "ult_registro_slug": "mitla",
-  "ultima_actualizacion": "2026-04-21T01:22:12.346Z"
+  "nfts_con_slug_resuelto": 89,
+  "ult_registro_txid": "c490864b0c4cd2cbe163a573e830c22d7e270207062903f9f2f0e08fca6a13f6",
+  "ult_registro_slug": "chimalma",
+  "ultima_actualizacion": "2026-04-30T16:05:52.366Z"
 }
