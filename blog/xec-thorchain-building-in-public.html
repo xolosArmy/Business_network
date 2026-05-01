@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building in Public: eCash x THORChain Native Integration - Technical Update #1</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-main: #cbd5e1;
+            --text-heading: #f8fafc;
+            --accent-color: #38bdf8;
+            --code-bg: #1e293b;
+            --border-color: #334155;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .blog-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        header {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+
+        h1 {
+            color: var(--text-heading);
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .meta {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            display: flex;
+            gap: 1rem;
+        }
+
+        h2 {
+            color: var(--text-heading);
+            font-size: 1.8rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: var(--text-heading);
+            font-size: 1.3rem;
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+
+        a:hover {
+            border-bottom: 1px solid var(--accent-color);
+        }
+
+        ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            font-family: "Fira Code", Consolas, Monaco, monospace;
+            background-color: var(--code-bg);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #e2e8f0;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            padding: 1.2rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #e2e8f0;
+        }
+
+        .highlight-box {
+            background-color: rgba(56, 189, 248, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #0369a1;
+            font-weight: bold;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            text-align: center;
+            margin-top: 1rem;
+            transition: transform 0.2s ease, filter 0.2s ease;
+            border: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+            color: #0f172a;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="blog-container">
+    <header>
+        <h1>Building in Public: eCash x THORChain Native Integration - Technical Update #1</h1>
+        <div class="meta">
+            <span>By <strong>xolosArmy Network</strong></span>
+            <span>|</span>
+            <span>Engineering & Infrastructure</span>
+        </div>
+    </header>
+
+    <article>
+        <p>This is a detailed technical summary for the community and backers supporting the <a href="https://www.teyolia.cash/campaigns/campaign-1775831790436" target="_blank">Teyolia campaign</a> to bring native <a href="https://e.cash/" target="_blank">eCash ($XEC)</a> into <a href="https://gitlab.com/thorchain/thornode" target="_blank">THORChain</a> and Tonalli Wallet.</p>
+
+        <p>Over the past few days, we have been working directly on a fork of the THORNode repository—the technical core of THORChain—to prepare the initial integration of $XEC as a native UTXO chain. This is part of our broader mission: native cross-chain swaps, zero wrapped tokens, zero centralized bridges, and a seamless future UX via Tonalli Wallet.</p>
+
+        <p>This is not just about "adding a ticker." We are paving the infrastructure path so THORChain can recognize, validate, derive addresses, sign transactions, and eventually operate with $XEC as a first-class citizen. Here is our Proof of Work.</p>
+
+        <h2>1. The Technical Progress</h2>
+
+        <h3>1. THORNode Fork & Draft MR</h3>
+        <p>We prepared a working fork to develop without touching the official repository yet. Our main working branch is <code>clean/xec-shared-utxo</code>, and we created an internal Draft Merge Request titled: <em>Draft: Add initial eCash (XEC) chain support to THORNode via shared UTXO client.</em> We have officially moved from concept to reviewable, testable code.</p>
+
+        <h3>2. Setting up a Local GitLab Runner (CI/CD)</h3>
+        <p>THORNode has a massive CI suite (protobuf, tests, lint, semgrep). We installed and registered a dedicated Docker executor runner: <code>xolosrmz-thornode-docker-runner</code>. We resolved initial 403 Forbidden token errors and adjusted <code>config.toml</code> to allow <code>privileged = true</code>, essential for <code>docker:dind</code> to work correctly within the jobs.</p>
+
+        <h3>3. Fixing Docker-in-Docker in CI</h3>
+        <p>The original pipeline struggled with TLS configs on the local runner. We switched to a non-TLS approach using <code>DOCKER_HOST: tcp://docker:2375</code> and the <code>docker:28.5.2-dind</code> service. This unlocked the <code>generate</code> job, allowing the pipeline to actually execute THORNode tasks.</p>
+
+        <h3>4. Resolving Docker Hub Access</h3>
+        <p>The upstream pipeline hardcoded the user as <code>-u thornode</code>. We parameterized the login to use our own Personal Access Token via <code>$DOCKER_HUB_USER</code>, bypassing upstream credential blocks.</p>
+
+        <h3>5. Overcoming the Protobuf Blocker</h3>
+        <p>The <code>proto-check-breaking</code> job failed due to an upstream misalignment regarding <code>QueryStreamingSwapResponse</code>. Since our branch doesn't modify <code>.proto</code> files, we temporarily marked this job as <code>allow_failure: true</code> to avoid blocking the XEC logic review.</p>
+
+        <h3>6. Fixing Go Compilation in <code>common/pubkey.go</code></h3>
+        <p>We hit a real Go error: <code>fmt.Errorf format %s has arg chainNetwork of wrong type common.ChainNetwork</code>. We patched it to use <code>%v</code>, allowing the codebase to continue compiling.</p>
+
+        <h3>7. Memo Tests "Butterfly Effect"</h3>
+        <p>In <code>x/thorchain/memo/memo_test.go</code>, a test that expected an invalid memo to fail suddenly started passing. Why? Adding XEC as an asset made previously ambiguous empty values resolve differently. We updated the test to use a truly invalid asset (<code>INVALID!ASSET</code>). Adding a new chain changes the environment.</p>
+
+        <h3>8. Asset Parser Bug (The Empty Shortcode)</h3>
+        <p>We discovered a critical error: <code>pool XEC.XEC does not exist</code>. The root cause was in <code>common/asset.go</code>. <code>XECAsset.ShortCode()</code> was returning an empty string, which was dangerously registering in the map as <code>shorts[""] = "XEC.XEC"</code>. This caused empty optional fields in memos to be accidentally parsed as XEC. We fixed the logic to prevent registering empty shortcodes. This is exactly why infrastructure funding matters.</p>
+
+        <h3>9. Passing Unit-Tests</h3>
+        <p>After fixing the shortcode bug, <code>unit-tests</code> went green ✅. This confirms that the core logic of THORNode is no longer breaking due to the XEC integration.</p>
+
+        <h3>10-13. Linting, Go Toolchain, and Trunk Concurrency</h3>
+        <p>We cleaned up a useless <code>trunk-ignore</code> comment, resolved a Go toolchain mismatch (forcing Go 1.24.6 to match the pipeline), increased the <code>golangci-lint</code> timeout, and reduced Trunk's job concurrency (<code>-j4</code>) to prevent our local runner from aborting under heavy load.</p>
+
+        <h2>2. What We Achieved for Teyolia Backers</h2>
+        
+        <div class="highlight-box">
+            <p><strong>This is no longer just an idea.</strong> The project has real code in a THORNode fork. We are identifying exact touchpoints (parsers, addresses, UTXO clients, CI/CD). We are fixing real bugs, like the empty shortcode collision, preventing silent failures. We are actively funding the heavy lifting.</p>
+        </div>
+
+        <h2>3. What is Next? (Phase 1 & Phase 2)</h2>
+        
+        <ul>
+            <li><strong>Stabilize CI:</strong> Ensure <code>generate</code>, <code>long-test</code>, and <code>test-simulation</code> pass consistently.</li>
+            <li><strong>Harden XEC/UTXO Architecture:</strong> Strict <code>ecash:</code> prefix handling, 100 sats base unit configuration, and mapping out the future Avalanche Pre-Consensus logic for sub-3-second finality.</li>
+            <li><strong>MockNet Deployment:</strong> Testing the integration in a controlled environment with a real eCash RPC.</li>
+            <li><strong>Tonalli Wallet UX:</strong> Preparing the frontend routing and memo construction for the end-user.</li>
+            <li><strong>Upstream MR:</strong> Presenting a clean, documented, and reviewable Merge Request to the THORChain core devs.</li>
+        </ul>
+
+        <h2>4. A Message to Our Donors</h2>
+        <p>We have proven that technical progress is happening right now. We aren't asking for support to "see if we can start"—we are already deep in the THORNode codebase navigating infrastructure, compilers, and parsers.</p>
+
+        <p>The <a href="https://www.teyolia.cash/campaigns/campaign-1775831790436" target="_blank">Teyolia campaign</a> funds this exact reality: turning an ambitious idea into a serious, reviewable integration. <strong>Native eCash + Tonalli Wallet + Cross-Chain Swaps.</strong></p>
+
+        <p>Let's build the path. 🐕⚡️</p>
+
+        <p style="text-align: center; margin-top: 3rem;">
+            <a href="https://www.teyolia.cash/campaigns/campaign-1775831790436" class="cta-button" target="_blank">Support the Infrastructure Campaign on Teyolia</a>
+        </p>
+    </article>
+</div>
+
+</body>
+</html>
