@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+  <title id="title">Arte Ceremonial Evangelio RMZ</title>
+  <desc id="desc">Composición ceremonial con un Xolo de obsidiana, fuego dorado y símbolos de linaje RMZ.</desc>
+  <defs>
+    <radialGradient id="ember" cx="50%" cy="44%" r="58%">
+      <stop offset="0%" stop-color="#ffd86b" stop-opacity="0.95"/>
+      <stop offset="38%" stop-color="#e63946" stop-opacity="0.55"/>
+      <stop offset="72%" stop-color="#28110d" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#060606"/>
+    </radialGradient>
+    <linearGradient id="obsidian" x1="18%" y1="12%" x2="82%" y2="88%">
+      <stop offset="0%" stop-color="#24242c"/>
+      <stop offset="48%" stop-color="#070709"/>
+      <stop offset="100%" stop-color="#151018"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff1a6"/>
+      <stop offset="50%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#b76519"/>
+    </linearGradient>
+    <filter id="glow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="11" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 1  0 0.78 0 0 0.52  0 0 0.25 0 0.05  0 0 0 0.9 0" result="goldGlow"/>
+      <feMerge>
+        <feMergeNode in="goldGlow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="glyphs" width="96" height="96" patternUnits="userSpaceOnUse">
+      <path d="M16 48h24v-24h16v48h24" fill="none" stroke="#ffd700" stroke-opacity="0.12" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="70" cy="24" r="5" fill="#e63946" fill-opacity="0.16"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="900" fill="#060606"/>
+  <rect width="900" height="900" fill="url(#ember)"/>
+  <rect width="900" height="900" fill="url(#glyphs)"/>
+
+  <g opacity="0.56" filter="url(#glow)">
+    <circle cx="450" cy="450" r="304" fill="none" stroke="url(#gold)" stroke-width="8"/>
+    <circle cx="450" cy="450" r="240" fill="none" stroke="#e63946" stroke-width="3" stroke-dasharray="18 18"/>
+    <path d="M450 103l41 126 132-1-107 77 42 126-108-78-107 78 41-126-107-77 132 1z" fill="none" stroke="url(#gold)" stroke-width="6" opacity="0.7"/>
+  </g>
+
+  <g transform="translate(127 208)">
+    <path d="M215 333c-23-34-36-74-31-120 8-72 58-135 133-161 67-24 144-12 203 31 26 19 48 43 64 72l55 2c15 0 25 15 19 29l-22 50c-7 15-23 23-39 19l-38-10c-14 37-41 69-76 92l30 141c4 19-10 37-29 37h-33l-28-126c-17 4-35 6-53 5l-17 91c-4 17-18 30-36 30h-31l15-133c-24-11-46-27-65-49l-83 34c-23 10-48-8-47-33l1-25z" fill="url(#obsidian)" stroke="#ffd700" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M546 128l48-74 15 102" fill="url(#obsidian)" stroke="#ffd700" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M625 159l63-42-24 77" fill="url(#obsidian)" stroke="#ffd700" stroke-width="8" stroke-linejoin="round"/>
+    <circle cx="562" cy="168" r="13" fill="#ffd700"/>
+    <path d="M223 329c49 36 110 51 172 40 76-13 137-64 166-131" fill="none" stroke="#fce38a" stroke-opacity="0.4" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <g text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" filter="url(#glow)">
+    <text x="450" y="724" fill="#ffd700" font-size="54" font-weight="700" letter-spacing="7">RMZ</text>
+    <text x="450" y="779" fill="#fce38a" font-size="24" letter-spacing="5">SELLO DEL PACTO #001</text>
+  </g>
+</svg>

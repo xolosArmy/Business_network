@@ -53,6 +53,123 @@
       color: #fce38a;
     }
 
+    .nft-inscription {
+      margin-top: 3em;
+      padding-top: 3em;
+      border-top: 1px solid rgba(255, 215, 0, 0.28);
+    }
+
+    .nft-card {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.2fr);
+      gap: 1.5em;
+      overflow: hidden;
+      border: 1px solid rgba(252, 227, 138, 0.35);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at top left, rgba(230, 57, 70, 0.26), transparent 34%),
+        linear-gradient(145deg, rgba(27, 22, 18, 0.96), rgba(8, 8, 8, 0.98));
+      box-shadow: 0 0 36px rgba(255, 215, 0, 0.09);
+    }
+
+    .nft-visual {
+      position: relative;
+      min-height: 100%;
+      background: #0d0d0d;
+      isolation: isolate;
+    }
+
+    .nft-visual img {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      display: block;
+      object-fit: cover;
+      filter: saturate(1.12) contrast(1.08);
+    }
+
+    .scanline {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.08) 0,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 7px
+      );
+      mix-blend-mode: overlay;
+      opacity: 0.34;
+    }
+
+    .nft-info {
+      padding: 1.6em;
+    }
+
+    .label {
+      display: inline-block;
+      margin-bottom: 0.7em;
+      color: #fce38a;
+      font-size: 0.75em;
+      font-weight: bold;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .nft-info h3 {
+      margin: 0 0 0.7em;
+      color: #ffd700;
+      font-size: 1.55em;
+      line-height: 1.2;
+    }
+
+    .tx-box {
+      margin: 1.4em 0;
+      padding: 1em;
+      border: 1px solid rgba(255, 215, 0, 0.24);
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.38);
+    }
+
+    .tx-label {
+      display: block;
+      margin-bottom: 0.45em;
+      color: #aaa;
+      font-size: 0.82em;
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+    }
+
+    .tx-hash {
+      display: block;
+      color: #fce38a;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82em;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .btn-explorer {
+      display: inline-block;
+      padding: 0.85em 1.15em;
+      border: 1px solid rgba(252, 227, 138, 0.72);
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ffd700, #e63946);
+      color: #111;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 10px 24px rgba(230, 57, 70, 0.2);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .btn-explorer:hover,
+    .btn-explorer:focus {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(255, 215, 0, 0.22);
+    }
+
     @media (max-width: 600px) {
       body {
         padding: 1em;
@@ -60,6 +177,14 @@
 
       .container {
         padding: 1.5em;
+      }
+
+      .nft-card {
+        grid-template-columns: 1fr;
+      }
+
+      .nft-info {
+        padding: 1.25em;
       }
     }
   </style>
@@ -88,6 +213,30 @@
       Amen Mictlán.<br>
       Amen Memory.
     </div>
+
+    <section class="nft-inscription" aria-labelledby="nft-title">
+      <div class="nft-card">
+        <div class="nft-visual">
+          <img src="../assets/arte-ceremonial-rmz.svg" alt="Arte Ceremonial Evangelio RMZ">
+          <div class="scanline"></div>
+        </div>
+        <div class="nft-info">
+          <span class="label">Inscripción en Blockchain</span>
+          <h3 id="nft-title">Sello del Pacto RMZ #001</h3>
+          <p>Este Evangelio ha sido minteado como un activo soberano. Representa la primera piedra de la Red y el compromiso de lealtad absoluta al código abierto.</p>
+
+          <div class="tx-box">
+            <span class="tx-label">Transacción ID:</span>
+            <code class="tx-hash">17c807b364516916efbcfe64eac15b212935cce9e96aa58596bfbacfdba0d7c4</code>
+          </div>
+
+          <a href="https://explorer.xolosarmy.xyz/tx/17c807b364516916efbcfe64eac15b212935cce9e96aa58596bfbacfdba0d7c4"
+             target="_blank" rel="noopener noreferrer" class="btn-explorer">
+            Verificar en el Explorer
+          </a>
+        </div>
+      </div>
+    </section>
   </div>
 </body>
 </html>
