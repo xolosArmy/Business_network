@@ -1,5 +1,274 @@
 [
   {
+    "txid": "3033fe4d51767d196597df41d14ecdb4822b4c9e48be630035a76b7d301b502a",
+    "blockHeight": 949660,
+    "timestamp": 1779128383,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "amixtli",
+    "tokenId": "3033fe4d51767d196597df41d14ecdb4822b4c9e48be630035a76b7d301b502a",
+    "cid": "QmWjs54XnaaG2SRSoRk6Ro4S5nwSZgUvYbcdnxBpRgq3Tp",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e465410416d6978746c692052616dc3ad72657a35697066733a2f2f516d576a733534586e616147325352536f526b36526f3453356e77535a675576596263646e784270526771335470208d7926ad5e36fa3fdca85395683fb26516f55686b8ef38d1aa75e29c14b2415f01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Amixtli Ramírez",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmWjs54XnaaG2SRSoRk6Ro4S5nwSZgUvYbcdnxBpRgq3Tp",
+      "cid": "QmWjs54XnaaG2SRSoRk6Ro4S5nwSZgUvYbcdnxBpRgq3Tp",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Hembra"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "joven"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Amixtli Ramírez queda integrada al Archivo del Linaje Vivo de Xolos Ramírez mediante su microchip 900255002683040 y su registro on-chain en la blockchain de eCash. Hembra xoloitzcuintle talla intermedia, variedad sin pelo, color negro, nacida el 3 de mayo de 2025. Hija de Pandero Ramírez y Tula Ramírez. Este NFT vincula su identidad física con su memoria digital dentro del sistema Tonalli.",
+        "external_url": "https://www.youtube.com/shorts/sjiC_iwu5tM",
+        "image": "ipfs://QmWqWyV1YFgRvB7xPNUW3LehQz8aHoxGuScFYg3PVDmEPn",
+        "lineage": {
+          "camada": "Mayo del 2025",
+          "color": "Negro",
+          "criador": "Xolos Ramirez (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "joven",
+          "fechaNacimiento": "2025-05-03",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Tula (Ramirez/Ramirez) Mex.",
+          "microchip": "900255002683040",
+          "padre": "Pandero (Ramirez/Ramirez) Mex.",
+          "sexo": "Hembra",
+          "variedad": "Sin pelo"
+        },
+        "name": "Amixtli Ramírez",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Amixtli Ramírez"
+  },
+  {
+    "txid": "99c67c2e02f3ceba314c65cabd81c3c254b1ef6e110f82572e7ae8b438c65d37",
+    "blockHeight": 949632,
+    "timestamp": 1779112623,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "the",
+    "tokenId": "99c67c2e02f3ceba314c65cabd81c3c254b1ef6e110f82572e7ae8b438c65d37",
+    "cid": "QmZ8PDfFGwnMqZ4prU9SZ5shJ5Q5UtJAKFoqCevhFonFG3",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46544854686520586f6c6f732052616dc3ad72657a2053686f773a2048756d6f2052616dc3ad72657a2026204c756369616e612052656e6e6572202845702e2031372d30352d323032362935697066733a2f2f516d5a385044664647776e4d715a3470725539535a3573684a35513555744a414b466f7143657668466f6e46473320f6b526554f564eae259ccd76e3ded52d7e58bc7f14ac919aaf256accc4b5f92101004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | The Xolos Ramírez Show: Humo Ramírez & Luciana Renner (Ep. 17-05-2026)",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmZ8PDfFGwnMqZ4prU9SZ5shJ5Q5UtJAKFoqCevhFonFG3",
+      "cid": "QmZ8PDfFGwnMqZ4prU9SZ5shJ5Q5UtJAKFoqCevhFonFG3",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Colección Oficial de Linaje Digital de Xolos Ramírez. \nRegistro eToken emitido mediante la Tonalli Wallet para la posteridad cultural del Xoloitzcuintle.\n\nEste NFT conmemora el episodio de 'The Xolos Ramírez Show' emitido el 17 de mayo de 2026, contando con la participación especial de la arquitecta Luciana Renner y el ejemplar cachorro de 7 meses, Humo Ramírez (residentes de la col. Roma, CDMX). \n\nEl eToken certifica la divulgación de los activos etno-bioacústicos de la raza (el característico 'aplauso de orejas' y sus alaridos ancestrales), el análisis de su temperamento y mente primitiva, así como la promoción de la salud dérmica canina a través de la cosmética natural y soberana de xolosArmy Network.\n\n---\n🔗 RECURSOS ASOCIADOS:\n• Crónica Completa en el Blog: https://xolosramirez.com/blog/2026-05-17-the-xolos-ramirez-show.html\n• Video del Episodio en YouTube: https://www.youtube.com/watch?v=ZytyCBXOjDQ\n• Medicina Canina Ancestral: https://xolosarmy.xyz/productos-xoloitzcuintle/\n\nMictlán Digital - Preservando el pasado, asegurando el futuro.",
+        "external_url": "https://xolosramirez.com/blog/2026-05-17-the-xolos-ramirez-show.html",
+        "image": "ipfs://QmNMPEt9myM3VfWWzB2VfhVBosSTtn24DffwntaMu1VrWt",
+        "name": "The Xolos Ramírez Show: Humo Ramírez & Luciana Renner (Ep. 17-05-2026)",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "The Xolos Ramírez Show: Humo Ramírez & Luciana Renner (Ep. 17-05-2026)"
+  },
+  {
+    "txid": "dc0acad913498f5fbbcea2e0dcfe1069b8a0c7faf84ee3eb6e63b19f1afc2979",
+    "blockHeight": 949532,
+    "timestamp": 1779050624,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "chimalma",
+    "tokenId": "dc0acad913498f5fbbcea2e0dcfe1069b8a0c7faf84ee3eb6e63b19f1afc2979",
+    "cid": "Qmak5esCGzE9QW7xFSzQW8HPZJ1KpNqD85tVtGQsFFnpbs",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46543c4368696d616c6d612052616dc3ad72657a3a20456c20586f6c6f69747a6375696e746c6520656e206c6f732043c3b36469636573204d65786963617335697066733a2f2f516d616b35657343477a45395157377846537a51573848505a4a314b704e7144383574567447517346466e706273209a0460444b32f312f37ec121484169b7d81f411a19cae3bf9b7caa90b09dd4c301004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Chimalma Ramírez: El Xoloitzcuintle en los Códices Mexicas",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/Qmak5esCGzE9QW7xFSzQW8HPZJ1KpNqD85tVtGQsFFnpbs",
+      "cid": "Qmak5esCGzE9QW7xFSzQW8HPZJ1KpNqD85tVtGQsFFnpbs",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Chimalma Ramírez aparece durante la grabación de Café con Xolos Ramírez, en el episodio “El Xoloitzcuintle en los Códices Mexicas”, presentado por Alexandra Ramírez. Esta pieza registra un momento de crianza, memoria y transmisión cultural, donde el xoloitzcuintle es presentado como perro sagrado de México, vinculado al dios Xólotl, a los códices mexicas y al viaje espiritual por los nueve niveles del Mictlán.\n\nEl NFT forma parte del archivo vivo de Xolos Ramírez y xolosArmy Network: una memoria digital del linaje xoloitzcuintle, la cultura ancestral y la continuidad simbólica de una raza con más de 3,500 años de historia.",
+        "external_url": "https://xolosramirez.com/blog/2026-05-17-cafe-con-xolos-ramirez.html",
+        "image": "ipfs://QmekTMRR4jDpSwTHB3ofmUSQvXYTLsxGpyDWsxKqc8E7SH",
+        "name": "Chimalma Ramírez: El Xoloitzcuintle en los Códices Mexicas",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Chimalma Ramírez: El Xoloitzcuintle en los Códices Mexicas"
+  },
+  {
+    "txid": "7852e5b49afb68a7523e86f22dd5ef184468fbf68e99e411507c241f1b90a42f",
+    "blockHeight": 949503,
+    "timestamp": 1779033960,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "piel",
+    "tokenId": "7852e5b49afb68a7523e86f22dd5ef184468fbf68e99e411507c241f1b90a42f",
+    "cid": "QmbrRvFxiAwgVPtHRG42VG1xzyMiyTRALNrZmbAwYEhiAK",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e46542c5069656c20646520437565726f3a20586f6c6f69747a6375696e746c6520556c74726120496e7374696e637435697066733a2f2f516d627252764678694177675650744852473432564731787a794d69795452414c4e725a6d62417759456869414b20326470051f4160e4717db6d701d974b75e4d1f6ba710c43eafa53927ed286bda01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Piel de Cuero: Xoloitzcuintle Ultra Instinct",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmbrRvFxiAwgVPtHRG42VG1xzyMiyTRALNrZmbAwYEhiAK",
+      "cid": "QmbrRvFxiAwgVPtHRG42VG1xzyMiyTRALNrZmbAwYEhiAK",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "Una pieza meme-educativa de Xolos Ramírez que celebra la biología única del xoloitzcuintle: su piel ancestral, la mutación FOXI3, la epidermis engrosada y su resistencia natural como perro primitivo mexicano.",
+        "external_url": "https://xolosramirez.com/blog/piel-del-xoloitzcuintle.html",
+        "image": "ipfs://QmT3hLJCjwEMD1xAbMEi5g6pv81roLeFH6bKT3VCnH389N",
+        "name": "Piel de Cuero: Xoloitzcuintle Ultra Instinct",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Piel de Cuero: Xoloitzcuintle Ultra Instinct"
+  },
+  {
+    "txid": "17c807b364516916efbcfe64eac15b212935cce9e96aa58596bfbacfdba0d7c4",
+    "blockHeight": 949223,
+    "timestamp": 1778866733,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "evangelio",
+    "tokenId": "17c807b364516916efbcfe64eac15b212935cce9e96aa58596bfbacfdba0d7c4",
+    "cid": "QmSd8veFkA9EdYKUaAL4L4tHWdregyKWWaHPrW4hGUUkG8",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e4654344576616e67656c696f20524d5a2064656c20586f6c6f69747a6375696e746c6520e2809420426c6f7175652047c3a96e6573697335697066733a2f2f516d5364387665466b41394564594b5561414c344c3474485764726567794b5757614850725734684755556b473820f6297bd9aff499f08af2240a1bc99c8bb4e0e3aae522398af2eafe221c8d287a01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Evangelio RMZ del Xoloitzcuintle — Bloque Génesis",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmSd8veFkA9EdYKUaAL4L4tHWdregyKWWaHPrW4hGUUkG8",
+      "cid": "QmSd8veFkA9EdYKUaAL4L4tHWdregyKWWaHPrW4hGUUkG8",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "NFT conmemorativo del Evangelio RMZ del Xoloitzcuintle: El Pacto de la Soberanía Digital.\n\nEsta pieza marca la publicación del Evangelio RMZ en xolosArmy Network, una red espiritual en una realidad tecnológica. El Xoloitzcuintle aparece como guía, guardián y psicopompo del Mictlán digital: símbolo de soberanía, linaje, código abierto y pertenencia.\n\nLa red será un Xolo, no un Baal.\nLa lealtad es nuestro algoritmo; la libertad es nuestro consenso.\n\nColección: Evangelio RMZ\nTipo: Arte digital ceremonial\nEcosistema: xolosArmy Network",
+        "external_url": "https://xolosarmy.xyz/rmz-gospel.html",
+        "image": "ipfs://QmU2BMQsuLZFJjan5DbRkAB8mxD5q45orM8pQWLpGGuF4m",
+        "name": "Evangelio RMZ del Xoloitzcuintle — Bloque Génesis",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Evangelio RMZ del Xoloitzcuintle — Bloque Génesis"
+  },
+  {
+    "txid": "a0c51438388893afa192ce24d3632a157daf7f34166fd26058e5b0ccf1e2ff76",
+    "blockHeight": 948978,
+    "timestamp": 1778714783,
+    "protocol": "XOLO",
+    "version": "v1",
+    "eventType": "reg",
+    "slug": "personalidad",
+    "tokenId": "a0c51438388893afa192ce24d3632a157daf7f34166fd26058e5b0ccf1e2ff76",
+    "cid": "QmYbju6Ne1855KBU9r3XuV2FanMUtcSYv3f5LbnvX8Pzvq",
+    "rawOpReturnHex": "6a04534c500001410747454e4553495308584f4c4f534e465420506572736f6e616c6964616420586f6c6f3a204f6e69782052616dc3ad72657a35697066733a2f2f516d59626a75364e65313835354b42553972335875563246616e4d5574635359763366354c626e765838507a767120a973340857da0f27b88e91dd1c5e327c1d98ad9e88cb347c426583d602040ddd01004c00080000000000000001",
+    "decodedText": "SLP NFT1 | XOLOSNFT | Personalidad Xolo: Onix Ramírez",
+    "ipfs": {
+      "ok": true,
+      "url": "https://ipfs.io/ipfs/QmYbju6Ne1855KBU9r3XuV2FanMUtcSYv3f5LbnvX8Pzvq",
+      "cid": "QmYbju6Ne1855KBU9r3XuV2FanMUtcSYv3f5LbnvX8Pzvq",
+      "json": {
+        "app": "Tonalli RMZWallet",
+        "attributes": [
+          {
+            "trait_type": "Sexo",
+            "value": "Macho"
+          },
+          {
+            "trait_type": "Variedad",
+            "value": "Sin pelo"
+          },
+          {
+            "trait_type": "Etapa",
+            "value": "recien-nacido"
+          }
+        ],
+        "collection": {
+          "family": "Xolos Ramírez",
+          "name": "xolosArmy NFTs"
+        },
+        "description": "NFT conmemorativo del episodio 'Personalidad Xolo' protagonizado por Onix Ramírez, un cachorro Xoloitzcuintle negro de 3 semanas. Este token documenta su linaje, la presencia de la mutación del gen FOXI3 (displasia ectodérmica) y su herencia avalada por Xolos Ramírez.",
+        "external_url": "https://www.youtube.com/watch?v=BedcTg9xq1c",
+        "image": "ipfs://QmYbtqZQqBZTbv3xd88hogg11FzXNBpCkvcEUo5NABU4w9",
+        "lineage": {
+          "camada": "Camada del 20 de abril de 2026",
+          "color": "Negro",
+          "criador": "Xolos Ramirez (Fernando Ramírez Gutiérrez / Alexandra Ramírez Gutiérrez)",
+          "etapa": "recien-nacido",
+          "fechaNacimiento": "2026-04-20",
+          "lugarNacimiento": "Ciudad de Mexico",
+          "madre": "Gema (Ramirez/Ramirez) Mex.",
+          "padre": "Bolero (Ramirez/Ramirez) Mex.",
+          "sexo": "Macho",
+          "variedad": "Sin pelo"
+        },
+        "name": "Personalidad Xolo: Onix Ramírez",
+        "parent": "bf8e0b5cd60fe4d6354c662b28542e0f3c3d69941eb039426d65bcdb7fe9f48c",
+        "schema_version": "1.1.0"
+      },
+      "sha256Matches": null
+    },
+    "hasParents": false,
+    "parentTokenId": null,
+    "motherTokenId": null,
+    "name": "Personalidad Xolo: Onix Ramírez"
+  },
+  {
     "txid": "c490864b0c4cd2cbe163a573e830c22d7e270207062903f9f2f0e08fca6a13f6",
     "blockHeight": 946915,
     "timestamp": 1777477267,

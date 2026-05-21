@@ -1,5 +1,71 @@
 [
   {
+    "txid": "3033fe4d51767d196597df41d14ecdb4822b4c9e48be630035a76b7d301b502a",
+    "slug": "amixtli",
+    "tokenId": "3033fe4d51767d196597df41d14ecdb4822b4c9e48be630035a76b7d301b502a",
+    "cid": "QmWjs54XnaaG2SRSoRk6Ro4S5nwSZgUvYbcdnxBpRgq3Tp",
+    "nombre": "Amixtli Ramírez",
+    "timestamp": 1779128383,
+    "blockHeight": 949660,
+    "hasParents": false,
+    "ipfsOk": true
+  },
+  {
+    "txid": "99c67c2e02f3ceba314c65cabd81c3c254b1ef6e110f82572e7ae8b438c65d37",
+    "slug": "the",
+    "tokenId": "99c67c2e02f3ceba314c65cabd81c3c254b1ef6e110f82572e7ae8b438c65d37",
+    "cid": "QmZ8PDfFGwnMqZ4prU9SZ5shJ5Q5UtJAKFoqCevhFonFG3",
+    "nombre": "The Xolos Ramírez Show: Humo Ramírez & Luciana Renner (Ep. 17-05-2026)",
+    "timestamp": 1779112623,
+    "blockHeight": 949632,
+    "hasParents": false,
+    "ipfsOk": true
+  },
+  {
+    "txid": "dc0acad913498f5fbbcea2e0dcfe1069b8a0c7faf84ee3eb6e63b19f1afc2979",
+    "slug": "chimalma",
+    "tokenId": "dc0acad913498f5fbbcea2e0dcfe1069b8a0c7faf84ee3eb6e63b19f1afc2979",
+    "cid": "Qmak5esCGzE9QW7xFSzQW8HPZJ1KpNqD85tVtGQsFFnpbs",
+    "nombre": "Chimalma Ramírez: El Xoloitzcuintle en los Códices Mexicas",
+    "timestamp": 1779050624,
+    "blockHeight": 949532,
+    "hasParents": false,
+    "ipfsOk": true
+  },
+  {
+    "txid": "7852e5b49afb68a7523e86f22dd5ef184468fbf68e99e411507c241f1b90a42f",
+    "slug": "piel",
+    "tokenId": "7852e5b49afb68a7523e86f22dd5ef184468fbf68e99e411507c241f1b90a42f",
+    "cid": "QmbrRvFxiAwgVPtHRG42VG1xzyMiyTRALNrZmbAwYEhiAK",
+    "nombre": "Piel de Cuero: Xoloitzcuintle Ultra Instinct",
+    "timestamp": 1779033960,
+    "blockHeight": 949503,
+    "hasParents": false,
+    "ipfsOk": true
+  },
+  {
+    "txid": "17c807b364516916efbcfe64eac15b212935cce9e96aa58596bfbacfdba0d7c4",
+    "slug": "evangelio",
+    "tokenId": "17c807b364516916efbcfe64eac15b212935cce9e96aa58596bfbacfdba0d7c4",
+    "cid": "QmSd8veFkA9EdYKUaAL4L4tHWdregyKWWaHPrW4hGUUkG8",
+    "nombre": "Evangelio RMZ del Xoloitzcuintle — Bloque Génesis",
+    "timestamp": 1778866733,
+    "blockHeight": 949223,
+    "hasParents": false,
+    "ipfsOk": true
+  },
+  {
+    "txid": "a0c51438388893afa192ce24d3632a157daf7f34166fd26058e5b0ccf1e2ff76",
+    "slug": "personalidad",
+    "tokenId": "a0c51438388893afa192ce24d3632a157daf7f34166fd26058e5b0ccf1e2ff76",
+    "cid": "QmYbju6Ne1855KBU9r3XuV2FanMUtcSYv3f5LbnvX8Pzvq",
+    "nombre": "Personalidad Xolo: Onix Ramírez",
+    "timestamp": 1778714783,
+    "blockHeight": 948978,
+    "hasParents": false,
+    "ipfsOk": true
+  },
+  {
     "txid": "c490864b0c4cd2cbe163a573e830c22d7e270207062903f9f2f0e08fca6a13f6",
     "slug": "chimalma",
     "tokenId": "c490864b0c4cd2cbe163a573e830c22d7e270207062903f9f2f0e08fca6a13f6",
@@ -62,72 +128,6 @@
     "nombre": "MITLA (RAMIREZ/RAMIREZ) MEX.FCI.",
     "timestamp": 1776639296,
     "blockHeight": 945530,
-    "hasParents": false,
-    "ipfsOk": true
-  },
-  {
-    "txid": "407bf5b92211cd2c77c6b8ca95d9cdc7e5d40f201b2348a0c886ed3f52c5f12e",
-    "slug": "tejocote",
-    "tokenId": "407bf5b92211cd2c77c6b8ca95d9cdc7e5d40f201b2348a0c886ed3f52c5f12e",
-    "cid": "QmU6J9FwWLWzeLhJRhVvDhGBuNqKNggXFRHevKK8VELMCG",
-    "nombre": "TEJOCOTE (RAMIREZ/RAMIREZ) MEX. FCI.",
-    "timestamp": 1776286081,
-    "blockHeight": 944953,
-    "hasParents": false,
-    "ipfsOk": true
-  },
-  {
-    "txid": "196f4f5cb3f0016dd62715d7e1768e465c8a1db8c65a1afc58861845265dcd9c",
-    "slug": "amoxtli",
-    "tokenId": "196f4f5cb3f0016dd62715d7e1768e465c8a1db8c65a1afc58861845265dcd9c",
-    "cid": "QmWyV9scQsKT68SWFjnu66GzDHnz3BZaQdBXYfZt5RTVQd",
-    "nombre": "AMOXTLI (RAMIREZ/RAMIREZ) MEX. FCI.",
-    "timestamp": 1775242713,
-    "blockHeight": 943236,
-    "hasParents": false,
-    "ipfsOk": true
-  },
-  {
-    "txid": "13a2fd97493e2c15ec1077465da11dd602e86fbf4e200b9c4bb72dab78c199ea",
-    "slug": "humo",
-    "tokenId": "13a2fd97493e2c15ec1077465da11dd602e86fbf4e200b9c4bb72dab78c199ea",
-    "cid": "QmYLesiz2CXGY1Cdg7M6Pm5oqzP14RvKYQNKBQ3Jkmch5a",
-    "nombre": "Humo Ramirez",
-    "timestamp": 1774634025,
-    "blockHeight": 942195,
-    "hasParents": false,
-    "ipfsOk": true
-  },
-  {
-    "txid": "1dc6943cc081e410646c1466653a1c6937815ce6a05253f0e541620e47bb3d7f",
-    "slug": "uxmal",
-    "tokenId": "1dc6943cc081e410646c1466653a1c6937815ce6a05253f0e541620e47bb3d7f",
-    "cid": "Qmau9MYxWmsL9wnDs8z2x1oaR68rNXRS14UWsstKHq3jgF",
-    "nombre": "Uxmal (Avila) Mex. FCI.",
-    "timestamp": 1774293474,
-    "blockHeight": 941637,
-    "hasParents": false,
-    "ipfsOk": true
-  },
-  {
-    "txid": "fb0f49f9b6c5b701c637afbe6c10088fe11b4689bdf7a3800e62ba1a192499ab",
-    "slug": "chontal",
-    "tokenId": "fb0f49f9b6c5b701c637afbe6c10088fe11b4689bdf7a3800e62ba1a192499ab",
-    "cid": "QmbJWuXdomrEELs59XhHKrZuPufwdLJLV6V6dr75oGWQkK",
-    "nombre": "CHONTAL (RAMIREZ/RAMIREZ) MEX. FCI.",
-    "timestamp": 1774292417,
-    "blockHeight": 941635,
-    "hasParents": false,
-    "ipfsOk": true
-  },
-  {
-    "txid": "731213c084ab76901592478583331a24cc9591d0aac079ec26afb2be65778505",
-    "slug": "bolero",
-    "tokenId": "731213c084ab76901592478583331a24cc9591d0aac079ec26afb2be65778505",
-    "cid": "Qmc6DmfzdtAEnHeZ9ZBY5r4XKz6V4kbhYQ6iHWC7tajipQ",
-    "nombre": "BOLERO (RAMIREZ/RAMIREZ) MEX. FCI.",
-    "timestamp": 1774288492,
-    "blockHeight": 941627,
     "hasParents": false,
     "ipfsOk": true
   }
