@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teposxolotlcalli: El Xoloitzcuintle, el Náhuatl y el Códice Vivo de xolosArmy Network</title>
+
+  <style>
+    :root {
+      --bg: #070707;
+      --bg-soft: #111111;
+      --gold: #d6a84f;
+      --gold-soft: #f2d48a;
+      --red: #8f1d14;
+      --text: #f4efe5;
+      --muted: #b8aa94;
+      --line: rgba(214, 168, 79, 0.28);
+      --card: rgba(255, 255, 255, 0.045);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top, rgba(143, 29, 20, 0.28), transparent 38%),
+        radial-gradient(circle at bottom, rgba(214, 168, 79, 0.18), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.75;
+    }
+
+    .article-wrapper {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 56px 22px 80px;
+    }
+
+    .hero {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 46px 32px;
+      background:
+        linear-gradient(135deg, rgba(214, 168, 79, 0.12), rgba(143, 29, 20, 0.12)),
+        rgba(0, 0, 0, 0.48);
+      box-shadow: 0 0 45px rgba(214, 168, 79, 0.08);
+      text-align: center;
+      margin-bottom: 42px;
+    }
+
+    .eyebrow {
+      color: var(--gold-soft);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      margin-bottom: 18px;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 6vw, 4.4rem);
+      line-height: 1.05;
+      margin: 0 0 22px;
+      color: var(--gold);
+      text-shadow: 0 0 18px rgba(214, 168, 79, 0.18);
+    }
+
+    .subtitle {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .nahua-term {
+      color: var(--gold-soft);
+      font-weight: bold;
+      letter-spacing: 0.03em;
+    }
+
+    .content {
+      background: rgba(0, 0, 0, 0.38);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 34px;
+    }
+
+    h2 {
+      color: var(--gold);
+      font-size: 1.85rem;
+      line-height: 1.22;
+      margin-top: 44px;
+      margin-bottom: 18px;
+      border-left: 4px solid var(--red);
+      padding-left: 16px;
+    }
+
+    h2:first-child {
+      margin-top: 0;
+    }
+
+    p {
+      font-size: 1.08rem;
+      margin: 0 0 22px;
+    }
+
+    strong {
+      color: var(--gold-soft);
+    }
+
+    .quote {
+      margin: 34px 0;
+      padding: 26px;
+      border-left: 4px solid var(--gold);
+      background: var(--card);
+      border-radius: 18px;
+      color: var(--gold-soft);
+      font-size: 1.24rem;
+      line-height: 1.55;
+    }
+
+    .concept-box {
+      margin: 36px 0;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(214, 168, 79, 0.10), rgba(143, 29, 20, 0.16)),
+        var(--bg-soft);
+    }
+
+    .concept-box h3 {
+      margin-top: 0;
+      color: var(--gold-soft);
+      font-size: 1.55rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin: 30px 0;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px;
+      background: var(--card);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: var(--gold-soft);
+      font-size: 1.25rem;
+    }
+
+    .card p {
+      font-size: 1rem;
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .mantra {
+      margin: 42px 0 10px;
+      padding: 32px;
+      border-radius: 24px;
+      text-align: center;
+      background:
+        linear-gradient(135deg, rgba(143, 29, 20, 0.42), rgba(214, 168, 79, 0.18));
+      border: 1px solid var(--line);
+      font-size: 1.35rem;
+      color: var(--gold-soft);
+      font-weight: bold;
+    }
+
+    .footer-note {
+      margin-top: 34px;
+      color: var(--muted);
+      font-size: 0.96rem;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+
+    @media (max-width: 720px) {
+      .hero,
+      .content {
+        padding: 28px 20px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      p {
+        font-size: 1.02rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="article-wrapper">
+
+    <section class="hero">
+      <div class="eyebrow">xolosArmy Network · Evangelio tecnológico-cultural</div>
+      <h1>Teposxolotlcalli</h1>
+      <p class="subtitle">
+        El hogar del xolo de metal: una casa simbólica donde el náhuatl, los códices,
+        el xoloitzcuintle y la blockchain se encuentran para formar un nuevo códice vivo.
+      </p>
+    </section>
+
+    <article class="content">
+
+      <h2>1. El náhuatl no solo nombra: eleva el mundo</h2>
+
+      <p>
+        El náhuatl, o <span class="nahua-term">mexicano</span>, como muchos hablantes lo han llamado históricamente,
+        no es únicamente una lengua antigua ni una herramienta gramatical. Es una forma de ordenar la realidad,
+        de honrar aquello que se nombra y de envolver al mundo en metáfora, respeto y memoria.
+      </p>
+
+      <p>
+        En esta lengua, la palabra no funciona solamente como etiqueta. La palabra puede ser ofrenda,
+        puente, reverencia y visión. Por eso, una cosa común puede elevarse mediante una imagen poética.
+        Al alcohol o aguardiente se le puede llamar <span class="nahua-term">xochiatl</span>,
+        “agua de flores”. La expresión no se limita a describir una bebida; la transforma en símbolo.
+      </p>
+
+      <div class="quote">
+        En el pensamiento nahua, nombrar no es reducir. Nombrar es revelar una dimensión más profunda de las cosas.
+      </div>
+
+      <p>
+        Esta capacidad de elevar el lenguaje nos ayuda a comprender mejor al xoloitzcuintle.
+        Llamarlo simplemente “perro mexicano sin pelo” sería empobrecerlo. El
+        <span class="nahua-term">xoloitzcuintli</span> carga en su nombre una memoria civilizatoria:
+        mito, muerte, compañía, calor, linaje, viaje y protección espiritual.
+      </p>
+
+      <h2>2. El respeto vive dentro de la palabra</h2>
+
+      <p>
+        Una de las formas más profundas de respeto en náhuatl aparece en sufijos como
+        <span class="nahua-term">-tzin</span>. Este sufijo puede expresar reverencia, aprecio,
+        ternura, dignidad o estima. No es simplemente un diminutivo. Es una señal de que aquello
+        que se nombra merece cuidado.
+      </p>
+
+      <p>
+        Así, el respeto no queda fuera de la lengua como una intención invisible. Entra dentro de la palabra.
+        La modifica desde adentro. La vuelve más delicada, más ceremonial, más humana.
+      </p>
+
+      <p>
+        Para xolosArmy Network, esta enseñanza es central: si el lenguaje puede honrar,
+        entonces la cultura digital también puede hacerlo. No todo contenido debe ser ruido.
+        No toda tecnología debe ser fría. No todo token debe ser mercancía. También puede existir
+        una tecnología reverencial, una economía simbólica y una comunidad que nombre con respeto.
+      </p>
+
+      <h2>3. Mitogramas: imágenes que cuentan el mito</h2>
+
+      <p>
+        En la tradición mesoamericana, las imágenes no eran simples ilustraciones. Los
+        <strong>mitogramas</strong> eran representaciones gráficas en esculturas, códices,
+        vasijas o relieves que narraban episodios míticos. Una escena podía contener una historia completa:
+        el origen de un pueblo, el tránsito de un alma, la aparición de una deidad o la fundación de una comunidad.
+      </p>
+
+      <p>
+        El mitograma no se mira como decoración. Se lee como memoria. Cada figura, postura,
+        animal, río, flor, cueva, montaña o camino puede estar cargado de significado.
+      </p>
+
+      <p>
+        Por eso, cuando el xoloitzcuintle aparece junto al camino, al muerto, al río o al inframundo,
+        no estamos frente a una imagen cualquiera. Estamos frente a una historia sagrada condensada.
+        El xolo se convierte en figura narrativa: guía, testigo y acompañante del alma.
+      </p>
+
+      <div class="quote">
+        El xoloitzcuintle no solo aparece como animal: aparece como mitograma viviente.
+      </div>
+
+      <h2>4. Papel recortado: materia que habla con los dioses</h2>
+
+      <p>
+        En los contextos ceremoniales nahuas, el papel recortado funcionaba como un elemento ritual vivo.
+        No era adorno. Era presencia simbólica. Las figuras podían representar deidades celestes,
+        terrestres o del inframundo, y se utilizaban en ceremonias como las peticiones de lluvia.
+      </p>
+
+      <p>
+        El papel, el caracol, la flor, el agua, el viento y la figura divina formaban parte de una
+        gramática ritual. La materia hablaba. La forma comunicaba. El objeto invocaba.
+      </p>
+
+      <p>
+        Esta visión permite entender que, para el mundo nahua, la naturaleza no era muda.
+        Todo podía convertirse en signo: el corte del papel, el sonido del caracol, el color de la ofrenda,
+        la dirección del rito, el agua pedida al cielo y el cuerpo del animal sagrado.
+      </p>
+
+      <p>
+        En esa misma gramática simbólica vive el xoloitzcuintle. Su piel, su calor, su silencio,
+        su mirada y su antigua relación con la muerte lo convierten en un puente entre mundos.
+      </p>
+
+      <h2>5. Los códices como contabilidad, memoria y tecnología</h2>
+
+      <p>
+        Los códices mesoamericanos no fueron únicamente obras de arte. También fueron sistemas de archivo,
+        registro económico y administración. En documentos tributarios, las mantas podían representar
+        unidades estandarizadas de pago. Los glifos indicaban material, cantidad, frecuencia,
+        procedencia y obligación.
+      </p>
+
+      <p>
+        Incluso los números podían aparecer como imágenes. Una bandera podía representar veinte unidades,
+        integrada dentro de un sistema contable visual. De esta manera, la imagen funcionaba como escritura,
+        contrato, inventario y memoria económica.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Mitograma</h3>
+          <p>Imagen que narra un mito y conserva memoria sagrada.</p>
+        </div>
+
+        <div class="card">
+          <h3>Glifo contable</h3>
+          <p>Imagen que registra valor, cantidad, tributo y obligación.</p>
+        </div>
+
+        <div class="card">
+          <h3>Objeto ritual</h3>
+          <p>Materia que invoca una fuerza natural o divina.</p>
+        </div>
+
+        <div class="card">
+          <h3>Blockchain cultural</h3>
+          <p>Registro digital de pertenencia, linaje, comunidad y valor.</p>
+        </div>
+      </div>
+
+      <p>
+        Esta continuidad es fundamental para xolosArmy Network. Cuando hablamos de blockchain,
+        NFTs de linaje, RMZ, Teyolía o comunidad digital, no estamos copiando una idea ajena
+        sin raíz. Estamos reinterpretando una tradición profunda: la de registrar valor,
+        pertenencia y memoria mediante signos.
+      </p>
+
+      <p>
+        El códice fue una tecnología visual. La blockchain puede ser un códice digital.
+        Y el xoloitzcuintle puede ser el símbolo vivo que une ambos mundos.
+      </p>
+
+      <h2>6. Chicomoztoc: las siete cuevas y el origen de los pueblos</h2>
+
+      <p>
+        Chicomoztoc, el lugar de las siete cuevas, representa uno de los mitos de origen más poderosos
+        de Mesoamérica. En los documentos antiguos, distintas tribus salen de estas cuevas para iniciar
+        su peregrinación y poblar regiones que darían forma a comunidades, linajes y territorios.
+      </p>
+
+      <p>
+        La cueva no es solo un hueco en la tierra. Es matriz, vientre, memoria y portal.
+        Chicomoztoc representa el nacimiento colectivo: los pueblos emergen desde la profundidad
+        para caminar hacia su destino.
+      </p>
+
+      <p>
+        Esta imagen puede dialogar con otros relatos fundacionales del mundo, como las narrativas
+        de salida, peregrinación y formación del pueblo en la tradición judía. En ambos casos,
+        el origen no es solamente un lugar: es una historia que organiza identidad.
+      </p>
+
+      <p>
+        Para xolosArmy Network, Chicomoztoc puede entenderse como una metáfora del nacimiento
+        de una comunidad cultural digital. De las cuevas antiguas salían pueblos. De los nuevos
+        espacios digitales pueden salir comunidades con memoria, propósito y linaje.
+      </p>
+
+      <h2>7. Teposxolotlcalli: la casa del xolo de metal</h2>
+
+      <div class="concept-box">
+        <h3>Teposxolotlcalli</h3>
+        <p>
+          <span class="nahua-term">Tepos</span> puede asociarse simbólicamente con lo metálico,
+          lo tecnológico, lo construido por la mano humana. 
+          <span class="nahua-term">Xolotl</span> evoca al xolo, al acompañante mítico,
+          al doble, al guía y al ser liminal.
+          <span class="nahua-term">Calli</span> significa casa.
+        </p>
+
+        <p>
+          Así, <strong>Teposxolotlcalli</strong> puede entenderse poéticamente como
+          <strong>“la casa del xolo de metal”</strong>: un espacio donde el xoloitzcuintle ancestral
+          entra en contacto con la infraestructura tecnológica contemporánea.
+        </p>
+      </div>
+
+      <p>
+        Teposxolotlcalli no debe entenderse solo como un edificio físico ni como una página web.
+        Es una imagen fundacional para xolosArmy Network: la casa simbólica donde el xoloitzcuintle,
+        el náhuatl, los códices, la blockchain, los NFTs de linaje, RMZ y la cultura mexicana
+        se reúnen en una nueva arquitectura espiritual-tecnológica.
+      </p>
+
+      <p>
+        En el mundo antiguo, el papel recortado daba cuerpo ritual a las deidades. El códice
+        registraba tributo y memoria. El mitograma narraba episodios sagrados. La palabra náhuatl
+        elevaba la realidad mediante metáforas y reverencia.
+      </p>
+
+      <p>
+        En el mundo contemporáneo, Teposxolotlcalli puede ser el espacio donde todas esas funciones
+        renacen en forma digital: imágenes, tokens, archivos, comunidad, membresía, linajes,
+        manifiestos, cantos, cómics, memes y registros en cadena.
+      </p>
+
+      <div class="quote">
+        Teposxolotlcalli es la casa donde el xolo ancestral entra al códice digital.
+      </div>
+
+      <h2>8. El xoloitzcuintle como centro del códice vivo</h2>
+
+      <p>
+        El xoloitzcuintle no es un accesorio dentro de esta visión. Es el centro simbólico.
+        Es el animal que permite unir lo corporal con lo espiritual, lo antiguo con lo moderno,
+        lo doméstico con lo mítico, lo mexicano con lo universal.
+      </p>
+
+      <p>
+        Su cuerpo guarda una paradoja poderosa: es familiar y sagrado al mismo tiempo.
+        Puede dormir junto a una familia moderna, pero también remitir al Mictlán.
+        Puede caminar en una casa, pero también evocar el camino del alma.
+        Puede ser compañero de vida, pero también símbolo de tránsito entre mundos.
+      </p>
+
+      <p>
+        Por eso, xolosArmy Network no debe presentarse únicamente como un proyecto cripto.
+        Su raíz es más profunda. Es una comunidad que toma al xoloitzcuintle como emblema
+        de continuidad cultural, memoria viva y soberanía simbólica.
+      </p>
+
+      <h2>9. RMZ, Teyolía y el nuevo registro cultural</h2>
+
+      <p>
+        En esta arquitectura, RMZ puede entenderse como una llave cultural. No solo representa
+        una unidad técnica dentro de una red. Representa pertenencia, acceso, identidad y participación.
+      </p>
+
+      <p>
+        Teyolía, por su parte, puede ser comprendida como una energía comunitaria: el corazón
+        colectivo que permite financiar, sostener y expandir proyectos culturales y tecnológicos
+        desde una lógica soberana.
+      </p>
+
+      <p>
+        Si los códices antiguos registraban tributo, territorios, cantidades y linajes,
+        los nuevos registros digitales pueden documentar membresía, apoyo, comunidad,
+        acceso, genealogía simbólica y creación cultural.
+      </p>
+
+      <p>
+        Así, la blockchain deja de ser únicamente una base de datos financiera.
+        Se convierte en un códice vivo: un archivo de memoria, valor y pertenencia.
+      </p>
+
+      <h2>10. Conclusión: del códice al Network State</h2>
+
+      <p>
+        El náhuatl nos enseña que el lenguaje puede honrar.
+        Los mitogramas nos enseñan que la imagen puede narrar lo sagrado.
+        El papel recortado nos enseña que la materia puede comunicarse con las fuerzas del cosmos.
+        Los códices tributarios nos enseñan que el valor puede registrarse mediante signos.
+        Chicomoztoc nos enseña que todo pueblo necesita un mito de origen.
+      </p>
+
+      <p>
+        xolosArmy Network toma todas esas intuiciones y las proyecta hacia el presente.
+        No para imitar el pasado de forma superficial, sino para continuar su potencia simbólica
+        en una nueva realidad tecnológica.
+      </p>
+
+      <p>
+        Teposxolotlcalli es esa casa. La casa del xolo de metal. La casa donde el xoloitzcuintle
+        ancestral se vuelve guía digital. La casa donde la cultura mexicana se registra,
+        se honra y se expande.
+      </p>
+
+      <div class="mantra">
+        XEC es el dinero. RMZ es la llave. Teyolía es el corazón.  
+        El xoloitzcuintle es el guardián.  
+        La cultura es el ecosistema.
+      </div>
+
+      <p class="footer-note">
+        xolosArmy Network · Códice digital, cultura viva y soberanía simbólica mexicana.
+      </p>
+
+    </article>
+  </main>
+</body>
+</html>
