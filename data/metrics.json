@@ -1,12 +1,12 @@
 {
-  "linajes_registrados": 95,
-  "linajes_validados_ipfs": 95,
+  "linajes_registrados": 100,
+  "linajes_validados_ipfs": 61,
   "registros_con_padre_y_madre": 0,
-  "txs_xolo_detectadas": 95,
-  "ipfs_disponibles": 95,
-  "ipfs_fallidos": 0,
-  "nfts_con_slug_resuelto": 95,
-  "ult_registro_txid": "3033fe4d51767d196597df41d14ecdb4822b4c9e48be630035a76b7d301b502a",
-  "ult_registro_slug": "amixtli",
-  "ultima_actualizacion": "2026-05-21T14:54:06.038Z"
+  "txs_xolo_detectadas": 100,
+  "ipfs_disponibles": 61,
+  "ipfs_fallidos": 39,
+  "nfts_con_slug_resuelto": 100,
+  "ult_registro_txid": "8fe5d64e78b9acc8c622b29a41c8d575f4e728cd70a3166749ae486ee8913959",
+  "ult_registro_slug": "jornada",
+  "ultima_actualizacion": "2026-06-05T22:33:41.921Z"
 }
