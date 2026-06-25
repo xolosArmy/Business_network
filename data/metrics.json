@@ -1,12 +1,12 @@
 {
-  "linajes_registrados": 100,
-  "linajes_validados_ipfs": 61,
+  "linajes_registrados": 105,
+  "linajes_validados_ipfs": 43,
   "registros_con_padre_y_madre": 0,
-  "txs_xolo_detectadas": 100,
-  "ipfs_disponibles": 61,
-  "ipfs_fallidos": 39,
-  "nfts_con_slug_resuelto": 100,
-  "ult_registro_txid": "8fe5d64e78b9acc8c622b29a41c8d575f4e728cd70a3166749ae486ee8913959",
-  "ult_registro_slug": "jornada",
-  "ultima_actualizacion": "2026-06-05T22:33:41.921Z"
+  "txs_xolo_detectadas": 105,
+  "ipfs_disponibles": 43,
+  "ipfs_fallidos": 62,
+  "nfts_con_slug_resuelto": 105,
+  "ult_registro_txid": "0b0a16a49d2a1d045cfba864ef00f207eea5b6d31caff4be845b311df3256296",
+  "ult_registro_slug": "certificado",
+  "ultima_actualizacion": "2026-06-25T12:41:59.876Z"
 }

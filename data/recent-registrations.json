@@ -1,14 +1,69 @@
 [
   {
+    "txid": "0b0a16a49d2a1d045cfba864ef00f207eea5b6d31caff4be845b311df3256296",
+    "slug": "certificado",
+    "tokenId": "0b0a16a49d2a1d045cfba864ef00f207eea5b6d31caff4be845b311df3256296",
+    "cid": "QmX21ywpfoiDXJgDbrpKSQmkhxJirGStsofjWysdmbZCZa",
+    "nombre": null,
+    "timestamp": 1782175684,
+    "blockHeight": 954661,
+    "hasParents": false,
+    "ipfsOk": false
+  },
+  {
+    "txid": "2ab5d1890eec894ed87b00f02721ce57dc36f681e96f9125a84a7e3936e25c4e",
+    "slug": "ehecatl",
+    "tokenId": "2ab5d1890eec894ed87b00f02721ce57dc36f681e96f9125a84a7e3936e25c4e",
+    "cid": "QmZwdQJcoEEYTDFz1bk7o9YU4UWtPYwskhr3CmQqpBgzLD",
+    "nombre": null,
+    "timestamp": 1781116341,
+    "blockHeight": 952942,
+    "hasParents": false,
+    "ipfsOk": false
+  },
+  {
+    "txid": "6c5430f6e99b5945bb74723f20f61173efb1f9a5c256f5921b77fa070bcb245e",
+    "slug": "espadn",
+    "tokenId": "6c5430f6e99b5945bb74723f20f61173efb1f9a5c256f5921b77fa070bcb245e",
+    "cid": "QmQWhqKwxs6Hh2XLB5hgdoLQMgGePK1pQYhzZuDGXp2UD5",
+    "nombre": null,
+    "timestamp": 1781114593,
+    "blockHeight": 952938,
+    "hasParents": false,
+    "ipfsOk": false
+  },
+  {
+    "txid": "26fb361599ec6ce20b9259f6ec59433bbed50a83dedef706bcef7a5323fe1694",
+    "slug": "puka",
+    "tokenId": "26fb361599ec6ce20b9259f6ec59433bbed50a83dedef706bcef7a5323fe1694",
+    "cid": "QmdfRRqjtpveHGiFsiaMKJ58G1eS8TdYoCziiCENzzdfht",
+    "nombre": null,
+    "timestamp": 1781034116,
+    "blockHeight": 952821,
+    "hasParents": false,
+    "ipfsOk": false
+  },
+  {
+    "txid": "c4f6498bfb0450bf3d2820a9008e4cb206f59b0b5fcd05914f51c23af2da0f05",
+    "slug": "asamblea",
+    "tokenId": "c4f6498bfb0450bf3d2820a9008e4cb206f59b0b5fcd05914f51c23af2da0f05",
+    "cid": "QmeJNUchDKoSNgFafc11BWmE5myzCin9BtYQ2e1wEahxXg",
+    "nombre": "Asamblea RMZ: Identidad Soberana y Ciudadanía Activa",
+    "timestamp": 1780854328,
+    "blockHeight": 952540,
+    "hasParents": false,
+    "ipfsOk": true
+  },
+  {
     "txid": "8fe5d64e78b9acc8c622b29a41c8d575f4e728cd70a3166749ae486ee8913959",
     "slug": "jornada",
     "tokenId": "8fe5d64e78b9acc8c622b29a41c8d575f4e728cd70a3166749ae486ee8913959",
     "cid": "QmbezEYyhYZUAfV4i9XCyoYk2EnJm6NMNpzxar3GJdFhdZ",
-    "nombre": "Jornada de Primera Vacunación - Xolos Ramírez",
+    "nombre": null,
     "timestamp": 1780692392,
     "blockHeight": 952282,
     "hasParents": false,
-    "ipfsOk": true
+    "ipfsOk": false
   },
   {
     "txid": "a75171224ffe78256bab830762566cc97e95d0d2fabfae2618d41fb1e39d83e8",
@@ -26,22 +81,22 @@
     "slug": "personalidad",
     "tokenId": "f8fbc56343766a57f39a6e9a7d5f72606fb557afe8495d118dea394bc039f0cb",
     "cid": "QmZPAwX3kkDvop5uz91ci9m1Ajx2KvxNazcfwwmuWedgR6",
-    "nombre": null,
+    "nombre": "Personalidad Xolo: Tonatiuh Ramírez (Edición Teyolía)",
     "timestamp": 1780493921,
     "blockHeight": 951972,
     "hasParents": false,
-    "ipfsOk": false
+    "ipfsOk": true
   },
   {
     "txid": "d7fa0e23f61589795eb2dd1f286c1278f87cfbede005b9543aed83183c4f230b",
     "slug": "mitograma",
     "tokenId": "d7fa0e23f61589795eb2dd1f286c1278f87cfbede005b9543aed83183c4f230b",
     "cid": "Qma27z3Zr4jdJiPSi8vfTTdqM6y8jeKfEnscADT4nPVHiP",
-    "nombre": null,
+    "nombre": "Mitograma Teposxolotlcalli #001",
     "timestamp": 1780409740,
     "blockHeight": 951825,
     "hasParents": false,
-    "ipfsOk": false
+    "ipfsOk": true
   },
   {
     "txid": "bafd926497cc424276299297cc14697dda91a0029cbc2124d2ad5f3b4faeea0c",
@@ -73,61 +128,6 @@
     "nombre": null,
     "timestamp": 1779112623,
     "blockHeight": 949632,
-    "hasParents": false,
-    "ipfsOk": false
-  },
-  {
-    "txid": "dc0acad913498f5fbbcea2e0dcfe1069b8a0c7faf84ee3eb6e63b19f1afc2979",
-    "slug": "chimalma",
-    "tokenId": "dc0acad913498f5fbbcea2e0dcfe1069b8a0c7faf84ee3eb6e63b19f1afc2979",
-    "cid": "Qmak5esCGzE9QW7xFSzQW8HPZJ1KpNqD85tVtGQsFFnpbs",
-    "nombre": null,
-    "timestamp": 1779050624,
-    "blockHeight": 949532,
-    "hasParents": false,
-    "ipfsOk": false
-  },
-  {
-    "txid": "7852e5b49afb68a7523e86f22dd5ef184468fbf68e99e411507c241f1b90a42f",
-    "slug": "piel",
-    "tokenId": "7852e5b49afb68a7523e86f22dd5ef184468fbf68e99e411507c241f1b90a42f",
-    "cid": "QmbrRvFxiAwgVPtHRG42VG1xzyMiyTRALNrZmbAwYEhiAK",
-    "nombre": "Piel de Cuero: Xoloitzcuintle Ultra Instinct",
-    "timestamp": 1779033960,
-    "blockHeight": 949503,
-    "hasParents": false,
-    "ipfsOk": true
-  },
-  {
-    "txid": "17c807b364516916efbcfe64eac15b212935cce9e96aa58596bfbacfdba0d7c4",
-    "slug": "evangelio",
-    "tokenId": "17c807b364516916efbcfe64eac15b212935cce9e96aa58596bfbacfdba0d7c4",
-    "cid": "QmSd8veFkA9EdYKUaAL4L4tHWdregyKWWaHPrW4hGUUkG8",
-    "nombre": null,
-    "timestamp": 1778866733,
-    "blockHeight": 949223,
-    "hasParents": false,
-    "ipfsOk": false
-  },
-  {
-    "txid": "a0c51438388893afa192ce24d3632a157daf7f34166fd26058e5b0ccf1e2ff76",
-    "slug": "personalidad",
-    "tokenId": "a0c51438388893afa192ce24d3632a157daf7f34166fd26058e5b0ccf1e2ff76",
-    "cid": "QmYbju6Ne1855KBU9r3XuV2FanMUtcSYv3f5LbnvX8Pzvq",
-    "nombre": null,
-    "timestamp": 1778714783,
-    "blockHeight": 948978,
-    "hasParents": false,
-    "ipfsOk": false
-  },
-  {
-    "txid": "c490864b0c4cd2cbe163a573e830c22d7e270207062903f9f2f0e08fca6a13f6",
-    "slug": "chimalma",
-    "tokenId": "c490864b0c4cd2cbe163a573e830c22d7e270207062903f9f2f0e08fca6a13f6",
-    "cid": "QmQgzwkmWEue7iEB2qFXGywVCYY7dUngah6RitYs2aFb22",
-    "nombre": null,
-    "timestamp": 1777477267,
-    "blockHeight": 946915,
     "hasParents": false,
     "ipfsOk": false
   }
