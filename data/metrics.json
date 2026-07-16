@@ -1,12 +1,12 @@
 {
-  "linajes_registrados": 105,
-  "linajes_validados_ipfs": 43,
+  "linajes_registrados": 111,
+  "linajes_validados_ipfs": 62,
   "registros_con_padre_y_madre": 0,
-  "txs_xolo_detectadas": 105,
-  "ipfs_disponibles": 43,
-  "ipfs_fallidos": 62,
-  "nfts_con_slug_resuelto": 105,
-  "ult_registro_txid": "0b0a16a49d2a1d045cfba864ef00f207eea5b6d31caff4be845b311df3256296",
-  "ult_registro_slug": "certificado",
-  "ultima_actualizacion": "2026-06-25T12:41:59.876Z"
+  "txs_xolo_detectadas": 111,
+  "ipfs_disponibles": 62,
+  "ipfs_fallidos": 49,
+  "nfts_con_slug_resuelto": 111,
+  "ult_registro_txid": "a9227d0b8be2ad7c1d1367bbd5262c363b1b4094639aa7f0fdc77feef0241305",
+  "ult_registro_slug": "onix",
+  "ultima_actualizacion": "2026-07-16T13:50:46.999Z"
 }

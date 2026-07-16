@@ -1,5 +1,71 @@
 [
   {
+    "txid": "a9227d0b8be2ad7c1d1367bbd5262c363b1b4094639aa7f0fdc77feef0241305",
+    "slug": "onix",
+    "tokenId": "a9227d0b8be2ad7c1d1367bbd5262c363b1b4094639aa7f0fdc77feef0241305",
+    "cid": "QmcHfqczcX5LGxaGeTuSL9er2RNZoKQAXywbHVc4w3qDDp",
+    "nombre": null,
+    "timestamp": 1784147907,
+    "blockHeight": 958042,
+    "hasParents": false,
+    "ipfsOk": false
+  },
+  {
+    "txid": "f8fa54ed31c44fc3fd83bbb6bcbe540d95aacdbc13bf0c840e73519ee5da4213",
+    "slug": "luna",
+    "tokenId": "f8fa54ed31c44fc3fd83bbb6bcbe540d95aacdbc13bf0c840e73519ee5da4213",
+    "cid": "QmYPr6ZDxEpxF4NwJmeMwbPGZsgpd2m898JzV3gtechLEV",
+    "nombre": null,
+    "timestamp": 1784145327,
+    "blockHeight": 958035,
+    "hasParents": false,
+    "ipfsOk": false
+  },
+  {
+    "txid": "775c15b3b20009b19fafa069c977cb15d05acc7924c1c9184be6a2b3ee5066f3",
+    "slug": "luna",
+    "tokenId": "775c15b3b20009b19fafa069c977cb15d05acc7924c1c9184be6a2b3ee5066f3",
+    "cid": "QmNb5Q4R2oWg6SZPQsr5VjfsLWzwvawYq7JsZg9SBdorvL",
+    "nombre": null,
+    "timestamp": 1783798629,
+    "blockHeight": 957404,
+    "hasParents": false,
+    "ipfsOk": false
+  },
+  {
+    "txid": "218006a83344dd21c849fe852f375ff2673f3184c1018b725889fe7413a0981e",
+    "slug": "la",
+    "tokenId": "218006a83344dd21c849fe852f375ff2673f3184c1018b725889fe7413a0981e",
+    "cid": "QmaCHKRfB8ZFwwKb7ygp5HASqTiSVnHGH5DmAhWdKGPLec",
+    "nombre": null,
+    "timestamp": 1783212658,
+    "blockHeight": 956451,
+    "hasParents": false,
+    "ipfsOk": false
+  },
+  {
+    "txid": "c3b14df7f7a31314cabc60db4093707c6ef168a5727f6b4d2ca935d1b25f9f31",
+    "slug": "certificado",
+    "tokenId": "c3b14df7f7a31314cabc60db4093707c6ef168a5727f6b4d2ca935d1b25f9f31",
+    "cid": "QmaCE4QeJnfsxDZSjGhur2JMxAAkj4KxZEAZ2kCvdCrugK",
+    "nombre": "Certificado de Registro, Vacunación y Desparasitación – Mixa Ramírez",
+    "timestamp": 1783183110,
+    "blockHeight": 956404,
+    "hasParents": false,
+    "ipfsOk": true
+  },
+  {
+    "txid": "e498efa3118069e3a0d0243c98af94b4beb3a0e819dc7690438aad7617d85a06",
+    "slug": "registro",
+    "tokenId": "e498efa3118069e3a0d0243c98af94b4beb3a0e819dc7690438aad7617d85a06",
+    "cid": "QmfG8t9WoLungidXjCY6q2S66SipvzuwQsuKnpGf4Wk2bb",
+    "nombre": "Registro Oficial FCM: Chimalma, Mixa, Luna y Teyolia 🐕🇲🇽",
+    "timestamp": 1783129747,
+    "blockHeight": 956314,
+    "hasParents": false,
+    "ipfsOk": true
+  },
+  {
     "txid": "0b0a16a49d2a1d045cfba864ef00f207eea5b6d31caff4be845b311df3256296",
     "slug": "certificado",
     "tokenId": "0b0a16a49d2a1d045cfba864ef00f207eea5b6d31caff4be845b311df3256296",
@@ -15,120 +81,54 @@
     "slug": "ehecatl",
     "tokenId": "2ab5d1890eec894ed87b00f02721ce57dc36f681e96f9125a84a7e3936e25c4e",
     "cid": "QmZwdQJcoEEYTDFz1bk7o9YU4UWtPYwskhr3CmQqpBgzLD",
-    "nombre": null,
+    "nombre": "Ehecatl Ramírez",
     "timestamp": 1781116341,
     "blockHeight": 952942,
     "hasParents": false,
-    "ipfsOk": false
+    "ipfsOk": true
   },
   {
     "txid": "6c5430f6e99b5945bb74723f20f61173efb1f9a5c256f5921b77fa070bcb245e",
     "slug": "espadn",
     "tokenId": "6c5430f6e99b5945bb74723f20f61173efb1f9a5c256f5921b77fa070bcb245e",
     "cid": "QmQWhqKwxs6Hh2XLB5hgdoLQMgGePK1pQYhzZuDGXp2UD5",
-    "nombre": null,
+    "nombre": "Espadín Ramírez · Microchip ISO 900255002683025",
     "timestamp": 1781114593,
     "blockHeight": 952938,
     "hasParents": false,
-    "ipfsOk": false
+    "ipfsOk": true
   },
   {
     "txid": "26fb361599ec6ce20b9259f6ec59433bbed50a83dedef706bcef7a5323fe1694",
     "slug": "puka",
     "tokenId": "26fb361599ec6ce20b9259f6ec59433bbed50a83dedef706bcef7a5323fe1694",
     "cid": "QmdfRRqjtpveHGiFsiaMKJ58G1eS8TdYoCziiCENzzdfht",
-    "nombre": null,
+    "nombre": "Puka Ramírez — Registro de Linaje y Microchip",
     "timestamp": 1781034116,
     "blockHeight": 952821,
     "hasParents": false,
-    "ipfsOk": false
+    "ipfsOk": true
   },
   {
     "txid": "c4f6498bfb0450bf3d2820a9008e4cb206f59b0b5fcd05914f51c23af2da0f05",
     "slug": "asamblea",
     "tokenId": "c4f6498bfb0450bf3d2820a9008e4cb206f59b0b5fcd05914f51c23af2da0f05",
     "cid": "QmeJNUchDKoSNgFafc11BWmE5myzCin9BtYQ2e1wEahxXg",
-    "nombre": "Asamblea RMZ: Identidad Soberana y Ciudadanía Activa",
+    "nombre": null,
     "timestamp": 1780854328,
     "blockHeight": 952540,
     "hasParents": false,
-    "ipfsOk": true
+    "ipfsOk": false
   },
   {
     "txid": "8fe5d64e78b9acc8c622b29a41c8d575f4e728cd70a3166749ae486ee8913959",
     "slug": "jornada",
     "tokenId": "8fe5d64e78b9acc8c622b29a41c8d575f4e728cd70a3166749ae486ee8913959",
     "cid": "QmbezEYyhYZUAfV4i9XCyoYk2EnJm6NMNpzxar3GJdFhdZ",
-    "nombre": null,
+    "nombre": "Jornada de Primera Vacunación - Xolos Ramírez",
     "timestamp": 1780692392,
     "blockHeight": 952282,
     "hasParents": false,
-    "ipfsOk": false
-  },
-  {
-    "txid": "a75171224ffe78256bab830762566cc97e95d0d2fabfae2618d41fb1e39d83e8",
-    "slug": "xolosarmyxec",
-    "tokenId": "a75171224ffe78256bab830762566cc97e95d0d2fabfae2618d41fb1e39d83e8",
-    "cid": "QmXq8BHDA5SdTjuFCjuk3Rdw6mdRejoVj33rTR5JjxAxRY",
-    "nombre": null,
-    "timestamp": 1780671863,
-    "blockHeight": 952253,
-    "hasParents": false,
-    "ipfsOk": false
-  },
-  {
-    "txid": "f8fbc56343766a57f39a6e9a7d5f72606fb557afe8495d118dea394bc039f0cb",
-    "slug": "personalidad",
-    "tokenId": "f8fbc56343766a57f39a6e9a7d5f72606fb557afe8495d118dea394bc039f0cb",
-    "cid": "QmZPAwX3kkDvop5uz91ci9m1Ajx2KvxNazcfwwmuWedgR6",
-    "nombre": "Personalidad Xolo: Tonatiuh Ramírez (Edición Teyolía)",
-    "timestamp": 1780493921,
-    "blockHeight": 951972,
-    "hasParents": false,
     "ipfsOk": true
-  },
-  {
-    "txid": "d7fa0e23f61589795eb2dd1f286c1278f87cfbede005b9543aed83183c4f230b",
-    "slug": "mitograma",
-    "tokenId": "d7fa0e23f61589795eb2dd1f286c1278f87cfbede005b9543aed83183c4f230b",
-    "cid": "Qma27z3Zr4jdJiPSi8vfTTdqM6y8jeKfEnscADT4nPVHiP",
-    "nombre": "Mitograma Teposxolotlcalli #001",
-    "timestamp": 1780409740,
-    "blockHeight": 951825,
-    "hasParents": false,
-    "ipfsOk": true
-  },
-  {
-    "txid": "bafd926497cc424276299297cc14697dda91a0029cbc2124d2ad5f3b4faeea0c",
-    "slug": "the",
-    "tokenId": "bafd926497cc424276299297cc14697dda91a0029cbc2124d2ad5f3b4faeea0c",
-    "cid": "QmbCG5Xpk23UMAv9FAAsnJ8Jkbxvpewqgn4Dncwnje6kR2",
-    "nombre": "The Xolos Ramirez Show #001 – Yanga",
-    "timestamp": 1780099265,
-    "blockHeight": 951274,
-    "hasParents": false,
-    "ipfsOk": true
-  },
-  {
-    "txid": "3033fe4d51767d196597df41d14ecdb4822b4c9e48be630035a76b7d301b502a",
-    "slug": "amixtli",
-    "tokenId": "3033fe4d51767d196597df41d14ecdb4822b4c9e48be630035a76b7d301b502a",
-    "cid": "QmWjs54XnaaG2SRSoRk6Ro4S5nwSZgUvYbcdnxBpRgq3Tp",
-    "nombre": null,
-    "timestamp": 1779128383,
-    "blockHeight": 949660,
-    "hasParents": false,
-    "ipfsOk": false
-  },
-  {
-    "txid": "99c67c2e02f3ceba314c65cabd81c3c254b1ef6e110f82572e7ae8b438c65d37",
-    "slug": "the",
-    "tokenId": "99c67c2e02f3ceba314c65cabd81c3c254b1ef6e110f82572e7ae8b438c65d37",
-    "cid": "QmZ8PDfFGwnMqZ4prU9SZ5shJ5Q5UtJAKFoqCevhFonFG3",
-    "nombre": null,
-    "timestamp": 1779112623,
-    "blockHeight": 949632,
-    "hasParents": false,
-    "ipfsOk": false
   }
 ]
