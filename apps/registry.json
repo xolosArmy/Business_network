@@ -35,7 +35,7 @@
       "lastVerified": "2026-09-13T12:00:00Z",
       "evidence": {
         "specificationDocument": "docs/agentic-commerce/xr-ac0-architecture.md",
-        "gitCommitSha": "90206e5792d773229b1d7d3d1a8eecbb67a8459f",
+        "gitCommitSha": "90206e5eb53837a853a1147da359dff07d6999d5",
         "auditReference": "XR-AC0-REVISION-B-FREEZE-20260913"
       }
     }

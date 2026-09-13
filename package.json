@@ -8,5 +8,9 @@
     "test": "node tools/network.test.mjs && node scripts/validate-registry.mjs",
     "test:network": "node tools/network.test.mjs",
     "test:registry": "node scripts/validate-registry.mjs"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1"
   }
 }

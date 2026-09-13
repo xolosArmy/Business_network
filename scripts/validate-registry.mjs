@@ -199,4 +199,20 @@ test('DIR-XA1: Fail-closed validation on invalid fixtures', () => {
   const res7 = validateRegistry(badTimestamp);
   assert.equal(res7.valid, false);
   assert.ok(res7.errors.some((e) => e.includes('date-time') || e.includes('format')));
+
+  // Case 8: empty specificationDocument in evidence (rejected by minLength and pattern)
+  const emptySpec = JSON.parse(JSON.stringify(registry));
+  emptySpec.applications[0].evidence.specificationDocument = '';
+  const res8 = validateRegistry(emptySpec);
+  assert.equal(res8.valid, false);
+  assert.ok(res8.errors.some((e) => e.includes('specificationDocument') || e.includes('minLength') || e.includes('pattern')));
+
+  // Case 9: production capability with empty specificationDocument (rejected by conditional allOf)
+  const prodEmptySpec = JSON.parse(JSON.stringify(registry));
+  prodEmptySpec.applications[0].capabilities.webMcpStatus = 'production';
+  prodEmptySpec.applications[0].securityStatus = 'verified';
+  prodEmptySpec.applications[0].evidence.specificationDocument = '';
+  const res9 = validateRegistry(prodEmptySpec);
+  assert.equal(res9.valid, false);
+  assert.ok(res9.errors.some((e) => e.includes('specificationDocument') || e.includes('then') || e.includes('complete audit evidence')));
 });

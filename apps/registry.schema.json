@@ -138,12 +138,20 @@
               "auditReference"
             ],
             "properties": {
-              "specificationDocument": { "type": "string" },
+              "specificationDocument": {
+                "type": "string",
+                "minLength": 1,
+                "format": "uri-reference",
+                "pattern": "^(https?://|[a-zA-Z0-9_.-]+/).+"
+              },
               "gitCommitSha": {
                 "type": "string",
                 "pattern": "^[0-9a-f]{40}$"
               },
-              "auditReference": { "type": "string" }
+              "auditReference": {
+                "type": "string",
+                "minLength": 1
+              }
             },
             "additionalProperties": false
           }
@@ -167,7 +175,30 @@
               "type": "object",
               "properties": {
                 "securityStatus": { "const": "verified" },
-                "evidence": { "type": "object" }
+                "evidence": {
+                  "type": "object",
+                  "required": [
+                    "specificationDocument",
+                    "gitCommitSha",
+                    "auditReference"
+                  ],
+                  "properties": {
+                    "specificationDocument": {
+                      "type": "string",
+                      "minLength": 1,
+                      "format": "uri-reference",
+                      "pattern": "^(https?://|[a-zA-Z0-9_.-]+/).+"
+                    },
+                    "gitCommitSha": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{40}$"
+                    },
+                    "auditReference": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
               },
               "required": ["securityStatus", "evidence"]
             }
@@ -190,7 +221,30 @@
               "type": "object",
               "properties": {
                 "securityStatus": { "const": "verified" },
-                "evidence": { "type": "object" }
+                "evidence": {
+                  "type": "object",
+                  "required": [
+                    "specificationDocument",
+                    "gitCommitSha",
+                    "auditReference"
+                  ],
+                  "properties": {
+                    "specificationDocument": {
+                      "type": "string",
+                      "minLength": 1,
+                      "format": "uri-reference",
+                      "pattern": "^(https?://|[a-zA-Z0-9_.-]+/).+"
+                    },
+                    "gitCommitSha": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{40}$"
+                    },
+                    "auditReference": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
               },
               "required": ["securityStatus", "evidence"]
             }

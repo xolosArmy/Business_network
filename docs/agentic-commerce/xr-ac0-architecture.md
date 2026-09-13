@@ -26,7 +26,7 @@ The architecture establishes:
 | **WebMCP Tools** (`webMcpStatus`) | `testing` | Read-only (`annotations: { readOnlyHint: true }`), zero DOM mutation, zero side effects. | `WM-XR1` |
 | **x402 Protocol** (`x402Status`) | `planned` | Offline harness only. No live broadcast, zero key escape, zero mainnet assets. | `X402-XR0-OFFLINE-HARNESS` |
 | **Settlement Assets** | `[]` (None in production) | Upstream TBD. No mainnet tokens declared or active. | Frozen |
-| **Funding Paths** | `["planned:xec-chronik-settlement"]` | Planned only. Offline verification fixtures. | Gate C2 Roadmap v1.1 |
+| **Funding Paths** | `["direct_inquiry", "planned_x402_verified_dossier"]` | Planned only. Offline verification fixtures. | Gate C2 Roadmap v1.1 |
 
 ---
 
@@ -43,6 +43,6 @@ The 5 normative tools exposed on the browser context:
 
 ## 4. Verification & Audit Trail
 
-- **Git Commit SHA:** `90206e5792d773229b1d7d3d1a8eecbb67a8459f` (frozen base commit)
+- **Git Commit SHA:** `90206e5eb53837a853a1147da359dff07d6999d5` (frozen base commit)
 - **Schema Compliance:** Draft 2020-12 fail-closed validation.
 - **Evidence Requirement:** No capability can be advertised as `"production"` without verified security status and published specification.
