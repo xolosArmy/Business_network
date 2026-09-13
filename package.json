@@ -5,7 +5,8 @@
   "description": "xolosArmy Network portal, applications registry, and ecosystem state.",
   "type": "module",
   "scripts": {
-    "test": "node scripts/validate-registry.mjs",
+    "test": "node tools/network.test.mjs && node scripts/validate-registry.mjs",
+    "test:network": "node tools/network.test.mjs",
     "test:registry": "node scripts/validate-registry.mjs"
   }
 }

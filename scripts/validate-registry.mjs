@@ -5,9 +5,10 @@
  * Verifies:
  * 1. JSON parsing and structure of /apps/registry.schema.json and /apps/registry.json.
  * 2. Strict Draft 2020-12 schema conformance (types, enums, required properties, additionalProperties: false).
- * 3. Security invariant: NO capability may be declared as "production" without verified production evidence.
- * 4. Xolos Ramírez registered as first app with accurate non-production status (webMcpStatus: testing, x402Status: planned).
- * 5. Fail-closed test suite rejecting malformed, injected, or unevidenced production payloads.
+ * 3. Standard Ajv2020 + ajv-formats validation against canonical schema.
+ * 4. Security invariant: NO capability may be declared as "production" without verified production evidence.
+ * 5. Xolos Ramírez registered as first app with accurate non-production status (webMcpStatus: testing, x402Status: planned).
+ * 6. Fail-closed test suite rejecting malformed, injected, or unevidenced production payloads.
  */
 
 import assert from 'node:assert/strict';
@@ -15,6 +16,11 @@ import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
+const Ajv2020 = require('ajv/dist/2020');
+const addFormats = require('ajv-formats');
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -29,157 +35,69 @@ const rawRegistry = readFileSync(registryPath, 'utf8');
 const schema = JSON.parse(rawSchema);
 const registry = JSON.parse(rawRegistry);
 
+// Initialize Draft 2020-12 validator in strict mode
+const ajv = new Ajv2020({ allErrors: true, strict: true });
+addFormats(ajv);
+const compiledValidator = ajv.compile(schema);
+
 /**
- * Validates a registry object against the canonical rules of registry.schema.json.
+ * Validates a registry object against both Draft 2020-12 schema and domain invariants.
  * @param {Object} data 
  * @returns {{ valid: boolean, errors: string[] }}
  */
 export function validateRegistry(data) {
   const errors = [];
 
+  // 1. Standard Draft 2020-12 schema validation
+  const isSchemaValid = compiledValidator(data);
+  if (!isSchemaValid && compiledValidator.errors) {
+    for (const err of compiledValidator.errors) {
+      errors.push(`[Schema ${err.keyword}] ${err.instancePath || 'root'}: ${err.message}`);
+    }
+  }
+
+  // 2. Comprehensive domain and invariant checks
   if (typeof data !== 'object' || data === null || Array.isArray(data)) {
-    return { valid: false, errors: ['Root must be an object'] };
+    return { valid: false, errors: ['Root must be an object', ...errors] };
   }
 
-  // Root allowed keys
-  const allowedRootKeys = new Set(['$schema', 'schemaVersion', 'updatedAt', 'network', 'registryPolicy', 'applications']);
-  for (const k of Object.keys(data)) {
-    if (!allowedRootKeys.has(k)) {
-      errors.push(`Disallowed property in root: "${k}"`);
-    }
-  }
-
-  // Required root fields
-  const requiredRoot = ['schemaVersion', 'updatedAt', 'network', 'registryPolicy', 'applications'];
-  for (const field of requiredRoot) {
-    if (data[field] === undefined) {
-      errors.push(`Missing required root field: "${field}"`);
-    }
-  }
-
-  // schemaVersion regex
-  if (data.schemaVersion && !/^v[0-9]+(\.[0-9]+)*$/.test(data.schemaVersion)) {
-    errors.push(`Invalid schemaVersion format: "${data.schemaVersion}"`);
-  }
-
-  // network enum
-  const allowedNetworks = ['xolosArmy Network', 'Tonalli Ecosystem'];
-  if (data.network && !allowedNetworks.includes(data.network)) {
-    errors.push(`Invalid network: "${data.network}"`);
-  }
-
-  // registryPolicy
-  if (data.registryPolicy) {
-    if (typeof data.registryPolicy.productionEvidenceRequired !== 'boolean') {
-      errors.push('registryPolicy.productionEvidenceRequired must be a boolean');
-    }
-  }
-
-  // applications array
-  if (!Array.isArray(data.applications)) {
-    errors.push('applications must be an array');
-    return { valid: errors.length === 0, errors };
-  }
-
-  const allowedCategories = ['commerce', 'wallet', 'explorer', 'identity', 'infrastructure', 'governance'];
-  const allowedStatuses = ['planned', 'testing', 'verified', 'production'];
-  const allowedSecurityStatuses = ['in-review', 'verified', 'deprecated'];
-  const allowedAppKeys = new Set([
-    'id', 'name', 'description', 'url', 'category', 'capabilities', 'securityStatus', 'lastVerified', 'evidence'
-  ]);
-  const allowedCapabilityKeys = new Set([
-    'webMcpStatus', 'x402Status', 'settlementAssets', 'fundingPaths', 'webMcpTools'
-  ]);
-  const allowedEvidenceKeys = new Set([
-    'specificationDocument', 'gitCommitSha', 'auditReference'
-  ]);
-
-  for (let i = 0; i < data.applications.length; i++) {
-    const app = data.applications[i];
-    const prefix = `applications[${i}]`;
-
-    if (typeof app !== 'object' || app === null) {
-      errors.push(`${prefix} must be an object`);
-      continue;
-    }
-
-    // Disallowed keys
-    for (const k of Object.keys(app)) {
-      if (!allowedAppKeys.has(k)) {
-        errors.push(`${prefix} has disallowed property: "${k}"`);
+  // Registry policy constraints
+  if (data.registryPolicy && typeof data.registryPolicy === 'object') {
+    const allowedPolicyKeys = new Set(['productionEvidenceRequired', 'allowedWebMcpStatuses', 'allowedX402Statuses']);
+    for (const k of Object.keys(data.registryPolicy)) {
+      if (!allowedPolicyKeys.has(k)) {
+        errors.push(`registryPolicy has disallowed property: "${k}"`);
       }
     }
-
-    // Required app fields
-    for (const field of allowedAppKeys) {
-      if (app[field] === undefined) {
-        errors.push(`${prefix} missing required field: "${field}"`);
-      }
+    if (!Array.isArray(data.registryPolicy.allowedWebMcpStatuses)) {
+      errors.push('registryPolicy.allowedWebMcpStatuses must be an array');
     }
-
-    // id regex
-    if (app.id && !/^[a-z0-9-]+$/.test(app.id)) {
-      errors.push(`${prefix}.id must match pattern ^[a-z0-9-]+$, got: "${app.id}"`);
+    if (!Array.isArray(data.registryPolicy.allowedX402Statuses)) {
+      errors.push('registryPolicy.allowedX402Statuses must be an array');
     }
+  }
 
-    // category
-    if (app.category && !allowedCategories.includes(app.category)) {
-      errors.push(`${prefix}.category "${app.category}" is not in allowed enum`);
-    }
+  // Application entries invariant checks
+  if (Array.isArray(data.applications)) {
+    for (let i = 0; i < data.applications.length; i++) {
+      const app = data.applications[i];
+      const prefix = `applications[${i}]`;
 
-    // securityStatus
-    if (app.securityStatus && !allowedSecurityStatuses.includes(app.securityStatus)) {
-      errors.push(`${prefix}.securityStatus "${app.securityStatus}" is not in allowed enum`);
-    }
+      if (typeof app !== 'object' || app === null) continue;
 
-    // url format
-    if (app.url) {
-      try {
-        const parsed = new URL(app.url);
-        if (!['http:', 'https:'].includes(parsed.protocol)) {
-          errors.push(`${prefix}.url must use http or https`);
+      if (app.capabilities && typeof app.capabilities === 'object') {
+        const isProduction =
+          app.capabilities.webMcpStatus === 'production' ||
+          app.capabilities.x402Status === 'production';
+
+        if (isProduction) {
+          if (app.securityStatus !== 'verified') {
+            errors.push(`${prefix} declares "production" capability without verified security status!`);
+          }
+          if (!app.evidence || !app.evidence.gitCommitSha || !app.evidence.specificationDocument) {
+            errors.push(`${prefix} declares "production" capability without complete audit evidence!`);
+          }
         }
-      } catch {
-        errors.push(`${prefix}.url is not a valid URI`);
-      }
-    }
-
-    // capabilities
-    if (app.capabilities) {
-      for (const ck of Object.keys(app.capabilities)) {
-        if (!allowedCapabilityKeys.has(ck)) {
-          errors.push(`${prefix}.capabilities has disallowed property: "${ck}"`);
-        }
-      }
-
-      if (!allowedStatuses.includes(app.capabilities.webMcpStatus)) {
-        errors.push(`${prefix}.capabilities.webMcpStatus "${app.capabilities.webMcpStatus}" invalid`);
-      }
-      if (!allowedStatuses.includes(app.capabilities.x402Status)) {
-        errors.push(`${prefix}.capabilities.x402Status "${app.capabilities.x402Status}" invalid`);
-      }
-
-      // CRITICAL PRODUCTION EVIDENCE INVARIANT:
-      if (
-        (app.capabilities.webMcpStatus === 'production' || app.capabilities.x402Status === 'production') &&
-        (!app.evidence || !app.evidence.gitCommitSha || app.securityStatus !== 'verified')
-      ) {
-        errors.push(
-          `${prefix} declares "production" capability without verified security status and audit commit evidence!`
-        );
-      }
-    }
-
-    // evidence
-    if (app.evidence) {
-      for (const ek of Object.keys(app.evidence)) {
-        if (!allowedEvidenceKeys.has(ek)) {
-          errors.push(`${prefix}.evidence has disallowed property: "${ek}"`);
-        }
-      }
-
-      if (app.evidence.gitCommitSha && !/^[0-9a-f]{40}$/.test(app.evidence.gitCommitSha)) {
-        errors.push(`${prefix}.evidence.gitCommitSha must be a valid 40-character hex commit SHA`);
       }
     }
   }
@@ -195,8 +113,10 @@ export function validateRegistry(data) {
 test('DIR-XA1: Canonical registry.schema.json is valid Draft 2020-12', () => {
   assert.equal(schema.$schema, 'https://json-schema.org/draft/2020-12/schema');
   assert.equal(schema.type, 'object');
+  assert.ok(schema.properties.$schema, 'Schema must declare $schema property for instances');
   assert.ok(schema.properties.applications);
   assert.ok(schema.properties.schemaVersion);
+  assert.ok(schema.properties.registryPolicy);
 });
 
 test('DIR-XA1: Canonical registry.json passes schema validation', () => {
@@ -216,49 +136,67 @@ test('DIR-XA1: Xolos Ramírez is registered as the first application', () => {
 
 test('DIR-XA1: Strict Invariant — No capability declared as "production" without evidence', () => {
   for (const app of registry.applications) {
-    assert.notEqual(
-      app.capabilities.webMcpStatus,
-      'production',
-      `Application "${app.id}" must NOT declare webMcpStatus as production during pre-release`
-    );
-    assert.notEqual(
-      app.capabilities.x402Status,
-      'production',
-      `Application "${app.id}" must NOT declare x402Status as production before Gate C2 settlement freeze`
-    );
-    assert.equal(app.capabilities.webMcpStatus, 'testing');
-    assert.equal(app.capabilities.x402Status, 'planned');
-    assert.equal(app.securityStatus, 'in-review');
+    if (app.capabilities.webMcpStatus === 'production' || app.capabilities.x402Status === 'production') {
+      assert.equal(app.securityStatus, 'verified', `App ${app.id} in production must have verified securityStatus`);
+      assert.ok(app.evidence && app.evidence.gitCommitSha, `App ${app.id} in production must have audit evidence`);
+    }
   }
+  // Scoped specifically to Xolos Ramírez launch-state assertions
+  const xolos = registry.applications.find((a) => a.id === 'xolosramirez');
+  assert.ok(xolos, 'xolosramirez must be registered');
+  assert.equal(xolos.capabilities.webMcpStatus, 'testing');
+  assert.equal(xolos.capabilities.x402Status, 'planned');
+  assert.equal(xolos.securityStatus, 'in-review');
 });
 
 test('DIR-XA1: Fail-closed validation on invalid fixtures', () => {
-  // Case 1: missing required field
+  // Case 1: missing required field in application
   const missingField = JSON.parse(JSON.stringify(registry));
   delete missingField.applications[0].url;
   const res1 = validateRegistry(missingField);
   assert.equal(res1.valid, false);
-  assert.ok(res1.errors.some((e) => e.includes('missing required field: "url"')));
+  assert.ok(res1.errors.some((e) => e.includes('url')));
 
   // Case 2: illegal enum in capability
   const badEnum = JSON.parse(JSON.stringify(registry));
   badEnum.applications[0].capabilities.webMcpStatus = 'super-ready';
   const res2 = validateRegistry(badEnum);
   assert.equal(res2.valid, false);
-  assert.ok(res2.errors.some((e) => e.includes('invalid')));
+  assert.ok(res2.errors.some((e) => e.includes('enum') || e.includes('invalid')));
 
-  // Case 3: unauthorized extra property (additionalProperties: false)
-  const extraProp = JSON.parse(JSON.stringify(registry));
-  extraProp.applications[0].unauthorizedField = 'injected';
-  const res3 = validateRegistry(extraProp);
+  // Case 3: unauthorized extra property in root (additionalProperties: false)
+  const extraPropRoot = JSON.parse(JSON.stringify(registry));
+  extraPropRoot.unauthorizedRootField = 'injected';
+  const res3 = validateRegistry(extraPropRoot);
   assert.equal(res3.valid, false);
-  assert.ok(res3.errors.some((e) => e.includes('disallowed property: "unauthorizedField"')));
+  assert.ok(res3.errors.some((e) => e.includes('additional properties') || e.includes('unauthorizedRootField')));
 
-  // Case 4: illicit production declaration without verified status
+  // Case 4: illicit production declaration without verified status (rejected by Draft 2020-12 allOf)
   const illicitProd = JSON.parse(JSON.stringify(registry));
   illicitProd.applications[0].capabilities.webMcpStatus = 'production';
   illicitProd.applications[0].securityStatus = 'in-review';
   const res4 = validateRegistry(illicitProd);
   assert.equal(res4.valid, false);
-  assert.ok(res4.errors.some((e) => e.includes('without verified security status')));
+  assert.ok(res4.errors.some((e) => e.includes('then') || e.includes('without verified security status')));
+
+  // Case 5: omitted allowedWebMcpStatuses in registryPolicy
+  const missingPolicy = JSON.parse(JSON.stringify(registry));
+  delete missingPolicy.registryPolicy.allowedWebMcpStatuses;
+  const res5 = validateRegistry(missingPolicy);
+  assert.equal(res5.valid, false);
+  assert.ok(res5.errors.some((e) => e.includes('allowedWebMcpStatuses')));
+
+  // Case 6: extra property in registryPolicy
+  const extraPolicy = JSON.parse(JSON.stringify(registry));
+  extraPolicy.registryPolicy.extraProp = 'disallowed';
+  const res6 = validateRegistry(extraPolicy);
+  assert.equal(res6.valid, false);
+  assert.ok(res6.errors.some((e) => e.includes('additional properties') || e.includes('extraProp')));
+
+  // Case 7: malformed timestamp in updatedAt
+  const badTimestamp = JSON.parse(JSON.stringify(registry));
+  badTimestamp.updatedAt = 'not-a-date';
+  const res7 = validateRegistry(badTimestamp);
+  assert.equal(res7.valid, false);
+  assert.ok(res7.errors.some((e) => e.includes('date-time') || e.includes('format')));
 });

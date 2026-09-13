@@ -12,6 +12,9 @@
     "applications"
   ],
   "properties": {
+    "$schema": {
+      "type": "string"
+    },
     "schemaVersion": {
       "type": "string",
       "pattern": "^v[0-9]+(\\.[0-9]+)*$"
@@ -145,6 +148,54 @@
             "additionalProperties": false
           }
         },
+        "allOf": [
+          {
+            "if": {
+              "type": "object",
+              "properties": {
+                "capabilities": {
+                  "type": "object",
+                  "properties": {
+                    "webMcpStatus": { "const": "production" }
+                  },
+                  "required": ["webMcpStatus"]
+                }
+              },
+              "required": ["capabilities"]
+            },
+            "then": {
+              "type": "object",
+              "properties": {
+                "securityStatus": { "const": "verified" },
+                "evidence": { "type": "object" }
+              },
+              "required": ["securityStatus", "evidence"]
+            }
+          },
+          {
+            "if": {
+              "type": "object",
+              "properties": {
+                "capabilities": {
+                  "type": "object",
+                  "properties": {
+                    "x402Status": { "const": "production" }
+                  },
+                  "required": ["x402Status"]
+                }
+              },
+              "required": ["capabilities"]
+            },
+            "then": {
+              "type": "object",
+              "properties": {
+                "securityStatus": { "const": "verified" },
+                "evidence": { "type": "object" }
+              },
+              "required": ["securityStatus", "evidence"]
+            }
+          }
+        ],
         "additionalProperties": false
       }
     }
