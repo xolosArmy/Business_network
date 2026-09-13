@@ -1,0 +1,11 @@
+{
+  "name": "xolosarmy-business-network",
+  "version": "1.0.0",
+  "private": true,
+  "description": "xolosArmy Network portal, applications registry, and ecosystem state.",
+  "type": "module",
+  "scripts": {
+    "test": "node scripts/validate-registry.mjs",
+    "test:registry": "node scripts/validate-registry.mjs"
+  }
+}

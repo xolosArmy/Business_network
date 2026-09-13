@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xolosarmy.xyz/apps/registry.schema.json",
+  "title": "xolosArmy Apps Registry Schema",
+  "description": "Formal schema for decentralized agentic application and capability registry within the xolosArmy Network.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "updatedAt",
+    "network",
+    "registryPolicy",
+    "applications"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^v[0-9]+(\\.[0-9]+)*$"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "network": {
+      "type": "string",
+      "enum": ["xolosArmy Network", "Tonalli Ecosystem"]
+    },
+    "registryPolicy": {
+      "type": "object",
+      "required": [
+        "productionEvidenceRequired",
+        "allowedWebMcpStatuses",
+        "allowedX402Statuses"
+      ],
+      "properties": {
+        "productionEvidenceRequired": { "type": "boolean" },
+        "allowedWebMcpStatuses": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "allowedX402Statuses": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "applications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "description",
+          "url",
+          "category",
+          "capabilities",
+          "securityStatus",
+          "lastVerified",
+          "evidence"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 2
+          },
+          "description": {
+            "type": "string",
+            "minLength": 10
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "commerce",
+              "wallet",
+              "explorer",
+              "identity",
+              "infrastructure",
+              "governance"
+            ]
+          },
+          "capabilities": {
+            "type": "object",
+            "required": [
+              "webMcpStatus",
+              "x402Status",
+              "settlementAssets",
+              "fundingPaths"
+            ],
+            "properties": {
+              "webMcpStatus": {
+                "type": "string",
+                "enum": ["planned", "testing", "verified", "production"]
+              },
+              "x402Status": {
+                "type": "string",
+                "enum": ["planned", "testing", "verified", "production"]
+              },
+              "settlementAssets": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "fundingPaths": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "webMcpTools": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            },
+            "additionalProperties": false
+          },
+          "securityStatus": {
+            "type": "string",
+            "enum": ["in-review", "verified", "deprecated"]
+          },
+          "lastVerified": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "evidence": {
+            "type": "object",
+            "required": [
+              "specificationDocument",
+              "gitCommitSha",
+              "auditReference"
+            ],
+            "properties": {
+              "specificationDocument": { "type": "string" },
+              "gitCommitSha": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{40}$"
+              },
+              "auditReference": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
