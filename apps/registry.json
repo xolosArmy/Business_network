@@ -1,0 +1,43 @@
+{
+  "$schema": "./registry.schema.json",
+  "schemaVersion": "v1.0.0",
+  "updatedAt": "2026-09-13T12:00:00Z",
+  "network": "xolosArmy Network",
+  "registryPolicy": {
+    "productionEvidenceRequired": true,
+    "allowedWebMcpStatuses": ["planned", "testing", "verified", "production"],
+    "allowedX402Statuses": ["planned", "testing", "verified", "production"]
+  },
+  "applications": [
+    {
+      "id": "xolosramirez",
+      "name": "Xolos Ramírez",
+      "description": "Criadero ético familiar y nodo de preservación biocultural del Xoloitzcuintle. Superficie web equipada con WebMCP para exploración canina y descubrimiento de linajes sin PII ni precios numéricos abiertos.",
+      "url": "https://xolosramirez.com",
+      "category": "commerce",
+      "capabilities": {
+        "webMcpStatus": "testing",
+        "x402Status": "planned",
+        "settlementAssets": [],
+        "fundingPaths": [
+          "direct_inquiry",
+          "planned_x402_verified_dossier"
+        ],
+        "webMcpTools": [
+          "list_available_xolos",
+          "get_xolo_profile",
+          "get_delivery_information",
+          "get_contact_options",
+          "get_price_process_information"
+        ]
+      },
+      "securityStatus": "in-review",
+      "lastVerified": "2026-09-13T12:00:00Z",
+      "evidence": {
+        "specificationDocument": "/docs/agentic-commerce/xr-ac0-architecture.md",
+        "gitCommitSha": "90206e5eb53837a853a1147da359dff07d6999d5",
+        "auditReference": "XR-AC0-REVISION-B-FREEZE-20260913"
+      }
+    }
+  ]
+}

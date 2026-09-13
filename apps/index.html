@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Directorio de Aplicaciones y Capacidades | xolosArmy Network</title>
+  <meta name="description" content="Directorio canónico de aplicaciones, superficies WebMCP y capacidades agénticas dentro de la red xolosArmy y el ecosistema Tonalli." />
+  <link rel="canonical" href="https://xolosarmy.xyz/apps/" />
+  <meta name="theme-color" content="#080c0c" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="xolosArmy Network" />
+  <meta property="og:locale" content="es_MX" />
+  <meta property="og:title" content="Directorio de Aplicaciones | xolosArmy Network" />
+  <meta property="og:description" content="Registro canónico de agentes, herramientas WebMCP y superficies comerciales sobre eCash." />
+  <meta property="og:url" content="https://xolosarmy.xyz/apps/" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Directorio de Aplicaciones | xolosArmy Network" />
+  <meta name="twitter:description" content="Registro canónico de agentes, herramientas WebMCP y superficies comerciales sobre eCash." />
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/layout.css" />
+  <link rel="stylesheet" href="/css/network.css" />
+  <style>
+    .registry-hero {
+      padding: 4rem 1rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .registry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 2rem auto 4rem;
+      padding: 0 1rem;
+    }
+    .app-card {
+      background: rgba(18, 24, 24, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .app-card:hover {
+      border-color: rgba(212, 175, 55, 0.4);
+      transform: translateY(-2px);
+    }
+    .app-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+    .app-title {
+      font-size: 1.25rem;
+      margin: 0;
+      color: #fff;
+    }
+    .app-category {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #a0aec0;
+    }
+    .app-desc {
+      color: #cbd5e0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+    }
+    .badge-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .badge-testing {
+      background: rgba(234, 179, 8, 0.15);
+      color: #facc15;
+      border: 1px solid rgba(234, 179, 8, 0.3);
+    }
+    .badge-planned {
+      background: rgba(148, 163, 184, 0.15);
+      color: #94a3b8;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+    .badge-review {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+    .tools-list {
+      margin: 0.75rem 0;
+      padding-left: 1.25rem;
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+    .app-meta {
+      font-size: 0.8rem;
+      color: #64748b;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 0.75rem;
+      margin-top: 1rem;
+    }
+    .app-meta code {
+      color: #d4af37;
+    }
+    .registry-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "DataCatalog",
+    "name": "xolosArmy Apps Registry",
+    "url": "https://xolosarmy.xyz/apps/",
+    "description": "Registro estructurado de aplicaciones, interfaces WebMCP y pasarelas agénticas de la red xolosArmy."
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YTZMJ41WMY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YTZMJ41WMY');
+  </script>
+</head>
+<body class="network-theme">
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="/" aria-label="xolosArmy Network, inicio">
+        <span class="brand-emblem" aria-hidden="true">X</span>
+        <span>xolosArmy<span class="brand-subtitle">NETWORK / REGISTRY</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="/">Inicio</a>
+        <a href="/ecosystem/">Ecosistema</a>
+        <a href="/apps/" aria-current="page" class="active">Apps</a>
+        <a href="/infrastructure/">Infraestructura</a>
+        <a class="btn btn-primary nav-highlight" href="https://app.tonalli.cash" target="_blank" rel="noopener noreferrer">Abrir Tonalli <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="registry-hero">
+      <p class="eyebrow">CAPACIDADES AGÉNTICAS · CATÁLOGO AUTENTICADO</p>
+      <h1>Directorio de Aplicaciones</h1>
+      <p class="hero-lead">
+        Registro auditable y descentralizado de aplicaciones, interfaces WebMCP y puntos de acceso del ecosistema Tonalli y la red xolosArmy.
+      </p>
+      <div class="registry-actions">
+        <a href="/apps/registry.json" class="btn btn-primary" target="_blank">Descargar registry.json</a>
+        <a href="/apps/registry.schema.json" class="text-link" target="_blank">Ver Schema JSON Draft 2020-12 ↗</a>
+      </div>
+    </section>
+
+    <section class="registry-grid" id="apps-container">
+      <article class="app-card">
+        <div>
+          <div class="app-card-header">
+            <h2 class="app-title">Xolos Ramírez</h2>
+            <span class="app-category">commerce</span>
+          </div>
+          <p class="app-desc">
+            Criadero ético familiar y nodo de preservación biocultural del Xoloitzcuintle. Superficie web equipada con WebMCP para exploración canina y descubrimiento de linajes sin PII ni precios numéricos abiertos.
+          </p>
+
+          <div class="badge-group">
+            <span class="badge badge-testing" title="En fase de testing controlado en rama">WebMCP: testing</span>
+            <span class="badge badge-planned" title="Planificado; condicionado a C2 y settlement">x402: planned</span>
+            <span class="badge badge-review" title="Evaluación técnica y harness offline">Seguridad: in-review</span>
+          </div>
+
+          <div>
+            <strong>Herramientas WebMCP Registradas:</strong>
+            <ul class="tools-list">
+              <li><code>list_available_xolos</code> (lectura, filtro ejemplares)</li>
+              <li><code>get_xolo_profile</code> (perfil público y cuidados)</li>
+              <li><code>get_delivery_information</code> (logística y bienestar)</li>
+              <li><code>get_contact_options</code> (canales verificados)</li>
+              <li><code>get_price_process_information</code> (filosofía ética)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="app-meta">
+          <div>Sitio Oficial: <a href="https://xolosramirez.com" target="_blank" rel="noopener noreferrer">xolosramirez.com ↗</a></div>
+          <div>Evidencia Commit: <code>90206e5eb5...</code></div>
+          <div>Auditoría Ref: <code>XR-AC0-REVISION-B-FREEZE-20260913</code></div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="copyright">© 2026 xolosArmy Network State. Registro canónico de aplicaciones.</p>
+    </div>
+  </footer>
+</body>
+</html>
