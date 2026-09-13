@@ -38,11 +38,17 @@
         "productionEvidenceRequired": { "type": "boolean" },
         "allowedWebMcpStatuses": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string",
+            "enum": ["planned", "testing", "verified", "production"]
+          }
         },
         "allowedX402Statuses": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string",
+            "enum": ["planned", "testing", "verified", "production"]
+          }
         }
       },
       "additionalProperties": false
@@ -142,7 +148,7 @@
                 "type": "string",
                 "minLength": 1,
                 "format": "uri-reference",
-                "pattern": "^(https?://|[a-zA-Z0-9_.-]+/).+"
+                "pattern": "^(/|https?://|[a-zA-Z0-9_.-]+/).+"
               },
               "gitCommitSha": {
                 "type": "string",
@@ -187,7 +193,7 @@
                       "type": "string",
                       "minLength": 1,
                       "format": "uri-reference",
-                      "pattern": "^(https?://|[a-zA-Z0-9_.-]+/).+"
+                      "pattern": "^(/|https?://|[a-zA-Z0-9_.-]+/).+"
                     },
                     "gitCommitSha": {
                       "type": "string",
@@ -233,7 +239,7 @@
                       "type": "string",
                       "minLength": 1,
                       "format": "uri-reference",
-                      "pattern": "^(https?://|[a-zA-Z0-9_.-]+/).+"
+                      "pattern": "^(/|https?://|[a-zA-Z0-9_.-]+/).+"
                     },
                     "gitCommitSha": {
                       "type": "string",

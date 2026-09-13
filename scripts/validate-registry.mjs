@@ -86,6 +86,17 @@ export function validateRegistry(data) {
       if (typeof app !== 'object' || app === null) continue;
 
       if (app.capabilities && typeof app.capabilities === 'object') {
+        if (data.registryPolicy && Array.isArray(data.registryPolicy.allowedWebMcpStatuses)) {
+          if (!data.registryPolicy.allowedWebMcpStatuses.includes(app.capabilities.webMcpStatus)) {
+            errors.push(`${prefix}.capabilities.webMcpStatus "${app.capabilities.webMcpStatus}" is not permitted by registryPolicy.allowedWebMcpStatuses`);
+          }
+        }
+        if (data.registryPolicy && Array.isArray(data.registryPolicy.allowedX402Statuses)) {
+          if (!data.registryPolicy.allowedX402Statuses.includes(app.capabilities.x402Status)) {
+            errors.push(`${prefix}.capabilities.x402Status "${app.capabilities.x402Status}" is not permitted by registryPolicy.allowedX402Statuses`);
+          }
+        }
+
         const isProduction =
           app.capabilities.webMcpStatus === 'production' ||
           app.capabilities.x402Status === 'production';
@@ -215,4 +226,25 @@ test('DIR-XA1: Fail-closed validation on invalid fixtures', () => {
   const res9 = validateRegistry(prodEmptySpec);
   assert.equal(res9.valid, false);
   assert.ok(res9.errors.some((e) => e.includes('specificationDocument') || e.includes('then') || e.includes('complete audit evidence')));
+
+  // Case 10: arbitrary string in allowedWebMcpStatuses policy array (rejected by schema enum)
+  const badPolicyWebMcp = JSON.parse(JSON.stringify(registry));
+  badPolicyWebMcp.registryPolicy.allowedWebMcpStatuses = ['arbitrary_status'];
+  const res10 = validateRegistry(badPolicyWebMcp);
+  assert.equal(res10.valid, false);
+  assert.ok(res10.errors.some((e) => e.includes('enum') || e.includes('allowedWebMcpStatuses')));
+
+  // Case 11: arbitrary string in allowedX402Statuses policy array (rejected by schema enum)
+  const badPolicyX402 = JSON.parse(JSON.stringify(registry));
+  badPolicyX402.registryPolicy.allowedX402Statuses = ['custom_status'];
+  const res11 = validateRegistry(badPolicyX402);
+  assert.equal(res11.valid, false);
+  assert.ok(res11.errors.some((e) => e.includes('enum') || e.includes('allowedX402Statuses')));
+
+  // Case 12: application capability status not in registryPolicy allowed list (rejected by invariant)
+  const restrictedPolicy = JSON.parse(JSON.stringify(registry));
+  restrictedPolicy.registryPolicy.allowedWebMcpStatuses = ['planned']; // testing is omitted
+  const res12 = validateRegistry(restrictedPolicy);
+  assert.equal(res12.valid, false);
+  assert.ok(res12.errors.some((e) => e.includes('not permitted by registryPolicy')));
 });
