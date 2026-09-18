@@ -1,12 +1,12 @@
 {
-  "linajes_registrados": 119,
+  "linajes_registrados": 125,
   "linajes_validados_ipfs": 0,
   "registros_con_padre_y_madre": 0,
-  "txs_xolo_detectadas": 119,
+  "txs_xolo_detectadas": 125,
   "ipfs_disponibles": 0,
-  "ipfs_fallidos": 119,
-  "nfts_con_slug_resuelto": 119,
-  "ult_registro_txid": "444de8eeb8b0ccf6ee3c51221a4e1a73e91e99ff510f058ca080b6925f75e11d",
-  "ult_registro_slug": "luna",
-  "ultima_actualizacion": "2026-09-04T17:03:24.055Z"
+  "ipfs_fallidos": 125,
+  "nfts_con_slug_resuelto": 125,
+  "ult_registro_txid": "a6e2171d6bbca37212bf4541747ba9d4c5762402a9a3095c8848d4523c63e9c0",
+  "ult_registro_slug": "teyolia",
+  "ultima_actualizacion": "2026-09-18T14:03:21.797Z"
 }
