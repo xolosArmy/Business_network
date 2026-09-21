@@ -1,0 +1,37 @@
+name: Temporary portal validation
+
+on:
+  push:
+    branches:
+      - content/roadmap-tonalli-memo-links
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Run repository tests
+        run: npm test
+      - name: Validate portal SEO and static references
+        run: python3 tools/site_seo.py
+      - name: Check JavaScript modules
+        run: |
+          node --check js/network-scene.mjs
+          node --check js/network-math.mjs
+          node --check js/portal.mjs
+          node --check js/census.mjs
+      - name: Check whitespace
+        run: git diff --check origin/main...HEAD
