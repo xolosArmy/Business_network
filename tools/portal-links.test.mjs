@@ -22,6 +22,18 @@ const footerPages = [
 
 const read = path => readFileSync(path, 'utf8');
 const count = (source, value) => source.split(value).length - 1;
+const footer = html => {
+  const start = html.indexOf('<footer class="site-footer">');
+  const end = html.indexOf('</footer>', start);
+  assert.ok(start >= 0 && end > start, 'site footer must exist');
+  return html.slice(start, end + 9);
+};
+const header = html => {
+  const start = html.indexOf('<header class="site-header">');
+  if (start < 0) return '';
+  const end = html.indexOf('</header>', start);
+  return end > start ? html.slice(start, end + 9) : '';
+};
 
 test('portal and ecosystem expose roadmap and Tonalli Memo as matching module cards', () => {
   for (const path of portalPages) {
@@ -35,14 +47,19 @@ test('portal and ecosystem expose roadmap and Tonalli Memo as matching module ca
   }
 });
 
-test('shared footer surfaces stay synchronized across portal pages', () => {
+test('shared footer surfaces stay synchronized and primary nav remains unchanged', () => {
   for (const path of footerPages) {
     const html = read(path);
-    const expected = portalPages.includes(path) ? 2 : 1;
-    assert.equal(count(html, `href="${ROADMAP}"`), expected, `${path} roadmap occurrences`);
-    assert.equal(count(html, `href="${MEMO}"`), expected, `${path} memo occurrences`);
-    assert.match(html, new RegExp(`href="${ROADMAP.replaceAll('.', '\\.')}" target="_blank" rel="noopener noreferrer"`));
-    assert.match(html, new RegExp(`href="${MEMO.replaceAll('.', '\\.')}" target="_blank" rel="noopener noreferrer"`));
+    const foot = footer(html);
+    assert.equal(count(foot, `href="${ROADMAP}"`), 1, `${path} roadmap footer link`);
+    assert.equal(count(foot, `href="${MEMO}"`), 1, `${path} memo footer link`);
+    assert.match(foot, new RegExp(`href="${ROADMAP.replaceAll('.', '\\.').replaceAll('/', '\\/')}" target="_blank" rel="noopener noreferrer"`));
+    assert.match(foot, new RegExp(`href="${MEMO.replaceAll('.', '\\.').replaceAll('/', '\\/')}" target="_blank" rel="noopener noreferrer"`));
+    const nav = header(html);
+    if (nav) {
+      assert.equal(nav.includes(ROADMAP), false, `${path} primary nav must not gain roadmap`);
+      assert.equal(nav.includes(MEMO), false, `${path} primary nav must not gain Memo`);
+    }
   }
 });
 
