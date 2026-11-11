@@ -2761,15 +2761,16 @@
     },
     "slug": "tabasquea",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmZrtMeK6HKwBkGP5H6DhuM3Kak6raVrXXVEKht2yEWmYf",
-      "reason": "historical_rate_limit",
       "cid": "QmZrtMeK6HKwBkGP5H6DhuM3Kak6raVrXXVEKht2yEWmYf",
-      "ok": false
+      "documentHash": "a5a794592a577de454f1bb4a367487d8d2871b6c7d81a3b37589eda630edc07e",
+      "url": "https://gateway.pinata.cloud/ipfs/QmZrtMeK6HKwBkGP5H6DhuM3Kak6raVrXXVEKht2yEWmYf",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -2778,7 +2779,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "TABASQUEÑA (ALATORRE) MEX. FCI."
   },
   {
     "txid": "7f0004c748fd06f4a7770b8d48c27b1f3492b81be8fe02df1a8bc9b96f91e9b3",
@@ -3141,15 +3142,16 @@
     },
     "slug": "cereza",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmPbvPXTGvwQwdqJXGH2JV7zn4mYHeA9rTrMhtYynaVJfH",
-      "reason": "historical_rate_limit",
       "cid": "QmPbvPXTGvwQwdqJXGH2JV7zn4mYHeA9rTrMhtYynaVJfH",
-      "ok": false
+      "documentHash": "3758b488ba0e1d8418ccb5d8711a136ab4c75f572945877e3754141c9e984d7d",
+      "url": "https://gateway.pinata.cloud/ipfs/QmPbvPXTGvwQwdqJXGH2JV7zn4mYHeA9rTrMhtYynaVJfH",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3158,7 +3160,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "CEREZA (RAMIREZ/RAMIREZ) MEX."
   },
   {
     "txid": "2de34e3d7c8eb32a0493c9711f7fc888c327e355c8932794ec7a2f9fc0fcf707",
@@ -3220,15 +3222,16 @@
     },
     "slug": "venecia",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmYApcMYC18qwqfKGdMgV8GLWWv4DKvZuY8hKUmMSff3bW",
-      "reason": "historical_rate_limit",
       "cid": "QmYApcMYC18qwqfKGdMgV8GLWWv4DKvZuY8hKUmMSff3bW",
-      "ok": false
+      "documentHash": "7effb82b9b3cbab877ba9a8b102c4d2c9a8265dca00064f313f62804c9c2133b",
+      "url": "https://gateway.pinata.cloud/ipfs/QmYApcMYC18qwqfKGdMgV8GLWWv4DKvZuY8hKUmMSff3bW",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3248,7 +3251,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "VENECIA (RAMIREZ/RAMIREZ) MEX."
   },
   {
     "txid": "2a40ed39f83a48a89aa79c464c43ceff1fb65239fff1210a7a79709d9548f0d5",
