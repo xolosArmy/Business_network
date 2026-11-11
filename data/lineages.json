@@ -2982,15 +2982,16 @@
     },
     "slug": "citlali",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmZq1d8xZwmDqdyTwfyh1kbYJ7dYtDFyY6yc4Qhi7TMYCa",
-      "reason": "historical_rate_limit",
       "cid": "QmZq1d8xZwmDqdyTwfyh1kbYJ7dYtDFyY6yc4Qhi7TMYCa",
-      "ok": false
+      "documentHash": "9f82750182a6116834c9b6128cd7eadfd9b5c4122a7fd9d657405b87d7ef0d27",
+      "url": "https://gateway.pinata.cloud/ipfs/QmZq1d8xZwmDqdyTwfyh1kbYJ7dYtDFyY6yc4Qhi7TMYCa",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -2999,7 +3000,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "CITLALI (RAMIREZ/RAMIREZ) MEX."
   },
   {
     "txid": "0d9a9992064b624f986c55d4d418ef186b49b9039e9a67fb9a3a08f0e3e2cfc3",
@@ -3060,15 +3061,16 @@
     },
     "slug": "itzia",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmY4DX7P1RHLJ7hEpWXiDHsrnzkf2oRWMMjcee1arbSMkG",
-      "reason": "historical_rate_limit",
       "cid": "QmY4DX7P1RHLJ7hEpWXiDHsrnzkf2oRWMMjcee1arbSMkG",
-      "ok": false
+      "documentHash": "79bd050de264ea79b312ffa2919d07e58fe83902790570fd17745869752390ca",
+      "url": "https://gateway.pinata.cloud/ipfs/QmY4DX7P1RHLJ7hEpWXiDHsrnzkf2oRWMMjcee1arbSMkG",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3088,7 +3090,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "ITZIA (RAMIREZ) MEX."
   },
   {
     "txid": "30c912d7bc57e6c950eb4786e1d1dbc947ba5a8705d85d5e330c38e65b9a7ddf",
@@ -3149,15 +3151,16 @@
     },
     "slug": "reina",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/Qmd2iz4Z8m9jYnDw3qtBFEeuhQx3H6BQptQqkevqyzpMsZ",
-      "reason": "historical_rate_limit",
       "cid": "Qmd2iz4Z8m9jYnDw3qtBFEeuhQx3H6BQptQqkevqyzpMsZ",
-      "ok": false
+      "documentHash": "c79a745169ea39ae5505e10621ae72d125c27006631a281324389c460f4b3a48",
+      "url": "https://gateway.pinata.cloud/ipfs/Qmd2iz4Z8m9jYnDw3qtBFEeuhQx3H6BQptQqkevqyzpMsZ",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3166,7 +3169,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "REINA (RAMIREZ/RAMIREZ) MEX."
   },
   {
     "txid": "1eeefaf68adb859dbbf588df2bc1bf4b41717ada776b6883231843dd1bd0eafa",
@@ -3288,15 +3291,16 @@
     },
     "slug": "tula",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmQTHG6D31oECBz1Af27HS82n9skZR1bScSwb2cA41kXaa",
-      "reason": "historical_rate_limit",
       "cid": "QmQTHG6D31oECBz1Af27HS82n9skZR1bScSwb2cA41kXaa",
-      "ok": false
+      "documentHash": "5a520da6d83c142ea56cbcedc369d9e22bbcbfc17ab23112d2aed25ec82b265e",
+      "url": "https://gateway.pinata.cloud/ipfs/QmQTHG6D31oECBz1Af27HS82n9skZR1bScSwb2cA41kXaa",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3316,7 +3320,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "TULA (RAMIREZ/RAMIREZ) MEX."
   },
   {
     "txid": "9615f6518edeb36f0cc8c53f66ace430c65bd953d1ee2dbef02728e9fbe52df0",
@@ -3377,15 +3381,16 @@
     },
     "slug": "muna",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmWunHhwwpkueQJNFrdhWpwmGcgiSqNzLdF8z1EfXQk6Wr",
-      "reason": "historical_rate_limit",
       "cid": "QmWunHhwwpkueQJNFrdhWpwmGcgiSqNzLdF8z1EfXQk6Wr",
-      "ok": false
+      "documentHash": "2c134600fde567e6edb4de0efb239a6427ce711ddd4cf292a71202700735b899",
+      "url": "https://gateway.pinata.cloud/ipfs/QmWunHhwwpkueQJNFrdhWpwmGcgiSqNzLdF8z1EfXQk6Wr",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3394,7 +3399,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Muna (Ramírez/Ramírez) Mex."
   },
   {
     "txid": "999ecf726d29b2dc4866b226d9c5e550da40fe5a9949d550c4a381affe53b1e7",
