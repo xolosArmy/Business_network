@@ -3998,15 +3998,16 @@
     },
     "slug": "xoxo",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmZSaTcXMGmsA9iMMdBoXGS4U1tXohZGMTZH5UKvqvtJhJ",
-      "reason": "historical_rate_limit",
       "cid": "QmZSaTcXMGmsA9iMMdBoXGS4U1tXohZGMTZH5UKvqvtJhJ",
-      "ok": false
+      "documentHash": "e50854d4a1b2e0ddc7f79d60fe77b46b0b607d98dc5db854a84a5883f02fb3ef",
+      "url": "https://gateway.pinata.cloud/ipfs/QmZSaTcXMGmsA9iMMdBoXGS4U1tXohZGMTZH5UKvqvtJhJ",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -4015,7 +4016,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Xoxo (Ramírez/Ramírez) Mex."
   },
   {
     "txid": "e46491551765133ad49efd1b71f5b47e9ca65fecd90a55c02dfb22da726ee558",
@@ -4037,15 +4038,16 @@
     },
     "slug": "anahuac",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmSa7Yxb7KJLkuasZExMyGf4ED3UQ5Kw6qJUTfRi8KgwQu",
-      "reason": "historical_rate_limit",
       "cid": "QmSa7Yxb7KJLkuasZExMyGf4ED3UQ5Kw6qJUTfRi8KgwQu",
-      "ok": false
+      "documentHash": "7749ffe39964591d487bff0c0391b6c0c019f6be9e350620f4ce6746ea54c850",
+      "url": "https://gateway.pinata.cloud/ipfs/QmSa7Yxb7KJLkuasZExMyGf4ED3UQ5Kw6qJUTfRi8KgwQu",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -4065,7 +4067,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Anahuac (Ramírez/Ramírez) Mex."
   },
   {
     "txid": "91fa432c1b051c4e8bc9b396b924ed9ef2835b6c2e00f90f720ae1a33b482991",
@@ -4176,15 +4178,16 @@
     },
     "slug": "ocelotl",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmRDSLf5zs79V4F2ijuG9HeGbWWVf2vcAm7uovDYqY628J",
-      "reason": "historical_rate_limit",
       "cid": "QmRDSLf5zs79V4F2ijuG9HeGbWWVf2vcAm7uovDYqY628J",
-      "ok": false
+      "documentHash": "0bd7108d5cf75f95bd7f5a41f1fa40dd44a4618a70d1b5d70741a2cedbe669b1",
+      "url": "https://gateway.pinata.cloud/ipfs/QmRDSLf5zs79V4F2ijuG9HeGbWWVf2vcAm7uovDYqY628J",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -4193,7 +4196,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Ocelotl Ramirez"
   },
   {
     "txid": "4b9680a440279a54211305b142105142c7e57fc9fc586e666a679a903dac1107",
@@ -4293,15 +4296,16 @@
     },
     "slug": "mayahuel",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmRGghmZUpFLDQ3YFA4icgLhj7Gy1cFPVZMUH6SS5ib6Gi",
-      "reason": "historical_rate_limit",
       "cid": "QmRGghmZUpFLDQ3YFA4icgLhj7Gy1cFPVZMUH6SS5ib6Gi",
-      "ok": false
+      "documentHash": "dbbc08cea757b6f8bc1d6ca290e15d298c4e1447f3cfcb82ea8001520ba65d66",
+      "url": "https://gateway.pinata.cloud/ipfs/QmRGghmZUpFLDQ3YFA4icgLhj7Gy1cFPVZMUH6SS5ib6Gi",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -4310,7 +4314,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Mayahuel Ramirez"
   },
   {
     "txid": "02c571ffefef3a28ad07d3afe20e07ba059f78c9f4807f27e5cc12dc4654af41",
@@ -4332,15 +4336,16 @@
     },
     "slug": "durango",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmQgARyqSf67ykKB4GPxQ6ac13jgTvQAQW1C5L5pf4oNhM",
-      "reason": "historical_rate_limit",
       "cid": "QmQgARyqSf67ykKB4GPxQ6ac13jgTvQAQW1C5L5pf4oNhM",
-      "ok": false
+      "documentHash": "d59643b78a3b7d5ae08fe69a0ab83667be59272f5662f66f4522279ca0c05192",
+      "url": "https://gateway.pinata.cloud/ipfs/QmQgARyqSf67ykKB4GPxQ6ac13jgTvQAQW1C5L5pf4oNhM",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -4360,7 +4365,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Durango Ramirez"
   },
   {
     "txid": "5bbf51e055b39ee1eaabcd828b4206b9b50fac69252af280c0b83f575c56b6a2",
@@ -4382,15 +4387,16 @@
     },
     "slug": "anubis",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmeGq5CSDUyQrbWq9y1dAhqbp32LGFLgMPjf5AT7X3Vf3q",
-      "reason": "historical_rate_limit",
       "cid": "QmeGq5CSDUyQrbWq9y1dAhqbp32LGFLgMPjf5AT7X3Vf3q",
-      "ok": false
+      "documentHash": "fd070a4dcbdb472b3d5ce6bb3bb03cf4bb27208abf4c1e44f5c96124761528ca",
+      "url": "https://gateway.pinata.cloud/ipfs/QmeGq5CSDUyQrbWq9y1dAhqbp32LGFLgMPjf5AT7X3Vf3q",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -4399,7 +4405,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Anubis Ramirez"
   },
   {
     "txid": "f4f26fa9099a02067c0977bff52c2030635619382b08dbb4e304c5f64d57c0be",
