@@ -180,7 +180,7 @@
   .module-number { margin-bottom:1.4rem; }
   .metrics-dashboard { grid-template-columns:repeat(2,minmax(0,1fr)); gap:2rem 0; }
   .metric-node { padding-inline:1rem; }
-  .metric-node:nth-child(3) { border:0; padding-left:0; }
+  .metric-node:nth-child(odd) { border:0; padding-left:0; }
   .recent-lineages-grid { grid-template-columns:1fr; }
   .origin-art { max-width:400px; margin-inline:auto; }
   .human-grid { gap:3rem; }
