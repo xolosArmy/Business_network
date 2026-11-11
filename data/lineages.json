@@ -1179,20 +1179,21 @@
     },
     "slug": "xolosarmyxec",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmXq8BHDA5SdTjuFCjuk3Rdw6mdRejoVj33rTR5JjxAxRY",
-      "reason": "historical_rate_limit",
       "cid": "QmXq8BHDA5SdTjuFCjuk3Rdw6mdRejoVj33rTR5JjxAxRY",
-      "ok": false
+      "documentHash": "14954e9d6f513395a1b995d4f27c907a71848d8a0034d44eb3d72a4397d2b9ee",
+      "url": "https://gateway.pinata.cloud/ipfs/QmXq8BHDA5SdTjuFCjuk3Rdw6mdRejoVj33rTR5JjxAxRY",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "xolosarmy.xec: Identidad Soberana en eCash"
   },
   {
     "txid": "f8fbc56343766a57f39a6e9a7d5f72606fb557afe8495d118dea394bc039f0cb",
@@ -1214,20 +1215,21 @@
     },
     "slug": "personalidad",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmZPAwX3kkDvop5uz91ci9m1Ajx2KvxNazcfwwmuWedgR6",
-      "reason": "historical_rate_limit",
       "cid": "QmZPAwX3kkDvop5uz91ci9m1Ajx2KvxNazcfwwmuWedgR6",
-      "ok": false
+      "documentHash": "76b67ab7bb17f0c1b6b965a5a334f22d2e1d325180f4c9fb17a128a030a6f9ea",
+      "url": "https://gateway.pinata.cloud/ipfs/QmZPAwX3kkDvop5uz91ci9m1Ajx2KvxNazcfwwmuWedgR6",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Personalidad Xolo: Tonatiuh Ramírez (Edición Teyolía)"
   },
   {
     "txid": "d7fa0e23f61589795eb2dd1f286c1278f87cfbede005b9543aed83183c4f230b",
@@ -1249,20 +1251,21 @@
     },
     "slug": "mitograma",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/Qma27z3Zr4jdJiPSi8vfTTdqM6y8jeKfEnscADT4nPVHiP",
-      "reason": "historical_rate_limit",
       "cid": "Qma27z3Zr4jdJiPSi8vfTTdqM6y8jeKfEnscADT4nPVHiP",
-      "ok": false
+      "documentHash": "9f08b619e26ff62662536adbf6a37765e910213d8c4ba334317a99de011de30e",
+      "url": "https://gateway.pinata.cloud/ipfs/Qma27z3Zr4jdJiPSi8vfTTdqM6y8jeKfEnscADT4nPVHiP",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Mitograma Teposxolotlcalli #001"
   },
   {
     "txid": "bafd926497cc424276299297cc14697dda91a0029cbc2124d2ad5f3b4faeea0c",
@@ -1284,20 +1287,21 @@
     },
     "slug": "the",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmbCG5Xpk23UMAv9FAAsnJ8Jkbxvpewqgn4Dncwnje6kR2",
-      "reason": "historical_rate_limit",
       "cid": "QmbCG5Xpk23UMAv9FAAsnJ8Jkbxvpewqgn4Dncwnje6kR2",
-      "ok": false
+      "documentHash": "ee8585e074bb65ebb461fc44e1c0844e299d25b09b743c8dbc951c7f43a0aea7",
+      "url": "https://gateway.pinata.cloud/ipfs/QmbCG5Xpk23UMAv9FAAsnJ8Jkbxvpewqgn4Dncwnje6kR2",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "The Xolos Ramirez Show #001 – Yanga"
   },
   {
     "txid": "3033fe4d51767d196597df41d14ecdb4822b4c9e48be630035a76b7d301b502a",
@@ -1319,20 +1323,21 @@
     },
     "slug": "amixtli",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmWjs54XnaaG2SRSoRk6Ro4S5nwSZgUvYbcdnxBpRgq3Tp",
-      "reason": "historical_rate_limit",
       "cid": "QmWjs54XnaaG2SRSoRk6Ro4S5nwSZgUvYbcdnxBpRgq3Tp",
-      "ok": false
+      "documentHash": "8d7926ad5e36fa3fdca85395683fb26516f55686b8ef38d1aa75e29c14b2415f",
+      "url": "https://gateway.pinata.cloud/ipfs/QmWjs54XnaaG2SRSoRk6Ro4S5nwSZgUvYbcdnxBpRgq3Tp",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Amixtli Ramírez"
   },
   {
     "txid": "99c67c2e02f3ceba314c65cabd81c3c254b1ef6e110f82572e7ae8b438c65d37",
@@ -1354,20 +1359,21 @@
     },
     "slug": "the",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmZ8PDfFGwnMqZ4prU9SZ5shJ5Q5UtJAKFoqCevhFonFG3",
-      "reason": "historical_rate_limit",
       "cid": "QmZ8PDfFGwnMqZ4prU9SZ5shJ5Q5UtJAKFoqCevhFonFG3",
-      "ok": false
+      "documentHash": "f6b526554f564eae259ccd76e3ded52d7e58bc7f14ac919aaf256accc4b5f921",
+      "url": "https://gateway.pinata.cloud/ipfs/QmZ8PDfFGwnMqZ4prU9SZ5shJ5Q5UtJAKFoqCevhFonFG3",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "The Xolos Ramírez Show: Humo Ramírez & Luciana Renner (Ep. 17-05-2026)"
   },
   {
     "txid": "dc0acad913498f5fbbcea2e0dcfe1069b8a0c7faf84ee3eb6e63b19f1afc2979",
@@ -1459,20 +1465,21 @@
     },
     "slug": "evangelio",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmSd8veFkA9EdYKUaAL4L4tHWdregyKWWaHPrW4hGUUkG8",
-      "reason": "historical_rate_limit",
       "cid": "QmSd8veFkA9EdYKUaAL4L4tHWdregyKWWaHPrW4hGUUkG8",
-      "ok": false
+      "documentHash": "f6297bd9aff499f08af2240a1bc99c8bb4e0e3aae522398af2eafe221c8d287a",
+      "url": "https://gateway.pinata.cloud/ipfs/QmSd8veFkA9EdYKUaAL4L4tHWdregyKWWaHPrW4hGUUkG8",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Evangelio RMZ del Xoloitzcuintle — Bloque Génesis"
   },
   {
     "txid": "a0c51438388893afa192ce24d3632a157daf7f34166fd26058e5b0ccf1e2ff76",
@@ -1494,20 +1501,21 @@
     },
     "slug": "personalidad",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmYbju6Ne1855KBU9r3XuV2FanMUtcSYv3f5LbnvX8Pzvq",
-      "reason": "historical_rate_limit",
       "cid": "QmYbju6Ne1855KBU9r3XuV2FanMUtcSYv3f5LbnvX8Pzvq",
-      "ok": false
+      "documentHash": "a973340857da0f27b88e91dd1c5e327c1d98ad9e88cb347c426583d602040ddd",
+      "url": "https://gateway.pinata.cloud/ipfs/QmYbju6Ne1855KBU9r3XuV2FanMUtcSYv3f5LbnvX8Pzvq",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Personalidad Xolo: Onix Ramírez"
   },
   {
     "txid": "c490864b0c4cd2cbe163a573e830c22d7e270207062903f9f2f0e08fca6a13f6",
@@ -1529,20 +1537,21 @@
     },
     "slug": "chimalma",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmQgzwkmWEue7iEB2qFXGywVCYY7dUngah6RitYs2aFb22",
-      "reason": "historical_rate_limit",
       "cid": "QmQgzwkmWEue7iEB2qFXGywVCYY7dUngah6RitYs2aFb22",
-      "ok": false
+      "documentHash": "d0a837c2d8e8ff1baf783abc019fa7a201fdc590349490ed115dc8295e1e0a23",
+      "url": "https://gateway.pinata.cloud/ipfs/QmQgzwkmWEue7iEB2qFXGywVCYY7dUngah6RitYs2aFb22",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Chimalma Ramírez — NFT de Nacimiento"
   },
   {
     "txid": "efec4f67bad956de425122d0496071842832433d349209f6f201898dc737477b",
