@@ -3726,15 +3726,16 @@
     },
     "slug": "mictli",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmPjcg7aUorrU5Q5i4atjezmdSPusUES3ShFHv2J93wvXy",
-      "reason": "historical_rate_limit",
       "cid": "QmPjcg7aUorrU5Q5i4atjezmdSPusUES3ShFHv2J93wvXy",
-      "ok": false
+      "documentHash": "6ed9bf0e172aeb6930b1e93a701f2ed6ab87c49c72749a7814a2ef9605f1b8f5",
+      "url": "https://gateway.pinata.cloud/ipfs/QmPjcg7aUorrU5Q5i4atjezmdSPusUES3ShFHv2J93wvXy",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3743,7 +3744,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Mictli Ramirez"
   },
   {
     "txid": "4b499c21c0d324366c43f2840a2218091de301e0898b38633ddf1eb0cb070684",
@@ -3765,15 +3766,16 @@
     },
     "slug": "teyolia",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmXU1z9PV9F7Mc3JQf2mVDJZX57fxcJ7eUsGEBMTxESW8A",
-      "reason": "historical_rate_limit",
       "cid": "QmXU1z9PV9F7Mc3JQf2mVDJZX57fxcJ7eUsGEBMTxESW8A",
-      "ok": false
+      "documentHash": "3d84c3075aa52799f841a99f9c6da485f86a9510612d892ea165c364f0498924",
+      "url": "https://gateway.pinata.cloud/ipfs/QmXU1z9PV9F7Mc3JQf2mVDJZX57fxcJ7eUsGEBMTxESW8A",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3782,7 +3784,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Teyolia Ramírez"
   },
   {
     "txid": "0153b3cdc6bb45fb5fc9fa0162914f9a0edb14ea565607993336b46d5d4bc6b3",
@@ -3804,15 +3806,16 @@
     },
     "slug": "balamka",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmTY1ZDCYpf6JRndvb6ivw331eFasB3JnDegptijkDQb1d",
-      "reason": "historical_rate_limit",
       "cid": "QmTY1ZDCYpf6JRndvb6ivw331eFasB3JnDegptijkDQb1d",
-      "ok": false
+      "documentHash": "84d79218c4aa0450312321f9f1a62dcbd2f458b521e6c543175787654a4d8420",
+      "url": "https://gateway.pinata.cloud/ipfs/QmTY1ZDCYpf6JRndvb6ivw331eFasB3JnDegptijkDQb1d",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3832,7 +3835,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Balamka (Ramírez/Ramírez) Mex."
   },
   {
     "txid": "8f9d0638a8c0d4df260a0d89617287f2df258c4e215ed9a7cb471c91e5013d75",
