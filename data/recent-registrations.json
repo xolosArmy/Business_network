@@ -15,11 +15,11 @@
     "slug": "xilonen-ramirez",
     "tokenId": "ed4124cb645395306234e3625f02c580e768eabfe4444cf148bd455f929f5cb1",
     "cid": "QmPP9WC9Quf1PNaj1aVzU8XLyZ526doP5gEu28aHTEuigh",
-    "nombre": null,
+    "nombre": "Xilonen Ramírez",
     "timestamp": 1793724806,
     "blockHeight": 973947,
     "hasParents": false,
-    "ipfsOk": false
+    "ipfsOk": true
   },
   {
     "txid": "2cd356ecf042c3182352b3f240895090e1d716cb5d08f4ee4da8a178365a3ed1",
@@ -48,22 +48,22 @@
     "slug": "tonalli-ramirez",
     "tokenId": "084ff1d5dde0cdfe3f6d61978dc39e7a21ebb9a25cb21e8e44616315f7d9b199",
     "cid": "QmXx6hiC1FWxXKoaJQ1cSc6SpxkGq76JEyToL89aM3mGWE",
-    "nombre": null,
+    "nombre": "Tonalli Ramírez",
     "timestamp": 1791721248,
     "blockHeight": 970582,
     "hasParents": false,
-    "ipfsOk": false
+    "ipfsOk": true
   },
   {
     "txid": "6a14c61eee376cb86ec310bc0a9bf68ed501439ac3ab0378c1a9885e559165ed",
     "slug": "iztli-ramirez",
     "tokenId": "6a14c61eee376cb86ec310bc0a9bf68ed501439ac3ab0378c1a9885e559165ed",
     "cid": "QmXKNZnTSHREtnCWWeDK5SXkQK3QRBPzs987d7xF15KEZ9",
-    "nombre": null,
+    "nombre": "Iztli Ramírez",
     "timestamp": 1790792439,
     "blockHeight": 969097,
     "hasParents": false,
-    "ipfsOk": false
+    "ipfsOk": true
   },
   {
     "txid": "a6e2171d6bbca37212bf4541747ba9d4c5762402a9a3095c8848d4523c63e9c0",
