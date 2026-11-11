@@ -1115,15 +1115,16 @@
     },
     "slug": "registro",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmfG8t9WoLungidXjCY6q2S66SipvzuwQsuKnpGf4Wk2bb",
-      "reason": "historical_rate_limit",
       "cid": "QmfG8t9WoLungidXjCY6q2S66SipvzuwQsuKnpGf4Wk2bb",
-      "ok": false
+      "documentHash": "c338991c09bbc43797b02c555759c12ee03e0203c669cdb17bfda2c269f18c17",
+      "url": "https://gateway.pinata.cloud/ipfs/QmfG8t9WoLungidXjCY6q2S66SipvzuwQsuKnpGf4Wk2bb",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -1132,7 +1133,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Registro Oficial FCM: Chimalma, Mixa, Luna y Teyolia 🐕🇲🇽"
   },
   {
     "txid": "0b0a16a49d2a1d045cfba864ef00f207eea5b6d31caff4be845b311df3256296",
@@ -1154,15 +1155,16 @@
     },
     "slug": "certificado",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmX21ywpfoiDXJgDbrpKSQmkhxJirGStsofjWysdmbZCZa",
-      "reason": "historical_rate_limit",
       "cid": "QmX21ywpfoiDXJgDbrpKSQmkhxJirGStsofjWysdmbZCZa",
-      "ok": false
+      "documentHash": "734f94d6ac8576b80154b2e9f326a0c736f40b09b4a066d792e3bd4f498a73e8",
+      "url": "https://gateway.pinata.cloud/ipfs/QmX21ywpfoiDXJgDbrpKSQmkhxJirGStsofjWysdmbZCZa",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -1171,7 +1173,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Certificado de Vacunación y Desparasitación - Xolos Ramírez"
   },
   {
     "txid": "2ab5d1890eec894ed87b00f02721ce57dc36f681e96f9125a84a7e3936e25c4e",
@@ -1193,15 +1195,16 @@
     },
     "slug": "ehecatl",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmZwdQJcoEEYTDFz1bk7o9YU4UWtPYwskhr3CmQqpBgzLD",
-      "reason": "historical_rate_limit",
       "cid": "QmZwdQJcoEEYTDFz1bk7o9YU4UWtPYwskhr3CmQqpBgzLD",
-      "ok": false
+      "documentHash": "853a699c5c2f643bbbc03d0e5ee067baaaaf28f58a7c329a8f19b17543ca8f21",
+      "url": "https://gateway.pinata.cloud/ipfs/QmZwdQJcoEEYTDFz1bk7o9YU4UWtPYwskhr3CmQqpBgzLD",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -1221,7 +1224,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Ehecatl Ramírez"
   },
   {
     "txid": "6c5430f6e99b5945bb74723f20f61173efb1f9a5c256f5921b77fa070bcb245e",
@@ -1243,15 +1246,16 @@
     },
     "slug": "espadn",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmQWhqKwxs6Hh2XLB5hgdoLQMgGePK1pQYhzZuDGXp2UD5",
-      "reason": "historical_rate_limit",
       "cid": "QmQWhqKwxs6Hh2XLB5hgdoLQMgGePK1pQYhzZuDGXp2UD5",
-      "ok": false
+      "documentHash": "4f361be00cf1d9955c9e6e96f8cc15ffba327cb49989edaa9aa7fcb5349ebbe8",
+      "url": "https://gateway.pinata.cloud/ipfs/QmQWhqKwxs6Hh2XLB5hgdoLQMgGePK1pQYhzZuDGXp2UD5",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -1260,7 +1264,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Espadín Ramírez · Microchip ISO 900255002683025"
   },
   {
     "txid": "26fb361599ec6ce20b9259f6ec59433bbed50a83dedef706bcef7a5323fe1694",
@@ -1282,15 +1286,16 @@
     },
     "slug": "puka",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmdfRRqjtpveHGiFsiaMKJ58G1eS8TdYoCziiCENzzdfht",
-      "reason": "historical_rate_limit",
       "cid": "QmdfRRqjtpveHGiFsiaMKJ58G1eS8TdYoCziiCENzzdfht",
-      "ok": false
+      "documentHash": "063efd499474a3941ee22afa5683d3f8cc6f1821eca026e44ed7a64c933406c6",
+      "url": "https://gateway.pinata.cloud/ipfs/QmdfRRqjtpveHGiFsiaMKJ58G1eS8TdYoCziiCENzzdfht",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -1299,7 +1304,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Puka Ramírez — Registro de Linaje y Microchip"
   },
   {
     "txid": "c4f6498bfb0450bf3d2820a9008e4cb206f59b0b5fcd05914f51c23af2da0f05",
@@ -1639,15 +1644,16 @@
     },
     "slug": "chimalma",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/Qmak5esCGzE9QW7xFSzQW8HPZJ1KpNqD85tVtGQsFFnpbs",
-      "reason": "historical_rate_limit",
       "cid": "Qmak5esCGzE9QW7xFSzQW8HPZJ1KpNqD85tVtGQsFFnpbs",
-      "ok": false
+      "documentHash": "9a0460444b32f312f37ec121484169b7d81f411a19cae3bf9b7caa90b09dd4c3",
+      "url": "https://gateway.pinata.cloud/ipfs/Qmak5esCGzE9QW7xFSzQW8HPZJ1KpNqD85tVtGQsFFnpbs",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -1656,7 +1662,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Chimalma Ramírez: El Xoloitzcuintle en los Códices Mexicas"
   },
   {
     "txid": "7852e5b49afb68a7523e86f22dd5ef184468fbf68e99e411507c241f1b90a42f",
@@ -1837,15 +1843,16 @@
     },
     "slug": "onix",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmaNfYghNuVp5jHuaqnuSu5rWS57cuLbhxfXviJ18kfLq3",
-      "reason": "historical_rate_limit",
       "cid": "QmaNfYghNuVp5jHuaqnuSu5rWS57cuLbhxfXviJ18kfLq3",
-      "ok": false
+      "documentHash": "217f6f402c4778d5e95d59bdaa55ba3a7b5c6c1e21276a8b7e86aa4fa87f81ee",
+      "url": "https://gateway.pinata.cloud/ipfs/QmaNfYghNuVp5jHuaqnuSu5rWS57cuLbhxfXviJ18kfLq3",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -1854,7 +1861,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Onix Ramirez"
   },
   {
     "txid": "094639e668c24620ec9f2107f68b55eb4766c3fee41261fc624117d4fa805fd4",
@@ -1876,15 +1883,16 @@
     },
     "slug": "luna",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmaLkQaqE2jsBQfjvehiFp3qub8vXHX2MM6jC7cdcHNkvQ",
-      "reason": "historical_rate_limit",
       "cid": "QmaLkQaqE2jsBQfjvehiFp3qub8vXHX2MM6jC7cdcHNkvQ",
-      "ok": false
+      "documentHash": "29a4e010d2e0606911337d2fa3abeeb5d4e974b6dde35174d326a18fb0271a48",
+      "url": "https://gateway.pinata.cloud/ipfs/QmaLkQaqE2jsBQfjvehiFp3qub8vXHX2MM6jC7cdcHNkvQ",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -1893,7 +1901,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Luna Ramirez"
   },
   {
     "txid": "4628220c6bb119148f320fd943f3957a12367ade2282e5fcaaae18d92b8f9909",
