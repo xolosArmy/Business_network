@@ -1783,20 +1783,21 @@
     },
     "slug": "amoxtli",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmWyV9scQsKT68SWFjnu66GzDHnz3BZaQdBXYfZt5RTVQd",
-      "reason": "historical_rate_limit",
       "cid": "QmWyV9scQsKT68SWFjnu66GzDHnz3BZaQdBXYfZt5RTVQd",
-      "ok": false
+      "documentHash": "0de057d7f3b21847236f356847c71fba7efa3682fb8734b3cc47ebb5618bd1b5",
+      "url": "https://gateway.pinata.cloud/ipfs/QmWyV9scQsKT68SWFjnu66GzDHnz3BZaQdBXYfZt5RTVQd",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "AMOXTLI (RAMIREZ/RAMIREZ) MEX. FCI."
   },
   {
     "txid": "13a2fd97493e2c15ec1077465da11dd602e86fbf4e200b9c4bb72dab78c199ea",
@@ -1853,20 +1854,21 @@
     },
     "slug": "uxmal",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/Qmau9MYxWmsL9wnDs8z2x1oaR68rNXRS14UWsstKHq3jgF",
-      "reason": "historical_rate_limit",
       "cid": "Qmau9MYxWmsL9wnDs8z2x1oaR68rNXRS14UWsstKHq3jgF",
-      "ok": false
+      "documentHash": "01a4f2eec11de55b79cd970e76b51ff0f41e09dffb540551768e0ee41686e08b",
+      "url": "https://gateway.pinata.cloud/ipfs/Qmau9MYxWmsL9wnDs8z2x1oaR68rNXRS14UWsstKHq3jgF",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Uxmal (Avila) Mex. FCI."
   },
   {
     "txid": "fb0f49f9b6c5b701c637afbe6c10088fe11b4689bdf7a3800e62ba1a192499ab",
@@ -1958,20 +1960,21 @@
     },
     "slug": "ticuiz",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmXExoek4rTfAVh7RtT6PSoYScevco4tDR4iSk2Ta9iWJa",
-      "reason": "historical_rate_limit",
       "cid": "QmXExoek4rTfAVh7RtT6PSoYScevco4tDR4iSk2Ta9iWJa",
-      "ok": false
+      "documentHash": "140463624276c2727d27b2490cc7be943c1ae626783d96667cf00d81ac3232e0",
+      "url": "https://gateway.pinata.cloud/ipfs/QmXExoek4rTfAVh7RtT6PSoYScevco4tDR4iSk2Ta9iWJa",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Ticuiz (Langarica) Mex. FCI."
   },
   {
     "txid": "44b35bf6dfb472b982bf6964f9eeb6783b5eea5ab71e7adb84246b61ff4371f5",
