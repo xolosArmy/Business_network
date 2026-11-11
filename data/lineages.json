@@ -377,15 +377,16 @@
     },
     "slug": "sesasi",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
       "cid": "QmV7XVfXzKC5zSD7ZdzRwk8D7rRjvyGRuDKpayhq2ckWd3",
       "documentHash": "5e1f70ace96df0377443f22da051437fe5840fdb0ba5a701c165633a0eb99a6c",
       "url": "https://gateway.pinata.cloud/ipfs/QmV7XVfXzKC5zSD7ZdzRwk8D7rRjvyGRuDKpayhq2ckWd3",
-      "reason": "gateway_unreachable",
-      "state": "temporary",
-      "ok": false
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -394,7 +395,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Sesasi Ramírez — Celebración de cumpleaños · 2026"
   },
   {
     "txid": "d2e66260d69158171d80a270a6cba041508c57767f52ef106f1a6beda85988d6",
@@ -615,15 +616,16 @@
     },
     "slug": "onix",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmY73NvBfZipQbWGccEvqNg1oa2hWa5CiLxXhjt5vUPDBB",
-      "reason": "historical_rate_limit",
       "cid": "QmY73NvBfZipQbWGccEvqNg1oa2hWa5CiLxXhjt5vUPDBB",
-      "ok": false
+      "documentHash": "48e25f855cd755f384042d946b75958e807b2a78bd39084cc6950b192945773a",
+      "url": "https://gateway.pinata.cloud/ipfs/QmY73NvBfZipQbWGccEvqNg1oa2hWa5CiLxXhjt5vUPDBB",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -632,7 +634,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Onix Ramírez — The Xolos Ramirez Show 2026"
   },
   {
     "txid": "2108c211d55ea3c35e5b4e19c0ada499995ab5e8a629ed3134442de3e16051cb",
@@ -796,15 +798,16 @@
     },
     "slug": "chalchi",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmWT5PwvGDBFnZN8i2fjmHKR8wiSMJWWT1T3RrDdRrtwuc",
-      "reason": "historical_rate_limit",
       "cid": "QmWT5PwvGDBFnZN8i2fjmHKR8wiSMJWWT1T3RrDdRrtwuc",
-      "ok": false
+      "documentHash": "cee545920ab2a3666b44e8d5f997a523528774ee134f2d0c793bf64dcd4c71d5",
+      "url": "https://gateway.pinata.cloud/ipfs/QmWT5PwvGDBFnZN8i2fjmHKR8wiSMJWWT1T3RrDdRrtwuc",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -813,7 +816,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Chalchi Ramírez"
   },
   {
     "txid": "5ef654e40992b3df24b5902780c73530d8ca8f3171eb81fbc9c44a3813107887",
@@ -835,15 +838,16 @@
     },
     "slug": "yolotzin",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmcPuqG1VXeyxR2xkJMm8znunWzmgYMWykmzSkt5D2haWR",
-      "reason": "historical_rate_limit",
       "cid": "QmcPuqG1VXeyxR2xkJMm8znunWzmgYMWykmzSkt5D2haWR",
-      "ok": false
+      "documentHash": "b450a08542535d0422bade26d86cf13f47472e3b4f8cd1c590e50755bfec2f22",
+      "url": "https://gateway.pinata.cloud/ipfs/QmcPuqG1VXeyxR2xkJMm8znunWzmgYMWykmzSkt5D2haWR",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -852,7 +856,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Yolotzin Ramírez"
   },
   {
     "txid": "907515980dfce29c54377b8096bd911e3a565940fa51f09fac5d1a4545f75c34",

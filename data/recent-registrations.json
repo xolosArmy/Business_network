@@ -164,11 +164,11 @@
     "slug": "sesasi",
     "tokenId": "fb9cb8e412873c3af64f73ccb89b7323c8e3c186ee2b131a049bf64996beafbc",
     "cid": "QmV7XVfXzKC5zSD7ZdzRwk8D7rRjvyGRuDKpayhq2ckWd3",
-    "nombre": null,
+    "nombre": "Sesasi Ramírez — Celebración de cumpleaños · 2026",
     "timestamp": 1789698780,
     "blockHeight": 967277,
     "hasParents": false,
-    "ipfsOk": false,
+    "ipfsOk": true,
     "genealogy": {
       "documented": null,
       "verified": false
