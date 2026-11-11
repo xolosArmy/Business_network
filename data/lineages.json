@@ -3421,15 +3421,16 @@
     },
     "slug": "papalotl",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmXMQimJ457cNmoBSUQxA26NnVHAYRgDu9c3fvYYaN6YrD",
-      "reason": "historical_rate_limit",
       "cid": "QmXMQimJ457cNmoBSUQxA26NnVHAYRgDu9c3fvYYaN6YrD",
-      "ok": false
+      "documentHash": "9f3fc9ae4b764578a510e046e03e1debe2e3a85936a1e524bc234bf06748ed0e",
+      "url": "https://gateway.pinata.cloud/ipfs/QmXMQimJ457cNmoBSUQxA26NnVHAYRgDu9c3fvYYaN6YrD",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3449,7 +3450,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Papalotl (Ramírez/Ramírez) Mex."
   },
   {
     "txid": "cec56b1d30592fa06096cca506aaf9771fe0f760e06b159bce89126587615fe0",
@@ -3471,15 +3472,16 @@
     },
     "slug": "yeyetzi",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmYFtNkjmUXWFXfNtj4at3fgAKyfkUXfRqpj8C3bXtgvcX",
-      "reason": "historical_rate_limit",
       "cid": "QmYFtNkjmUXWFXfNtj4at3fgAKyfkUXfRqpj8C3bXtgvcX",
-      "ok": false
+      "documentHash": "2858352a1bdf31559a63905b6c9bde8ffbb4c8828b23c4a0e10e759d6157e52d",
+      "url": "https://gateway.pinata.cloud/ipfs/QmYFtNkjmUXWFXfNtj4at3fgAKyfkUXfRqpj8C3bXtgvcX",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3488,7 +3490,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Yeyetzi (Ramirez/Ramirez) Mex."
   },
   {
     "txid": "0004bd83727c79eb7ad2d3e232eb88b058dee238006cf4d3aeb5b317f630047e",
@@ -3510,15 +3512,16 @@
     },
     "slug": "jade",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmNaUBcNshQKDeSgy4LAt51Kdxj3zwymnuf4Cxt9hZrFDn",
-      "reason": "historical_rate_limit",
       "cid": "QmNaUBcNshQKDeSgy4LAt51Kdxj3zwymnuf4Cxt9hZrFDn",
-      "ok": false
+      "documentHash": "6421f2969635d89486babdbf9fb3868a824adec38e01ac3c9199eb358915d49f",
+      "url": "https://gateway.pinata.cloud/ipfs/QmNaUBcNshQKDeSgy4LAt51Kdxj3zwymnuf4Cxt9hZrFDn",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3538,7 +3541,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Jade (Ramirez/Ramirez) Mex."
   },
   {
     "txid": "676a4f51cf30841240d692c651ebab00834d6bc78aeb7abb2fbc8c66a9aba483",
@@ -3816,15 +3819,16 @@
     },
     "slug": "aruma",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmdypZpnsc9HigMZuFTTNdtCfsxkD7NUjibpByn4rMNx34",
-      "reason": "historical_rate_limit",
       "cid": "QmdypZpnsc9HigMZuFTTNdtCfsxkD7NUjibpByn4rMNx34",
-      "ok": false
+      "documentHash": "c6ebd00a5e50b5c8d7325670ec5ebb8a47691b524a8e50c84238a4ab88b0fb96",
+      "url": "https://gateway.pinata.cloud/ipfs/QmdypZpnsc9HigMZuFTTNdtCfsxkD7NUjibpByn4rMNx34",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3844,7 +3848,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Aruma (Ramírez) Mex."
   },
   {
     "txid": "0d4926f2c94567a1e97c435229439e885e36672bbb31b26b5be3dd9160a7c4b7",
