@@ -5341,15 +5341,16 @@
     },
     "slug": "xolosarmy",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmVL17PbiY1fxeFKedgTkxoHWbvcBr5iFNG8EjtZskvAFp",
-      "reason": "historical_rate_limit",
       "cid": "QmVL17PbiY1fxeFKedgTkxoHWbvcBr5iFNG8EjtZskvAFp",
-      "ok": false
+      "documentHash": "4545e29c3e3cabbe562fc7e18b70f47a06038c72fc241da2fea3e3d05804ef4b",
+      "url": "https://gateway.pinata.cloud/ipfs/QmVL17PbiY1fxeFKedgTkxoHWbvcBr5iFNG8EjtZskvAFp",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -5358,7 +5359,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "xolosArmy Network Grokipedia Entry Confirmed"
   },
   {
     "txid": "b0f473c7941e4d7c286032b0374c2457012b8dbd2e576c7f3fcb6710a16694ba",
