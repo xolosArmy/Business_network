@@ -148,3 +148,20 @@ test('context loss shows fallback, restoration rebuilds once, and pause stops th
     const ev=new Event('pagehide');Object.defineProperty(ev,'persisted',{value:false});window.dispatchEvent(ev);assert.equal(env.deleted.length,10);
   }finally{env.restore();}
 });
+
+test('the census displays documented and verified counts independently',()=>{
+  const input={linajes_registrados:4,registros_con_padre_y_madre:2,registros_con_padre_y_madre_verificados:0};
+  const {entries}=readMetrics(input);
+  assert.equal(entries['metric-links'],2);
+  assert.equal(entries['metric-links-verified'],0);
+  assert.equal(readMetrics({linajes_registrados:4,registros_con_padre_y_madre:1}).entries['metric-links'],null);
+});
+
+test('recent cards distinguish verified, documented and pending genealogy',()=>{
+  const d=fakeDocument(),documented={padre:'Padre',madre:'Madre'};
+  for(const [item,label] of [
+    [{genealogy:{documented,verified:true}},'verificada'],
+    [{genealogy:{documented,verified:false}},'documentada'],
+    [{genealogy:{documented:null,verified:false}},'pendiente'],
+  ]) assert.equal(lineageCard(d,item).children[0].textContent,'IPFS sin validar · Genealogía '+label);
+});

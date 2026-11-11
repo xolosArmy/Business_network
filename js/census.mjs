@@ -8,7 +8,8 @@ export function readMetrics(value, now = Date.now()) {
     'metric-lineages':count(value.linajes_registrados),
     'metric-events':count(value.txs_xolo_detectadas),
     'metric-ipfs':count(value.linajes_validados_ipfs),
-    'metric-links':count(value.registros_con_padre_y_madre),
+    'metric-links':Object.hasOwn(value,'registros_con_padre_y_madre_verificados')?count(value.registros_con_padre_y_madre):null,
+    'metric-links-verified':count(value.registros_con_padre_y_madre_verificados),
   };
   if(Object.values(entries).every(n=>n===null)) throw new Error('Empty census');
   const parsed = typeof value.ultima_actualizacion === 'string' ? Date.parse(value.ultima_actualizacion) : NaN;
@@ -38,7 +39,10 @@ export async function loadMetrics(document) {
   if(!badge)return;
   try {
     const result=readMetrics(await fetchJSON('/data/metrics.json'));
-    for(const [id,value] of Object.entries(result.entries)) document.getElementById(id).textContent=value===null?'—':new Intl.NumberFormat('es-MX').format(value);
+    for(const [id,value] of Object.entries(result.entries)) {
+      const metric=document.getElementById(id);
+      if(metric) metric.textContent=value===null?'—':new Intl.NumberFormat('es-MX').format(value);
+    }
     const time=document.getElementById('metrics-last-update');
     time.textContent=result.date?formatDate(result.date):'Fecha no disponible';
     if(result.date)time.dateTime=result.date.toISOString();
@@ -50,8 +54,13 @@ export async function loadMetrics(document) {
 }
 export function lineageCard(document,item) {
   const article=document.createElement('article');article.className='lineage-card';
-  const status=document.createElement('span');status.className='lineage-status';
-  status.textContent=`${item.ipfsOk===true?'IPFS validado':'IPFS sin validar'} · ${item.hasParents===true?'Padres enlazados':'Genealogía pendiente'}`;
+  const status=document.createElement('span');
+  const verified=item.genealogy?.verified===true || (!item.genealogy && item.hasParents===true);
+  const documented=Boolean(item.genealogy?.documented?.padre && item.genealogy?.documented?.madre);
+  const kind=verified?'verified':documented?'documented':'pending';
+  const labels={verified:'Genealogía verificada',documented:'Genealogía documentada',pending:'Genealogía pendiente'};
+  status.className='lineage-status lineage-status--'+kind;
+  status.textContent=`${item.ipfsOk===true?'IPFS validado':'IPFS sin validar'} · ${labels[kind]}`;
   const title=document.createElement('h4');
   title.textContent=(typeof item.nombre==='string' && item.nombre.trim()) || (typeof item.slug==='string' && item.slug.trim()) || 'Registro XOLO';
   const meta=document.createElement('p');

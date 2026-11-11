@@ -79,7 +79,7 @@
 .module-featured { background:linear-gradient(140deg,#2d3420,#151e15); border-color:#777644; }
 .section-footlinks { display:flex; flex-wrap:wrap; gap:1rem 2rem; margin-top:2rem; font-size:.9375rem; }
 .lineage-section { background:#0c1210; }
-.metrics-dashboard { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-block:1px solid #354337; padding-block:2rem; }
+.metrics-dashboard { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); border-block:1px solid #354337; padding-block:2rem; }
 .metric-node { padding:0 1.8rem; border-left:1px solid var(--border); }
 .metric-node:first-child { border:0; padding-left:0; }
 .network-theme .metric-value { display:block; font-family:Georgia,serif; color:var(--accent); font-weight:400; font-size:clamp(2.7rem,4vw,4rem); line-height:1.2; margin-bottom:.5rem; }
@@ -92,6 +92,8 @@
 .network-theme .lineage-card { border:1px solid var(--border); padding:1.5rem; background:#101914; min-width:0; }
 .lineage-card h4 { font-size:1.5rem; margin:1rem 0; overflow-wrap:anywhere; }
 .lineage-status { color:#c4c8b3; font-size:.8125rem; }
+.lineage-status--documented { color:#e6c773; }
+.lineage-status--verified { color:#a9d9aa; }
 .lineage-card p { font-size:.875rem; color:var(--text-secondary); }
 .lineage-links { display:flex; gap:1.5rem; flex-wrap:wrap; font-size:.875rem; }
 .data-message { grid-column:1/-1; color:var(--text-secondary); }
