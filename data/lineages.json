@@ -4639,15 +4639,16 @@
     },
     "slug": "la",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmeWkfKx5ybNE6En5ar2UQvX8gBetSoDhwp1RALpwTQVbt",
-      "reason": "historical_rate_limit",
       "cid": "QmeWkfKx5ybNE6En5ar2UQvX8gBetSoDhwp1RALpwTQVbt",
-      "ok": false
+      "documentHash": "22b3eb8fc86c0caa35cb397aac63bf7ec57a00c344a63e90207116cf966b42c4",
+      "url": "https://gateway.pinata.cloud/ipfs/QmeWkfKx5ybNE6En5ar2UQvX8gBetSoDhwp1RALpwTQVbt",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -4656,7 +4657,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "La Era del Código — Génesis I"
   },
   {
     "txid": "c2ae3a1035134b93994dbbb01715e90424799a3c26760f234b97430c1ce162a2",
@@ -5037,15 +5038,16 @@
     },
     "slug": "guardin",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmcrvA3GUhwMjZG4pCEA5NYHZGf8r6G4P1Qi8Tfo3mUKEJ",
-      "reason": "historical_rate_limit",
       "cid": "QmcrvA3GUhwMjZG4pCEA5NYHZGf8r6G4P1Qi8Tfo3mUKEJ",
-      "ok": false
+      "documentHash": "5c12fc4ef65bfa63a6f3919b83cf40dd92a3f2905110e8fdc90e6b8faddd338d",
+      "url": "https://gateway.pinata.cloud/ipfs/QmcrvA3GUhwMjZG4pCEA5NYHZGf8r6G4P1Qi8Tfo3mUKEJ",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -5054,7 +5056,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Guardián del Fuego"
   },
   {
     "txid": "89cc4d76c2487d2bbabf03201e9ab760260d9323c42de1e31fc311c2fe220096",
