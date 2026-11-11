@@ -1687,15 +1687,16 @@
     },
     "slug": "piel",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmbrRvFxiAwgVPtHRG42VG1xzyMiyTRALNrZmbAwYEhiAK",
-      "reason": "historical_rate_limit",
       "cid": "QmbrRvFxiAwgVPtHRG42VG1xzyMiyTRALNrZmbAwYEhiAK",
-      "ok": false
+      "documentHash": "326470051f4160e4717db6d701d974b75e4d1f6ba710c43eafa53927ed286bda",
+      "url": "https://gateway.pinata.cloud/ipfs/QmbrRvFxiAwgVPtHRG42VG1xzyMiyTRALNrZmbAwYEhiAK",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -1704,7 +1705,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Piel de Cuero: Xoloitzcuintle Ultra Instinct"
   },
   {
     "txid": "17c807b364516916efbcfe64eac15b212935cce9e96aa58596bfbacfdba0d7c4",
@@ -1926,15 +1927,16 @@
     },
     "slug": "misha",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmYLmjgpjiHpcmtscySuH5778cQtZQgfSgETh6FobB1rb8",
-      "reason": "historical_rate_limit",
       "cid": "QmYLmjgpjiHpcmtscySuH5778cQtZQgfSgETh6FobB1rb8",
-      "ok": false
+      "documentHash": "f8d7fa4e39878238b6d037d42b1c02bef1e4f745325c4dd45cdff53e517dd3f3",
+      "url": "https://gateway.pinata.cloud/ipfs/QmYLmjgpjiHpcmtscySuH5778cQtZQgfSgETh6FobB1rb8",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -1954,7 +1956,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Misha (Ramirez/Ramirez)"
   },
   {
     "txid": "ae69f7111c9b733f9788d787b7e974ce9b053527ea4cbab8603ba2e9be3d2eda",
@@ -1976,15 +1978,16 @@
     },
     "slug": "mixa",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmSmoFrHoBQHuA5bw5ivVQnJwzArePby69emazMAyydutP",
-      "reason": "historical_rate_limit",
       "cid": "QmSmoFrHoBQHuA5bw5ivVQnJwzArePby69emazMAyydutP",
-      "ok": false
+      "documentHash": "58b7c7a9c8a5385303b31ac3b29248f4c7cf84ad796c1f44568ca97ee8f9fd5c",
+      "url": "https://gateway.pinata.cloud/ipfs/QmSmoFrHoBQHuA5bw5ivVQnJwzArePby69emazMAyydutP",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -1993,7 +1996,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Mixa Ramírez"
   },
   {
     "txid": "ce37133f74d42ee1e5b4574a7b9bde9623200a61172f350b3e47f746fdf5cbad",
@@ -2367,15 +2370,16 @@
     },
     "slug": "jicamo",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmVX5JrRPsuSfqnDnrRQDr9npHVEjiWj8CXbr3ACAchym6",
-      "reason": "historical_rate_limit",
       "cid": "QmVX5JrRPsuSfqnDnrRQDr9npHVEjiWj8CXbr3ACAchym6",
-      "ok": false
+      "documentHash": "08580d5fc15cfebe65b2e7b14a78c6f32a87da8d960ddea7639a12f5dd2e7dde",
+      "url": "https://gateway.pinata.cloud/ipfs/QmVX5JrRPsuSfqnDnrRQDr9npHVEjiWj8CXbr3ACAchym6",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -2384,7 +2388,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Jicamo (Lopez) Mex.FCI."
   },
   {
     "txid": "a4c358ca51058e3b893a3579c0d558bec17a5854d2fd7200aa0d42b8c0ea76ca",
@@ -2445,15 +2449,16 @@
     },
     "slug": "kiwi",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmQyTN68Nqq47ByoaZiC1AyVPJcYsuoRSZpx36dfbQHnz7",
-      "reason": "historical_rate_limit",
       "cid": "QmQyTN68Nqq47ByoaZiC1AyVPJcYsuoRSZpx36dfbQHnz7",
-      "ok": false
+      "documentHash": "95fe8906d4afc465ce7daaeb0e748d225b6ac658781d889c331909a7d08afab8",
+      "url": "https://gateway.pinata.cloud/ipfs/QmQyTN68Nqq47ByoaZiC1AyVPJcYsuoRSZpx36dfbQHnz7",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -2473,7 +2478,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "KIWI (RAMIREZ/RAMIREZ) MEX. FCI."
   },
   {
     "txid": "bde767e246706ddaa4c208aa913285ac7e0e4517b5eaedaf40b0b15a42207e95",
