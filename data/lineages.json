@@ -5318,15 +5318,16 @@
     },
     "slug": "zaziltunich",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmZxC1Uu6Yoieu4szYRsYhQckNNMoZP3LKczvfSFtpgx7D",
-      "reason": "historical_rate_limit",
       "cid": "QmZxC1Uu6Yoieu4szYRsYhQckNNMoZP3LKczvfSFtpgx7D",
-      "ok": false
+      "documentHash": "0d42fde41dcd8706c6b3032737a266ebdfda4cbccb199d5a4cc69d7336cac511",
+      "url": "https://gateway.pinata.cloud/ipfs/QmZxC1Uu6Yoieu4szYRsYhQckNNMoZP3LKczvfSFtpgx7D",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -5335,7 +5336,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "ZAZIL:TUNICH — Soul Bond NFT Eternal Pairing v1.0"
   },
   {
     "txid": "d47585f16c3f138f4958c2d68894c0038c833b1f80394ef8146797006a0e1ab1",
@@ -5357,15 +5358,16 @@
     },
     "slug": "tonalli",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmdfvFAaqX5y4rzG2UzFjZhpAkRfHevrPAV9JAmS9pbHFs",
-      "reason": "historical_rate_limit",
       "cid": "QmdfvFAaqX5y4rzG2UzFjZhpAkRfHevrPAV9JAmS9pbHFs",
-      "ok": false
+      "documentHash": "fd2f0086aa5fc8ffcff6df76c29a868e7bbf13763dd308e37c69f5123ddeca39",
+      "url": "https://gateway.pinata.cloud/ipfs/QmdfvFAaqX5y4rzG2UzFjZhpAkRfHevrPAV9JAmS9pbHFs",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -5374,7 +5376,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Tonalli, guardián en brazos"
   },
   {
     "txid": "52b9ce967c831f14ae9281bace36e0f9554daac2beb10b5483a2afa5a43ef2c3",
