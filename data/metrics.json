@@ -1,12 +1,14 @@
 {
-  "linajes_registrados": 125,
-  "linajes_validados_ipfs": 0,
-  "registros_con_padre_y_madre": 0,
-  "txs_xolo_detectadas": 125,
-  "ipfs_disponibles": 0,
-  "ipfs_fallidos": 125,
-  "nfts_con_slug_resuelto": 125,
-  "ult_registro_txid": "a6e2171d6bbca37212bf4541747ba9d4c5762402a9a3095c8848d4523c63e9c0",
-  "ult_registro_slug": "teyolia",
-  "ultima_actualizacion": "2026-09-18T14:03:21.797Z"
+  "linajes_registrados": 131,
+  "linajes_validados_ipfs": 11,
+  "registros_con_padre_y_madre": null,
+  "txs_xolo_detectadas": 131,
+  "ipfs_disponibles": 11,
+  "ipfs_fallidos": 0,
+  "ipfs_temporales": 120,
+  "ipfs_no_comprobados": 0,
+  "nfts_con_slug_resuelto": 130,
+  "ult_registro_txid": "a58412e07a6c793679bdb85b62809458ad6af274a5cc145654e724e149d891fa",
+  "ult_registro_slug": "xochitl-ramirez",
+  "ultima_actualizacion": "2026-11-11T15:58:27.361Z"
 }
