@@ -2673,15 +2673,16 @@
     },
     "slug": "huapango",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmRriKXvRN2WX8PHB1hsfK2xb6dSmHLHw5zyJXsL7taBrV",
-      "reason": "historical_rate_limit",
       "cid": "QmRriKXvRN2WX8PHB1hsfK2xb6dSmHLHw5zyJXsL7taBrV",
-      "ok": false
+      "documentHash": "513bafd0245f9a1d582494c58b27f8b7789b803168b0a8181a44b9acc967923e",
+      "url": "https://gateway.pinata.cloud/ipfs/QmRriKXvRN2WX8PHB1hsfK2xb6dSmHLHw5zyJXsL7taBrV",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -2690,7 +2691,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "HUAPANGO (RAMIREZ/RAMIREZ) MEX. FCI."
   },
   {
     "txid": "2c9d00116ea445ad05f450dbe8e7b79ba192cab58b8e64ded60a1a5fd418c5db",
@@ -2831,15 +2832,16 @@
     },
     "slug": "bronce",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmeSNxGNw1Kr5VRksoUkKvUec7a1cbe1zNzeCiJmkvqp3k",
-      "reason": "historical_rate_limit",
       "cid": "QmeSNxGNw1Kr5VRksoUkKvUec7a1cbe1zNzeCiJmkvqp3k",
-      "ok": false
+      "documentHash": "26328b28a9b958a35e506fd1bc78b26c56e7972d7e2792f5a26f165480a2a617",
+      "url": "https://gateway.pinata.cloud/ipfs/QmeSNxGNw1Kr5VRksoUkKvUec7a1cbe1zNzeCiJmkvqp3k",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -2859,7 +2861,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "BRONCE (RAMIREZ/RAMIREZ) MEX. FCI."
   },
   {
     "txid": "94fc64e3bea9ae9d333ff22cdf84925552d6922919958c86c9651fde64b0c4cb",
@@ -2960,15 +2962,16 @@
     },
     "slug": "copal",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmWxyAA5XBfVjCtkTzthomW8Aemwz7qKgiigVCe2xRgCeB",
-      "reason": "historical_rate_limit",
       "cid": "QmWxyAA5XBfVjCtkTzthomW8Aemwz7qKgiigVCe2xRgCeB",
-      "ok": false
+      "documentHash": "900042dc82652bb55337c59a0f837178ab47dccb1abc4f0ddebcc23d54f68304",
+      "url": "https://gateway.pinata.cloud/ipfs/QmWxyAA5XBfVjCtkTzthomW8Aemwz7qKgiigVCe2xRgCeB",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -2977,7 +2980,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "COPAL (RAMIREZ/RAMIREZ) MEX. FCI."
   },
   {
     "txid": "9731516fe680fb90204c56321653ad3fdfd2b5704a5981055a5042db63d727a2",
@@ -3039,15 +3042,16 @@
     },
     "slug": "tonalli",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmYFoPkG5mRx1dApHQ8WEsH7bahRFTzexrvEjjPxWnA97J",
-      "reason": "historical_rate_limit",
       "cid": "QmYFoPkG5mRx1dApHQ8WEsH7bahRFTzexrvEjjPxWnA97J",
-      "ok": false
+      "documentHash": "7570c53cd94bc23e2812c5d2b1c3198d7795e68711df1facb35aa73a475b1c7b",
+      "url": "https://gateway.pinata.cloud/ipfs/QmYFoPkG5mRx1dApHQ8WEsH7bahRFTzexrvEjjPxWnA97J",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3056,7 +3060,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "TONALLI (GUTIERREZ) MEX."
   },
   {
     "txid": "fedaff48232023ab2e06230a389895e2648a1bdc5158a7e3091f9bbff6df5088",
@@ -3359,15 +3363,16 @@
     },
     "slug": "orculo",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmcLTgKoU3BBZDBniF4QDtByx5CxuoVPchvgCLNdnfBstK",
-      "reason": "historical_rate_limit",
       "cid": "QmcLTgKoU3BBZDBniF4QDtByx5CxuoVPchvgCLNdnfBstK",
-      "ok": false
+      "documentHash": "35a31119dd77bcd9bcd0bc4faa44184261ab1b351d719591c9cc13aabc1edf36",
+      "url": "https://gateway.pinata.cloud/ipfs/QmcLTgKoU3BBZDBniF4QDtByx5CxuoVPchvgCLNdnfBstK",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3376,7 +3381,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Oráculo XOLO #001 — Memoria Soberana"
   },
   {
     "txid": "95c1dc3330ef04af95a33b0d3be2ef66f5d4c050195c88983fa00f2dc51f0aa2",
@@ -3580,15 +3585,16 @@
     },
     "slug": "canek",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmQhpnX46GkMq3RQDwAZfa11WL5BvsExyW1nFjbmvWZYzD",
-      "reason": "historical_rate_limit",
       "cid": "QmQhpnX46GkMq3RQDwAZfa11WL5BvsExyW1nFjbmvWZYzD",
-      "ok": false
+      "documentHash": "e8ce95748c61a2b0f15250fa98494973204bef33169c3b8c9c284b660dc0391b",
+      "url": "https://gateway.pinata.cloud/ipfs/QmQhpnX46GkMq3RQDwAZfa11WL5BvsExyW1nFjbmvWZYzD",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3597,7 +3603,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "CANEK (Ramírez/Ramírez) Mex."
   },
   {
     "txid": "84c28813ce5ce06b90cf0a2339f3a46d1cd12582b6674b706e91bb0236fba68f",
@@ -3619,15 +3625,16 @@
     },
     "slug": "axia",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmYaQfMpDWP4SVjyhxHhW8iuYZoFZ181EwpYFQ1uukDHun",
-      "reason": "historical_rate_limit",
       "cid": "QmYaQfMpDWP4SVjyhxHhW8iuYZoFZ181EwpYFQ1uukDHun",
-      "ok": false
+      "documentHash": "dd581ca46a60ea2c6e6c2c3934875094caeb6a9181643788772b1e755d105765",
+      "url": "https://gateway.pinata.cloud/ipfs/QmYaQfMpDWP4SVjyhxHhW8iuYZoFZ181EwpYFQ1uukDHun",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3647,7 +3654,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Axia (Ramirez/Ramirez) Mex."
   },
   {
     "txid": "748e82ca7f6ded3423fc797628608fe90e92b309bdfcc1845b1ef850e73d4f6f",
