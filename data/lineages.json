@@ -36,6 +36,21 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "AZTLAN RAMIREZ",
+        "madre": "AXIA RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "xochitl-ramirez",
+          "txid": "a58412e07a6c793679bdb85b62809458ad6af274a5cc145654e724e149d891fa"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Xóchitl Ramírez — NFT de Linaje Xoloitzcuintle"
@@ -77,6 +92,21 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "PITAGORAS RAMIREZ",
+        "madre": "REYNA RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "xilonen-ramirez",
+          "txid": "ed4124cb645395306234e3625f02c580e768eabfe4444cf148bd455f929f5cb1"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Xilonen Ramírez"
@@ -117,6 +147,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "AZTLAN RAMIREZ",
+        "madre": "XIUH RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "yohualli-ramirez",
+          "txid": "2cd356ecf042c3182352b3f240895090e1d716cb5d08f4ee4da8a178365a3ed1"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -153,6 +198,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Lupilla Alvarado"
@@ -194,6 +243,21 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "YAQUI_RAMIREZ",
+        "madre": "CARMIN_RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "tonalli-ramirez",
+          "txid": "084ff1d5dde0cdfe3f6d61978dc39e7a21ebb9a25cb21e8e44616315f7d9b199"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Tonalli Ramírez"
@@ -235,6 +299,21 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "PITAGORAS RAMIREZ",
+        "madre": "2de34e3d7c8eb32a0493c9711f7fc888c327e355c8932794ec7a2f9fc0fcf707",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "iztli-ramirez",
+          "txid": "6a14c61eee376cb86ec310bc0a9bf68ed501439ac3ab0378c1a9885e559165ed"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Iztli Ramírez"
@@ -270,6 +349,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -305,6 +388,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -341,6 +428,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Marcela 61 — El abrazo de la manada"
@@ -377,6 +468,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Marcela 61 — La luz de la celebración"
@@ -413,6 +508,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Título: Marcela 61 — Guardiana de la manada"
@@ -448,6 +547,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -484,6 +587,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Luna Ramírez / Romina — The Xolos Ramirez Show 2026"
@@ -519,6 +626,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -555,6 +666,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Vacunación Xoloitzcuintle — 20 de agosto de 2026"
@@ -591,6 +706,21 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "huapango-ramirez",
+        "madre": "tula-ramirez",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "nox-ramirez",
+          "txid": "46a96ccf2e5ca44bc9fc02e0b3b01fe405016715707c488bcfbb82b80a1680fa"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Nox Ramírez — Linaje Xoloitzcuintle FCM/FCI"
@@ -627,6 +757,21 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "BRONCE RAMIREZ",
+        "madre": "ITZIA RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "teyolia-ramirez",
+          "txid": "c95242fdea3a16ba21d3c876ecf11990c04ae4f1eb0d04d22801c8ff5a885c02"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Teyolía Ramírez — Pedigrí, Servicio y Viaje a República Dominicana"
@@ -662,6 +807,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -697,6 +846,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -733,6 +886,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Chimalma Ramírez — Preparación documental para entrega en Tijuana"
@@ -768,6 +925,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -804,6 +965,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Luna Ramírez — Linaje Xoloitzcuintle"
@@ -839,6 +1004,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -874,6 +1043,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -910,6 +1083,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Certificado de Registro, Vacunación y Desparasitación – Mixa Ramírez"
@@ -945,6 +1122,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -980,6 +1161,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -1015,6 +1200,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "YAQUI RAMIREZ",
+        "madre": "YEYETZI RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "ehecatl-ramirez",
+          "txid": "2ab5d1890eec894ed87b00f02721ce57dc36f681e96f9125a84a7e3936e25c4e"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -1050,6 +1250,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -1085,6 +1289,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -1120,6 +1328,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -1155,6 +1367,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -1191,6 +1407,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "xolosarmy.xec: Identidad Soberana en eCash"
@@ -1227,6 +1447,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Personalidad Xolo: Tonatiuh Ramírez (Edición Teyolía)"
@@ -1263,6 +1487,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Mitograma Teposxolotlcalli #001"
@@ -1299,6 +1527,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "The Xolos Ramirez Show #001 – Yanga"
@@ -1335,6 +1567,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Amixtli Ramírez"
@@ -1371,6 +1607,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "The Xolos Ramírez Show: Humo Ramírez & Luciana Renner (Ep. 17-05-2026)"
@@ -1406,6 +1646,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -1441,6 +1685,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -1477,6 +1725,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Evangelio RMZ del Xoloitzcuintle — Bloque Génesis"
@@ -1513,6 +1765,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Personalidad Xolo: Onix Ramírez"
@@ -1549,6 +1805,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Chimalma Ramírez — NFT de Nacimiento"
@@ -1584,6 +1844,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -1619,6 +1883,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -1654,6 +1922,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "415b0d971d78ccf465c8a0b99b74edee950e0bdbacc6a941cb8f44b1874867f4",
+        "madre": "a4c358ca51058e3b893a3579c0d558bec17a5854d2fd7200aa0d42b8c0ea76ca",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "misha-ramirez",
+          "txid": "4628220c6bb119148f320fd943f3957a12367ade2282e5fcaaae18d92b8f9909"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -1689,6 +1972,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -1724,6 +2011,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "94fc64e3bea9ae9d333ff22cdf84925552d6922919958c86c9651fde64b0c4cb",
+        "madre": "6e02dbf7fb0e16d833aad89422094306dcd1ce002b9037a55fed47e304551353",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "mitla-ramirez",
+          "txid": "ce37133f74d42ee1e5b4574a7b9bde9623200a61172f350b3e47f746fdf5cbad"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -1759,6 +2061,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "94fc64e3bea9ae9d333ff22cdf84925552d6922919958c86c9651fde64b0c4cb",
+        "madre": "6e02dbf7fb0e16d833aad89422094306dcd1ce002b9037a55fed47e304551353",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "tejocote-ramirez",
+          "txid": "407bf5b92211cd2c77c6b8ca95d9cdc7e5d40f201b2348a0c886ed3f52c5f12e"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -1795,6 +2112,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "AMOXTLI (RAMIREZ/RAMIREZ) MEX. FCI."
@@ -1830,6 +2151,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -1866,6 +2191,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Uxmal (Avila) Mex. FCI."
@@ -1901,6 +2230,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "44b35bf6dfb472b982bf6964f9eeb6783b5eea5ab71e7adb84246b61ff4371f5",
+        "madre": "4df6ec8a9c51578d79b8b43886cec0930520a0179748f055da52cad0fdd75434",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "chontal-ramirez",
+          "txid": "fb0f49f9b6c5b701c637afbe6c10088fe11b4689bdf7a3800e62ba1a192499ab"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -1936,6 +2280,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -1972,6 +2320,10 @@
       "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": "Ticuiz (Langarica) Mex. FCI."
@@ -2007,6 +2359,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2042,6 +2398,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2077,6 +2437,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "44b35bf6dfb472b982bf6964f9eeb6783b5eea5ab71e7adb84246b61ff4371f5",
+        "madre": "4df6ec8a9c51578d79b8b43886cec0930520a0179748f055da52cad0fdd75434",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "kiwi-ramirez",
+          "txid": "5bcf1823927af2645c310037666a3852a5726b9526c03550c820282b7c48ed2a"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2101,20 +2476,25 @@
     },
     "slug": "ixchel",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmfNkxq6EcR8jydjqo5G5Dxnqq5gmcNg4pQyme3FamGnpG",
-      "reason": "historical_rate_limit",
       "cid": "QmfNkxq6EcR8jydjqo5G5Dxnqq5gmcNg4pQyme3FamGnpG",
-      "ok": false
+      "documentHash": "d095a029048562b4917f33a28518ee67835280401502f46628f68dcfc37b1a6a",
+      "url": "https://gateway.pinata.cloud/ipfs/QmfNkxq6EcR8jydjqo5G5Dxnqq5gmcNg4pQyme3FamGnpG",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "IXCHEL (RAMIREZ/RAMIREZ) MEX. FCI."
   },
   {
     "txid": "40a8d3b6cf35dc3d8db8e0d70f57f45ae158659de9364d5c591b55dfe555ba70",
@@ -2147,6 +2527,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "UN PAPALOTE CALIENTE MEX",
+        "madre": "PATY CALIENTE MEX FCI",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "vovid-caliente",
+          "txid": "40a8d3b6cf35dc3d8db8e0d70f57f45ae158659de9364d5c591b55dfe555ba70"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2182,6 +2577,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2206,20 +2605,36 @@
     },
     "slug": "xiuh",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmYc5n4RzW1B33NfSPsthmfnSFQqstptPrSgb1tYeCzbjv",
-      "reason": "historical_rate_limit",
       "cid": "QmYc5n4RzW1B33NfSPsthmfnSFQqstptPrSgb1tYeCzbjv",
-      "ok": false
+      "documentHash": "5055b9e36eda43cfb39826fe9be4d2492159f08709c17154933e8aaf7ed17e1a",
+      "url": "https://gateway.pinata.cloud/ipfs/QmYc5n4RzW1B33NfSPsthmfnSFQqstptPrSgb1tYeCzbjv",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "UXMAL AVILA",
+        "madre": "SABINA RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "xiuh-ramirez",
+          "txid": "e2384d8728fc958c459b4859619938ddda4b1dd0e4ca47aac0779a26496eb9db"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "XIUH (RAMIREZ/RAMIREZ) MEX. FCI."
   },
   {
     "txid": "8f56dd69c664a4edd9c950126a0940ef2517d948639e6995cf54ce7ed658cf50",
@@ -2252,6 +2667,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2276,20 +2695,25 @@
     },
     "slug": "moka",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmYDTeUB5qm7ibYqg2HHvNhLXzhSqqF4dy7PF7cKwvvpXP",
-      "reason": "historical_rate_limit",
       "cid": "QmYDTeUB5qm7ibYqg2HHvNhLXzhSqqF4dy7PF7cKwvvpXP",
-      "ok": false
+      "documentHash": "ea491f7749ce82df14f21024ddccaef434563bd3c16085a3336850bdb47e32b7",
+      "url": "https://gateway.pinata.cloud/ipfs/QmYDTeUB5qm7ibYqg2HHvNhLXzhSqqF4dy7PF7cKwvvpXP",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Moka (Ramirez/Ramirez) Mex.FCI."
   },
   {
     "txid": "4df6ec8a9c51578d79b8b43886cec0930520a0179748f055da52cad0fdd75434",
@@ -2322,6 +2746,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2346,20 +2774,25 @@
     },
     "slug": "pandero",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmQsigpHL2eoNwGHPF4m9U3NjXPLv37namyKkL6utBwW1M",
-      "reason": "historical_rate_limit",
       "cid": "QmQsigpHL2eoNwGHPF4m9U3NjXPLv37namyKkL6utBwW1M",
-      "ok": false
+      "documentHash": "330328373e770ff9a732db26d8b43f74196cc1f32c0c41ac5813689784f37bdc",
+      "url": "https://gateway.pinata.cloud/ipfs/QmQsigpHL2eoNwGHPF4m9U3NjXPLv37namyKkL6utBwW1M",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "PANDERO (RAMIREZ/RAMIREZ) MEX. FCI."
   },
   {
     "txid": "28a5c3ad2f792e6ed747512f2170590690c5c02e0a67dc59fbbad0222400e4c8",
@@ -2392,6 +2825,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "TICUIZ LANGARICA",
+        "madre": "RIMA LANGARICA",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "bronce-ramirez",
+          "txid": "28a5c3ad2f792e6ed747512f2170590690c5c02e0a67dc59fbbad0222400e4c8"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2416,20 +2864,25 @@
     },
     "slug": "aztlan",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmcRB8L58yGvhNqgEirHmijQBbfs4bqC7XXmERg6WZYCTX",
-      "reason": "historical_rate_limit",
       "cid": "QmcRB8L58yGvhNqgEirHmijQBbfs4bqC7XXmERg6WZYCTX",
-      "ok": false
+      "documentHash": "7032cd4063ec016738707bcfd4414c8db45eca46169ef85e359c941af99d0434",
+      "url": "https://gateway.pinata.cloud/ipfs/QmcRB8L58yGvhNqgEirHmijQBbfs4bqC7XXmERg6WZYCTX",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "AZTLAN (RAMIREZ/RAMIREZ) MEX. FCI."
   },
   {
     "txid": "f8472fd0d98260aa8da2dc4009f8fd141232b4232a88a06e21f96c198482f69d",
@@ -2462,6 +2915,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2497,6 +2954,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2532,6 +2993,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2567,6 +3032,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2602,6 +3071,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "IKAL CALIENTE",
+        "madre": "CALIMAYA ALVARADO",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "itzia-ramirez",
+          "txid": "fedaff48232023ab2e06230a389895e2648a1bdc5158a7e3091f9bbff6df5088"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2637,6 +3121,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2672,6 +3160,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2707,6 +3199,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "VOVID CALIENTE",
+        "madre": "ALTAR ALVARADO",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "venecia-ramirez",
+          "txid": "1eeefaf68adb859dbbf588df2bc1bf4b41717ada776b6883231843dd1bd0eafa"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2742,6 +3249,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "IKAL CALIENTE",
+        "madre": "JADE RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "mimosa-ramirez",
+          "txid": "2a40ed39f83a48a89aa79c464c43ceff1fb65239fff1210a7a79709d9548f0d5"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2777,6 +3299,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "IKAL CALIENTE",
+        "madre": "JADE RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "tula-ramirez",
+          "txid": "c6d67d82b53c2d94751ee3aaf487fdcdac2c945319f65b435fc29b198d3e8e95"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2812,6 +3349,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2847,6 +3388,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2882,6 +3427,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "VOVID CALIENTE",
+        "madre": "FRIDA RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "papalotl-ramirez",
+          "txid": "999ecf726d29b2dc4866b226d9c5e550da40fe5a9949d550c4a381affe53b1e7"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2917,6 +3477,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2952,6 +3516,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "VOVID CALIENTE",
+        "madre": "ITZIA RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "jade-ramirez",
+          "txid": "0004bd83727c79eb7ad2d3e232eb88b058dee238006cf4d3aeb5b317f630047e"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -2987,6 +3566,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3022,6 +3605,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "UXMAL AVILA",
+        "madre": "VIDA RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "axia-ramirez",
+          "txid": "84c28813ce5ce06b90cf0a2339f3a46d1cd12582b6674b706e91bb0236fba68f"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3057,6 +3655,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3092,6 +3694,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3127,6 +3733,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3162,6 +3772,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "IKAL CALIENTE",
+        "madre": "VENUS RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "balamka-ramirez",
+          "txid": "0153b3cdc6bb45fb5fc9fa0162914f9a0edb14ea565607993336b46d5d4bc6b3"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3197,6 +3822,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "IKAL CALIENTE",
+        "madre": "CALIMAYA ALVARADO",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "aruma-ramirez",
+          "txid": "8f9d0638a8c0d4df260a0d89617287f2df258c4e215ed9a7cb471c91e5013d75"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3232,6 +3872,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "VOVID CALIENTE",
+        "madre": "ITZIA RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "venus-ramirez",
+          "txid": "0d4926f2c94567a1e97c435229439e885e36672bbb31b26b5be3dd9160a7c4b7"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3267,6 +3922,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3302,6 +3961,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3337,6 +4000,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3372,6 +4039,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "UXMAL AVILA",
+        "madre": "CEREZA RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "anahuac-ramirez",
+          "txid": "e46491551765133ad49efd1b71f5b47e9ca65fecd90a55c02dfb22da726ee558"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3407,6 +4089,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "IKAL CALIENTE",
+        "madre": "REYNA RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "sabina-ramirez",
+          "txid": "91fa432c1b051c4e8bc9b396b924ed9ef2835b6c2e00f90f720ae1a33b482991"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3442,6 +4139,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3477,6 +4178,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3512,6 +4217,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3547,6 +4256,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3582,6 +4295,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3617,6 +4334,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "VOVID CALIENTE",
+        "madre": "ALTAR ALVARADO",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "durango-ramirez",
+          "txid": "02c571ffefef3a28ad07d3afe20e07ba059f78c9f4807f27e5cc12dc4654af41"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3652,6 +4384,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3687,6 +4423,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3722,6 +4462,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3757,6 +4501,21 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": {
+        "padre": "Vovid Caliente Mex. FCI",
+        "madre": "Frida (Ramírez) Mex.",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "tomate-ramirez",
+          "txid": "cc43d40fa21304cfde5271a2f897fc0deff14c4854fa2b8f9f58c5a0ab4b171a"
+        }
+      },
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3792,6 +4551,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3827,6 +4590,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3862,6 +4629,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3897,6 +4668,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3932,6 +4707,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -3967,6 +4746,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -4002,6 +4785,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -4037,6 +4824,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -4072,6 +4863,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -4107,6 +4902,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -4142,6 +4941,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -4177,6 +4980,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -4212,6 +5019,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -4247,6 +5058,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -4282,6 +5097,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -4317,6 +5136,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -4352,6 +5175,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -4387,6 +5214,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -4422,6 +5253,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -4457,6 +5292,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -4492,6 +5331,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -4527,6 +5370,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -4562,6 +5409,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -4597,6 +5448,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null
@@ -4632,6 +5487,10 @@
       "ok": false
     },
     "hasParents": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    },
     "parentTokenId": null,
     "motherTokenId": null,
     "name": null

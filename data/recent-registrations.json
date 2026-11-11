@@ -8,7 +8,22 @@
     "timestamp": 1794348406,
     "blockHeight": 974987,
     "hasParents": false,
-    "ipfsOk": true
+    "ipfsOk": true,
+    "genealogy": {
+      "documented": {
+        "padre": "AZTLAN RAMIREZ",
+        "madre": "AXIA RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "xochitl-ramirez",
+          "txid": "a58412e07a6c793679bdb85b62809458ad6af274a5cc145654e724e149d891fa"
+        }
+      },
+      "verified": false
+    }
   },
   {
     "txid": "ed4124cb645395306234e3625f02c580e768eabfe4444cf148bd455f929f5cb1",
@@ -19,7 +34,22 @@
     "timestamp": 1793724806,
     "blockHeight": 973947,
     "hasParents": false,
-    "ipfsOk": true
+    "ipfsOk": true,
+    "genealogy": {
+      "documented": {
+        "padre": "PITAGORAS RAMIREZ",
+        "madre": "REYNA RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "xilonen-ramirez",
+          "txid": "ed4124cb645395306234e3625f02c580e768eabfe4444cf148bd455f929f5cb1"
+        }
+      },
+      "verified": false
+    }
   },
   {
     "txid": "2cd356ecf042c3182352b3f240895090e1d716cb5d08f4ee4da8a178365a3ed1",
@@ -30,7 +60,22 @@
     "timestamp": 1792171063,
     "blockHeight": 971306,
     "hasParents": false,
-    "ipfsOk": false
+    "ipfsOk": false,
+    "genealogy": {
+      "documented": {
+        "padre": "AZTLAN RAMIREZ",
+        "madre": "XIUH RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "yohualli-ramirez",
+          "txid": "2cd356ecf042c3182352b3f240895090e1d716cb5d08f4ee4da8a178365a3ed1"
+        }
+      },
+      "verified": false
+    }
   },
   {
     "txid": "696e47c8ed0e9855f0a1ed0307ca60fa9c44893fe589dae086fdcd39c963bb9b",
@@ -41,7 +86,11 @@
     "timestamp": 1791852848,
     "blockHeight": 970792,
     "hasParents": false,
-    "ipfsOk": true
+    "ipfsOk": true,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    }
   },
   {
     "txid": "084ff1d5dde0cdfe3f6d61978dc39e7a21ebb9a25cb21e8e44616315f7d9b199",
@@ -52,7 +101,22 @@
     "timestamp": 1791721248,
     "blockHeight": 970582,
     "hasParents": false,
-    "ipfsOk": true
+    "ipfsOk": true,
+    "genealogy": {
+      "documented": {
+        "padre": "YAQUI_RAMIREZ",
+        "madre": "CARMIN_RAMIREZ",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "tonalli-ramirez",
+          "txid": "084ff1d5dde0cdfe3f6d61978dc39e7a21ebb9a25cb21e8e44616315f7d9b199"
+        }
+      },
+      "verified": false
+    }
   },
   {
     "txid": "6a14c61eee376cb86ec310bc0a9bf68ed501439ac3ab0378c1a9885e559165ed",
@@ -63,7 +127,22 @@
     "timestamp": 1790792439,
     "blockHeight": 969097,
     "hasParents": false,
-    "ipfsOk": true
+    "ipfsOk": true,
+    "genealogy": {
+      "documented": {
+        "padre": "PITAGORAS RAMIREZ",
+        "madre": "2de34e3d7c8eb32a0493c9711f7fc888c327e355c8932794ec7a2f9fc0fcf707",
+        "source": {
+          "repository": "xolosArmy/xolos-explorer",
+          "commit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+          "path": "src/data/linajeMeta.js",
+          "blob": "0afaf4a2ae0358ead734214b4bc427f7e8f5bc9a",
+          "entry": "iztli-ramirez",
+          "txid": "6a14c61eee376cb86ec310bc0a9bf68ed501439ac3ab0378c1a9885e559165ed"
+        }
+      },
+      "verified": false
+    }
   },
   {
     "txid": "a6e2171d6bbca37212bf4541747ba9d4c5762402a9a3095c8848d4523c63e9c0",
@@ -74,7 +153,11 @@
     "timestamp": 1789702512,
     "blockHeight": 967286,
     "hasParents": false,
-    "ipfsOk": false
+    "ipfsOk": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    }
   },
   {
     "txid": "fb9cb8e412873c3af64f73ccb89b7323c8e3c186ee2b131a049bf64996beafbc",
@@ -85,7 +168,11 @@
     "timestamp": 1789698780,
     "blockHeight": 967277,
     "hasParents": false,
-    "ipfsOk": false
+    "ipfsOk": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    }
   },
   {
     "txid": "d2e66260d69158171d80a270a6cba041508c57767f52ef106f1a6beda85988d6",
@@ -96,7 +183,11 @@
     "timestamp": 1789406107,
     "blockHeight": 966779,
     "hasParents": false,
-    "ipfsOk": true
+    "ipfsOk": true,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    }
   },
   {
     "txid": "5434804f5c0e508cbd85e75f028568ab35c673e03ea4bcce98ba01b6859549e4",
@@ -107,7 +198,11 @@
     "timestamp": 1789405271,
     "blockHeight": 966778,
     "hasParents": false,
-    "ipfsOk": true
+    "ipfsOk": true,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    }
   },
   {
     "txid": "4b5f8e0da1ead04f2710e0fe895ef5b3ea60362a0583867c1e6e11f7e611e144",
@@ -118,7 +213,11 @@
     "timestamp": 1789405076,
     "blockHeight": 966777,
     "hasParents": false,
-    "ipfsOk": true
+    "ipfsOk": true,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    }
   },
   {
     "txid": "a1e1789849d17e4d82b93658ae728df38799f342b1e2c548bbe8bfd2982f8738",
@@ -129,6 +228,10 @@
     "timestamp": 1789166978,
     "blockHeight": 966359,
     "hasParents": false,
-    "ipfsOk": false
+    "ipfsOk": false,
+    "genealogy": {
+      "documented": null,
+      "verified": false
+    }
   }
 ]
