@@ -537,15 +537,16 @@
     },
     "slug": "trivia",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
       "cid": "QmWf6M4Bgk5YKsr1TDp8P3BVn1t8WZ3L8W8dmWm7LoSb84",
       "documentHash": "8e561868745cbda196d6c54392d979da1fdcadcbe6160de37c4632c140982a93",
       "url": "https://gateway.pinata.cloud/ipfs/QmWf6M4Bgk5YKsr1TDp8P3BVn1t8WZ3L8W8dmWm7LoSb84",
-      "reason": "gateway_unreachable",
-      "state": "temporary",
-      "ok": false
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -554,7 +555,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Trivia Xoloitzcuintle — Tlilxóchitl Ramírez 🐕🇲🇽"
   },
   {
     "txid": "444de8eeb8b0ccf6ee3c51221a4e1a73e91e99ff510f058ca080b6925f75e11d",
@@ -918,15 +919,16 @@
     },
     "slug": "onix",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmcHfqczcX5LGxaGeTuSL9er2RNZoKQAXywbHVc4w3qDDp",
-      "reason": "historical_rate_limit",
       "cid": "QmcHfqczcX5LGxaGeTuSL9er2RNZoKQAXywbHVc4w3qDDp",
-      "ok": false
+      "documentHash": "632b2f5c9ef1e8cd8e1f7ef6da2b120df7942d909340de8f59bbe4429cf0c76c",
+      "url": "https://gateway.pinata.cloud/ipfs/QmcHfqczcX5LGxaGeTuSL9er2RNZoKQAXywbHVc4w3qDDp",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -935,7 +937,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Onix Ramírez — Linaje Xoloitzcuintle"
   },
   {
     "txid": "f8fa54ed31c44fc3fd83bbb6bcbe540d95aacdbc13bf0c840e73519ee5da4213",
@@ -997,15 +999,16 @@
     },
     "slug": "luna",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmNb5Q4R2oWg6SZPQsr5VjfsLWzwvawYq7JsZg9SBdorvL",
-      "reason": "historical_rate_limit",
       "cid": "QmNb5Q4R2oWg6SZPQsr5VjfsLWzwvawYq7JsZg9SBdorvL",
-      "ok": false
+      "documentHash": "4527e6655a7da137a089b9dc116ce8241f84274bc24fdb59bc422da9a24748b6",
+      "url": "https://gateway.pinata.cloud/ipfs/QmNb5Q4R2oWg6SZPQsr5VjfsLWzwvawYq7JsZg9SBdorvL",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -1014,7 +1017,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Luna Ramírez — Linaje Xoloitzcuintle"
   },
   {
     "txid": "218006a83344dd21c849fe852f375ff2673f3184c1018b725889fe7413a0981e",
@@ -5222,15 +5225,16 @@
     },
     "slug": "tonalli",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmPFw33bpQVd3iF3E19QfGpmFqDkBFS6umbrYMcgQ7vt9w",
-      "reason": "historical_rate_limit",
       "cid": "QmPFw33bpQVd3iF3E19QfGpmFqDkBFS6umbrYMcgQ7vt9w",
-      "ok": false
+      "documentHash": "75578bf07cbd7c1ec43f799851e20f6f0061d8c1bbc726a8fb435bdf12bd1acd",
+      "url": "https://gateway.pinata.cloud/ipfs/QmPFw33bpQVd3iF3E19QfGpmFqDkBFS6umbrYMcgQ7vt9w",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -5239,7 +5243,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Tonalli Message - Sender Identified"
   },
   {
     "txid": "6a2f54715a4d273c7140614c356906314f6666fd86335d84e616d34444100163",
@@ -5261,15 +5265,16 @@
     },
     "slug": "the",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmY2JKsAXjvr5YR7QjCytbDNwLCGg1p5HyUkZT4umQMnXT",
-      "reason": "historical_rate_limit",
       "cid": "QmY2JKsAXjvr5YR7QjCytbDNwLCGg1p5HyUkZT4umQMnXT",
-      "ok": false
+      "documentHash": "398aaa7c97d30afbce3585962036cd7d4495f0ac78727441d49860cd25efbde4",
+      "url": "https://gateway.pinata.cloud/ipfs/QmY2JKsAXjvr5YR7QjCytbDNwLCGg1p5HyUkZT4umQMnXT",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -5278,7 +5283,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "THE AGENT 001 TO OBSIDIAN"
   },
   {
     "txid": "fd1b0b1257a433049e8e99ea1e7d6d9a49d8e790d1c66ebc2e62a1066ed486fa",
@@ -5418,15 +5423,16 @@
     },
     "slug": "entrega",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmQYJUuCsdYKoLiBTQow7PCfqESYro6nzXPjtx3THyLkjX",
-      "reason": "historical_rate_limit",
       "cid": "QmQYJUuCsdYKoLiBTQow7PCfqESYro6nzXPjtx3THyLkjX",
-      "ok": false
+      "documentHash": "5763b2a26babe6e831e892b58c3b010ebf15bdb1fa913e5686be158a1862773f",
+      "url": "https://gateway.pinata.cloud/ipfs/QmQYJUuCsdYKoLiBTQow7PCfqESYro6nzXPjtx3THyLkjX",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -5435,7 +5441,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Entrega Sami Ramírez · UNAM · 13.01.2026"
   },
   {
     "txid": "a7fb8038f1cb97796f8ada485cee34ddc9a645a0eaa2da6dbedc135bbe72294d",
@@ -5496,15 +5502,16 @@
     },
     "slug": "xolosarmy",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/Qmbb3fxqaTjjXmCBSwQ1R7yb25eLR6dxMpyTWMaQZQxCSS",
-      "reason": "historical_rate_limit",
       "cid": "Qmbb3fxqaTjjXmCBSwQ1R7yb25eLR6dxMpyTWMaQZQxCSS",
-      "ok": false
+      "documentHash": "5344c0c9adf0984951503f279337ffce38af5f356b5d024287d24b53eff399f9",
+      "url": "https://gateway.pinata.cloud/ipfs/Qmbb3fxqaTjjXmCBSwQ1R7yb25eLR6dxMpyTWMaQZQxCSS",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -5513,7 +5520,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "xolosArmy Chronik Node"
   },
   {
     "txid": "f04084930392b9b97b4cfbf2ebc5ece7de179357707ceb02f4ca0c10db2f5fcd",
@@ -5535,15 +5542,16 @@
     },
     "slug": "xolosarmy",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmbaJhSMVEACW1u2VMskRwtxk3f1mA3iFCVtBZ1AuKEZ5s",
-      "reason": "historical_rate_limit",
       "cid": "QmbaJhSMVEACW1u2VMskRwtxk3f1mA3iFCVtBZ1AuKEZ5s",
-      "ok": false
+      "documentHash": "48a8840e854c6914895e567a8704e00724e86896c1c98233b3df254e732279bc",
+      "url": "https://gateway.pinata.cloud/ipfs/QmbaJhSMVEACW1u2VMskRwtxk3f1mA3iFCVtBZ1AuKEZ5s",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -5552,6 +5560,6 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "xolosArmy Network State Genesis"
   }
 ]

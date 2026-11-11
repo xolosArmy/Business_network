@@ -224,11 +224,11 @@
     "slug": "trivia",
     "tokenId": "a1e1789849d17e4d82b93658ae728df38799f342b1e2c548bbe8bfd2982f8738",
     "cid": "QmWf6M4Bgk5YKsr1TDp8P3BVn1t8WZ3L8W8dmWm7LoSb84",
-    "nombre": null,
+    "nombre": "Trivia Xoloitzcuintle — Tlilxóchitl Ramírez 🐕🇲🇽",
     "timestamp": 1789166978,
     "blockHeight": 966359,
     "hasParents": false,
-    "ipfsOk": false,
+    "ipfsOk": true,
     "genealogy": {
       "documented": null,
       "verified": false
