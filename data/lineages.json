@@ -2062,15 +2062,16 @@
     },
     "slug": "tejocote",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmU6J9FwWLWzeLhJRhVvDhGBuNqKNggXFRHevKK8VELMCG",
-      "reason": "historical_rate_limit",
       "cid": "QmU6J9FwWLWzeLhJRhVvDhGBuNqKNggXFRHevKK8VELMCG",
-      "ok": false
+      "documentHash": "0dc96afa87c3facab5b5a8adc7c9c0d27df2d422a7a5191c26c5690085d35016",
+      "url": "https://gateway.pinata.cloud/ipfs/QmU6J9FwWLWzeLhJRhVvDhGBuNqKNggXFRHevKK8VELMCG",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -2090,7 +2091,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "TEJOCOTE (RAMIREZ/RAMIREZ) MEX. FCI."
   },
   {
     "txid": "196f4f5cb3f0016dd62715d7e1768e465c8a1db8c65a1afc58861845265dcd9c",
@@ -2152,15 +2153,16 @@
     },
     "slug": "humo",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmYLesiz2CXGY1Cdg7M6Pm5oqzP14RvKYQNKBQ3Jkmch5a",
-      "reason": "historical_rate_limit",
       "cid": "QmYLesiz2CXGY1Cdg7M6Pm5oqzP14RvKYQNKBQ3Jkmch5a",
-      "ok": false
+      "documentHash": "2d38662066330170fc1c6c64ad728f98bec581349f7d586bb11a8eb3c92efabd",
+      "url": "https://gateway.pinata.cloud/ipfs/QmYLesiz2CXGY1Cdg7M6Pm5oqzP14RvKYQNKBQ3Jkmch5a",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -2169,7 +2171,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Humo Ramirez"
   },
   {
     "txid": "1dc6943cc081e410646c1466653a1c6937815ce6a05253f0e541620e47bb3d7f",
@@ -2231,15 +2233,16 @@
     },
     "slug": "chontal",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmbJWuXdomrEELs59XhHKrZuPufwdLJLV6V6dr75oGWQkK",
-      "reason": "historical_rate_limit",
       "cid": "QmbJWuXdomrEELs59XhHKrZuPufwdLJLV6V6dr75oGWQkK",
-      "ok": false
+      "documentHash": "12c7178fee0536842ad9fcfa746591a24e0d12497796ee34f8e87b51092a1a39",
+      "url": "https://gateway.pinata.cloud/ipfs/QmbJWuXdomrEELs59XhHKrZuPufwdLJLV6V6dr75oGWQkK",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -2259,7 +2262,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "CHONTAL (RAMIREZ/RAMIREZ) MEX. FCI."
   },
   {
     "txid": "731213c084ab76901592478583331a24cc9591d0aac079ec26afb2be65778505",
@@ -2281,15 +2284,16 @@
     },
     "slug": "bolero",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/Qmc6DmfzdtAEnHeZ9ZBY5r4XKz6V4kbhYQ6iHWC7tajipQ",
-      "reason": "historical_rate_limit",
       "cid": "Qmc6DmfzdtAEnHeZ9ZBY5r4XKz6V4kbhYQ6iHWC7tajipQ",
-      "ok": false
+      "documentHash": "e9fbe94b7ccbb79ec4b0bc7aade84c43026fed854a82141a0dd4d267a6bc2b98",
+      "url": "https://gateway.pinata.cloud/ipfs/Qmc6DmfzdtAEnHeZ9ZBY5r4XKz6V4kbhYQ6iHWC7tajipQ",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -2298,7 +2302,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "BOLERO (RAMIREZ/RAMIREZ) MEX. FCI."
   },
   {
     "txid": "a4c6f91bc781ae03d82b71345715b9590a5cbea5ccccd4a9d505fef1da5b7bc3",
@@ -2528,15 +2532,16 @@
     },
     "slug": "vovid",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmNasTYAkJoL5iEkXmriJ6HGE7TRFLxbGE2hRrRfgMzgML",
-      "reason": "historical_rate_limit",
       "cid": "QmNasTYAkJoL5iEkXmriJ6HGE7TRFLxbGE2hRrRfgMzgML",
-      "ok": false
+      "documentHash": "6100f014712aeb9ac8c01532bdd068d2fc7df4605897414881e745f450e6faa9",
+      "url": "https://gateway.pinata.cloud/ipfs/QmNasTYAkJoL5iEkXmriJ6HGE7TRFLxbGE2hRrRfgMzgML",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -2556,7 +2561,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "VOVID CALIENTE MEX. FCI."
   },
   {
     "txid": "415b0d971d78ccf465c8a0b99b74edee950e0bdbacc6a941cb8f44b1874867f4",
