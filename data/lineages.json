@@ -3689,15 +3689,16 @@
     },
     "slug": "the",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmZeusd4hyicdkMpjDvZziargJvY6SRaWip73k51ZbQDLM",
-      "reason": "historical_rate_limit",
       "cid": "QmZeusd4hyicdkMpjDvZziargJvY6SRaWip73k51ZbQDLM",
-      "ok": false
+      "documentHash": "17757672a4a074c8200c9902076811a0eab02772f97fb67c70e808f0e3455ff0",
+      "url": "https://gateway.pinata.cloud/ipfs/QmZeusd4hyicdkMpjDvZziargJvY6SRaWip73k51ZbQDLM",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3706,7 +3707,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "The Teyolia Flipstarter Manifesto"
   },
   {
     "txid": "8db9c0ebb06404e43ac36133aa85d14591ea66f4ab32f2d687033351becc0f46",
@@ -4181,15 +4182,16 @@
     },
     "slug": "crnica",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmWSZtahbeEmE79CkGqqovGiZWwfzk7RT1bnN16c5fkLkK",
-      "reason": "historical_rate_limit",
       "cid": "QmWSZtahbeEmE79CkGqqovGiZWwfzk7RT1bnN16c5fkLkK",
-      "ok": false
+      "documentHash": "3db718c2b013bdfbfcb2a2cdf90d382b077b708dc50f0ce727e250b9057c92d0",
+      "url": "https://gateway.pinata.cloud/ipfs/QmWSZtahbeEmE79CkGqqovGiZWwfzk7RT1bnN16c5fkLkK",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -4198,7 +4200,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Crónica del Psicopompo Mesoamericano"
   },
   {
     "txid": "b1afe01140c3aa4cc3a653170c18b043ac07bc2867aee288b94fc253a85ab7d3",
