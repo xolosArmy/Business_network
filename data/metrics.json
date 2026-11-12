@@ -1,15 +1,15 @@
 {
   "linajes_registrados": 131,
-  "linajes_validados_ipfs": 114,
+  "linajes_validados_ipfs": 116,
   "registros_con_padre_y_madre": 30,
   "registros_con_padre_y_madre_verificados": 0,
   "txs_xolo_detectadas": 131,
-  "ipfs_disponibles": 114,
+  "ipfs_disponibles": 116,
   "ipfs_fallidos": 0,
-  "ipfs_temporales": 17,
+  "ipfs_temporales": 15,
   "ipfs_no_comprobados": 0,
   "nfts_con_slug_resuelto": 130,
   "ult_registro_txid": "a58412e07a6c793679bdb85b62809458ad6af274a5cc145654e724e149d891fa",
   "ult_registro_slug": "xochitl-ramirez",
-  "ultima_actualizacion": "2026-11-11T21:00:24.729Z"
+  "ultima_actualizacion": "2026-11-12T02:15:12.556Z"
 }

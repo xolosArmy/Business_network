@@ -2932,15 +2932,16 @@
     },
     "slug": "ajijic",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmZwhHAuFyjwuMhcCovfUC6urEgYrjvQFbLxw1tffeUQhZ",
-      "reason": "historical_rate_limit",
       "cid": "QmZwhHAuFyjwuMhcCovfUC6urEgYrjvQFbLxw1tffeUQhZ",
-      "ok": false
+      "documentHash": "dd8b748ca21fcbbf4574acca3ec8e026ac2090accfb58ea8894a17aa36aba795",
+      "url": "https://gateway.pinata.cloud/ipfs/QmZwhHAuFyjwuMhcCovfUC6urEgYrjvQFbLxw1tffeUQhZ",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -2949,7 +2950,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "AJIJIC (RAMIREZ/RAMIREZ) MEX. FCI."
   },
   {
     "txid": "6e02dbf7fb0e16d833aad89422094306dcd1ce002b9037a55fed47e304551353",
@@ -3273,15 +3274,16 @@
     },
     "slug": "mimosa",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmTJ16sczuc9dtGWMoRoJZpFXhD1Q8BtcPzzk8ozvaoPMv",
-      "reason": "historical_rate_limit",
       "cid": "QmTJ16sczuc9dtGWMoRoJZpFXhD1Q8BtcPzzk8ozvaoPMv",
-      "ok": false
+      "documentHash": "ca38e2f45a5aa3ac13c9bb27de2a9eb2932cc38f2a3acc380bc026285a2edec6",
+      "url": "https://gateway.pinata.cloud/ipfs/QmTJ16sczuc9dtGWMoRoJZpFXhD1Q8BtcPzzk8ozvaoPMv",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3301,7 +3303,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "MIMOSA (RAMIREZ/RAMIREZ) MEX."
   },
   {
     "txid": "c6d67d82b53c2d94751ee3aaf487fdcdac2c945319f65b435fc29b198d3e8e95",
