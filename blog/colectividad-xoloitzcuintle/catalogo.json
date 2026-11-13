@@ -62,7 +62,11 @@
       "original_image_sha256": "038c80ab79380cbe37ac719930ba1b0677e2141cc6d9d68e8d2b5dab536b8f4e",
       "roblox_exhibition_status": "planned",
       "announcement": {
-        "status": "pending"
+        "protocol": "Tonalli Memo TM1",
+        "txid": "0d408720977f09b14ea15bd4c14b94d73cc62d5b2a1463967556b9e04af3b1af",
+        "status": "verified_visible_in_feed",
+        "date": "2026-11-13",
+        "explorer_url": "https://explorer.xolosarmy.xyz/tx/0d408720977f09b14ea15bd4c14b94d73cc62d5b2a1463967556b9e04af3b1af"
       },
       "explorer_url": "https://explorer.xolosarmy.xyz/token/cedd28604d9ac60fcf47c4b81fe448312169cbebe61cb832abbfa0d8070b6564",
       "mint_tx_url": "https://explorer.xolosarmy.xyz/tx/cedd28604d9ac60fcf47c4b81fe448312169cbebe61cb832abbfa0d8070b6564"
