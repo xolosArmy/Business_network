@@ -22,8 +22,10 @@
         "txid": "4ae0b1fadced2eb706bfa6845f56a1cb7b99b25843d915facc27125f3ffce06e",
         "status": "verified_visible_in_feed",
         "date": "2026-11-13",
-        "explorer_url": "https://explorer.e.cash/tx/4ae0b1fadced2eb706bfa6845f56a1cb7b99b25843d915facc27125f3ffce06e"
-      }
+        "explorer_url": "https://explorer.xolosarmy.xyz/tx/4ae0b1fadced2eb706bfa6845f56a1cb7b99b25843d915facc27125f3ffce06e"
+      },
+      "explorer_url": "https://explorer.xolosarmy.xyz/token/750d49cd41749b550acbe59a8e81e4bcfcec5f74b2b49ae5d29145d17cad2ced",
+      "mint_tx_url": "https://explorer.xolosarmy.xyz/tx/750d49cd41749b550acbe59a8e81e4bcfcec5f74b2b49ae5d29145d17cad2ced"
     }
   ]
 }
