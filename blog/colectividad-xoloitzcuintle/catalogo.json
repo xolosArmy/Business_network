@@ -16,7 +16,14 @@
       "protocol": "SLP NFT1 Child",
       "image": "https://xolosarmy.xyz/assets/colectividad-xoloitzcuintle/cauce-del-itzcuintlan.png",
       "original_image_sha256": "c11d1d6ec30f0e5e6a4ce18575083dfd7233a40f42db4fa48b4449eb7117ccba",
-      "roblox_exhibition_status": "planned"
+      "roblox_exhibition_status": "planned",
+      "announcement": {
+        "protocol": "Tonalli Memo TM1",
+        "txid": "4ae0b1fadced2eb706bfa6845f56a1cb7b99b25843d915facc27125f3ffce06e",
+        "status": "verified_visible_in_feed",
+        "date": "2026-11-13",
+        "explorer_url": "https://explorer.e.cash/tx/4ae0b1fadced2eb706bfa6845f56a1cb7b99b25843d915facc27125f3ffce06e"
+      }
     }
   ]
 }
