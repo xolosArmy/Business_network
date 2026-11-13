@@ -70,6 +70,24 @@
       },
       "explorer_url": "https://explorer.xolosarmy.xyz/token/cedd28604d9ac60fcf47c4b81fe448312169cbebe61cb832abbfa0d8070b6564",
       "mint_tx_url": "https://explorer.xolosarmy.xyz/tx/cedd28604d9ac60fcf47c4b81fe448312169cbebe61cb832abbfa0d8070b6564"
+    },
+    {
+      "number": 4,
+      "slug": "tonalli-en-el-xolo",
+      "name": "Tonalli en el Xolo",
+      "date": "2026-11-13",
+      "edition": "1/1",
+      "url": "https://xolosarmy.xyz/blog/colectividad-xoloitzcuintle/tonalli-en-el-xolo",
+      "token_id": "c7a24c96df32e5cab48af66856d2fe07fbef5fc3f40b216a0e5662a918db6ba4",
+      "protocol": "SLP NFT1 Child",
+      "image": "https://xolosarmy.xyz/assets/colectividad-xoloitzcuintle/tonalli-en-el-xolo.png",
+      "original_image_sha256": "ec9c6ce801b1934e7993b7db8f520e986923d395ee7c8689c849d4fd98edc93b",
+      "roblox_exhibition_status": "planned",
+      "announcement": {
+        "status": "pending"
+      },
+      "explorer_url": "https://explorer.xolosarmy.xyz/token/c7a24c96df32e5cab48af66856d2fe07fbef5fc3f40b216a0e5662a918db6ba4",
+      "mint_tx_url": "https://explorer.xolosarmy.xyz/tx/c7a24c96df32e5cab48af66856d2fe07fbef5fc3f40b216a0e5662a918db6ba4"
     }
   ]
 }
