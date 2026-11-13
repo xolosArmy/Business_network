@@ -5,6 +5,7 @@ on:
     paths:
       - "blog/colectividad-xoloitzcuintle/**"
       - "scripts/sync-community-nft-artwork.mjs"
+      - "scripts/sync-huehueteotl-artwork.mjs"
       - ".github/workflows/sync-community-nft-artwork.yml"
   workflow_dispatch:
 permissions:
@@ -24,13 +25,15 @@ jobs:
         run: npm install --no-save --no-package-lock chronik-client@3.5.0
       - name: Recuperar PNG desde la metadata del NFT y comprobar SHA-256
         run: node scripts/sync-community-nft-artwork.mjs
+      - name: Recuperar PNG verificado del NFT #002 desde IPFS
+        run: node scripts/sync-huehueteotl-artwork.mjs
       - name: Publicar archivo exacto en GitHub Pages
         run: |
           if git status --porcelain -- assets/colectividad-xoloitzcuintle/ | grep -q .; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add assets/colectividad-xoloitzcuintle/cauce-del-itzcuintlan.png
-            git commit -m "art: sincronizar PNG verificado del NFT #001 [skip ci]"
+            git add assets/colectividad-xoloitzcuintle/*.png
+            git commit -m "art: sincronizar PNG verificados de Colectividad Xoloitzcuintle [skip ci]"
             git pull --rebase origin main
             git push origin HEAD:main
           else
