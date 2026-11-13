@@ -1039,15 +1039,16 @@
     },
     "slug": "la",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmaCHKRfB8ZFwwKb7ygp5HASqTiSVnHGH5DmAhWdKGPLec",
-      "reason": "historical_rate_limit",
       "cid": "QmaCHKRfB8ZFwwKb7ygp5HASqTiSVnHGH5DmAhWdKGPLec",
-      "ok": false
+      "documentHash": "5b7d6f4eaa2593e85ec320e5ff0b6118946d146885643eaf16151374c81245da",
+      "url": "https://gateway.pinata.cloud/ipfs/QmaCHKRfB8ZFwwKb7ygp5HASqTiSVnHGH5DmAhWdKGPLec",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -1056,7 +1057,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "La Entrega de Mixa Ramírez — Una Nueva Historia"
   },
   {
     "txid": "c3b14df7f7a31314cabc60db4093707c6ef168a5727f6b4d2ca935d1b25f9f31",
@@ -2018,15 +2019,16 @@
     },
     "slug": "mitla",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmVnUf6bfozexRa8k6uZpgkxMVfisGcWW67P4YNCkNfhYt",
-      "reason": "historical_rate_limit",
       "cid": "QmVnUf6bfozexRa8k6uZpgkxMVfisGcWW67P4YNCkNfhYt",
-      "ok": false
+      "documentHash": "3354bee776983cbe8f913e971cee08688552f186a8e3c1f69578444f9e414263",
+      "url": "https://gateway.pinata.cloud/ipfs/QmVnUf6bfozexRa8k6uZpgkxMVfisGcWW67P4YNCkNfhYt",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -2046,7 +2048,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "MITLA (RAMIREZ/RAMIREZ) MEX.FCI."
   },
   {
     "txid": "407bf5b92211cd2c77c6b8ca95d9cdc7e5d40f201b2348a0c886ed3f52c5f12e",
