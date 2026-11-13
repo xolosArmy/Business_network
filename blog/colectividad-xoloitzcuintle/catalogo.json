@@ -114,6 +114,24 @@
       },
       "explorer_url": "https://explorer.xolosarmy.xyz/token/717d555b1ecc1f701c8273fe3fb4d80954d1eca26874188584e6facd9f0634ba",
       "mint_tx_url": "https://explorer.xolosarmy.xyz/tx/717d555b1ecc1f701c8273fe3fb4d80954d1eca26874188584e6facd9f0634ba"
+    },
+    {
+      "number": 6,
+      "slug": "la-mutacion-es-el-mensaje",
+      "name": "La mutación es el mensaje",
+      "date": "2026-11-13",
+      "edition": "1/1",
+      "url": "https://xolosarmy.xyz/blog/colectividad-xoloitzcuintle/la-mutacion-es-el-mensaje",
+      "token_id": "774b3cc7be2a731f929a8ffc0473733786cdb38bc432f59856cdc5990204d7ba",
+      "protocol": "SLP NFT1 Child",
+      "image": "https://xolosarmy.xyz/assets/colectividad-xoloitzcuintle/la-mutacion-es-el-mensaje.png",
+      "original_image_sha256": "e48d883a15aeb59b815c00b328ad5c84a9df4e4d69cc4ab9f7b9424c3749b2da",
+      "roblox_exhibition_status": "planned",
+      "announcement": {
+        "status": "pending"
+      },
+      "explorer_url": "https://explorer.xolosarmy.xyz/token/774b3cc7be2a731f929a8ffc0473733786cdb38bc432f59856cdc5990204d7ba",
+      "mint_tx_url": "https://explorer.xolosarmy.xyz/tx/774b3cc7be2a731f929a8ffc0473733786cdb38bc432f59856cdc5990204d7ba"
     }
   ]
 }
