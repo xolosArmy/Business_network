@@ -4003,15 +4003,16 @@
     },
     "slug": "tuna",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmYUHjmbEqxiePeq5oTbAck2kobV9dy7eTdSK8wMi4U52q",
-      "reason": "historical_rate_limit",
       "cid": "QmYUHjmbEqxiePeq5oTbAck2kobV9dy7eTdSK8wMi4U52q",
-      "ok": false
+      "documentHash": "aefab6126fcf04230c6914078d16668abc66d63fb00867f9f6e419d25e591878",
+      "url": "https://gateway.pinata.cloud/ipfs/QmYUHjmbEqxiePeq5oTbAck2kobV9dy7eTdSK8wMi4U52q",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -4020,7 +4021,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Tuna (Ramírez/Ramírez) Mex."
   },
   {
     "txid": "9bd0d8e6fc4f38b9628f1b4e801c874d93db3150d3928b9b768e825930f6c57a",
