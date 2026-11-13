@@ -1,0 +1,38 @@
+name: Publicar arte NFT Community desde IPFS
+on:
+  push:
+    branches: [main]
+    paths:
+      - "blog/colectividad-xoloitzcuintle/**"
+      - "scripts/sync-community-nft-artwork.mjs"
+      - ".github/workflows/sync-community-nft-artwork.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  sync-nft-artwork:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Preparar cliente Chronik
+        run: npm install --no-save --no-package-lock chronik-client@3.5.0
+      - name: Recuperar PNG desde la metadata del NFT y comprobar SHA-256
+        run: node scripts/sync-community-nft-artwork.mjs
+      - name: Publicar archivo exacto en GitHub Pages
+        run: |
+          if git status --porcelain -- assets/colectividad-xoloitzcuintle/ | grep -q .; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add assets/colectividad-xoloitzcuintle/cauce-del-itzcuintlan.png
+            git commit -m "art: sincronizar PNG verificado del NFT #001 [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          else
+            echo "La obra verificada ya coincide con el archivo publicado."
+          fi
