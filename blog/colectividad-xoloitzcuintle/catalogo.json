@@ -26,6 +26,24 @@
       },
       "explorer_url": "https://explorer.xolosarmy.xyz/token/750d49cd41749b550acbe59a8e81e4bcfcec5f74b2b49ae5d29145d17cad2ced",
       "mint_tx_url": "https://explorer.xolosarmy.xyz/tx/750d49cd41749b550acbe59a8e81e4bcfcec5f74b2b49ae5d29145d17cad2ced"
+    },
+    {
+      "number": 2,
+      "slug": "el-calor-de-huehueteotl",
+      "name": "El calor de Huehueteotl",
+      "date": "2026-11-13",
+      "edition": "1/1",
+      "url": "https://xolosarmy.xyz/blog/colectividad-xoloitzcuintle/el-calor-de-huehueteotl",
+      "token_id": "ae430d802b9b2514f721f9305881bbdff03b7c8e3a495e3ad093fdf7b98e3b8f",
+      "protocol": "SLP NFT1 Child",
+      "image": "https://xolosarmy.xyz/assets/colectividad-xoloitzcuintle/el-calor-de-huehueteotl.png",
+      "original_image_sha256": "3ea8f4235c393b867aad9c823e9401edbf8abd481812f26c65359e6a8f3b5e49",
+      "roblox_exhibition_status": "planned",
+      "announcement": {
+        "status": "pending"
+      },
+      "explorer_url": "https://explorer.xolosarmy.xyz/token/ae430d802b9b2514f721f9305881bbdff03b7c8e3a495e3ad093fdf7b98e3b8f",
+      "mint_tx_url": "https://explorer.xolosarmy.xyz/tx/ae430d802b9b2514f721f9305881bbdff03b7c8e3a495e3ad093fdf7b98e3b8f"
     }
   ]
 }
