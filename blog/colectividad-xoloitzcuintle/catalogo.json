@@ -48,6 +48,24 @@
       },
       "explorer_url": "https://explorer.xolosarmy.xyz/token/ae430d802b9b2514f721f9305881bbdff03b7c8e3a495e3ad093fdf7b98e3b8f",
       "mint_tx_url": "https://explorer.xolosarmy.xyz/tx/ae430d802b9b2514f721f9305881bbdff03b7c8e3a495e3ad093fdf7b98e3b8f"
+    },
+    {
+      "number": 3,
+      "slug": "itztlantli-en-el-nuevo-mundo",
+      "name": "Itztlantli en el nuevo mundo",
+      "date": "2026-11-13",
+      "edition": "1/1",
+      "url": "https://xolosarmy.xyz/blog/colectividad-xoloitzcuintle/itztlantli-en-el-nuevo-mundo",
+      "token_id": "cedd28604d9ac60fcf47c4b81fe448312169cbebe61cb832abbfa0d8070b6564",
+      "protocol": "SLP NFT1 Child",
+      "image": "https://xolosarmy.xyz/assets/colectividad-xoloitzcuintle/itztlantli-en-el-nuevo-mundo.png",
+      "original_image_sha256": "038c80ab79380cbe37ac719930ba1b0677e2141cc6d9d68e8d2b5dab536b8f4e",
+      "roblox_exhibition_status": "planned",
+      "announcement": {
+        "status": "pending"
+      },
+      "explorer_url": "https://explorer.xolosarmy.xyz/token/cedd28604d9ac60fcf47c4b81fe448312169cbebe61cb832abbfa0d8070b6564",
+      "mint_tx_url": "https://explorer.xolosarmy.xyz/tx/cedd28604d9ac60fcf47c4b81fe448312169cbebe61cb832abbfa0d8070b6564"
     }
   ]
 }
