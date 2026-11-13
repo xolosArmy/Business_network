@@ -92,6 +92,24 @@
       },
       "explorer_url": "https://explorer.xolosarmy.xyz/token/c7a24c96df32e5cab48af66856d2fe07fbef5fc3f40b216a0e5662a918db6ba4",
       "mint_tx_url": "https://explorer.xolosarmy.xyz/tx/c7a24c96df32e5cab48af66856d2fe07fbef5fc3f40b216a0e5662a918db6ba4"
+    },
+    {
+      "number": 5,
+      "slug": "encarnacion-de-xolotl",
+      "name": "Encarnación de Xolotl",
+      "date": "2026-11-13",
+      "edition": "1/1",
+      "url": "https://xolosarmy.xyz/blog/colectividad-xoloitzcuintle/encarnacion-de-xolotl",
+      "token_id": "717d555b1ecc1f701c8273fe3fb4d80954d1eca26874188584e6facd9f0634ba",
+      "protocol": "SLP NFT1 Child",
+      "image": "https://xolosarmy.xyz/assets/colectividad-xoloitzcuintle/encarnacion-de-xolotl.png",
+      "original_image_sha256": "7d05313c724e45cbc8e8daf9124dc18b36902de242f13991f313df19e2da6709",
+      "roblox_exhibition_status": "planned",
+      "announcement": {
+        "status": "pending"
+      },
+      "explorer_url": "https://explorer.xolosarmy.xyz/token/717d555b1ecc1f701c8273fe3fb4d80954d1eca26874188584e6facd9f0634ba",
+      "mint_tx_url": "https://explorer.xolosarmy.xyz/tx/717d555b1ecc1f701c8273fe3fb4d80954d1eca26874188584e6facd9f0634ba"
     }
   ]
 }
