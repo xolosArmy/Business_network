@@ -7,6 +7,7 @@ on:
       - "scripts/sync-community-nft-artwork.mjs"
       - "scripts/sync-huehueteotl-artwork.mjs"
       - "scripts/sync-itztlantli-artwork.mjs"
+      - "scripts/sync-tonalli-en-el-xolo-artwork.mjs"
       - ".github/workflows/sync-community-nft-artwork.yml"
   workflow_dispatch:
 permissions:
@@ -30,6 +31,8 @@ jobs:
         run: node scripts/sync-huehueteotl-artwork.mjs
       - name: Recuperar PNG verificado del NFT #003 desde IPFS
         run: node scripts/sync-itztlantli-artwork.mjs
+      - name: Recuperar PNG verificado del NFT #004 desde IPFS
+        run: node scripts/sync-tonalli-en-el-xolo-artwork.mjs
       - name: Publicar archivo exacto en GitHub Pages
         run: |
           if git status --porcelain -- assets/colectividad-xoloitzcuintle/ | grep -q .; then
