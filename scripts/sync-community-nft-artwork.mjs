@@ -46,7 +46,20 @@ async function fetchIpfs(path, asJson = false) {
 
 const client = new ChronikClient(CHRONIK)
 const info = await client.token(TOKEN_ID)
-if (info.groupTokenId?.toLowerCase() !== PARENT_ID) throw new Error('NFT1 parent does not match xolosArmy Community')
+if (info.tokenId !== TOKEN_ID || info.tokenType?.number !== 65 || info.tokenType?.protocol !== 'SLP') {
+  throw new Error('Invalid NFT1 Child token information')
+}
+const genesis = await client.tx(TOKEN_ID)
+const childEntries = genesis.tokenEntries?.filter(entry => entry.tokenId === TOKEN_ID && entry.txType === 'GENESIS' && entry.tokenType?.number === 65 && entry.isInvalid === false) || []
+const childEntry = childEntries.length === 1 ? childEntries[0] : null
+const groupEntry = genesis.tokenEntries?.find(entry => entry.tokenId === PARENT_ID && entry.tokenType?.number === 129 && entry.isInvalid === false)
+const inputGroup = genesis.inputs?.[0]?.token
+if (genesis.tokenStatus !== 'TOKEN_STATUS_NORMAL' || genesis.txid !== TOKEN_ID || genesis.tokenFailedParsings?.length !== 0 ||
+    childEntry?.groupTokenId !== PARENT_ID || !groupEntry ||
+    inputGroup?.tokenId !== PARENT_ID || inputGroup.tokenType?.number !== 129 ||
+    inputGroup.atoms !== 1n || inputGroup.isMintBaton !== false) {
+  throw new Error('NFT1 child genesis does not prove xolosArmy Community parent ancestry')
+}
 const uri = info.genesisInfo?.url
 const metadata = await fetchIpfs(cidOf(uri), true)
 if (metadata.name !== 'Cauce del Itzcuintlan') throw new Error('Unexpected NFT name')
