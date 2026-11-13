@@ -1,0 +1,22 @@
+{
+  "schema": "xolosarmy-art-collection/1",
+  "collection": "Colectividad Xoloitzcuintle",
+  "network": "eCash",
+  "nft_collection": "xolosArmy Community",
+  "parent_token_id": "d6ff881413733a1a6407fa5e1e86537e5fc9f48246bae89b732ca7044993e57a",
+  "items": [
+    {
+      "number": 1,
+      "slug": "cauce-del-itzcuintlan",
+      "name": "Cauce del Itzcuintlan",
+      "date": "2026-11-13",
+      "edition": "1/1",
+      "url": "https://xolosarmy.xyz/blog/colectividad-xoloitzcuintle/cauce-del-itzcuintlan",
+      "token_id": "750d49cd41749b550acbe59a8e81e4bcfcec5f74b2b49ae5d29145d17cad2ced",
+      "protocol": "SLP NFT1 Child",
+      "image": "https://xolosarmy.xyz/assets/colectividad-xoloitzcuintle/cauce-del-itzcuintlan.png",
+      "original_image_sha256": "c11d1d6ec30f0e5e6a4ce18575083dfd7233a40f42db4fa48b4449eb7117ccba",
+      "roblox_exhibition_status": "planned"
+    }
+  ]
+}
