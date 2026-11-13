@@ -1,0 +1,60 @@
+/**
+ * Recover the exact minted artwork from its on-chain IPFS metadata.
+ * The expected SHA-256 is the independently calculated hash of the original PNG.
+ * Fails closed: never publishes a different image.
+ */
+import { ChronikClient } from 'chronik-client'
+import { createHash } from 'node:crypto'
+import { mkdir, writeFile } from 'node:fs/promises'
+
+const TOKEN_ID = '750d49cd41749b550acbe59a8e81e4bcfcec5f74b2b49ae5d29145d17cad2ced'
+const PARENT_ID = 'd6ff881413733a1a6407fa5e1e86537e5fc9f48246bae89b732ca7044993e57a'
+const EXPECTED_IMAGE_SHA256 = 'c11d1d6ec30f0e5e6a4ce18575083dfd7233a40f42db4fa48b4449eb7117ccba'
+const TARGET = 'assets/colectividad-xoloitzcuintle/cauce-del-itzcuintlan.png'
+const CHRONIK = ['https://chronik.e.cash', 'https://chronik.xolosarmy.xyz']
+const GATEWAYS = [
+  'https://tomato-rational-rat-921.mypinata.cloud/ipfs/',
+  'https://gateway.pinata.cloud/ipfs/',
+  'https://dweb.link/ipfs/',
+  'https://ipfs.io/ipfs/'
+]
+
+const cidOf = (value) => {
+  if (typeof value !== 'string' || !value.startsWith('ipfs://')) throw new Error('Expected an ipfs:// URI')
+  const path = value.slice('ipfs://'.length)
+  if (!/^(bafy[a-z2-7]{20,}|Qm[1-9A-HJ-NP-Za-km-z]{44})(\/.*)?$/.test(path)) throw new Error('Invalid IPFS CID')
+  return path
+}
+
+async function fetchIpfs(path, asJson = false) {
+  let lastError
+  for (const gateway of GATEWAYS) {
+    try {
+      const response = await fetch(gateway + path, { signal: AbortSignal.timeout(20000), headers: { Accept: asJson ? 'application/json' : 'image/png' } })
+      if (!response.ok) throw new Error('HTTP ' + response.status)
+      if (asJson) return await response.json()
+      const size = Number(response.headers.get('content-length') || 0)
+      if (size > 10000000) throw new Error('Oversized image')
+      return Buffer.from(await response.arrayBuffer())
+    } catch (error) {
+      lastError = error
+      console.warn('Gateway unavailable:', gateway, error.message)
+    }
+  }
+  throw new Error('All IPFS gateways failed: ' + lastError?.message)
+}
+
+const client = new ChronikClient(CHRONIK)
+const info = await client.token(TOKEN_ID)
+if (info.groupTokenId?.toLowerCase() !== PARENT_ID) throw new Error('NFT1 parent does not match xolosArmy Community')
+const uri = info.genesisInfo?.url
+const metadata = await fetchIpfs(cidOf(uri), true)
+if (metadata.name !== 'Cauce del Itzcuintlan') throw new Error('Unexpected NFT name')
+if (metadata.parent?.toLowerCase() !== PARENT_ID) throw new Error('Unexpected metadata parent')
+const bytes = await fetchIpfs(cidOf(metadata.image))
+if (!bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]))) throw new Error('Not a PNG')
+const actual = createHash('sha256').update(bytes).digest('hex')
+if (actual !== EXPECTED_IMAGE_SHA256) throw new Error('Artwork SHA-256 mismatch: ' + actual)
+await mkdir('assets/colectividad-xoloitzcuintle', { recursive: true })
+await writeFile(TARGET, bytes)
+console.log('Verified artwork recovered from on-chain metadata:', TARGET, bytes.length, 'bytes; SHA256', actual)
