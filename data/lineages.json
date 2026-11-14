@@ -5486,15 +5486,16 @@
     },
     "slug": "otn",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmcuiwFSwTiLSibsF6TFARowfdBT3WN6HPcoCA7tLfxjgs",
-      "reason": "historical_rate_limit",
       "cid": "QmcuiwFSwTiLSibsF6TFARowfdBT3WN6HPcoCA7tLfxjgs",
-      "ok": false
+      "documentHash": "376926ebd225ad838bb6a904828adc616f87ec24ee2708cecceae1d7a01bf5f5",
+      "url": "https://gateway.pinata.cloud/ipfs/QmcuiwFSwTiLSibsF6TFARowfdBT3WN6HPcoCA7tLfxjgs",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -5503,7 +5504,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Otún Ir Ramírez — Ritual de Entrega (Kiepe)"
   },
   {
     "txid": "0eee3b3bea62103738eca6e840459305e1726583f66e519e792527ce3ea5e2db",
