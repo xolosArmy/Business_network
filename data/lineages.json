@@ -2593,15 +2593,16 @@
     },
     "slug": "ikal",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmRVBz14hK8KoMNbRphfM4VCgiAvfk2R1zV42DzNJ2XBax",
-      "reason": "historical_rate_limit",
       "cid": "QmRVBz14hK8KoMNbRphfM4VCgiAvfk2R1zV42DzNJ2XBax",
-      "ok": false
+      "documentHash": "bb6e47c852ae3506d622b4ae583ef71df1cf74830f3fd19951930380a7e4559a",
+      "url": "https://gateway.pinata.cloud/ipfs/QmRVBz14hK8KoMNbRphfM4VCgiAvfk2R1zV42DzNJ2XBax",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -2610,7 +2611,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Ikal Caliente Mex. FCI"
   },
   {
     "txid": "e2384d8728fc958c459b4859619938ddda4b1dd0e4ca47aac0779a26496eb9db",
