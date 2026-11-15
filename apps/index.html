@@ -125,6 +125,54 @@
       margin-top: 1.5rem;
       flex-wrap: wrap;
     }
+
+    /* XR-APPS-169 accessibility and anchor QA: scoped to this MCP card. */
+    #xolos-lineage-mcp {
+      scroll-margin-top: 8rem;
+      min-width: 0;
+    }
+    /* Reserve room for the last card to align below the sticky header on
+       direct hash navigation, including short desktop viewports. */
+    #apps-container {
+      padding-bottom: 8rem;
+    }
+    #xolos-lineage-mcp .app-card-header {
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      min-width: 0;
+    }
+    #xolos-lineage-mcp .app-title {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+    #xolos-lineage-mcp .app-category {
+      max-width: 100%;
+      text-transform: none;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+    #xolos-lineage-mcp .app-meta {
+      color: #bdc9c8;
+      overflow-wrap: anywhere;
+    }
+    #xolos-lineage-mcp .app-meta > div {
+      min-width: 0;
+    }
+    #xolos-lineage-mcp .app-meta code {
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: break-all;
+    }
+    #xolos-lineage-mcp .app-meta a {
+      color: #f3db9b;
+      text-decoration: underline;
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 0.2em;
+    }
+    #xolos-lineage-mcp .app-meta a:focus-visible {
+      outline: 2px solid #f3db9b;
+      outline-offset: 3px;
+    }
   </style>
   <script type="application/ld+json">
   {
@@ -215,7 +263,7 @@
         <div>
           <div class="app-card-header">
             <h2 class="app-title">Xolos Lineage MCP</h2>
-            <span class="app-category">infrastructure</span>
+            <span class="app-category">Infraestructura</span>
           </div>
           <p class="app-desc">
             Servidor MCP de solo lectura para agentes: consulta el censo del Oráculo XOLO, corrobora NFTs de linaje en eCash con Chronik,
