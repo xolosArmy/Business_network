@@ -1,12 +1,24 @@
 {
   "$schema": "./registry.schema.json",
   "schemaVersion": "v1.0.0",
-  "updatedAt": "2026-09-13T12:00:00Z",
+  "updatedAt": "2026-11-15T00:26:03Z",
   "network": "xolosArmy Network",
   "registryPolicy": {
     "productionEvidenceRequired": true,
-    "allowedWebMcpStatuses": ["planned", "testing", "verified", "production"],
-    "allowedX402Statuses": ["planned", "testing", "verified", "production"]
+    "allowedWebMcpStatuses": [
+      "planned",
+      "testing",
+      "verified",
+      "production",
+      "not_applicable"
+    ],
+    "allowedX402Statuses": [
+      "planned",
+      "testing",
+      "verified",
+      "production",
+      "not_applicable"
+    ]
   },
   "applications": [
     {
@@ -37,6 +49,36 @@
         "specificationDocument": "/docs/agentic-commerce/xr-ac0-architecture.md",
         "gitCommitSha": "90206e5eb53837a853a1147da359dff07d6999d5",
         "auditReference": "XR-AC0-REVISION-B-FREEZE-20260913"
+      }
+    },
+    {
+      "id": "xolos-lineage-mcp",
+      "name": "Xolos Lineage MCP",
+      "description": "Servidor MCP de solo lectura para consultar el censo del Oráculo XOLO, corroborar NFTs de linaje en eCash mediante Chronik, verificar bytes documentales IPFS y explorar genealogías documentadas y referencias parentales. Implementación auditada, uso local privado; sin endpoint público ni despliegue.",
+      "url": "https://xolosarmy.xyz/apps/#xolos-lineage-mcp",
+      "category": "infrastructure",
+      "capabilities": {
+        "webMcpStatus": "not_applicable",
+        "x402Status": "not_applicable",
+        "settlementAssets": [],
+        "fundingPaths": [],
+        "mcpStatus": "verified",
+        "mcpTransport": "stdio",
+        "mcpRuntime": "private_local",
+        "mcpTools": [
+          "list_lineages",
+          "get_lineage",
+          "get_census",
+          "verify_nft",
+          "get_genealogy"
+        ]
+      },
+      "securityStatus": "verified",
+      "lastVerified": "2026-11-15T00:26:03Z",
+      "evidence": {
+        "specificationDocument": "https://github.com/xolosArmy/xolos-lineage-mcp/blob/d1c5b188893c26ea81f7089ee899e1548cbe3089/README.md",
+        "gitCommitSha": "d1c5b188893c26ea81f7089ee899e1548cbe3089",
+        "auditReference": "XR-LINEAGE-MCP-PR04-GROK-FINAL-REVIEW; XR-LINEAGE-MCP-PR04-ARCHITECTURE-FINAL-REVIEW"
       }
     }
   ]

@@ -125,6 +125,54 @@
       margin-top: 1.5rem;
       flex-wrap: wrap;
     }
+
+    /* XR-APPS-169 accessibility and anchor QA: scoped to this MCP card. */
+    #xolos-lineage-mcp {
+      scroll-margin-top: 8rem;
+      min-width: 0;
+    }
+    /* Reserve room for the last card to align below the sticky header on
+       direct hash navigation, including short desktop viewports. */
+    #apps-container {
+      padding-bottom: 8rem;
+    }
+    #xolos-lineage-mcp .app-card-header {
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      min-width: 0;
+    }
+    #xolos-lineage-mcp .app-title {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+    #xolos-lineage-mcp .app-category {
+      max-width: 100%;
+      text-transform: none;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+    #xolos-lineage-mcp .app-meta {
+      color: #bdc9c8;
+      overflow-wrap: anywhere;
+    }
+    #xolos-lineage-mcp .app-meta > div {
+      min-width: 0;
+    }
+    #xolos-lineage-mcp .app-meta code {
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: break-all;
+    }
+    #xolos-lineage-mcp .app-meta a {
+      color: #f3db9b;
+      text-decoration: underline;
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 0.2em;
+    }
+    #xolos-lineage-mcp .app-meta a:focus-visible {
+      outline: 2px solid #f3db9b;
+      outline-offset: 3px;
+    }
   </style>
   <script type="application/ld+json">
   {
@@ -208,6 +256,43 @@
           <div>Sitio Oficial: <a href="https://xolosramirez.com" target="_blank" rel="noopener noreferrer">xolosramirez.com ↗</a></div>
           <div>Evidencia Commit: <code>90206e5eb5...</code></div>
           <div>Auditoría Ref: <code>XR-AC0-REVISION-B-FREEZE-20260913</code></div>
+        </div>
+      </article>
+
+      <article class="app-card" id="xolos-lineage-mcp">
+        <div>
+          <div class="app-card-header">
+            <h2 class="app-title">Xolos Lineage MCP</h2>
+            <span class="app-category">Infraestructura</span>
+          </div>
+          <p class="app-desc">
+            Servidor MCP de solo lectura para agentes: consulta el censo del Oráculo XOLO, corrobora NFTs de linaje en eCash con Chronik,
+            comprueba la integridad documental mediante SHA-256 e IPFS y muestra genealogías documentadas y referencias parentales.
+          </p>
+          <div class="badge-group">
+            <span class="badge badge-review" title="Código fusionado y aprobado en auditorías independientes">MCP: auditado</span>
+            <span class="badge badge-planned" title="Servidor stdio privado; no existe un servicio público desplegado">Acceso: local privado</span>
+          </div>
+          <p class="app-desc">
+            <strong>Alcance de las comprobaciones:</strong> Chronik es un indexador confiado, no una prueba SPV independiente.
+            La coincidencia SHA-256 no verifica el DAG IPFS y una referencia parental no demuestra parentesco biológico.
+          </p>
+          <div>
+            <strong>Herramientas MCP (stdio):</strong>
+            <ul class="tools-list">
+              <li><code>list_lineages</code> — registros del censo publicado</li>
+              <li><code>get_lineage</code> — ficha y procedencia de un NFT</li>
+              <li><code>get_census</code> — métricas del Oráculo XOLO</li>
+              <li><code>verify_nft</code> — corroboración eCash/Chronik e integridad IPFS</li>
+              <li><code>get_genealogy</code> — relaciones documentadas y referencias parentales</li>
+            </ul>
+          </div>
+        </div>
+        <div class="app-meta">
+          <div>Disponibilidad: implementación privada auditada; sin endpoint MCP público, distribución npm ni despliegue.</div>
+          <div>Código y auditorías: repositorio GitHub de acceso restringido.</div>
+          <div>Commit fusionado: <code>d1c5b188893c26ea81f7089ee899e1548cbe3089</code></div>
+          <div>Consulta pública de linajes: <a href="https://explorer.xolosarmy.xyz" target="_blank" rel="noopener noreferrer">Xolos Explorer ↗</a></div>
         </div>
       </article>
     </section>
