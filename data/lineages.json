@@ -3968,15 +3968,16 @@
     },
     "slug": "diago",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmUq2ET4VzunrkT4RcnLJupnh34U9ftskWYgWw8Ethrsdx",
-      "reason": "historical_rate_limit",
       "cid": "QmUq2ET4VzunrkT4RcnLJupnh34U9ftskWYgWw8Ethrsdx",
-      "ok": false
+      "documentHash": "72e792cf3ba0ddc8806d83ac68d86f0d9f2cc2552be50633db3d2f92c3e775e2",
+      "url": "https://gateway.pinata.cloud/ipfs/QmUq2ET4VzunrkT4RcnLJupnh34U9ftskWYgWw8Ethrsdx",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -3985,7 +3986,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Diago (Ramírez/Ramírez) Mex."
   },
   {
     "txid": "70bc6caf7cb91848359c40736e2f64c2e81cd9d1021f4b60a0f9cf8683098049",
@@ -4611,15 +4612,16 @@
     },
     "slug": "tika",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmXZH3sKEGWjxV2iqxkTxJtTqFCAkDreVcAyHnDfrWPcEX",
-      "reason": "historical_rate_limit",
       "cid": "QmXZH3sKEGWjxV2iqxkTxJtTqFCAkDreVcAyHnDfrWPcEX",
-      "ok": false
+      "documentHash": "79f2a00e6d756f99fd1282867476e0da22b4cc7c0ae283006dfeea16d1977e42",
+      "url": "https://gateway.pinata.cloud/ipfs/QmXZH3sKEGWjxV2iqxkTxJtTqFCAkDreVcAyHnDfrWPcEX",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -4628,7 +4630,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Tika Ramirez"
   },
   {
     "txid": "42e2796b5ca1edb6ee77e6caa3373d588bba29921d764a2bdefde38d9fda1c11",
@@ -5010,15 +5012,16 @@
     },
     "slug": "teyola",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmaaextgyiEFKZB2RSXzDTfquev3RKkb5KD19YUba5cupy",
-      "reason": "historical_rate_limit",
       "cid": "QmaaextgyiEFKZB2RSXzDTfquev3RKkb5KD19YUba5cupy",
-      "ok": false
+      "documentHash": "541f7ac68f2686b014e95fe68860e754b47c51c6878618a7ad1836a3f76da9b9",
+      "url": "https://gateway.pinata.cloud/ipfs/QmaaextgyiEFKZB2RSXzDTfquev3RKkb5KD19YUba5cupy",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -5027,7 +5030,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "TEYOLÍA"
   },
   {
     "txid": "0df671d009e05793e3c82943b3275111453a1991c76519e27d71f27e064d94cb",
