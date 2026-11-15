@@ -40,14 +40,14 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": ["planned", "testing", "verified", "production"]
+            "enum": ["planned", "testing", "verified", "production", "not_applicable"]
           }
         },
         "allowedX402Statuses": {
           "type": "array",
           "items": {
             "type": "string",
-            "enum": ["planned", "testing", "verified", "production"]
+            "enum": ["planned", "testing", "verified", "production", "not_applicable"]
           }
         }
       },
@@ -107,11 +107,11 @@
             "properties": {
               "webMcpStatus": {
                 "type": "string",
-                "enum": ["planned", "testing", "verified", "production"]
+                "enum": ["planned", "testing", "verified", "production", "not_applicable"]
               },
               "x402Status": {
                 "type": "string",
-                "enum": ["planned", "testing", "verified", "production"]
+                "enum": ["planned", "testing", "verified", "production", "not_applicable"]
               },
               "settlementAssets": {
                 "type": "array",
@@ -124,6 +124,25 @@
               "webMcpTools": {
                 "type": "array",
                 "items": { "type": "string" }
+              },
+              "mcpStatus": {
+                "type": "string",
+                "description": "Maturity of the MCP server code; verified does not imply a hosted public service.",
+                "enum": ["testing", "verified", "production"]
+              },
+              "mcpTransport": {
+                "type": "string",
+                "enum": ["stdio", "streamable_http"]
+              },
+              "mcpRuntime": {
+                "type": "string",
+                "enum": ["private_local", "public_service"]
+              },
+              "mcpTools": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" }
               }
             },
             "additionalProperties": false
