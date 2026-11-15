@@ -338,15 +338,16 @@
     },
     "slug": "teyolia",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
       "cid": "QmajBgbFwscVJJieD76nN96wpgFap4zgsoQoiLV6513CcA",
       "documentHash": "b1cba29a0e6f8db3431c905c081cb66f8bfedf70974e9e1729fce0a362a9f7c3",
       "url": "https://gateway.pinata.cloud/ipfs/QmajBgbFwscVJJieD76nN96wpgFap4zgsoQoiLV6513CcA",
-      "reason": "gateway_unreachable",
-      "state": "temporary",
-      "ok": false
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -355,7 +356,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Teyolia Ramírez — La princesa de la casa"
   },
   {
     "txid": "fb9cb8e412873c3af64f73ccb89b7323c8e3c186ee2b131a049bf64996beafbc",
@@ -1369,15 +1370,16 @@
     },
     "slug": "jornada",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmbezEYyhYZUAfV4i9XCyoYk2EnJm6NMNpzxar3GJdFhdZ",
-      "reason": "historical_rate_limit",
       "cid": "QmbezEYyhYZUAfV4i9XCyoYk2EnJm6NMNpzxar3GJdFhdZ",
-      "ok": false
+      "documentHash": "30e4568e35a9da3f3e964e93db952ee450d1cfb9a39e6c90dc2a6dd356dfa85d",
+      "url": "https://gateway.pinata.cloud/ipfs/QmbezEYyhYZUAfV4i9XCyoYk2EnJm6NMNpzxar3GJdFhdZ",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -1386,7 +1388,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Jornada de Primera Vacunación - Xolos Ramírez"
   },
   {
     "txid": "a75171224ffe78256bab830762566cc97e95d0d2fabfae2618d41fb1e39d83e8",
@@ -2412,15 +2414,16 @@
     },
     "slug": "rima",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmbABXXXiyGrgMTzMKcqgUoTKS1xneYbVaZWGikmhZPBEg",
-      "reason": "historical_rate_limit",
       "cid": "QmbABXXXiyGrgMTzMKcqgUoTKS1xneYbVaZWGikmhZPBEg",
-      "ok": false
+      "documentHash": "7f1f61fab7e0de4493b4ebd488912a7c67ee661496553cecabb68c72023b1e4f",
+      "url": "https://gateway.pinata.cloud/ipfs/QmbABXXXiyGrgMTzMKcqgUoTKS1xneYbVaZWGikmhZPBEg",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -2429,7 +2432,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "RIMA (LANGARICA) MEX. FCI."
   },
   {
     "txid": "5bcf1823927af2645c310037666a3852a5726b9526c03550c820282b7c48ed2a",

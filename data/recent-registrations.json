@@ -149,11 +149,11 @@
     "slug": "teyolia",
     "tokenId": "a6e2171d6bbca37212bf4541747ba9d4c5762402a9a3095c8848d4523c63e9c0",
     "cid": "QmajBgbFwscVJJieD76nN96wpgFap4zgsoQoiLV6513CcA",
-    "nombre": null,
+    "nombre": "Teyolia Ramírez — La princesa de la casa",
     "timestamp": 1789702512,
     "blockHeight": 967286,
     "hasParents": false,
-    "ipfsOk": false,
+    "ipfsOk": true,
     "genealogy": {
       "documented": null,
       "verified": false
