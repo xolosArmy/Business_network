@@ -132,7 +132,8 @@
     "slug": "yohualli-ramirez",
     "provenance": {
       "inclusion": "explorer_txid",
-      "editorialCommit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f"
+      "editorialCommit": "6cc1b4ec2ed582c689c83352b0ffb8cdcd04c60f",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "editorial": {
       "source": "xolos-explorer",
@@ -142,9 +143,9 @@
       "cid": "QmacP7da2YwV8JBbLmCYiUT2zdSYv54rzfPbTrEMT7yjD1",
       "documentHash": "379f781af85c38cb35452643c24a8f58767b9e7197f7efe18dab50a60c2fed77",
       "url": "https://gateway.pinata.cloud/ipfs/QmacP7da2YwV8JBbLmCYiUT2zdSYv54rzfPbTrEMT7yjD1",
-      "reason": "gateway_unreachable",
-      "state": "temporary",
-      "ok": false
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -164,7 +165,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Yohualli Ramírez"
   },
   {
     "txid": "696e47c8ed0e9855f0a1ed0307ca60fa9c44893fe589dae086fdcd39c963bb9b",
