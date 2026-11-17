@@ -1332,15 +1332,16 @@
     },
     "slug": "asamblea",
     "provenance": {
-      "inclusion": "historical_census"
+      "inclusion": "historical_census",
+      "metadata": "ipfs_sha256_matches_slp"
     },
     "ipfs": {
-      "state": "temporary",
-      "status": 429,
-      "url": "https://ipfs.io/ipfs/QmeJNUchDKoSNgFafc11BWmE5myzCin9BtYQ2e1wEahxXg",
-      "reason": "historical_rate_limit",
       "cid": "QmeJNUchDKoSNgFafc11BWmE5myzCin9BtYQ2e1wEahxXg",
-      "ok": false
+      "documentHash": "922e37407f3038ff51630d2299c32d45c8244525dec0e077335a00e691bf2d3b",
+      "url": "https://gateway.pinata.cloud/ipfs/QmeJNUchDKoSNgFafc11BWmE5myzCin9BtYQ2e1wEahxXg",
+      "status": 200,
+      "state": "validated",
+      "ok": true
     },
     "hasParents": false,
     "genealogy": {
@@ -1349,7 +1350,7 @@
     },
     "parentTokenId": null,
     "motherTokenId": null,
-    "name": null
+    "name": "Asamblea RMZ: Identidad Soberana y Ciudadanía Activa"
   },
   {
     "txid": "8fe5d64e78b9acc8c622b29a41c8d575f4e728cd70a3166749ae486ee8913959",
