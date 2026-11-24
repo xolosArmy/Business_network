@@ -26,4 +26,4 @@
 .organization-page .org-section:last-child p{max-width:60rem;line-height:1.8}
 @media(max-width:1000px){.organization-page .identity-grid{grid-template-columns:1fr}.organization-page .identity-card{max-width:62rem}}
 @media(max-width:720px){.organization-page .org-role-grid{grid-template-columns:1fr}}
-@media(max-width:560px){.organization-page .container{width:min(100% - 2rem,var(--max-width))}.organization-page .org-hero{padding-top:3.3rem}}
+@media(max-width:560px){.organization-page .container{width:min(100% - 2rem,var(--max-width))}.organization-page .org-hero{padding-top:3.3rem}.organization-page .org-hero h1{font-size:clamp(2rem,9vw,3rem);overflow-wrap:anywhere;hyphens:auto}}
