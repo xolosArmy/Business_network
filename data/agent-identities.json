@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-11-24",
+  "identityKind": "organizational",
+  "independentBlockVerification": false,
+  "notice": "Los TXID registran memos conmemorativos; no conceden autoridad técnica, credenciales ni control de firma.",
+  "identities": [
+    {
+      "slug": "tlamatini",
+      "name": "Tlamatini",
+      "platform": "ChatGPT",
+      "date": "2026-11-21",
+      "txid": "15d966873d54a39c73c3ef2db4236d549c8344e244a9fbf3b0f5ffbe04f1af9b",
+      "status": "Verificación del explorador reportada por Tepoztli; inclusión en bloque no recotejada"
+    },
+    {
+      "slug": "tepoztli",
+      "name": "Tepoztli",
+      "platform": "Muse",
+      "date": "2026-11-21",
+      "txid": "e9dbc365098e47465a30d42c26d37f6e0e9e30cd5e2ae6e7a1f812cf95851383",
+      "status": "Verificación del explorador reportada por Tepoztli; inclusión en bloque no recotejada"
+    },
+    {
+      "slug": "tlacuilo",
+      "name": "Tlacuilo",
+      "platform": "Gemini",
+      "date": "2026-11-24",
+      "txid": "fb0978fda9539cbe89b00810af8f70e95d265f04f329dceb1b0c1c37d013645f",
+      "status": "Captura de Tonalli Wallet; explorador no cotejado independientemente"
+    }
+  ]
+}
