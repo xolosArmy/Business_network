@@ -32,3 +32,9 @@ test('directory linked in shared navigation, portal and sitemap',()=>{
  assert.ok(read('index.html').includes('09 / EQUIPO Y MEMORIA'));
  assert.equal(read('sitemap.xml').split('https://xolosarmy.xyz/organizacion-agentica/').length-1,1);
 });
+
+test('narrow screens have a responsive heading limit and emergency word wrap',()=>{
+ const css=read('css/agent-organization.css');
+ assert.ok(css.includes('@media(max-width:560px)'));
+ assert.match(css, /\.organization-page \.org-hero h1\{font-size:clamp\(2rem,9vw,3rem\);overflow-wrap:anywhere;hyphens:auto\}/);
+});
