@@ -1,0 +1,29 @@
+/* Organización Agéntica: estilos estáticos y adaptables. */
+.organization-page .org-hero{padding-block:clamp(4rem,9vw,7.5rem);border-bottom:1px solid var(--border)}
+.organization-page .org-hero h1{font-size:clamp(3.4rem,8.5vw,7rem);max-width:20ch;line-height:1.04;margin:0 0 1.7rem}
+.organization-page .org-intro{font-size:clamp(1.06rem,1.7vw,1.36rem);max-width:52rem;line-height:1.8;color:var(--text-secondary)}
+.organization-page .org-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.2rem}
+.organization-page .org-section{padding-block:clamp(4rem,7vw,6.2rem);border-bottom:1px solid var(--border);scroll-margin-top:7rem}
+.organization-page .org-section h2{margin-bottom:1rem}
+.organization-page .org-root{max-width:32rem;margin:2rem auto 2.2rem;padding:2rem;border:1px solid var(--accent);background:#151d18;display:flex;flex-direction:column;align-items:center;gap:.45rem;text-align:center}
+.organization-page .org-root span{letter-spacing:.14em;font-size:.75rem;color:var(--accent)}
+.organization-page .org-root strong{font-family:Georgia,serif;font-size:2.2rem;font-weight:400}
+.organization-page .org-root small{max-width:25rem;color:var(--text-secondary);font-size:.9rem}
+.organization-page .org-role-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2rem;margin:0 0 2rem}
+.organization-page .org-role-grid>div{display:flex;flex-direction:column;gap:.65rem;border:1px solid var(--border);background:var(--surface);padding:1.7rem}
+.organization-page .org-role-grid>div.independent{border-style:dashed}
+.organization-page .org-role-grid span{color:var(--accent);letter-spacing:.1em;font-size:.75rem}
+.organization-page .org-role-grid strong{font-family:Georgia,serif;font-size:1.8rem;font-weight:400}
+.organization-page .org-role-grid p{color:var(--text-secondary);font-size:.91rem;margin:0}
+.organization-page .identity-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2rem;margin-top:2.2rem}
+.organization-page .identity-card{display:flex;flex-direction:column;min-width:0;padding:clamp(1.2rem,2.4vw,1.9rem);border:1px solid var(--border);background:var(--surface);scroll-margin-top:7rem}
+.organization-page .identity-card h3{font-size:clamp(1.8rem,3vw,2.5rem);margin-bottom:.75rem}
+.organization-page .identity-card h4{color:var(--accent);letter-spacing:.1em;font-size:.8rem;margin:1.5rem 0 .75rem;text-transform:uppercase}
+.organization-page .identity-card p{line-height:1.7}
+.organization-page .identity-card blockquote{margin:1.3rem 0;padding:1.1rem;border-left:2px solid var(--accent);background:#101c17;font-size:.88rem;line-height:1.75}
+.organization-page .identity-hash{display:block;color:#c7e3d2;overflow-wrap:anywhere;word-break:break-word;background:#07100d;border:1px solid #293d33;padding:.9rem;font-size:.83rem;line-height:1.65}
+.organization-page .identity-card .btn{margin-top:auto;align-self:flex-start}
+.organization-page .org-section:last-child p{max-width:60rem;line-height:1.8}
+@media(max-width:1000px){.organization-page .identity-grid{grid-template-columns:1fr}.organization-page .identity-card{max-width:62rem}}
+@media(max-width:720px){.organization-page .org-role-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.organization-page .container{width:min(100% - 2rem,var(--max-width))}.organization-page .org-hero{padding-top:3.3rem}.organization-page .org-hero h1{font-size:clamp(2rem,9vw,3rem);overflow-wrap:anywhere;hyphens:auto}}
